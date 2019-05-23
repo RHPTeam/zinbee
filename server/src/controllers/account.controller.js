@@ -8,7 +8,9 @@
  */
 
 const Account = require( "../models/Account.model" );
+const Role = require( "../models/Role.model" );
 
+const fs = require( "fs" );
 const jsonResponse = require( "../configs/response" );
 
 module.exports = {
@@ -45,6 +47,21 @@ module.exports = {
    * @param res
    * @returns {Promise<*|Promise<any>>}
    */
-  "active": async () => {}
+  "active": async () => {},
+  "signIn": async () => {},
+  "signUp": async () => {},
+  "signInByAdmin": async () => {
+
+  },
+  "signUpByAdmin": async ( req, res ) => {
+    // check code admin from headers
+    const key = JSON.parse( fs.readFileSync( "./src/databases/key.json" ) );
+
+    console.log( key );
+    if ( key.isAdmin.includes( req.headers.token ) ) {
+      return;
+    }
+    console.log( await Role.find( {} ) );
+  }
 
 };
