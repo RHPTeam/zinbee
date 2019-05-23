@@ -1,6 +1,8 @@
 <template>
   <div class="server position_relative" :data-theme="currentTheme">
-    <div class="desc py_3 px_2"><span>Quản lý hệ thống server :</span> Thông tin về domain cho 3 miền.</div>
+    <div class="desc py_3 px_2">
+      <span>Quản lý hệ thống server :</span> Thông tin về domain cho 3 miền.
+    </div>
     <div class="action py_2 px_2">
       <button class="btn btn_info" @click="openCreateNewDomain">Tạo mới</button>
     </div>
@@ -39,7 +41,7 @@
 </template>
 
 <script>
-import AddDomain from "./adddomain";
+import AddDomain from "./action";
 import ItemDomain from "./item";
 export default {
   components: {
@@ -50,26 +52,26 @@ export default {
     return {
       isShowAddDomain: false,
       statusDefault: false
-    }
+    };
   },
   computed: {
-    currentTheme(){
+    currentTheme() {
       return this.$store.getters.themeName;
     },
-    domain(){
+    domain() {
       return this.$store.getters.allDomain;
     }
   },
   async created() {
-    await this.$store.dispatch( "getAllDomain" );
+    await this.$store.dispatch("getAllDomain");
   },
   methods: {
     openCreateNewDomain() {
-      this.$store.dispatch( "setDomainDefault" );
+      this.$store.dispatch("setDomainDefault");
       this.isShowAddDomain = true;
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>

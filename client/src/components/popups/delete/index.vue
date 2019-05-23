@@ -8,8 +8,9 @@
         <div class="modal--body my_3">
           <div class="desc" v-if="multiple === false">
             Toàn bộ dữ liệu liên quan đến {{ typeName }}
-            <span class="text--bold">{{ targetName }}</span> sẽ bị xóa hoàn toàn.
-            <span v-if="description !== '' ">{{ description }}</span>
+            <span class="text--bold">{{ targetName }}</span> sẽ bị xóa hoàn
+            toàn.
+            <span v-if="description !== ''">{{ description }}</span>
             Để tiếp tục, nhập
             <span class="text--delete">DELETE</span> vào ô bên dưới.
           </div>
@@ -20,16 +21,17 @@
             v-model="deleteText"
           />
         </div>
-        <div class="modal--footer d_flex justify_content_between align_items_center">
-          <button
-            class="btn--submit"
-            @click="closePopup()"
-          >HỦY</button>
+        <div
+          class="modal--footer d_flex justify_content_between align_items_center"
+        >
+          <button class="btn--submit" @click="closePopup()">HỦY</button>
           <button
             class="btn--skip"
             v-if="deleteConfirm"
             @click="deleteTargets()"
-          >XÓA</button>
+          >
+            XÓA
+          </button>
         </div>
       </div>
     </div>
@@ -85,12 +87,12 @@ export default {
   },
   methods: {
     closePopup() {
-      this.$emit( "closePopup", false );
+      this.$emit("closePopup", false);
     },
     deleteTargets() {
-      this.$store.dispatch( this.storeActionName, this.targetData );
+      this.$store.dispatch(this.storeActionName, this.targetData);
 
-      this.$emit( "closePopup", false );
+      this.$emit("closePopup", false);
     }
   }
 };
@@ -100,4 +102,3 @@ export default {
 @import "../style";
 @import "./index.style";
 </style>
-

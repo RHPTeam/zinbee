@@ -4,7 +4,10 @@
       <div class="modal--content">
         <div class="modal--header">
           <div class="title--small mt_2">Xóa các tài khoản đã chọn</div>
-          <div class="desc mt_3">Hành động này sẽ không thể hoàn tác. Bạn có chắc chắn muốn xóa không?</div>
+          <div class="desc mt_3">
+            Hành động này sẽ không thể hoàn tác. Bạn có chắc chắn muốn xóa
+            không?
+          </div>
         </div>
         <div
           class="modal--footer d_flex justify_content_between align_items_center"
@@ -21,29 +24,25 @@
 
 <script>
 export default {
-  props: [
-    "selectedUIDs"
-  ],
+  props: ["selectedUIDs"],
 
   data() {
-    return {
-    };
+    return {};
   },
 
-  computed: {
-  },
+  computed: {},
 
   methods: {
     closeDialog() {
-      this.$emit( "closeDialog", false );
+      this.$emit("closeDialog", false);
     },
     deleteSelected() {
       const dataSender = {
         userId: this.selectedUIDs
       };
 
-      this.$store.dispatch( "deleteUsers", dataSender );
-      this.$emit( "closeDialog", false );
+      this.$store.dispatch("deleteUsers", dataSender);
+      this.$emit("closeDialog", false);
     }
   }
 };

@@ -34,26 +34,26 @@
 
 <script>
 export default {
-  props: [ "eventsPopupData", "leftVal", "rightVal", "topVal" ],
+  props: ["eventsPopupData", "leftVal", "rightVal", "topVal"],
   methods: {
     closeMorePopover() {
-      this.$emit( "closeMorePopover", false );
+      this.$emit("closeMorePopover", false);
     },
-    eventClick( data) {
-      this.$emit( "eventClick", data );
+    eventClick(data) {
+      this.$emit("eventClick", data);
     },
-    formatTime( d ) {
-      const dateTime = new Date( d ),
-            hours = String( dateTime.getHours() ).padStart( 2, "0"),
-            mins = String( dateTime.getMinutes() ).padStart( 2, "0" );
+    formatTime(d) {
+      const dateTime = new Date(d),
+        hours = String(dateTime.getHours()).padStart(2, "0"),
+        mins = String(dateTime.getMinutes()).padStart(2, "0");
 
       return `${hours}:${mins}`;
     },
-    showEventContent( eventVal) {
-      if ( eventVal=== undefined || eventVal.length === 0 ) {
-        return '';
+    showEventContent(eventVal) {
+      if (eventVal === undefined || eventVal.length === 0) {
+        return "";
       } else {
-        return `${this.formatTime( eventVal.started_at )}  ${eventVal.title}`;
+        return `${this.formatTime(eventVal.started_at)}  ${eventVal.title}`;
       }
     }
   }

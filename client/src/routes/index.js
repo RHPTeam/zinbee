@@ -4,12 +4,9 @@ import Router from "vue-router";
 import adminGeneralRouter from "./modules/admin";
 import signinRouterAdmin from "./modules/admin/signin";
 
-Vue.use( Router );
+Vue.use(Router);
 
-export default new Router( {
+export default new Router({
   base: process.env.BASE_URL,
-  routes: [
-    adminGeneralRouter,
-    signinRouterAdmin
-  ]
-} );
+  routes: [adminGeneralRouter, signinRouterAdmin]
+});

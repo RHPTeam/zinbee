@@ -127,30 +127,29 @@
 
 <script>
 export default {
-  components: {
-  },
+  components: {},
   filters: {
-    formatDate( d ) {
-      const newDate = new Date( d ),
-            year = newDate.getFullYear(),
-            month = String(newDate.getMonth() + 1 ).padStart( 2, 0),
-            date = String(  newDate.getDate() ).padStart( 2, 0 );
+    formatDate(d) {
+      const newDate = new Date(d),
+        year = newDate.getFullYear(),
+        month = String(newDate.getMonth() + 1).padStart(2, 0),
+        date = String(newDate.getDate()).padStart(2, 0);
 
       return `${date}/${month}/${year}`;
     },
-    getFirstLetter( string ) {
-      return string.charAt( 0 ).toUpperCase();
+    getFirstLetter(string) {
+      return string.charAt(0).toUpperCase();
     }
   },
-  props: [ "user" ],
+  props: ["user"],
   methods: {
     closeAddInfo() {
-      this.$emit( "closeAddInfo", false );
+      this.$emit("closeAddInfo", false);
     },
     openAddEdit() {
       this.closeAddInfo();
-      this.$emit( "openAddEdit", true );
-      this.$emit( "userSelectEdit", this.user );
+      this.$emit("openAddEdit", true);
+      this.$emit("userSelectEdit", this.user);
     }
   }
 };

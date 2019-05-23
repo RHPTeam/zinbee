@@ -4,31 +4,25 @@
     <div class="wrapper">
       <div class="top d_flex align_items_center">
         <div class="categories mr_5">
-          <button class="btn btn_light">Thêm danh mục</button>
+          <router-link
+            tag="button"
+            :to="{ name: 'admin_categories' }"
+            class="btn btn_light"
+          >
+            Thêm danh mục
+          </router-link>
         </div>
         <div class="blogs">
-          <button class="btn bg_primary">Thêm bài viết</button>
+          <router-link
+            tag="button"
+            class="btn bg_primary"
+            :to="{ name: 'admin_blogs' }"
+          >
+            Thêm bài viết
+          </router-link>
         </div>
       </div>
-      <div class="body">
-        <!-- Start: Choose 5 blogs popular -->
-        <multiselect
-          multiple
-          label="title"
-          placeholder="Chọn bài viết ..."
-        />
-        <!-- End: Choose 5 blogs popular -->
-        <!-- Start: Choose categories -->
-        <multiselect
-          multiple
-          label="title"
-          placeholder="Chọn danh mục ..."
-        />
-        <!-- End: Choose categories -->
-        <div class="">
-          <button class="btn btn_primary">Cập nhật</button>
-        </div>
-      </div>
+      <router-view />
     </div>
   </div>
 </template>

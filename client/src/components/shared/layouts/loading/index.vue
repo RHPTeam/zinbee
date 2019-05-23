@@ -14,16 +14,16 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+img {
+  width: 5%;
+}
+// Friends
+.friend {
   img {
-    width: 5%;
+    width: 4%;
   }
-  // Friends
-  .friend {
-    img {
-      width: 4%;
-    }
-    span {
-      font-size: 14px;
-    }
+  span {
+    font-size: 14px;
   }
+}
 </style>

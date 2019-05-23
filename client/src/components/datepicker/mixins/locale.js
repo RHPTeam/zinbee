@@ -1,34 +1,34 @@
-import Languages from '../locale/languages'
+import Languages from "../locale/languages";
 
-const defaultLang = Languages.zh
+const defaultLang = Languages.zh;
 
 export default {
   methods: {
-    t (path) {
-      let component = this
-      let name = component.$options.name
-      while (component && (!name || name !== 'DatePicker')) {
-        component = component.$parent
+    t(path) {
+      let component = this;
+      let name = component.$options.name;
+      while (component && (!name || name !== "DatePicker")) {
+        component = component.$parent;
         if (component) {
-          name = component.$options.name
+          name = component.$options.name;
         }
       }
-      const lang = (component && component.language) || defaultLang
-      const arr = path.split('.')
-      let current = lang
-      let value
+      const lang = (component && component.language) || defaultLang;
+      const arr = path.split(".");
+      let current = lang;
+      let value;
       for (let i = 0, len = arr.length; i < len; i++) {
-        const prop = arr[i]
-        value = current[prop]
+        const prop = arr[i];
+        value = current[prop];
         if (i === len - 1) {
-          return value
+          return value;
         }
         if (!value) {
-          return ''
+          return "";
         }
-        current = value
+        current = value;
       }
-      return ''
+      return "";
     }
   }
-}
+};

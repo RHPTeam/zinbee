@@ -105,7 +105,7 @@ export default {
     RcMorePopover,
     RcWeekRow
   },
-  props: [ "events", "monthDays" ],
+  props: ["events", "monthDays"],
   data() {
     return {
       eventsPopupData: [],
@@ -117,26 +117,34 @@ export default {
       topVal: null
     };
   },
-  computed: {
-
-  },
+  computed: {},
   methods: {
-    eventClick( data ) {
-      this.$emit( "eventClick", data );
+    eventClick(data) {
+      this.$emit("eventClick", data);
     },
-    eventHover( data ) {
+    eventHover(data) {
       this.showCardHover = true;
       this.eventHoverData = data;
     },
-    eventsOfWeek( i ) {
-      let firstDayOfWeek = new Date( this.monthDays[ i * 7 ].time ).setHours( 0, 0, 0),
-          lastDayOfWeek = new Date( this.monthDays[ i * 7 + 6 ].time ).setHours( 23, 59, 59);
+    eventsOfWeek(i) {
+      let firstDayOfWeek = new Date(this.monthDays[i * 7].time).setHours(
+          0,
+          0,
+          0
+        ),
+        lastDayOfWeek = new Date(this.monthDays[i * 7 + 6].time).setHours(
+          23,
+          59,
+          59
+        );
 
-      let res = this.events.filter( ( event ) => {
+      let res = this.events.filter(event => {
         const eventStartTime = new Date(event.started_at);
 
-        return eventStartTime >= firstDayOfWeek && eventStartTime <= lastDayOfWeek;
-      } );
+        return (
+          eventStartTime >= firstDayOfWeek && eventStartTime <= lastDayOfWeek
+        );
+      });
 
       return res;
     }

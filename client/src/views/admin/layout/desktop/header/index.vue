@@ -27,11 +27,12 @@
     <div class="header--right d_flex align_items_center">
       <!-- Start: Notification Groups -->
       <div class="notification--groups position_relative">
-        <div class="btn--notification position_relative mr_3"
+        <div
+          class="btn--notification position_relative mr_3"
           @click="showNotificationDropdown"
         >
           <icon-base
-            :class="[ isShowNotificationDropdown ? 'active' : null ]"
+            :class="[isShowNotificationDropdown ? 'active' : null]"
             icon-name="bell"
             width="20px"
             height="20px"
@@ -107,9 +108,9 @@
               v-else
               class="avatar--wrap avatar--default position_relative d_block"
             >
-            <span class="position_absolute">{{
-              user.name | getFirstLetter
-            }}</span>
+              <span class="position_absolute">{{
+                user.name | getFirstLetter
+              }}</span>
             </div>
             <div class="ml_2">
               <h4 class="mb_0">{{ user.name }}</h4>

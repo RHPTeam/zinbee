@@ -1,10 +1,10 @@
-import directive from "./handle"
+import directive from "./handle";
 
 const plugin = {
   install(Vue) {
-    Vue.directive('click-outside', directive)
+    Vue.directive("click-outside", directive);
   },
-  directive,
-}
+  directive
+};
 
-export default plugin
+export default plugin;

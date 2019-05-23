@@ -4,9 +4,10 @@
       <table class="rc--list-table ">
         <tbody v-if="eventsOfWeek.length !== 0">
           <!-- Sunday -->
-          <tr class="rc--list-heading"
-              :date="weekDays[0].time"
-              v-if="filterEventsByDay( weekDays[0].time ).length !== 0"
+          <tr
+            class="rc--list-heading"
+            :date="weekDays[0].time"
+            v-if="filterEventsByDay(weekDays[0].time).length !== 0"
           >
             <td class="rc--widget-header" colspan="3">
               <div class="rc--list-heading-main">
@@ -19,14 +20,17 @@
           </tr>
           <tr
             class="rc--list-item"
-            v-for="( event, index ) in filterEventsByDay( weekDays[0].time )"
+            v-for="(event, index) in filterEventsByDay(weekDays[0].time)"
             :key="`Sun${index}`"
-            @click="eventClick( event )"
+            @click="eventClick(event)"
           >
-            <td class="rc--list-item-time rc--widget-content">{{ formatTime(event.started_at) }}</td>
+            <td class="rc--list-item-time rc--widget-content">
+              {{ formatTime(event.started_at) }}
+            </td>
             <td class="rc--list-item-marker rc--widget-content">
-              <span class="rc--event-dot"
-                    :style="{ backgroundColor: event.color }"
+              <span
+                class="rc--event-dot"
+                :style="{ backgroundColor: event.color }"
               ></span>
             </td>
             <td class="rc--list-item-title rc--widget-content">
@@ -35,9 +39,10 @@
           </tr>
 
           <!-- Monday -->
-          <tr class="rc--list-heading"
-              :date="weekDays[1].time"
-              v-if="filterEventsByDay( weekDays[1].time ).length !== 0"
+          <tr
+            class="rc--list-heading"
+            :date="weekDays[1].time"
+            v-if="filterEventsByDay(weekDays[1].time).length !== 0"
           >
             <td class="rc--widget-header" colspan="3">
               <div class="rc--list-heading-main">
@@ -50,14 +55,17 @@
           </tr>
           <tr
             class="rc--list-item"
-            v-for="( event, index ) in filterEventsByDay( weekDays[1].time )"
+            v-for="(event, index) in filterEventsByDay(weekDays[1].time)"
             :key="`Mon${index}`"
-            @click="eventClick( event )"
+            @click="eventClick(event)"
           >
-            <td class="rc--list-item-time rc--widget-content">{{ formatTime(event.started_at) }}</td>
+            <td class="rc--list-item-time rc--widget-content">
+              {{ formatTime(event.started_at) }}
+            </td>
             <td class="rc--list-item-marker rc--widget-content">
-              <span class="rc--event-dot"
-                    :style="{ backgroundColor: event.color }"
+              <span
+                class="rc--event-dot"
+                :style="{ backgroundColor: event.color }"
               ></span>
             </td>
             <td class="rc--list-item-title rc--widget-content">
@@ -66,9 +74,10 @@
           </tr>
 
           <!-- Tuesday -->
-          <tr class="rc--list-heading"
-              :date="weekDays[2].time"
-              v-if="filterEventsByDay( weekDays[2].time ).length !== 0"
+          <tr
+            class="rc--list-heading"
+            :date="weekDays[2].time"
+            v-if="filterEventsByDay(weekDays[2].time).length !== 0"
           >
             <td class="rc--widget-header" colspan="3">
               <div class="rc--list-heading-main">
@@ -81,14 +90,17 @@
           </tr>
           <tr
             class="rc--list-item"
-            v-for="( event, index ) in filterEventsByDay( weekDays[2].time )"
+            v-for="(event, index) in filterEventsByDay(weekDays[2].time)"
             :key="`Tue${index}`"
-            @click="eventClick( event )"
+            @click="eventClick(event)"
           >
-            <td class="rc--list-item-time rc--widget-content">{{ formatTime(event.started_at) }}</td>
+            <td class="rc--list-item-time rc--widget-content">
+              {{ formatTime(event.started_at) }}
+            </td>
             <td class="rc--list-item-marker rc--widget-content">
-              <span class="rc--event-dot"
-                    :style="{ backgroundColor: event.color }"
+              <span
+                class="rc--event-dot"
+                :style="{ backgroundColor: event.color }"
               ></span>
             </td>
             <td class="rc--list-item-title rc--widget-content">
@@ -97,9 +109,10 @@
           </tr>
 
           <!-- Wednesday -->
-          <tr class="rc--list-heading"
-              :date="weekDays[3].time"
-              v-if="filterEventsByDay( weekDays[3].time ).length !== 0"
+          <tr
+            class="rc--list-heading"
+            :date="weekDays[3].time"
+            v-if="filterEventsByDay(weekDays[3].time).length !== 0"
           >
             <td class="rc--widget-header" colspan="3">
               <div class="rc--list-heading-main">
@@ -112,14 +125,17 @@
           </tr>
           <tr
             class="rc--list-item"
-            v-for="( event, index ) in filterEventsByDay( weekDays[3].time )"
+            v-for="(event, index) in filterEventsByDay(weekDays[3].time)"
             :key="`Wed${index}`"
-            @click="eventClick( event )"
+            @click="eventClick(event)"
           >
-            <td class="rc--list-item-time rc--widget-content">{{ formatTime(event.started_at) }}</td>
+            <td class="rc--list-item-time rc--widget-content">
+              {{ formatTime(event.started_at) }}
+            </td>
             <td class="rc--list-item-marker rc--widget-content">
-              <span class="rc--event-dot"
-                    :style="{ backgroundColor: event.color }"
+              <span
+                class="rc--event-dot"
+                :style="{ backgroundColor: event.color }"
               ></span>
             </td>
             <td class="rc--list-item-title rc--widget-content">
@@ -128,9 +144,10 @@
           </tr>
 
           <!-- Thursday -->
-          <tr class="rc--list-heading"
-              :date="weekDays[4].time"
-              v-if="filterEventsByDay( weekDays[4].time ).length !== 0"
+          <tr
+            class="rc--list-heading"
+            :date="weekDays[4].time"
+            v-if="filterEventsByDay(weekDays[4].time).length !== 0"
           >
             <td class="rc--widget-header" colspan="3">
               <div class="rc--list-heading-main">
@@ -143,14 +160,17 @@
           </tr>
           <tr
             class="rc--list-item"
-            v-for="( event, index ) in filterEventsByDay( weekDays[4].time )"
+            v-for="(event, index) in filterEventsByDay(weekDays[4].time)"
             :key="`Thu${index}`"
-            @click="eventClick( event )"
+            @click="eventClick(event)"
           >
-            <td class="rc--list-item-time rc--widget-content">{{ formatTime(event.started_at) }}</td>
+            <td class="rc--list-item-time rc--widget-content">
+              {{ formatTime(event.started_at) }}
+            </td>
             <td class="rc--list-item-marker rc--widget-content">
-              <span class="rc--event-dot"
-                    :style="{ backgroundColor: event.color }"
+              <span
+                class="rc--event-dot"
+                :style="{ backgroundColor: event.color }"
               ></span>
             </td>
             <td class="rc--list-item-title rc--widget-content">
@@ -159,9 +179,10 @@
           </tr>
 
           <!-- Friday -->
-          <tr class="rc--list-heading"
-              :date="weekDays[5].time"
-              v-if="filterEventsByDay( weekDays[5].time ).length !== 0"
+          <tr
+            class="rc--list-heading"
+            :date="weekDays[5].time"
+            v-if="filterEventsByDay(weekDays[5].time).length !== 0"
           >
             <td class="rc--widget-header" colspan="3">
               <div class="rc--list-heading-main">
@@ -174,14 +195,17 @@
           </tr>
           <tr
             class="rc--list-item"
-            v-for="( event, index ) in filterEventsByDay( weekDays[5].time )"
+            v-for="(event, index) in filterEventsByDay(weekDays[5].time)"
             :key="`Fri${index}`"
-            @click="eventClick( event )"
+            @click="eventClick(event)"
           >
-            <td class="rc--list-item-time rc--widget-content">{{ formatTime(event.started_at) }}</td>
+            <td class="rc--list-item-time rc--widget-content">
+              {{ formatTime(event.started_at) }}
+            </td>
             <td class="rc--list-item-marker rc--widget-content">
-              <span class="rc--event-dot"
-                    :style="{ backgroundColor: event.color }"
+              <span
+                class="rc--event-dot"
+                :style="{ backgroundColor: event.color }"
               ></span>
             </td>
             <td class="rc--list-item-title rc--widget-content">
@@ -190,9 +214,10 @@
           </tr>
 
           <!-- Saturday -->
-          <tr class="rc--list-heading"
-              :date="weekDays[6].time"
-              v-if="filterEventsByDay( weekDays[6].time ).length !== 0"
+          <tr
+            class="rc--list-heading"
+            :date="weekDays[6].time"
+            v-if="filterEventsByDay(weekDays[6].time).length !== 0"
           >
             <td class="rc--widget-header" colspan="3">
               <div class="rc--list-heading-main">
@@ -205,14 +230,17 @@
           </tr>
           <tr
             class="rc--list-item"
-            v-for="( event, index ) in filterEventsByDay( weekDays[6].time )"
+            v-for="(event, index) in filterEventsByDay(weekDays[6].time)"
             :key="`Sat${index}`"
-            @click="eventClick( event )"
+            @click="eventClick(event)"
           >
-            <td class="rc--list-item-time rc--widget-content">{{ formatTime(event.started_at) }}</td>
+            <td class="rc--list-item-time rc--widget-content">
+              {{ formatTime(event.started_at) }}
+            </td>
             <td class="rc--list-item-marker rc--widget-content">
-              <span class="rc--event-dot"
-                    :style="{ backgroundColor: event.color }"
+              <span
+                class="rc--event-dot"
+                :style="{ backgroundColor: event.color }"
               ></span>
             </td>
             <td class="rc--list-item-title rc--widget-content">
@@ -221,7 +249,9 @@
           </tr>
         </tbody>
         <tbody v-else>
-          <tr class="rc--list-empty">Không có sự kiện nào.</tr>
+          <tr class="rc--list-empty">
+            Không có sự kiện nào.
+          </tr>
         </tbody>
       </table>
     </div>
@@ -230,31 +260,31 @@
 
 <script>
 export default {
-  props: [ "eventsOfWeek", "dayFullName", "monthName", "weekDays" ],
+  props: ["eventsOfWeek", "dayFullName", "monthName", "weekDays"],
   methods: {
-    eventClick( data ) {
-      this.$emit( "eventClick", data );
+    eventClick(data) {
+      this.$emit("eventClick", data);
     },
-    filterEventsByDay( d ) {
-      const day = new Date( d ).getDay();
+    filterEventsByDay(d) {
+      const day = new Date(d).getDay();
 
-      return this.eventsOfWeek.filter( ( event ) => {
-        const eventStartDay = new Date( event.started_at ).getDay();
+      return this.eventsOfWeek.filter(event => {
+        const eventStartDay = new Date(event.started_at).getDay();
 
         return eventStartDay === day;
-      } );
+      });
     },
-    formatDate( d ) {
-      const time = new Date( d );
+    formatDate(d) {
+      const time = new Date(d);
 
-      return `${String( time.getDate() ).padStart( 2, "0" )} ${
-        this.monthName[ time.getMonth() ]
+      return `${String(time.getDate()).padStart(2, "0")} ${
+        this.monthName[time.getMonth()]
       }, ${time.getFullYear()}`;
     },
-    formatTime( d ) {
-      const dateTime = new Date( d ),
-            hours = String( dateTime.getHours() ).padStart( 2, "0"),
-            mins = String( dateTime.getMinutes() ).padStart( 2, "0" );
+    formatTime(d) {
+      const dateTime = new Date(d),
+        hours = String(dateTime.getHours()).padStart(2, "0"),
+        mins = String(dateTime.getMinutes()).padStart(2, "0");
 
       return `${hours}:${mins}`;
     }

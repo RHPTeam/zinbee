@@ -47,22 +47,38 @@
         </thead>
         <tbody>
           <tr v-for="(x, i) in 3" :key="i">
-            <td class="rc--event-container"
-                v-for="(v, j) in 7"
-                :key="j"
-                :id="[ i === 0 && j === 0 ? 'eventColumnWidth' : null ]"
+            <td
+              class="rc--event-container"
+              v-for="(v, j) in 7"
+              :key="j"
+              :id="[i === 0 && j === 0 ? 'eventColumnWidth' : null]"
             >
               <div
                 class="rc--day-grid-event rc--h-event rc--event rc--start rc--end rc--draggable rc--resizable"
-                :style="{ backgroundColor: eventOfDay(monthDays[rowIndex * 7 + j ].time)[i].color }"
-                v-if=" eventOfDay( monthDays[rowIndex * 7 + j ].time ).length !== 0 && eventOfDay( monthDays[rowIndex * 7 + j ].time )[i] "
-                @click="eventClick(eventOfDay(monthDays[rowIndex * 7 + j ].time)[i])"
-                @mouseover="eventHover(j, eventOfDay(monthDays[rowIndex * 7 + j ].time)[i])"
+                :style="{
+                  backgroundColor: eventOfDay(monthDays[rowIndex * 7 + j].time)[
+                    i
+                  ].color
+                }"
+                v-if="
+                  eventOfDay(monthDays[rowIndex * 7 + j].time).length !== 0 &&
+                    eventOfDay(monthDays[rowIndex * 7 + j].time)[i]
+                "
+                @click="
+                  eventClick(eventOfDay(monthDays[rowIndex * 7 + j].time)[i])
+                "
+                @mouseover="
+                  eventHover(j, eventOfDay(monthDays[rowIndex * 7 + j].time)[i])
+                "
                 @mouseleave="closeCardHover"
               >
                 <div class="rc--content">
                   <span class="rc--title">
-                    {{ showEventContent(eventOfDay(monthDays[rowIndex * 7 + j ].time)[i]) }}
+                    {{
+                      showEventContent(
+                        eventOfDay(monthDays[rowIndex * 7 + j].time)[i]
+                      )
+                    }}
                   </span>
                 </div>
                 <div class="rc--resizer rc--end-resizer"></div>
@@ -70,16 +86,36 @@
             </td>
           </tr>
           <tr>
-            <td rowspan="1"
-                v-for="(v, index) in 7"
-                :key="index"
-                :class="[ eventOfDay( monthDays[rowIndex * 7 + index ].time ) !== undefined && eventOfDay( monthDays[rowIndex * 7 + index ].time ).length > 3 ? 'rc--more-cell' : '']"
+            <td
+              rowspan="1"
+              v-for="(v, index) in 7"
+              :key="index"
+              :class="[
+                eventOfDay(monthDays[rowIndex * 7 + index].time) !==
+                  undefined &&
+                eventOfDay(monthDays[rowIndex * 7 + index].time).length > 3
+                  ? 'rc--more-cell'
+                  : ''
+              ]"
             >
-              <div class="rc--more"
-                   @click="showMorePopover( index, eventOfDay( monthDays[rowIndex * 7 + index ].time ) )"
-                   v-if="eventOfDay( monthDays[rowIndex * 7 + index ].time ) !== undefined && eventOfDay( monthDays[rowIndex * 7 + index ].time ).length > 3"
+              <div
+                class="rc--more"
+                @click="
+                  showMorePopover(
+                    index,
+                    eventOfDay(monthDays[rowIndex * 7 + index].time)
+                  )
+                "
+                v-if="
+                  eventOfDay(monthDays[rowIndex * 7 + index].time) !==
+                    undefined &&
+                    eventOfDay(monthDays[rowIndex * 7 + index].time).length > 3
+                "
               >
-                +{{ eventOfDay( monthDays[rowIndex * 7 + index ].time ).length - 3 }} sự kiện
+                +{{
+                  eventOfDay(monthDays[rowIndex * 7 + index].time).length - 3
+                }}
+                sự kiện
               </div>
             </td>
           </tr>

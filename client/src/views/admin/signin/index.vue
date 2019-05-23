@@ -17,9 +17,7 @@
     </div>
   </div>
 </template>
-<script type="text/javascript">
-
-</script>
+<script type="text/javascript"></script>
 <style lang="scss" scoped>
 .wrap {
   width: 100vw;

@@ -1,5 +1,7 @@
 <template>
-  <div class="bread--crumb text_left d_flex justify_content_start align_items_end px_2 py_3">
+  <div
+    class="bread--crumb text_left d_flex justify_content_start align_items_end px_2 py_3"
+  >
     <div class="title mr_3">
       {{ breadTitle }}
     </div>
@@ -9,15 +11,14 @@
   </div>
 </template>
 <script>
-  export default {
-    props: [ "breadTitle", "breadDesc"]
-  }
+export default {
+  props: ["breadTitle", "breadDesc"]
+};
 </script>
 <style lang="scss" scoped>
-<style lang="scss" scoped>
 .bread--crumb {
-margin-bottom: 25px;
-margin-top: 52px;
+  margin-bottom: 25px;
+  margin-top: 52px;
   .title {
     font-size: 30px;
     font-weight: 600;
@@ -30,7 +31,7 @@ margin-top: 52px;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  .text_left d_flex justify_content_start align_items_end {
+  .bread--crumb {
     display: flex !important;
     flex-direction: column !important;
     text-align: left !important;
@@ -42,5 +43,4 @@ margin-top: 52px;
     }
   }
 }
-</style>
 </style>

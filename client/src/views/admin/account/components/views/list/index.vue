@@ -23,7 +23,8 @@
           <div
             class="d_flex justify_content_start align_items_center pt_1 pb_1 mt_2"
             v-for="user in users"
-            :key="user._id">
+            :key="user._id"
+          >
             <div class="list--item item--checkbox">
               <input
                 type="checkbox"
@@ -47,9 +48,7 @@
                 class="item--status-tag"
                 :class="[user.status === true ? 'enable' : '']"
               >
-                <span v-if="user.status"
-                >Hoạt động</span
-                >
+                <span v-if="user.status">Hoạt động</span>
                 <span v-else>Đã ngừng</span>
               </div>
             </div>

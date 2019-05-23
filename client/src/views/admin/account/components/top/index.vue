@@ -1,11 +1,15 @@
 <template>
-  <div class="top d_flex justify_content_between align_items_center mb_4" :data-theme="currentTheme">
+  <div
+    class="top d_flex justify_content_between align_items_center mb_4"
+    :data-theme="currentTheme"
+  >
     <div class="top--search d_flex">
       <div class="input--wrap position_relative">
-        <input type="text"
-               placeholder="Tìm kiếm"
-               v-model="search"
-               @input="searchUsers"
+        <input
+          type="text"
+          placeholder="Tìm kiếm"
+          v-model="search"
+          @input="searchUsers"
         />
         <div class="search--icon position_absolute">
           <icon-base
@@ -19,7 +23,9 @@
         </div>
       </div>
 
-      <div class="btn btn--active ml_3" @click="isActivePopup = true">Kích hoạt bằng mã</div>
+      <div class="btn btn--active ml_3" @click="isActivePopup = true">
+        Kích hoạt bằng mã
+      </div>
     </div>
     <!-- <div class="d_none">{{ filteredSearch }}</div> -->
     <div class="d_flex justify_content_end align_items_center">
@@ -39,8 +45,10 @@
             </icon-base>
           </div>
           <div class="selected">{{ statusFilter }}</div>
-          <div class="options position_absolute m_0"
-                v-if="isShowStatusFilter === true">
+          <div
+            class="options position_absolute m_0"
+            v-if="isShowStatusFilter === true"
+          >
             <div
               class="option"
               v-for="(item, index) in statusOptions"

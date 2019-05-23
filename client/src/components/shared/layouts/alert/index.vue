@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  props: [ "message", "type" ]
+  props: ["message", "type"]
 };
 </script>

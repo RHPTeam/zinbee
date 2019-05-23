@@ -1,5 +1,8 @@
 <template>
-  <div class="paginate d_flex justify_content_between align_items_center mt_2" :data-theme="currentTheme">
+  <div
+    class="paginate d_flex justify_content_between align_items_center mt_2"
+    :data-theme="currentTheme"
+  >
     <div class="paginate--info">Hiển thị 25 trong số 100</div>
     <div
       class="paginate--content d_flex justify_content_end align_items_center"

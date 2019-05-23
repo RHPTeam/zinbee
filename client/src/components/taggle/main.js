@@ -29,7 +29,7 @@ export default {
       default: false
     },
     validate: {
-      type: [ String, Function, Object ],
+      type: [String, Function, Object],
       default: ""
     },
     addTagOnKeys: {
@@ -61,88 +61,97 @@ export default {
   data() {
     return {
       newTag: "",
-      innerTags: [ ...this.value ],
+      innerTags: [...this.value],
       isInputActive: false
     };
   },
   computed: {
     isLimit: function() {
-      return this.limit > 0 && Number( this.limit ) === this.innerTags.length;
+      return this.limit > 0 && Number(this.limit) === this.innerTags.length;
     }
   },
   watch: {
     value() {
-      this.innerTags = [ ...this.value ];
+      this.innerTags = [...this.value];
     }
   },
   methods: {
     focusNewTag() {
-      if ( this.readOnly || !this.$el.querySelector( ".new-tag" ) ) {
+      if (this.readOnly || !this.$el.querySelector(".new-tag")) {
         return;
       }
-      this.$el.querySelector( ".new-tag" ).focus();
+      this.$el.querySelector(".new-tag").focus();
     },
     handleInputFocus() {
       this.isInputActive = true;
     },
-    handleInputBlur( e ) {
+    handleInputBlur(e) {
       this.isInputActive = false;
-      this.addNew( e );
+      this.addNew(e);
     },
-    async addNew( e ) {
-      const keyShouldAddTag = e ? this.addTagOnKeys.indexOf( e.keyCode ) !== -1 : true,
+    async addNew(e) {
+      const keyShouldAddTag = e
+          ? this.addTagOnKeys.indexOf(e.keyCode) !== -1
+          : true,
         typeIsNotBlur = e && e.type !== "blur",
-        tag = this.beforeAdding ? await this.beforeAdding( this.newTag ) : this.newTag,
-        isValid = await this.validateIfNeeded( tag );
+        tag = this.beforeAdding
+          ? await this.beforeAdding(this.newTag)
+          : this.newTag,
+        isValid = await this.validateIfNeeded(tag);
 
       if (
-        ( !keyShouldAddTag && ( typeIsNotBlur || !this.addTagOnBlur ) ) || this.isLimit
+        (!keyShouldAddTag && (typeIsNotBlur || !this.addTagOnBlur)) ||
+        this.isLimit
       ) {
         return;
       }
 
       if (
-        tag && isValid && ( this.allowDuplicates || this.innerTags.indexOf( tag ) === -1 )
+        tag &&
+        isValid &&
+        (this.allowDuplicates || this.innerTags.indexOf(tag) === -1)
       ) {
-        this.innerTags.push( tag );
+        this.innerTags.push(tag);
         this.newTag = "";
         this.tagChange();
         e && e.preventDefault();
       }
     },
-    validateIfNeeded( tagValue ) {
-      if ( this.validate === "" || this.validate === undefined ) {
+    validateIfNeeded(tagValue) {
+      if (this.validate === "" || this.validate === undefined) {
         return true;
       }
-      if ( typeof this.validate === "function" ) {
-        return this.validate( tagValue );
+      if (typeof this.validate === "function") {
+        return this.validate(tagValue);
       }
       if (
-        typeof this.validate === "string" && Object.keys( validators ).indexOf( this.validate ) > -1
+        typeof this.validate === "string" &&
+        Object.keys(validators).indexOf(this.validate) > -1
       ) {
-        return validators[ this.validate ].test( tagValue );
+        return validators[this.validate].test(tagValue);
       }
       if (
-        typeof this.validate === "object" && this.validate.test !== undefined
+        typeof this.validate === "object" &&
+        this.validate.test !== undefined
       ) {
-        return this.validate.test( tagValue );
+        return this.validate.test(tagValue);
       }
       return true;
     },
-    remove( index ) {
-      this.innerTags.splice( index, 1 );
+    remove(index) {
+      this.innerTags.splice(index, 1);
       this.tagChange();
     },
     removeLastTag() {
-      if ( this.newTag ) {
+      if (this.newTag) {
         return;
       }
       this.innerTags.pop();
       this.tagChange();
     },
     tagChange() {
-      this.$emit( "update:tags", this.innerTags );
-      this.$emit( "input", this.innerTags );
+      this.$emit("update:tags", this.innerTags);
+      this.$emit("input", this.innerTags);
     }
   }
 };

@@ -57,7 +57,7 @@
               <td
                 v-for="(v, i) in 7"
                 :key="i"
-                :id="[ i === 0 ? 'eventColumnWidth' : null ]"
+                :id="[i === 0 ? 'eventColumnWidth' : null]"
               >
                 <div class="rc--content-col">
                   <div class="rc--event-container rc--mirror-container"></div>
@@ -66,32 +66,101 @@
                     <div v-for="(t, j) in 24" :key="j">
                       <div
                         class="rc--time-grid-event rc--event rc--start rc--end rc--draggable rc--resizable"
-                        :style="[ {backgroundColor: filterEventsByTime( j, filterEventsByDay( weekDays[i].time ) )[0].color },
-                                {top: j*2*29 + 'px'}, {bottom: -j*2*29 - 29 + 'px'}, {zIndex: 1}, {left: 0 + '%'}, {right: 0 + '%'} ]"
-                        v-if="filterEventsByTime( j, filterEventsByDay( weekDays[i].time ) ).length !== 0
-                              && filterEventsByTime( j, filterEventsByDay( weekDays[i].time ) )"
+                        :style="[
+                          {
+                            backgroundColor: filterEventsByTime(
+                              j,
+                              filterEventsByDay(weekDays[i].time)
+                            )[0].color
+                          },
+                          { top: j * 2 * 29 + 'px' },
+                          { bottom: -j * 2 * 29 - 29 + 'px' },
+                          { zIndex: 1 },
+                          { left: 0 + '%' },
+                          { right: 0 + '%' }
+                        ]"
+                        v-if="
+                          filterEventsByTime(
+                            j,
+                            filterEventsByDay(weekDays[i].time)
+                          ).length !== 0 &&
+                            filterEventsByTime(
+                              j,
+                              filterEventsByDay(weekDays[i].time)
+                            )
+                        "
                         @click="
-                        eventClick( filterEventsByTime( j, filterEventsByDay( weekDays[i].time ) )[0] )
-                      "
-                        @mouseover="eventHover(i, j, filterEventsByTime( j, filterEventsByDay( weekDays[i].time ) )[0] )"
+                          eventClick(
+                            filterEventsByTime(
+                              j,
+                              filterEventsByDay(weekDays[i].time)
+                            )[0]
+                          )
+                        "
+                        @mouseover="
+                          eventHover(
+                            i,
+                            j,
+                            filterEventsByTime(
+                              j,
+                              filterEventsByDay(weekDays[i].time)
+                            )[0]
+                          )
+                        "
                         @mouseleave="isShowCardHover = false"
                       >
                         <div class="rc--content">
                           <div class="rc--title">
-                            {{ showEventContent( filterEventsByTime( j, filterEventsByDay( weekDays[i].time ) )[ 0 ]) }}
+                            {{
+                              showEventContent(
+                                filterEventsByTime(
+                                  j,
+                                  filterEventsByDay(weekDays[i].time)
+                                )[0]
+                              )
+                            }}
                           </div>
                         </div>
                         <div class="rc--resizer rc--end-resizer"></div>
                       </div>
                       <div
                         class="rc--time-grid-event rc--event rc--start rc--end rc--draggable rc--resizable"
-                        v-if="filterEventsByTime( j, filterEventsByDay( weekDays[i].time ) ).length > 1
-                              && filterEventsByTime( j, filterEventsByDay( weekDays[i].time ) )"
-                        :style="[ {top: j*2*29 + 29 + 'px'}, {bottom: -j*2*29 - 58 + 'px'} ]"
+                        v-if="
+                          filterEventsByTime(
+                            j,
+                            filterEventsByDay(weekDays[i].time)
+                          ).length > 1 &&
+                            filterEventsByTime(
+                              j,
+                              filterEventsByDay(weekDays[i].time)
+                            )
+                        "
+                        :style="[
+                          { top: j * 2 * 29 + 29 + 'px' },
+                          { bottom: -j * 2 * 29 - 58 + 'px' }
+                        ]"
                       >
                         <div class="rc--content">
-                          <div class="rc--more" @click="showMorePopover(i, j, filterEventsByTime( j, filterEventsByDay( weekDays[i].time ) ))">
-                            +{{ filterEventsByTime( j, filterEventsByDay( weekDays[i].time ) ).length - 1 }} sự kiện
+                          <div
+                            class="rc--more"
+                            @click="
+                              showMorePopover(
+                                i,
+                                j,
+                                filterEventsByTime(
+                                  j,
+                                  filterEventsByDay(weekDays[i].time)
+                                )
+                              )
+                            "
+                          >
+                            +{{
+                              filterEventsByTime(
+                                j,
+                                filterEventsByDay(weekDays[i].time)
+                              ).length - 1
+                            }}
+                            sự kiện
                           </div>
                         </div>
                         <div class="rc--resizer rc--end-resizer"></div>

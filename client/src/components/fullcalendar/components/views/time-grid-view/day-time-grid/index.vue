@@ -59,26 +59,29 @@
                       class="rc--time-grid-event rc--event rc--start rc--end rc--draggable rc--resizable"
                       v-for="(v, i) in 24"
                       :key="i"
-                      :style="[ {top: i*2*29 + 'px'}, {bottom: -i*2*29 - 29 + 'px'} ]"
+                      :style="[
+                        { top: i * 2 * 29 + 'px' },
+                        { bottom: -i * 2 * 29 - 29 + 'px' }
+                      ]"
                     >
                       <div class="rc--content">
                         <div class="rc--content-flex">
                           <div
                             class="rc--content-bg"
-                            v-for="(event, index) in filterEventsByTime(i).slice(0, 3)"
+                            v-for="(event, index) in filterEventsByTime(
+                              i
+                            ).slice(0, 3)"
                             :key="index"
-                            :style="{backgroundColor: event.color}"
+                            :style="{ backgroundColor: event.color }"
                           >
-                            <div
-                              class="rc--title"
-                              @click="eventClick(event)"
-                            >
+                            <div class="rc--title" @click="eventClick(event)">
                               {{ showEventContent(event) }}
                             </div>
                           </div>
-                          <div class="rc--more"
-                               v-if="filterEventsByTime(i).length > 2"
-                               @click="showMorePopover(i, filterEventsByTime(i))"
+                          <div
+                            class="rc--more"
+                            v-if="filterEventsByTime(i).length > 2"
+                            @click="showMorePopover(i, filterEventsByTime(i))"
                           >
                             +{{ filterEventsByTime(i).length - 3 }} sự kiện
                           </div>

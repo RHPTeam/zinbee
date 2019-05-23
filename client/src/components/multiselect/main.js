@@ -7,7 +7,7 @@ import OpenIndicator from "./components/openindicator";
 
 export default {
   components: { Deselect, OpenIndicator },
-  mixins: [ pointerScroll, typeAheadPointer, ajax ],
+  mixins: [pointerScroll, typeAheadPointer, ajax],
   props: {
     /**
      * Contains the currently selected value. Very similar to a
@@ -121,7 +121,7 @@ export default {
      */
     reduce: {
       type: Function,
-      default: ( option ) => option
+      default: option => option
     },
     /**
      * Callback to generate the label text. If {option}
@@ -138,12 +138,12 @@ export default {
      */
     getOptionLabel: {
       type: Function,
-      default( option ) {
-        if ( typeof option === "object" ) {
-          if ( !option.hasOwnProperty( this.label ) ) {
+      default(option) {
+        if (typeof option === "object") {
+          if (!option.hasOwnProperty(this.label)) {
             return;
           }
-          return option[ this.label ];
+          return option[this.label];
         }
         return option;
       }
@@ -153,8 +153,8 @@ export default {
      */
     onTab: {
       type: Function,
-      default: function () {
-        if ( this.selectOnTab ) {
+      default: function() {
+        if (this.selectOnTab) {
           this.typeAheadSelect();
         }
       }
@@ -206,8 +206,8 @@ export default {
      */
     filterBy: {
       type: Function,
-      default( option, label, search ) {
-        return ( label || "" ).toLowerCase().indexOf( search.toLowerCase() ) > -1;
+      default(option, label, search) {
+        return (label || "").toLowerCase().indexOf(search.toLowerCase()) > -1;
       }
     },
     /**
@@ -222,16 +222,16 @@ export default {
      * @return {Boolean}
      */
     filter: {
-      "type": Function,
-      default( options, search ) {
-        return options.filter( ( option ) => {
-          let label = this.getOptionLabel( option );
+      type: Function,
+      default(options, search) {
+        return options.filter(option => {
+          let label = this.getOptionLabel(option);
 
-          if ( typeof label === "number" ) {
+          if (typeof label === "number") {
             label = label.toString();
           }
-          return this.filterBy( option, label, search );
-        } );
+          return this.filterBy(option, label, search);
+        });
       }
     },
     /**
@@ -240,13 +240,13 @@ export default {
      */
     createOption: {
       type: Function,
-      default( option ) {
+      default(option) {
         let newOption = option;
-        
-        if ( typeof this.optionList[ 0 ] === "object" ) {
-          newOption = { [ this.label ]: newOption };
+
+        if (typeof this.optionList[0] === "object") {
+          newOption = { [this.label]: newOption };
         }
-        this.$emit( "option:created", newOption );
+        this.$emit("option:created", newOption);
         return newOption;
       }
     },
@@ -321,7 +321,7 @@ export default {
      * @return {[type]} [description]
      */
     options() {
-      if ( !this.taggable && this.resetOnOptionsChange ) {
+      if (!this.taggable && this.resetOnOptionsChange) {
         this.clearSelection();
       }
     },
@@ -341,14 +341,16 @@ export default {
    */
   created() {
     this.mutableLoading = this.loading;
-    if ( this.$options.propsData.hasOwnProperty( "reduce" ) && this.value ) {
-      if ( Array.isArray( this.value ) ) {
-        this.$data._value = this.value.map( ( value ) => this.findOptionFromReducedValue( value ) );
+    if (this.$options.propsData.hasOwnProperty("reduce") && this.value) {
+      if (Array.isArray(this.value)) {
+        this.$data._value = this.value.map(value =>
+          this.findOptionFromReducedValue(value)
+        );
       } else {
-        this.$data._value = this.findOptionFromReducedValue( this.value );
+        this.$data._value = this.findOptionFromReducedValue(this.value);
       }
     }
-    this.$on( "option:created", this.maybePushTag );
+    this.$on("option:created", this.maybePushTag);
   },
   methods: {
     /**
@@ -356,36 +358,38 @@ export default {
      * @param  {Object|String} option
      * @return {void}
      */
-    select( param ) {
+    select(param) {
       let option = param;
 
-      if ( !this.isOptionSelected( option ) ) {
-        if ( this.taggable && !this.optionExists( option ) ) {
-          option = this.createOption( option );
+      if (!this.isOptionSelected(option)) {
+        if (this.taggable && !this.optionExists(option)) {
+          option = this.createOption(option);
         }
-        if ( this.multiple ) {
-          option = this.selectedValue.concat( option );
+        if (this.multiple) {
+          option = this.selectedValue.concat(option);
         }
-        this.updateValue( option );
+        this.updateValue(option);
       }
-      this.onAfterSelect( option );
+      this.onAfterSelect(option);
     },
     /**
      * De-select a given option.
      * @param  {Object|String} option
      * @return {void}
      */
-    deselect ( option ) {
-      this.updateValue( this.selectedValue.filter( ( val ) => {
-        return !this.optionComparator( val, option );
-      } ) );
+    deselect(option) {
+      this.updateValue(
+        this.selectedValue.filter(val => {
+          return !this.optionComparator(val, option);
+        })
+      );
     },
     /**
      * Clears the currently selected value(s)
      * @return {void}
      */
     clearSelection() {
-      this.updateValue( this.multiple ? [] : null );
+      this.updateValue(this.multiple ? [] : null);
     },
     /**
      * Called from this.select after each selection.
@@ -393,11 +397,11 @@ export default {
      * @return {void}
      */
     onAfterSelect() {
-      if ( this.closeOnSelect ) {
+      if (this.closeOnSelect) {
         this.open = !this.open;
         this.searchEl.blur();
       }
-      if ( this.clearSearchOnSelect ) {
+      if (this.clearSearchOnSelect) {
         this.search = "";
       }
     },
@@ -409,28 +413,28 @@ export default {
      * @emits input
      * @param value
      */
-    updateValue ( val ) {
+    updateValue(val) {
       let value = val;
 
-      if ( this.isTrackingValues ) {
+      if (this.isTrackingValues) {
         // Vue select has to manage value
         this.$data._value = value;
       }
-      if ( value !== null ) {
-        if ( Array.isArray( value ) ) {
-          value = value.map( ( vl ) => this.reduce( vl ) );
+      if (value !== null) {
+        if (Array.isArray(value)) {
+          value = value.map(vl => this.reduce(vl));
         } else {
-          value = this.reduce( value );
+          value = this.reduce(value);
         }
       }
-      this.$emit( "input", value );
+      this.$emit("input", value);
     },
     /**
      * Toggle the visibility of the dropdown menu.
      * @param  {Event} e
      * @return {void}
      */
-    toggleDropdown ( e ) {
+    toggleDropdown(e) {
       const target = e.target,
         toggleTargets = [
           this.$el,
@@ -438,13 +442,16 @@ export default {
           this.$refs.toggle.$el,
           this.$refs.openIndicator.$el,
           // the line below is a bit gross, but required to support IE11 without adding polyfills
-          ...Array.prototype.slice.call( this.$refs.openIndicator.$el.childNodes )
+          ...Array.prototype.slice.call(this.$refs.openIndicator.$el.childNodes)
         ];
 
-      if ( toggleTargets.indexOf( target ) > -1 || target.classList.contains( "vs__selected" ) ) {
-        if ( this.open ) {
+      if (
+        toggleTargets.indexOf(target) > -1 ||
+        target.classList.contains("vs__selected")
+      ) {
+        if (this.open) {
           this.searchEl.blur(); // dropdown will close on blur
-        } else if ( !this.disabled ) {
+        } else if (!this.disabled) {
           this.open = true;
           this.searchEl.focus();
         }
@@ -455,10 +462,10 @@ export default {
      * @param  {Object|String}  option
      * @return {Boolean}        True when selected | False otherwise
      */
-    isOptionSelected( option ) {
-      return this.selectedValue.some( ( value ) => {
-        return this.optionComparator( value, option );
-      } );
+    isOptionSelected(option) {
+      return this.selectedValue.some(value => {
+        return this.optionComparator(value, option);
+      });
     },
     /**
      * Determine if two option objects are matching.
@@ -467,21 +474,24 @@ export default {
      * @param option {Object}
      * @returns {boolean}
      */
-    optionComparator( value, option ) {
-      if ( typeof value !== "object" && typeof option !== "object" ) {
+    optionComparator(value, option) {
+      if (typeof value !== "object" && typeof option !== "object") {
         // Comparing primitives
-        if ( value === option ) {
+        if (value === option) {
           return true;
         }
       } else {
         // Comparing objects
-        if ( value === this.reduce( option ) ) {
+        if (value === this.reduce(option)) {
           return true;
         }
-        if ( ( this.getOptionLabel( value ) === this.getOptionLabel( option ) ) || ( this.getOptionLabel( value ) === option ) ) {
+        if (
+          this.getOptionLabel(value) === this.getOptionLabel(option) ||
+          this.getOptionLabel(value) === option
+        ) {
           return true;
         }
-        if ( this.reduce( value ) === this.reduce( option ) ) {
+        if (this.reduce(value) === this.reduce(option)) {
           return true;
         }
       }
@@ -495,8 +505,13 @@ export default {
      * @param value {Object}
      * @returns {*}
      */
-    findOptionFromReducedValue ( value ) {
-      return this.options.find( ( option ) => JSON.stringify( this.reduce( option ) ) === JSON.stringify( value ) ) || value;
+    findOptionFromReducedValue(value) {
+      return (
+        this.options.find(
+          option =>
+            JSON.stringify(this.reduce(option)) === JSON.stringify(value)
+        ) || value
+      );
     },
     /**
      * 'Private' function to close the search options
@@ -505,7 +520,7 @@ export default {
      */
     closeSearchOptions() {
       this.open = false;
-      this.$emit( "search:blur" );
+      this.$emit("search:blur");
     },
     /**
      * Delete the value on Delete keypress when there is no
@@ -513,13 +528,15 @@ export default {
      * @return {this.value}
      */
     maybeDeleteValue() {
-      if ( !this.searchEl.value.length && this.selectedValue && this.clearable ) {
+      if (!this.searchEl.value.length && this.selectedValue && this.clearable) {
         let value = null;
 
-        if ( this.multiple ) {
-          value = [ ...this.selectedValue.slice( 0, this.selectedValue.length - 1 ) ];
+        if (this.multiple) {
+          value = [
+            ...this.selectedValue.slice(0, this.selectedValue.length - 1)
+          ];
         }
-        this.updateValue( value );
+        this.updateValue(value);
       }
     },
     /**
@@ -529,15 +546,15 @@ export default {
      * @param  {Object || String} option
      * @return {boolean}
      */
-    optionExists( option ) {
-      return this.optionList.some( ( opt ) => {
-        if ( typeof opt === "object" && this.getOptionLabel( opt ) === option ) {
+    optionExists(option) {
+      return this.optionList.some(opt => {
+        if (typeof opt === "object" && this.getOptionLabel(opt) === option) {
           return true;
-        } else if ( opt === option ) {
+        } else if (opt === option) {
           return true;
         }
         return false;
-      } );
+      });
     },
     /**
      * Ensures that options are always
@@ -545,8 +562,8 @@ export default {
      * @param option
      * @return {*}
      */
-    normalizeOptionForSlot ( option ) {
-      return ( typeof option === "object" ) ? option : { [ this.label ]: option };
+    normalizeOptionForSlot(option) {
+      return typeof option === "object" ? option : { [this.label]: option };
     },
     /**
      * If push-tags is true, push the
@@ -555,9 +572,9 @@ export default {
      * @param  {Object || String} option
      * @return {void}
      */
-    maybePushTag( option ) {
-      if ( this.pushTags ) {
-        this.pushedTags.push( option );
+    maybePushTag(option) {
+      if (this.pushTags) {
+        this.pushedTags.push(option);
       }
     },
     /**
@@ -566,7 +583,7 @@ export default {
      * @return {void}
      */
     onEscape() {
-      if ( !this.search.length ) {
+      if (!this.search.length) {
         this.searchEl.blur();
       } else {
         this.search = "";
@@ -578,17 +595,17 @@ export default {
      * @return {void}
      */
     onSearchBlur() {
-      if ( this.mousedown && !this.searching ) {
+      if (this.mousedown && !this.searching) {
         this.mousedown = false;
       } else {
-        if ( this.clearSearchOnBlur ) {
+        if (this.clearSearchOnBlur) {
           this.search = "";
         }
         this.closeSearchOptions();
         return;
       }
       // Fixed bug where no-options message could not be closed
-      if ( this.search.length === 0 && this.options.length === 0 ) {
+      if (this.search.length === 0 && this.options.length === 0) {
         this.closeSearchOptions();
         return;
       }
@@ -600,7 +617,7 @@ export default {
      */
     onSearchFocus() {
       this.open = true;
-      this.$emit( "search:focus" );
+      this.$emit("search:focus");
     },
     /**
      * Event-Handler to help workaround IE11 (probably fixes 10 as well)
@@ -626,8 +643,8 @@ export default {
      * @param e {KeyboardEvent}
      * @return {Function}
      */
-    onSearchKeyDown ( e ) {
-      switch ( e.keyCode ) {
+    onSearchKeyDown(e) {
+      switch (e.keyCode) {
         case 8:
           //  delete
           return this.maybeDeleteValue();
@@ -641,8 +658,8 @@ export default {
      * @param e {KeyboardEvent}
      * @return {Function}
      */
-    onSearchKeyUp ( e ) {
-      switch ( e.keyCode ) {
+    onSearchKeyUp(e) {
+      switch (e.keyCode) {
         case 27:
           //  esc
           return this.onEscape();
@@ -667,22 +684,25 @@ export default {
      * track the state of values internally.
      * @return {boolean}
      */
-    isTrackingValues () {
-      return typeof this.value === "undefined" || this.$options.propsData.hasOwnProperty( "reduce" );
+    isTrackingValues() {
+      return (
+        typeof this.value === "undefined" ||
+        this.$options.propsData.hasOwnProperty("reduce")
+      );
     },
     /**
      * The options that are currently selected.
      * @return {Array}
      */
-    selectedValue () {
+    selectedValue() {
       let value = this.value;
 
-      if ( this.isTrackingValues ) {
+      if (this.isTrackingValues) {
         // Vue select has to manage value internally
         value = this.$data._value;
       }
-      if ( value ) {
-        return [].concat( value );
+      if (value) {
+        return [].concat(value);
       }
       return [];
     },
@@ -693,44 +713,48 @@ export default {
      *
      * @return {Array}
      */
-    optionList () {
-      return this.options.concat( this.pushedTags );
+    optionList() {
+      return this.options.concat(this.pushedTags);
     },
     /**
      * Find the search input DOM element.
      * @returns {HTMLInputElement}
      */
-    searchEl () {
-      return this.$scopedSlots.search ? this.$refs.selectedOptions.querySelector( this.searchInputQuerySelector ) : this.$refs.search;
+    searchEl() {
+      return this.$scopedSlots.search
+        ? this.$refs.selectedOptions.querySelector(
+            this.searchInputQuerySelector
+          )
+        : this.$refs.search;
     },
     /**
      * The object to be bound to the $slots.search scoped slot.
      * @returns {Object}
      */
-    scope () {
+    scope() {
       return {
         search: {
           attributes: {
-            "disabled": this.disabled,
-            "placeholder": this.searchPlaceholder,
-            "tabindex": this.tabindex,
-            "readonly": !this.searchable,
-            "id": this.inputId,
+            disabled: this.disabled,
+            placeholder: this.searchPlaceholder,
+            tabindex: this.tabindex,
+            readonly: !this.searchable,
+            id: this.inputId,
             "aria-expanded": this.dropdownOpen,
             "aria-label": "Search for option",
-            "ref": "search",
-            "role": "combobox",
-            "type": "search",
-            "autocomplete": "off",
-            "value": this.search
+            ref: "search",
+            role: "combobox",
+            type: "search",
+            autocomplete: "off",
+            value: this.search
           },
           events: {
-            "keydown": this.onSearchKeyDown,
-            "keyup": this.onSearchKeyUp,
-            "blur": this.onSearchBlur,
-            "focus": this.onSearchFocus,
+            keydown: this.onSearchKeyDown,
+            keyup: this.onSearchKeyUp,
+            blur: this.onSearchBlur,
+            focus: this.onSearchFocus,
             // eslint-disable-next-line no-return-assign
-            "input": ( e ) => this.search = e.target.value
+            input: e => (this.search = e.target.value)
           }
         },
         spinner: {
@@ -782,7 +806,7 @@ export default {
      * @return {String} Placeholder text
      */
     searchPlaceholder() {
-      if ( this.isValueEmpty && this.placeholder ) {
+      if (this.isValueEmpty && this.placeholder) {
         return this.placeholder;
       }
     },
@@ -795,15 +819,21 @@ export default {
      * @return {array}
      */
     filteredOptions() {
-      const optionList = [].concat( this.optionList );
+      const optionList = [].concat(this.optionList);
 
-      if ( !this.filterable && !this.taggable ) {
+      if (!this.filterable && !this.taggable) {
         return optionList;
       }
-      let options = this.search.length ? this.filter( optionList, this.search, this ) : optionList;
+      let options = this.search.length
+        ? this.filter(optionList, this.search, this)
+        : optionList;
 
-      if ( this.taggable && this.search.length && !this.optionExists( this.search ) ) {
-        options.unshift( this.search );
+      if (
+        this.taggable &&
+        this.search.length &&
+        !this.optionExists(this.search)
+      ) {
+        options.unshift(this.search);
       }
       return options;
     },
@@ -819,7 +849,9 @@ export default {
      * @return {Boolean}
      */
     showClearButton() {
-      return !this.multiple && this.clearable && !this.open && !this.isValueEmpty;
+      return (
+        !this.multiple && this.clearable && !this.open && !this.isValueEmpty
+      );
     }
   }
 };

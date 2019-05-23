@@ -3,14 +3,14 @@
     @click="focusNewTag()"
     :class="{
       'read-only': readOnly,
-      'vue-input-tag-wrapper--active': isInputActive,
+      'vue-input-tag-wrapper--active': isInputActive
     }"
     class="vue-input-tag-wrapper"
   >
     <span v-for="(tag, index) in innerTags" :key="index" class="input-tag">
       <span>{{ tag }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove">
-        <slot name="remove-icon"/>
+        <slot name="remove-icon" />
       </a>
     </span>
     <input
@@ -24,7 +24,7 @@
       v-on:blur="handleInputBlur"
       v-on:focus="handleInputFocus"
       class="new-tag"
-    >
+    />
   </div>
 </template>
 

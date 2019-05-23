@@ -23,15 +23,15 @@ export default {
       default: "box"
     },
     width: {
-      type: [ Number, String ],
+      type: [Number, String],
       default: 18
     },
     height: {
-      type: [ Number, String ],
+      type: [Number, String],
       default: 18
     },
     viewBox: {
-      type: [ Number, String ],
+      type: [Number, String],
       default: "0 0 18 18"
     },
     iconColor: {

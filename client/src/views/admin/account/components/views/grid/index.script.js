@@ -19,16 +19,16 @@ export default {
     };
   },
   filters: {
-    formatDate( d ) {
-      const newDate = new Date( d ),
+    formatDate(d) {
+      const newDate = new Date(d),
         year = newDate.getFullYear(),
-        month = String(newDate.getMonth() + 1 ).padStart( 2, 0),
-        date = String(  newDate.getDate() ).padStart( 2, 0 );
+        month = String(newDate.getMonth() + 1).padStart(2, 0),
+        date = String(newDate.getDate()).padStart(2, 0);
 
       return `${date}/${month}/${year}`;
     },
-    getFirstLetter( string ) {
-      return string.charAt( 0 ).toUpperCase();
+    getFirstLetter(string) {
+      return string.charAt(0).toUpperCase();
     }
   },
   computed: {
@@ -42,33 +42,33 @@ export default {
       get: function() {
         return this.users ? this.selected.length === this.users.length : false;
       },
-      set: function( value ) {
+      set: function(value) {
         let selected = [];
 
-        if ( value ) {
-          this.users.forEach( ( user ) => {
-            selected.push( user._id );
-          } );
+        if (value) {
+          this.users.forEach(user => {
+            selected.push(user._id);
+          });
         }
         this.selected = selected;
       }
     }
   },
   methods: {
-    openPopupInfo( user ) {
+    openPopupInfo(user) {
       this.showInfo = true;
       this.userSelectInfo = user;
     },
-    openPopupEdit( user ) {
+    openPopupEdit(user) {
       this.showEdit = true;
       this.userSelectEdit = user;
     },
     openDeleteDialog() {
       this.showDeleteDialog = true;
     },
-    userStatus( startDate, endDate ) {
-      const startDateTime = new Date( startDate ),
-        endDateTime = new Date( endDate ),
+    userStatus(startDate, endDate) {
+      const startDateTime = new Date(startDate),
+        endDateTime = new Date(endDate),
         time = endDateTime.getTime() - startDateTime.getTime();
 
       return time > 0;

@@ -2,13 +2,13 @@
   <div class="account text_left px_4 py_4" :data-theme="currentTheme">
     <div class="account--title mb_4">Quản lý tài khoản</div>
     <div class="account--content card card_body p_4">
-      <div class="alert alert_success" v-if="$store.getters.status === 'success'">
+      <div
+        class="alert alert_success"
+        v-if="$store.getters.status === 'success'"
+      >
         Kích hoạt tài khoản với mã kích hoạt thành công!
       </div>
-      <app-top
-        :isGrid="isGrid"
-        @changeLayout="isGrid = $event"
-      />
+      <app-top :isGrid="isGrid" @changeLayout="isGrid = $event" />
       <div v-if="isGrid" class="account--grid">
         <app-grid-view />
       </div>
@@ -43,11 +43,11 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch( "getUsers" );
+    await this.$store.dispatch("getUsers");
 
     const data = this.$store.getters.users;
 
-    await this.$store.dispatch( "getUsersFilter", data );
+    await this.$store.dispatch("getUsersFilter", data);
   }
 };
 </script>
@@ -78,7 +78,7 @@ export default {
     color: #ccc;
   }
   .account--content {
-    background-color: #27292D;
+    background-color: #27292d;
   }
 }
 </style>

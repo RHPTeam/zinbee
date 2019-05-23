@@ -20,7 +20,7 @@
           <div class="alert p_2" v-if="isShowAlert === true">
             Mã cookie của bạn không chính xác, vui lòng xác nhận đây là mã
             cookie của tài khoản <span>{{ item.userInfo.name }}</span
-          >.
+            >.
           </div>
           <textarea
             placeholder="Nhập mã kích hoạt tại đây ..."
@@ -84,5 +84,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "./index.style";
+@import "./index.style";
 </style>

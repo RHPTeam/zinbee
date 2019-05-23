@@ -4,9 +4,11 @@
       <div class="d_flex mb_3">
         <div class="left">
           <div class="d_flex">
-            <button class="btn btn_success" @click="createNewPost">Viết bài đăng mới</button>
+            <button class="btn btn_success" @click="createNewPost">
+              Viết bài đăng mới
+            </button>
             <form class="ml_3" role="search-post">
-              <input class="form_control" type="text" placeholder="Tìm kiếm">
+              <input class="form_control" type="text" placeholder="Tìm kiếm" />
             </form>
           </div>
         </div>
@@ -37,13 +39,13 @@ export default {
   components: {
     Item
   },
-  data () {
+  data() {
     return {
       isFilterTime: "Không sắp xếp"
-    }
+    };
   },
   computed: {
-    newPostLibraries(){
+    newPostLibraries() {
       return this.$store.getters.newPostLibraries;
     },
     allPostLibraries() {
@@ -52,64 +54,64 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch( "getAllPostLibraries" );
+    await this.$store.dispatch("getAllPostLibraries");
   },
   methods: {
     async createNewPost() {
       const dataSender = {};
-      await this.$store.dispatch( "createNewPostLibraries", dataSender );
-      this.$router.push( {
+      await this.$store.dispatch("createNewPostLibraries", dataSender);
+      this.$router.push({
         name: "post_libraries_details",
         params: { id: this.newPostLibraries._id }
-      } );
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  $table-header: #ffb94a;
-  $table-header-border: #fff6f4;
-  $table-border: #d9d9d9;
-  $row-bg: #f4f2f1;
+$table-header: #ffb94a;
+$table-header-border: #fff6f4;
+$table-border: #d9d9d9;
+$row-bg: #f4f2f1;
 
-  .table-container {
-    display: block;
-    margin: auto;
-    width: 100%;
-    max-width: 100%;
-  }
+.table-container {
+  display: block;
+  margin: auto;
+  width: 100%;
+  max-width: 100%;
+}
 
-  .flex-table {
-    display: flex;
-    flex-flow: row wrap;
-    border-left: solid 1px $table-border;
-    transition: 0.5s;
-    &:first-of-type {
-      border-top: solid 1px $table-header-border;
-      border-left: solid 1px $table-header-border;
-    }
-    &:first-of-type .flex-row {
-      background: $table-header;
-      color: white;
-      border-color: $table-header-border;
-    }
-    &.row:nth-child(odd) .flex-row {
-      background: $row-bg;
-    }
-    &:hover {
-      background: #F5F5F5;
-      transition: 500ms;
-    }
-    .flex-row {
-      overflow: hidden;
-      width: calc(100% / 4);
-      text-align: center;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      padding: 0.5em 0.5em;
-      border-right: solid 1px $table-border;
-      border-bottom: solid 1px $table-border;
-    }
+.flex-table {
+  display: flex;
+  flex-flow: row wrap;
+  border-left: solid 1px $table-border;
+  transition: 0.5s;
+  &:first-of-type {
+    border-top: solid 1px $table-header-border;
+    border-left: solid 1px $table-header-border;
   }
+  &:first-of-type .flex-row {
+    background: $table-header;
+    color: white;
+    border-color: $table-header-border;
+  }
+  &.row:nth-child(odd) .flex-row {
+    background: $row-bg;
+  }
+  &:hover {
+    background: #f5f5f5;
+    transition: 500ms;
+  }
+  .flex-row {
+    overflow: hidden;
+    width: calc(100% / 4);
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0.5em 0.5em;
+    border-right: solid 1px $table-border;
+    border-bottom: solid 1px $table-border;
+  }
+}
 </style>

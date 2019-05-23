@@ -1,11 +1,11 @@
 export default {
-  setLocaStorage( val ){
-    localStorage.setItem( 'YourVariables', val );
+  setLocaStorage(val) {
+    localStorage.setItem("YourVariables", val);
   },
-  getLocalStorage(){
-    return localStorage.getItem( 'YourVariables' );
+  getLocalStorage() {
+    return localStorage.getItem("YourVariables");
   },
-  removeLocalStorage(){
-    localStorage.removeItem('YourVariables');
+  removeLocalStorage() {
+    localStorage.removeItem("YourVariables");
   }
-}
+};

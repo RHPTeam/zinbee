@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-  props: [ "nameBread", "subBread" ]
+  props: ["nameBread", "subBread"]
 };
 </script>
 <style lang="scss" scoped>

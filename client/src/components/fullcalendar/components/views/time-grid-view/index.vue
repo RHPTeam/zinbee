@@ -68,7 +68,15 @@ export default {
     RcDayTimeGrid,
     RcWeekTimeGrid
   },
-  props: [ "activeDay", "eventOfDay", "eventsOfWeek", "dayFullName", "timePoint", "view", "weekDays" ],
+  props: [
+    "activeDay",
+    "eventOfDay",
+    "eventsOfWeek",
+    "dayFullName",
+    "timePoint",
+    "view",
+    "weekDays"
+  ],
   data() {
     return {
       showMorePopover: false,
@@ -77,8 +85,8 @@ export default {
     };
   },
   methods: {
-    eventClick( data ) {
-      this.$emit( "eventClick", data );
+    eventClick(data) {
+      this.$emit("eventClick", data);
     }
   }
 };

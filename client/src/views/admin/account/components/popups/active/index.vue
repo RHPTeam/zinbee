@@ -6,10 +6,12 @@
           <div class="title text_left">Kích hoạt tài khoản</div>
         </div>
         <div class="modal--body my_3">
-          <div class="alert alert_danger"
-              v-if="activeAccountError !== ''"
-          >{{ activeAccountError }}</div>
-          <div class="desc">Kích hoạt tài khoản nâng cao bằng mã kích hoạt. Vui lòng nhập đúng mã kích hoạt và thời gian gia hạn cho các tài khoản cần kích hoạt
+          <div class="alert alert_danger" v-if="activeAccountError !== ''">
+            {{ activeAccountError }}
+          </div>
+          <div class="desc">
+            Kích hoạt tài khoản nâng cao bằng mã kích hoạt. Vui lòng nhập đúng
+            mã kích hoạt và thời gian gia hạn cho các tài khoản cần kích hoạt
           </div>
           <div class="content mt_3">
             <div class="form_group">
@@ -35,15 +37,13 @@
             </div>
           </div>
         </div>
-        <div class="modal--footer d_flex justify_content_between align_items_center">
-          <button
-            class="btn--skip"
-            @click="closePopup()"
-          >HỦY</button>
-          <button
-            class="btn--submit"
-            @click="activeAccount()"
-          >KÍCH HOẠT</button>
+        <div
+          class="modal--footer d_flex justify_content_between align_items_center"
+        >
+          <button class="btn--skip" @click="closePopup()">HỦY</button>
+          <button class="btn--submit" @click="activeAccount()">
+            KÍCH HOẠT
+          </button>
         </div>
       </div>
     </div>
@@ -70,21 +70,20 @@ export default {
   },
   methods: {
     async activeAccount() {
-      await this.$store.dispatch( "activeAccount", this.user );
+      await this.$store.dispatch("activeAccount", this.user);
 
-      if ( this.activeAccountError === "" ) {
-        this.$emit( "close", false );
-        this.$emit( "updateStatusFilter", "Tất cả" );
+      if (this.activeAccountError === "") {
+        this.$emit("close", false);
+        this.$emit("updateStatusFilter", "Tất cả");
       }
     },
     closePopup() {
-      this.$emit( "close", false );
+      this.$emit("close", false);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-  @import "index.style";
+@import "index.style";
 </style>
-

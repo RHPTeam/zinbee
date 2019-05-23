@@ -28,7 +28,7 @@ export default {
      * @emits search
      */
     search() {
-      this.$emit( "search", this.search, this.toggleLoading );
+      this.$emit("search", this.search, this.toggleLoading);
     },
 
     /**
@@ -36,7 +36,7 @@ export default {
      * mutable loading value.
      * @param val
      */
-    loading( val ) {
+    loading(val) {
       this.mutableLoading = val;
     }
   },
@@ -49,11 +49,11 @@ export default {
      * @param toggle Boolean
      * @returns {*}
      */
-    toggleLoading( toggle = null ) {
-      if ( toggle == null ) {
-        return ( this.mutableLoading = !this.mutableLoading );
+    toggleLoading(toggle = null) {
+      if (toggle == null) {
+        return (this.mutableLoading = !this.mutableLoading);
       }
-      return ( this.mutableLoading = toggle );
+      return (this.mutableLoading = toggle);
     }
   }
 };

@@ -2,9 +2,7 @@
   <div class="wrapper" :data-theme="currentTheme">
     <div class="grid">
       <!-- Start: Grid Header -->
-      <div
-        class="grid--header d_flex align_items_center mb_1"
-      >
+      <div class="grid--header d_flex align_items_center mb_1">
         <div class="d_flex align_items_center">
           <input
             type="checkbox"
@@ -13,9 +11,10 @@
             value
             v-model="selectAll"
           />
-          <div class="grid--header-remove ml_3"
-               @click="openDeleteDialog"
-               v-if="selected.length > 0"
+          <div
+            class="grid--header-remove ml_3"
+            @click="openDeleteDialog"
+            v-if="selected.length > 0"
           >
             <icon-base
               icon-name="remove"
@@ -28,7 +27,8 @@
           </div>
         </div>
         <div class="grid--header-select ml_3">
-          Đã chọn <span class="font_weight_bold">{{ selected.length }}</span> tài khoản
+          Đã chọn
+          <span class="font_weight_bold">{{ selected.length }}</span> tài khoản
         </div>
       </div>
       <!-- End: Grid Header -->
@@ -51,7 +51,9 @@
                 </div>
                 <!-- End: Checkbox -->
                 <!-- Start: Status -->
-                <div class="d_flex justify_content_center align_items_center text_center">
+                <div
+                  class="d_flex justify_content_center align_items_center text_center"
+                >
                   <div class="user--name">{{ user.name }}</div>
                   <div
                     class="user--status ml_2"
@@ -75,7 +77,9 @@
                 <div class="user--phone mb_3 text_center">{{ user.phone }}</div>
                 <!-- End: Phone -->
                 <!-- Start: Avatar -->
-                <div class="user--avatar mt_2 mb_3 d_flex justify_content_center">
+                <div
+                  class="user--avatar mt_2 mb_3 d_flex justify_content_center"
+                >
                   <div
                     v-if="user.imageAvatar"
                     class="avatar--content avatar--img position_relative d_block"
@@ -96,7 +100,9 @@
                 </div>
                 <!-- End: Avatar -->
                 <!-- Start: ExpireDate & Limited Accounts -->
-                <div class="d_flex justify_content_between align_items_center data--wrap">
+                <div
+                  class="d_flex justify_content_between align_items_center data--wrap"
+                >
                   <div class="user--data">
                     <div class="user--data-desc">Ngày hết hạn</div>
                     <div class="user--data-number mt_1 mb_1">
@@ -145,7 +151,8 @@
       <edit-popup
         v-if="showEdit === true"
         :user="userSelectEdit"
-        @closeAddEdit="showEdit = $event"></edit-popup>
+        @closeAddEdit="showEdit = $event"
+      ></edit-popup>
     </transition>
     <transition name="popup">
       <info-popup
@@ -153,7 +160,8 @@
         :user="userSelectInfo"
         @closeAddInfo="showInfo = $event"
         @openAddEdit="showEdit = $event"
-        @userSelectEdit="userSelectEdit = $event"></info-popup>
+        @userSelectEdit="userSelectEdit = $event"
+      ></info-popup>
     </transition>
     <transition name="popup">
       <delete-popup

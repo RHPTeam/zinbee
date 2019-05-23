@@ -1,12 +1,12 @@
-import { formatTime, parseTime } from '../utils/index'
+import { formatTime, parseTime } from "../utils/index";
 
 export default {
-  name: 'panelTime',
+  name: "panelTime",
   props: {
     timePickerOptions: {
       type: [Object, Function],
-      default () {
-        return null
+      default() {
+        return null;
       }
     },
     minuteStep: {
@@ -17,90 +17,91 @@ export default {
     value: null,
     timeType: {
       type: Array,
-      default () {
-        return ['24', 'a']
+      default() {
+        return ["24", "a"];
       }
     },
     disabledTime: Function
   },
   computed: {
-    currentHours () {
-      return this.value ? new Date(this.value).getHours() : 0
+    currentHours() {
+      return this.value ? new Date(this.value).getHours() : 0;
     },
-    currentMinutes () {
-      return this.value ? new Date(this.value).getMinutes() : 0
+    currentMinutes() {
+      return this.value ? new Date(this.value).getMinutes() : 0;
     },
-    currentSeconds () {
-      return this.value ? new Date(this.value).getSeconds() : 0
+    currentSeconds() {
+      return this.value ? new Date(this.value).getSeconds() : 0;
     }
   },
   methods: {
-    stringifyText (value) {
-      return ('00' + value).slice(String(value).length)
+    stringifyText(value) {
+      return ("00" + value).slice(String(value).length);
     },
-    selectTime (time) {
-      if (typeof this.disabledTime === 'function' && this.disabledTime(time)) {
-        return
+    selectTime(time) {
+      if (typeof this.disabledTime === "function" && this.disabledTime(time)) {
+        return;
       }
-      this.$emit('select', new Date(time))
+      this.$emit("select", new Date(time));
     },
-    pickTime (time) {
-      if (typeof this.disabledTime === 'function' && this.disabledTime(time)) {
-        return
+    pickTime(time) {
+      if (typeof this.disabledTime === "function" && this.disabledTime(time)) {
+        return;
       }
-      this.$emit('pick', new Date(time))
+      this.$emit("pick", new Date(time));
     },
-    getTimeSelectOptions () {
-      const result = []
-      const options = this.timePickerOptions
+    getTimeSelectOptions() {
+      const result = [];
+      const options = this.timePickerOptions;
       if (!options) {
-        return []
+        return [];
       }
-      if (typeof options === 'function') {
-        return options() || []
+      if (typeof options === "function") {
+        return options() || [];
       }
-      const start = parseTime(options.start)
-      const end = parseTime(options.end)
-      const step = parseTime(options.step)
+      const start = parseTime(options.start);
+      const end = parseTime(options.end);
+      const step = parseTime(options.step);
       if (start && end && step) {
-        const startMinutes = start.minutes + start.hours * 60
-        const endMinutes = end.minutes + end.hours * 60
-        const stepMinutes = step.minutes + step.hours * 60
-        const len = Math.floor((endMinutes - startMinutes) / stepMinutes)
+        const startMinutes = start.minutes + start.hours * 60;
+        const endMinutes = end.minutes + end.hours * 60;
+        const stepMinutes = step.minutes + step.hours * 60;
+        const len = Math.floor((endMinutes - startMinutes) / stepMinutes);
         for (let i = 0; i <= len; i++) {
-          let timeMinutes = startMinutes + i * stepMinutes
-          let hours = Math.floor(timeMinutes / 60)
-          let minutes = timeMinutes % 60
+          let timeMinutes = startMinutes + i * stepMinutes;
+          let hours = Math.floor(timeMinutes / 60);
+          let minutes = timeMinutes % 60;
           let value = {
             hours,
             minutes
-          }
+          };
           result.push({
             value,
             label: formatTime(value, ...this.timeType)
-          })
+          });
         }
       }
-      return result
+      return result;
     }
   },
-  render (h) {
+  // eslint-disable-next-line no-unused-vars
+  render(h) {
     const date = this.value
       ? new Date(this.value)
-      : new Date().setHours(0, 0, 0, 0)
+      : new Date().setHours(0, 0, 0, 0);
     const disabledTime =
-      typeof this.disabledTime === 'function' && this.disabledTime
+      typeof this.disabledTime === "function" && this.disabledTime;
 
-    let pickers = this.getTimeSelectOptions()
+    let pickers = this.getTimeSelectOptions();
     if (Array.isArray(pickers) && pickers.length) {
       pickers = pickers.map(picker => {
-        const pickHours = picker.value.hours
-        const pickMinutes = picker.value.minutes
-        const time = new Date(date).setHours(pickHours, pickMinutes, 0)
+        const pickHours = picker.value.hours;
+        const pickMinutes = picker.value.minutes;
+        const time = new Date(date).setHours(pickHours, pickMinutes, 0);
         return (
           <li
             class={{
-              'mx-time-picker-item': true,
+              "mx-time-picker-item": true,
               cell: true,
               actived:
                 pickHours === this.currentHours &&
@@ -111,17 +112,17 @@ export default {
           >
             {picker.label}
           </li>
-        )
-      })
+        );
+      });
       return (
         <div class="mx-panel mx-panel-time">
           <ul class="mx-time-list">{pickers}</ul>
         </div>
-      )
+      );
     }
 
     const hours = Array.apply(null, { length: 24 }).map((_, i) => {
-      const time = new Date(date).setHours(i)
+      const time = new Date(date).setHours(i);
       return (
         <li
           class={{
@@ -133,14 +134,14 @@ export default {
         >
           {this.stringifyText(i)}
         </li>
-      )
-    })
+      );
+    });
 
-    const step = this.minuteStep || 1
-    const length = parseInt(60 / step)
+    const step = this.minuteStep || 1;
+    const length = parseInt(60 / step);
     const minutes = Array.apply(null, { length }).map((_, i) => {
-      const value = i * step
-      const time = new Date(date).setMinutes(value)
+      const value = i * step;
+      const time = new Date(date).setMinutes(value);
       return (
         <li
           class={{
@@ -152,11 +153,11 @@ export default {
         >
           {this.stringifyText(value)}
         </li>
-      )
-    })
+      );
+    });
 
     const seconds = Array.apply(null, { length: 60 }).map((_, i) => {
-      const time = new Date(date).setSeconds(i)
+      const time = new Date(date).setSeconds(i);
       return (
         <li
           class={{
@@ -168,20 +169,20 @@ export default {
         >
           {this.stringifyText(i)}
         </li>
-      )
-    })
+      );
+    });
 
-    let times = [hours, minutes]
+    let times = [hours, minutes];
     if (this.minuteStep === 0) {
-      times.push(seconds)
+      times.push(seconds);
     }
 
     times = times.map(list => (
-      <ul class="mx-time-list" style={{ width: 100 / times.length + '%' }}>
+      <ul class="mx-time-list" style={{ width: 100 / times.length + "%" }}>
         {list}
       </ul>
-    ))
+    ));
 
-    return <div class="mx-panel mx-panel-time">{times}</div>
+    return <div class="mx-panel mx-panel-time">{times}</div>;
   }
-}
+};

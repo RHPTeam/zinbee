@@ -5,7 +5,7 @@
   >
     <div class="notification--text">
       Bạn đã đăng xuất tài khoản facebook <span>{{ item.userInfo.name }}</span
-    >. Hãy đăng nhập lại và cập nhật lại cookie!.
+      >. Hãy đăng nhập lại và cập nhật lại cookie!.
       <button class="btn--update ml_4" @click="showModal = true">
         Cập nhật ngay
       </button>
@@ -16,7 +16,8 @@
       :popupData="showModal"
       @closeAddPopup="showModal = $event"
       :nameBread="nameBread"
-      :subBread="subBread"></update-cookie>
+      :subBread="subBread"
+    ></update-cookie>
   </div>
 </template>
 
@@ -36,48 +37,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .notification {
-    width: 100%;
-    padding: 0.25rem 2.5rem;
-    font-size: 13px;
-    justify-content: space-between;
-    transition: all 0.4s ease;
-    border-bottom: 1px dotted #ffffff;
-    background-color: #ff0000;
-    &:last-child {
-      border-bottom: 0;
+.notification {
+  width: 100%;
+  padding: 0.25rem 2.5rem;
+  font-size: 13px;
+  justify-content: space-between;
+  transition: all 0.4s ease;
+  border-bottom: 1px dotted #ffffff;
+  background-color: #ff0000;
+  &:last-child {
+    border-bottom: 0;
+  }
+  &--text {
+    width: 95%;
+    margin-right: 1rem;
+    text-align: center;
+    color: #ffffff;
+    span {
+      color: #ffab0d;
+      font-size: 14px;
+      font-weight: 500;
     }
-    &--text {
-      width: 95%;
-      margin-right: 1rem;
-      text-align: center;
+    button {
+      background-color: transparent;
+      box-shadow: none;
+      border: 1px solid #ffffff;
+      border-radius: 0.25rem;
       color: #ffffff;
-      span {
-        color: #ffab0d;
-        font-size: 14px;
-        font-weight: 500;
+      height: 24px;
+      font-size: 13px;
+      &:hover,
+      &:focus,
+      &:active,
+      &:visited {
+        background-color: #ffffff;
+        color: #ff0000;
+        transition: all 0.5s ease;
       }
-      button {
-        background-color: transparent;
-        box-shadow: none;
-        border: 1px solid #ffffff;
-        border-radius: 0.25rem;
-        color: #ffffff;
-        height: 24px;
-        font-size: 13px;
-        &:hover,
-        &:focus,
-        &:active,
-        &:visited {
-          background-color: #ffffff;
-          color: #ff0000;
-          transition: all 0.5s ease;
-        }
-      }
-    }
-
-    &--close {
-      cursor: pointer;
     }
   }
+
+  &--close {
+    cursor: pointer;
+  }
+}
 </style>

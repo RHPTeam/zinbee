@@ -1,12 +1,12 @@
-let mouseDownTarget
+let mouseDownTarget;
 
-const handleMouseDown = evt => (mouseDownTarget = evt.target)
+const handleMouseDown = evt => (mouseDownTarget = evt.target);
 
 export default {
-  bind (el, binding, vnode) {
-    el['@clickoutside'] = e => {
-      const mouseUpTarget = e.target
-      const popupElm = vnode && vnode.context && vnode.context.popupElm
+  bind(el, binding, vnode) {
+    el["@clickoutside"] = e => {
+      const mouseUpTarget = e.target;
+      const popupElm = vnode && vnode.context && vnode.context.popupElm;
       if (
         mouseDownTarget &&
         mouseUpTarget &&
@@ -20,14 +20,14 @@ export default {
         binding.expression &&
         vnode.context[binding.expression]
       ) {
-        binding.value()
+        binding.value();
       }
-    }
-    document.addEventListener('mousedown', handleMouseDown)
-    document.addEventListener('mouseup', el['@clickoutside'])
+    };
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", el["@clickoutside"]);
   },
-  unbind (el) {
-    document.removeEventListener('mousedown', handleMouseDown)
-    document.removeEventListener('mouseup', el['@clickoutside'])
+  unbind(el) {
+    document.removeEventListener("mousedown", handleMouseDown);
+    document.removeEventListener("mouseup", el["@clickoutside"]);
   }
-}
+};
