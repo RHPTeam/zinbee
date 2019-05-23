@@ -8,7 +8,6 @@
  */
 const Server = require( "../models/Server.model" );
 
-const decodeRole = require( "../helpers/utils/role.util" );
 const jsonResponse = require( "../configs/response" );
 
 module.exports = {
