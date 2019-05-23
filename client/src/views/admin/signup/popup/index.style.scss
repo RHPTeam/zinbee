@@ -1,0 +1,58 @@
+.modal--wrapper {
+  background-color: rgba(153, 153, 153, 0.4);
+  bottom: 0;
+  font-family: "Open Sans", sans-serif;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 999;
+
+  .modal--dialog {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+
+    .modal--content {
+      background-color: #fafafa;
+      border-radius: .625rem;
+      max-height: calc( 100vh - 10% );
+      width: 50%;
+      .header {}
+      .body {
+        .card {
+          cursor: pointer;
+          .detail {
+            .text--bold {
+              font-weight: 600;
+            }
+            .desc {
+              font-size: 14px;
+            }
+            .action {
+              button {
+
+              }
+            }
+          }
+        }
+      }
+      .footer {
+        button {
+          color: #ffffff;
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
+/*Transition popup*/
+.popup-enter-active, .popup-leave-active {
+  transition: opacity 1s;
+}
+.popup-enter, .popup-leave-to {
+  opacity: 0;
+}
