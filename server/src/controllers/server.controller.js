@@ -59,22 +59,16 @@ module.exports = {
    * @returns {Promise<void>}
    */
   "update": async ( req, res ) => {
-    if ( req.headers.cfr === undefined ) {
-      return res.status( 405 ).json( { "status": "error", "message": "Không thể xác thực được quyền của bạn!" } );
-    } else if ( req.query._serverId === undefined ) {
-      return res.status( 403 ).json( { "status": "fail", "_serverId": "Vui lòng cung cấp server để cập nhật!" } );
+    // Check validator
+    if ( req.query._id === undefined ) {
+      return res.status( 403 ).json( { "status": "fail", "_id": "Vui lòng cung cấp server để cập nhật!" } );
     }
 
-    const findServer = await Server.findOne( { "_id": req.query._serverId } );
+    const serverInfo = await Server.findOne( { "_id": req.query._id } );
 
-    if ( !findServer ) {
+    // Check error
+    if ( !serverInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Server này không tồn tại!" } );
-    }
-
-    let role = req.headers.cfr;
-
-    if ( decodeRole( role, 10 ) !== 1 && decodeRole( role, 10 ) !== 2 ) {
-      return res.status( 405 ).json( { "status": "error", "message": "Bạn không có quyền cho chức năng này!" } );
     }
 
     if ( req.body.title.length === 0 ) {
@@ -87,7 +81,7 @@ module.exports = {
       return res.status( 403 ).json( { "status": "fail", "info": "Cấu hình vps không được bỏ trống!" } );
     }
 
-    res.status( 200 ).json( jsonResponse( "success", await Server.findByIdAndUpdate( req.query._serverId, { "$set": req.body }, { "new": true } ) ) );
+    res.status( 200 ).json( jsonResponse( "success", await Server.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) ) );
   },
   /**
    * Delete server
@@ -96,25 +90,17 @@ module.exports = {
    * @returns {Promise<void>}
    */
   "delete": async ( req, res ) => {
-    if ( req.headers.cfr === undefined ) {
-      return res.status( 405 ).json( { "status": "error", "message": "Không thể xác thực được quyền của bạn!" } );
-    } else if ( req.query._serverId === undefined ) {
+    if ( req.query._id === undefined ) {
       return res.status( 403 ).json( { "status": "fail", "_serverId": "Vui lòng cung cấp server để xóa!" } );
     }
 
-    const findServer = await Server.findOne( { "_id": req.query._serverId } );
+    const serverInfo = await Server.findOne( { "_id": req.query._id } );
 
-    if ( !findServer ) {
+    if ( !serverInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Server này không tồn tại!" } );
     }
 
-    let role = req.headers.cfr;
-
-    if ( decodeRole( role, 10 ) !== 1 && decodeRole( role, 10 ) !== 2 ) {
-      return res.status( 405 ).json( { "status": "error", "message": "Bạn không có quyền cho chức năng này!" } );
-    }
-
-    await findServer.remove();
+    await serverInfo.remove();
 
     res.status( 200 ).json( jsonResponse( "success", null ) );
   }
