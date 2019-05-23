@@ -5,7 +5,7 @@
  * team: BE-RHP
  */
 const router = require( "express-promise-router" )();
-const BlogHelpController = require( "../../../controllers/help/blogHelp.controller" );
+const BlogHelpController = require( "../../../controllers/help/blog.controller" );
 
 router
   .route( "/" )

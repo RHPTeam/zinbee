@@ -16,21 +16,81 @@ const jsonResponse = require( "../configs/response" );
 const JWT = require( "jsonwebtoken" );
 
 module.exports = {
+  "changeStatus": async ( req, res ) => {
+    let data;
+
+    const { id } = req.body,
+      userInfo = await Account.findOne( { "_id": id } );
+
+    userInfo.status = !userInfo;
+    data = await Account.findByIdAndUpdate( id, { "$set": { "status": userInfo.status } }, { "new": true } ).select( "-password" );
+
+    res.status( 200 ).json( jsonResponse( "success", data ) );
+  },
   "index": async ( req, res ) => {
     let data;
 
     if ( req.query._id ) {
-      data = await Account.findOne( { "_id": req.query._id } );
+      data = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await Account.find( {} );
+      data = await Account.find( {} ).select( "-password" ).lean();
     } else {
-      data = await Account.find( req.query );
+      data = await Account.find( req.query ).select( "-password" ).lean();
     }
 
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
-  "active": async () => {
+  "renewById": async ( req, res ) => {
+    let data;
 
+    // Check validator
+    if ( req.body.id === undefined || req.body.id.length === 0 ) {
+      return res.status( 403 ).json( { "status": "fail", "id": "Vui lòng cung cấp id người dùng để kích hoạt!" } );
+    } else if ( req.body.expireDate < new Date() ) {
+      return res.status( 403 ).json( { "status": "fail", "expireDate": "Ngày gia hạn cần phải ở tương lai!" } );
+    }
+
+    const { id, expireDate } = req.body,
+      userInfo = await Account.findOne( { "_id": id } );
+
+    // Check exists
+    if ( !userInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Người dùng này không tồn tại!" } );
+    }
+
+    // Update expire date
+    data = await Account.findByIdAndUpdate( id, { "$set": { "status": 1, "expireDate": expireDate } }, { "new": true } ).select( "-password" );
+
+    res.status( 200 ).json( jsonResponse( "success", data ) );
+  },
+  "renewByCode": async ( req, res ) => {
+    // Check validator
+    if ( req.body.presenter === undefined || req.body.presenter.length === 0 ) {
+      return res.status( 403 ).json( { "status": "fail", "presenter": "Mã kích hoạt không được để trống" } );
+    }
+
+    // Active by key
+    if ( req.body.presenter && req.body.presenter.length > 0 ) {
+      // find all user have key
+      const userList = await Account.find( { "presenter": req.body.presenter } );
+
+      if ( userList.length === 0 ) {
+        return res.status( 404 ).json( { "status": "error", "message": "Mã kích hoạt không tồn tại!" } );
+      }
+
+      await Promise.all( userList.map( async ( user ) => {
+        user.status = 1;
+        user.expireDate = req.body.expireDate;
+
+        await Account.findByIdAndUpdate(
+          user._id,
+          { "$set": user },
+          { "new": true }
+        );
+      } ) );
+    }
+
+    res.status( 201 ).json( jsonResponse( "success", null ) );
   },
   "signIn": async () => {},
   "signUp": async () => {},
