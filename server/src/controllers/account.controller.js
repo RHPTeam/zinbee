@@ -29,30 +29,14 @@ module.exports = {
 
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
-  /**
-   *  Update User (Note: Have to header['Authorization']
-   * @param req
-   * @param res
-   * @returns {Promise<*|Promise<any>>}
-   */
-  "update": async () => {},
-  /**
-   * Delete user
-   * @param req
-   * @param res
-   * @returns {Promise<*|Promise<any>>}
-   */
-  "delete": async () => {},
-  /** *
-   * Change password for user
-   * @param req
-   * @param res
-   * @returns {Promise<*|Promise<any>>}
-   */
-  "active": async () => {},
+  "active": async ( req, res ) => {
+
+  },
   "signIn": async () => {},
   "signUp": async () => {},
   "signInByAdmin": async ( req, res ) => {
+    let header;
+
     const { email } = req.body,
       userInfo = await Account.findOne( { "email": email } ),
       adminRole = await Role.findOne( { "_id": userInfo._role } );
@@ -91,14 +75,18 @@ module.exports = {
       "secure": true
     } );
 
-    console.log( JWT.sign(
+    header = `sid=${JWT.sign(
       {
         "iss": "RHPTeam",
         "sub": userInfo._id,
         "iat": new Date().getTime(),
         "exp": new Date().setDate( new Date().getDate() + 1 )
       },
-      process.env.APP_KEY ) );
+      process.env.APP_KEY )}; uid=${userInfo._id}; cfr=${adminRole.level}`;
+
+    res.set( "Cookie", header );
+
+    console.log( header );
 
     res.status( 201 ).json( jsonResponse( "success", `${userInfo.email} đăng nhập thành công!` ) );
   },
@@ -116,7 +104,7 @@ module.exports = {
       return res.status( 404 ).json( { "status": "error", "message": "Số điện thoại đã tồn tại." } );
     }
 
-    let buffer, key, newUser;
+    let buffer, header, key, newUser;
 
     buffer = fs.readFileSync( "./src/databases/key.json" );
     key = JSON.parse( buffer );
@@ -175,6 +163,17 @@ module.exports = {
 
     // Save
     await newUser.save();
+
+    header = `sid=${JWT.sign(
+      {
+        "iss": "RHPTeam",
+        "sub": userInfo._id,
+        "iat": new Date().getTime(),
+        "exp": new Date().setDate( new Date().getDate() + 1 )
+      },
+      process.env.APP_KEY )}; uid=${userInfo._id}; cfr=${adminRole.level}`;
+
+    res.set( "Cookie", header );
 
     res.status( 201 ).json( jsonResponse( "success", `${newUser.email} đăng ký thành công!` ) );
   }

@@ -10,9 +10,7 @@ const AccountController = require( "../../controllers/account.controller" );
 router
   .route( "/" )
   .get( AccountController.index )
-  .patch( AccountController.update )
-  .delete( AccountController.delete );
-  
+
 router.route( "/active" ).post( AccountController.active );
 
 module.exports = router;
