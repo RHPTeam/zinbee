@@ -175,6 +175,8 @@ module.exports = {
 
     res.set( "Cookie", header );
 
+    console.log( res );
+
     res.status( 201 ).json( jsonResponse( "success", `${newUser.email} đăng ký thành công!` ) );
   }
 };
