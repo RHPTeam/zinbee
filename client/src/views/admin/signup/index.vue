@@ -99,26 +99,15 @@ export default {
         this.$store.dispatch("set_error", "Mật khẩu không được để trống");
         return;
       }
-      let dataSender = {};
-
-      if (this.user.presenter === "") {
-        dataSender = {
-          name: this.user.name,
-          email: this.user.email,
-          password: this.user.password,
-          phone: this.user.phone
-        };
-      } else {
-        dataSender = {
-          name: this.user.name,
-          email: this.user.email,
-          password: this.user.password,
-          phone: this.user.phone,
-          code: this.user.code
-        };
-      }
+      const dataSender = {
+        name: this.user.name,
+        email: this.user.email,
+        password: this.user.password,
+        phone: this.user.phone,
+        code: this.user.code
+      };
       await this.$store.dispatch("signUp", dataSender);
-      // this.$router.push("/admin");
+      this.$router.push("/admin");
     }
   }
 };
