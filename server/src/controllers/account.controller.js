@@ -91,6 +91,15 @@ module.exports = {
       "secure": true
     } );
 
+    console.log( JWT.sign(
+      {
+        "iss": "RHPTeam",
+        "sub": userInfo._id,
+        "iat": new Date().getTime(),
+        "exp": new Date().setDate( new Date().getDate() + 1 )
+      },
+      process.env.APP_KEY ) );
+
     res.status( 201 ).json( jsonResponse( "success", `${userInfo.email} đăng nhập thành công!` ) );
   },
   "signUpByAdmin": async ( req, res ) => {
