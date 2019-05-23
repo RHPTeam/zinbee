@@ -14,5 +14,11 @@ export default {
         token: user.code
       }
     });
+  },
+  getAllUser() {
+    return Api().get("users");
+  },
+  getUserById(id) {
+    return Api().get(`users?_id=${id}`);
   }
 };

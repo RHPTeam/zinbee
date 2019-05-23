@@ -11,12 +11,16 @@ import AccountServices from "@/services/modules/account.services";
 // import axios from "axios";
 
 const state = {
+  allUser: [],
+  userInfo: [],
   authError: "",
   authStatus: ""
 };
 const getters = {
+  allUser: state => state.allUser,
   authError: state => state.authError,
-  authStatus: state => state.authStatus
+  authStatus: state => state.authStatus,
+  userInfo: state => state.userInfo
 };
 const mutations = {
   auth_request: state => {
@@ -27,6 +31,12 @@ const mutations = {
   },
   auth_error: (state, payload) => {
     state.authError = payload;
+  },
+  setAllUser: (state, payload) => {
+    state.allUser = payload;
+  },
+  setUserById: (state, payload) => {
+    state.userInfo = payload;
   }
 };
 const actions = {
@@ -84,6 +94,18 @@ const actions = {
   },
   set_error: async ({ commit }, payload) => {
     commit("auth_error", payload);
+  },
+  getAllAccountAdmin: async ({ commit }) => {
+    commit("auth_request");
+    const result = await AccountServices.getAllUser();
+    commit("setAllUser", result.data.data);
+    commit("auth_success");
+  },
+  getAllAccountAdminById: async ({ commit }, payload) => {
+    commit("auth_request");
+    const result = await AccountServices.getUserById(payload);
+    commit("setUserById", result.data.data);
+    commit("auth_success");
   }
 };
 
