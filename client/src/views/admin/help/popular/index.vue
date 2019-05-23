@@ -7,7 +7,7 @@
           :to="{ name: 'admin_categories' }"
           class="btn btn_light"
         >
-          Thêm danh mục
+          Danh mục
         </router-link>
       </div>
       <div class="blogs mr_5">
@@ -16,7 +16,7 @@
           :to="{ name: 'admin_blogs' }"
           class="btn btn_light"
         >
-          Thêm bài viết
+          Bài viết
         </router-link>
       </div>
     </div>

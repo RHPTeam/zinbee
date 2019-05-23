@@ -15,13 +15,15 @@ const state = {
   allUser: [],
   userInfo: [],
   authError: "",
-  authStatus: ""
+  authStatus: "",
+  roles: []
 };
 const getters = {
   allUser: state => state.allUser,
   authError: state => state.authError,
   authStatus: state => state.authStatus,
   userInfo: state => state.userInfo,
+  roles: state => state.roles,
   token: state => state.token
 };
 const mutations = {
@@ -39,6 +41,9 @@ const mutations = {
   },
   setUserById: (state, payload) => {
     state.userInfo = payload;
+  },
+  setRoles: (state, payload) => {
+    state.roles = payload;
   }
 };
 const actions = {
@@ -152,6 +157,10 @@ const actions = {
     const userInfoRes = await AccountServices.getUserById(dataSender);
     commit("setUserById", userInfoRes.data.data);
     commit("auth_success");
+  },
+  getRoles: async ({commit}) => {
+    const result = await AccountServices.getRole();
+    commit("setRoles", result.data.data);
   }
 };
 

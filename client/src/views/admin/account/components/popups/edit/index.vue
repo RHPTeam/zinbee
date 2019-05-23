@@ -31,7 +31,9 @@
         <!-- Start: User Edit -->
         <div class="edit">
           <!-- Start: Expire Date -->
+          <div v-if="user.expireDate === undefined || user.expireDate === ''"></div>
           <div
+            v-else
             class="edit--time d_flex justify_content_between align_items_center mb_3"
           >
             <div class="edit--desc d_flex align_items_center">
@@ -119,20 +121,8 @@
                 <icon-role /> </icon-base
               >Loại tài khoản:
             </div>
-            <div class="type--select">
-              <div class="select--wrapper position_relative">
-                <select v-model="user._role.level">
-                  <option
-                    v-for="role in roles"
-                    :key="role.level"
-                    :value="role.level"
-                    :selected="
-                      role.level === user._role.level ? 'selected' : ''
-                    "
-                    >{{ role.level }}</option
-                  >
-                </select>
-              </div>
+            <div class="type--select-level">
+              {{ user._role.level }}
             </div>
           </div>
           <!-- End: Account Type -->

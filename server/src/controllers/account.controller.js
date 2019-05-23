@@ -31,7 +31,7 @@ module.exports = {
     let data;
 
     if ( req.query._id ) {
-      data = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).lean();
+      data = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await Account.find( {} ).select( "-password" ).lean();
     } else {

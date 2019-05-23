@@ -133,7 +133,7 @@ export default {
       this.$store.dispatch("updatePostLibraries", dataSender);
       // this.content = "";
       // this.files = "";
-      this.$router.push("/admin/post-libraries");
+      this.$router.push("/admin/libraries");
     },
     // Select file images
     selectFile(id) {

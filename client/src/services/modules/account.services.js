@@ -17,5 +17,17 @@ export default {
   },
   getUserById(id) {
     return Api().get(`users?_id=${id}`);
+  },
+  getRole(){
+    return Api().get( "roles" );
+  },
+  renewById( data ){
+    return Api().post("users/renew/id", data);
+  },
+  renewByCode( data ){
+    return Api().post("users/renew/code", data);
+  },
+  changeStatus(id){
+    return Api().post("users/status", id);
   }
 };

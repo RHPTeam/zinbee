@@ -66,7 +66,7 @@ export default {
     showPostLibrariesById() {
       this.$store.dispatch("getPostLibrariesById", this.item._id);
       this.$router.push({
-        name: "post_libraries_details",
+        name: "libraries_details",
         params: { id: this.item._id }
       });
     },

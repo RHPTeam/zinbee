@@ -61,7 +61,7 @@ export default {
       const dataSender = {};
       await this.$store.dispatch("createNewPostLibraries", dataSender);
       this.$router.push({
-        name: "post_libraries_details",
+        name: "libraries_details",
         params: { id: this.newPostLibraries._id }
       });
     }
