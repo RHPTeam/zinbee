@@ -46,7 +46,7 @@ export default {
         password: this.user.password
       };
       await this.$store.dispatch("signIn", dataSender);
-      this.$router.push("/admin");
+      // this.$router.push("/admin");
     }
   }
 };
