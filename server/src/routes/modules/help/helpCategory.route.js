@@ -5,7 +5,7 @@
  * team: BE-RHP
  */
 const router = require( "express-promise-router" )();
-const HelpCategoryController = require( "../../../controllers/help/helpCategory.controller" );
+const HelpCategoryController = require( "../../../controllers/help/category.controller" );
 
 router
   .route( "/" )

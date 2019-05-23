@@ -5,10 +5,11 @@ const permission = require( "../helpers/middleware/permission.middleware" );
 // Chat Route
 
 // General Route
-router.use( "/users", auth, permission, require( "./modules/account.route" ) );
+router.use( "/posts", auth, require( "./modules/post.route" ) );
 router.use( "/roles", auth, permission, require( "./modules/role.route" ) );
 router.use( "/signin", require( "./modules/signin.route" ) );
 router.use( "/signup", require( "./modules/signup.route" ) );
+router.use( "/users", auth, permission, require( "./modules/account.route" ) );
 
 // Help Route
 router.use( "/help", auth, permission, require( "./modules/help/help.route" ) );
