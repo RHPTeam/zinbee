@@ -158,7 +158,7 @@ const actions = {
     commit("setUserById", userInfoRes.data.data);
     commit("auth_success");
   },
-  getRoles: async ({commit}) => {
+  getRoles: async ({ commit }) => {
     const result = await AccountServices.getRole();
     commit("setRoles", result.data.data);
   }

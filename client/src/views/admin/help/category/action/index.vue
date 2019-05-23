@@ -59,13 +59,13 @@ export default {
   color: #444444;
   .back {
     background-color: #fafafa;
-    border-radius: .625rem;
+    border-radius: 0.625rem;
     cursor: pointer;
     width: 50%;
   }
   form {
     border: 1px solid #e4e4e4;
-    border-radius: .625rem;
+    border-radius: 0.625rem;
     label {
       font-weight: 600;
       color: #cccccc;

@@ -31,7 +31,9 @@
         <!-- Start: User Edit -->
         <div class="edit">
           <!-- Start: Expire Date -->
-          <div v-if="user.expireDate === undefined || user.expireDate === ''"></div>
+          <div
+            v-if="user.expireDate === undefined || user.expireDate === ''"
+          ></div>
           <div
             v-else
             class="edit--time d_flex justify_content_between align_items_center mb_3"
