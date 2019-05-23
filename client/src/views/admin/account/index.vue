@@ -43,7 +43,7 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch("getUsers");
+    await this.$store.dispatch("getAllAccountAdmin");
 
     const data = this.$store.getters.users;
 

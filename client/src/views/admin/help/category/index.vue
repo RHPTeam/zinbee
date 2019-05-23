@@ -1,29 +1,27 @@
 <template>
   <div class="categories">
-    <form>
-      <div class="form_group">
-        <label>Tên danh mục</label>
-        <input
-          type="text"
-          class="form_control"
-          placeholder="Nhập tên danh mục ..."
-        />
+    <div class="top d_flex align_items_center">
+      <div class="categories mr_5">
+        <router-link
+          tag="button"
+          :to="{ name: 'categories_detail' }"
+          class="btn btn_light"
+        >
+          Thêm danh mục
+        </router-link>
       </div>
-      <div class="form_group">
-        <label>Chọn danh mục cha</label>
-        <div class="option">
-          <multiselect label="title" placeholder="Chọn danh mục cha ..." />
-        </div>
-      </div>
-      <div class="form_group">
-        <button class="btn btn_primary form_control">
-          Tạo mới
-        </button>
-        <button class="btn btn_primary form_control">
-          Cập nhật
-        </button>
-      </div>
-    </form>
-    <div class="body"></div>
+    </div>
+    <div class="desc">Danh sách các danh mục hiện có</div>
+    <div class="body">
+      <div class="item"></div>
+    </div>
   </div>
 </template>
+<script></script>
+<style lang="scss" scoped>
+.categories {
+  .desc {
+    font-weight: 600;
+  }
+}
+</style>

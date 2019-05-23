@@ -101,11 +101,23 @@ const actions = {
     commit("setAllUser", result.data.data);
     commit("auth_success");
   },
-  getAllAccountAdminById: async ({ commit }, payload) => {
+  getAccountAdminById: async ({ commit }, payload) => {
     commit("auth_request");
     const result = await AccountServices.getUserById(payload);
     commit("setUserById", result.data.data);
     commit("auth_success");
+  },
+  getAccountInfo: async ({ commit }) => {
+    commit("auth_request");
+    // const userInfoRes = await AccountServices.getUserById(
+    //   CookieFunction.getCookie("uid")
+    // );
+    // const sendDataToMutation = {
+    //   token: CookieFunction.getCookie("sid"),
+    //   user: userInfoRes.data.data[0]
+    // };
+    //
+    // commit("auth_success", sendDataToMutation);
   }
 };
 

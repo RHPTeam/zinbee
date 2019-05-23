@@ -1,5 +1,25 @@
 <template>
   <div class="popular">
+    <div class="top d_flex align_items_center">
+      <div class="categories mr_5">
+        <router-link
+          tag="button"
+          :to="{ name: 'admin_categories' }"
+          class="btn btn_light"
+        >
+          Thêm danh mục
+        </router-link>
+      </div>
+      <div class="blogs mr_5">
+        <router-link
+          tag="button"
+          :to="{ name: 'admin_blogs' }"
+          class="btn btn_light"
+        >
+          Thêm bài viết
+        </router-link>
+      </div>
+    </div>
     <div class="header px_4 py_3">
       <!-- Start: Choose 5 blogs popular -->
       <div class="item mb_3">
