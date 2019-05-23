@@ -9,10 +9,8 @@
 
 const BlogHelp = require( "../../models/help/Blog.model" );
 const HelpCategory = require( "../../models/help/category.model" );
-const Account = require( "../../models/Account.model" );
 
 const jsonResponse = require( "../../configs/response" );
-const secure = require( "../../helpers/secures/rcrypt" );
 
 module.exports = {
   "index": async ( req, res ) => {
@@ -38,7 +36,7 @@ module.exports = {
 
     // Create
     const { title, parent } = req.body;
-    
+
     // Set default parent
     req.body.level = 0;
 
@@ -65,70 +63,53 @@ module.exports = {
 
     res.status( 200 ).json( jsonResponse( "success", newCategory ) );
   },
-  /**
-   * Update category help
-   * @param req
-   * @param res
-   * @returns {Promise<void>}
-   */
   "update": async ( req, res ) => {
     // Check validator
     if ( req.body.title === "" || !req.body.title ) {
-      return res.status( 403 ).json( { "status": "fail", "data": { "title": "Tiêu đề danh mục help không được bỏ trống!" } } );
+      return res.status( 403 ).json( { "status": "fail", "data": { "title": "Tiêu đề blog không được bỏ trống!" } } );
     }
 
-    const userId = secure( res, req.headers.authorization ),
-      findHelpCategory = await HelpCategory.findById( req.query._categoryId );
+    const categoryInfo = await HelpCategory.findOne( { "_id": req.query._id } ).lean();
 
-    // Check catch when update user categories
-    if ( !findHelpCategory ) {
+    // Check error
+    if ( !categoryInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Danh mục help không tồn tại!" } );
-    } else if ( findHelpCategory._account.toString() !== userId ) {
-      return res.status( 405 ).json( { "status": "error", "message": "Bạn không có quyền cho danh mục này!" } );
     }
+
+    categoryInfo.title = req.body.title;
+
+    // Check logic
     if ( req.body.parent ) {
-      const findParentHelpCategory = await HelpCategory.findOne( { "_id": req.body.parent } );
+      const categoryParent = await HelpCategory.findOne( { "_id": req.body.parent } );
 
-      if ( findHelpCategory.level < findParentHelpCategory.level ) {
-        return res.status( 403 ).json( { "status": "fail", "data": { "title": "Bạn không thể cập nhật danh mục nhỏ cấp hơn!" } } );
+      if ( categoryInfo.level < categoryParent.level ) {
+        return res.status( 404 ).json( { "status": "error", "message": "Bạn không thể cập nhật danh mục nhỏ cấp hơn danh mục hiện tại làm cha!" } );
       }
-      findHelpCategory.parent = req.body.parent;
-      findHelpCategory.level = findParentHelpCategory.level + 1;
-      await findHelpCategory.save();
-    }
-    if ( req.body._blogHelp ) {
-      req.body.vote = req.body._blogHelp.concat( findHelpCategory._blogHelp );
+
+      categoryInfo.parent = req.body.parent;
+      categoryInfo.level = parseInt( categoryParent.level ) + 1;
     }
 
-    res.status( 201 ).json( jsonResponse( "success", await HelpCategory.findByIdAndUpdate( req.query._categoryId, { "$set": req.body }, { "new": true } ) ) );
+    // Assign new admin
+    categoryInfo._account = req.headers.uid;
+
+    res.status( 201 ).json( jsonResponse( "success", await HelpCategory.findByIdAndUpdate( req.query._id, { "$set": categoryInfo }, { "new": true } ) ) );
 
   },
-  /**
-   * Delete category help
-   * @param req
-   * @param res
-   * @returns {Promise<void>}
-   */
   "delete": async ( req, res ) => {
-    const userId = secure( res, req.headers.authorization ),
-      findHelpCategory = await HelpCategory.findById( req.query._categoryId ),
-      findAccount = await Account.findOne( { "_id": userId } );
-    // Check ctach when delete help categories
+    const categoryInfo = await HelpCategory.findById( req.query._id );
 
-    if ( !findHelpCategory ) {
+    if ( !categoryInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Danh mục không tồn tại!" } );
-    }
-    if ( !findAccount ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Người dùng không tồn tại!" } );
     }
 
     // When delete auto which all of help of that auto will deleted
-    await Promise.all( findHelpCategory._blogHelp.map( async ( blogHelp ) => {
-      let findBlogHelp = await BlogHelp.findOne( { "_id": blogHelp } );
-
-      await findBlogHelp.remove();
+    await Promise.all( categoryInfo._blogHelp.map( async ( id ) => {
+      await BlogHelp.findByIdAndRemove( id );
     } ) );
-    await HelpCategory.findByIdAndRemove( req.query._categoryId );
+
+    await categoryInfo.remove();
+
     res.status( 200 ).json( jsonResponse( "success", null ) );
   }
 };
