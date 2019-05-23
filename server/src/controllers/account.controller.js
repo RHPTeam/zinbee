@@ -16,18 +16,18 @@ const jsonResponse = require( "../configs/response" );
 const JWT = require( "jsonwebtoken" );
 
 module.exports = {
-  "index": async () => {
-    const dataFound = await Account.find( req.query )
-      .select( "-password" )
-      .populate( {
-        "path": "_role",
-        "select": "level"
-      } );
+  "index": async ( req, res ) => {
+    let data;
 
-    if ( !dataFound ) {
-      return res.status( 403 ).json( jsonResponse( "Data is not found!", null ) );
+    if ( req.query._id ) {
+      data = await Account.findOne( { "_id": req.query._id } );
+    } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
+      data = await Account.find( {} );
+    } else {
+      data = await Account.find( req.query );
     }
-    res.status( 200 ).json( jsonResponse( "Data fetch successfully!", dataFound ) );
+
+    res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   /**
    *  Update User (Note: Have to header['Authorization']

@@ -5,6 +5,7 @@
  * team: BE-RHP
  */
 const router = require( "express-promise-router" )();
+const passport = require( "passport" );
 const AccountController = require( "../../controllers/Account.controller" );
 
 router
@@ -13,6 +14,6 @@ router
 
 router
   .route( "/bz" )
-  .post( AccountController.signInByAdmin );
+  .post( passport.authenticate( "local", { "session": false } ), AccountController.signInByAdmin );
 
 module.exports = router;
