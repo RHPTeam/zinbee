@@ -2,9 +2,6 @@
 import Api from "@/services";
 
 export default {
-  index() {
-    return Api().get();
-  },
   signIn(user) {
     return Api().post("/signin/bz", user);
   },

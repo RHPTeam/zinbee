@@ -12,7 +12,7 @@
       </div>
     </div>
     <ol v-if="node.children && node.children.length > 0">
-<!--      <node v-for="child in node.children" :node="child" />-->
+      <!--      <node v-for="child in node.children" :node="child" />-->
     </ol>
   </div>
 </template>

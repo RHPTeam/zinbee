@@ -42,12 +42,8 @@ export default {
       return this.$store.getters.themeName;
     }
   },
-  async created() {
-    await this.$store.dispatch("getAllAccountAdmin");
-
-    const data = this.$store.getters.users;
-
-    await this.$store.dispatch("getUsersFilter", data);
+  created() {
+    this.$store.dispatch("getAllUserAdmin");
   }
 };
 </script>
