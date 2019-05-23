@@ -7,142 +7,114 @@
  * team: BE-RHP
  */
 
-const BlogHelp = require( "../../models/help/BlogHelp.model" );
-const HelpCategory = require( "../../models/help/HelpCategory.model" );
-const Account = require( "../../models/Account.model" );
+const BlogHelp = require( "../../models/help/Blog.model" );
+const HelpCategory = require( "../../models/help/category.model" );
 
 
 const jsonResponse = require( "../../configs/response" );
-const secure = require( "../../helpers/secures/rcrypt" );
-const convertUnicode = require( "../../helpers/utils/unicode.util" );
 
 module.exports = {
-  /**
-   * Get blog help (all or query)
-   * @param req
-   * @param res
-   * @returns {Promise<void>}
-   */
   "index": async ( req, res ) => {
-    let dataResponse = null;
-    const authorization = req.headers.authorization,
-      userId = secure( res, authorization );
+    let data;
 
-    // Handle get all group from mongodb
     if ( req.query._id ) {
-      dataResponse = await BlogHelp.find( { "_id": req.query._id, "_account": userId } ).lean();
-      dataResponse = dataResponse[ 0 ];
+      data = await BlogHelp.findOne( { "_id": req.query._id } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      dataResponse = await BlogHelp.find( { "_account": userId } ).lean();
+      data = await BlogHelp.find( {} ).lean();
     }
 
     res
       .status( 200 )
-      .json( jsonResponse( "success", dataResponse ) );
+      .json( jsonResponse( "success", data ) );
   },
-  /**
-   * Create blog help
-   * @param req
-   * @param res
-   * @returns {Promise<void>}
-   */
   "create": async ( req, res ) => {
     // Check validator
-    if ( req.body.title === "" || !req.body.title ) {
+    if ( req.body.title === undefined || req.body.title === "" ) {
       return res.status( 403 ).json( { "status": "fail", "data": { "title": "Tiêu đề blog không được bỏ trống!" } } );
-    } else if ( req.body.content ) {
+    } else if ( req.body.content === undefined || req.body.content === "" ) {
       return res.status( 403 ).json( { "status": "fail", "data": { "content": "Nội dung blog không được bỏ trống!" } } );
     }
 
-    // Handle create with mongodb
-    const userId = secure( res, req.headers.authorization ), objSave = {
-        "title": req.body.title,
-        "content": req.body.content,
-        "_account": userId
-      },
-      newBlogHelp = await new BlogHelp( objSave );
+    // Create
+    const { title, content } = req.body,
+      newBlog = await new BlogHelp( {
+        "title": title,
+        "content": content,
+        "_account": req.headers.uid
+      } );
 
-    // Save mongodb
-    await newBlogHelp.save();
+    // Save
+    await newBlog.save();
 
-    res.status( 200 ).json( jsonResponse( "success", newBlogHelp ) );
+    res.status( 201 ).json( jsonResponse( "success", newBlog ) );
   },
-  /**
-   * Update blog help
-   * @param req
-   * @param res
-   * @returns {Promise<void>}
-   */
   "update": async ( req, res ) => {
     // Check validator
-    if ( req.body.title === "" || !req.body.title ) {
-      return res.status( 403 ).json( { "status": "fail", "data": { "title": "Tiêu đề bài viết không được bỏ trống!" } } );
+    if ( req.body.title === undefined || req.body.title === "" ) {
+      return res.status( 403 ).json( { "status": "fail", "data": { "title": "Tiêu đề blog không được bỏ trống!" } } );
+    } else if ( req.body.content === undefined || req.body.content === "" ) {
+      return res.status( 403 ).json( { "status": "fail", "data": { "content": "Nội dung blog không được bỏ trống!" } } );
     }
 
-    const userId = secure( res, req.headers.authorization ),
-      findBlogHelp = await BlogHelp.findById( req.query._helpId ).lean();
+    const { title, content } = req.body,
+      blogInfo = await BlogHelp.findOne( { "_id": req.query._id } ).lean();
 
-    // Check catch when update user categories
-    if ( !findBlogHelp ) {
+    // Check error
+    if ( !blogInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Bài viết không tồn tại!" } );
-    } else if ( findBlogHelp._account.toString() !== userId ) {
-      return res.status( 405 ).json( { "status": "error", "message": "Bạn không có quyền cho bài viết này!" } );
     }
+
+    // Concat vote
     if ( req.body.vote ) {
-      await Promise.all( findBlogHelp.vote.map( ( vote ) => {
-        delete vote._id;
+      await Promise.all( blogInfo.vote.map( ( v ) => {
+        delete v._id;
       } ) );
-      req.body.vote = req.body.vote.concat( findBlogHelp.vote );
+      req.body.vote = req.body.vote.concat( blogInfo.vote );
     }
-    res.status( 201 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._helpId, { "$set": req.body }, { "new": true } ) ) );
 
+    res.status( 200 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._id, { "$set": { "title": title, "content": content, "vote": req.body.vote, "_account": req.headers.uid } }, { "new": true } ) ) );
   },
-  "searchBlog": async ( req, res ) => {
-    const userId = secure( res, req.headers.authorization ),
-      findBlogHelp = await BlogHelp.find( {} ),
-      findAccount = await Account.findOne( { "_id": userId } );
-
-
-    if ( !findAccount ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Người dùng không tồn tại!" } );
-    }
-    let dataResponse = findBlogHelp.filter( ( blog ) => convertUnicode( blog.title.toLowerCase() ).toString().includes( convertUnicode( req.query._title.toLowerCase() ).toString() ) );
-
-    if ( req.query._type === "full" ) {
-      return res.status( 200 ).json( jsonResponse( "success", dataResponse ) );
-    }
-
-    res.status( 200 ).json( jsonResponse( "success", dataResponse.slice( 0, 6 ) ) );
-  },
-  /**
-   * Delete blog help
-   * @param req
-   * @param res
-   * @returns {Promise<void>}
-   */
   "delete": async ( req, res ) => {
-    const userId = secure( res, req.headers.authorization ),
-      findBlogHelp = await BlogHelp.findById( req.query._helpId ),
-      findHelpCategory = await HelpCategory.find( {} ),
-      findAccount = await Account.findOne( { "_id": userId } );
+    const blogInfo = await BlogHelp.findOne( { "_id": req.query._id } ),
+      categoryContainBlog = await HelpCategory.findOne( { "_blogHelp": req.query._id } );
 
-    // Check ctach when delete help categories
-    if ( !findBlogHelp ) {
+    // Check error
+    if ( !blogInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Bài viết không tồn tại!" } );
     }
-    if ( !findAccount ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Người dùng không tồn tại!" } );
+
+    if ( categoryContainBlog ) {
+      categoryContainBlog._blogHelp.pull( req.query._id );
+      await categoryContainBlog.save();
     }
 
-    // When delete auto which all of help category of that auto will deleted
-    if ( findHelpCategory.length > 0 ) {
-      if ( findHelpCategory._blogHelp.index( req.query._helpId ) > -1 ) {
-        findHelpCategory._blogHelp.pull( req.query()._helpId );
-        await findHelpCategory.save();
+    await blogInfo.remove();
+
+    res.status( 200 ).json( jsonResponse( "success", null ) );
+  },
+  "search": async ( req, res ) => {
+    if ( req.query.keyword === undefined ) {
+      return res.status( 404 ).json( { "status": "fail", "keyword": "Vui lòng cung cấp từ khóa để tìm kiếm!" } );
+    }
+
+    let page = null, dataResponse = null, data = ( await BlogHelp.find( { "$text": { "$search": req.query.keyword, "$language": "none" } } ).sort( { "vote": "desc" } ).lean() );
+
+    if ( req.query._size && req.query._page ) {
+      dataResponse = data.slice( ( Number( req.query._page ) - 1 ) * Number( req.query._size ), Number( req.query._size ) * Number( req.query._page ) );
+    } else if ( req.query._size ) {
+      dataResponse = data.slice( 0, Number( req.query._size ) );
+    }
+
+    if ( req.query._size ) {
+      if ( data.length % req.query._size === 0 ) {
+        page = Math.floor( data.length / req.query._size );
+      } else {
+        page = Math.floor( data.length / req.query._size ) + 1;
       }
     }
 
-    await BlogHelp.findByIdAndRemove( req.query._helpId );
-    res.status( 200 ).json( jsonResponse( "success", null ) );
+    return res
+      .status( 200 )
+      .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
   }
 };

@@ -8,9 +8,9 @@
  */
 
 const Help = require( "../../models/help/Help.model" );
-const BlogHelp = require( "../../models/help/BlogHelp.model" );
+const BlogHelp = require( "../../models/help/Blog.model" );
 // eslint-disable-next-line no-unused-vars
-const HelpCategory = require( "../../models/help/HelpCategory.model" );
+const HelpCategory = require( "../../models/help/category.model" );
 const Account = require( "../../models/Account.model" );
 
 
@@ -25,26 +25,11 @@ module.exports = {
    * @returns {Promise<void>}
    */
   "index": async ( req, res ) => {
-    let dataResponse = null;
-    const authorization = req.headers.authorization,
-      userId = secure( res, authorization ),
-      findAccount = await Account.findOne( { "_id": userId } );
-
-    if ( !findAccount ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Người dùng không tồn tại!" } );
-    }
-
-    // Handle get all group from mongodb
-    if ( req.query._id ) {
-      dataResponse = await Help.find( { "_id": req.query._id } ).lean();
-      dataResponse = dataResponse[ 0 ];
-    } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      dataResponse = await Help.find( {} ).lean();
-    }
+    const data = await Help.find( {} ).lean();
 
     res
       .status( 200 )
-      .json( jsonResponse( "success", dataResponse ) );
+      .json( jsonResponse( "success", data[ 0 ] ) );
   },
   /**
    * Update help
