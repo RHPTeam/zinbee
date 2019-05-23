@@ -7,67 +7,63 @@
  * team: BE-RHP
  */
 
-const BlogHelp = require( "../../models/help/BlogHelp.model" );
-const HelpCategory = require( "../../models/help/HelpCategory.model" );
+const BlogHelp = require( "../../models/help/Blog.model" );
+const HelpCategory = require( "../../models/help/category.model" );
 const Account = require( "../../models/Account.model" );
 
 const jsonResponse = require( "../../configs/response" );
 const secure = require( "../../helpers/secures/rcrypt" );
 
 module.exports = {
-  /**
-   * Get category help (all or query)
-   * @param req
-   * @param res
-   * @returns {Promise<void>}
-   */
   "index": async ( req, res ) => {
-    let dataResponse = null;
-    const authorization = req.headers.authorization,
-      userId = secure( res, authorization );
+    let data;
 
-    // Handle get all group from mongodb
     if ( req.query._id ) {
-      dataResponse = await HelpCategory.find( { "_id": req.query._id, "_account": userId } ).lean();
-      dataResponse = dataResponse[ 0 ];
+      data = await HelpCategory.findOne( { "_id": req.query._id } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      dataResponse = await HelpCategory.find( { "_account": userId } ).lean();
+      data = await HelpCategory.find( {} ).lean();
     }
 
     res
       .status( 200 )
-      .json( jsonResponse( "success", dataResponse ) );
+      .json( jsonResponse( "success", data ) );
   },
-  /**
-   * create category help
-   * @param req
-   * @param res
-   * @returns {Promise<void>}
-   */
   "create": async ( req, res ) => {
     // Check validator
     if ( req.body.title === "" || !req.body.title ) {
       return res.status( 403 ).json( { "status": "fail", "data": { "title": "Tiêu đề blog không được bỏ trống!" } } );
     }
 
-    // Handle create with mongodb
-    const userId = secure( res, req.headers.authorization ), objSave = {
-        "title": req.body.title,
-        "_account": userId
-      },
-      newHelpCategory = await new HelpCategory( objSave );
+    let newCategory;
 
-    // Save mongodb
-    await newHelpCategory.save();
-    if ( req.body.parent ) {
-      const findHelpCategory = await HelpCategory.findOne( { "_id": req.body.parent } );
+    // Create
+    const { title, parent } = req.body;
+    
+    // Set default parent
+    req.body.level = 0;
 
-      newHelpCategory.parent = req.body.parent;
-      newHelpCategory.level = findHelpCategory.level + 1;
-      await newHelpCategory.save();
+    // Handle parent category id
+    if ( parent !== undefined && parent !== "" ) {
+      const categoryParent = await HelpCategory.findOne( { "_id": parent } );
+
+      if ( !categoryParent ) {
+        return res.status( 404 ).json( { "status": "error", "message": "Danh mục cha không tồn tại!" } );
+      }
+
+      req.body.level = parseInt( categoryParent.level ) + 1;
     }
 
-    res.status( 200 ).json( jsonResponse( "success", newHelpCategory ) );
+    newCategory = await new HelpCategory( {
+      "title": title,
+      "level": req.body.level,
+      "parent": parent !== undefined && parent !== "" ? parent : "",
+      "_account": req.headers.uid
+    } );
+
+    // Save mongodb
+    await newCategory.save();
+
+    res.status( 200 ).json( jsonResponse( "success", newCategory ) );
   },
   /**
    * Update category help
