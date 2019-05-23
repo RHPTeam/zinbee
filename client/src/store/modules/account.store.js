@@ -69,7 +69,7 @@ const actions = {
   signIn: async ({ commit }, payload) => {
     try {
       commit("auth_request");
-      await AccountServices.signIn(payload);
+      const response = await AccountServices.signIn(payload);
       // console.log(resData);
       // CookieFunction.setCookie( "sid", resData.data.data.token, 1 );
       // CookieFunction.setCookie( "uid", resData.data.data.user._id );

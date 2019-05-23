@@ -29,7 +29,7 @@ module.exports = {
 
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
-  "active": async ( req, res ) => {
+  "active": async () => {
 
   },
   "signIn": async () => {},
@@ -59,19 +59,16 @@ module.exports = {
     ), {
       "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
       "httpOnly": true, // The cookie only accessible by the web server
-      "signed": true, // Indicates if the cookie should be signed
       "secure": true
     } );
-    res.cookie( "uid", userInfo._id, {
+    res.cookie( "uid", userInfo._id.toString(), {
       "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
       "httpOnly": true, // The cookie only accessible by the web server
-      "signed": true, // Indicates if the cookie should be signed
       "secure": true
     } );
     res.cookie( "cfr", adminRole.level, {
       "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
       "httpOnly": true, // The cookie only accessible by the web server
-      "signed": true, // Indicates if the cookie should be signed
       "secure": true
     } );
 
@@ -85,8 +82,6 @@ module.exports = {
       process.env.APP_KEY )}; uid=${userInfo._id}; cfr=${adminRole.level}`;
 
     res.set( "Cookie", header );
-
-    console.log( header );
 
     res.status( 201 ).json( jsonResponse( "success", `${userInfo.email} đăng nhập thành công!` ) );
   },
