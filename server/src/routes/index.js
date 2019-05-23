@@ -6,6 +6,8 @@ const auth = require( "../helpers/middleware/authenticate.middleware" );
 // General Route
 router.use( "/users", auth, require( "./modules/account.route" ) );
 router.use( "/roles", auth, require( "./modules/role.route" ) );
+router.use( "/signin", require( "./modules/signin.route" ) );
+router.use( "/signup", require( "./modules/signup.route" ) );
 
 // Help Route
 router.use( "/help", auth, require( "./modules/help/help.route" ) );
