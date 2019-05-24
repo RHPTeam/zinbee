@@ -1,0 +1,44 @@
+$vs-colors: (
+        lightest: #e4e4e4,
+        light: #ccc,
+        dark: #333,
+        darkest: rgba(0, 0, 0, .1),
+) !default;
+
+//  Global Component Variables
+$vs-component-line-height: 1.4 !default;
+$vs-component-placeholder-color: #ccc !default;
+
+//  Active State
+$vs-state-active-bg: #f7f7f7 !default;
+$vs-state-active-color: #444 !default;
+
+//  Disabled State
+$vs-state-disabled-bg: rgb(248, 248, 248) !default;
+$vs-state-disabled-color: map_get($vs-colors, 'light') !default;
+$vs-state-disabled-controls-color: map_get($vs-colors, 'light') !default;
+$vs-state-disabled-cursor: not-allowed !default;
+
+//  Borders
+$vs-border-width: 1px !default;
+$vs-border-style: solid !default;
+$vs-border-radius: .625rem !default;
+$vs-border-color: map_get($vs-colors, 'lightest') !default;
+
+//  Component Controls: Clear, Open Indicator
+$vs-controls-color: map_get($vs-colors, 'light') !default;
+$vs-controls-size: 1 !default;
+$vs-controls-deselect-text-shadow: 0 1px 0 #fff;
+
+//  Selected
+$vs-selected-bg: #f7f7f7 !default;
+$vs-selected-border-color: $vs-border-color !default;
+$vs-selected-border-style: $vs-border-style !default;
+$vs-selected-border-width: $vs-border-width !default;
+
+//  Dropdown
+$vs-dropdown-z-index: 1000 !default;
+$vs-dropdown-min-width: 160px !default;
+$vs-dropdown-max-height: 180px !default;
+$vs-dropdown-box-shadow: 0 0 10px map_get($vs-colors, 'darkest') !default;
+$vs-dropdown-bg: #fff !default;

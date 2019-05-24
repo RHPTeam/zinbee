@@ -1,0 +1,121 @@
+.list {
+  border-bottom: 1px solid #f2f2f2;
+
+  .checkbox {
+    border: solid 1px #e4e4e4;
+    border-radius: .3rem;
+    cursor: pointer;
+    height: 20px;
+    outline: none;
+    transition: all 0.4s ease;
+    width: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    &:hover {
+      border: solid 1px #e4e4e4;
+      background-color: #e4e4e4
+    }
+    &:checked {
+      border: 0;
+      border-right: solid 1px #ffb94a;
+      border-bottom: solid 1px #ffb94a;
+      background-color: #ffb94a;
+      &:before {
+        border-right: solid 2px #fff;
+        border-bottom: solid 2px #fff;
+        bottom: -1px;
+        content: "";
+        display: block;
+        height: 14px;
+        left: 6px;
+        position: relative;
+        transform: rotate(35deg);
+        width: 8px;
+      }
+    }
+  }
+
+  .list--content {
+    color: #444;
+    font-size: 14px;
+    .data--empty {
+      font-size: 14px;
+      color: #666;
+    }
+    .list--title {
+      border-bottom: 1px solid #f2f2f2;
+      color: #666;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .item--checkbox {
+      height: 16px;
+      width: 40px;
+    }
+
+    .item--name,
+    .item--mail {
+      max-width: calc(50% - 240px);
+      min-width: calc(50% - 340px);
+      width: calc(25% - 60px);
+    }
+    .item--account,
+    .item--time {
+      max-width: 260px;
+      min-width: 160px;
+      width: calc(25% - 60px);
+    }
+    .item--action {
+      width: 100px;
+    }
+  }
+  .item--name {
+    span {
+      cursor: pointer;
+      transition: all 0.4s ease;
+      &:hover {
+        border-color: #ffb94a;
+        color: #ffb94a;
+      }
+    }
+  }
+  .item--status {
+    .item--status-tag {
+      border: solid 1px #f37978;
+      border-radius: 11px;
+      color: #f37978;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      height: 22px;
+      line-height: 22px;
+      width: 84px;
+
+      &.enable {
+        border-color: #00c853;
+        color: #00c853;
+      }
+    }
+  }
+  .icon--edit {
+    color: #ccc;
+    cursor: pointer;
+  }
+}
+.backdrop {
+  background-color: rgba(153, 153, 153, 0.5);
+  height: 100vh;
+  left: 0;
+  max-height: 100vh;
+  top: 0;
+  width: 100%;
+  z-index: 1040;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}

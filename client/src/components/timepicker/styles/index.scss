@@ -1,0 +1,110 @@
+$color_1: #d2d2d2;
+$color_2: #797979;
+$color_3: #161616;
+$color_4: #fff;
+$color_5: #a5a5a5;
+$font_family_1: sans-serif;
+
+.time-picker {
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+  width: 10em;
+  font-family: $font_family_1;
+  vertical-align: middle;
+  * {
+    box-sizing: border-box;
+  }
+  input.display-time {
+    border: none;
+    border-radius: 10px;
+    width: 10em;
+    height: 38px;
+    padding: 0.3em 1.5em;
+    font-size: 1em;
+  }
+  .clear-btn {
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: -0.15em;
+    z-index: 3;
+    font-size: 1.1em;
+    line-height: 1em;
+    vertical-align: middle;
+    width: 1.3em;
+    color: $color_1;
+    background: rgba(255,255,255,0);
+    text-align: center;
+    font-style: normal;
+    -webkit-transition: color .2s;
+    transition: color .2s;
+    &:hover {
+      color: $color_2;
+      cursor: pointer;
+    }
+  }
+  .time-picker-overlay {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .dropdown {
+    position: absolute;
+    z-index: 5;
+    top: calc(2.2em + 2px);
+    left: 0;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+    width: 10em;
+    font-weight: normal;
+    .select-list {
+      width: 10em;
+      overflow: hidden;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: stretch;
+      justify-content: space-between;
+    }
+    select {
+      padding: 0;
+      margin: 0;
+      flex: 1;
+      overflow-x: hidden;
+      overflow-y: auto;
+      option {
+        text-align: center;
+        padding: 0.3em 0;
+        color: $color_3;
+        &:not(.hint) {
+          &:hover {
+            background: rgba(0,0,0,.08);
+            color: $color_3;
+            cursor: pointer;
+          }
+        }
+      }
+      option.active {
+        background: #41B883;
+        color: $color_4;
+        &:hover {
+          background: #41B883;
+          color: $color_4;
+        }
+      }
+    }
+    .hint {
+      color: $color_5;
+      cursor: default;
+      font-size: 0.8em;
+    }
+  }
+}

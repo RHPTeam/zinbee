@@ -1,11 +1,20 @@
-export default function isRole( ...allowed ) {
-  const isAllowed = ( role ) => allowed.indexOf( role ) > -1;
+const Account = require( "../../models/Account.model" );
+const Role = require( "../../models/Role.model" );
 
-  return ( req, res, next ) => {
-    if ( req.user && isAllowed( req.user.role ) ) {
-      next();
-    } else {
-      res.status( 405 ).json( { "status": "error", "message": "Bạn không có quyền truy cập!" } );
+module.exports = async ( req, res, next ) => {
+  const isAllowed = async ( id ) => {
+    const userInfo = await Account.findOne( { "_id": id } ),
+      roleInfo = await Role.findOne( { "_id": userInfo._role } );
+
+    if ( roleInfo.level.toLowerCase() !== "admin" && roleInfo.level.toLowerCase() !== "superadmin" ) {
+      return false;
     }
+    return true;
   };
-}
+
+  if ( await isAllowed( req.headers.uid ) ) {
+    next();
+  } else {
+    res.status( 405 ).json( { "status": "error", "message": "Bạn không có quyền truy cập!" } );
+  }
+};
