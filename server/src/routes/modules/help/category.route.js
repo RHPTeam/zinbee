@@ -13,7 +13,7 @@ const permission = require( "../../../helpers/middleware/permission.middleware" 
 router
   .route( "/" )
   .get( HelpCategoryController.index )
-  .patch( HelpCategoryController.update )
-  .post( HelpCategoryController.create )
-  .delete( HelpCategoryController.delete );
+  .patch( auth, permission, HelpCategoryController.update )
+  .post( auth, permission, HelpCategoryController.create )
+  .delete( auth, permission, HelpCategoryController.delete );
 module.exports = router;
