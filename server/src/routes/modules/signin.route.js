@@ -23,6 +23,6 @@ router
 
 router
   .route( "/bz" )
-  .post( AccountController.signInByAdmin );
+  .post( passport.authenticate( "local", { "session": false } ), AccountController.signInByAdmin );
 
 module.exports = router;

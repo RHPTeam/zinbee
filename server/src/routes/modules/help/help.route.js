@@ -7,8 +7,11 @@
 const router = require( "express-promise-router" )();
 const HelpController = require( "../../../controllers/help/help.controller" );
 
+const auth = require( "../../../helpers/middleware/authenticate.middleware" );
+const permission = require( "../../../helpers/middleware/permission.middleware" );
+
 router
   .route( "/" )
   .get( HelpController.index )
-  .patch( HelpController.update );
+  .patch( auth, permission, HelpController.update );
 module.exports = router;

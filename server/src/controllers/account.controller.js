@@ -41,18 +41,52 @@ const checkPhone = require( "../helpers/utils/checkPhone.util" ),
   };
 
 module.exports = {
-  "index": async () => {
-    const dataFound = await Account.find( req.query )
-      .select( "-password" )
-      .populate( {
-        "path": "_role",
-        "select": "level"
-      } );
+  "changeStatus": async ( req, res ) => {
+    let data;
 
-    if ( !dataFound ) {
-      return res.status( 403 ).json( jsonResponse( "Data is not found!", null ) );
+    const { id } = req.body,
+      userInfo = await Account.findOne( { "_id": id } );
+
+    userInfo.status = !userInfo;
+    data = await Account.findByIdAndUpdate( id, { "$set": { "status": userInfo.status } }, { "new": true } ).select( "-password" );
+
+    res.status( 200 ).json( jsonResponse( "success", data ) );
+  },
+  "index": async ( req, res ) => {
+    let data;
+
+    if ( req.query._id ) {
+      data = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).lean();
+    } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
+      data = await Account.find( {} ).select( "-password" ).lean();
+    } else {
+      data = await Account.find( req.query ).select( "-password" ).lean();
     }
-    res.status( 200 ).json( jsonResponse( "Data fetch successfully!", dataFound ) );
+
+    res.status( 200 ).json( jsonResponse( "success", data ) );
+  },
+  "renewById": async ( req, res ) => {
+    let data;
+
+    // Check validator
+    if ( req.body.id === undefined || req.body.id.length === 0 ) {
+      return res.status( 403 ).json( { "status": "fail", "id": "Vui lòng cung cấp id người dùng để kích hoạt!" } );
+    } else if ( req.body.expireDate < new Date() ) {
+      return res.status( 403 ).json( { "status": "fail", "expireDate": "Ngày gia hạn cần phải ở tương lai!" } );
+    }
+
+    const { id, expireDate } = req.body,
+      userInfo = await Account.findOne( { "_id": id } );
+
+    // Check exists
+    if ( !userInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Người dùng này không tồn tại!" } );
+    }
+
+    // Update expire date
+    data = await Account.findByIdAndUpdate( id, { "$set": { "status": 1, "expireDate": expireDate } }, { "new": true } ).select( "-password" );
+
+    res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   /**
    *  Update User (Note: Have to header['Authorization']
@@ -62,8 +96,8 @@ module.exports = {
    */
   "update": async ( req, res ) => {
     const { body } = req;
-    const userId = secure( res, req.headers.authorization );
-    const foundUser = await Account.findOne( userId );
+    const email = secure( res, req.headers.authorization );
+    const foundUser = await Account.findOne( { "email": email } );
 
     if ( !foundUser ) {
       return res
@@ -72,7 +106,7 @@ module.exports = {
     }
 
     const dataResponse = await Account.findByIdAndUpdate(
-      userId,
+      foundUser._id,
       {
         "$set": body
       },
@@ -243,6 +277,7 @@ module.exports = {
     } else if ( newUser._role.toString() === roleSuperAdmin.toString() ) {
       role = randomString.generate( 10 ) + 2 + randomString.generate( 1997 );
     }
+    // send axios to server children
     signUp( `${ process.env.SERVER_CHILDRENT_NORTH }/signup`, sendData );
     res.status( 200 ).json(
       jsonResponse( "Successfully!", {
@@ -253,18 +288,173 @@ module.exports = {
       } )
     );
   },
-  "signInByAdmin": async () => {
-
-  },
-  "signUpByAdmin": async ( req ) => {
-    // check code admin from headers
-    const key = JSON.parse( fs.readFileSync( "./src/databases/key.json" ) );
-
-    console.log( key );
-    if ( key.isAdmin.includes( req.headers.token ) ) {
-      return;
+  "renewByCode": async ( req, res ) => {
+    // Check validator
+    if ( req.body.presenter === undefined || req.body.presenter.length === 0 ) {
+      return res.status( 403 ).json( { "status": "fail", "presenter": "Mã kích hoạt không được để trống" } );
     }
-    console.log( await Role.find( {} ) );
-  }
 
+    // Active by key
+    if ( req.body.presenter && req.body.presenter.length > 0 ) {
+      // find all user have key
+      const userList = await Account.find( { "presenter": req.body.presenter } );
+
+      if ( userList.length === 0 ) {
+        return res.status( 404 ).json( { "status": "error", "message": "Mã kích hoạt không tồn tại!" } );
+      }
+
+      await Promise.all( userList.map( async ( user ) => {
+        user.status = 1;
+        user.expireDate = req.body.expireDate;
+
+        await Account.findByIdAndUpdate(
+          user._id,
+          { "$set": user },
+          { "new": true }
+        );
+      } ) );
+    }
+
+    res.status( 201 ).json( jsonResponse( "success", null ) );
+  },
+  "signInByAdmin": async ( req, res ) => {
+    let header;
+
+    const { email } = req.body,
+      userInfo = await Account.findOne( { "email": email } ),
+      adminRole = await Role.findOne( { "_id": userInfo._role } );
+
+    // Check expire date
+    if ( new Date( userInfo.expireDate ) < new Date() ) {
+      await Account.findByIdAndUpdate( userInfo._id, { "$set": { "status": 0 } }, { "new": true } );
+      return res.status( 405 ).json( { "status": "error", "message": "Tài khoản của bạn đã hết hạn. Vui lòng liên hệ với bộ phận CSKH!" } );
+    }
+
+    // Set cookie user
+    res.cookie( "sid", JWT.sign(
+      {
+        "iss": "RHPTeam",
+        "sub": userInfo._id,
+        "iat": new Date().getTime(),
+        "exp": new Date().setDate( new Date().getDate() + 1 )
+      },
+      process.env.APP_KEY
+    ), {
+      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
+      "httpOnly": true, // The cookie only accessible by the web server
+      "secure": true
+    } );
+    res.cookie( "uid", userInfo._id.toString(), {
+      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
+      "httpOnly": true, // The cookie only accessible by the web server
+      "secure": true
+    } );
+    res.cookie( "cfr", adminRole.level, {
+      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
+      "httpOnly": true, // The cookie only accessible by the web server
+      "secure": true
+    } );
+
+    header = `sid=${JWT.sign(
+      {
+        "iss": "RHPTeam",
+        "sub": userInfo._id,
+        "iat": new Date().getTime(),
+        "exp": new Date().setDate( new Date().getDate() + 1 )
+      },
+      process.env.APP_KEY )}; uid=${userInfo._id}; cfr=${adminRole.level}`;
+
+    res.set( "Cookie", header );
+
+    res.status( 201 ).json( jsonResponse( "success", `${userInfo.email} đăng nhập thành công!` ) );
+  },
+  "signUpByAdmin": async ( req, res ) => {
+    // check code admin from headers
+    const { name, email, phone, password } = req.body,
+      adminRole = await Role.findOne( { "level": "Admin" } ),
+      isEmail = await Account.findOne( { "email": email } ),
+      isPhone = await Account.findOne( { "phone": phone } );
+
+    // Check exists
+    if ( isEmail ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Email đã tồn tại." } );
+    } else if ( isPhone ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Số điện thoại đã tồn tại." } );
+    }
+
+    let buffer, header, key, newUser;
+
+    buffer = fs.readFileSync( "./src/databases/key.json" );
+    key = JSON.parse( buffer );
+
+    if ( key.staffKey.includes( req.headers.token ) === false ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Mã xác thực nhân viên của bạn không đúng hoặc IP không hợp lệ!" } );
+    }
+
+    // Check validator
+    if ( name === undefined || name.length === 0 ) {
+      return res.status( 403 ).json( { "status": "fail", "name": "Tên không được để trống!" } );
+    } else if ( phone === undefined || phone.length === 0 ) {
+      return res.status( 403 ).json( { "status": "fail", "phone": "Số điện thoại không được để trống!" } );
+    } else if ( email === undefined || email.length === 0 ) {
+      return res.status( 403 ).json( { "status": "fail", "email": "Email không được để trống!" } );
+    } else if ( password === undefined || password.length === 0 ) {
+      return res.status( 403 ).json( { "status": "fail", "password": "Mật khẩu không được để trống!" } );
+    }
+
+    // Create object mongo
+    newUser = new Account( {
+      "name": name,
+      "email": email,
+      "phone": phone,
+      "password": password,
+      "_role": adminRole._id
+    } );
+
+    // Set cookie user
+    res.cookie( "sid", JWT.sign(
+      {
+        "iss": "RHPTeam",
+        "sub": newUser._id,
+        "iat": new Date().getTime(),
+        "exp": new Date().setDate( new Date().getDate() + 1 )
+      },
+      process.env.APP_KEY
+    ), {
+      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
+      "httpOnly": true, // The cookie only accessible by the web server
+      "signed": true, // Indicates if the cookie should be signed
+      "secure": true
+    } );
+    res.cookie( "uid", newUser._id, {
+      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
+      "httpOnly": true, // The cookie only accessible by the web server
+      "signed": true, // Indicates if the cookie should be signed
+      "secure": true
+    } );
+    res.cookie( "cfr", adminRole.level, {
+      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
+      "httpOnly": true, // The cookie only accessible by the web server
+      "signed": true, // Indicates if the cookie should be signed
+      "secure": true
+    } );
+
+    // Save
+    await newUser.save();
+
+    header = `sid=${JWT.sign(
+      {
+        "iss": "RHPTeam",
+        "sub": userInfo._id,
+        "iat": new Date().getTime(),
+        "exp": new Date().setDate( new Date().getDate() + 1 )
+      },
+      process.env.APP_KEY )}; uid=${userInfo._id}; cfr=${adminRole.level}`;
+
+    res.set( "Cookie", header );
+
+    console.log( res );
+
+    res.status( 201 ).json( jsonResponse( "success", `${newUser.email} đăng ký thành công!` ) );
+  }
 };

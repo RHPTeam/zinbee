@@ -1,0 +1,72 @@
+/* Dropdown Menu */
+
+$border-width: $vs-border-width;
+$border-style: solid;
+$border-color: $vs-border-color;
+$border-radius: $vs-border-radius;
+$box-shadow: $vs-dropdown-box-shadow;
+
+$bg-color: $vs-dropdown-bg;
+$z-index: $vs-dropdown-z-index;
+$min-width: $vs-dropdown-min-width;
+$max-height: $vs-dropdown-max-height;
+
+.vs__dropdown-menu {
+  display: block;
+  position: absolute;
+  top: calc(100% - #{$border-width}); // -{#$border-width} here ensures the left and right borders of the dropdown appear flush with the toggle.
+  left: 0;
+  z-index: $z-index;
+  padding: .5rem 0;
+  margin: 0;
+  width: 100%;
+  max-height: $max-height;
+  min-width: $min-width;
+  overflow-y: hidden;
+  box-shadow: $box-shadow;
+  border: $border-width $border-style $border-color;
+  border-top-style: none;
+  border-radius: 0 0 $border-radius $border-radius;
+  text-align: left;
+  list-style: none;
+  background: $bg-color;
+  &:hover {
+    overflow-y: scroll;
+  }
+  &::-webkit-scrollbar-track
+  {
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    transition: background-color 1s linear, opacity 1s linear;
+    -webkit-transition: background-color 1s linear, opacity 1s linear;
+  }
+
+  &::-webkit-scrollbar
+  {
+    width: 8px;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    transition: background-color 1s linear, opacity 1s linear;
+    -webkit-transition: background-color 1s linear, opacity 1s linear;
+    &:hover {
+      background-color: #cccccc;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    background-color: #d6d6d6;
+    transition: background-color 1s linear, opacity 1s linear;
+    -webkit-transition: background-color 1s linear, opacity 1s linear;
+    &:hover {
+      width: 12px;
+      border-radius: 10px;
+      background-color: #c7c7c7;
+    }
+  }
+}
+
+.vs__no-options {
+  text-align: center;
+}

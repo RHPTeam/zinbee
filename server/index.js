@@ -6,7 +6,6 @@ const express = require( "express" ),
   app = express(),
   logger = require( "morgan" );
 const api = require( "./src/routes" );
-const cookieParser = require( "cookie-parser" );
 const mongoose = require( "mongoose" );
 const passport = require( "passport" );
 
@@ -36,13 +35,16 @@ mongoose.set( "useFindAndModify", false );
 
 app.set( "port", process.env.PORT_BASE );
 
-app.use( cors() );
+app.use( cors( {
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "allowedHeaders": [ "Content-Type", "Authorization" ],
+  "exposedHeaders": [ "Cookie" ] } ) );
 app.use( bodyParser.json( { "limit": "500MB", "extended": true } ) );
 app.use( bodyParser.urlencoded( { "limit": "500MB", "extended": true } ) );
 app.use( passport.initialize() );
 app.use( passport.session() );
 app.use( logger( "dev" ) );
-app.use( cookieParser( process.env.APP_KEY ) );
 app.use( "/uploads", express.static( "uploads" ) );
 app.use( "/api/v1", api );
 app.use( "/", ( req, res ) => res.send( "API running!" ) );
