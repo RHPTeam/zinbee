@@ -1,79 +1,103 @@
 <template>
-  <div class="action">
-    <div
-      class="back d_flex align_items_center py_2 px_2 mb_5"
-      @click="backListCategories"
-    >
-      <div class="icon mr_3">
-        <icon-base
-          class="icon--arrow-left"
-          icon-name="arrow"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-        >
-          <icon-arrow-left></icon-arrow-left>
-        </icon-base>
-      </div>
-      <div>
-        Danh sách danh mục
+  <div class="modal--wrapper" :data-theme="currentTheme">
+    <div class="modal--dialog d_flex justify_content_center">
+      <div class="modal--content" v-click-outside="close">
+        <!-- Start: Modal Body -->
+        <div class="action">
+          <div
+            class="back d_flex align_items_center py_2 px_2 mb_5"
+            @click="backListCategories"
+          >
+            <div class="icon mr_3">
+              <icon-base
+                class="icon--arrow-left"
+                icon-name="arrow"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <icon-arrow-left></icon-arrow-left>
+              </icon-base>
+            </div>
+            <div>
+              Danh sách danh mục
+            </div>
+          </div>
+          <form class="py_3 px_5">
+            <div class="form_group">
+              <label>Tên danh mục</label>
+              <input
+                type="text"
+                class="form_control"
+                placeholder="Nhập tên danh mục ..."
+                v-model="categories.title"
+              />
+            </div>
+            <div class="form_group">
+              <label>Chọn danh mục cha</label>
+              <div class="option">
+                <multiselect
+                  label="title"
+                  placeholder="Chọn danh mục cha ..."
+                  :options="allCategories"
+                  v-model="categories.parent"
+                />
+              </div>
+            </div>
+            <div class="form_group">
+              <button
+                v-if="isDefault === true"
+                class="btn btn_primary form_control"
+                @click="createNewCategories"
+              >
+                Tạo mới
+              </button>
+              <button v-else class="btn btn_primary form_control d_none" @click="updateCategories">
+                Cập nhật
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- End: Modal Body -->
       </div>
     </div>
-    <form class="py_3 px_5">
-      <div class="form_group">
-        <label>Tên danh mục</label>
-        <input
-          type="text"
-          class="form_control"
-          placeholder="Nhập tên danh mục ..."
-        />
-      </div>
-      <div class="form_group">
-        <label>Chọn danh mục cha</label>
-        <div class="option">
-          <multiselect label="title" placeholder="Chọn danh mục cha ..." />
-        </div>
-      </div>
-      <div class="form_group">
-        <button class="btn btn_primary form_control">
-          Tạo mới
-        </button>
-        <button class="btn btn_primary form_control d_none">
-          Cập nhật
-        </button>
-      </div>
-    </form>
   </div>
 </template>
 <script>
 export default {
+  props: {
+    currentTheme: String,
+    isDefault: Boolean
+  },
+  computed: {
+    allCategories() {
+      return this.$store.getters.allCategories;
+    },
+    categories() {
+      return this.$store.getters.categories;
+    }
+  },
+  async created() {
+    await this.$store.dispatch("getCategoriesDefault");
+  },
   methods: {
     backListCategories() {
       this.$router.push("/admin/help/categories");
+    },
+    close() {
+      this.$emit("close", false);
+    },
+    createNewCategories() {
+      this.$store.dispatch("createNewCategories", this.categories);
+    },
+    updateCategories(){
+      this.$store.dispatch("updateCategories", this.categories);
+      this.$emit("backDefault", true);
+      this.close();
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.action {
-  color: #444444;
-  .back {
-    background-color: #fafafa;
-    border-radius: 0.625rem;
-    cursor: pointer;
-    width: 50%;
-  }
-  form {
-    border: 1px solid #e4e4e4;
-    border-radius: 0.625rem;
-    label {
-      font-weight: 600;
-      color: #cccccc;
-    }
-  }
-  .option {
-    border: 1px solid #e4e4e4;
-    border-radius: 0.625rem;
-  }
-}
+@import "./index.style";
 </style>

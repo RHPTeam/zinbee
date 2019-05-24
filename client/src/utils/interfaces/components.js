@@ -103,6 +103,7 @@ Vue.component("IconLogoText", () => import("@/components/icons/IconLogoText"));
 
 // Global Component
 Vue.component("VuePerfectScrollbar", () => import("vue-perfect-scrollbar"));
+Vue.component("VueQuillEditor", () => import("vue-quill-editor"));
 
 Vue.component("contenteditable", () => import("@/components/contenteditable"));
 Vue.component("Breadcrumb", () =>

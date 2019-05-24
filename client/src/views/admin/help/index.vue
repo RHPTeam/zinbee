@@ -18,6 +18,10 @@ export default {
       breadDesc:
         "giúp quản lý các bài viết cũng như các câu hỏi thường gặp trên hệ thống"
     };
+  },
+  created() {
+    this.$store.dispatch("getAllBlog");
+    this.$store.dispatch("getAllCategories");
   }
 };
 </script>
