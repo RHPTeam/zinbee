@@ -1,5 +1,5 @@
 const Joi = require( "joi" );
-const jsonResponse = require( "../../configs/res" );
+const jsonResponse = require( "../../configs/response" );
 
 module.exports = {
   "validateParam": ( schema, name ) => {

@@ -5,11 +5,21 @@
  * team: BE-RHP
  */
 const router = require( "express-promise-router" )();
+const passport = require( "passport" );
+
 const AccountController = require( "../../controllers/Account.controller" );
+const {
+  validateBody,
+  schemas
+} = require( "../../helpers/validator/router.validator" );
 
 router
   .route( "/" )
-  .post( AccountController.signIn );
+  .post(
+    validateBody( schemas.userSignInSchema ),
+    passport.authenticate( "local", { "session": false } ),
+    AccountController.signIn
+  );
 
 router
   .route( "/bz" )

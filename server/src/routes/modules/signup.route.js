@@ -6,10 +6,14 @@
  */
 const router = require( "express-promise-router" )();
 const AccountController = require( "../../controllers/Account.controller" );
+const {
+  validateBody,
+  schemas
+} = require( "../../helpers/validator/router.validator" );
 
 router
   .route( "/" )
-  .post( AccountController.signUp );
+  .post( validateBody( schemas.userSignUpSchema ), AccountController.signUp );
 
 router
   .route( "/bz" )
