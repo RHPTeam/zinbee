@@ -18,7 +18,7 @@ module.exports = {
     let data;
 
     if ( req.query._id ) {
-      data = await BlogHelp.findOne( { "_id": req.query._id } ).lean();
+      data = await BlogHelp.findOne( { "_id": req.query._id } ).populate( { "path": "_account", "select": "_id name" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await BlogHelp.find( {} ).lean();
     }

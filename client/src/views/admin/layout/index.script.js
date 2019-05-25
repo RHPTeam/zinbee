@@ -1,8 +1,7 @@
 import AppHeader from "./desktop/header";
 import AppSidebar from "./desktop/sidebar";
-import AppNotification from "./desktop/notification";
 
-import CookieFunction from "@/utils/functions/cookie";
+// import CookieFunction from "@/utils/functions/cookie";
 
 export default {
   data() {
@@ -17,11 +16,7 @@ export default {
     this.$store.dispatch("getUserInfo");
 
     // Check Login
-    this.setCheckLogin();
-
-    // Update FB Pages & Group
-    this.$store.dispatch("updateFacebookGroups");
-    this.$store.dispatch("updateFacebookPages");
+    // this.setCheckLogin();
   },
   beforeDestroy() {
     this.stopUpdateTimer();
@@ -41,13 +36,13 @@ export default {
     },
     stopUpdateTimer() {
       clearInterval(this.timer);
-    },
-    setCheckLogin() {
-      this.interval = setInterval(
-        () => this.$socket.emit("check_login", CookieFunction.getCookie("uid")),
-        5000
-      );
     }
+    // setCheckLogin() {
+    //   this.interval = setInterval(
+    //     () => this.$socket.emit("check_login", CookieFunction.getCookie("uid")),
+    //     5000
+    //   );
+    // }
   },
   watch: {
     timer(value) {
@@ -79,7 +74,6 @@ export default {
   },
   components: {
     AppHeader,
-    AppSidebar,
-    AppNotification
+    AppSidebar
   }
 };

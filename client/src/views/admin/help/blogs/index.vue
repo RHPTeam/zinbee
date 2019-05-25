@@ -1,5 +1,10 @@
 <template>
   <div class="help">
-    <h1>Help Blog is here</h1>
+    <router-view/>
   </div>
 </template>
+<script>
+export default {
+
+};
+</script>
