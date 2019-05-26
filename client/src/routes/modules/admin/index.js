@@ -51,19 +51,25 @@ const generalRouter = {
           component: require("@/views/admin/help/category").default
         },
         {
-          path: "categories/:id",
-          name: "categories_detail",
-          component: require("@/views/admin/help/category/action").default
-        },
-        {
           path: "blogs",
-          name: "admin_blogs",
-          component: require("@/views/admin/help/blogs").default
-        },
-        {
-          path: "blogs/:id",
-          name: "blogs_detail",
-          component: require("@/views/admin/help/blogs/action").default
+          component: require("@/views/admin/help/blogs").default,
+          children: [
+            {
+              path: "",
+              name: "blogs",
+              component: require("@/views/admin/help/blogs/list").default
+            },
+            {
+              path: "create",
+              name: "blogs_new",
+              component: require("@/views/admin/help/blogs/action").default
+            },
+            {
+              path: ":id",
+              name: "blogs_update",
+              component: require("@/views/admin/help/blogs/action").default
+            }
+          ]
         }
       ]
     }

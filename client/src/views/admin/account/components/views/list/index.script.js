@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     users() {
-      return this.$store.getters.usersFilter;
+      return this.$store.getters.allUser;
     },
     selectAll: {
       get: function() {

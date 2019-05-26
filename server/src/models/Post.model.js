@@ -4,6 +4,10 @@ const mongoose = require( "mongoose" ),
   Schema = mongoose.Schema,
 
   PostFacebookSchema = new Schema( {
+    "feedId": {
+      "type": String,
+      "default": ""
+    },
     "title": String,
     "content": String,
     "attachments": [ {

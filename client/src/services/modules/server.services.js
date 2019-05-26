@@ -11,9 +11,9 @@ export default {
     return Api().get(`vps?_id=${id}`);
   },
   updateVps(serverId, content) {
-    return Api().patch(`vps?_serverId=${serverId}`, content);
+    return Api().patch(`vps?_id=${serverId}`, content);
   },
   deleteVps(serverId) {
-    return Api().delete(`vps?_serverId=${serverId}`);
+    return Api().delete(`vps?_id=${serverId}`);
   }
 };
