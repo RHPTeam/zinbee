@@ -38,29 +38,24 @@ module.exports = {
    * @returns {Promise<void>}
    */
   "update": async ( req, res ) => {
-    const userId = secure( res, req.headers.authorization ),
-      findHelp = await Help.find( {} )[ 0 ],
-      findAccount = await Account.findOne( { "_id": userId } );
-
-    if ( !findAccount ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Người dùng không tồn tại!" } );
-    }
+    const help = await Help.find( {} )[ 0 ];
+      
     if ( req.body.popular_blog && req.body.popular_blog.length <= 5 ) {
-      if ( findHelp.popular_blog.length + req.body.popular_blog.length > 5 ) {
-        const temp = findHelp.popular_blog.length + req.body.popular_blog.length - 5;
+      if ( help.popular_blog.length + req.body.popular_blog.length > 5 ) {
+        const temp = help.popular_blog.length + req.body.popular_blog.length - 5;
 
-        for ( let i = findHelp.popular_blog.length; i > 5 - temp; i-- ) {
-          findHelp.popular_blog.pull( findHelp.popular_blog[ i ] );
+        for ( let i = help.popular_blog.length; i > 5 - temp; i-- ) {
+          help.popular_blog.pull( help.popular_blog[ i ] );
         }
-        await findHelp.save();
+        await help.save();
 
       }
-      await Promise.all( findHelp.vote.map( ( vote ) => {
+      await Promise.all( help.vote.map( ( vote ) => {
         delete vote._id;
       } ) );
       req.body.vote = req.body.vote.concat( findBlogHelp.vote );
     }
-    res.status( 201 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._helpId, { "$set": req.body }, { "new": true } ) ) );
+    res.status( 201 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( help._id, { "$set": req.body }, { "new": true } ) ) );
 
   }
 };
