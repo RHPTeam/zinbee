@@ -6,8 +6,14 @@
  */
 const router = require( "express-promise-router" )();
 const RoleController = require( "../../controllers/role.controller" );
+const auth = require( "../../helpers/middleware/authenticate.middleware" );
+const permission = require( "../../helpers/middleware/permission.middleware" );
 
 router
   .route( "/" )
-  .get( RoleController.index );
+  .get( auth, permission, RoleController.index );
+
+router
+  .route( "/sync" )
+  .get( RoleController.sync );
 module.exports = router;

@@ -9,11 +9,12 @@
 
 const Account = require( "../models/Account.model" );
 const Role = require( "../models/Role.model" );
-
+const Server = require( "../models/Server.model" );
 
 const fs = require( "fs" );
 const jsonResponse = require( "../configs/response" );
-const JWT = require( "jsonwebtoken" );
+const { signToken } = require( "../configs/jwt" );
+const { signUpSync } = require( "../microservices/synchronize/account" );
 
 module.exports = {
   "changeStatus": async ( req, res ) => {
@@ -92,56 +93,82 @@ module.exports = {
 
     res.status( 201 ).json( jsonResponse( "success", null ) );
   },
-  "signIn": async () => {},
-  "signUp": async () => {},
-  "signInByAdmin": async ( req, res ) => {
-    let header;
-
+  "signIn": async ( req, res ) => {
     const { email } = req.body,
       userInfo = await Account.findOne( { "email": email } ),
-      adminRole = await Role.findOne( { "_id": userInfo._role } );
+      memberRole = await Role.findOne( { "_id": userInfo._role } ),
+      serverContainUser = await Server.findOne( { "userAmount": userInfo._id } );
+
+    let cookie;
 
     // Check expire date
     if ( new Date( userInfo.expireDate ) < new Date() ) {
       await Account.findByIdAndUpdate( userInfo._id, { "$set": { "status": 0 } }, { "new": true } );
       return res.status( 405 ).json( { "status": "error", "message": "Tài khoản của bạn đã hết hạn. Vui lòng liên hệ với bộ phận CSKH!" } );
     }
+    cookie = `sid=${ signToken( userInfo ) }; uid=${userInfo._id}; cfr=${memberRole.level}`;
 
-    // Set cookie user
-    res.cookie( "sid", JWT.sign(
-      {
-        "iss": "RHPTeam",
-        "sub": userInfo._id,
-        "iat": new Date().getTime(),
-        "exp": new Date().setDate( new Date().getDate() + 1 )
-      },
-      process.env.APP_KEY
-    ), {
-      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
-      "httpOnly": true, // The cookie only accessible by the web server
-      "secure": true
-    } );
-    res.cookie( "uid", userInfo._id.toString(), {
-      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
-      "httpOnly": true, // The cookie only accessible by the web server
-      "secure": true
-    } );
-    res.cookie( "cfr", adminRole.level, {
-      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
-      "httpOnly": true, // The cookie only accessible by the web server
-      "secure": true
+    res.set( "Cookie", cookie );
+
+    res.status( 201 ).json( jsonResponse( "success", {
+      "message": `${userInfo.email} đăng nhập thành công!`,
+      "domain": serverContainUser.info.domain
+    } ) );
+  },
+  "signUp": async ( req, res ) => {
+    const { name, email, phone, password, presenter, region } = req.body,
+      isEmailExist = await Account.findOne( { email } ),
+      isPhoneExist = await Account.findOne( { phone } ),
+      memberRole = await Role.findOne( { "level": "Member" } ),
+      optimalServer = await Server.findOne( { region, "status": 1 } ).sort( { "slot": -1 } );
+
+    let cookie, newUser, resSyncNestedServer;
+
+    if ( isEmailExist ) {
+      return res.status( 403 ).json( { "status": "fail", "phone": "Email đã tồn tại!" } );
+    } else if ( isPhoneExist ) {
+      return res.status( 403 ).json( { "status": "fail", "phone": "Số điện thoại đã tồn tại!" } );
+    }
+
+    newUser = await new Account( {
+      name,
+      email,
+      phone,
+      presenter,
+      password,
+      "expireDate": new Date().setDate( new Date().getDate() + 3 ),
+      "_role": memberRole._id
     } );
 
-    header = `sid=${JWT.sign(
-      {
-        "iss": "RHPTeam",
-        "sub": userInfo._id,
-        "iat": new Date().getTime(),
-        "exp": new Date().setDate( new Date().getDate() + 1 )
-      },
-      process.env.APP_KEY )}; uid=${userInfo._id}; cfr=${adminRole.level}`;
+    // Sync with nested server
+    resSyncNestedServer = await signUpSync( `${optimalServer.info.domain}/api/v1/signup`, newUser.toObject() );
+    if ( resSyncNestedServer.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Quá trình đăng ký xảy ra vấn đề!" } );
+    }
 
-    res.set( "Cookie", header );
+    await newUser.save();
+
+    // Push account to server
+    optimalServer.userAmount.push( newUser._id );
+    optimalServer.slot = optimalServer.amountMax - optimalServer.userAmount.length;
+    optimalServer.save();
+
+    // Assign cookie to headers
+    cookie = `sid=${newUser}; uid=${newUser._id}; cfr=${memberRole.level}`;
+    res.set( "Cookie", cookie );
+
+    res.status( 201 ).json( jsonResponse( "success", {
+      "message": `${newUser.email} đăng ký thành công!`,
+      "domain": optimalServer.info.domain
+    } ) );
+  },
+  "signInByAdmin": async ( req, res ) => {
+    const { email } = req.body,
+      userInfo = await Account.findOne( { "email": email } ),
+      adminRole = await Role.findOne( { "_id": userInfo._role } ),
+      cookie = `sid=${ signToken( userInfo ) }; uid=${userInfo._id}; cfr=${adminRole.level}`;
+
+    res.set( "Cookie", cookie );
 
     res.status( 201 ).json( jsonResponse( "success", `${userInfo.email} đăng nhập thành công!` ) );
   },
@@ -188,46 +215,12 @@ module.exports = {
       "_role": adminRole._id
     } );
 
-    // Set cookie user
-    res.cookie( "sid", JWT.sign(
-      {
-        "iss": "RHPTeam",
-        "sub": newUser._id,
-        "iat": new Date().getTime(),
-        "exp": new Date().setDate( new Date().getDate() + 1 )
-      },
-      process.env.APP_KEY
-    ), {
-      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
-      "httpOnly": true, // The cookie only accessible by the web server
-      "secure": true
-    } );
-    res.cookie( "uid", newUser._id, {
-      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
-      "httpOnly": true, // The cookie only accessible by the web server
-      "secure": true
-    } );
-    res.cookie( "cfr", adminRole.level, {
-      "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
-      "httpOnly": true, // The cookie only accessible by the web server
-      "secure": true
-    } );
-
     // Save
     await newUser.save();
 
-    header = `sid=${JWT.sign(
-      {
-        "iss": "RHPTeam",
-        "sub": userInfo._id,
-        "iat": new Date().getTime(),
-        "exp": new Date().setDate( new Date().getDate() + 1 )
-      },
-      process.env.APP_KEY )}; uid=${newUser._id}; cfr=${adminRole.level}`;
+    header = `sid=${signToken( newUser )}; uid=${newUser._id}; cfr=${adminRole.level}`;
 
     res.set( "Cookie", header );
-
-    console.log( res );
 
     res.status( 201 ).json( jsonResponse( "success", `${newUser.email} đăng ký thành công!` ) );
   }
