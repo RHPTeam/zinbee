@@ -9,13 +9,8 @@
 
 const Help = require( "../../models/help/Help.model" );
 const BlogHelp = require( "../../models/help/Blog.model" );
-// eslint-disable-next-line no-unused-vars
-const HelpCategory = require( "../../models/help/category.model" );
-const Account = require( "../../models/Account.model" );
-
 
 const jsonResponse = require( "../../configs/response" );
-const secure = require( "../../helpers/secures/rcrypt" );
 
 module.exports = {
   /**
