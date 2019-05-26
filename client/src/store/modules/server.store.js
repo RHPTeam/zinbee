@@ -65,7 +65,7 @@ const actions = {
         domain: "",
         ip: "",
         cpu: "",
-        clientPort:null,
+        clientPort: null,
         serverPort: null,
         ram: null,
         card: "",
