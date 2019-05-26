@@ -15,12 +15,14 @@ const jsonResponse = require( "../../configs/response" );
 
 module.exports = {
   "index": async ( req, res ) => {
+    console.log( req.uid );
+
     let data;
 
     if ( req.query._id ) {
       data = await BlogHelp.findOne( { "_id": req.query._id } ).populate( { "path": "_account", "select": "_id name" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await BlogHelp.find( {} ).lean();
+      data = await BlogHelp.find( {} ).populate( { "path": "_account", "select": "_id name" } ).lean();
     }
 
     res
@@ -40,7 +42,7 @@ module.exports = {
       newBlog = await new BlogHelp( {
         "title": title,
         "content": content,
-        "_account": req.headers.uid
+        "_account": req.uid
       } );
 
     // Save
@@ -72,7 +74,7 @@ module.exports = {
       req.body.vote = req.body.vote.concat( blogInfo.vote );
     }
 
-    res.status( 200 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._id, { "$set": { "title": title, "content": content, "vote": req.body.vote, "_account": req.headers.uid } }, { "new": true } ) ) );
+    res.status( 200 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._id, { "$set": { "title": title, "content": content, "vote": req.body.vote, "_account": req.uid } }, { "new": true } ) ) );
   },
   "delete": async ( req, res ) => {
     const blogInfo = await BlogHelp.findOne( { "_id": req.query._id } ),

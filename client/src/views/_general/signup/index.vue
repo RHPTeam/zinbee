@@ -224,12 +224,17 @@
             </div>
             <div class="text--error">{{ errorText.confirmPassword }}</div>
             <div class="form--action action--register">
-              <button type="submit" class="btn btn--submit">
-                {{
+              <button
+                type="submit"
+                class="btn btn--submit"
+                @click="openPopupSelectServer"
+              >
+                <!-- {{
                   this.$store.getters.authStatus === "loading"
                     ? "Đang đăng ký..."
-                    : "Đăng ký"
-                }}
+                    : "Tiếp tục"
+                }} -->
+                Tiếp tục
               </button>
             </div>
           </form>

@@ -32,6 +32,11 @@ export default {
       }
     };
   },
+  computed: {
+    redirectDomain() {
+      return this.$store.getters.redirectDomain;
+    }
+  },
   methods: {
     async signIn() {
       const dataSender = {
@@ -39,28 +44,13 @@ export default {
         password: this.user.password
       };
 
-      await this.$store.dispatch( "signIn", dataSender );
+      await this.$store.dispatch( "signInByUser", dataSender );
       if (
-        parseInt(
-          SecureFunction.decodeRole( CookieFunction.getCookie( "cfr" ), 10 )
-        ) === 0
+        this.$store.getters.authStatus === "401" || this.$store.getters.authStatus === "405"
       ) {
-        if (
-          this.$store.getters.authStatus === "401" || this.$store.getters.authStatus === "405"
-        ) {
-          return;
-        }
-        this.$store.dispatch("getUserInfo" );
-        this.$router.push( "/welcome" );
-      } else if (
-        parseInt(
-          SecureFunction.decodeRole( CookieFunction.getCookie( "cfr" ), 10 )
-        ) === 1 || parseInt(
-          SecureFunction.decodeRole( CookieFunction.getCookie( "cfr" ), 10 )
-        ) === 2
-      ) {
-        this.$router.push( "/admin" );
+        return;
       }
+      window.location = `${this.redirectDomain}welcome`;
     }
   },
   watch: {

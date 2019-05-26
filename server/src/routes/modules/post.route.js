@@ -13,7 +13,7 @@ const multer = require( "multer" ),
   fs = require( "fs-extra" ),
   storage = multer.diskStorage( {
     "destination": ( req, file, cb ) => {
-      const path = `./uploads/post_facebook/person/${req.headers.uid}`;
+      const path = `./uploads/post_facebook/person/${req.uid}`;
 
       fs.mkdirsSync( path );
       cb( null, path );

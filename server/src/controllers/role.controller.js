@@ -26,9 +26,11 @@ module.exports = {
 
     res.status( 200 ).json( jsonResponse( "success", roleList ) );
   },
-  "sync": async ( _req, res ) => {
+  "sync": async ( req, res ) => {
+    console.log( req.body );
     const roleList = await Role.find( {} ).select( "_id level" ).lean();
 
+    console.log( roleList );
     if ( roleList.length === 0 ) {
       return res.send( { "status": "error", "message": "Không có quyền được thiết lập trên hệ thống!" } );
     }

@@ -81,14 +81,17 @@ export default {
           presenter: this.user.presenter
         };
       }
-      const resData = await this.$store.dispatch("signUp", dataSender);
+      await this.$store.dispatch("setSingUpByUser", dataSender);
       this.isShowServerMutipart = true;
 
-      if (resData === false) {
-        return;
-      }
+      // if (resData === false) {
+      //   return;
+      // }
       // this.$store.dispatch("getUserInfo" );
       // this.$router.push( "/welcome" );
+    },
+    openPopupSelectServer() {
+      this.isShowServerMutipart = true;
     }
   },
   watch: {

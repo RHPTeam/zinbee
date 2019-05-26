@@ -14,7 +14,7 @@
         <div
           class="body d_flex align_items_center justify_content_between mb_2"
         >
-          <div class="card position_realtive mb_2" @click="gotoServer(1)">
+          <div class="card position_realtive mb_2" @click="gotoServer(0)">
             <div
               class="earth item d_flex align_items_center justify_content_center position_absolute"
             >
@@ -39,7 +39,7 @@
             </div>
           </div>
 
-          <div class="card mb_2" @click="gotoServer(2)">
+          <div class="card mb_2" @click="gotoServer(1)">
             <div class="card_body">
               <div class="">
                 <div class="detail mb_3">
@@ -54,7 +54,7 @@
             </div>
           </div>
 
-          <div class="card mb_2" @click="gotoServer(3)">
+          <div class="card mb_2" @click="gotoServer(2)">
             <div class="card_body">
               <div class="">
                 <div class="detail mb_3">
@@ -96,19 +96,23 @@ export default {
       isShowButtonFinal: false
     };
   },
+  computed: {
+    userDefault() {
+      return this.$store.getters.userDefault;
+    },
+    redirectDomain() {
+      return this.$store.getters.redirectDomain;
+    }
+  },
   methods: {
     gotoServer(val) {
-      if (val === 1) {
-        // console.log("Miền bắc");
-      } else if (val === 2) {
-        // console.log("miền trung");
-      } else if (val === 3) {
-        // console.log("miền nam");
-      }
+      this.userDefault.region = val;
       this.isShowButtonFinal = true;
     },
-    redirectServer() {
+    async redirectServer() {
+      await this.$store.dispatch("signUpByUser", this.userDefault);
       this.$emit("closePopupServerMutipart", false);
+      window.location = `${this.redirectDomain}welcome`;
     }
   }
 };

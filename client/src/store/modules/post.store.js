@@ -3,7 +3,9 @@ import PostLibrariesServices from "@/services/modules/post.services";
 const state = {
   allPostLibraries: [],
   newPostLibraries: [],
-  postLibraries: [],
+  postLibraries: {
+    content: ""
+  },
   postSearch: [],
   statusLib: ""
 };
@@ -72,13 +74,18 @@ const actions = {
     commit("setAllPostLibraries", resultUpdate.data.data);
 
     commit("lib_success");
+
+    commit("setPostLibraries", { content: "" });
   },
-  updateAttachmentPostLibraries: async ({ commit }, payload) => {
+  updateAttachmentPostLibraries: async ({ commit, state }, payload) => {
+    await PostLibrariesServices.updatePost(payload.id, {
+      content: state.postLibraries.content
+    });
+
     await PostLibrariesServices.updateAttachmentPost(
       payload.id,
       payload.formData
     );
-
     const result = await PostLibrariesServices.getById(payload.id);
     commit("setPostLibraries", result.data.data);
 

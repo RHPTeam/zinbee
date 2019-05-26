@@ -9,6 +9,7 @@ import signupRouterAdmin from "./modules/admin/signup";
 /**
  * Router for Sytem Member
  */
+import userGeneralRouter from "./modules/user";
 import signInRouter from "./modules/user/signin";
 import signUpRouter from "./modules/user/signup";
 
@@ -18,6 +19,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     adminGeneralRouter,
+    userGeneralRouter,
     signinRouterAdmin,
     signupRouterAdmin,
     signInRouter,

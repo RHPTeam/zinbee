@@ -41,6 +41,29 @@
                     />
                   </div>
                 </div>
+
+                <div class="d_flex align_items_center justify_content_between">
+                  <div class="square form_group">
+                    <label>Local Port</label>
+                    <input
+                      type="text"
+                      placeholder="Nhập thông tin local ..."
+                      class="form_control"
+                      v-model="domainInfo.info.clientPort"
+                    />
+                  </div>
+
+                  <div class="square form_group">
+                    <label>Server Port</label>
+                    <input
+                      type="text"
+                      placeholder="Nhập thông tin server ..."
+                      class="form_control"
+                      v-model="domainInfo.info.serverPort"
+                    />
+                  </div>
+                </div>
+
                 <div class="d_flex align_items_center justify_content_between">
                   <div class="square form_group">
                     <label>Thông tin CPU</label>
