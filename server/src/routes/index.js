@@ -9,7 +9,7 @@ router.use( "/posts", auth, require( "./modules/post.route" ) );
 router.use( "/roles", require( "./modules/role.route" ) );
 router.use( "/signin", require( "./modules/signin.route" ) );
 router.use( "/signup", require( "./modules/signup.route" ) );
-router.use( "/users", auth, permission, require( "./modules/account.route" ) );
+router.use( "/users", require( "./modules/account.route" ) );
 
 // Help Route
 router.use( "/help", require( "./modules/help/help.route" ) );
