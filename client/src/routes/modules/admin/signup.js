@@ -1,5 +1,5 @@
 const signupRouterAdmin = {
-  path: "/signup",
+  path: "/admin/signup",
   component: require("@/views/admin/signup").default
 };
 

@@ -1,7 +1,7 @@
 <template>
   <div class="categories position_relative" :data-theme="currentTheme">
     <div class="top d_flex align_items_center mb_4">
-      <router-link tag="label" class="link" :to="{ name: 'admin_help'}">
+      <router-link tag="label" class="link" :to="{ name: 'admin_help' }">
         Quay lại
       </router-link>
       <label class="link" @click="isShowPopupCategories = true">
@@ -11,7 +11,12 @@
     <div class="desc mb_3">Danh sách các danh mục hiện có</div>
     <div class="body px_3 py_2">
       <div v-if="!allCategories"></div>
-      <div v-else class="item mb_1" v-for="(item, index) in allCategories" :key="`c-${index}`">
+      <div
+        v-else
+        class="item mb_1"
+        v-for="(item, index) in allCategories"
+        :key="`c-${index}`"
+      >
         <!--Start: categories dont parent-->
         <div class="d_flex align_items_center justify_content_between">
           <div class="left">{{ item.title }}</div>
@@ -42,12 +47,12 @@
         </div>
         <!--End: categories dont parent-->
         <!--Start: categories have parent-->
-<!--        <div v-if="item.parent === undefined || item.parent === ''"></div>-->
-<!--        <div v-else>-->
-<!--          <div class="children d_flex align_items_center pl_3" v-for="(child, index) in item.parent" :key="`i-${index}`">-->
-<!--            {{child.title}}-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--        <div v-if="item.parent === undefined || item.parent === ''"></div>-->
+        <!--        <div v-else>-->
+        <!--          <div class="children d_flex align_items_center pl_3" v-for="(child, index) in item.parent" :key="`i-${index}`">-->
+        <!--            {{child.title}}-->
+        <!--          </div>-->
+        <!--        </div>-->
         <!--End: categories have parent-->
       </div>
     </div>
@@ -78,7 +83,7 @@ export default {
     allCategories() {
       return this.$store.getters.allCategories;
     },
-    currentTheme(){
+    currentTheme() {
       return this.$store.getters.themeName;
     }
   },
@@ -91,7 +96,7 @@ export default {
     deleteCategories(val) {
       this.$store.dispatch("deleteCategories", val);
     }
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -119,7 +124,7 @@ export default {
   }
   .body {
     border: 1px solid #e4e4e4;
-    border-radius: .625rem;
+    border-radius: 0.625rem;
     .item {
       border-bottom: 1px solid #e4e4e4;
       cursor: pointer;

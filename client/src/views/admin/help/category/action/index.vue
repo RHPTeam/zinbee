@@ -52,7 +52,11 @@
               >
                 Tạo mới
               </button>
-              <button v-else class="btn btn_primary form_control d_none" @click="updateCategories">
+              <button
+                v-else
+                class="btn btn_primary form_control d_none"
+                @click="updateCategories"
+              >
                 Cập nhật
               </button>
             </div>
@@ -90,7 +94,7 @@ export default {
     createNewCategories() {
       this.$store.dispatch("createNewCategories", this.categories);
     },
-    updateCategories(){
+    updateCategories() {
       this.$store.dispatch("updateCategories", this.categories);
       this.$emit("backDefault", true);
       this.close();

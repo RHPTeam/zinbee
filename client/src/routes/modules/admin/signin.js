@@ -1,5 +1,5 @@
 const signinRouterAdmin = {
-  path: "/login",
+  path: "/admin/login",
   component: require("@/views/admin/signin").default
 };
 
