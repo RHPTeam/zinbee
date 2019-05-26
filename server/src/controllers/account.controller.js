@@ -31,7 +31,7 @@ module.exports = {
     let data;
 
     if ( req.query._id ) {
-      data = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).lean();
+      data = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await Account.find( {} ).select( "-password" ).lean();
     } else {
@@ -200,19 +200,16 @@ module.exports = {
     ), {
       "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
       "httpOnly": true, // The cookie only accessible by the web server
-      "signed": true, // Indicates if the cookie should be signed
       "secure": true
     } );
     res.cookie( "uid", newUser._id, {
       "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
       "httpOnly": true, // The cookie only accessible by the web server
-      "signed": true, // Indicates if the cookie should be signed
       "secure": true
     } );
     res.cookie( "cfr", adminRole.level, {
       "maxAge": 1000 * 60 * 60 * 24, // would expire after 1 days
       "httpOnly": true, // The cookie only accessible by the web server
-      "signed": true, // Indicates if the cookie should be signed
       "secure": true
     } );
 
@@ -226,7 +223,7 @@ module.exports = {
         "iat": new Date().getTime(),
         "exp": new Date().setDate( new Date().getDate() + 1 )
       },
-      process.env.APP_KEY )}; uid=${userInfo._id}; cfr=${adminRole.level}`;
+      process.env.APP_KEY )}; uid=${newUser._id}; cfr=${adminRole.level}`;
 
     res.set( "Cookie", header );
 

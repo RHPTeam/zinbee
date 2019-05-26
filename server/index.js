@@ -1,4 +1,5 @@
 const bodyParser = require( "body-parser" );
+const fs = require( "fs" );
 const cors = require( "cors" );
 const http = require( "http" );
 const https = require( "https" );
@@ -38,7 +39,7 @@ app.set( "port", process.env.PORT_BASE );
 app.use( cors( {
   "origin": "*",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "allowedHeaders": [ "Content-Type", "Authorization" ],
+  "allowedHeaders": [ "Content-Type", "Authorization", "cfr", "uid" ],
   "exposedHeaders": [ "Cookie" ] } ) );
 app.use( bodyParser.json( { "limit": "500MB", "extended": true } ) );
 app.use( bodyParser.urlencoded( { "limit": "500MB", "extended": true } ) );

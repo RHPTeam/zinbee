@@ -7,20 +7,24 @@
  */
 import AccountServices from "@/services/modules/account.services";
 
-// import CookieFunction from "@/utils/functions/cookie";
-// import axios from "axios";
+import CookieFunction from "@/utils/functions/string";
+import LocalStorageFunction from "@/utils/functions/cookie";
+import axios from "axios";
 
 const state = {
   allUser: [],
   userInfo: [],
   authError: "",
-  authStatus: ""
+  authStatus: "",
+  roles: []
 };
 const getters = {
   allUser: state => state.allUser,
   authError: state => state.authError,
   authStatus: state => state.authStatus,
-  userInfo: state => state.userInfo
+  userInfo: state => state.userInfo,
+  roles: state => state.roles,
+  token: state => state.token
 };
 const mutations = {
   auth_request: state => {
@@ -37,29 +41,44 @@ const mutations = {
   },
   setUserById: (state, payload) => {
     state.userInfo = payload;
+  },
+  setRoles: (state, payload) => {
+    state.roles = payload;
   }
 };
 const actions = {
   signUp: async ({ commit }, payload) => {
     try {
       commit("auth_request");
-      await AccountServices.signUp(payload);
+      const resData = await AccountServices.signUp(payload);
 
-      // CookieFunction.setCookie( "sid", resData.data.data.token, 1 );
-      // CookieFunction.setCookie( "uid", resData.data.data._id );
-      // CookieFunction.setCookie( "cfr", resData.data.data.role );
-      //
-      // // remove localStorage
-      // localStorage.removeItem( "rid" );
-      //
-      // // set Authorization
-      // axios.defaults.headers.common.Authorization = resData.data.data.token;
-      // const sendDataToMutation = {
-      //   token: resData.data.data.token,
-      //   user: resData.data.data.user
-      // };
-      //
-      // commit( "auth_success", sendDataToMutation );
+      const newSid = CookieFunction.findSubString(
+        resData.headers.cookie,
+        "sid=",
+        ";"
+      );
+
+      const newUid = CookieFunction.findSubString(
+        resData.headers.cookie,
+        "uid=",
+        ";"
+      );
+
+      const newCfr = CookieFunction.findSubString(
+        resData.headers.cookie,
+        "cfr=",
+        ""
+      );
+
+      LocalStorageFunction.setCookie("sid", newSid, 1);
+      LocalStorageFunction.setCookie("uid", newUid);
+      LocalStorageFunction.setCookie("cfr", newCfr);
+
+      // remove localStorage
+      // localStorage.removeItem("rid");
+
+      axios.defaults.headers.common.Authorization = newSid;
+      commit("auth_success");
     } catch (e) {
       if (e.response.status === 403) {
         commit("auth_error", e.response.data);
@@ -69,22 +88,35 @@ const actions = {
   signIn: async ({ commit }, payload) => {
     try {
       commit("auth_request");
-      const response = await AccountServices.signIn(payload);
-      // console.log(resData);
-      // CookieFunction.setCookie( "sid", resData.data.data.token, 1 );
-      // CookieFunction.setCookie( "uid", resData.data.data.user._id );
-      // CookieFunction.setCookie( "cfr", resData.data.data.role );
-      //
-      // // remove localStorage
-      // localStorage.removeItem( "rid" );
-      //
-      // axios.defaults.headers.common.Authorization = resData.data.data.token;
-      // const sendDataToMutation = {
-      //   token: resData.data.data.token,
-      //   user: resData.data.data.user
-      // };
-      //
-      // commit( "auth_success", sendDataToMutation );
+      const resData = await AccountServices.signIn(payload);
+
+      const newSid = CookieFunction.findSubString(
+        resData.headers.cookie,
+        "sid=",
+        ";"
+      );
+
+      const newUid = CookieFunction.findSubString(
+        resData.headers.cookie,
+        "uid=",
+        ";"
+      );
+
+      const newCfr = CookieFunction.findSubString(
+        resData.headers.cookie,
+        "cfr=",
+        ""
+      );
+
+      LocalStorageFunction.setCookie("sid", newSid, 1);
+      LocalStorageFunction.setCookie("uid", newUid);
+      LocalStorageFunction.setCookie("cfr", newCfr);
+
+      // remove localStorage
+      // localStorage.removeItem("rid");
+
+      axios.defaults.headers.common.Authorization = newSid;
+
       commit("auth_success");
     } catch (e) {
       if (e.response.status === 401) {
@@ -92,20 +124,43 @@ const actions = {
       }
     }
   },
+  logOut: async ({ commit }) => {
+    commit("auth_request");
+    // remove cookie
+    LocalStorageFunction.removeCookie("sid");
+    LocalStorageFunction.removeCookie("uid");
+    LocalStorageFunction.removeCookie("cfr");
+    // remove localstorage
+    // localStorage.removeItem( "rid" );
+    // delete token on headers
+    delete axios.defaults.headers.common.Authorization;
+    commit("auth_success");
+  },
   set_error: async ({ commit }, payload) => {
     commit("auth_error", payload);
   },
-  getAllAccountAdmin: async ({ commit }) => {
+  getAllUserAdmin: async ({ commit }) => {
     commit("auth_request");
     const result = await AccountServices.getAllUser();
     commit("setAllUser", result.data.data);
     commit("auth_success");
   },
-  getAllAccountAdminById: async ({ commit }, payload) => {
+  getUserAdminById: async ({ commit }, payload) => {
     commit("auth_request");
     const result = await AccountServices.getUserById(payload);
     commit("setUserById", result.data.data);
     commit("auth_success");
+  },
+  getUserInfo: async ({ commit }) => {
+    commit("auth_request");
+    const dataSender = LocalStorageFunction.getCookie("uid");
+    const userInfoRes = await AccountServices.getUserById(dataSender);
+    commit("setUserById", userInfoRes.data.data);
+    commit("auth_success");
+  },
+  getRoles: async ({ commit }) => {
+    const result = await AccountServices.getRole();
+    commit("setRoles", result.data.data);
   }
 };
 

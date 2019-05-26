@@ -12,8 +12,8 @@
           <div class="flex-table header" role="rowgroup">
             <div class="flex-row first" role="columnheader">Tên</div>
             <div class="flex-row" role="columnheader">Cụm</div>
-            <div class="flex-row" role="columnheader">Số lượng hiện tại</div>
             <div class="flex-row" role="columnheader">Số lượng max</div>
+            <div class="flex-row" role="columnheader">Số lượng hiện tại</div>
             <div class="flex-row" role="columnheader">Hành động</div>
           </div>
           <div v-if="!domain"></div>
