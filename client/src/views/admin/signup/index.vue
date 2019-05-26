@@ -107,7 +107,7 @@ export default {
         code: this.user.code
       };
       await this.$store.dispatch("signUp", dataSender);
-      this.$router.push("/admin");
+      this.$router.push({ name: "admin_dashboard" });
     }
   }
 };
