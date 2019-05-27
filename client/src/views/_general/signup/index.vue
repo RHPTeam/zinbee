@@ -30,21 +30,21 @@
             <!-- Start: Alert -->
             <app-alert
               :type="
-                this.$store.getters.authStatus === 'error' ? 'alert_danger' : ''
+                this.$store.getters.authError === '403' ? 'alert_danger' : ''
               "
               :message="
-                this.$store.getters.authStatus === 'error'
-                  ? this.$store.getters.textAuth
+                this.$store.getters.authError === '403'
+                  ? 'Số điện thoại hoặc email đã tồn tại'
                   : ''
               "
             ></app-alert>
             <app-alert
               :type="
-                this.$store.getters.textAuth === '404' ? 'alert_danger' : ''
+                this.$store.getters.authError === '404' ? 'alert_danger' : ''
               "
               :message="
-                this.$store.getters.textAuth === '404'
-                  ? 'Số điện thoại hoặc email đã tồn tại'
+                this.$store.getters.authError === '404'
+                  ? 'Đã xảy ra lỗi trong quá trình đăng ký vui lòng thử lại'
                   : ''
               "
             ></app-alert>
@@ -229,11 +229,6 @@
                 class="btn btn--submit"
                 @click="openPopupSelectServer"
               >
-                <!-- {{
-                  this.$store.getters.authStatus === "loading"
-                    ? "Đang đăng ký..."
-                    : "Tiếp tục"
-                }} -->
                 Tiếp tục
               </button>
             </div>

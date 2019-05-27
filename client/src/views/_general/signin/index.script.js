@@ -46,7 +46,7 @@ export default {
 
       await this.$store.dispatch( "signInByUser", dataSender );
       if (
-        this.$store.getters.authStatus === "401" || this.$store.getters.authStatus === "405"
+        this.$store.getters.authError === "401" || this.$store.getters.authError === "405"
       ) {
         return;
       }
