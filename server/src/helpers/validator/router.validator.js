@@ -84,8 +84,9 @@ module.exports = {
         .label( "Số điện thoại phải lớn hơn 9 số!" ),
       "presenter": Joi.string()
         .max( 30 )
-        .label( "Mã giới thiệu tối đa 30 ký tự!" ),
-      "ip": Joi.object().allow( null )
+        .label( "Mã giới thiệu tối đa 30 ký tự!" ).allow( null ),
+      "ip": Joi.object().allow( null ),
+      "region": Joi.number().allow( null )
     } )
   }
 };

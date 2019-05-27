@@ -45,6 +45,8 @@ module.exports = {
       return res.status( 403 ).json( { "status": "fail", "info": "Cấu hình vps không được bỏ trống!" } );
     }
 
+    req.body.slot = req.body.amountMax;
+
     const newServer = new Server( req.body );
 
     await newServer.save();

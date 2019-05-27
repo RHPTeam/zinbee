@@ -112,9 +112,6 @@ const actions = {
       LocalStorageFunction.setCookie("uid", newUid);
       LocalStorageFunction.setCookie("cfr", newCfr);
 
-      // remove localStorage
-      // localStorage.removeItem("rid");
-
       axios.defaults.headers.common.Authorization = newSid;
 
       commit("auth_success");

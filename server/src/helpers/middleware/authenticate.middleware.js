@@ -19,9 +19,9 @@ module.exports = ( req, res, next ) => {
         .status( 405 )
         .json( { "status": "error", "message": "Cookie không đúng!" } );
     }
-    const email = decoded.sub;
+    const id = decoded.sub;
 
-    return Account.findOne( { "email": email }, ( userErr, user ) => {
+    return Account.findOne( { "_id": id }, ( userErr, user ) => {
       if ( userErr || !user ) {
         return res
           .status( 405 )

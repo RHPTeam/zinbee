@@ -26,6 +26,7 @@ const mongoose = require( "mongoose" ),
       "type": Schema.Types.ObjectId,
       "ref": "Account"
     } ],
+    "slot": Number,
     "amountMax": Number,
     "status": Boolean,
     "created_at": {
