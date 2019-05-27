@@ -225,5 +225,25 @@ module.exports = {
     res.set( "Cookie", header );
 
     res.status( 201 ).json( jsonResponse( "success", `${newUser.email} đăng ký thành công!` ) );
+  },
+  "updateSync": async ( req, res ) => {
+    const { info, id } = req.body,
+      userInfo = await Account.findOne( { "_id": id } );
+    
+    if ( !userInfo ) {
+      res.send( { "status": "error", "message": "Tài không được đồng bộ trên server!" } );
+    }
+
+    let data = await Account.findByIdAndUpdate(
+      userInfo._id,
+      {
+        "$set": info
+      },
+      {
+        "new": true
+      }
+    ).select( "-password -__v" );
+
+    res.send( { "status": "success", "data": data } );
   }
 };
