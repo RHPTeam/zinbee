@@ -16,7 +16,9 @@ router
 router.route( "/sync" ).patch( auth, AccountController.updateSync );
 
 router.route( "/status" ).post( auth, permission, AccountController.changeStatus );
+router.route( "/new-password" ).post( auth, AccountController.createNewPasswordSync );
 router.route( "/renew/id" ).post( auth, permission, AccountController.renewById );
 router.route( "/renew/code" ).post( auth, permission, AccountController.renewByCode );
+router.route( "/change-password/sync" ).patch( auth, AccountController.changePasswordSync );
 
 module.exports = router;
