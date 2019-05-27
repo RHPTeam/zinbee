@@ -112,6 +112,12 @@ export default {
     async redirectServer() {
       await this.$store.dispatch("signUpByUser", this.userDefault);
       this.$emit("closePopupServerMutipart", false);
+      if (
+        this.$store.getters.authError === "403" ||
+        this.$store.getters.authError === "404"
+      ) {
+        return;
+      }
       window.location = `${this.redirectDomain}welcome`;
     }
   }

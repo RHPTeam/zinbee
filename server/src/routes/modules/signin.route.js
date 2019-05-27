@@ -10,7 +10,7 @@ const AccountController = require( "../../controllers/Account.controller" );
 
 router
   .route( "/" )
-  .post( AccountController.signIn );
+  .post( passport.authenticate( "local", { "session": false } ), AccountController.signIn );
 
 router
   .route( "/bz" )
