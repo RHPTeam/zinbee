@@ -5,19 +5,6 @@
       <div>
         <div class="form_group">
           <label>Nội dung</label>
-          <!--          <div v-if="postLibraries.content === undefined">-->
-          <!--            <div class="py_3 px_2" v-if="showOptionUpdateContent === false" @click="showOptionUpdateContent = true">Bài viết chưa có nội dung</div>-->
-          <!--            <div v-if="showOptionUpdateContent === true">-->
-          <!--              <contenteditable-->
-          <!--                tag="div"-->
-          <!--                class="description px_3 py_2"-->
-          <!--                :contenteditable="true"-->
-          <!--                :noHTML="false"-->
-          <!--                v-model="content"-->
-          <!--                placeholder="Cập nhật nội dung bài viết"-->
-          <!--              />-->
-          <!--            </div>-->
-          <!--          </div>-->
           <div>
             <contenteditable
               tag="div"
@@ -108,15 +95,6 @@ export default {
       return this.$store.getters.postLibraries;
     }
   },
-  watch: {
-    "postLibraries.content"() {
-      const dataSender = {
-        postId: this.$route.params.id,
-        content: this.postLibraries
-      };
-      this.$store.dispatch("updatePostLibraries", dataSender);
-    }
-  },
   methods: {
     deleteItemAttachments(val) {
       const objSender = {
@@ -131,8 +109,6 @@ export default {
         content: this.postLibraries
       };
       this.$store.dispatch("updatePostLibraries", dataSender);
-      // this.content = "";
-      // this.files = "";
       this.$router.push("/admin/libraries");
     },
     // Select file images
@@ -151,6 +127,7 @@ export default {
         formData: formData
       };
       this.$store.dispatch("updateAttachmentPostLibraries", objSender);
+      this.files = "";
     }
   }
 };

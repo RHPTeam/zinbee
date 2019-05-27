@@ -12,6 +12,12 @@ export default {
       }
     });
   },
+  signInByUser(user) {
+    return Api().post("/signin", user);
+  },
+  signUpByUser(user) {
+    return Api().post("/signup", user);
+  },
   getAllUser() {
     return Api().get("users");
   },

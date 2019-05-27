@@ -16,7 +16,8 @@ const Help = require( "../models/help/Help.model" );
       { "level": "Member" }
     ];
 
-    Role.insertMany( arr );
+    await Role.insertMany( arr );
+    console.log( "Create role successfully!" );
   }
 
   // Check Help First Time Server running

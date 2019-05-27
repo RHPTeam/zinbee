@@ -12,7 +12,7 @@ const getters = {
   categories: state => state.categories,
   helpStatus: state => state.helpStatus,
   allBlog: state => state.allBlog,
-  blog: state => state.blog,
+  blog: state => state.blog
 };
 const mutations = {
   help_request: state => {

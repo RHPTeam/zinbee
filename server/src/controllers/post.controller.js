@@ -13,7 +13,7 @@ const dictionary = require( "../configs/dictionaries" );
 
 module.exports = {
   "create": async ( req, res ) => {
-    const newPostFacebook = new PostFacebook( { "title": dictionary.DEFAULT_NAME_POST, "_account": req.headers.uid } );
+    const newPostFacebook = new PostFacebook( { "title": dictionary.DEFAULT_NAME_POST, "_account": req.uid } );
 
     await newPostFacebook.save();
     res.status( 200 ).json( jsonResponse( "success", newPostFacebook ) );

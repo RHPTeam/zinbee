@@ -1,0 +1,186 @@
+.main {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Open Sans", sans-serif;
+  .main--above {
+    background-color: #13120b;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    opacity: .9;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+  .main--form {
+    background-color: #ffffff;
+    form {
+      width: 100%;
+    }
+    .form--wrap {
+      height: 100%;
+      min-height: 100vh;
+      width: 300px;
+    }
+    .header--logo {
+      margin-bottom: 3.5rem;
+      margin-left: -24px;
+    }
+    h3.title {
+      color: #666666;
+      font-size: 1.75rem;
+      font-weight: bold;
+      font-family: "Open Sans", sans-serif;
+      margin-bottom: 1.75rem;
+    }
+    .forgot--pass {
+      color: #8a8a8a;
+      font-size: .8rem;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33;
+      letter-spacing: normal;
+      margin-top: 5px;
+      text-align: left;
+      width: 300px;
+    }
+  }
+  .form_group {
+    input {
+      border-radius: .625rem;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      font-size: .95rem;
+      outline: none;
+      padding: 10px 15px 10px 46px;
+      transition: all 0.4s ease;
+      width: 100%;
+      &:focus {
+        border-color: #ffb94a;
+      }
+    }
+    ::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #ccc;
+      opacity: 1;
+      /* Firefox */
+    }
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: #ccc;
+    }
+    ::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: #ccc;
+    }
+    .icon {
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      svg {
+          color: #999;
+      }
+    }
+    .ic--security {
+      svg {
+        stroke: #999;
+        stroke-width: .5;
+        vertical-align: text-bottom;
+      }
+    }
+    .network {
+      font-size: .75rem;
+      padding: 0 6px;
+      right: 10px;
+      text-transform: uppercase;
+      top: 12px;
+      &.viettel {
+        border: 1px solid #008c88;
+        color: #008c88;
+      }
+      &.vina {
+        border: 1px solid #008ed6;
+        color: #008ed6;
+      }
+      &.mobi {
+        border: 1px solid #e61a23;
+        color: #e61a23;
+      }
+      &.vietnammb {
+        border: 1px solid #ea8303;
+        color: #ea8303;
+      }
+      &.gmb {
+        border: 1px solid #f6c60c;
+        color: #f6c60c;
+      }
+    }
+    &.errors {
+      input, .error--text {
+        border: 1px solid red;
+        color: red;
+      }
+      .error--text {
+        border: 0;
+      }
+    }
+    &.passed {
+      input, .error--text {
+        border: 1px solid #42b983;
+        color: #42b983
+      }
+      .error--text {
+        border: 0;
+      }
+    }
+  }
+  .form--action {
+    margin: 1rem 0 1.25rem 0;
+    .btn--submit {
+      background-color: #ffb94a;
+      border: 1px solid #ffb94a;
+      border-radius: .625rem;
+      box-shadow: none;
+      color: #f7f7f7;
+      font-size: .95rem;
+      font-weight: 600;
+      height: 46px;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+      width: 100%;
+      &:hover {
+        background-color: #fff;
+        color: #ffb94a;
+      }
+    }
+    &.action--register {
+      margin-top: 2rem !important;
+    }
+  }
+  .form--footer {
+    width: 100%;
+    .form--footer-note {
+      color: #8a8a8a;
+      font-size: .8rem;
+      line-height: 1.33;
+    }
+    a {
+      color: #57a4f1;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      // border-bottom: 1px solid transparent;
+      // &:hover {
+      //     border-color: #57a4f1;
+      // }
+    }
+  }
+  .text--error {
+    color: red;
+    font-size: .8rem;
+    margin-bottom: .625rem;
+    margin-top: -10px;
+    text-align: left;
+  }
+}

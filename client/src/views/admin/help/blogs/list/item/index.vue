@@ -5,12 +5,12 @@
     <!--    </div>-->
     <div class="flex-table row" role="rowgroup">
       <div class="flex-row first" role="cell">
-        <div>{{item.title}}</div>
+        <div>{{ item.title }}</div>
       </div>
       <div class="flex-row" role="cell">
         <div v-html="item.content"></div>
       </div>
-      <div class="flex-row" role="cell">{{item._account.name}}</div>
+      <div class="flex-row" role="cell">{{ item._account.name }}</div>
       <div class="flex-row" role="cell">
         <div class="d_flex justify_content_center">
           <button class="btn btn_warning" @click="showBlogById">
