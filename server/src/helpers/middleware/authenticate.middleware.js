@@ -1,5 +1,6 @@
 const jwt = require( "jsonwebtoken" );
 const Account = require( "../../models/Account.model" );
+const { findSubString } = require( "../utils/functions/string" );
 
 /**
  *  The Auth Checker middleware function.
@@ -11,7 +12,7 @@ module.exports = ( req, res, next ) => {
       .status( 405 )
       .json( { "status": "error", "message": "Vui lòng cung cấp cookie!" } );
   }
-  const token = req.headers.authorization;
+  const token = findSubString( req.headers.authorization, "sid=", ";" );
 
   return jwt.verify( token, process.env.APP_KEY, ( err, decoded ) => {
     if ( err ) {

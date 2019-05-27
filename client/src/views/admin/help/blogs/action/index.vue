@@ -1,20 +1,33 @@
 <template>
   <div class="action">
-    <router-link tag="label" class="top" :to="{name: 'blogs'}">
+    <router-link tag="label" class="top" :to="{ name: 'blogs' }">
       Quay lại
     </router-link>
     <div class="body">
       <div class="form_group">
         <label>Tên bài viết</label>
-        <input type="text" placeholder="Nhập tên bài viết ..." class="form_control"  v-model="blog.title" />
+        <input
+          type="text"
+          placeholder="Nhập tên bài viết ..."
+          class="form_control"
+          v-model="blog.title"
+        />
       </div>
       <div class="form_group">
         <label>Nội dung bài viết</label>
         <quill-editor ref="myQuillEditor" v-model="blog.content" />
       </div>
       <div class="form_group">
-        <button v-if="this.$route.params.id === undefined" class="btn btn_primary form_control" @click="createNewBlog">Tạo mới</button>
-        <button v-else class="btn btn_primary form_control" @click="updateBlog">Cập nhật</button>
+        <button
+          v-if="this.$route.params.id === undefined"
+          class="btn btn_primary form_control"
+          @click="createNewBlog"
+        >
+          Tạo mới
+        </button>
+        <button v-else class="btn btn_primary form_control" @click="updateBlog">
+          Cập nhật
+        </button>
       </div>
     </div>
   </div>
@@ -44,11 +57,11 @@ export default {
   methods: {
     createNewBlog() {
       this.$store.dispatch("createNewBlog", this.blog);
-      this.$router.push({ name: 'blogs' });
+      this.$router.push({ name: "blogs" });
     },
-    updateBlog(){
+    updateBlog() {
       this.$store.dispatch("updateBlog", this.blog);
-      this.$router.push({ name: 'blogs' });
+      this.$router.push({ name: "blogs" });
     }
   }
 };
@@ -64,7 +77,7 @@ export default {
   .body {
     .multi {
       border: 1px solid #e4e4e4;
-      border-radius: .625rem;
+      border-radius: 0.625rem;
     }
   }
 }

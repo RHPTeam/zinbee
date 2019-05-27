@@ -112,7 +112,7 @@ module.exports = {
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${userInfo.email} đăng nhập thành công!`,
-      "domain": serverContainUser.info.domain
+      "domain": `${serverContainUser.info.domain}:${serverContainUser.info.clientPort}/#/`
     } ) );
   },
   "signUp": async ( req, res ) => {
@@ -136,12 +136,13 @@ module.exports = {
       phone,
       presenter,
       password,
+      "status": 1,
       "expireDate": new Date().setDate( new Date().getDate() + 3 ),
       "_role": memberRole._id
     } );
 
     // Sync with nested server
-    resSyncNestedServer = await signUpSync( `${optimalServer.info.domain}/api/v1/signup`, newUser.toObject() );
+    resSyncNestedServer = await signUpSync( `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup`, newUser.toObject() );
     if ( resSyncNestedServer.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Quá trình đăng ký xảy ra vấn đề!" } );
     }
@@ -154,12 +155,12 @@ module.exports = {
     optimalServer.save();
 
     // Assign cookie to headers
-    cookie = `sid=${newUser}; uid=${newUser._id}; cfr=${memberRole.level}`;
+    cookie = `sid=${signToken( newUser )}; uid=${newUser._id}; cfr=${memberRole.level}`;
     res.set( "Cookie", cookie );
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${newUser.email} đăng ký thành công!`,
-      "domain": optimalServer.info.domain
+      "domain": `${optimalServer.info.domain}:${optimalServer.info.clientPort}/#/`
     } ) );
   },
   "signInByAdmin": async ( req, res ) => {
@@ -212,6 +213,7 @@ module.exports = {
       "email": email,
       "phone": phone,
       "password": password,
+      "status": 1,
       "_role": adminRole._id
     } );
 
@@ -223,5 +225,25 @@ module.exports = {
     res.set( "Cookie", header );
 
     res.status( 201 ).json( jsonResponse( "success", `${newUser.email} đăng ký thành công!` ) );
+  },
+  "updateSync": async ( req, res ) => {
+    const { info, id } = req.body,
+      userInfo = await Account.findOne( { "_id": id } );
+    
+    if ( !userInfo ) {
+      res.send( { "status": "error", "message": "Tài không được đồng bộ trên server!" } );
+    }
+
+    let data = await Account.findByIdAndUpdate(
+      userInfo._id,
+      {
+        "$set": info
+      },
+      {
+        "new": true
+      }
+    ).select( "-password -__v" );
+
+    res.send( { "status": "success", "data": data } );
   }
 };

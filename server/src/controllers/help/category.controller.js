@@ -18,6 +18,14 @@ module.exports = {
 
     if ( req.query._id ) {
       data = await HelpCategory.findOne( { "_id": req.query._id } ).lean();
+      if ( data.parent !== "" ) {
+        const parentInfo = await HelpCategory.findOne( { "_id": data.parent } );
+
+        data.parent = {
+          "_id": parentInfo._id,
+          "title": parentInfo.title
+        };
+      }
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await HelpCategory.find( {} ).lean();
     }
@@ -55,7 +63,7 @@ module.exports = {
       "title": title,
       "level": req.body.level,
       "parent": parent !== undefined && parent !== "" ? parent : "",
-      "_account": req.headers.uid
+      "_account": req.uid
     } );
 
     // Save mongodb
@@ -91,7 +99,7 @@ module.exports = {
     }
 
     // Assign new admin
-    categoryInfo._account = req.headers.uid;
+    categoryInfo._account = req.uid;
 
     res.status( 201 ).json( jsonResponse( "success", await HelpCategory.findByIdAndUpdate( req.query._id, { "$set": categoryInfo }, { "new": true } ) ) );
 

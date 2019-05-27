@@ -31,7 +31,7 @@ export default {
     Item
   },
   computed: {
-    allBlog(){
+    allBlog() {
       return this.$store.getters.allBlog;
     }
   }

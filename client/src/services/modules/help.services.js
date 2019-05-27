@@ -8,16 +8,16 @@ export default {
   createCategories(data) {
     return Api().post("help/categories", data);
   },
-  getAllCategories(){
+  getAllCategories() {
     return Api().get("help/categories");
   },
-  getCategoriesById(id){
+  getCategoriesById(id) {
     return Api().get(`help/categories?_id=${id}`);
   },
-  updateCategories(id, data){
+  updateCategories(id, data) {
     return Api().patch(`help/categories?_id=${id}`, data);
   },
-  deleteCategories(id){
+  deleteCategories(id) {
     return Api().delete(`help/categories?_id=${id}`);
   },
   /**
@@ -36,7 +36,7 @@ export default {
   updateBlog(id, content) {
     return Api().patch(`help/posts?_id=${id}`, content);
   },
-  deleteBlog(id){
+  deleteBlog(id) {
     return Api().delete(`help/posts?_id=${id}`);
   }
 };

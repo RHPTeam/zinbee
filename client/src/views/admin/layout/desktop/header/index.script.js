@@ -59,7 +59,7 @@ export default {
   methods: {
     async logOut() {
       await this.$store.dispatch( "logOut" );
-      this.$router.push( "/login" );
+      this.$router.push({name: "admin_signin"});
     },
     toogleSidebar() {
       this.statusCollapse = !this.statusCollapse;

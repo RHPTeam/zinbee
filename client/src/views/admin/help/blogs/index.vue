@@ -1,10 +1,8 @@
 <template>
   <div class="help">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
-export default {
-
-};
+export default {};
 </script>

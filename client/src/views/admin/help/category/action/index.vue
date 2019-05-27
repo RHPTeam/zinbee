@@ -40,20 +40,25 @@
                   label="title"
                   placeholder="Chọn danh mục cha ..."
                   :options="allCategories"
-                  v-model="categories.parent"
+                  @input="updateParent"
+                  :value="categories.parent.title"
                 />
               </div>
             </div>
             <div class="form_group">
               <button
-                v-if="isDefault === true"
+                v-if="categories._id"
+                class="btn btn_primary form_control"
+                @click="updateCategories"
+              >
+                Cập nhật
+              </button>
+              <button
+                v-else
                 class="btn btn_primary form_control"
                 @click="createNewCategories"
               >
                 Tạo mới
-              </button>
-              <button v-else class="btn btn_primary form_control d_none" @click="updateCategories">
-                Cập nhật
               </button>
             </div>
           </form>
@@ -90,10 +95,13 @@ export default {
     createNewCategories() {
       this.$store.dispatch("createNewCategories", this.categories);
     },
-    updateCategories(){
+    updateCategories() {
       this.$store.dispatch("updateCategories", this.categories);
       this.$emit("backDefault", true);
       this.close();
+    },
+    updateParent(val) {
+      this.categories.parent = val._id;
     }
   }
 };
