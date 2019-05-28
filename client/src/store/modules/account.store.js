@@ -252,12 +252,12 @@ const actions = {
     const result = await AccountServices.getRole();
     commit("setRoles", result.data.data);
   },
-  sendFile: async ( { commit }, payload ) => {
-    commit( "setFileAvatar", payload );
-    const result = await AccountServices.upload( payload );
+  sendFile: async ({ commit }, payload) => {
+    commit("setFileAvatar", payload);
+    const result = await AccountServices.upload(payload);
 
-    commit( "user_set", result.data.data );
-  },
+    commit("user_set", result.data.data);
+  }
 };
 
 export default {
