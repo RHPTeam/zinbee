@@ -258,7 +258,7 @@ module.exports = {
   "updateSync": async ( req, res ) => {
     const { info, id } = req.body,
       userInfo = await Account.findOne( { "_id": id } );
-    
+
     if ( !userInfo ) {
       res.send( { "status": "error", "message": "Tài không được đồng bộ trên server!" } );
     }

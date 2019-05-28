@@ -55,7 +55,6 @@ export default {
       )}; uid=${CookieFunction.getCookie("uid")}; cfr=${CookieFunction.getCookie(
         "cfr"
       )}`;
-      
       window.location = `${this.redirectDomain}redirect?authorization=${encodeURIComponent(token)}`;
     }
   },
