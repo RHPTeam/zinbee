@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 export default {
-  setCookie( name, value, exp ) {
+  setCookie( name, value, exp = 3 ) {
     const d = new Date();
 
     let expires;

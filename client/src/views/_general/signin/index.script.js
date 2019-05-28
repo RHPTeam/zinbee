@@ -50,7 +50,13 @@ export default {
       ) {
         return;
       }
-      window.location = `${this.redirectDomain}welcome`;
+      const token = `sid=${CookieFunction.getCookie(
+        "sid"
+      )}; uid=${CookieFunction.getCookie("uid")}; cfr=${CookieFunction.getCookie(
+        "cfr"
+      )}`;
+      
+      window.location = `${this.redirectDomain}redirect?authorization=${encodeURIComponent(token)}`;
     }
   },
   watch: {
