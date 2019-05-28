@@ -27,10 +27,7 @@
         </button>
         <div class="mb_2 mt_2">
           Chưa có tài khoản
-          <router-link
-            tag="a"
-            :to="{name: 'admin_signup'}"
-          >
+          <router-link tag="a" :to="{ name: 'admin_signup' }">
             đăng ký ngay
           </router-link>
         </div>

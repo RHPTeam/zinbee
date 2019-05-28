@@ -205,7 +205,6 @@ const actions = {
       commit("auth_success");
       commit("setRedirectDomain", `${resData.data.data.domain}`);
     } catch (e) {
-
       if (e.response.status === 401) {
         commit("auth_error", "401");
       } else if (e.response.status === 405) {
@@ -252,6 +251,12 @@ const actions = {
   getRoles: async ({ commit }) => {
     const result = await AccountServices.getRole();
     commit("setRoles", result.data.data);
+  },
+  sendFile: async ({ commit }, payload) => {
+    commit("setFileAvatar", payload);
+    const result = await AccountServices.upload(payload);
+
+    commit("user_set", result.data.data);
   }
 };
 

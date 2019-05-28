@@ -61,5 +61,5 @@
 <script src="./index.script.js"></script>
 
 <style lang="scss" scoped>
-  @import "../style/index.style";
+@import "../style/index.style";
 </style>
