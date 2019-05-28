@@ -127,6 +127,9 @@ module.exports = {
       memberRole = await Role.findOne( { "_id": userInfo._role } ),
       serverContainUser = await Server.findOne( { "userAmount": userInfo._id } );
 
+    console.log( userInfo );
+    console.log( serverContainUser );
+
     let cookie;
 
     // Check expire date
