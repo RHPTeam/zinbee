@@ -2,10 +2,10 @@
 import Api from "@/services";
 
 export default {
-  signIn(user) {
+  signInAdmin(user) {
     return Api().post("/signin/bz", user);
   },
-  signUp(user) {
+  signUpAdmin(user) {
     return Api().post("/signup/bz", user, {
       headers: {
         token: user.code
