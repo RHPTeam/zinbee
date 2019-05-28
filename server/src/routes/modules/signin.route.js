@@ -6,7 +6,6 @@
  */
 const router = require( "express-promise-router" )();
 const passport = require( "passport" );
-
 const AccountController = require( "../../controllers/Account.controller" );
 const {
   validateBody,

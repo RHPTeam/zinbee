@@ -18,6 +18,24 @@ const { signToken } = require( "../configs/jwt" );
 const { signUpSync } = require( "../microservices/synchronize/account" );
 
 module.exports = {
+  "changePasswordSync": async ( req, res ) => {
+    const { body } = req,
+      userInfo = await Account.findOne( { "_id": req.uid } ),
+      isPassword = await userInfo.isValidPassword( body.password );
+
+    // Check errors
+    if ( !isPassword ) {
+      return res.send( { "status": "error", "message": "Mật khẩu không chính xác!" } );
+    }
+
+    // Assign new password
+    userInfo.password = body.newPassword;
+
+    // Save to mongodb
+    await userInfo.save();
+
+    res.send( { "status": "success", "data": null } );
+  },
   "changeStatus": async ( req, res ) => {
     let data;
 
@@ -28,6 +46,16 @@ module.exports = {
     data = await Account.findByIdAndUpdate( id, { "$set": { "status": userInfo.status } }, { "new": true } ).select( "-password" );
 
     res.status( 200 ).json( jsonResponse( "success", data ) );
+  },
+  "createNewPasswordSync": async ( req, res ) => {
+    const { password } = req.body,
+      userInfo = await Account.findOne( { "_id": req.uid } );
+
+    userInfo.password = password;
+
+    await userInfo.save();
+
+    res.send( { "status": "success", "message": "Tạo mới mất khẩu thành công!" } );
   },
   "index": async ( req, res ) => {
     let data;

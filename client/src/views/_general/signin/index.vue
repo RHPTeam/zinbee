@@ -42,20 +42,20 @@
             <!--End: Notification change password success -->
             <app-alert
               :type="
-                this.$store.getters.authStatus === '401' ? 'alert_danger' : ''
+                this.$store.getters.authError === '401' ? 'alert_danger' : ''
               "
               :message="
-                this.$store.getters.authStatus === '401'
+                this.$store.getters.authError === '401'
                   ? 'Tài khoản email hoặc mật khẩu không đúng!'
                   : ''
               "
             ></app-alert>
             <app-alert
               :type="
-                this.$store.getters.authStatus === '405' ? 'alert_danger' : ''
+                this.$store.getters.authError === '405' ? 'alert_danger' : ''
               "
               :message="
-                this.$store.getters.authStatus === '405'
+                this.$store.getters.authError === '405'
                   ? 'Tài khoản của bạn đã hết hạn hoặc bị ngừng truy cập!'
                   : ''
               "
@@ -65,7 +65,7 @@
           </div>
           <!-- End: Form Header -->
           <!-- Start: Form Body -->
-          <form @submit.prevent="signIn" class="form--body">
+          <form @submit="signIn" class="form--body">
             <div
               class="form_group position_relative"
               :class="{
@@ -118,7 +118,7 @@
             </div>
             <div class="text--error">{{ errorText.password }}</div>
             <router-link
-              :to="{ name: 'step1' }"
+              :to="{ name: 'check_mail' }"
               class="forgot--pass text_left d_block"
               >Quên mật khẩu?</router-link
             >
