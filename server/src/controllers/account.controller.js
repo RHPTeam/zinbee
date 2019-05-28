@@ -140,7 +140,7 @@ module.exports = {
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${userInfo.email} đăng nhập thành công!`,
-      "domain": `${serverContainUser.info.domain}:${serverContainUser.info.clientPort}/#/`
+      "domain": process.env.APP_ENV === "production" ? `${serverContainUser.info.domain}/#/` : `${serverContainUser.info.domain}:${serverContainUser.info.clientPort}/#/`
     } ) );
   },
   "signUp": async ( req, res ) => {
@@ -150,7 +150,7 @@ module.exports = {
       memberRole = await Role.findOne( { "level": "Member" } ),
       optimalServer = await Server.findOne( { region, "status": 1 } ).sort( { "slot": -1 } );
 
-    let cookie, newUser, resSyncNestedServer;
+    let cookie, newUser, resSyncNestedServer, isEnvironment;
 
     if ( isEmailExist ) {
       return res.status( 403 ).json( { "status": "fail", "phone": "Email đã tồn tại!" } );
@@ -170,7 +170,8 @@ module.exports = {
     } );
 
     // Sync with nested server
-    resSyncNestedServer = await signUpSync( `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup`, newUser.toObject() );
+    isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domain}/api/v1/signup` : `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup`;
+    resSyncNestedServer = await signUpSync( isEnvironment, newUser.toObject() );
     if ( resSyncNestedServer.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Quá trình đăng ký xảy ra vấn đề!" } );
     }
@@ -188,7 +189,7 @@ module.exports = {
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${newUser.email} đăng ký thành công!`,
-      "domain": `${optimalServer.info.domain}:${optimalServer.info.clientPort}/#/`
+      "domain": process.env.APP_ENV === "production" ? `${optimalServer.info.domain}/#/` : `${optimalServer.info.domain}:${optimalServer.info.clientPort}/#/`
     } ) );
   },
   "signInByAdmin": async ( req, res ) => {
