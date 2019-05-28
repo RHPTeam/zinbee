@@ -4,9 +4,11 @@
       <div class="modal--content px_4 py_3" v-click-outside="close">
         <!-- Start: Modal Header -->
         <div class="header text_center mb_3">
-          <h3>Xin chào {{userDefault.name}}</h3>
+          <h3>Xin chào {{ userDefault.name }}</h3>
           <div class="desc text_left alert alert_info">
-            Chào mừng bạn đến với hệ thống Marketting Online của Zinbee. Vui lòng chọn những serve đang hoạt động để hoàn thành đăng ký tài khoản.
+            Chào mừng bạn đến với hệ thống Marketting Online của Zinbee. Vui
+            lòng chọn những serve đang hoạt động để hoàn thành đăng ký tài
+            khoản.
           </div>
         </div>
         <!-- End: Modal Header -->
@@ -14,7 +16,11 @@
         <div
           class="body d_flex align_items_center justify_content_between mb_2"
         >
-          <div class="card position_realtive mb_2" @click="gotoServer(0)" :style="{backgroundImage: 'url('+srcDefault+')'}">
+          <div
+            class="card position_realtive mb_2"
+            @click="gotoServer(0)"
+            :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
+          >
             <div
               class="earth item d_flex align_items_center justify_content_center position_absolute"
             >
@@ -39,8 +45,17 @@
             </div>
           </div>
 
-          <div class="card maintenance position_relative mb_2" @click="gotoServer(1)" :style="{backgroundImage: 'url('+srcDefault+')'}">
-            <div class="alert--card position_absolute d_flex align_items_center justify_content_center px_2">Hệ thống đang được nâng cấp, vui lòng chọn server khác đang hoạt động!</div>
+          <div
+            class="card maintenance position_relative mb_2"
+            @click="gotoServer(1)"
+            :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
+          >
+            <div
+              class="alert--card position_absolute d_flex align_items_center justify_content_center px_2"
+            >
+              Hệ thống đang được nâng cấp, vui lòng chọn server khác đang hoạt
+              động!
+            </div>
             <div
               class="earth item d_flex align_items_center justify_content_center position_absolute"
             >
@@ -64,7 +79,11 @@
             </div>
           </div>
 
-          <div class="card position_relative mb_2" @click="gotoServer(2)" :style="{backgroundImage: 'url('+srcDefault+')'}">
+          <div
+            class="card position_relative mb_2"
+            @click="gotoServer(2)"
+            :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
+          >
             <div
               class="earth item d_flex align_items_center justify_content_center position_absolute"
             >
@@ -130,7 +149,7 @@ export default {
       this.$emit("closePopupServerMutipart", false);
     },
     gotoServer(val) {
-      if(val === 1) {
+      if (val === 1) {
         this.isShowAlert = true;
       }
       this.userDefault.region = val;
