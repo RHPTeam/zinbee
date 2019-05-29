@@ -7,6 +7,7 @@ const { findSubString } = require( "../utils/functions/string" );
  */
 
 module.exports = ( req, res, next ) => {
+  console.log(req.headers);
   if ( !req.headers.authorization ) {
     return res
       .status( 405 )
