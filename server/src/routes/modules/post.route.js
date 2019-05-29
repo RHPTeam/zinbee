@@ -45,5 +45,6 @@ router
   .delete( permission, PostController.delete );
 
 router.route( "/search" ).post( PostController.search );
+router.route( "/search-live" ).post( PostController.searchLive );
 
 module.exports = router;
