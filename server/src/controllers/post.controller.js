@@ -144,7 +144,8 @@ module.exports = {
       .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
   },
   "searchLive": async ( req, res ) => {
-    let listPostByKeyword;
+    let listPostByKeyword,
+      page = null, dataResponse = null;
 
     if ( req.query.keyword === undefined ) {
       return res.status( 404 ).json( { "status": "fail", "keyword": "Vui lòng cung cấp từ khóa để tìm kiếm!" } );
@@ -204,8 +205,22 @@ module.exports = {
       return post;
     } ) );
 
+    if ( req.query._size && req.query._page ) {
+      dataResponse = listPostByKeyword.slice( ( Number( req.query._page ) - 1 ) * Number( req.query._size ), Number( req.query._size ) * Number( req.query._page ) );
+    } else if ( req.query._size ) {
+      dataResponse = listPostByKeyword.slice( 0, Number( req.query._size ) );
+    }
+
+    if ( req.query._size ) {
+      if ( listPostByKeyword.length % req.query._size === 0 ) {
+        page = Math.floor( listPostByKeyword.length / req.query._size );
+      } else {
+        page = Math.floor( listPostByKeyword.length / req.query._size ) + 1;
+      }
+    }
+
     return res
       .status( 200 )
-      .json( jsonResponse( "success", listPostByKeyword ) );
+      .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
   }
 };
