@@ -6,13 +6,19 @@
  */
 const router = require( "express-promise-router" )();
 const AccountController = require( "../../controllers/account.controller" );
+const auth = require( "../../helpers/middleware/authenticate.middleware" );
+const permission = require( "../../helpers/middleware/permission.middleware" );
 
 router
   .route( "/" )
-  .get( AccountController.index );
+  .get( auth, permission, AccountController.index );
 
-router.route( "/status" ).post( AccountController.changeStatus );
-router.route( "/renew/id" ).post( AccountController.renewById );
-router.route( "/renew/code" ).post( AccountController.renewByCode );
+router.route( "/sync" ).patch( auth, AccountController.updateSync );
+
+router.route( "/status" ).post( auth, permission, AccountController.changeStatus );
+router.route( "/new-password" ).post( auth, AccountController.createNewPasswordSync );
+router.route( "/renew/id" ).post( auth, permission, AccountController.renewById );
+router.route( "/renew/code" ).post( auth, permission, AccountController.renewByCode );
+router.route( "/change-password/sync" ).patch( auth, AccountController.changePasswordSync );
 
 module.exports = router;

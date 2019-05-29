@@ -12,7 +12,10 @@ import signupRouterAdmin from "./modules/admin/signup";
 import userGeneralRouter from "./modules/user";
 import signInRouter from "./modules/user/signin";
 import signUpRouter from "./modules/user/signup";
-
+import changePasswordRouter from "./modules/user/password";
+/**
+ * Router for Help
+ */
 Vue.use(Router);
 
 export default new Router({
@@ -23,6 +26,7 @@ export default new Router({
     signinRouterAdmin,
     signupRouterAdmin,
     signInRouter,
-    signUpRouter
+    signUpRouter,
+    changePasswordRouter
   ]
 });
