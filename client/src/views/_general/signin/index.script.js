@@ -56,7 +56,6 @@ export default {
         "cfr"
       )};`;
       window.location = `${this.redirectDomain}redirect?authorization=${encodeURIComponent(token)}`;
-      console.log("done");
     }
   },
   watch: {

@@ -5,7 +5,9 @@ import store from "../../store";
 
 /** ******************* SECURED ROUTER ************************/
 router.beforeEach((to, from, next) => {
-  if (CookieFunction.getCookie("sid") && to.path === "/signin") {
+  if (CookieFunction.getCookie("patch")) {
+    window.location = `${CookieFunction.getCookie("patch")}`;
+  } else if (CookieFunction.getCookie("sid") && to.path === "/signin") {
     next("/");
   } else if (CookieFunction.getCookie("sid") && to.path === "/signup") {
     next("/");

@@ -159,6 +159,7 @@ const actions = {
       CookieFunction.setCookie("sid", newSid);
       CookieFunction.setCookie("uid", newUid);
       CookieFunction.setCookie("cfr", newCfr);
+      CookieFunction.setCookie("patch", resData.data.data.domain);
 
       axios.defaults.headers.common.Authorization = resData.headers.cookie;
 
@@ -199,6 +200,7 @@ const actions = {
       CookieFunction.setCookie("sid", newSid);
       CookieFunction.setCookie("uid", newUid);
       CookieFunction.setCookie("cfr", newCfr);
+      CookieFunction.setCookie("patch", resData.data.data.domain);
 
       axios.defaults.headers.common.Authorization = resData.headers.cookie;
 

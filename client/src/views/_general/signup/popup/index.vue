@@ -155,6 +155,7 @@ export default {
         this.isShowAlert = true;
       }
       this.userDefault.region = val;
+      // this.userDefault.patch = this.redirectDomain;
       this.isShowButtonFinal = true;
     },
     async redirectServer() {
