@@ -134,7 +134,7 @@ module.exports = {
       await Account.findByIdAndUpdate( userInfo._id, { "$set": { "status": 0 } }, { "new": true } );
       return res.status( 405 ).json( { "status": "error", "message": "Tài khoản của bạn đã hết hạn. Vui lòng liên hệ với bộ phận CSKH!" } );
     }
-    cookie = `sid=${ signToken( userInfo ) }; uid=${userInfo._id}; cfr=${memberRole.level}`;
+    cookie = `sid=${ signToken( userInfo ) }; uid=${userInfo._id}; cfr=${memberRole.level};`;
 
     res.set( "Cookie", cookie );
 
@@ -184,7 +184,7 @@ module.exports = {
     optimalServer.save();
 
     // Assign cookie to headers
-    cookie = `sid=${signToken( newUser )}; uid=${newUser._id}; cfr=${memberRole.level}`;
+    cookie = `sid=${signToken( newUser )}; uid=${newUser._id}; cfr=${memberRole.level};`;
     res.set( "Cookie", cookie );
 
     res.status( 201 ).json( jsonResponse( "success", {
