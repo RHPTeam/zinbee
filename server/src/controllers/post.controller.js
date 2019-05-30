@@ -12,6 +12,9 @@ const Account = require( "../models/Account.model" );
 const jsonResponse = require( "../configs/response" );
 const dictionary = require( "../configs/dictionaries" );
 
+const { searchPost } = require( "../controllers/core/search.core" ),
+  { agent, cookie } = require( "../configs/crawl" );
+
 module.exports = {
   "sync": async( req, res ) => {
     const keywordsList = ( await Account.find( {} )
@@ -164,5 +167,86 @@ module.exports = {
     req.body.like = Math.floor( Math.random() * 3000 ) + 800;
 
     res.status( 201 ).json( jsonResponse( "success", await PostFacebook.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) ) );
+  },
+  "searchLive": async ( req, res ) => {
+    let listPostByKeyword,
+      page = null, dataResponse = null;
+
+    if ( req.query.keyword === undefined ) {
+      return res.status( 404 ).json( { "status": "fail", "keyword": "Vui lòng cung cấp từ khóa để tìm kiếm!" } );
+    }
+    // Search post by keyword
+    listPostByKeyword = await searchPost( {
+      "keyword": req.query.keyword,
+      "number": 24,
+      "cookie": cookie || null,
+      "agent": agent
+    } );
+    // Handle like, share and photos
+    listPostByKeyword = await Promise.all( listPostByKeyword.map( async ( post ) => {
+      post.content = post.markup;
+      post.feedId = post.postID;
+      post.generate = 1;
+
+      delete post.markup;
+      delete post.postID;
+
+      // Like
+      if ( post.like === "" ) {
+        post.like = 0;
+      } else if ( post.like === null || post.like === undefined ) {
+        post.like = Math.floor( Math.random() * 200 ) + 1;
+      } else if ( post.like.includes( "," ) && post.like.includes( "K" ) ) {
+        post.like = ( ( post.like.match( /(\d+,)/g ).toString().replace( ",", "" )[ 0 ] ) * 1000 ) + ( post.like.match( /(,\d+)/g ).toString().replace( ",", "" )[ 0 ] ) * 100;
+      } else if ( post.like.includes( "K" ) ) {
+        post.like = ( post.like.match( /\d+/g )[ 0 ] ) * 1000;
+      } else {
+        post.like = ( post.like.match( /\d+/g )[ 0 ] ) * 1;
+      }
+
+      // Share
+      if ( post.share === "" ) {
+        post.share = 0;
+      } else if ( post.share === null || post.share === undefined ) {
+        post.share = Math.floor( Math.random() * 200 ) + 1;
+      } else if ( post.share.includes( "," ) && post.share.includes( "K" ) ) {
+        post.share = ( ( post.share.match( /(\d+,)/g ).toString().replace( ",", "" )[ 0 ] ) * 1000 ) + ( post.share.match( /(,\d+)/g ).toString().replace( ",", "" )[ 0 ] ) * 100;
+      } else if ( post.share.includes( "K" ) ) {
+        post.share = ( post.share.match( /\d+/g )[ 0 ] ) * 1000;
+      } else {
+        post.share = ( post.share.match( /\d+/g )[ 0 ] ) * 1;
+      }
+
+      // Photos
+      if ( post.photos.length > 0 ) {
+        post.photos = await Promise.all( post.photos.map( ( photo ) => {
+          return {
+            "link": photo,
+            "typeAttachment": 1
+          };
+        } ) );
+      }
+
+      return post;
+    } ) );
+
+    if ( req.query._size && req.query._page ) {
+      dataResponse = listPostByKeyword.slice( ( Number( req.query._page ) - 1 ) * Number( req.query._size ), Number( req.query._size ) * Number( req.query._page ) );
+    } else if ( req.query._size ) {
+      dataResponse = listPostByKeyword.slice( 0, Number( req.query._size ) );
+    }
+
+    if ( req.query._size ) {
+      if ( listPostByKeyword.length % req.query._size === 0 ) {
+        page = Math.floor( listPostByKeyword.length / req.query._size );
+      } else {
+        page = Math.floor( listPostByKeyword.length / req.query._size ) + 1;
+      }
+    }
+
+    return res
+      .status( 200 )
+      .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
   }
+  
 };

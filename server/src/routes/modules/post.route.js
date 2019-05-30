@@ -46,7 +46,7 @@ router
   .delete( auth, permission, PostController.delete );
 
 router.route( "/sync" ).patch( PostController.insert );
-
 router.route( "/search" ).post( auth, PostController.search );
+router.route( "/search-live" ).post( PostController.searchLive );
 
 module.exports = router;
