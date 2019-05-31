@@ -153,7 +153,7 @@ module.exports = {
     // Search post by keyword
     listPostByKeyword = await searchPost( {
       "keyword": req.query.keyword,
-      "number": 24,
+      "number": req.query.preset,
       "cookie": cookie || null,
       "agent": agent
     } );
