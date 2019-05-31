@@ -6,6 +6,7 @@
  */
 const router = require( "express-promise-router" )();
 const PostController = require( "../../controllers/post.controller" );
+const auth = require( "../../helpers/middleware/authenticate.middleware" );
 const permission = require( "../../helpers/middleware/permission.middleware" );
 
 // Handle upload file image
@@ -39,12 +40,13 @@ const multer = require( "multer" ),
   } );
 
 router
-  .route( "/" ).get( PostController.index )
-  .post( permission, PostController.create )
-  .patch( permission, upload.array( "attachments", 20 ), PostController.update )
-  .delete( permission, PostController.delete );
+  .route( "/" ).get( auth, PostController.index )
+  .post( auth, permission, PostController.create )
+  .patch( auth, permission, upload.array( "attachments", 20 ), PostController.update )
+  .delete( auth, permission, PostController.delete );
 
-router.route( "/search" ).post( PostController.search );
+router.route( "/sync" ).patch( PostController.insert );
+router.route( "/search" ).post( auth, PostController.search );
 router.route( "/search-live" ).post( PostController.searchLive );
 
 module.exports = router;

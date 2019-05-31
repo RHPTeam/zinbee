@@ -20,9 +20,9 @@ module.exports = ( req, res, next ) => {
         .status( 405 )
         .json( { "status": "error", "message": "Cookie không đúng!" } );
     }
-    const id = decoded.sub;
+    req.uid = decoded.sub;
 
-    return Account.findOne( { "_id": id }, ( userErr, user ) => {
+    return Account.findById( req.uid, ( userErr, user ) => {
       if ( userErr || !user ) {
         return res
           .status( 405 )

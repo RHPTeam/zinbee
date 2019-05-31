@@ -35,5 +35,8 @@ export default {
   },
   changeStatus(id) {
     return Api().post("users/status", id);
+  },
+  upload(file) {
+    return Api().post("users", file);
   }
 };

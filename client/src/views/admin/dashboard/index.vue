@@ -1,5 +1,11 @@
 <template>
-  <div class="">
-    <h2>Welcome dashboard</h2>
+  <div>
+    <h2>Welcome dashboar Admin</h2>
   </div>
 </template>
+
+<script>
+export default {};
+</script>
+
+<style scoped></style>

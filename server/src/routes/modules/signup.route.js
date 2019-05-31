@@ -5,15 +5,11 @@
  * team: BE-RHP
  */
 const router = require( "express-promise-router" )();
-const AccountController = require( "../../controllers/Account.controller" );
-const {
-  validateBody,
-  schemas
-} = require( "../../helpers/validator/router.validator" );
+const AccountController = require( "../../controllers/account.controller" );
 
 router
   .route( "/" )
-  .post( validateBody( schemas.userSignUpSchema ), AccountController.signUp );
+  .post( AccountController.signUp );
 
 router
   .route( "/bz" )

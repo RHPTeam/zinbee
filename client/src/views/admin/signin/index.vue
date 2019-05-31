@@ -52,9 +52,7 @@ export default {
         password: this.user.password
       };
       await this.$store.dispatch("signInAdmin", dataSender);
-      if (this.$store.getters.authError === "401") {
-        return;
-      }
+
       this.$router.push({ name: "admin_dashboard" });
     }
   }
