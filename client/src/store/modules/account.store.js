@@ -159,6 +159,7 @@ const actions = {
       CookieFunction.setCookie("sid", newSid);
       CookieFunction.setCookie("uid", newUid);
       CookieFunction.setCookie("cfr", newCfr);
+      CookieFunction.setCookie("_sub", `${resData.data.data.domain}welcome`);
 
       axios.defaults.headers.common.Authorization = resData.headers.cookie;
 
@@ -178,27 +179,19 @@ const actions = {
       commit("auth_request");
       const resData = await AccountServices.signInByUser(payload);
 
-      const newSid = StringFunction.findSubString(
-        resData.headers.cookie,
-        "sid=",
-        ";"
+      CookieFunction.setCookie(
+        "sid",
+        StringFunction.findSubString(resData.headers.cookie, "sid=", ";")
       );
-
-      const newUid = StringFunction.findSubString(
-        resData.headers.cookie,
-        "uid=",
-        ";"
+      CookieFunction.setCookie(
+        "uid",
+        StringFunction.findSubString(resData.headers.cookie, "uid=", ";")
       );
-
-      const newCfr = StringFunction.findSubString(
-        resData.headers.cookie,
-        "cfr=",
-        ""
+      CookieFunction.setCookie(
+        "cfr",
+        StringFunction.findSubString(resData.headers.cookie, "cfr=", "")
       );
-
-      CookieFunction.setCookie("sid", newSid);
-      CookieFunction.setCookie("uid", newUid);
-      CookieFunction.setCookie("cfr", newCfr);
+      CookieFunction.setCookie("_sub", `${resData.data.data.domain}welcome`);
 
       axios.defaults.headers.common.Authorization = resData.headers.cookie;
 
