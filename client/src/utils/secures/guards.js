@@ -5,12 +5,12 @@ import store from "../../store";
 
 /** ******************* SECURED ROUTER ************************/
 router.beforeEach((to, from, next) => {
-  if (CookieFunction.getCookie("patch")) {
-    window.location = `${CookieFunction.getCookie("patch")}`;
-  } else if (CookieFunction.getCookie("sid") && to.path === "/signin") {
-    next("/");
-  } else if (CookieFunction.getCookie("sid") && to.path === "/signup") {
-    next("/");
+  if (CookieFunction.getCookie("_sub") && CookieFunction.getCookie("sid") && CookieFunction.getCookie("cfr") && CookieFunction.getCookie("uid") ) {
+    window.location = `${CookieFunction.getCookie("_sub")}`;
+  } else if (CookieFunction.getCookie("_sub") && CookieFunction.getCookie("sid") && CookieFunction.getCookie("cfr") && CookieFunction.getCookie("uid") && to.path === "/signin") {
+    window.location = `${CookieFunction.getCookie("_sub")}`;
+  } else if (CookieFunction.getCookie("_sub") && CookieFunction.getCookie("sid") && CookieFunction.getCookie("cfr") && CookieFunction.getCookie("uid") && to.path === "/signup") {
+    window.location = `${CookieFunction.getCookie("_sub")}`;
   } else if (to.matched.some(record => record.meta.requiredAuth)) {
     if (store.getters.isLoggedIn || CookieFunction.getCookie("sid")) {
       next();
