@@ -2,7 +2,7 @@
 const redirectRouter = {
   path: "/redirect",
   name: "redirect",
-  component: () => import( "@/views/_general/redirect" )
+  component: () => import("@/views/_general/redirect")
 };
 
 export default redirectRouter;
