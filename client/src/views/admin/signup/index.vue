@@ -106,8 +106,15 @@ export default {
         phone: this.user.phone,
         code: this.user.code
       };
-      await this.$store.dispatch("signUp", dataSender);
-      this.$router.push("/admin");
+      await this.$store.dispatch("signUpAdmin", dataSender);
+      if (
+        this.$store.getters.authError === "403" ||
+        this.$store.getters.authError === "404"
+      ) {
+        return;
+      }
+      this.$router.push({ name: "admin_dashboard" });
+      // window.location.href =
     }
   }
 };

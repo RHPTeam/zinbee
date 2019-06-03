@@ -2,10 +2,10 @@
 import Api from "@/services";
 
 export default {
-  signIn(user) {
+  signInAdmin(user) {
     return Api().post("/signin/bz", user);
   },
-  signUp(user) {
+  signUpAdmin(user) {
     return Api().post("/signup/bz", user, {
       headers: {
         token: user.code
@@ -35,5 +35,8 @@ export default {
   },
   changeStatus(id) {
     return Api().post("users/status", id);
+  },
+  upload(file) {
+    return Api().post("users", file);
   }
 };

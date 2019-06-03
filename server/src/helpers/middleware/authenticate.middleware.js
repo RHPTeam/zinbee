@@ -21,9 +21,9 @@ module.exports = ( req, res, next ) => {
         .status( 405 )
         .json( { "status": "error", "message": "Cookie không đúng!" } );
     }
-    const userId = decoded.sub;
+    req.uid = decoded.sub;
 
-    return Account.findById( userId, ( userErr, user ) => {
+    return Account.findById( req.uid, ( userErr, user ) => {
       if ( userErr || !user ) {
         return res
           .status( 405 )

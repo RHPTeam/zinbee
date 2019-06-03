@@ -46,11 +46,17 @@ export default {
 
       await this.$store.dispatch( "signInByUser", dataSender );
       if (
-        this.$store.getters.authStatus === "401" || this.$store.getters.authStatus === "405"
+        this.$store.getters.authError === "401" || this.$store.getters.authError === "405"
       ) {
         return;
       }
-      window.location = `${this.redirectDomain}welcome`;
+      console.log( "fuck u" );
+      const token = `sid=${CookieFunction.getCookie(
+        "sid"
+      )}; uid=${CookieFunction.getCookie("uid")}; cfr=${CookieFunction.getCookie(
+        "cfr"
+      )};`;
+      window.location = `${this.redirectDomain}redirect?authorization=${encodeURIComponent(token)}`;
     }
   },
   watch: {

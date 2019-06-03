@@ -57,10 +57,10 @@ const mutations = {
   }
 };
 const actions = {
-  signUp: async ({ commit }, payload) => {
+  signUpAdmin: async ({ commit }, payload) => {
     try {
       commit("auth_request");
-      const resData = await AccountServices.signUp(payload);
+      const resData = await AccountServices.signUpAdmin(payload);
 
       const newSid = StringFunction.findSubString(
         resData.headers.cookie,
@@ -93,12 +93,13 @@ const actions = {
       if (e.response.status === 403) {
         commit("auth_error", e.response.data);
       }
+      return;
     }
   },
-  signIn: async ({ commit }, payload) => {
+  signInAdmin: async ({ commit }, payload) => {
     try {
       commit("auth_request");
-      const resData = await AccountServices.signIn(payload);
+      const resData = await AccountServices.signInAdmin(payload);
 
       const newSid = StringFunction.findSubString(
         resData.headers.cookie,
@@ -129,6 +130,7 @@ const actions = {
       if (e.response.status === 401) {
         commit("auth_error", "401");
       }
+      return;
     }
   },
   signUpByUser: async ({ commit }, payload) => {
@@ -157,6 +159,7 @@ const actions = {
       CookieFunction.setCookie("sid", newSid);
       CookieFunction.setCookie("uid", newUid);
       CookieFunction.setCookie("cfr", newCfr);
+      CookieFunction.setCookie("_sub", `${resData.data.data.domain}welcome`);
 
       axios.defaults.headers.common.Authorization = resData.headers.cookie;
 
@@ -164,8 +167,11 @@ const actions = {
       commit("setRedirectDomain", `${resData.data.data.domain}`);
     } catch (e) {
       if (e.response.status === 403) {
-        commit("auth_error", e.response.data);
+        commit("auth_error", "403");
+      } else if (e.response.status === 404) {
+        commit("auth_error", "404");
       }
+      return;
     }
   },
   signInByUser: async ({ commit }, payload) => {
@@ -173,27 +179,19 @@ const actions = {
       commit("auth_request");
       const resData = await AccountServices.signInByUser(payload);
 
-      const newSid = StringFunction.findSubString(
-        resData.headers.cookie,
-        "sid=",
-        ";"
+      CookieFunction.setCookie(
+        "sid",
+        StringFunction.findSubString(resData.headers.cookie, "sid=", ";")
       );
-
-      const newUid = StringFunction.findSubString(
-        resData.headers.cookie,
-        "uid=",
-        ";"
+      CookieFunction.setCookie(
+        "uid",
+        StringFunction.findSubString(resData.headers.cookie, "uid=", ";")
       );
-
-      const newCfr = StringFunction.findSubString(
-        resData.headers.cookie,
-        "cfr=",
-        ""
+      CookieFunction.setCookie(
+        "cfr",
+        StringFunction.findSubString(resData.headers.cookie, "cfr=", "")
       );
-
-      CookieFunction.setCookie("sid", newSid);
-      CookieFunction.setCookie("uid", newUid);
-      CookieFunction.setCookie("cfr", newCfr);
+      CookieFunction.setCookie("_sub", `${resData.data.data.domain}welcome`);
 
       axios.defaults.headers.common.Authorization = resData.headers.cookie;
 
@@ -202,7 +200,10 @@ const actions = {
     } catch (e) {
       if (e.response.status === 401) {
         commit("auth_error", "401");
+      } else if (e.response.status === 405) {
+        commit("auth_error", "405");
       }
+      return;
     }
   },
   setSingUpByUser: async ({ commit }, payload) => {
@@ -243,6 +244,12 @@ const actions = {
   getRoles: async ({ commit }) => {
     const result = await AccountServices.getRole();
     commit("setRoles", result.data.data);
+  },
+  sendFile: async ({ commit }, payload) => {
+    commit("setFileAvatar", payload);
+    const result = await AccountServices.upload(payload);
+
+    commit("user_set", result.data.data);
   }
 };
 
