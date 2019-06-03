@@ -1,9 +1,6 @@
 const generalRouter = {
   path: "/admin",
   component: require("@/views/admin/layout").default,
-  // meta: {
-  //   requiredAdmin: true
-  // },
   children: [
     {
       path: "",

@@ -114,6 +114,7 @@ export default {
         return;
       }
       this.$router.push({ name: "admin_dashboard" });
+      // window.location.href =
     }
   }
 };

@@ -48,7 +48,7 @@ let keywords = [];
     socket.on( "listPostCrawled", async ( data ) => {
       console.log( data );
       console.log( typeof data );
-      await PostFacebook.insertMany( data, function( error, docs ) {
+      await PostFacebook.insertMany( data, function( error ) {
         if ( error ) {
           console.log( error );
         }
