@@ -65,7 +65,7 @@
           </div>
           <!-- End: Form Header -->
           <!-- Start: Form Body -->
-          <form @submit="signIn" class="form--body">
+          <form @submit.prevent="signIn" class="form--body">
             <div
               class="form_group position_relative"
               :class="{

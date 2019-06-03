@@ -6,13 +6,14 @@
  * date to: ___
  * team: BE-RHP
  */
-
 const Account = require( "../models/Account.model" );
 const Role = require( "../models/Role.model" );
+
 const Server = require( "../models/Server.model" );
 
 const fs = require( "fs" );
 const jsonResponse = require( "../configs/response" );
+
 const { signToken } = require( "../configs/jwt" );
 const { signUpSync } = require( "../microservices/synchronize/account" );
 
