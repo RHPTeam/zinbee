@@ -75,8 +75,19 @@ const generalRouter = {
     },
     {
       path: "simple-data",
-      name: "simple_data",
-      component: require("@/views/admin/simpledata").default
+      component: require("@/views/admin/simpledata").default,
+      children: [
+        {
+          path: "",
+          name: "simple_data",
+          component: require("@/views/admin/simpledata/folder").default
+        },
+        {
+          path: "edit",
+          name: "simple_edit",
+          component: require("@/views/admin/simpledata/detail").default
+        }
+      ]
     }
   ]
 };

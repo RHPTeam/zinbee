@@ -1,0 +1,20 @@
+.simple {
+  .body {
+    .card {
+      cursor: pointer;
+      border-radius: 1rem;
+      &:hover, &:active, &:visited, &:focus {
+        > .above {
+          opacity: 1;
+        }
+      }
+      .above {
+        cursor: pointer;
+        top: .5rem;
+        right: .5rem;
+        z-index: 9;
+        opacity: 0;
+      }
+    }
+  }
+}
