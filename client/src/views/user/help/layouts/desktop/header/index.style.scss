@@ -1,0 +1,139 @@
+
+.content--header-help{
+  background-color: $mainBrandColor;
+  padding-top: 20px;
+  ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+
+// header logo help
+.logo{
+  cursor: pointer;
+  .icon{
+    color: $color-dark;
+    margin: 0;
+  }
+  .center--support{
+    font-weight: bold;
+    color: $color-dark;
+  }
+}
+
+
+// header--search
+
+.wrap--search{
+  svg{
+    color: rgba(255, 255, 255, .5);
+  }
+  input{
+    background-color: #fff;
+    border: 0;
+    border-radius: 5px;
+    color: #444444;
+    font-size: .875rem;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding-left: 2.25rem;
+    width: 100%;
+    &::placeholder{
+      color: $color-dark-1;
+      font-size: .825rem;
+    }
+  }
+  .search svg{
+    position: absolute;
+    top: 12px;
+    left: 25px;
+    z-index: 100;
+    color: #ffb94a;
+    stroke: #ffb94a;
+    stroke-width: .5;
+  }
+}
+
+// content--back
+
+.content--back{
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  opacity: .75;
+  transition: opacity .4s ease;
+  svg{
+    color: #fff;
+    margin-top: -7px;
+    margin-right: 5px;
+    transform: rotate(-180deg);
+    stroke: #fff;
+    stroke-width: 1;
+  }
+  &:hover{
+    opacity: 1;
+  }
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+// menu
+.menu--help{
+  .item--active {
+    border-bottom: 2px solid #fff;
+    color: #fff !important;
+  }
+  .menu--help-item{
+    position: relative;
+    color: rgba(255, 255, 255, 0.75);
+    height: 45px;
+    cursor: pointer;
+    padding: .75rem 1rem;
+    font-size: .875rem;
+    font-weight: 600;
+    transition: all .4s ease;
+    &:hover {
+      background: #ffb138;
+      border-radius: .5rem .5rem 0 0;
+      color: #fff;
+      .dropdown--menu {
+        display: block;
+      }
+    }
+    .dropdown--menu {
+      box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: $mainDefault;
+      color: $color-dark-2;
+      min-width: 300px;
+      z-index: 100;
+      display: none;
+      &-item{
+        color: #666;
+        font-weight: normal;
+        padding: .5rem 1rem;
+        &:hover {
+          background-color: #f7f7f7;
+        }
+      }
+    }
+  }
+}
+
+.mail--help{
+  .icon--envelope{
+    margin-top: 4px;
+    svg {
+      color: #fff;
+      stroke: #fff;
+      stroke-width: .2;
+    }
+  }
+}

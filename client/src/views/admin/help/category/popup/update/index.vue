@@ -4,10 +4,7 @@
       <div class="modal--content" v-click-outside="close">
         <!-- Start: Modal Body -->
         <div class="action">
-          <div
-            class="back d_flex align_items_center py_2 px_2 mb_5"
-            @click="backListCategories"
-          >
+          <div class="back d_flex align_items_center py_2 px_2 mb_5">
             <div class="icon mr_3">
               <icon-base
                 class="icon--arrow-left"
@@ -36,29 +33,26 @@
             <div class="form_group">
               <label>Chọn danh mục cha</label>
               <div class="option">
+                <!-- <multiselect
+                  label="title"
+                  placeholder="Chọn danh mục cha ..."
+                  :options="categories"
+                /> -->
                 <multiselect
                   label="title"
                   placeholder="Chọn danh mục cha ..."
                   :options="allCategories"
                   @input="updateParent"
-                  :value="categories.parent.title"
+                  :value="titleParent.parent.title"
                 />
               </div>
             </div>
             <div class="form_group">
               <button
-                v-if="categories._id"
                 class="btn btn_primary form_control"
                 @click="updateCategories"
               >
                 Cập nhật
-              </button>
-              <button
-                v-else
-                class="btn btn_primary form_control"
-                @click="createNewCategories"
-              >
-                Tạo mới
               </button>
             </div>
           </form>
@@ -76,27 +70,34 @@ export default {
   },
   computed: {
     allCategories() {
-      return this.$store.getters.allCategories;
+      return this.$store.getters.allHelpCategories;
     },
     categories() {
-      return this.$store.getters.categories;
+      return this.$store.getters.helpCategory;
+    },
+    titleParent() {
+      const newCategory = this.$store.getters.helpCategory;
+      this.allCategories.map(category => {
+        if (newCategory.parent === category._id) {
+          newCategory.parent = {
+            _id: category._id,
+            title: category.title
+          };
+        }
+      });
+      return newCategory;
     }
   },
   async created() {
-    await this.$store.dispatch("getCategoriesDefault");
+    await this.$store.dispatch("getHelpCategoryDefault");
+    await this.$store.dispatch("getAllHelpCategories");
   },
   methods: {
-    backListCategories() {
-      this.$router.push("/admin/help/categories");
-    },
     close() {
       this.$emit("close", false);
     },
-    createNewCategories() {
-      this.$store.dispatch("createNewCategories", this.categories);
-    },
     updateCategories() {
-      this.$store.dispatch("updateCategories", this.categories);
+      this.$store.dispatch("updateHelpCategory", this.categories);
       this.$emit("backDefault", true);
       this.close();
     },

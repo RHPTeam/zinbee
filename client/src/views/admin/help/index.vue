@@ -21,7 +21,7 @@ export default {
   },
   created() {
     this.$store.dispatch("getAllBlog");
-    this.$store.dispatch("getAllCategories");
+    // this.$store.dispatch("getAllCategories");
   }
 };
 </script>

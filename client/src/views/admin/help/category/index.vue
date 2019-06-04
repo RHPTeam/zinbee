@@ -10,51 +10,8 @@
     </div>
     <div class="desc mb_3">Danh sách các danh mục hiện có</div>
     <div class="body px_3 py_2">
-      <div v-if="!allCategories"></div>
-      <div
-        v-else
-        class="item mb_1"
-        v-for="(item, index) in allCategories"
-        :key="`c-${index}`"
-      >
-        <!--Start: categories dont parent-->
-        <div class="d_flex align_items_center justify_content_between">
-          <div class="left">{{ item.title }}</div>
-          <div class="right d_flex align_items_center">
-            <div class="icon mr_2" @click="showInfoCategories(item._id)">
-              <icon-base
-                class="icon--arrow-left"
-                icon-name="arrow"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <icon-edit></icon-edit>
-              </icon-base>
-            </div>
-            <div class="icon" @click="deleteCategories(item._id)">
-              <icon-base
-                class="icon--arrow-left"
-                icon-name="arrow"
-                width="24"
-                height="24"
-                viewBox="0 0 18 18"
-              >
-                <icon-remove></icon-remove>
-              </icon-base>
-            </div>
-          </div>
-        </div>
-        <!--End: categories dont parent-->
-        <!--Start: categories have parent-->
-        <!--        <div v-if="item.parent === undefined || item.parent === ''"></div>-->
-        <!--        <div v-else>-->
-        <!--          <div class="children d_flex align_items_center pl_3" v-for="(child, index) in item.parent" :key="`i-${index}`">-->
-        <!--            {{child.title}}-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--End: categories have parent-->
-      </div>
+      <!-- <categories-list /> -->
+      <app-tree :tree-data="getCategoryTable" />
     </div>
     <!--Start: Popup new and update categories-->
     <popup-categories
@@ -68,23 +25,26 @@
   </div>
 </template>
 <script>
-import PopupCategories from "./action";
+import PopupCategories from "./popup/create";
+import AppTree from "./list/components/tree";
 export default {
   components: {
-    PopupCategories
+    PopupCategories,
+    AppTree
   },
   data() {
     return {
       isShowPopupCategories: false,
-      isDefault: true
+      isDefault: true,
+      isShowPopupUpdate: false
     };
   },
   computed: {
-    allCategories() {
-      return this.$store.getters.allCategories;
-    },
     currentTheme() {
       return this.$store.getters.themeName;
+    },
+    getCategoryTable() {
+      return this.$store.getters.allHelpCategoriesChild;
     }
   },
   methods: {
@@ -96,6 +56,9 @@ export default {
     deleteCategories(val) {
       this.$store.dispatch("deleteCategories", val);
     }
+  },
+  async created() {
+    await this.$store.dispatch("getAllCategoriesChildren");
   }
 };
 </script>

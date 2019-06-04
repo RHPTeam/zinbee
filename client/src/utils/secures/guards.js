@@ -9,7 +9,6 @@ router.beforeEach((to, from, next) => {
     CookieFunction.getCookie("sid") &&
     CookieFunction.getCookie("cfr") === "member" &&
     CookieFunction.getCookie("uid")
-
   ) {
     window.location = `${CookieFunction.getCookie("_sub")}`;
   } else if (
