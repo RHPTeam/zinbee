@@ -16,9 +16,9 @@ module.exports = {
     let dataResponse = null;
 
     if ( req.query._id ) {
-      dataResponse = await CategoryDefault.findOne( { "_id": req.query._id } ).populate( "_posts" ).populate( { "path": "_account", "select": "name imageAvatar" } ).populate( { "path": "_editor", "select": "name imageAvatar" } ).lean();
+      dataResponse = await CategoryDefault.findOne( { "_id": req.query._id } ).populate( "postList" ).populate( { "path": "_account", "select": "name imageAvatar" } ).populate( { "path": "_editor", "select": "name imageAvatar" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      dataResponse = await CategoryDefault.find( {} ).populate( "_posts" ).populate( { "path": "_account", "select": "name imageAvatar" } ).populate( { "path": "_editor", "select": "name imageAvatar" } ).lean();
+      dataResponse = await CategoryDefault.find( {} ).populate( "postList" ).populate( { "path": "_account", "select": "name imageAvatar" } ).populate( { "path": "_editor", "select": "name imageAvatar" } ).lean();
     }
 
     res
@@ -73,30 +73,32 @@ module.exports = {
     res.status( 200 ).json( jsonResponse( "success", null ) );
   },
   "createPostByCategory": async ( req, res ) => {
-    const categoryDefaultInfo = await CategoryDefault.findOne( { "_id": req.query._id } );
+    const categoryDefaultInfo = await CategoryDefault.findOne( { "_id": req.params.categoryId } );
 
     // Check catch when delete post categories
     if ( !categoryDefaultInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Danh mục không tồn tại!" } );
     }
 
-    if ( categoryDefaultInfo._posts.includes( req.params.categoryId ) ) {
-      return res.status( 403 ).json( { "status": "fail", "_posts": "Bài viết đã tồn tại trong danh mục!" } );
+    if ( categoryDefaultInfo.postList.includes( req.params.postId ) ) {
+      return res.status( 403 ).json( { "status": "fail", "postList": "Bài viết đã tồn tại trong danh mục!" } );
     }
 
+    categoryDefaultInfo.postList.push( req.params.postId );
+    
     await categoryDefaultInfo.save();
 
     res.status( 200 ).json( jsonResponse( "success", categoryDefaultInfo ) );
   },
   "removePostByCategory": async ( req, res ) => {
-    const categoryDefaultInfo = await CategoryDefault.findOne( { "_id": req.query._id } );
+    const categoryDefaultInfo = await CategoryDefault.findOne( { "_id": req.params.categoryId } );
 
     // Check catch when delete post categories
     if ( !categoryDefaultInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Danh mục không tồn tại!" } );
     }
 
-    categoryDefaultInfo._posts.pull( req.params.categoryId );
+    categoryDefaultInfo.postList.pull( req.params.postId );
 
     await categoryDefaultInfo.save();
 

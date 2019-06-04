@@ -10,10 +10,10 @@ const mongoose = require( "mongoose" ),
       "type": Boolean,
       "default": true
     },
-    "_posts": [
+    "postList": [
       {
         "type": Schema.Types.ObjectId,
-        "ref": "Post"
+        "ref": "PostFacebook"
       }
     ],
     "editor": {

@@ -13,8 +13,8 @@
             <button class="btn bg_danger mr_2" @click="close">
               Hủy bỏ
             </button>
-            <button class="btn bg_primary" @click="createNewFolder">
-              Tạo mới
+            <button class="btn bg_primary" @click="deleteFolder">
+              Xóa
             </button>
           </div>
         </div>
@@ -27,13 +27,16 @@
 <script>
 export default {
   props: {
-    currentTheme: String
+    currentTheme: String,
+    item: String
   },
   methods: {
     close() {
       this.$emit("close", false);
     },
-    createNewFolder() {}
+    deleteFolder() {
+      console.log(this.item);
+    }
   }
 };
 </script>

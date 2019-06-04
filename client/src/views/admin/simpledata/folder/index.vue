@@ -3,10 +3,22 @@
     <bread-crumb :breadTitle="breadTitle" :breadDesc="breadDesc" />
     <div class="body">
       <div class="r">
-        <div class="c_3 mb_3">
+        <div class="c_3" v-if="!categoryDefault">
           <div
             class="card d_flex flex_column align_items_center position_relative px_3 py_5"
-            @click="showInfoFolder"
+          >
+            <loading-component />
+          </div>
+        </div>
+        <div
+          class="c_3 mb_3 position_relative"
+          v-else
+          v-for="(item, index) in categoryDefault"
+          :key="`c-${index}`"
+        >
+          <div
+            class="card d_flex flex_column align_items_center position_relative px_3 py_5"
+            @click="showInfoFolder(item._id)"
           >
             <div class="icon mb_2">
               <icon-base
@@ -19,22 +31,33 @@
                 <icon-folder />
               </icon-base>
             </div>
-            <div class="desc">Tên folder</div>
-            <div
-              class="above position_absolute"
-              @click="isShowDeletePopup = true"
-            >
-              <icon-base
-                class="icon--remove"
-                icon-name="plus"
-                width="24"
-                height="24"
-                viewBox="0 0 20 20"
-              >
-                <icon-remove />
-              </icon-base>
-            </div>
+            <div class="desc">{{ item.title }}</div>
           </div>
+
+          <div
+            class="above d_flex align_items_center position_absolute"
+            @click="deleteFolder(item._id)"
+          >
+            <icon-base
+              class="icon--remove"
+              icon-name="plus"
+              width="24"
+              height="24"
+              viewBox="0 0 20 20"
+            >
+              <icon-remove />
+            </icon-base>
+          </div>
+
+          <!--*********** POPUP *************-->
+          <transition name="popup">
+            <delete-folder-popup
+              v-if="isShowDeletePopup === true"
+              :data-theme="currentTheme"
+              :item="item._id"
+              @close="isShowDeletePopup = $event"
+            ></delete-folder-popup>
+          </transition>
         </div>
 
         <div class="c_3 mb_3">
@@ -65,11 +88,6 @@
         :data-theme="currentTheme"
         @closePopup="isShowCreateGroup = $event"
       ></create-folder-popup>
-      <delete-folder-popup
-        v-if="isShowDeletePopup === true"
-        :data-theme="currentTheme"
-        @close="isShowDeletePopup = $event"
-      ></delete-folder-popup>
     </transition>
   </div>
 </template>
@@ -95,11 +113,18 @@ export default {
   computed: {
     currentTheme() {
       return this.$store.getters.themeName;
+    },
+    categoryDefault() {
+      return this.$store.getters.allCategoryDefault;
     }
   },
   methods: {
-    showInfoFolder() {
-      this.$router.push({ name: "simple_edit" });
+    showInfoFolder(itemId) {
+      this.$store.dispatch("getInfoCategoryDefault", itemId);
+      this.$router.push({ name: "simple_edit", params: { id: itemId } });
+    },
+    deleteFolder(val) {
+      this.$store.dispatch("deleteCategoryDefault", val);
     }
   }
 };

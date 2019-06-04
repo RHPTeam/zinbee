@@ -83,7 +83,7 @@ const generalRouter = {
           component: require("@/views/admin/simpledata/folder").default
         },
         {
-          path: "edit",
+          path: "edit/:id",
           name: "simple_edit",
           component: require("@/views/admin/simpledata/detail").default
         }

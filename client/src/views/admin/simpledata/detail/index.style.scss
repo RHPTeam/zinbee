@@ -11,6 +11,19 @@ $row-bg: #f4f2f1;
       padding: .5rem 1rem;
     }
   }
+  .name {
+    input {
+      width: 40%;
+      height: 38px;
+      border-radius: .625rem;
+      border: 0;
+      padding-left: 2rem;
+      &:hover, &:focus {
+        box-shadow: none;
+        outline: 0;
+      }
+    }
+  }
 }
 .desc {
   span {

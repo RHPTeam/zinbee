@@ -1,33 +1,30 @@
 <template>
   <div>
-    <div v-if="!item"></div>
+    <div v-if="!post"></div>
     <div v-else class="flex-table row" role="rowgroup">
       <div class="flex-row first" role="cell">
-        <div v-if="item.content && item.title.length > 0">{{ item.title }}</div>
+        <div v-if="post && post.title.length > 0">{{ post.title }}</div>
       </div>
       <div
         class="flex-row content"
         role="cell"
-        v-if="item.content && item.content.length > 0"
+        v-if="post && post.content.length > 0"
       >
-        <div class="item--content" v-html="item.content.slice(0, 38)"></div>
+        <div class="item--content" v-html="post.content.slice(0, 38)"></div>
       </div>
       <div class="flex-row action" role="cell">
         <div class="d_flex justify_content_center">
-          <span
-            class="checked"
-            v-if="
-              infoCateDefault.map(category => category._id).includes(item._id)
-            "
-          >
-            Đã chọn
-          </span>
           <button
-            v-else
-            class="btn btn_danger ml_3"
-            @click="pushContentToCategory(item._id)"
+            class="btn btn_warning ml_3"
+            @click="redirectEditPost(post._id)"
           >
-            Chọn
+            Sửa
+          </button>
+          <button
+            class="btn btn_danger ml_3"
+            @click="deleteContentToCategory(post._id)"
+          >
+            Xóa
           </button>
         </div>
       </div>
@@ -38,16 +35,21 @@
 <script>
 export default {
   props: {
-    item: Object,
-    infoCateDefault: Array
+    post: Object
   },
   methods: {
-    pushContentToCategory(val) {
+    deleteContentToCategory(val) {
       const dataSender = {
         cateId: this.$route.params.id,
         postId: val
       };
-      this.$store.dispatch("updatePostToCategory", dataSender);
+      this.$store.dispatch("deletePostFromCategory", dataSender);
+    },
+    redirectEditPost(val) {
+      this.$router.push({
+        name: "libraries_details",
+        params: { id: val }
+      });
     }
   }
 };
@@ -55,7 +57,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "../index.style";
-.item--content {
-  width: 100%;
-}
 </style>

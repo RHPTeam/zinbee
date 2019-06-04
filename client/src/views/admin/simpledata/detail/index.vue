@@ -3,21 +3,26 @@
     <!-- Start: Select List content simple data -->
     <div class="list mb_3" v-if="isShowResultDefault === false">
       <div class="header mb_4">
-        <span class="add" @click="isShowResultDefault = true">
+        <span class="add" @click="comeBackToCategoryDetail">
           Xong
         </span>
       </div>
+
+      <h3 class="py_3">
+        Chọn bài viết cho danh mục {{ infoCateDefault.title }}
+      </h3>
+
       <div class="table-container" role="table" aria-label="Destinations">
         <div class="flex-table header" role="rowgroup">
           <div class="flex-row first" role="columnheader">Tiêu đề</div>
           <div class="flex-row content" role="columnheader">Nội dung</div>
           <div class="flex-row action" role="columnheader">Hành động</div>
         </div>
-        <!--        <div v-if="this.$store.getters.statusLib === 'loading'">-->
-        <!--          <loading-component />-->
-        <!--        </div>-->
-        <div>
-          <item />
+        <div v-if="!allPost">
+          <loading-component />
+        </div>
+        <div v-else v-for="(item, index) in allPost" :key="`i-${index}`">
+          <item :item="item" :infoCateDefault="infoCateDefault.postList" />
         </div>
       </div>
     </div>
@@ -30,18 +35,27 @@
           >Thêm bài viết</span
         >
       </div>
-
+      <div class="name">
+        <input type="text" placeholder="Tên thư mục"  v-model="infoCateDefault.title" @keydown.enter="updateTitleCategories" />
+      </div>
+      <h3 class="py_3">
+        Danh sách bài viết trong danh mục
+      </h3>
       <div class="table-container" role="table" aria-label="Destinations">
         <div class="flex-table header" role="rowgroup">
           <div class="flex-row first" role="columnheader">Tiêu đề</div>
           <div class="flex-row content" role="columnheader">Nội dung</div>
           <div class="flex-row action" role="columnheader">Hành động</div>
         </div>
-        <!--        <div v-if="this.$store.getters.statusLib === 'loading'">-->
-        <!--          <loading-component />-->
-        <!--        </div>-->
-        <div>
-          <item />
+        <div v-if="infoCateDefault.postList && infoCateDefault.postList.length === 0" class="d_flex align_items_center justify_content_center py_3">
+          Chưa có bài viết nào
+        </div>
+        <div
+          v-else
+          v-for="(post, index) in infoCateDefault.postList"
+          :key="`p-${index}`"
+        >
+          <item-cate :post="post" />
         </div>
       </div>
     </div>
@@ -51,18 +65,38 @@
 
 <script>
 import Item from "./item";
+import ItemCate from "./itemcate";
 export default {
   components: {
-    Item
+    Item,
+    ItemCate
   },
   data() {
     return {
       isShowResultDefault: true
     };
   },
+  computed: {
+    infoCateDefault() {
+      if (this.$store.getters.infoCateDefault === undefined) return;
+      return this.$store.getters.infoCateDefault;
+    },
+    allPost() {
+      return this.$store.getters.allPostLibraries;
+    },
+    listPost() {
+      return this.$store.getters.listPost;
+    }
+  },
   methods: {
     comeBackFolder() {
       this.$router.push({ name: "simple_data" });
+    },
+    async comeBackToCategoryDetail() {
+      this.isShowResultDefault = true;
+    },
+    updateTitleCategories(){
+      this.$store.dispatch("updateTitleCategoryDefault", this.infoCateDefault);
     }
   }
 };

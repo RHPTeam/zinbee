@@ -15,7 +15,7 @@ router
   .delete( CategoryDefaultController.delete );
 
 router
-  .route( "/:categoryId/post" )
+  .route( "/:categoryId/post/:postId" )
   .post( CategoryDefaultController.createPostByCategory )
   .delete( CategoryDefaultController.removePostByCategory );
 module.exports = router;

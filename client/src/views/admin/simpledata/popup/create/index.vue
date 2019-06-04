@@ -9,6 +9,7 @@
             type="text"
             class="form_control"
             placeholder="Nhập tên thư mục"
+            v-model="title"
           />
         </div>
         <!-- End: Modal Body -->
@@ -34,11 +35,21 @@ export default {
   props: {
     currentTheme: String
   },
+  data() {
+    return {
+      title: ""
+    };
+  },
   methods: {
     close() {
       this.$emit("closePopup", false);
     },
-    createNewFolder() {}
+    async createNewFolder() {
+      await this.$store.dispatch("createNewCategoryDefault", {
+        title: this.title
+      });
+      this.close();
+    }
   }
 };
 </script>
