@@ -36,7 +36,12 @@
         >
       </div>
       <div class="name">
-        <input type="text" placeholder="Tên thư mục"  v-model="infoCateDefault.title" @keydown.enter="updateTitleCategories" />
+        <input
+          type="text"
+          placeholder="Tên thư mục"
+          v-model="infoCateDefault.title"
+          @keydown.enter="updateTitleCategories"
+        />
       </div>
       <h3 class="py_3">
         Danh sách bài viết trong danh mục
@@ -47,7 +52,12 @@
           <div class="flex-row content" role="columnheader">Nội dung</div>
           <div class="flex-row action" role="columnheader">Hành động</div>
         </div>
-        <div v-if="infoCateDefault.postList && infoCateDefault.postList.length === 0" class="d_flex align_items_center justify_content_center py_3">
+        <div
+          v-if="
+            infoCateDefault.postList && infoCateDefault.postList.length === 0
+          "
+          class="d_flex align_items_center justify_content_center py_3"
+        >
           Chưa có bài viết nào
         </div>
         <div
@@ -95,7 +105,7 @@ export default {
     async comeBackToCategoryDetail() {
       this.isShowResultDefault = true;
     },
-    updateTitleCategories(){
+    updateTitleCategories() {
       this.$store.dispatch("updateTitleCategoryDefault", this.infoCateDefault);
     }
   }

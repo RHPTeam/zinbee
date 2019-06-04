@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-
 import AccountStore from "./modules/account.store";
 import CategoryDefault from "./modules/categorydefault.store";
 import DashBoard from "./modules/dashboard.store";

@@ -34,9 +34,7 @@ export default {
     close() {
       this.$emit("close", false);
     },
-    deleteFolder() {
-      console.log(this.item);
-    }
+    deleteFolder() {}
   }
 };
 </script>
