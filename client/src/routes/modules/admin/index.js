@@ -74,7 +74,7 @@ const generalRouter = {
       path: "simple-data",
       name: "simple_data",
       component: require("@/views/admin/simpledata").default
-    },
+    }
   ]
 };
 
