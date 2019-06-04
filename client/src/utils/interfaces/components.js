@@ -31,6 +31,7 @@ Vue.component("IconDelete", () => import("@/components/icons/IconDelete"));
 Vue.component("IconEdit", () => import("@/components/icons/IconEdit"));
 Vue.component("IconEditInfo", () => import("@/components/icons/IconEditInfo"));
 Vue.component("IconEnvelope", () => import("@/components/icons/IconEnvelope"));
+Vue.component("IconFolder", () => import("@/components/icons/IconFolder"));
 Vue.component("IconFilter", () => import("@/components/icons/IconFilter"));
 Vue.component("IconFriend", () => import("@/components/icons/IconFriend"));
 Vue.component("IconFriendTag", () =>
