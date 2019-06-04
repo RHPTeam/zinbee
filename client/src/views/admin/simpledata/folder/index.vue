@@ -20,7 +20,10 @@
               </icon-base>
             </div>
             <div class="desc">Tên folder</div>
-            <div class="above position_absolute" @click="isShowDeletePopup = true">
+            <div
+              class="above position_absolute"
+              @click="isShowDeletePopup = true"
+            >
               <icon-base
                 class="icon--remove"
                 icon-name="plus"
@@ -96,9 +99,9 @@ export default {
   },
   methods: {
     showInfoFolder() {
-      this.$router.push({name: "simple_edit"});
+      this.$router.push({ name: "simple_edit" });
     }
-  },
+  }
 };
 </script>
 

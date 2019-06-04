@@ -33,8 +33,7 @@ export default {
     close() {
       this.$emit("close", false);
     },
-    createNewFolder() {
-    }
+    createNewFolder() {}
   }
 };
 </script>

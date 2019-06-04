@@ -38,8 +38,7 @@ export default {
     close() {
       this.$emit("closePopup", false);
     },
-    createNewFolder() {
-    }
+    createNewFolder() {}
   }
 };
 </script>
