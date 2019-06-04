@@ -8,7 +8,7 @@
 export default {
   async created() {
     await localStorage.clear();
-    this.$router.push({ name: "signin" });
+    this.$router.push({ name: "user_signin" });
   }
 };
 </script>
