@@ -1,0 +1,150 @@
+<template>
+  <div class="content--header-help">
+    <div class="ct">
+      <div class="r mx_0 mb_3">
+        <!-- Start header logo help   -->
+        <div class="c_md_3">
+          <div class="logo d_flex align_items_center">
+            <icon-base
+              icon-name="logo"
+              width="40px"
+              height="40px"
+              viewBox="0 0 200 200"
+            >
+              <icon-logo-icon-white />
+            </icon-base>
+            <div class="center--support ml_2">
+              Trung tâm trợ giúp
+            </div>
+          </div>
+        </div>
+        <!-- End header logo help   -->
+        <!-- Start search help   -->
+        <div class="c_md_6">
+          <div class="wrap--search">
+            <div class="search">
+              <icon-base
+                icon-name="search"
+                width="26"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <icon-input-search />
+              </icon-base>
+              <input
+                type="text"
+                name=""
+                id=""
+                placeholder="Chào ABC, chúng tôi có thể giúp gì cho bạn?"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- End search help   -->
+        <!-- Start back facebook   -->
+        <div class="c_md_3 d_flex align_items_center">
+          <div class="content--back">
+            <div class="icon">
+              <icon-base
+                icon-name="back"
+                width="25"
+                height="22"
+                viewBox="0 0 25 25"
+              >
+                <icon-logout />
+              </icon-base>
+            </div>
+            <router-link to="/">
+              <div class="text">
+                Quay lại Zinbee
+              </div>
+            </router-link>
+          </div>
+        </div>
+        <!-- End back facebook   -->
+      </div>
+
+      <!-- Start: Navigation help-->
+      <div class="wrap--nav">
+        <nav>
+          <ul class="menu--help d_inline_flex">
+            <!-- Start: Home -->
+            <li class="menu--help-item flex_fill item--active">
+              <a href="">Trang chủ</a>
+            </li>
+            <!-- End: Home -->
+            <!-- Start: Menu Items Loop -->
+            <li
+              class="menu--help-item flex_fill"
+              v-for="(category, index) in navigationCategories.slice(0, 4)"
+              :key="index"
+            >
+              {{ category.title }}
+              <ul class="dropdown--menu">
+                <li
+                  class="dropdown--menu-item"
+                  v-for="(categoryChild, cindex) in childrenOfCategory(
+                    category._id
+                  )"
+                  :key="cindex"
+                >
+                  <a href="">{{ categoryChild.title }}</a>
+                </li>
+              </ul>
+            </li>
+            <!-- End: Menu Items Loop -->
+            <!-- Start: Mail -->
+            <li class="menu--help-item flex_fill">
+              <a href="">
+                <div class="mail--help d_flex">
+                  <div class="icon--envelope mr_1">
+                    <icon-base
+                      icon-name="mail"
+                      width="22"
+                      height="20"
+                      viewBox="0 0 22 22"
+                    >
+                      <icon-envelope />
+                    </icon-base>
+                  </div>
+                  <div>Hộp thư hỗ trợ</div>
+                </div>
+              </a>
+            </li>
+            <!-- End: Mail -->
+          </ul>
+        </nav>
+      </div>
+      <!-- End: Navigation help-->
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  computed: {
+    allHelpCategories() {
+      return this.$store.getters.allHelpCategories;
+    },
+    navigationCategories() {
+      return this.allHelpCategories.filter(category => {
+        return category.level === 0;
+      });
+    }
+  },
+  async created() {
+    await this.$store.dispatch("getAllHelpCategories");
+  },
+  methods: {
+    childrenOfCategory(id) {
+      return this.allHelpCategories.filter(category => {
+        return category.parent === id;
+      });
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "./index.style";
+</style>

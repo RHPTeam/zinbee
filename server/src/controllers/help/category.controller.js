@@ -36,9 +36,11 @@ module.exports = {
 
     if ( req.query._id ) {
       data = await HelpCategory.findOne( { "_id": req.query._id } ).lean();
-    } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
+    } else if ( req.query._type === "rs" ) {
       data = await HelpCategory.find( {} ).lean();
       data = getNestedChildren( data, "" );
+    } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
+      data = await HelpCategory.find( {} ).lean();
     }
 
     res
