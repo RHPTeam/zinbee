@@ -11,6 +11,7 @@ router.use( "/signin", require( "./modules/signin.route" ) );
 router.use( "/signup", require( "./modules/signup.route" ) );
 router.use( "/users", require( "./modules/account.route" ) );
 router.use( "/keywords", require( "./modules/keyword.route" ) );
+router.use( "/category-default", require( "./modules/categorydefault.route" ) );
 
 // Help Route
 router.use( "/help", require( "./modules/help/help.route" ) );

@@ -12,6 +12,7 @@ import signupRouterAdmin from "./modules/admin/signup";
 import userGeneralRouter from "./modules/user";
 import signInRouter from "./modules/user/signin";
 import signUpRouter from "./modules/user/signup";
+import redirectRouter from "./modules/user/redirect";
 import changePasswordRouter from "./modules/user/password";
 /**
  * Router for Help
@@ -27,6 +28,7 @@ export default new Router({
     signupRouterAdmin,
     signInRouter,
     signUpRouter,
+    redirectRouter,
     changePasswordRouter
   ]
 });
