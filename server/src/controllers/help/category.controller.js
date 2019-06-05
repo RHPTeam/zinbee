@@ -1,9 +1,9 @@
 /**
  * Controller help categories for project
  * author: hoc-anms
- * updater:
+ * updater: Tran Toan (Sky Albert)
  * date up: 15/05/2019
- * date to:
+ * date to: 04/06/2019
  * team: BE-RHP
  */
 
@@ -12,20 +12,33 @@ const HelpCategory = require( "../../models/help/category.model" );
 
 const jsonResponse = require( "../../configs/response" );
 
+let getNestedChildren = ( arr, parent ) => {
+  if ( arr.length > 0 ) {
+    const out = [];
+
+    for ( let i in arr ) {
+      if ( arr[ i ].parent.toString() === parent.toString() ) {
+        let children = getNestedChildren( arr, arr[ i ]._id );
+
+        if ( children.length ) {
+          arr[ i ].children = children;
+        }
+        out.push( arr[ i ] );
+      }
+    }
+    return out;
+  }
+};
+
 module.exports = {
   "index": async ( req, res ) => {
     let data;
 
     if ( req.query._id ) {
       data = await HelpCategory.findOne( { "_id": req.query._id } ).lean();
-      if ( data.parent !== "" ) {
-        const parentInfo = await HelpCategory.findOne( { "_id": data.parent } );
-
-        data.parent = {
-          "_id": parentInfo._id,
-          "title": parentInfo.title
-        };
-      }
+    } else if ( req.query._type === "rs" ) {
+      data = await HelpCategory.find( {} ).lean();
+      data = getNestedChildren( data, "" );
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await HelpCategory.find( {} ).lean();
     }

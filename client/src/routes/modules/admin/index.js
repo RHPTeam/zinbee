@@ -1,5 +1,8 @@
 const generalRouter = {
   path: "/admin",
+  meta: {
+    requiredAdmin: true
+  },
   component: require("@/views/admin/layout").default,
   children: [
     {
@@ -67,6 +70,22 @@ const generalRouter = {
               component: require("@/views/admin/help/blogs/action").default
             }
           ]
+        }
+      ]
+    },
+    {
+      path: "simple-data",
+      component: require("@/views/admin/simpledata").default,
+      children: [
+        {
+          path: "",
+          name: "simple_data",
+          component: require("@/views/admin/simpledata/folder").default
+        },
+        {
+          path: "edit/:id",
+          name: "simple_edit",
+          component: require("@/views/admin/simpledata/detail").default
         }
       ]
     }

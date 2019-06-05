@@ -1,7 +1,16 @@
 <template>
   <div class="popular">
     <div class="top d_flex align_items_center">
-      <div class="categories mr_5">
+      <div class="categories mr_3">
+        <router-link
+          tag="button"
+          class="btn btn_light"
+          :to="{ name: 'admin_help' }"
+        >
+          Danh muc va bai viet duoc chon
+        </router-link>
+      </div>
+      <div class="categories mr_3">
         <router-link
           tag="button"
           :to="{ name: 'admin_categories' }"
@@ -10,19 +19,19 @@
           Danh mục
         </router-link>
       </div>
-      <div class="blogs mr_5">
+      <div class="blogs mr_3">
         <router-link tag="button" :to="{ name: 'blogs' }" class="btn btn_light">
           Bài viết
         </router-link>
       </div>
     </div>
-    <div class="header px_4 py_3">
+    <div class="header py_3">
       <!-- Start: Choose 5 blogs popular -->
       <div class="item mb_3">
         <multiselect
           multiple
           label="title"
-          placeholder="Chọn bài viết ..."
+          placeholder="Chọn danh mục ..."
           :options="allCategories"
         />
       </div>
@@ -32,7 +41,7 @@
         <multiselect
           multiple
           label="title"
-          placeholder="Chọn danh mục ..."
+          placeholder="Chọn bài viết ..."
           :options="allBlog"
         />
       </div>
@@ -50,11 +59,14 @@
 export default {
   computed: {
     allCategories() {
-      return this.$store.getters.allCategories;
+      return this.$store.getters.allHelpCategories;
     },
     allBlog() {
       return this.$store.getters.allBlog;
     }
+  },
+  created() {
+    this.$store.dispatch("getAllHelpCategories");
   }
 };
 </script>

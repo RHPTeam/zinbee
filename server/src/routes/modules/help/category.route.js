@@ -16,4 +16,5 @@ router
   .patch( auth, permission, HelpCategoryController.update )
   .post( auth, permission, HelpCategoryController.create )
   .delete( auth, permission, HelpCategoryController.delete );
+
 module.exports = router;

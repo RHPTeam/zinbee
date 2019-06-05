@@ -64,6 +64,17 @@ export default {
             viewBox: "0 0 24 24"
           },
           to: "admin_help"
+        },
+        {
+          text: "Dữ liệu mẫu",
+          icon: {
+            iconName: "folder",
+            tagName: "icon-folder",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 540 540"
+          },
+          to: "simple_data"
         }
       ]
     };
