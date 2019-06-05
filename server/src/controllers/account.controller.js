@@ -185,6 +185,70 @@ module.exports = {
       "domain": process.env.APP_ENV === "production" ? `${optimalServer.info.domain}/#/` : `${optimalServer.info.domain}:${optimalServer.info.clientPort}/#/`
     } ) );
   },
+  "signUpAccountBackup": async ( objectData ) => {
+    const { name, email, phone, status, expireDate, presenter, other01 } = objectData,
+      isEmailExist = await Account.findOne( { email } ),
+      isPhoneExist = await Account.findOne( { phone } ),
+      memberRole = await Role.findOne( { "level": "Member" } ),
+      optimalServer = await Server.findOne( { "region": 0, "status": 1 } ).sort( { "slot": -1 } ),
+      character = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    let newUser, resSyncNestedServer, isEnvironment, code = "", transporter;
+
+    // Random get six character
+    for ( let i = 0; i < 6; i++ ) {
+      code += character.charAt( Math.floor( Math.random() * character.length ) );
+    }
+    if ( isEmailExist ) {
+      return;
+    } else if ( isPhoneExist ) {
+      return;
+    }
+    newUser = await new Account( { name, email, phone, "password": code, status, expireDate, presenter, other01, "_role": memberRole._id } );
+
+    // Sync with nested server
+    isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup` : `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup`;
+    resSyncNestedServer = await signUpSync( isEnvironment, newUser.toObject() );
+    if ( resSyncNestedServer.data.status !== "success" ) {
+      return;
+    }
+
+    await newUser.save();
+
+    // Push account to server
+    optimalServer.userAmount.push( newUser._id );
+    optimalServer.slot = optimalServer.amountMax - optimalServer.userAmount.length;
+    optimalServer.save();
+    // Send password to user
+    // Use Smtp Protocol to send Email
+    transporter = await mail.createTransport( {
+      "service": "Gmail",
+      "auth": {
+        "user": process.env.MAIL_USERNAME,
+        "pass": process.env.MAIL_PASSWORD
+      }
+    } );
+
+    // Setup template email
+    await transporter.sendMail(
+      {
+        "from": process.env.MAIL_USERNAME,
+        "to": email,
+        "subject": "Zinbee Version Update",
+        "html": `
+      <div>
+        <img src="http://zinbee.vn/assets/landing/image/logo/zinbee.png"> <br>
+        <span style="font-size: 20px">Mật khẩu của bạn sau khi hệ thống update</span><br>
+        <span style="font-size: 20px"><b>Password:<span>${code}</span></b> </span> 
+      </div>`
+      },
+      ( err ) => {
+        if ( err ) {
+          return next( err );
+        }
+      }
+    );
+  },
   "resetPassword": async ( req, res, next ) => {
     const { email } = req.body,
       character = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
