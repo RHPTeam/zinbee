@@ -1,0 +1,17 @@
+.model--content{
+    width: 70%;
+    margin: 0 auto;
+}
+.create--product{
+    .price{
+        .price--info{
+            font-size: 0.875rem;
+            opacity: 0;
+        }
+        input:focus{
+            & + .price--info{
+                opacity: 1;
+            }
+        }
+    }
+}

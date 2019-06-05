@@ -1,0 +1,28 @@
+
+.list--product{
+    .table{
+        border: 1px solid #ccc;
+        .content:last-child{
+            border-bottom: 0;
+        }
+    }
+    .header--title{
+        background: #ffb94a;
+        .kind--of, .category--title, .tag--title {
+            flex: 2;
+        }
+        .price--title {
+            flex: 1;
+        }
+    }
+    .content {
+        border-bottom: 1px solid #ccc;
+        .kind--of--item, .category--item, .tag--item{
+            flex: 2;
+            border-right: 1px solid #ccc;
+        }
+        .price--item{
+            flex: 1;
+        }
+    }
+}
