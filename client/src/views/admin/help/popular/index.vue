@@ -82,7 +82,7 @@ export default {
     categoryDefault() {
       if (this.$store.getters.categoryDefault === undefined) return;
       return this.$store.getters.categoryDefault;
-    },
+    }
   },
   created() {
     this.$store.dispatch("getAllHelpCategories");
@@ -93,7 +93,7 @@ export default {
       const contentId = arr.splice(-1).toString();
       this.$store.dispatch("setIdContentBlog", contentId);
     },
-    updateCategoryPopular(val){
+    updateCategoryPopular(val) {
       const arr = val.map(item => item._id);
       const contentId = arr.splice(-1).toString();
       this.$store.dispatch("setIdCategoryPopular", contentId);
