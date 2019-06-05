@@ -95,7 +95,7 @@ export default {
       });
       return newCategory;
     },
-    allBlog(){
+    allBlog() {
       return this.$store.getters.allBlog;
     }
   },
@@ -116,7 +116,7 @@ export default {
     updateParent(val) {
       this.categories.parent = val._id;
     },
-    updateBlogHelp(val){
+    updateBlogHelp(val) {
       const arr = val.map(item => item._id);
       const newArr = arr.slice(-1).toString();
       this.categories._blogHelp.push(newArr);

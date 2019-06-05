@@ -146,7 +146,7 @@ export default {
     goToHelpHome() {
       this.$router.push({ name: "help" });
     },
-    async showInfoCategory(val){
+    async showInfoCategory(val) {
       await this.$store.dispatch("setHelpDefault", 1);
       await this.$store.dispatch("setHelpCategoryChildrenLevel", val);
       this.$router.push({

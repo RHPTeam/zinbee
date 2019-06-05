@@ -89,7 +89,7 @@ const actions = {
     const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
     commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
   },
-  setHelpCategoryChildrenLevel: async ({commit}, payload) => {
+  setHelpCategoryChildrenLevel: async ({ commit }, payload) => {
     commit("setCategoryChildren", payload);
   }
 };

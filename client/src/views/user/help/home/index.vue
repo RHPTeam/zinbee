@@ -15,7 +15,10 @@
                 v-for="(item, index) in popularHelp.popular_blog"
                 :key="`c-${index}`"
               >
-                <a @click="showDetailBlog(item._id)" v-html="item.content.slice(0, 120)"></a>
+                <a
+                  @click="showDetailBlog(item._id)"
+                  v-html="item.content.slice(0, 120)"
+                ></a>
               </li>
             </ul>
             <div v-else>Chức năng đang nâng cấp vui lòng quay lại sau</div>
@@ -161,7 +164,7 @@ export default {
       await this.$store.dispatch("getBlogById", val);
       this.$router.push({
         name: "help_detail",
-        params: { id: val}
+        params: { id: val }
       });
     }
   }

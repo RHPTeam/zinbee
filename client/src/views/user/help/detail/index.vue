@@ -40,7 +40,9 @@
         <div class="c_9 content px_4 pt_5">
           <!-- Start: Blog Detail  -->
           <div class="blog--detail" v-if="helpDefault === 1">
-            <h2 class="title--question">{{ getBlogFirstCateChildren.title }}</h2>
+            <h2 class="title--question">
+              {{ getBlogFirstCateChildren.title }}
+            </h2>
             <div class="text" v-html="getBlogFirstCateChildren.content">
               {{ getBlogFirstCateChildren.content }}
             </div>
@@ -71,7 +73,10 @@
             <h4>Bài viết có liên quan</h4>
             <nav v-if="helpDefault === 1">
               <ul v-if="getBlogCateChildren && getBlogCateChildren.length > 0">
-                <li v-for="(post, index) in getBlogCateChildren" :key="`p-${index}`">
+                <li
+                  v-for="(post, index) in getBlogCateChildren"
+                  :key="`p-${index}`"
+                >
                   <a @click="showDetailBlog(post._id)">{{ post.title }}</a>
                 </li>
               </ul>
@@ -124,14 +129,14 @@ export default {
     getBlogFirstCateChildren() {
       if (this.categoryChildren === undefined) return;
       const item = this.categoryChildren.children[0]._blogHelp;
-      if( item === undefined ) return;
+      if (item === undefined) return;
       return item[0];
     },
     helpDefault() {
       return this.$store.getters.helpDefault;
     },
-    helpCategory(){
-      if(this.$store.getters.helpCategory === undefined) return;
+    helpCategory() {
+      if (this.$store.getters.helpCategory === undefined) return;
       return this.$store.getters.helpCategory;
     }
   },
@@ -147,7 +152,7 @@ export default {
         params: { id: val }
       });
     },
-    showInfoCategory(val){
+    showInfoCategory(val) {
       this.$store.dispatch("getHelpCategoryById", val);
     }
   }

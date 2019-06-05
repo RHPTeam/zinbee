@@ -71,7 +71,7 @@ const actions = {
   setIdCategoryPopular: async ({ commit }, payload) => {
     commit("setCategoryDefault", payload);
   },
-  setHelpDefault: async ({commit}, payload) => {
+  setHelpDefault: async ({ commit }, payload) => {
     commit("setHelpDefault", payload);
   }
 };

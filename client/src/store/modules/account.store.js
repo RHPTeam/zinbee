@@ -256,9 +256,9 @@ const actions = {
 
     commit("user_set", result.data.data);
   },
-  getInfoByEmail: async ({commit}, payload) => {
+  getInfoByEmail: async ({ commit }, payload) => {
     commit("auth_request");
-    const result = await  AccountServices.getInfoByEmail(payload);
+    const result = await AccountServices.getInfoByEmail(payload);
     commit("setInfoEmail", result.data.data);
     commit("auth_success");
   }
