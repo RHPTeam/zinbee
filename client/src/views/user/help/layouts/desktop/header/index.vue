@@ -13,7 +13,7 @@
             >
               <icon-logo-icon-white />
             </icon-base>
-            <div class="center--support ml_2">
+            <div class="center--support ml_2" @click="goToHelpHome">
               Trung tâm trợ giúp
             </div>
           </div>
@@ -76,19 +76,21 @@
             <!-- Start: Menu Items Loop -->
             <li
               class="menu--help-item flex_fill"
-              v-for="(category, index) in navigationCategories.slice(0, 4)"
+              v-for="(category, index) in allHelpCategories.slice(0, 4)"
               :key="index"
             >
               {{ category.title }}
-              <ul class="dropdown--menu">
+              <ul
+                class="dropdown--menu"
+                v-if="category.children && category.children.length > 0"
+              >
                 <li
                   class="dropdown--menu-item"
-                  v-for="(categoryChild, cindex) in childrenOfCategory(
-                    category._id
-                  )"
+                  v-for="(categoryChild, cindex) in category.children"
                   :key="cindex"
+                  @click="showInfoCategory(categoryChild)"
                 >
-                  <a href="">{{ categoryChild.title }}</a>
+                  <a>{{ categoryChild.title }}</a>
                 </li>
               </ul>
             </li>
@@ -124,7 +126,7 @@
 export default {
   computed: {
     allHelpCategories() {
-      return this.$store.getters.allHelpCategories;
+      return this.$store.getters.allHelpCategoriesChild;
     },
     navigationCategories() {
       return this.allHelpCategories.filter(category => {
@@ -133,12 +135,23 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch("getAllHelpCategories");
+    await this.$store.dispatch("getAllCategoriesChildren");
   },
   methods: {
     childrenOfCategory(id) {
       return this.allHelpCategories.filter(category => {
         return category.parent === id;
+      });
+    },
+    goToHelpHome() {
+      this.$router.push({ name: "help" });
+    },
+    async showInfoCategory(val) {
+      await this.$store.dispatch("setHelpDefault", 1);
+      await this.$store.dispatch("setHelpCategoryChildrenLevel", val);
+      this.$router.push({
+        name: "help_detail",
+        params: { id: val }
       });
     }
   }

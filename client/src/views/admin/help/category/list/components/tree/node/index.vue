@@ -39,7 +39,10 @@
 
     <!-- START: POPUP update category -->
 
-    <update-category v-if="isShowPopupUpdateCategory === true" />
+    <update-category
+      v-if="isShowPopupUpdateCategory === true"
+      @close="isShowPopupUpdateCategory = $event"
+    />
 
     <!-- END: POPUP update category -->
   </div>

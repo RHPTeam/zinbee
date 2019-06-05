@@ -17,18 +17,30 @@ import changePasswordRouter from "./modules/user/password";
 /**
  * Router for Help
  */
+import helpGeneralRouter from "./modules/user/help";
+
 Vue.use(Router);
 
 export default new Router({
   base: process.env.BASE_URL,
   routes: [
+    /**
+     * Router for Sytem Admin
+     */
     adminGeneralRouter,
-    userGeneralRouter,
     signinRouterAdmin,
     signupRouterAdmin,
+    /**
+     * Router for Sytem Member
+     */
+    userGeneralRouter,
     signInRouter,
     signUpRouter,
     redirectRouter,
-    changePasswordRouter
+    changePasswordRouter,
+    /**
+     * Router for Help
+     */
+    helpGeneralRouter
   ]
 });
