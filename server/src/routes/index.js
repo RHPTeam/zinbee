@@ -20,7 +20,7 @@ router.use( "/help/categories", require( "./modules/help/category.route" ) );
 
 // Market Route
 router.use( "/market/categories", require( "./modules/market/category.route" ) );
-// router.use( "/market/products", require( "./modules/market/product.route" ) );
+router.use( "/market/products", require( "./modules/market/product.route" ) );
 
 // Server Route
 router.use( "/vps", auth, permission, require( "./modules/server.route" ) );

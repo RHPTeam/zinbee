@@ -8,31 +8,23 @@
           <div class="btn btn_info" @click="showOptionsCampaign">Campaign</div>
         </div>
         <div class="form_control py_0 post" v-if="isOptionsPost === true">
-          <multiselect
-            label="name"
-            :value="posts"
-            placeholder="Chọn bài de đăng..."
-          />
+          <multiselect label="name" placeholder="Chọn bài de đăng..." />
         </div>
         <div
           class="form_control py_0 campaign"
           v-if="isOptionsCapaign === true"
         >
-          <multiselect
-            label="name"
-            :value="campaign"
-            placeholder="Chọn bài de đăng..."
-          />
+          <multiselect label="name" placeholder="Chọn bài de đăng..." />
         </div>
+      </div>
+      <div class="form_group title">
+        <label for="" class="">Tieu de:</label>
+        <input type="text" class="form_control" v-model="titleProduct" />
       </div>
       <div class="form_group category">
         <label for="" class="">Danh muc:</label>
         <div class="form_control py_0">
-          <multiselect
-            label="name"
-            :value="category"
-            placeholder="Chọn danh mục đăng bài..."
-          />
+          <multiselect label="name" placeholder="Chọn danh mục đăng bài..." />
         </div>
       </div>
       <div class="form_group d_flex align_items_center price">
@@ -89,32 +81,7 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      posts: [{ name: "Van hoc" }],
-      category: [{ name: "Post" }],
-      campaign: [{ name: "campaign" }],
-      isOptionsPost: false,
-      isOptionsCapaign: false
-    };
-  },
-  methods: {
-    createProduct() {
-      this.$router.push({ name: "manage_product" });
-    },
-    showOptionsPost() {
-      this.isOptionsPost = true;
-      this.isOptionsCapaign = false;
-    },
-    showOptionsCampaign() {
-      this.isOptionsCapaign = true;
-      this.isOptionsPost = false;
-    }
-  }
-};
-</script>
+<script src="./index.script"></script>
 
 <style lang="scss" scoped>
 @import "./index.style";
