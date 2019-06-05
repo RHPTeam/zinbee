@@ -27,27 +27,35 @@
     </div>
     <div class="header py_3">
       <!-- Start: Choose 5 blogs popular -->
+      <h4 class="py_3">Chọn 4 danh mục phổ biến nhất</h4>
       <div class="item mb_3">
         <multiselect
           multiple
           label="title"
           placeholder="Chọn danh mục ..."
           :options="allCategories"
+          @input="updateCategoryPopular"
+          v-model="popularHelp.popular_section"
         />
       </div>
       <!-- End: Choose 5 blogs popular -->
       <!-- Start: Choose categories -->
+      <h4 class="py_3">Chọn 5 bài viết phổ biến nhất</h4>
       <div class="item mb_3">
         <multiselect
           multiple
           label="title"
           placeholder="Chọn bài viết ..."
           :options="allBlog"
+          @input="updateBlogPopular"
+          v-model="popularHelp.popular_blog"
         />
       </div>
       <!-- End: Choose categories -->
       <div class="form_group">
-        <button class="btn btn_primary form_control">Cập nhật</button>
+        <button class="btn btn_primary form_control" @click="updatePopularHelp">
+          Cập nhật
+        </button>
       </div>
     </div>
     <div class="body">
@@ -63,10 +71,40 @@ export default {
     },
     allBlog() {
       return this.$store.getters.allBlog;
-    }
+    },
+    popularHelp() {
+      return this.$store.getters.popularHelp;
+    },
+    contentDefault() {
+      if (this.$store.getters.contentDefault === undefined) return;
+      return this.$store.getters.contentDefault;
+    },
+    categoryDefault() {
+      if (this.$store.getters.categoryDefault === undefined) return;
+      return this.$store.getters.categoryDefault;
+    },
   },
   created() {
     this.$store.dispatch("getAllHelpCategories");
+  },
+  methods: {
+    updateBlogPopular(val) {
+      const arr = val.map(item => item._id);
+      const contentId = arr.splice(-1).toString();
+      this.$store.dispatch("setIdContentBlog", contentId);
+    },
+    updateCategoryPopular(val){
+      const arr = val.map(item => item._id);
+      const contentId = arr.splice(-1).toString();
+      this.$store.dispatch("setIdCategoryPopular", contentId);
+    },
+    updatePopularHelp() {
+      const dataSender = {
+        listContent: this.contentDefault,
+        listCategory: this.categoryDefault
+      };
+      this.$store.dispatch("updatePopularHelp", dataSender);
+    }
   }
 };
 </script>

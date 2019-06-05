@@ -21,6 +21,7 @@ export default {
   },
   created() {
     this.$store.dispatch("getAllBlog");
+    this.$store.dispatch("getPopularHelp");
     // this.$store.dispatch("getAllCategories");
   }
 };

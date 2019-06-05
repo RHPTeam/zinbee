@@ -8,49 +8,38 @@
  */
 
 const Help = require( "../../models/help/Help.model" );
-const BlogHelp = require( "../../models/help/Blog.model" );
 
 const jsonResponse = require( "../../configs/response" );
 
 module.exports = {
-  /**
-   * Get help (all or query)
-   * @param req
-   * @param res
-   * @returns {Promise<void>}
-   */
-  "index": async ( req, res ) => {
-    const data = await Help.find( {} ).lean();
+  "getHelpHomePageDefault": async ( req, res ) => {
+    const data = await Help.findOne( { "name": "help_homepage" } ).populate( "popular_blog" ).populate( "popular_section" ).lean();
 
     res
       .status( 200 )
-      .json( jsonResponse( "success", data[ 0 ] ) );
+      .json( jsonResponse( "success", data ) );
   },
-  /**
-   * Update help
-   * @param req
-   * @param res
-   * @returns {Promise<void>}
-   */
   "update": async ( req, res ) => {
-    const help = await Help.find( {} )[ 0 ];
-      
-    if ( req.body.popular_blog && req.body.popular_blog.length <= 5 ) {
-      if ( help.popular_blog.length + req.body.popular_blog.length > 5 ) {
-        const temp = help.popular_blog.length + req.body.popular_blog.length - 5;
+    let helpHomePageInfo = await Help.findOne( { "name": "help_homepage" } );
+    
+    if ( !helpHomePageInfo ) {
+      const newHelpHomePage = new Help( {
+        "name": "help_homepage",
+        "text": "Help Homepage Default"
+      } );
 
-        for ( let i = help.popular_blog.length; i > 5 - temp; i-- ) {
-          help.popular_blog.pull( help.popular_blog[ i ] );
-        }
-        await help.save();
+      await newHelpHomePage.save();
 
-      }
-      await Promise.all( help.vote.map( ( vote ) => {
-        delete vote._id;
-      } ) );
-      req.body.vote = req.body.vote.concat( findBlogHelp.vote );
+      helpHomePageInfo = newHelpHomePage;
+
     }
-    res.status( 201 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( help._id, { "$set": req.body }, { "new": true } ) ) );
+      
+    if ( req.body.popular_blog && req.body.popular_blog.length > 5 ) {
+      return res.status( 403 ).json( { "status": "fail", "popular_blog": "Bài viết phổ biến không được quá 5 bài" } );
+    } else if ( req.body.popular_section && req.body.popular_section.length > 4 ) {
+      return res.status( 403 ).json( { "status": "fail", "popular_section": "Danh mục phổ biến không được quá 4 danh mục" } );
+    }
+    res.status( 201 ).json( jsonResponse( "success", await Help.findByIdAndUpdate( helpHomePageInfo._id, { "$set": req.body }, { "new": true } ) ) );
 
   }
 };

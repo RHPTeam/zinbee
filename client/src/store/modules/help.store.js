@@ -1,133 +1,76 @@
-// import HelpServices from "@/services/modules/help.services";
+import HelpServices from "@/services/modules/help.services";
 
-// const state = {
-//   allCategories: [],
-//   categories: [],
-//   helpStatus: "",
-//   allBlog: [],
-//   blog: []
-// };
-// const getters = {
-//   allCategories: state => state.allCategories,
-//   categories: state => state.categories,
-//   helpStatus: state => state.helpStatus,
-//   allBlog: state => state.allBlog,
-//   blog: state => state.blog
-// };
-// const mutations = {
-//   help_request: state => {
-//     state.helpStatus = "loading";
-//   },
-//   help_success: state => {
-//     state.helpStatus = "success";
-//   },
-//   /**
-//    * Help Categories Admin
-//    * Create, show, update, delete
-//    */
-//   setAllCategories: (state, payload) => {
-//     state.allCategories = payload;
-//   },
-//   setCategories: (state, payload) => {
-//     state.categories = payload;
-//   },
-//   /**
-//    * Help Blogs Admin
-//    * Create, show, update, delete
-//    */
-//   setAllBlog: (state, payload) => {
-//     state.allBlog = payload;
-//   },
-//   setBlog: (state, payload) => {
-//     state.blog = payload;
-//   }
-// };
-// const actions = {
-//   /**
-//    * Help Categories Admin
-//    * Create, show, update, delete
-//    */
-//   createNewCategories: async ({ commit }, payload) => {
-//     commit("help_request");
-//     await HelpServices.createCategories(payload);
-//     const result = await HelpServices.getAllCategories();
-//     commit("setAllCategories", result.data.data);
-//     commit("help_success");
-//   },
-//   getAllCategories: async ({ commit }) => {
-//     commit("help_request");
-//     const result = await HelpServices.getAllCategories();
-//     commit("setAllCategories", result.data.data);
-//     commit("help_success");
-//   },
-//   getCategoriesDefault: async ({ commit }) => {
-//     commit("setCategories", {
-//       title: "",
-//       parent: ""
-//     });
-//   },
-//   getCategoriesById: async ({ commit }, payload) => {
-//     commit("help_request");
-//     const result = await HelpServices.getCategoriesById(payload);
-//     commit("setCategories", result.data.data);
-//     commit("help_success");
-//   },
-//   updateCategories: async ({ commit }, payload) => {
-//     await HelpServices.updateCategories(payload._id, payload);
-//     const result = await HelpServices.getAllCategories();
-//     commit("setAllCategories", result.data.data);
-//   },
-//   deleteCategories: async ({ commit }, payload) => {
-//     await HelpServices.deleteCategories(payload);
-//     const result = await HelpServices.getAllCategories();
-//     commit("setAllCategories", result.data.data);
-//   },
-//   /**
-//    * Help Blogs Admin
-//    * Create, show, update, delete
-//    */
-//   createNewBlog: async ({ commit }, payload) => {
-//     commit("help_request");
-//     await HelpServices.createBlog(payload);
-//     const result = await HelpServices.getAllBlog();
-//     commit("setAllBlog", result.data.data);
-//     commit("help_success");
-//   },
-//   getAllBlog: async ({ commit }) => {
-//     commit("help_request");
-//     const result = await HelpServices.getAllBlog();
-//     commit("setAllBlog", result.data.data);
-//     commit("help_success");
-//   },
-//   getBlogDefault: async ({ commit }) => {
-//     commit("setBlog", {
-//       title: "",
-//       content: ""
-//     });
-//   },
-//   getBlogById: async ({ commit }, payload) => {
-//     commit("help_request");
-//     const result = await HelpServices.getBlogById(payload);
-//     commit("setBlog", result.data.data);
-//     commit("help_success");
-//   },
-//   updateBlog: async ({ commit }, payload) => {
-//     commit("help_request");
-//     await HelpServices.updateBlog(payload._id, payload);
-//     const result = await HelpServices.getAllBlog();
-//     commit("setAllBlog", result.data.data);
-//     commit("help_success");
-//   },
-//   deleteBlog: async ({ commit }, payload) => {
-//     await HelpServices.deleteBlog(payload);
-//     const result = await HelpServices.getAllBlog();
-//     commit("setAllBlog", result.data.data);
-//   }
-// };
+const state = {
+  popularHelp: [],
+  contentDefault: [],
+  categoryDefault: [],
+  helpStatus: ""
+};
+const getters = {
+  helpStatus: state => state.helpStatus,
+  popularHelp: state => state.popularHelp,
+  contentDefault: state => state.contentDefault,
+  categoryDefault: state => state.categoryDefault
+};
+const mutations = {
+  help_request: state => {
+    state.helpStatus = "loading";
+  },
+  help_success: state => {
+    state.helpStatus = "success";
+  },
+  setPopularHelp: (state, payload) => {
+    state.popularHelp = payload;
+  },
+  setContentDefault: (state, payload) => {
+    state.contentDefault.push(payload);
+  },
+  setCategoryDefault: (state, payload) => {
+    state.categoryDefault.push(payload);
+  }
+};
+const actions = {
+  getPopularHelp: async ({ commit }) => {
+    commit("help_request");
+    const result = await HelpServices.index();
+    commit("setPopularHelp", result.data.data);
+    commit("help_success");
+  },
+  updatePopularHelp: async ({ commit }, payload) => {
+    commit("help_request");
+    if (payload.listContent && payload.listCategory) {
+      const objSender = {
+        popular_blog: payload.listContent,
+        popular_section: payload.listCategory
+      };
+      await HelpServices.update(objSender);
+    } else if (payload.listContent === undefined) {
+      const objSender = {
+        popular_section: payload.listCategory
+      };
+      await HelpServices.update(objSender);
+    } else if (payload.listCategory === undefined) {
+      const objSender = {
+        popular_blog: payload.listContent
+      };
+      await HelpServices.update(objSender);
+    }
 
-// export default {
-//   state,
-//   getters,
-//   mutations,
-//   actions
-// };
+    const result = await HelpServices.index();
+    commit("setPopularHelp", result.data.data);
+    commit("help_success");
+  },
+  setIdContentBlog: async ({ commit }, payload) => {
+    commit("setContentDefault", payload);
+  },
+  setIdCategoryPopular: async ({ commit }, payload) => {
+    commit("setCategoryDefault", payload);
+  }
+};
+
+export default {
+  state,
+  getters,
+  mutations,
+  actions
+};
