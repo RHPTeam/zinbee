@@ -5,7 +5,8 @@
         <router-link
           :to="{ name: 'product_create' }"
           class="categories text_left btn btn_primary"
-        >Tao moi</router-link>
+          >Tao moi</router-link
+        >
       </div>
     </div>
     <div class="list--product">
@@ -19,13 +20,17 @@
             <div class="price--title p_2">Price</div>
           </div>
           <div class="d_flex content">
-            <div class="kind--of--item p_2">The loai bai dang >The loai bai dang >The loai bai dang</div>
+            <div class="kind--of--item p_2">
+              The loai bai dang >The loai bai dang >The loai bai dang
+            </div>
             <div class="category--item p_2">Danh muc</div>
             <div class="tag--item p_2">Thuoc tag</div>
             <div class="price--item p_2">Price</div>
           </div>
           <div class="d_flex content">
-            <div class="kind--of--item p_2">The loai bai dang >The loai bai dang >The loai bai dang</div>
+            <div class="kind--of--item p_2">
+              The loai bai dang >The loai bai dang >The loai bai dang
+            </div>
             <div class="category--item p_2">Danh muc</div>
             <div class="tag--item p_2">Thuoc tag</div>
             <div class="price--item p_2">Price</div>
