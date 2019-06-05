@@ -3,8 +3,29 @@ const mongoose = require( "mongoose" ),
 
   MarketProductSchema = new Schema( {
     "name": String,
-    "path": String,
-    "parent": String,
+    "description": String,
+    "content": String,
+    "typeProduct": Number, // 0 - Post | 1 - Campaign
+    "priceCents": String,
+    "numberOfSales": Number,
+    "trending": {
+      "type": Boolean,
+      "default": false
+    },
+    "tags": Array,
+    "attributes": [ {
+      "name": String,
+      "value": String
+    } ],
+    "previews": {
+      "thumbnail": String,
+      "thumbnailUrl": String,
+      "lists": [ {
+        "photoUrl": String,
+        "photoTargetUrl": String
+      } ]
+    },
+    "summary": String,
     "_creator": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"

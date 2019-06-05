@@ -38,8 +38,6 @@ module.exports = {
   "create": async ( req, res ) => {
     let { body } = req, newCategory;
 
-    console.log( body );
-
     // Check catch
     if ( body.name === "" || body.name === undefined ) {
       return res.status( 403 ).json( { "status": "fail", "data": { "name": "Tiêu đề blog không được bỏ trống!" } } );
