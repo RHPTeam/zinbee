@@ -59,7 +59,7 @@ export default {
           parseInt(value.getHours()) <= 23) ||
         (parseInt(value.getHours()) >= 0 && parseInt(value.getHours()) <= 5)
       ) {
-        this.$store.dispatch("changeThemeName", "dark");
+        this.$store.dispatch("changeThemeName", "light");
       }
     }
   },

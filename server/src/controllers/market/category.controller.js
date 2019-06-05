@@ -25,7 +25,7 @@ module.exports = {
     if ( req.query._id ) {
       data = await MarketCategory.findOne( { "_id": req.query._id } );
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await MarketCategory.find( {} ).lean();
+      data = await MarketCategory.find( {} ).populate( { "path": "_creator", "select": "name" } ).populate( { "path": "_editor", "select": "name" } ).lean();
     }
 
     res.status( 200 ).json( { "status": "success", "data": data } );
