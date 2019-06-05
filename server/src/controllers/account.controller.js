@@ -15,7 +15,9 @@ const fs = require( "fs" );
 const jsonResponse = require( "../configs/response" );
 
 const { signToken } = require( "../configs/jwt" );
-const { signUpSync } = require( "../microservices/synchronize/account" );
+const { signUpSync, createNewPasswordSync } = require( "../microservices/synchronize/account" ),
+  mail = require( "nodemailer" ),
+  CronJob = require( "cron" ).CronJob;
 
 module.exports = {
   "changePasswordSync": async ( req, res ) => {
@@ -46,16 +48,6 @@ module.exports = {
     data = await Account.findByIdAndUpdate( id, { "$set": { "status": userInfo.status } }, { "new": true } ).select( "-password" );
 
     res.status( 200 ).json( jsonResponse( "success", data ) );
-  },
-  "createNewPasswordSync": async ( req, res ) => {
-    const { password } = req.body,
-      userInfo = await Account.findOne( { "_id": req.uid } );
-
-    userInfo.password = password;
-
-    await userInfo.save();
-
-    res.send( { "status": "success", "message": "Tạo mới mất khẩu thành công!" } );
   },
   "index": async ( req, res ) => {
     let data;
@@ -192,6 +184,195 @@ module.exports = {
       "message": `${newUser.email} đăng ký thành công!`,
       "domain": process.env.APP_ENV === "production" ? `${optimalServer.info.domain}/#/` : `${optimalServer.info.domain}:${optimalServer.info.clientPort}/#/`
     } ) );
+  },
+  "signUpAccountBackup": async ( objectData ) => {
+    const { name, email, phone, status, expireDate, presenter, other01 } = objectData,
+      isEmailExist = await Account.findOne( { email } ),
+      isPhoneExist = await Account.findOne( { phone } ),
+      memberRole = await Role.findOne( { "level": "Member" } ),
+      optimalServer = await Server.findOne( { "region": 0, "status": 1 } ).sort( { "slot": -1 } ),
+      character = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    let newUser, resSyncNestedServer, isEnvironment, code = "", transporter;
+
+    // Random get six character
+    for ( let i = 0; i < 6; i++ ) {
+      code += character.charAt( Math.floor( Math.random() * character.length ) );
+    }
+    if ( isEmailExist ) {
+      return;
+    } else if ( isPhoneExist ) {
+      return;
+    }
+    newUser = await new Account( { name, email, phone, "password": code, status, expireDate, presenter, other01, "_role": memberRole._id } );
+
+    // Sync with nested server
+    isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup` : `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup`;
+    resSyncNestedServer = await signUpSync( isEnvironment, newUser.toObject() );
+    if ( resSyncNestedServer.data.status !== "success" ) {
+      return;
+    }
+
+    await newUser.save();
+
+    // Push account to server
+    optimalServer.userAmount.push( newUser._id );
+    optimalServer.slot = optimalServer.amountMax - optimalServer.userAmount.length;
+    optimalServer.save();
+    // Send password to user
+    // Use Smtp Protocol to send Email
+    transporter = await mail.createTransport( {
+      "service": "Gmail",
+      "auth": {
+        "user": process.env.MAIL_USERNAME,
+        "pass": process.env.MAIL_PASSWORD
+      }
+    } );
+
+    // Setup template email
+    await transporter.sendMail(
+      {
+        "from": process.env.MAIL_USERNAME,
+        "to": email,
+        "subject": "Zinbee Version Update",
+        "html": `
+      <div>
+        <img src="http://zinbee.vn/assets/landing/image/logo/zinbee.png"> <br>
+        <span style="font-size: 20px">Mật khẩu của bạn sau khi hệ thống update</span><br>
+        <span style="font-size: 20px"><b>Password:<span>${code}</span></b> </span> 
+      </div>`
+      },
+      ( err ) => {
+        if ( err ) {
+          return next( err );
+        }
+      }
+    );
+  },
+  "resetPassword": async ( req, res, next ) => {
+    const { email } = req.body,
+      character = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    let code = "", cronCode, transporter, userAssignCode, userInfo;
+
+    // Check validator
+    if ( !email ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Vui lòng cung cấp email!" } );
+    }
+
+    userInfo = await Account.findOne( { email } );
+
+    // Check errors
+    if ( !userInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Email không tồn tại trên hệ thống!" } );
+    }
+
+    // Random get six character
+    for ( let i = 0; i < 6; i++ ) {
+      code += character.charAt( Math.floor( Math.random() * character.length ) );
+    }
+
+    // Use Smtp Protocol to send Email
+    transporter = await mail.createTransport( {
+      "service": "Gmail",
+      "auth": {
+        "user": process.env.MAIL_USERNAME,
+        "pass": process.env.MAIL_PASSWORD
+      }
+    } );
+
+    // Setup template email
+    await transporter.sendMail(
+      {
+        "from": process.env.MAIL_USERNAME,
+        "to": req.body.email,
+        "subject": "Confirm reset password",
+        "html": `
+      <div>
+        <img src="http://zinbee.vn/assets/landing/image/logo/zinbee.png"> <br>
+        <span style="font-size: 20px">Email tự động xác nhận passcode</span><br>
+        <span style="font-size: 20px"><b>Code: ${code}</b> </span> 
+      </div>`
+      },
+      ( err ) => {
+        if ( err ) {
+          return next( err );
+        }
+      }
+    );
+
+    // Update code temp
+    userAssignCode = await Account.findOneAndUpdate( { "_id": userInfo._id }, { "code": code } ).select( "-password" );
+
+    if ( !userAssignCode ) {
+      return res.status( 404 ).json( { "status": "error", "message": "[Email] Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    }
+
+    res.status( 201 ).json( { "status": "success", "message": `Vui lòng check email ${req.body.email} để lấy code` } );
+
+    cronCode = await new CronJob( "* 5 * * * *", async () => {
+      const user = await Account.findOne( { "_id": userInfo._id } );
+
+      if ( user.code === "" || user.code === null ) {
+        return;
+      }
+
+      await Account.findByIdAndUpdate( userInfo._id, { "$set": { "code": "" } }, { "new": true } ).select( "-password" );
+    }, () => {
+      cronCode.stop();
+    }, true, true, "Asia/Ho_Chi_Minh" );
+  },
+  "checkCode": async ( req, res ) => {
+    const { email, code } = req.body;
+
+    let userInfo;
+
+    if ( !email || !code ) {
+      return res.status( 405 ).json( { "status": "error", "message": "Vui lòng cung cấp mã!" } );
+    }
+
+    userInfo = await Account.findOne( { email, code } );
+
+    if ( !userInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Mã xác thực không chính xác!" } );
+    }
+
+    return res.status( 201 ).json( { "status": "success", "message": `${email} xác thực code thành công!` } );
+  },
+  "createNewPassword": async ( req, res ) => {
+    const { code, email, password } = req.body,
+      userInfo = await Account.findOne( { code, email } ),
+      memberRole = await Role.findOne( { "_id": userInfo._role } ),
+      accountServer = await Server.find( { "userAmount": userInfo._id } ).select( "region" ).lean();
+
+    let resUserSync;
+
+    if ( !userInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Phiên tạo mới mật khẩu của bạn đã hết hạn!" } );
+    }
+
+    // Sync
+    resUserSync = await createNewPasswordSync( accountServer[ 0 ].region, "users/new-password", { password }, { "Authorization": `sid=${signToken( userInfo._id )}; uid=${userInfo._id}; cfr=${memberRole.level};` } );
+    if ( resUserSync.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    }
+
+    userInfo.password = password;
+    // Save
+    await userInfo.save();
+
+    // Reset code
+    await Account.findByIdAndUpdate( userInfo._id, { "$set": { "code": "" } }, { "new": true } ).select( "-password" );
+
+    res.status( 201 ).json( jsonResponse( "Change Password successfully!", null ) );
+  },
+  "getUserInfoLostPass": async ( req, res ) => {
+    const userInfo = await Account.findOne( { "email": req.query.email } ).select( "name email imageAvatar" );
+
+    if ( !userInfo ) {
+      return res.status( 405 ).json( { "status": "error", "message": "Tài khoản không tồn tại!" } );
+    }
+    res.status( 200 ).json( jsonResponse( "success", userInfo ) );
   },
   "signInByAdmin": async ( req, res ) => {
     const { email } = req.body,
