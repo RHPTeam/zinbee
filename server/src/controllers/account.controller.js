@@ -320,7 +320,9 @@ module.exports = {
       await Account.findByIdAndUpdate( userInfo._id, { "$set": { "code": "" } }, { "new": true } ).select( "-password" );
     }, () => {
       cronCode.stop();
-    }, true, true, "Asia/Ho_Chi_Minh" );
+    }, null,
+    true,
+    "Asia/Ho_Chi_Minh" );
   },
   "checkCode": async ( req, res ) => {
     const { email, code } = req.body;
@@ -343,7 +345,7 @@ module.exports = {
     const { code, email, password } = req.body,
       userInfo = await Account.findOne( { code, email } ),
       memberRole = await Role.findOne( { "_id": userInfo._role } ),
-      accountServer = await Server.find( { "userAmount": userInfo._id } ).select( "region" ).lean();
+      vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
 
     let resUserSync;
 
@@ -352,7 +354,8 @@ module.exports = {
     }
 
     // Sync
-    resUserSync = await createNewPasswordSync( accountServer[ 0 ].region, "users/new-password", { password }, { "Authorization": `sid=${signToken( userInfo._id )}; uid=${userInfo._id}; cfr=${memberRole.level};` } );
+    console.log( "du ma sai gon" );
+    resUserSync = await createNewPasswordSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/create-password`, { password }, { "Authorization": `sid=${signToken( userInfo._id )}; uid=${userInfo._id}; cfr=${memberRole.level};` } );
     if ( resUserSync.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
     }

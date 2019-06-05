@@ -18,21 +18,26 @@ export default {
       statusClassPassed: {
         password: false,
         confirmPassword: false
-      },
-      user: {
-        name: "Đặng Yến"
       }
     };
   },
   computed: {
-    // user() {
-    //   return this.$store.getters.userInfo;
-    // }
+    userInfo(){
+      return this.$store.getters.infoUserEmail;
+    },
+    code(){
+      return this.$store.getters.code;
+    }
   },
   methods: {
     async sendPassword() {
-      await this.$store.dispatch( "newPassword", this.reset.password );
-      this.$router.push( "/signin" );
+      const dataSender = {
+        password: this.reset.password,
+        code: this.code,
+        email: this.userInfo.email
+      };
+      await this.$store.dispatch( "getNewPassword", dataSender );
+      this.$router.push({name: "user_signin"});
     }
   },
   watch: {
