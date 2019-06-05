@@ -18,7 +18,8 @@ const state = {
   authError: "",
   authStatus: "",
   roles: [],
-  redirectDomain: ""
+  redirectDomain: "",
+  infoUserEmail: []
 };
 const getters = {
   allUser: state => state.allUser,
@@ -28,7 +29,8 @@ const getters = {
   userDefault: state => state.userDefault,
   roles: state => state.roles,
   redirectDomain: state => state.redirectDomain,
-  token: state => state.token
+  token: state => state.token,
+  infoUserEmail: state => state.infoUserEmail
 };
 const mutations = {
   auth_request: state => {
@@ -54,6 +56,9 @@ const mutations = {
   },
   setRedirectDomain: (state, payload) => {
     state.redirectDomain = payload;
+  },
+  setInfoEmail: (state, payload) => {
+    state.infoUserEmail = payload;
   }
 };
 const actions = {
@@ -250,6 +255,12 @@ const actions = {
     const result = await AccountServices.upload(payload);
 
     commit("user_set", result.data.data);
+  },
+  getInfoByEmail: async ({commit}, payload) => {
+    commit("auth_request");
+    const result = await  AccountServices.getInfoByEmail(payload);
+    commit("setInfoEmail", result.data.data);
+    commit("auth_success");
   }
 };
 

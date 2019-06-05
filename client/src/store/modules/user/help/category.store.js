@@ -5,14 +5,16 @@ const state = {
   helpCategory: [],
   helpCategoryStatus: "",
   allHelpCategoriesChild: [],
-  helpCategoryById: []
+  helpCategoryById: [],
+  categoryChildren: []
 };
 const getters = {
   allHelpCategories: state => state.allHelpCategories,
   helpCategory: state => state.helpCategory,
   helpCategoryStatus: state => state.helpCategoryStatus,
   allHelpCategoriesChild: state => state.allHelpCategoriesChild,
-  helpCategoryById: state => state.helpCategoryById
+  helpCategoryById: state => state.helpCategoryById,
+  categoryChildren: state => state.categoryChildren
 };
 const mutations = {
   help_category_request: state => {
@@ -32,6 +34,9 @@ const mutations = {
   },
   setAllHelpCategoriesChild: (state, payload) => {
     state.allHelpCategoriesChild = payload;
+  },
+  setCategoryChildren: (state, payload) => {
+    state.categoryChildren = payload;
   }
 };
 const actions = {
@@ -54,7 +59,8 @@ const actions = {
   getHelpCategoryDefault: async ({ commit }) => {
     commit("setHelpCategory", {
       title: "",
-      parent: ""
+      parent: "",
+      _blogHelp: []
     });
   },
   getHelpCategoryById: async ({ commit }, payload) => {
@@ -82,6 +88,9 @@ const actions = {
   getAllCategoriesChildren: async ({ commit }) => {
     const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
     commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
+  },
+  setHelpCategoryChildrenLevel: async ({commit}, payload) => {
+    commit("setCategoryChildren", payload);
   }
 };
 

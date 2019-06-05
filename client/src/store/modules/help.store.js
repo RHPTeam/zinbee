@@ -4,13 +4,15 @@ const state = {
   popularHelp: [],
   contentDefault: [],
   categoryDefault: [],
-  helpStatus: ""
+  helpStatus: "",
+  helpDefault: null
 };
 const getters = {
   helpStatus: state => state.helpStatus,
   popularHelp: state => state.popularHelp,
   contentDefault: state => state.contentDefault,
-  categoryDefault: state => state.categoryDefault
+  categoryDefault: state => state.categoryDefault,
+  helpDefault: state => state.helpDefault
 };
 const mutations = {
   help_request: state => {
@@ -27,6 +29,9 @@ const mutations = {
   },
   setCategoryDefault: (state, payload) => {
     state.categoryDefault.push(payload);
+  },
+  setHelpDefault: (state, payload) => {
+    state.helpDefault = payload;
   }
 };
 const actions = {
@@ -65,6 +70,9 @@ const actions = {
   },
   setIdCategoryPopular: async ({ commit }, payload) => {
     commit("setCategoryDefault", payload);
+  },
+  setHelpDefault: async ({commit}, payload) => {
+    commit("setHelpDefault", payload);
   }
 };
 

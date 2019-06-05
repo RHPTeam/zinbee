@@ -6,33 +6,19 @@
         <div class="r m_0 question pd">
           <div class="c_12 c_lg_6 choose">
             <div class="title--home">Câu hỏi bạn có thể có</div>
-            <ul>
-              <li>
-                <a href="">Tên nào được phép trên Facebook?</a>
-              </li>
-              <li>
-                <a href=""
-                  >Làm cách nào để chọn nội dung thông báo tôi sẽ nhận trên
-                  Facebook?</a
-                >
-              </li>
-              <li>
-                <a href=""
-                  >Tôi có thể tìm thấy cài đặt trên Facebook của mình ở đâu?</a
-                >
-              </li>
-              <li>
-                <a href=""
-                  >Làm cách nào để thay đổi hoặc đặt lại mật khẩu Facebook?</a
-                >
-              </li>
-              <li>
-                <a href=""
-                  >Tại sao tôi nhận được thông báo lỗi cho biết tôi không thể
-                  trả lời cuộc trò chuyện trên Facebook?</a
-                >
+            <ul
+              v-if="
+                popularHelp.popular_blog && popularHelp.popular_blog.length > 0
+              "
+            >
+              <li
+                v-for="(item, index) in popularHelp.popular_blog"
+                :key="`c-${index}`"
+              >
+                <a @click="showDetailBlog(item._id)" v-html="item.content.slice(0, 120)"></a>
               </li>
             </ul>
+            <div v-else>Chức năng đang nâng cấp vui lòng quay lại sau</div>
           </div>
           <div
             class="c_12 c_lg_6 descri--img"
@@ -160,6 +146,24 @@ export default {
     return {
       srcDefault: require("@/assets/images/home-help.png")
     };
+  },
+  computed: {
+    popularHelp() {
+      return this.$store.getters.popularHelp;
+    }
+  },
+  async created() {
+    await this.$store.dispatch("getPopularHelp");
+  },
+  methods: {
+    async showDetailBlog(val) {
+      await this.$store.dispatch("setHelpDefault", 0);
+      await this.$store.dispatch("getBlogById", val);
+      this.$router.push({
+        name: "help_detail",
+        params: { id: val}
+      });
+    }
   }
 };
 </script>

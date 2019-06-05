@@ -56,12 +56,12 @@ router.beforeEach((to, from, next) => {
     next("/admin/signin");
   } else if (
     store.getters.mailSender === "" &&
-    to.path === "/reset-password/step-2"
+    to.path === "/reset-password/code"
   ) {
     next("/reset-password");
   } else if (
     store.getters.mailSender === "" &&
-    to.path === "/reset-password/step-3"
+    to.path === "/reset-password/final"
   ) {
     next("/reset-password");
   } else {
