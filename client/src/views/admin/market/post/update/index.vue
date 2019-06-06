@@ -8,7 +8,7 @@
           type="text"
           class="item--input mt_2"
           placeholder="Nhập tên bài viết"
-          v-model="post.title"
+          v-model="marketPost.title"
         />
       </div>
       <!-- End: Name -->
@@ -20,7 +20,7 @@
             tag="div"
             class="contenteditable"
             contenteditable
-            v-model="post.content"
+            v-model="marketPost.content"
             placeholder="Cập nhật nội dung bài viết"
           />
         </div>
@@ -30,53 +30,47 @@
       <div class="item mb_4">
         <span>Hình ảnh</span>
         <image-gallery
-          :photos="post.photos"
+          :photos="marketPost.photos"
           @updatePhotos="updatePhotos($event)"
-          @removePhoto="post.photos = $event"
+          @removePhoto="marketPost.photos = $event"
         ></image-gallery>
       </div>
       <!-- End: Image -->
-      <div class="item" @click="createPost">
-        <button class="btn btn_info">Lưu</button>
+      <div class="item" @click="updatePost">
+        <button class="btn btn_info">Cập nhật</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ImageGallery from "./images";
+import ImageGallery from "../create/images";
 
 export default {
   components: {
     ImageGallery
   },
-  data() {
-    return {
-      post: {
-        title: "",
-        content: "",
-        photos: []
-      }
-    };
-  },
   computed: {
     currentTheme() {
       return this.$store.getters.themeName;
+    },
+    marketPost() {
+      return this.$store.getters.marketPost;
     }
   },
+  async created() {
+    const marketPostId = this.$route.params.marketPostId;
+    await this.$store.dispatch("getMarketPostById", marketPostId);
+  },
   methods: {
-    async createPost() {
-      await this.$store.dispatch("createMarketPost", this.post);
-      // reset post
-      this.post.title = "";
-      this.post.content = "";
-      this.post.photos = [];
+    async updatePost() {
+      await this.$store.dispatch("updateMarketPost", this.marketPost);
       // redirect to post list
       this.$router.push({ name: "market_post" });
     },
     updatePhotos(photos) {
       photos.forEach(item => {
-        this.post.photos.push(item);
+        this.marketPost.photos.push(item);
       });
     }
   }
