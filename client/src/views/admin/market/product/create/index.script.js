@@ -57,7 +57,6 @@ export default {
         updatedAt: this.inforProductById.updatedAt,
         content: this.inforProductById.content,
         summary: this.inforProductById.summary
-
       };
       this.$store.dispatch("createProduct", dataCreate);
       this.$router.push({ name: "manage_product" });
