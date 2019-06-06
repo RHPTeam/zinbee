@@ -16,7 +16,8 @@ const state = {
     description: "",
     tags: [],
     updatedAt: "",
-    content: ""
+    content: "",
+    summary: ""
   }
 };
 const getters = {

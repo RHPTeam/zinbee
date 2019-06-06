@@ -18,14 +18,33 @@ export default {
       return arrCategoriesChildren;
     },
     inforProductById() {
-      return this.$store.getters.inforById;
+      return this.$store.getters.product;
     },
     getProductDefault() {
       return this.$store.dispatch("getProductDefault");
     },
     nodeUpdate() {
       return this.$store.getters.nodeUpdate;
+    },
+    allMarketPosts() {
+      return this.$store.getters.allMarketPosts;
+    },
+    allMarketPostOptions() {
+      let res = [];
+      this.allMarketPosts.forEach(item => {
+        res.push({
+          id: item._id,
+          name: item.title
+        });
+      });
+      return res;
     }
+  },
+  async created() {
+    this.$store.dispatch("getcategories");
+    this.$store.dispatch("getProductDefault");
+    this.$store.dispatch("createAttr");
+    this.$store.dispatch("getAllMarketPosts");
   },
   methods: {
     createProduct() {
@@ -36,10 +55,14 @@ export default {
         description: this.inforProductById.description,
         tags: this.inforProductById.tags,
         updatedAt: this.inforProductById.updatedAt,
-        content: this.inforProductById.content
+        content: this.inforProductById.content,
+        summary: this.inforProductById.summary
       };
       this.$store.dispatch("createProduct", dataCreate);
       this.$router.push({ name: "manage_product" });
+    },
+    setProductContent(post) {
+      this.inforProductById.content = post.id;
     },
     showOptionsPost() {
       this.isOptionsPost = true;
@@ -53,10 +76,5 @@ export default {
       this.$store.dispatch("updateProduct", this.inforProductById);
       this.$router.push({ name: "manage_product" });
     }
-  },
-  created() {
-    this.$store.dispatch("getcategories");
-    this.$store.dispatch("getProductDefault");
-    this.$store.dispatch("createAttr");
   }
 };

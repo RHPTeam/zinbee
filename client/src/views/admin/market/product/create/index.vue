@@ -2,7 +2,7 @@
   <div class="model--wrapper create--product">
     <div class="model--content card p_3">
       <div class="form_group">
-        <label for class>Chon the loai bai de dang:</label>
+        <label for class>Chọn loại sản phẩm</label>
         <div class="mb_2 d_flex">
           <div class="mr_1 btn btn_info" @click="showOptionsPost">Post</div>
           <div class="btn btn_info" @click="showOptionsCampaign">Campaign</div>
@@ -11,10 +11,12 @@
           <multiselect
             label="name"
             class="form_control p_0"
-            placeholder="Chọn bài de đăng..."
+            :options="allMarketPostOptions"
+            placeholder="Chọn bài viết mẫu..."
+            @input="setProductContent($event)"
           />
           <div class="post mt_2">
-            <label for class="">Danh muc:</label>
+            <label for class="">Danh mục</label>
             <div class="form_control py_0">
               <multiselect
                 label="name"
@@ -32,7 +34,7 @@
             placeholder="Chọn chien dich de đăng..."
           />
           <div class="campaign mt_2">
-            <label for class>Danh muc:</label>
+            <label for class>Danh mục</label>
             <div class="py_0">
               <multiselect
                 label="name"
@@ -43,7 +45,7 @@
         </div>
       </div>
       <div class="form_group title">
-        <label for class>Tieu de:</label>
+        <label for class>Tiêu đề</label>
         <input
           type="text"
           class="form_control"
@@ -51,7 +53,7 @@
         />
       </div>
       <div class="form_group d_flex align_items_center price">
-        <label for class="mr_2 m_0">Gia:</label>
+        <label for class="mr_2 m_0">Đơn giá</label>
         <div class="d_inline_flex">
           <input
             type="number"
@@ -61,11 +63,11 @@
             min="10"
             v-model="inforProductById.priceCents"
           />
-          <div class="pl_3 price--info">Don vi nay se tinh bang VND</div>
+          <div class="pl_3 price--info">VNĐ</div>
         </div>
       </div>
       <div class="form_group">
-        <label class>Dac diem:</label>
+        <label class>Đặc điểm</label>
         <div class="d_flex align_items_center mb_2">
           <div class="mr_2">
             <input
@@ -94,18 +96,18 @@
           >
             <icon-plus />
           </icon-base>
-          Thêm dac diem
+          Thêm đặc điểm
         </div>
       </div>
       <div class="form_group">
-        <label for class>Anh dai dien:</label>
+        <label for class>Ảnh đại diện</label>
         <div class>
           <input type="file" class="form_control p_1" />
         </div>
         <div class="contain--images"></div>
       </div>
       <div class="form_group">
-        <label for class>Mo ta bai viet:</label>
+        <label for class>Mô tả</label>
         <div class>
           <textarea
             rows="5"
@@ -116,18 +118,18 @@
         </div>
       </div>
       <div class="form_group">
-        <label for class>Noi dung khi xem thu:</label>
+        <label for class>Nội dung xem trước</label>
         <div class>
           <textarea
             rows="5"
             cols="10"
             class="form_control"
-            v-model="inforProductById.content"
+            v-model="inforProductById.summary"
           ></textarea>
         </div>
       </div>
       <div class="form_group">
-        <label for class>Bai viet thuoc TAG nao:</label>
+        <label for class>Thẻ</label>
         <div class="">
           <taggle
             class="taggle form_control"
@@ -141,14 +143,14 @@
         @click="updateProduct"
         v-if="nodeUpdate === 0"
       >
-        Update
+        Cập nhật
       </div>
       <div
         class="btn btn_success"
         @click="createProduct"
         v-if="nodeUpdate === 1"
       >
-        Tao moi
+        Tạo mới
       </div>
     </div>
   </div>
