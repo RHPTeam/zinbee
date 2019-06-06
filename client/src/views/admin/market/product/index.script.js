@@ -13,7 +13,7 @@ export default {
       await this.$store.dispatch("getInfoProductById", value);
       this.$router.push({ name: "product_create" });
     },
-    deleteProduct(value){
+    deleteProduct(value) {
       this.$store.dispatch("delete", value);
     }
   },

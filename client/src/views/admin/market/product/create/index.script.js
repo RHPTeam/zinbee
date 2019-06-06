@@ -20,7 +20,7 @@ export default {
     inforProductById() {
       return this.$store.getters.inforById;
     },
-    getProductDefault(){
+    getProductDefault() {
       return this.$store.dispatch("getProductDefault");
     },
     nodeUpdate() {
