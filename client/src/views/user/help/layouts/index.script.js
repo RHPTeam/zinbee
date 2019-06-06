@@ -9,13 +9,13 @@ export default {
     currentTheme() {
       return this.$store.getters.themeName;
     },
-    cateParent(){
+    cateParent() {
       return this.$store.getters.parentCate;
     },
-    cateLevel2(){
+    cateLevel2() {
       return this.$store.getters.cateLevel2;
     },
-    cateChildren(){
+    cateChildren() {
       return this.$store.getters.cateChildren;
     }
   },
