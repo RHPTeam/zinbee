@@ -1,8 +1,13 @@
 <template>
-  <div class="content--header-help d_flex justify_content_between align_items_center" :data-theme="currentTheme">
+  <div
+    class="header d_flex justify_content_between align_items_center"
+    :data-theme="currentTheme"
+  >
     <div class="ct">
       <div class="r mx_0 mb_3">
-        <div class="c_md_6 header--left d_flex justify_content_start align_items_center ">
+        <div
+          class="c_md_6 header--left d_flex justify_content_start align_items_center "
+        >
           <!-- Start: Header logo -->
           <div class="logo">
             <div class="logo d_flex align_items_center">
@@ -21,18 +26,20 @@
           </div>
           <!-- End: Header logo-->
         </div>
-        <div class="c_md_6 header--right d_flex justify_content_end align_items_center">
+        <div
+          class="c_md_6 header--right d_flex justify_content_end align_items_center"
+        >
           <!-- Start: Redirect to help -->
-                <div class="help mr_2 ml_1" @click="redirectToHelp">
-                  <icon-base
-                    icon-name="menu"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 25 25"
-                  >
-                    <icon-help />
-                  </icon-base>
-                </div>
+          <div class="help mr_2 ml_1" @click="redirectToHelp">
+            <icon-base
+              icon-name="menu"
+              width="25"
+              height="25"
+              viewBox="0 0 25 25"
+            >
+              <icon-help />
+            </icon-base>
+          </div>
           <!-- End: Redirect to help -->
 
           <!-- Start: More Options -->
@@ -49,7 +56,11 @@
               </icon-base>
             </div>
             <transition name="dropdown">
-              <div class="position_absolute options" v-if="isShowOptionsMoreDropdown === true" v-click-outside="closeOptionsMoreDropdown">
+              <div
+                class="position_absolute options"
+                v-if="isShowOptionsMoreDropdown === true"
+                v-click-outside="closeOptionsMoreDropdown"
+              >
                 <div class="d_flex text_center r m_0 application">
                   <div class="zin--post item c_4" @click="gotoHomePost">
                     <icon-base
@@ -62,7 +73,10 @@
                     </icon-base>
                     <div class="pt_1">Zin Post</div>
                   </div>
-                  <div class="zin--post zin-chat item c_4" @click="gotoHomeChat">
+                  <div
+                    class="zin--post zin-chat item c_4"
+                    @click="gotoHomeChat"
+                  >
                     <icon-base
                       icon-name="bell"
                       width="50px"
@@ -105,7 +119,8 @@
           <!-- Start: User Info -->
           <div
             class="profile position_relative d_flex justify_content_end align_items_center"
-            @click="showProfileDropdown" v-click-outside="closeProfileDropdown"
+            @click="showProfileDropdown"
+            v-click-outside="closeProfileDropdown"
           >
             <div class="profile--image">
               <div
@@ -117,9 +132,9 @@
                 v-else
                 class="avatar--wrap avatar--default position_relative d_block"
               >
-            <span class="position_absolute">{{
-              user.name | getFirstLetter
-            }}</span>
+                <span class="position_absolute">{{
+                  user.name | getFirstLetter
+                }}</span>
               </div>
             </div>
             <span class="profile--name ml_2 mr_2">{{ user.name }}</span>
@@ -138,9 +153,9 @@
               class="dropdown--menu dropdown--menu-right user--dd flipInY animated"
               :class="{ show: isShowProfileDropdown }"
             >
-          <span class="with--arrow">
-            <span class="bg-orange"></span>
-          </span>
+              <span class="with--arrow">
+                <span class="bg-orange"></span>
+              </span>
               <div
                 class="d_flex align_items_center py_2 px_3 bg-orange border--custom text_white mb_2"
               >
@@ -153,16 +168,19 @@
                   v-else
                   class="avatar--wrap avatar--default position_relative d_block"
                 >
-            <span class="position_absolute">{{
-              user.name | getFirstLetter
-            }}</span>
+                  <span class="position_absolute">{{
+                    user.name | getFirstLetter
+                  }}</span>
                 </div>
                 <div class="ml_2">
                   <h4 class="mb_0">{{ user.name }}</h4>
                   <p class="mb_0">{{ user.email }}</p>
                 </div>
               </div>
-              <router-link class="dropdown--item" :to="{ name: 'post_account' }">
+              <router-link
+                class="dropdown--item"
+                :to="{ name: 'post_account' }"
+              >
                 <icon-base
                   icon-name="account"
                   width="20"
@@ -173,7 +191,11 @@
                 >Thiết lập tài khoản
               </router-link>
               <div class="dropdown--divider"></div>
-              <a class="dropdown--item" href="javascript:void(0)" @click="logOut">
+              <a
+                class="dropdown--item"
+                href="javascript:void(0)"
+                @click="logOut"
+              >
                 <icon-base
                   icon-name="logout"
                   width="20"
@@ -187,13 +209,31 @@
             <!-- End: Dropdown Menu -->
           </div>
           <!-- End: User Info -->
-
-
         </div>
       </div>
-      <div class="bot d_flex align_items_center py_2">
-        <button class="tab btn btn_primary mr_2">Post Popular</button>
-        <button class="tab btn btn_dark">Hightlight Post</button>
+      <div class="header--bottom-wrapper">
+        <div class="header--bottom">
+          <nav>
+            <div class="nav--label">
+              <a title="Bài viết mẫu"
+                class="active nav--label-link"
+                ><span >Bài viết mẫu</span
+                ></a>
+              <a title="Chiến dịch mẫu"
+                 class="nav--label-link"
+              ><span >Chiến dịch mẫu</span
+              ></a>
+              <a title="Ảnh trending"
+                 class="nav--label-link"
+              ><span >Ảnh trending</span
+              ></a>
+              <a title="Khác"
+                 class="nav--label-link"
+              ><span >Khác</span
+              ></a>
+            </div>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
