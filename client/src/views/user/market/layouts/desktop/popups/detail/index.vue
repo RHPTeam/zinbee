@@ -4,14 +4,8 @@
       <div class="modal--content px_4 pb_4 pt_3">
         <!-- Start: Modal Header -->
         <div class="modal--header position_relative">
-          <div class="btn--close position_absolute"
-               @click="closePopup"
-          >
-            <icon-base
-              height="18px"
-              width="18px"
-              viewBox="0 0 20 20"
-            >
+          <div class="btn--close position_absolute" @click="closePopup">
+            <icon-base height="18px" width="18px" viewBox="0 0 20 20">
               <icon-cancel></icon-cancel>
             </icon-base>
           </div>
@@ -21,8 +15,9 @@
         <div class="modal--body">
           <div class="general--info d_flex mb_3">
             <div class="left">
-              <div class="thumbnail mr_3"
-                   :style="{ backgroundImage: 'url(' + product.img + ')' }"
+              <div
+                class="thumbnail mr_3"
+                :style="{ backgroundImage: 'url(' + product.img + ')' }"
               ></div>
             </div>
             <div class="right">
@@ -63,11 +58,13 @@
           <div class="preview mt_3">
             <div class="preview--title mb_2">Xem trước</div>
             <div class="preview--content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-              ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum...
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum...
             </div>
           </div>
         </div>
@@ -79,11 +76,9 @@
 
 <script>
 export default {
-  props: [ "product" ],
+  props: ["product"],
   data() {
-    return {
-
-    };
+    return {};
   },
   computed: {
     currentTheme() {
@@ -92,7 +87,7 @@ export default {
   },
   methods: {
     closePopup() {
-      this.$emit( "closePopup", false );
+      this.$emit("closePopup", false);
     }
   }
 };
@@ -101,4 +96,3 @@ export default {
 <style lang="scss" scoped>
 @import "./index.style";
 </style>
-
