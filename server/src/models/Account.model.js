@@ -37,6 +37,8 @@ const mongoose = require( "mongoose" ),
       "type": Date,
       "default": Date.now()
     },
+    "other01": String, // id of phpMyadmin from older server
+    "other02": String,
     "updated_at": Date
   } );
 

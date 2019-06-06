@@ -38,5 +38,17 @@ export default {
   },
   upload(file) {
     return Api().post("users", file);
+  },
+  getInfoByEmail(email) {
+    return Api().get(`users/info/reset-password?email=${email}`);
+  },
+  checkCode(code) {
+    return Api().post("users/info/code", code);
+  },
+  resetPassword(email) {
+    return Api().post("users/reset-password", email);
+  },
+  createNewPassword(user) {
+    return Api().post(`users/create-password`, user);
   }
 };

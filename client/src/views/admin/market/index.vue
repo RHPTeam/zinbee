@@ -9,8 +9,13 @@
       >
       <router-link
         :to="{ name: 'manage_categories' }"
-        class="categories text_left btn btn_info"
+        class="categories text_left btn btn_info mr_3"
         >Quan ly danh muc</router-link
+      >
+      <router-link
+        :to="{ name: 'market_post' }"
+        class="categories text_left btn btn_info mr_3"
+        >Bài viết mẫu</router-link
       >
     </div>
     <div class="wrapper">

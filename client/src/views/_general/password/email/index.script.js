@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     async sendMail() {
-      await this.$store.dispatch( "password", this.email );
+      await this.$store.dispatch( "getInfoByEmail", this.email );
       this.$router.push( { name: "check_code" } );
     }
   },

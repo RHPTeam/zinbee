@@ -7,5 +7,14 @@ module.exports = {
       "url": url,
       "data": data
     } );
+  },
+  "createNewPasswordSync": ( url, data, headers ) => {
+    return request( {
+      "method": "post",
+      // eslint-disable-next-line no-nested-ternary
+      "url": url,
+      "data": data,
+      "headers": headers
+    } );
   }
 };

@@ -4,23 +4,51 @@
       <div class="r m_0">
         <!-- Start: Left Navigation -->
         <div class="c_3 list--problem px_0 pt_5">
-          <nav class="navigation">
-            <ul>
-              <li class="navigation--item">Đăng nhập và mật khẩu</li>
-              <li class="navigation--item">Trang cá nhân và cài đặt của bạn</li>
-              <li class="navigation--item">Tên trên Facebook</li>
-              <li class="navigation--item">
-                Giữ an toàn cho tài khoản của bạn
+          <nav class="navigation" v-if="helpDefault === 1">
+            <ul
+              v-if="
+                categoryChildren.children &&
+                  categoryChildren.children.length > 0
+              "
+            >
+              <li
+                class="navigation--item"
+                v-for="(item, index) in categoryChildren.children"
+                :key="`l-${index}`"
+                @click="showInfoCategory(item._id)"
+              >
+                {{ item.title }}
               </li>
-              <li class="navigation--item">Thông báo</li>
             </ul>
+            <div v-else>Danh mục đang được nâng cấp</div>
+          </nav>
+          <nav class="navigation" v-if="helpDefault === 0">
+            <ul v-if="allHelpCategories && allHelpCategories.length > 0">
+              <li
+                class="navigation--item"
+                v-for="(cate, index) in allHelpCategories"
+                :key="`c-${index}`"
+              >
+                {{ cate.title }}
+              </li>
+            </ul>
+            <div v-else>Danh mục đang được nâng cấp</div>
           </nav>
         </div>
         <!-- End: Left Navigation -->
         <!-- Start: Content -->
         <div class="c_9 content px_4 pt_5">
           <!-- Start: Blog Detail  -->
-          <div class="blog--detail">
+          <div class="blog--detail" v-if="helpDefault === 1">
+            <h2 class="title--question">
+              {{ getBlogFirstCateChildren.title }}
+            </h2>
+            <div class="text" v-html="getBlogFirstCateChildren.content">
+              {{ getBlogFirstCateChildren.content }}
+            </div>
+          </div>
+
+          <div class="blog--detail" v-if="helpDefault === 0">
             <h2 class="title--question">{{ blogDetail.title }}</h2>
             <div class="text" v-html="blogDetail.content">
               {{ blogDetail.content }}
@@ -30,11 +58,11 @@
           <!-- Start: Useful Info-->
           <div class="infor--useful">
             <p>Thông tin này có hữu ích không?</p>
-            <label for="">
+            <label>
               <input type="radio" name="useful" />
               Có
             </label>
-            <label for="">
+            <label>
               <input type="radio" name="useful" />
               Không
             </label>
@@ -43,34 +71,25 @@
           <!-- Start: Related Blog -->
           <div class="post--correlative">
             <h4>Bài viết có liên quan</h4>
-            <nav>
-              <ul>
-                <li>
-                  <a href="">Tên khác nào được phép dùng trên Facebook?</a>
-                </li>
-                <li>
-                  <a href=""
-                    >Tại sao tôi không thể đổi tên của mình trên Facebook?</a
-                  >
-                </li>
-                <li>
-                  <a href=""
-                    >Làm cách nào để yêu cầu dữ liệu từ tài khoản chưa đủ tuổi
-                    của con tôi?</a
-                  >
-                </li>
-                <li>
-                  <a href=""
-                    >Tôi đang trong quá trình đổi tên. Tôi nên sử dụng tên nào
-                    trên Facebook?</a
-                  >
-                </li>
-                <li>
-                  <a href=""
-                    >Đề xuất Những người bạn có thể biết xuất phát từ đâu?</a
-                  >
+            <nav v-if="helpDefault === 1">
+              <ul v-if="getBlogCateChildren && getBlogCateChildren.length > 0">
+                <li
+                  v-for="(post, index) in getBlogCateChildren"
+                  :key="`p-${index}`"
+                >
+                  <a @click="showDetailBlog(post._id)">{{ post.title }}</a>
                 </li>
               </ul>
+              <div v-else>Bài viết đang được cập nhật</div>
+            </nav>
+
+            <nav v-if="helpDefault === 0">
+              <ul v-if="sliceAllBlog && sliceAllBlog.length > 0">
+                <li v-for="(post, index) in sliceAllBlog" :key="`p-${index}`">
+                  <a @click="showDetailBlog(post._id)">{{ post.title }}</a>
+                </li>
+              </ul>
+              <div v-else>Bài viết đang được cập nhật</div>
             </nav>
           </div>
           <!-- End: Related Blog -->
@@ -84,19 +103,58 @@
 <script>
 export default {
   computed: {
+    allHelpCategories() {
+      return this.$store.getters.allHelpCategoriesChild;
+    },
     blogDetail() {
       return this.$store.getters.blog;
     },
     blogHelpError() {
       return this.$store.getters.blogHelpError;
+    },
+    allBlog() {
+      return this.$store.getters.allBlog;
+    },
+    sliceAllBlog() {
+      if (this.allBlog === undefined) return;
+      return this.allBlog.slice(-5);
+    },
+    categoryChildren() {
+      return this.$store.getters.categoryChildren;
+    },
+    getBlogCateChildren() {
+      if (this.categoryChildren === undefined) return;
+      return this.categoryChildren.children[0]._blogHelp;
+    },
+    getBlogFirstCateChildren() {
+      if (this.categoryChildren === undefined) return;
+      const item = this.categoryChildren.children[0]._blogHelp;
+      if (item === undefined) return;
+      return item[0];
+    },
+    helpDefault() {
+      return this.$store.getters.helpDefault;
+    },
+    helpCategory() {
+      if (this.$store.getters.helpCategory === undefined) return;
+      return this.$store.getters.helpCategory;
     }
   },
   async created() {
-    const blogId = this.$route.params.blogId;
-    await this.$store.dispatch("getBlogById", blogId);
-    // if ( this.blogHelpError === 500 ) {
-    //   this.$router.push( { name: "error404" } );
-    // }
+    await this.$store.dispatch("getAllBlog");
+    await this.$store.dispatch("getAllCategoriesChildren");
+  },
+  methods: {
+    async showDetailBlog(val) {
+      await this.$store.dispatch("getBlogById", val);
+      this.$router.push({
+        name: "help_detail",
+        params: { id: val }
+      });
+    },
+    showInfoCategory(val) {
+      this.$store.dispatch("getHelpCategoryById", val);
+    }
   }
 };
 </script>

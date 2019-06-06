@@ -17,7 +17,7 @@
         height="70"
         alt=""
       />
-      <h4>{{ user.name }}</h4>
+      <h4>{{ userInfo.name }}</h4>
     </div>
     <div class="form--reset-title">
       Xác minh tài khoản thành công. Bây giờ, bạn đã có thể đặt lại mật khẩu của

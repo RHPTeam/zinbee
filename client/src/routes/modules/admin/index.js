@@ -107,6 +107,22 @@ const generalRouter = {
           path: "categories",
           name: "manage_categories",
           component: require("@/views/admin/market/category").default
+        },
+        {
+          path: "posts",
+          component: require("@/views/admin/market/post").default,
+          children: [
+            {
+              path: "",
+              name: "market_post",
+              component: require("@/views/admin/market/post/list").default
+            },
+            {
+              path: "create",
+              name: "market_post_create",
+              component: require("@/views/admin/market/post/create").default
+            }
+          ]
         }
       ]
     }

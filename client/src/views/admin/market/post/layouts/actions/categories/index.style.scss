@@ -1,0 +1,72 @@
+.post--action {
+  font-size: .875rem;
+  .action--left {
+    .post--search {
+      border-radius: 10px;
+      font-size: 0.875rem;
+      height: 40px;
+      width: 240px;
+      input[type="text"] {
+        background-color: transparent;
+        border: 0;
+        font-size: 0.875rem;
+        height: 100%;
+        outline: none;
+        width: calc(100% - 48px);
+      }
+      ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: #ccc;
+      }
+      ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: #ccc;
+      }
+      :-ms-input-placeholder {
+        /* IE 10+ */
+        color: #ccc;
+      }
+      :-moz-placeholder {
+        /* Firefox 18- */
+        color: #999;
+      }
+      svg {
+        color: #999;
+      }
+    }
+  }
+}
+
+//CHANGE COLOR THEME
+
+//LIGHT
+.post--action[data-theme="light"] {
+  .action--left {
+    .post--search {
+      background-color: #fff;
+      input {
+        color: #444;
+        &::placeholder {
+          color: #ccc;
+        }
+      }
+    }
+  }
+}
+
+// DARK
+.post--action[data-theme="dark"] {
+  .action--left {
+    .post--search {
+      background-color: #27292d;
+      color: #f7f7f7;
+      input {
+        color: #f7f7f7;
+        &::placeholder {
+          color: #666666;
+        }
+      }
+    }
+  }
+}
+

@@ -31,10 +31,12 @@
             <!--Start: Notification change password success -->
             <app-alert
               :type="
-                this.$store.getters.statusResetPassword ? 'alert_success' : ''
+                this.$store.getters.statusResetPassword === true
+                  ? 'alert_success'
+                  : ''
               "
               :message="
-                this.$store.getters.statusResetPassword
+                this.$store.getters.statusResetPassword === true
                   ? 'Bạn đã đặt lại mật khẩu thành công!'
                   : ''
               "
