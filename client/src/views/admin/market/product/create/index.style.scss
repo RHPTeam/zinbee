@@ -14,4 +14,14 @@
             }
         }
     }
+    .add--att{
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    .icon-plus{
+        padding: 0.315rem;
+    }
 }

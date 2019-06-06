@@ -7,7 +7,7 @@ module.exports = {
     if ( req.query._id ) {
       data = await MarketProduct.findOne( { "_id": req.query._id } );
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await MarketProduct.find( {} ).lean();
+      data = await MarketProduct.find( {} ).populate( { "path": "_creator", "select": "name" } ).lean();
     }
 
     res.status( 200 ).json( { "status": "success", "data": data } );
