@@ -1,7 +1,9 @@
 <template>
   <div class="modal--wrapper">
     <div class="modal--content">
-      <div class="create mb_3 text_left btn btn_primary" @click="goToCreate">Tao moi</div>
+      <div class="create mb_3 text_left btn btn_primary" @click="goToCreate">
+        Tao moi
+      </div>
     </div>
     <!-- List product -->
     <div class="list--product">

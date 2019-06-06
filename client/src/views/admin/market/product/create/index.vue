@@ -143,8 +143,13 @@
       >
         Update
       </div>
-      <div class="btn btn_success" @click="createProduct" 
-        v-if="nodeUpdate === 1">Tao moi</div>
+      <div
+        class="btn btn_success"
+        @click="createProduct"
+        v-if="nodeUpdate === 1"
+      >
+        Tao moi
+      </div>
     </div>
   </div>
 </template>
