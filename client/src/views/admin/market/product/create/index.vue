@@ -101,8 +101,16 @@
       </div>
       <div class="form_group">
         <label for class>Ảnh đại diện</label>
+        <div class="img--preview" v-if="inforProductById.previews">
+          <img :src="inforProductById.previews.thumbnail" alt="">
+        </div>
         <div class>
-          <input type="file" class="form_control p_1" />
+          <input
+            type="file"
+            ref="file"
+            @change="selectFile()"
+            accept="image/x-png,image/gif,image/jpeg"
+            class="form_control p_1"/>
         </div>
         <div class="contain--images"></div>
       </div>

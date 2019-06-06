@@ -17,7 +17,10 @@ const state = {
     tags: [],
     updatedAt: "",
     content: "",
-    summary: ""
+    summary: "",
+    previews: {
+      thumbnail: ""
+    }
   }
 };
 const getters = {

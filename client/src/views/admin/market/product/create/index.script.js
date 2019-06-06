@@ -57,9 +57,29 @@ export default {
         updatedAt: this.inforProductById.updatedAt,
         content: this.inforProductById.content,
         summary: this.inforProductById.summary
+
       };
       this.$store.dispatch("createProduct", dataCreate);
       this.$router.push({ name: "manage_product" });
+    },
+    selectFile() {
+      this.file = this.$refs.file.files;
+      this.sendFile();
+
+      // reset ref
+      const input = this.$refs.file;
+      input.type = "text";
+      input.type = "file";
+    },
+    async sendFile() {
+      const formData = new FormData();
+      Array.from(this.file).forEach(file => {
+        formData.append("photos", file);
+      });
+
+      await this.$store.dispatch("uploadMarketPostPhotos", formData);
+      const dataEmit = this.$store.getters.marketPostPhotosUpload;
+      this.inforProductById.previews.thumbnail = dataEmit[0];
     },
     setProductContent(post) {
       this.inforProductById.content = post.id;
