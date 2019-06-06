@@ -31,9 +31,15 @@
       </div>
     </div>
 
-    <section class="describe d_flex flex_column align_items_center justify_content_center py_4">
+    <section
+      class="describe d_flex flex_column align_items_center justify_content_center py_4"
+    >
       <h3 class="title mb_4">Lorem ipsum dolor sit amet, consectetur.</h3>
-      <div class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quibusdam. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur.</div>
+      <div class="">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste,
+        quibusdam. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+        consectetur.
+      </div>
     </section>
 
     <div class="products p_4 ct">
