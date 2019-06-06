@@ -6,6 +6,15 @@
  * date to: 23/05/2019
  * team: BE-RHP
  */
+// eslint-disable-next-line no-extend-native
+Object.defineProperty( Array.prototype, "flat", {
+  "value": function( depth = 1 ) {
+    return this.reduce( function ( flat, toFlatten ) {
+      return flat.concat( ( Array.isArray( toFlatten ) && ( depth > 1 ) ) ? toFlatten.flat( depth - 1 ) : toFlatten );
+    }, [] );
+  }
+} );
+
 const PostFacebook = require( "../models/Post.model" );
 const Account = require( "../models/Account.model" );
 
@@ -248,5 +257,4 @@ module.exports = {
       .status( 200 )
       .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
   }
-  
 };
