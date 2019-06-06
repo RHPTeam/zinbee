@@ -21,7 +21,7 @@ router.route( "/renew/code" ).post( auth, permission, AccountController.renewByC
 router.route( "/change-password/sync" ).patch( auth, AccountController.changePasswordSync );
 router.route( "/info/code" ).post( AccountController.checkCode ); // check code
 router.route( "/info/reset-password" ).get( AccountController.getUserInfoLostPass ); // get use info by email
-router.route( "/reset-password" ).post( AccountController.resetPassword ); // b1 check mail
+router.route( "/reset-password" ).post( AccountController.resetPassword );
 router.route( "/create-password" ).post( AccountController.createNewPassword );// final reset password
 
 module.exports = router;

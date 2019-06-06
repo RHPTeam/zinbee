@@ -9,6 +9,8 @@ import PostLibraries from "./modules/post.store";
 import HelpBlogStore from "./modules/user/help/blog.store";
 import HelpCaterogiesStore from "./modules/user/help/category.store";
 import HelpStore from "./modules/help.store";
+import CategoryMarket from "./modules/market/category.store";
+import ProductMarket from "./modules/market/product.store";
 
 Vue.use(Vuex);
 
@@ -21,6 +23,8 @@ export default new Vuex.Store({
     PostLibraries,
     HelpBlogStore,
     HelpCaterogiesStore,
-    HelpStore
+    HelpStore,
+    CategoryMarket,
+    ProductMarket
   }
 });

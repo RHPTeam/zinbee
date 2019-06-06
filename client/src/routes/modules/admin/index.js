@@ -88,6 +88,43 @@ const generalRouter = {
           component: require("@/views/admin/simpledata/detail").default
         }
       ]
+    },
+    {
+      path: "manage-market",
+      component: require("@/views/admin/market").default,
+      children: [
+        {
+          path: "product",
+          name: "manage_product",
+          component: require("@/views/admin/market/product").default
+        },
+        {
+          path: "product/create",
+          name: "product_create",
+          component: require("@/views/admin/market/product/create").default
+        },
+        {
+          path: "categories",
+          name: "manage_categories",
+          component: require("@/views/admin/market/category").default
+        },
+        {
+          path: "posts",
+          component: require("@/views/admin/market/post").default,
+          children: [
+            {
+              path: "",
+              name: "market_post",
+              component: require("@/views/admin/market/post/list").default
+            },
+            {
+              path: "create",
+              name: "market_post_create",
+              component: require("@/views/admin/market/post/create").default
+            }
+          ]
+        }
+      ]
     }
   ]
 };

@@ -17,7 +17,7 @@
         height="70"
         alt=""
       />
-      <h4>{{ user.name }}</h4>
+      <h4>{{ userInfo.name }}</h4>
     </div>
     <div class="form--reset-title">
       Chúng tôi vừa gửi một mã xác minh tới email của bạn. Nhập vào form bên

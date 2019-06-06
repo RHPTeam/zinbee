@@ -18,7 +18,10 @@ const state = {
   authError: "",
   authStatus: "",
   roles: [],
-  redirectDomain: ""
+  redirectDomain: "",
+  infoUserEmail: [],
+  statusResetPassword: null,
+  code: ""
 };
 const getters = {
   allUser: state => state.allUser,
@@ -28,7 +31,10 @@ const getters = {
   userDefault: state => state.userDefault,
   roles: state => state.roles,
   redirectDomain: state => state.redirectDomain,
-  token: state => state.token
+  token: state => state.token,
+  infoUserEmail: state => state.infoUserEmail,
+  statusResetPassword: state => state.statusResetPassword,
+  code: state => state.code
 };
 const mutations = {
   auth_request: state => {
@@ -54,6 +60,15 @@ const mutations = {
   },
   setRedirectDomain: (state, payload) => {
     state.redirectDomain = payload;
+  },
+  setInfoEmail: (state, payload) => {
+    state.infoUserEmail = payload;
+  },
+  statusResetPassword: (state, payload) => {
+    state.statusResetPassword = payload;
+  },
+  setCode: (state, payload) => {
+    state.code = payload;
   }
 };
 const actions = {
@@ -250,6 +265,35 @@ const actions = {
     const result = await AccountServices.upload(payload);
 
     commit("user_set", result.data.data);
+  },
+  getInfoByEmail: async ({ commit }, payload) => {
+    commit("auth_request");
+    const sendEmail = {
+      email: payload
+    };
+
+    await AccountServices.resetPassword(sendEmail);
+    const result = await AccountServices.getInfoByEmail(payload);
+    commit("setInfoEmail", result.data.data);
+    commit("auth_success");
+  },
+  checkCode: async ({ commit }, payload) => {
+    commit("auth_request");
+    const objSender = {
+      code: payload.code,
+      email: payload.email
+    };
+    await AccountServices.checkCode(objSender);
+    commit("auth_success");
+  },
+  getNewPassword: async ({ commit }, payload) => {
+    commit("auth_request");
+    await AccountServices.createNewPassword(payload);
+    commit("statusResetPassword", true);
+    commit("auth_success");
+  },
+  setCodeResetPassword: async ({ commit }, payload) => {
+    commit("setCode", payload);
   }
 };
 

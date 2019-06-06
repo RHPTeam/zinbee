@@ -6,20 +6,22 @@ export default {
       code: "",
       errorText: "",
       statusClassError: false,
-      statusClassPassed: false,
-      user: {
-        name: "Đặng Yến"
-      }
+      statusClassPassed: false
     };
   },
   computed: {
-    // user() {
-    //   return this.$store.getters.userInfo;
-    // }
+    userInfo(){
+      return this.$store.getters.infoUserEmail;
+    }
   },
   methods: {
     async sendCode() {
-      await this.$store.dispatch( "checkCode", this.code );
+      const dataSender = {
+        code: this.code,
+        email: this.userInfo.email
+      };
+      await this.$store.dispatch( "setCodeResetPassword", this.code );
+      await this.$store.dispatch( "checkCode", dataSender );
       this.$router.push( { name: "change_final" } );
     }
   },

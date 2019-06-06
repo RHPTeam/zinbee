@@ -35,12 +35,12 @@ module.exports = {
     let data;
 
     if ( req.query._id ) {
-      data = await HelpCategory.findOne( { "_id": req.query._id } ).lean();
+      data = await HelpCategory.findOne( { "_id": req.query._id } ).populate( "_blogHelp" ).lean();
     } else if ( req.query._type === "rs" ) {
-      data = await HelpCategory.find( {} ).lean();
+      data = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
       data = getNestedChildren( data, "" );
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await HelpCategory.find( {} ).lean();
+      data = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
     }
 
     res
@@ -76,6 +76,7 @@ module.exports = {
       "title": title,
       "level": req.body.level,
       "parent": parent !== undefined && parent !== "" ? parent : "",
+      "_blogHelp": req.body._blogHelp ? req.body._blogHelp : [],
       "_account": req.uid
     } );
 
@@ -112,6 +113,7 @@ module.exports = {
     }
 
     // Assign new admin
+    categoryInfo._blogHelp = req.body._blogHelp ? req.body._blogHelp : [];
     categoryInfo._account = req.uid;
 
     res.status( 201 ).json( jsonResponse( "success", await HelpCategory.findByIdAndUpdate( req.query._id, { "$set": categoryInfo }, { "new": true } ) ) );

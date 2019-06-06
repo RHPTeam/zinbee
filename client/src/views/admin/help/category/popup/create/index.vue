@@ -33,6 +33,21 @@
                 v-model="categories.title"
               />
             </div>
+
+            <div class="form_group">
+              <label>Chọn bài viết</label>
+              <div class="option">
+                <multiselect
+                  label="title"
+                  multiple
+                  placeholder="Chọn bài viết"
+                  :options="allBlog"
+                  @input="updateBlogHelp"
+                  :value="allBlog.title"
+                />
+              </div>
+            </div>
+
             <div class="form_group">
               <label>Chọn danh mục cha</label>
               <div class="option">
@@ -72,11 +87,15 @@ export default {
     },
     categories() {
       return this.$store.getters.helpCategory;
+    },
+    allBlog() {
+      return this.$store.getters.allBlog;
     }
   },
   async created() {
     await this.$store.dispatch("getHelpCategoryDefault");
     await this.$store.dispatch("getAllHelpCategories");
+    await this.$store.dispatch("getAllBlog");
   },
   methods: {
     backListCategories() {
@@ -95,6 +114,11 @@ export default {
     },
     updateParent(val) {
       this.categories.parent = val._id;
+    },
+    updateBlogHelp(val) {
+      const arr = val.map(item => item._id);
+      const newArr = arr.slice(-1).toString();
+      this.categories._blogHelp.push(newArr);
     }
   }
 };

@@ -2,17 +2,15 @@ const mongoose = require( "mongoose" ),
   Schema = mongoose.Schema,
 
   HelpSchema = new Schema( {
+    "name": String,
+    "text": String,
     "popular_blog": [ {
       "type": Schema.Types.ObjectId,
       "ref": "BlogHelp"
     } ],
     "popular_section": [ {
-      "id": {
-        "type": Schema.Types.ObjectId,
-        "ref": "HelpCategory"
-      },
-      "desc": String,
-      "icon": String
+      "type": Schema.Types.ObjectId,
+      "ref": "HelpCategory"
     } ]
   } ),
 

@@ -75,6 +75,17 @@ export default {
             viewBox: "0 0 540 540"
           },
           to: "simple_data"
+        },
+        {
+          text: "Quản lý market",
+          icon: {
+            iconName: "manage-market",
+            tagName: "icon-account",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 26 26"
+          },
+          to: "manage_product"
         }
       ]
     };

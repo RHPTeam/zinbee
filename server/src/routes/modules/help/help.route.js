@@ -12,6 +12,6 @@ const permission = require( "../../../helpers/middleware/permission.middleware" 
 
 router
   .route( "/" )
-  .get( HelpController.index )
+  .get( HelpController.getHelpHomePageDefault )
   .patch( auth, permission, HelpController.update );
 module.exports = router;
