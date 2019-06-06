@@ -14,38 +14,33 @@
     <!-- End: Name Column -->
     <!-- Start: Category Column -->
     <div class="col col--category px_2">
-      <span v-for="(category, index) in item._categories" :key="`c-${index}`">
-        {{
-          category.title + [index === item._categories.length - 1 ? "" : ", "]
-        }}
-      </span>
+      <span
+        >{{ item.content.slice(0, 70)
+        }}{{ item.content.length > 50 ? "..." : "" }}</span
+      >
     </div>
     <!-- End: Category Column -->
     <!-- Start: Image Column -->
     <div class="col col--image px_2">
-      <div class="" v-if="item.attachments.length === 0">Không có hình ảnh</div>
+      <div class="" v-if="item.photos === 0">Không có hình ảnh</div>
       <div class="d_flex align_items_center justify_content_start" v-else>
         <div
           class="image--wrap position_relative mr_2"
-          v-for="(image, index) in item.attachments.slice(0, 3)"
+          v-for="(image, index) in item.photos.slice(0, 3)"
           :key="`img-${index}`"
         >
           <div
             class="image--bg"
-            v-if="image.typeAttachment === 1"
-            :style="{ backgroundImage: 'url(' + image.link + ')' }"
+            :style="{ backgroundImage: 'url(' + image + ')' }"
           >
-            <img :src="image.link" />
+            <img :src="image" />
           </div>
         </div>
-        <div
-          class="image--wrap position_relative"
-          v-if="item.attachments.length > 3"
-        >
+        <div class="image--wrap position_relative" v-if="item.photos > 3">
           <div
             class="image--wrap-more d_flex align_items_center justify_content_center"
           >
-            +{{ item.attachments.length - 3 }}
+            +{{ item.photos.length - 3 }}
           </div>
         </div>
       </div>
@@ -70,11 +65,6 @@
           <icon-remove />
         </icon-base>
       </span>
-      <span class="mx_1" @click="showPostNowPopup">
-        <icon-base icon-name="icon-edit" viewBox="0 0 18 18">
-          <icon-info />
-        </icon-base>
-      </span>
     </div>
     <!-- End: Action Column -->
   </div>
@@ -89,17 +79,14 @@ export default {
   },
   methods: {
     updatePost() {
-      this.$store.dispatch("getPostById", this.item._id);
+      this.$store.dispatch("getMarketPostById", this.item._id);
       this.$router.push({
-        name: "post_update_post",
-        params: { id: this.item._id }
+        name: "market_post_update",
+        params: { marketPostId: this.item._id }
       });
     },
     showDeletePopup() {
       this.$emit("showDeletePopup", this.item);
-    },
-    showPostNowPopup() {
-      this.$emit("showPostNowPopup", this.item);
     }
   }
 };

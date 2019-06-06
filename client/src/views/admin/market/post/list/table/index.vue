@@ -41,32 +41,43 @@
           </icon-base>
         </span>
       </div>
-      <div class="col col--category px_2">Danh mục</div>
+      <div class="col col--category px_2">Nội dung</div>
       <div class="col col--image px_4">Hình ảnh</div>
       <div class="col col--action px_4">Hành động</div>
     </div>
     <!-- if all post === undefined call component loading -->
     <div
-      v-if="filterAllPost.length === 0"
+      v-if="filteredMarketPosts.length === 0"
       class="item--body data--empty d_flex align_items_center justify_content_center px_3 py_2"
     >
       Không có dữ liệu.
     </div>
     <!-- else call component item post -->
     <div v-else>
-      <div v-if="this.$store.getters.statusPost === 'loading'" class="mt_3">
+      <div
+        v-if="this.$store.getters.marketPostStatus === 'loading'"
+        class="mt_3"
+      >
         <loading-component></loading-component>
       </div>
       <div v-else>
         <item-post
-          v-for="(item, index) in filterAllPost"
+          v-for="(item, index) in filteredMarketPosts"
           :key="index"
           :item="item"
           @showDeletePopup="showDeletePopup($event)"
-          @showPostNowPopup="showPostNowPopup($event)"
         ></item-post>
       </div>
     </div>
+
+    <!-- ***********POPUP*********** -->
+    <transition name="popup">
+      <delete-popup
+        v-if="isShowDeletePopup"
+        :post="postSelected"
+        @closePopup="isShowDeletePopup = $event"
+      ></delete-popup>
+    </transition>
   </div>
 </template>
 
