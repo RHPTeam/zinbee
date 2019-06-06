@@ -4,14 +4,8 @@
       <div class="modal--content px_4 pb_4 pt_3">
         <!-- Start: Modal Header -->
         <div class="modal--header position_relative">
-          <div class="btn--close position_absolute"
-               @click="closePopup"
-          >
-            <icon-base
-              height="18px"
-              width="18px"
-              viewBox="0 0 20 20"
-            >
+          <div class="btn--close position_absolute" @click="closePopup">
+            <icon-base height="18px" width="18px" viewBox="0 0 20 20">
               <icon-cancel></icon-cancel>
             </icon-base>
           </div>
@@ -21,8 +15,7 @@
         <div class="modal--body">
           <div class="general--info d_flex mb_3">
             <div class="left">
-              <div class="thumbnail mr_3"
-              ></div>
+              <div class="thumbnail mr_3"></div>
             </div>
             <div class="right">
               <div class="right--data">
@@ -49,7 +42,11 @@
           <div class="functions mt_3">
             <div class="functions--title mb_2">Đặc điểm</div>
             <ul class="list_group pl_3">
-              <li class="list_group_item" v-for="(attr, index) in product.attributes" :key="`c-${index}`">
+              <li
+                class="list_group_item"
+                v-for="(attr, index) in product.attributes"
+                :key="`c-${index}`"
+              >
                 <span class="font_weight_bold">{{ attr.name }} : </span>
                 <span>{{ attr.value }}</span>
               </li>
@@ -68,11 +65,9 @@
 
 <script>
 export default {
-  props: [ "product" ],
+  props: ["product"],
   data() {
-    return {
-
-    };
+    return {};
   },
   computed: {
     currentTheme() {
@@ -81,7 +76,7 @@ export default {
   },
   methods: {
     closePopup() {
-      this.$emit( "closePopup", false );
+      this.$emit("closePopup", false);
     }
   }
 };
@@ -89,8 +84,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "./index.style";
-.thumbnail{
-  background: url("https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg") no-repeat;
+.thumbnail {
+  background: url("https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg")
+    no-repeat;
   background-size: cover;
 }
 </style>

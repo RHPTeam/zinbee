@@ -1,7 +1,7 @@
 <template>
   <div class="list--wrapper">
     <div class="r mx_0 top--search mb_3">
-      <app-search/>
+      <app-search />
     </div>
     <div class="ct r m_auto px_3">
       <div class="c_md_3 pl_0">
@@ -21,7 +21,7 @@
 <script>
 import AppData from "./main";
 import AppSearch from "./search";
-import AppSidebar from  "./sidebar";
+import AppSidebar from "./sidebar";
 
 export default {
   components: {
@@ -29,11 +29,11 @@ export default {
     AppSearch,
     AppSidebar
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-.top--search{
+.top--search {
   border-bottom: 2px solid hsl(0, 0%, 90%);
 }
 </style>

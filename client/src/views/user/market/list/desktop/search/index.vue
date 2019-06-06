@@ -2,7 +2,7 @@
   <div class="ct m_auto">
     <div class="search py_3">
       <div class="input_group d_flex m_auto">
-        <input type="text" class="input--search" placeholder="Tìm kiếm">
+        <input type="text" class="input--search" placeholder="Tìm kiếm" />
         <div class="btn--search d_flex justify_content_center">Search</div>
       </div>
     </div>
@@ -20,7 +20,7 @@ export default {};
   font-size: 14px;
   transition: all 0.2s ease-in;
   box-shadow: 1px 1px 3px -1px hsl(0, 0%, 90%);
-  box-shadow: 1px 1px 3px 0 hsla(0, 0%, 0%, .07);
+  box-shadow: 1px 1px 3px 0 hsla(0, 0%, 0%, 0.07);
   color: hsl(0, 0%, 100%);
   padding: 16px 0;
   margin-left: -2px;
@@ -29,7 +29,7 @@ export default {};
   border: 0;
 }
 
-.input--search{
+.input--search {
   border-radius: 2px 0 0 2px;
   font-size: 16px;
   color: hsl(0, 0%, 10%);
