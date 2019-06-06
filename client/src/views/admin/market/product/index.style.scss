@@ -1,4 +1,3 @@
-
 .list--product{
     .table{
         border: 1px solid #ccc;
@@ -9,21 +8,19 @@
     .header--title{
         // background: #ffb94a;
         background: #000;
-        .kind--of, .category--title, .tag--title {
-            flex: 2;
-        }
-        .price--title {
+        div{
             flex: 1;
+            border-right: 1px solid #ccc;
+            &:last-child{
+                border: 0;
+            }
         }
     }
     .content {
         border-bottom: 1px solid #ccc;
-        .kind--of--item, .category--item, .tag--item{
-            flex: 2;
-            border-right: 1px solid #ccc;
-        }
-        .price--item{
+        .kind--of--item, .category--item, .tag--item, .price--item, .action{
             flex: 1;
+            border-right: 1px solid #ccc;
         }
     }
 }
