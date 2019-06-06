@@ -7,15 +7,13 @@
 </template>
 
 <script>
-import AppDesktop from "./desktop"
+import AppDesktop from "./desktop";
 
 export default {
   components: {
     AppDesktop
   }
-}
+};
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

@@ -215,22 +215,16 @@
         <div class="header--bottom">
           <nav>
             <div class="nav--label">
-              <a title="Bài viết mẫu"
-                class="active nav--label-link"
-                ><span >Bài viết mẫu</span
-                ></a>
-              <a title="Chiến dịch mẫu"
-                 class="nav--label-link"
-              ><span >Chiến dịch mẫu</span
-              ></a>
-              <a title="Ảnh trending"
-                 class="nav--label-link"
-              ><span >Ảnh trending</span
-              ></a>
-              <a title="Khác"
-                 class="nav--label-link"
-              ><span >Khác</span
-              ></a>
+              <a title="Bài viết mẫu" class="active nav--label-link"
+                ><span>Bài viết mẫu</span></a
+              >
+              <a title="Chiến dịch mẫu" class="nav--label-link"
+                ><span>Chiến dịch mẫu</span></a
+              >
+              <a title="Ảnh trending" class="nav--label-link"
+                ><span>Ảnh trending</span></a
+              >
+              <a title="Khác" class="nav--label-link"><span>Khác</span></a>
             </div>
           </nav>
         </div>
@@ -239,7 +233,7 @@
   </div>
 </template>
 
-<script src="./index.script"></script>
+<script src="./index.script.js"></script>
 
 <style lang="scss" scoped>
 @import "index.style";

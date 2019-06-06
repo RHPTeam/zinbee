@@ -32,21 +32,21 @@
 </template>
 
 <style lang="scss" scoped>
-  .wrap--footer {
-    color: #666666;
-    font-size: 0.875rem;
-    .language {
-      color: #666;
-      cursor: pointer;
-      .icon--edit {
-        margin: 0;
-        color: #999999;
-      }
-      .text {
-        &:hover {
-          text-decoration: underline;
-        }
+.wrap--footer {
+  color: #666666;
+  font-size: 0.875rem;
+  .language {
+    color: #666;
+    cursor: pointer;
+    .icon--edit {
+      margin: 0;
+      color: #999999;
+    }
+    .text {
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
+}
 </style>
