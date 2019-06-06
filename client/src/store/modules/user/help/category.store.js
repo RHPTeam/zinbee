@@ -6,7 +6,10 @@ const state = {
   helpCategoryStatus: "",
   allHelpCategoriesChild: [],
   helpCategoryById: [],
-  categoryChildren: []
+  categoryChildren: [],
+  parentCate: [],
+  cateLevel: [],
+  cateChildren: []
 };
 const getters = {
   allHelpCategories: state => state.allHelpCategories,
@@ -14,7 +17,10 @@ const getters = {
   helpCategoryStatus: state => state.helpCategoryStatus,
   allHelpCategoriesChild: state => state.allHelpCategoriesChild,
   helpCategoryById: state => state.helpCategoryById,
-  categoryChildren: state => state.categoryChildren
+  categoryChildren: state => state.categoryChildren,
+  parentCate: state => state.parentCate,
+  cateLevel: state => state.cateLevel,
+  cateChildren: state => state.cateChildren
 };
 const mutations = {
   help_category_request: state => {
@@ -33,6 +39,31 @@ const mutations = {
     state.helpCategoryById = payload;
   },
   setAllHelpCategoriesChild: (state, payload) => {
+    const level = [];
+    const children = [];
+
+    const parent = payload.filter(item => {
+      if (item.level === 0) return item;
+    });
+    parent.forEach(item => {
+      if (item.children) {
+        item.children.map(chill => {
+          if (chill.level === 1) return level.push(chill);
+        });
+      }
+    });
+    level.forEach(item => {
+      if (item.children) {
+        item.children.map(chill => {
+          if (chill.level === 2) return children.push(chill);
+        });
+      }
+    });
+
+    state.parentCate = parent;
+    state.cateLevel = level;
+    state.cateChildren = children;
+
     state.allHelpCategoriesChild = payload;
   },
   setCategoryChildren: (state, payload) => {

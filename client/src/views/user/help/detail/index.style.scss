@@ -19,11 +19,14 @@
   .content{
     border-left: 3px solid rgba(74, 71, 71, 0.05);
     .title--question{
+      cursor: pointer;
+      color: #4267b2;
       padding-bottom: 25px;
-      font-size: 25px;
+      font-size: 23px;
       font-weight: bold;
-      color: $color-light;
-      border-bottom: 1px solid #e4e4e4;
+      &:hover, &:focus {
+        text-decoration: underline;
+      }
     }
     .infor--useful{
       padding: 25px;
@@ -55,6 +58,12 @@
         li{
           cursor: pointer;
           margin-bottom: 10px;
+          a {
+            color: #4267b2;
+            &:hover, &:focus {
+              text-decoration: underline;
+            }
+          }
         }
       }
     }
