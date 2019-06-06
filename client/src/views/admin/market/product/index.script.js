@@ -8,13 +8,17 @@ export default {
     }
   },
   methods: {
-    async goToUpdate(value) {
-      await this.$store.dispatch("setButtonDefault", 0);
-      await this.$store.dispatch("getInfoProductById", value);
+    goToUpdate(value) {
+      this.$store.dispatch("getInfoProductById", value);
+      this.$store.dispatch("setButtonDefault", 0);
       this.$router.push({ name: "product_create" });
     },
     deleteProduct(value) {
       this.$store.dispatch("delete", value);
+    },
+    goToCreate() {
+      this.$store.dispatch("setButtonDefault", 1);
+      this.$router.push({ name: "product_create" });
     }
   },
   async created() {

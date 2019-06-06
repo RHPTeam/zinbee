@@ -30,11 +30,13 @@ export default {
   methods: {
     createProduct() {
       const dataCreate = {
-        name: this.inforProductById.titleProduct,
+        name: this.inforProductById.name,
         priceCents: this.inforProductById.priceCents,
         attributes: this.inforProductById.attributes,
         description: this.inforProductById.description,
-        tags: this.inforProductById.tags
+        tags: this.inforProductById.tags,
+        updatedAt: this.inforProductById.updatedAt,
+        content: this.inforProductById.content
       };
       this.$store.dispatch("createProduct", dataCreate);
       this.$router.push({ name: "manage_product" });
@@ -55,5 +57,6 @@ export default {
   created() {
     this.$store.dispatch("getcategories");
     this.$store.dispatch("getProductDefault");
+    this.$store.dispatch("createAttr");
   }
 };

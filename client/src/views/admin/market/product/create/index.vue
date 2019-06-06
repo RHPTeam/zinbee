@@ -66,8 +66,8 @@
       </div>
       <div class="form_group">
         <label class>Dac diem:</label>
-        <div class="r">
-          <div class="c">
+        <div class="d_flex align_items_center mb_2">
+          <div class="mr_2">
             <input
               type="text"
               class="form_control"
@@ -75,7 +75,7 @@
               v-model="inforProductById.attributes[0].name"
             />
           </div>
-          <div class="c">
+          <div class="mr_2">
             <input
               type="text"
               class="form_control"
@@ -83,6 +83,18 @@
               v-model="inforProductById.attributes[0].value"
             />
           </div>
+        </div>
+        <div class="d_inline_flex mb_2 align_items_center add--att p_1">
+          <icon-base
+            icon-name="icon-plus"
+            class="icon-plus"
+            width="25"
+            height="25"
+            viewBox="0 0 60 70"
+          >
+            <icon-plus />
+          </icon-base>
+          Thêm dac diem
         </div>
       </div>
       <div class="form_group">
@@ -93,15 +105,24 @@
         <div class="contain--images"></div>
       </div>
       <div class="form_group">
-        <label for class>Noi dung khi xem thu:</label>
+        <label for class>Mo ta bai viet:</label>
         <div class>
           <textarea
-            name
-            id
             rows="5"
             cols="10"
             class="form_control"
             v-model="inforProductById.description"
+          ></textarea>
+        </div>
+      </div>
+      <div class="form_group">
+        <label for class>Noi dung khi xem thu:</label>
+        <div class>
+          <textarea
+            rows="5"
+            cols="10"
+            class="form_control"
+            v-model="inforProductById.content"
           ></textarea>
         </div>
       </div>
@@ -122,7 +143,8 @@
       >
         Update
       </div>
-      <div class="btn btn_success" @click="createProduct" v-else>Tao moi</div>
+      <div class="btn btn_success" @click="createProduct" 
+        v-if="nodeUpdate === 1">Tao moi</div>
     </div>
   </div>
 </template>

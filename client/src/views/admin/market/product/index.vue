@@ -1,13 +1,7 @@
 <template>
   <div class="modal--wrapper">
     <div class="modal--content">
-      <div class="create mb_3">
-        <router-link
-          :to="{ name: 'product_create' }"
-          class="categories text_left btn btn_primary"
-          >Tao moi</router-link
-        >
-      </div>
+      <div class="create mb_3 text_left btn btn_primary" @click="goToCreate">Tao moi</div>
     </div>
     <!-- List product -->
     <div class="list--product">
@@ -20,6 +14,7 @@
             <div class="category--title p_2">Danh muc</div>
             <div class="tag--title p_2">Thuoc tag</div>
             <div class="price--title p_2">Price</div>
+            <div class="price--title p_2">Nguoi tao</div>
             <div></div>
           </div>
           <!-- Header Content -->
@@ -37,6 +32,7 @@
               >
             </div>
             <div class="price--item p_2">{{ product.priceCents }}</div>
+            <div class="price--item p_2">{{ product._creator.name }}</div>
             <div class="action p_2 d_flex">
               <div class="btn btn_primary mr_1" @click="goToUpdate(product)">
                 Update

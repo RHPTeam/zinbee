@@ -2,12 +2,26 @@ import ProductMarket from "@/services/modules/market/product.services";
 
 const state = {
   allProduct: [],
-  inforById: [],
-  nodeUpdate: []
+  nodeUpdate: [],
+  product: {
+    _id: "",
+    name: "",
+    priceCents: "",
+    attributes: [
+      {
+        name: "",
+        value: ""
+      }
+    ],
+    description: "",
+    tags: [],
+    updatedAt: "",
+    content: ""
+  }
 };
 const getters = {
   allProduct: state => state.allProduct,
-  inforById: state => state.inforById,
+  product: state => state.product,
   nodeUpdate: state => state.nodeUpdate
 };
 const mutations = {
@@ -17,13 +31,18 @@ const mutations = {
   },
 
   // info by id
-  setInforById: (state, payload) => {
-    state.inforById = payload;
+  setProduct: (state, payload) => {
+    state.product = payload;
   },
 
   // setButton
   setButton: (state, payload) => {
     state.nodeUpdate = payload;
+  },
+
+  // setAtribute
+  setAtribute: state => {
+    state.product.attributes.push({ name: "", value: "" });
   }
 };
 const actions = {
@@ -59,12 +78,13 @@ const actions = {
   // get infor product by id
   getInfoProductById: async ({ commit }, payload) => {
     const rsInfor = await ProductMarket.getInfoById(payload._id);
-    commit("setInforById", rsInfor.data.data);
+    commit("setProduct", rsInfor.data.data);
   },
 
   // get info Default
   getProductDefault: async ({ commit }) => {
-    commit("setInforById", {
+    commit("setProduct", {
+      _id: "",
       name: "",
       priceCents: "",
       attributes: [
@@ -74,11 +94,18 @@ const actions = {
         }
       ],
       description: "",
-      tags: []
+      tags: [],
+      updatedAt: "",
+      content: ""
     });
   },
   setButtonDefault: async ({ commit }, payload) => {
     commit("setButton", payload);
+  },
+
+  // create Attr
+  createAttr: async ({ commit }) => {
+    commit("setAtribute");
   }
 };
 
