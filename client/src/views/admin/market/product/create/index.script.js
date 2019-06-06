@@ -54,7 +54,10 @@ export default {
       this.$router.push({ name: "manage_product" });
     },
     addAttribute() {
-      this.$store.dispatch("createAttr");
+      this.$store.dispatch("createAttribute");
+    },
+    deleteAttribute(index) {
+      this.$store.dispatch("deleteAttribute", index);
     }
   },
   created() {

@@ -41,8 +41,13 @@ const mutations = {
   },
 
   // setAtribute
-  setAtribute: state => {
+  setCreateAtribute: state => {
     state.product.attributes.push({ name: "", value: "" });
+  },
+
+  // setDeleteAtribute
+  setDeleteAtribute: (state, payload) => {
+    state.product.attributes.splice(payload, 1);
   }
 };
 const actions = {
@@ -104,8 +109,13 @@ const actions = {
   },
 
   // create Attr
-  createAttr: async ({ commit }) => {
-    commit("setAtribute");
+  createAttribute: async ({ commit }) => {
+    commit("setCreateAtribute");
+  },
+
+  // delete attr
+  deleteAttribute: async ({ commit }, payload) => {
+    commit("setDeleteAtribute", payload);
   }
 };
 
