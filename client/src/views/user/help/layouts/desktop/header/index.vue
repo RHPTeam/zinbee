@@ -76,7 +76,7 @@
             <!-- Start: Menu Items Loop -->
             <li
               class="menu--help-item flex_fill"
-              v-for="(category, index) in allHelpCategories.slice(0, 4)"
+              v-for="(category, index) in allHelpCategories.slice(0, 5)"
               :key="index"
             >
               {{ category.title }}
@@ -147,7 +147,10 @@ export default {
       this.$router.push({ name: "help" });
     },
     async showInfoCategory(val) {
-      await this.$store.dispatch("setHelpDefault", 1);
+      await this.$store.dispatch("setHelpDefault", {
+        right: 1,
+        left: 1
+      });
       await this.$store.dispatch("setHelpCategoryChildrenLevel", val);
       this.$router.push({
         name: "help_detail",
