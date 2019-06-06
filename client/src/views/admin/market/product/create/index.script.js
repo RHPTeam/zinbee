@@ -94,6 +94,12 @@ export default {
     updateProduct() {
       this.$store.dispatch("updateProduct", this.inforProductById);
       this.$router.push({ name: "manage_product" });
+    },
+    addAttribute() {
+      this.$store.dispatch("createAttribute");
+    },
+    deleteAttribute(index) {
+      this.$store.dispatch("deleteAttribute", index);
     }
   }
 };
