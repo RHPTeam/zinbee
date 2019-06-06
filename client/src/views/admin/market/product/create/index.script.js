@@ -18,7 +18,7 @@ export default {
       return arrCategoriesChildren;
     },
     inforProductById() {
-      return this.$store.getters.inforById;
+      return this.$store.getters.product;
     },
     getProductDefault() {
       return this.$store.dispatch("getProductDefault");
@@ -52,11 +52,13 @@ export default {
     updateProduct() {
       this.$store.dispatch("updateProduct", this.inforProductById);
       this.$router.push({ name: "manage_product" });
+    },
+    addAttribute() {
+      this.$store.dispatch("createAttr");
     }
   },
   created() {
     this.$store.dispatch("getcategories");
     this.$store.dispatch("getProductDefault");
-    this.$store.dispatch("createAttr");
   }
 };

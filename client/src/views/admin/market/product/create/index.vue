@@ -66,25 +66,33 @@
       </div>
       <div class="form_group">
         <label class>Dac diem:</label>
-        <div class="d_flex align_items_center mb_2">
-          <div class="mr_2">
-            <input
-              type="text"
-              class="form_control"
-              placeholder="Name"
-              v-model="inforProductById.attributes[0].name"
-            />
-          </div>
-          <div class="mr_2">
-            <input
-              type="text"
-              class="form_control"
-              placeholder="Value"
-              v-model="inforProductById.attributes[0].value"
-            />
+        <div
+          v-for="(attr, index) in inforProductById.attributes"
+          :key="`e-${index}`"
+        >
+          <div class="d_flex align_items_center mb_2">
+            <div class="mr_2">
+              <input
+                type="text"
+                class="form_control"
+                placeholder="Name"
+                v-model="inforProductById.attributes[index].name"
+              />
+            </div>
+            <div class="mr_2">
+              <input
+                type="text"
+                class="form_control"
+                placeholder="Value"
+                v-model="inforProductById.attributes[index].value"
+              />
+            </div>
           </div>
         </div>
-        <div class="d_inline_flex mb_2 align_items_center add--att p_1">
+        <div
+          class="d_inline_flex mb_2 align_items_center add--att p_1"
+          @click="addAttribute"
+        >
           <icon-base
             icon-name="icon-plus"
             class="icon-plus"
