@@ -15,15 +15,12 @@
         <div class="modal--body">
           <div class="general--info d_flex mb_3">
             <div class="left">
-              <div
-                class="thumbnail mr_3"
-                :style="{ backgroundImage: 'url(' + product.img + ')' }"
-              ></div>
+              <div class="thumbnail mr_3"></div>
             </div>
             <div class="right">
               <div class="right--data">
-                <div class="title">{{ product.title }}</div>
-                <div class="editor mt_1">bởi {{ product.editor }}</div>
+                <div class="title">{{ product.name }}</div>
+                <div class="editor mt_1">bởi {{ product._creator.name }}</div>
                 <div class="sale d_flex align_items_center mt_3">
                   <icon-base
                     class="icon--user mr_1"
@@ -33,9 +30,9 @@
                   >
                     <icon-user></icon-user>
                   </icon-base>
-                  <span>{{ product.sale }} đã sử dụng</span>
+                  <span>{{ product.numberOfSales }} đã sử dụng</span>
                 </div>
-                <div class="price mt_3">{{ product.price }} ₫</div>
+                <div class="price mt_3">{{ product.priceCents }} ₫</div>
               </div>
               <div class="right--btn">
                 <div class="btn btn_outline_info">Thêm vào kho</div>
@@ -45,27 +42,19 @@
           <div class="functions mt_3">
             <div class="functions--title mb_2">Đặc điểm</div>
             <ul class="list_group pl_3">
-              <li class="list_group_item">
-                <span class="font_weight_bold">Key 1: </span>
-                <span>Lorem ipsum dolor sit amet</span>
-              </li>
-              <li class="list_group_item">
-                <span class="font_weight_bold">Key 1: </span>
-                <span>Lorem ipsum dolor sit amet</span>
+              <li
+                class="list_group_item"
+                v-for="(attr, index) in product.attributes"
+                :key="`c-${index}`"
+              >
+                <span class="font_weight_bold">{{ attr.name }} : </span>
+                <span>{{ attr.value }}</span>
               </li>
             </ul>
           </div>
           <div class="preview mt_3">
             <div class="preview--title mb_2">Xem trước</div>
-            <div class="preview--content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum...
-            </div>
+            <div class="preview--content">{{ product.content }}</div>
           </div>
         </div>
         <!-- End: Modal Body -->
@@ -95,4 +84,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "./index.style";
+.thumbnail {
+  background: url("https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg")
+    no-repeat;
+  background-size: cover;
+}
 </style>
