@@ -10,19 +10,21 @@
         >
           <!-- Start: Header logo -->
           <div class="logo">
-            <div class="logo d_flex align_items_center">
-              <icon-base
-                icon-name="logo"
-                width="40px"
-                height="40px"
-                viewBox="0 0 200 200"
-              >
-                <icon-logo-icon-white />
-              </icon-base>
-              <div class="center--support ml_2">
-                Zinbee Store
+            <router-link tag="div" :to="{ name: 'market_home' }">
+              <div class="logo d_flex align_items_center">
+                <icon-base
+                  icon-name="logo"
+                  width="40px"
+                  height="40px"
+                  viewBox="0 0 200 200"
+                >
+                  <icon-logo-icon-white />
+                </icon-base>
+                <div class="center--support ml_2">
+                  Zinbee Store
+                </div>
               </div>
-            </div>
+            </router-link>
           </div>
           <!-- End: Header logo-->
         </div>

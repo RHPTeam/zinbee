@@ -3,13 +3,15 @@ import CategoryMarket from "@/services/modules/market/category.services";
 const state = {
   allCategory: [],
   allMarketCategoriesTree: [],
-  currentParentMarketCategory: {}
+  currentParentMarketCategory: {},
+  currentChildrenMarketCategory: {}
 };
 
 const getters = {
   allCategory: state => state.allCategory,
   allMarketCategoriesTree: state => state.allMarketCategoriesTree,
-  currentParentMarketCategory: state => state.currentParentMarketCategory
+  currentParentMarketCategory: state => state.currentParentMarketCategory,
+  currentChildrenMarketCategory: state => state.currentChildrenMarketCategory
 };
 
 const mutations = {
@@ -21,6 +23,9 @@ const mutations = {
   },
   currentParentMarketCategory: (state, payload) => {
     state.currentParentMarketCategory = payload;
+  },
+  currentChildrenMarketCategory: (state, payload) => {
+    state.currentChildrenMarketCategory = payload;
   }
 };
 
@@ -39,10 +44,16 @@ const actions = {
     commit("currentParentMarketCategory", res.data.data[0]);
   },
   /**
-   * Set current parent market category
+   * Set current selected parent market category
    */
   currentParentMarketCategory: ({ commit }, payload) => {
     commit("currentParentMarketCategory", payload);
+  },
+  /**
+   * Set current selected children market category
+   */
+  currentChildrenMarketCategory: ({ commit }, payload) => {
+    commit("currentChildrenMarketCategory", payload);
   },
   // create
   createCategory: async ({ commit }, payload) => {

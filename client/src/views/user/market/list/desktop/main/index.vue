@@ -14,10 +14,7 @@
                   <div
                     class="thumbnail--bg"
                     :style="{
-                      backgroundImage:
-                        'url(' +
-                        'https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg' +
-                        ')'
+                      backgroundImage: 'url(' + item.previews.thumbnail + ')'
                     }"
                     @click="showDetailPopup(item)"
                   ></div>
