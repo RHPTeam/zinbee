@@ -42,4 +42,7 @@ router.route( "/" )
 router.route( "/upload" )
   .post( auth, permission, upload.single( "previewImageUrl" ), ProductController.upload );
 
+router.route( "/add/product/user" )
+  .post( auth, ProductController.addToCollection );
+
 module.exports = router;

@@ -31,15 +31,18 @@ export default {
         { name: "Ăn uống", total: 15 },
         { name: "Mỹ phẩm", total: 10001 },
         { name: "Du lịch", total: 152472 }
-      ]
+      ],
+      isShowFilter: false
     };
   },
-  computed: {}
+  computed: {},
+  methods: {
+    closeFilterSidebar() {
+      this.isShowFilter = true;
+    }
+  },
+  created() {}
 };
 </script>
 
-<style scoped lang="scss">
-.left--sidebar {
-  font-size: 0.875rem;
-}
-</style>
+<style scoped lang="scss"></style>

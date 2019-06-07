@@ -27,10 +27,10 @@
                     {{ item.name }}
                   </div>
                   <div class="editor mb_2">
-                    <span class="by">Bởi </span>
+                    <span class="by">Bởi</span>
                     <!-- <span class="avatar--user mr_1">
                       <img src="https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg" alt="">
-                    </span> -->
+                    </span>-->
                     {{ item._creator.name }}
                   </div>
                   <div class="description mb_1">{{ item.description }}</div>
@@ -42,7 +42,7 @@
                         :key="`c-${index}`"
                       >
                         <span class="font_weight_bold">{{ attr.name }} :</span>
-                        <span> {{ attr.value }}</span>
+                        <span>{{ attr.value }}</span>
                       </li>
                       <li v-if="item.attributes.length > 1">....</li>
                     </ul>
@@ -51,11 +51,10 @@
               </div>
               <div class="bottom mt_3">
                 <div class="tags">
-                  <span>Tags: </span>
+                  <span>Tags:</span>
                   <span v-for="(tag, tagIndex) in item.tags" :key="tagIndex">
-                    {{ tag
-                    }}{{ tagIndex === item.tags.length - 1 ? "" : ", " }}</span
-                  >
+                    {{ tag }}{{ tagIndex === item.tags.length - 1 ? "" : ", " }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -103,7 +102,6 @@
 
 <script>
 import DetailPopup from "../../../layouts/desktop/popup/detail";
-
 export default {
   components: {
     DetailPopup

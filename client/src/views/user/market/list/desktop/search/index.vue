@@ -1,6 +1,6 @@
 <template>
   <div class="ct m_auto">
-    <div class="search py_3">
+    <div class="search py_5">
       <div class="input_group d_flex m_auto">
         <input type="text" class="input--search" placeholder="Tìm kiếm" />
         <div class="btn--search d_flex justify_content_center">
@@ -50,6 +50,7 @@ export default {};
   padding: 0 1rem;
   flex: 1;
   height: 50px;
+  outline: none;
   line-height: 50px;
   outline: 0;
   &::placeholder {

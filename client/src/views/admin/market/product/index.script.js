@@ -14,7 +14,7 @@ export default {
       this.$router.push({ name: "product_create" });
     },
     deleteProduct(value) {
-      this.$store.dispatch("delete", value);
+      this.$store.dispatch("deleteProduct", value);
     },
     goToCreate() {
       this.$store.dispatch("setButtonDefault", 1);
