@@ -27,6 +27,7 @@ export default {};
   width: 160px;
   border-radius: 0 2px 2px 0;
   border: 0;
+  cursor: pointer;
 }
 
 .input--search {
@@ -38,5 +39,6 @@ export default {};
   padding: 16px 24px;
   flex: 1;
   height: 56px;
+  outline: none;
 }
 </style>
