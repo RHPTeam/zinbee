@@ -36,11 +36,7 @@ const actions = {
   getAllMarketCategoriesTree: async ({ commit }) => {
     const res = await CategoryMarket.getCategoriesTree();
     commit("setAllCategoriesTree", res.data.data);
-    // set data for marketCategoriesTreeLv0
-    const categories = res.data.data.filter(item => {
-      return (item.level = 0);
-    });
-    commit("setMarketCategoriesTreeLv0", categories);
+    commit("currentParentMarketCategory", res.data.data[0]);
   },
   /**
    * Set current parent market category

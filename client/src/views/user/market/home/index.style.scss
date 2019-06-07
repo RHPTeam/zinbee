@@ -95,12 +95,17 @@
 
 .desc {
   h4 {
+    cursor: pointer;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     color: hsl(0, 0%, 30%);
     font-size: 1rem;
     font-weight: 700;
+    transition: all .4s ease;
+    &:hover {
+      color: #FFB94A;
+    }
   }
   .editor {
     font-size: calc(1rem - 3px);
@@ -129,7 +134,7 @@
       font-weight: 700;
     }
     .sales {
-      font-size: calc(1rem - 1px);
+      font-size: .875rem;
     }
   }
   .right {
@@ -142,8 +147,11 @@
       padding: 0 1rem;
     }
     .action {
+      font-size: .875rem;
+      font-weight: 600;
       &:hover, &:focus {
         background-color: #ffb94a;
+        color: #fff;
         transition: all .75s  ease;
       }
     }

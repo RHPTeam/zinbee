@@ -1,4 +1,4 @@
-import ListProductStore from "@/services/modules/market/list.services";
+// import ListProductStore from "@/services/modules/market/list.services";
 
 const state = {
   showMarketListSidebar: true
@@ -22,14 +22,6 @@ const actions = {
     } else {
       commit("setFilterSidebarList", true);
     }
-  },
-
-  /**
-   * add to collection
-   */
-  addToCollection: async ({ commit }, payload) => {
-    const rsAddToCollection = await ListProductStore.addToCollection(payload);
-    commit("setAddToCollection", rsAddToCollection.data.data);
   }
 };
 

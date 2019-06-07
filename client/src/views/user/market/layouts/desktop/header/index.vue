@@ -6,7 +6,7 @@
     <div class="ct">
       <div class="r mx_0 mb_3">
         <div
-          class="c_md_6 header--left d_flex justify_content_start align_items_center "
+          class="c_md_6 header--left d_flex justify_content_start align_items_center px_0"
         >
           <!-- Start: Header logo -->
           <div class="logo">
@@ -27,7 +27,7 @@
           <!-- End: Header logo-->
         </div>
         <div
-          class="c_md_6 header--right d_flex justify_content_end align_items_center"
+          class="c_md_6 header--right d_flex justify_content_end align_items_center px_0"
         >
           <!-- Start: Redirect to help -->
           <div class="help mr_2 ml_1" @click="redirectToHelp">
@@ -211,24 +211,27 @@
           <!-- End: User Info -->
         </div>
       </div>
+      <!-- Start: Header Bottom Menu -->
       <div class="header--bottom-wrapper">
         <div class="header--bottom">
           <nav>
             <div class="nav--label">
-              <a title="Bài viết mẫu" class="active nav--label-link"
-                ><span>Bài viết mẫu</span></a
+              <a
+                :title="category.name"
+                class="nav--label-link"
+                :class="{
+                  active: category._id === currentParentMarketCategory._id
+                }"
+                v-for="(category, index) in allMarketCategoriesTree"
+                :key="index"
+                @click="chooseCategory(category)"
+                ><span>{{ category.name }}</span></a
               >
-              <a title="Chiến dịch mẫu" class="nav--label-link"
-                ><span>Chiến dịch mẫu</span></a
-              >
-              <a title="Ảnh trending" class="nav--label-link"
-                ><span>Ảnh trending</span></a
-              >
-              <a title="Khác" class="nav--label-link"><span>Khác</span></a>
             </div>
           </nav>
         </div>
       </div>
+      <!-- End: Header Bottom Menu -->
     </div>
   </div>
 </template>

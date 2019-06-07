@@ -82,7 +82,12 @@
                 </div>
               </div>
               <div class="right--item bottom text_center">
-                <div class="btn btn_outline_info">Thêm vào kho</div>
+                <div
+                  class="btn btn_outline_info"
+                  @click="addToCollection(item)"
+                >
+                  Thêm vào kho
+                </div>
               </div>
             </div>
           </div>
@@ -132,10 +137,13 @@ export default {
     showDetailPopup(val) {
       this.productSelected = val;
       this.isShowDetailPopup = true;
+    },
+    addToCollection(value) {
+      this.$store.dispatch("addToCollection", value);
     }
   },
   created() {
-    this.$store.dispatch("products");
+    this.$store.dispatch("getProducts");
   }
 };
 </script>

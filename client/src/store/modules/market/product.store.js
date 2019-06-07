@@ -21,12 +21,14 @@ const state = {
     previews: {
       thumbnail: ""
     }
-  }
+  },
+  collection: []
 };
 const getters = {
   allProduct: state => state.allProduct,
   product: state => state.product,
-  nodeUpdate: state => state.nodeUpdate
+  nodeUpdate: state => state.nodeUpdate,
+  collection: state => state.collection
 };
 const mutations = {
   // all product
@@ -52,11 +54,15 @@ const mutations = {
   // setDeleteAtribute
   setDeleteAtribute: (state, payload) => {
     state.product.attributes.splice(payload, 1);
+  },
+
+  setAddToCollection: (state, payload) => {
+    state.collection = payload;
   }
 };
 const actions = {
   // get all product
-  products: async ({ commit }) => {
+  getProducts: async ({ commit }) => {
     const rsAllProduct = await ProductMarket.allProduct();
     commit("setAllProduct", rsAllProduct.data.data);
   },
@@ -105,7 +111,11 @@ const actions = {
       description: "",
       tags: [],
       updatedAt: "",
-      content: ""
+      content: "",
+      summary: "",
+      previews: {
+        thumbnail: ""
+      }
     });
   },
   setButtonDefault: async ({ commit }, payload) => {
@@ -120,6 +130,17 @@ const actions = {
   // delete attr
   deleteAttribute: async ({ commit }, payload) => {
     commit("setDeleteAtribute", payload);
+  },
+
+  /**
+   * add to collection
+   */
+  addToCollection: async ({ commit }, payload) => {
+    const rsAddToCollection = await ProductMarket.addToCollection(
+      payload._id,
+      payload
+    );
+    commit("setAddToCollection", rsAddToCollection.data.data);
   }
 };
 

@@ -120,8 +120,12 @@
       </div>
       <div class="form_group">
         <label for class>Ảnh đại diện</label>
-        <div class="img--preview" v-if="inforProductById.previews">
-          <img :src="inforProductById.previews.thumbnail" alt="" />
+        <div class="img--preview mb_2" v-if="inforProductById.previews">
+          <img
+            :src="inforProductById.previews.thumbnail"
+            alt=""
+            height="120px"
+          />
         </div>
         <div class>
           <input
