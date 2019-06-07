@@ -230,6 +230,9 @@ const actions = {
     CookieFunction.removeCookie("sid");
     CookieFunction.removeCookie("uid");
     CookieFunction.removeCookie("cfr");
+    CookieFunction.removeCookie("token");
+    CookieFunction.removeCookie("_sub");
+    CookieFunction.removeCookie("__v");
 
     delete axios.defaults.headers.common.Authorization;
     commit("auth_success");
