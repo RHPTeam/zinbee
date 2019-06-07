@@ -1,7 +1,11 @@
 <template>
   <div class="list--main" :data-theme="currentTheme">
     <div class="r list--group m_0">
-      <div class="c_12 list--group-item mb_3 p_0" v-for="(item, index) in products" :key="index">
+      <div
+        class="c_12 list--group-item mb_3 p_0"
+        v-for="(item, index) in products"
+        :key="index"
+      >
         <div class="card">
           <div class="card_body d_flex">
             <div class="c_md_9 left p_0">
@@ -19,7 +23,9 @@
                   ></div>
                 </div>
                 <div class="info pr_0 c_lg_6 c_md_12 c_xl_6">
-                  <div class="title" @click="showDetailPopup(item)">{{ item.name }}</div>
+                  <div class="title" @click="showDetailPopup(item)">
+                    {{ item.name }}
+                  </div>
                   <div class="editor mb_2">
                     <span class="by">Bởi</span>
                     <!-- <span class="avatar--user mr_1">
@@ -47,8 +53,7 @@
                 <div class="tags">
                   <span>Tags:</span>
                   <span v-for="(tag, tagIndex) in item.tags" :key="tagIndex">
-                    {{ tag
-                    }}{{ tagIndex === item.tags.length - 1 ? "" : ", " }}
+                    {{ tag }}{{ tagIndex === item.tags.length - 1 ? "" : ", " }}
                   </span>
                 </div>
               </div>
@@ -56,14 +61,25 @@
             <div class="c_md_3 right py_0 pr_0 pl_3">
               <div class="top"></div>
               <div class="right--item content text_center mt_1">
-                <div class="price font_weight_bold">{{ item.priceCents }} ₫</div>
-                <div class="sale d_flex align_items_center justify_content_center mt_1">
-                  <icon-base class="icon--user mr_1" width="16px" height="16px" viewBox="0 0 20 20">
+                <div class="price font_weight_bold">
+                  {{ item.priceCents }} ₫
+                </div>
+                <div
+                  class="sale d_flex align_items_center justify_content_center mt_1"
+                >
+                  <icon-base
+                    class="icon--user mr_1"
+                    width="16px"
+                    height="16px"
+                    viewBox="0 0 20 20"
+                  >
                     <icon-user></icon-user>
                   </icon-base>
                   <span>{{ item.numberOfSales }} đã sử dụng</span>
                 </div>
-                <div class="last--update mt_1">Cập nhật lần cuối: {{ dateFormat(item.updatedAt) }}</div>
+                <div class="last--update mt_1">
+                  Cập nhật lần cuối: {{ dateFormat(item.updatedAt) }}
+                </div>
               </div>
               <div class="right--item bottom text_center">
                 <div class="btn btn_outline_info">Thêm vào kho</div>

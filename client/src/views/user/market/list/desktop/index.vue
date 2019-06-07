@@ -1,11 +1,14 @@
 <template>
   <div class="list--wrapper">
     <div class="r mx_0 top--search mb_3">
-      <app-search/>
+      <app-search />
     </div>
     <div class="top ct r m_auto">
       <div class="c_md_3 pl_0">
-        <div class="filter--menu d_flex align_items_center" @click="changeFilterSidebarList">
+        <div
+          class="filter--menu d_flex align_items_center"
+          @click="changeFilterSidebarList"
+        >
           <div class="icon pr_1">
             <div class="icon--menu">
               <svg
@@ -53,13 +56,11 @@
       </div>
       <div class="c_md_9 pr_0">
         <!-- Start: Filter Product -->
-        <filter-product/>
+        <filter-product />
         <!-- End: Filter Product -->
         <!-- START: Selected filters -->
         <div class="d_flex selected-filters align_items_center mb_4 mt_2">
-          <div class="total--product">
-            <b>1234</b> items in
-          </div>
+          <div class="total--product"><b>1234</b> items in</div>
           <div class="d_flex pl_2 pr_3">
             <div class="selected">
               <div class="items">
@@ -81,13 +82,16 @@
     </div>
     <div class="ct r m_auto px_3">
       <!-- Sidebar -->
-      <div class="pl_0" :class="showMarketListSidebar ? 'c_md_3' : 'sidebar--active' ">
+      <div
+        class="pl_0"
+        :class="showMarketListSidebar ? 'c_md_3' : 'sidebar--active'"
+      >
         <!-- Start: App Sidebar-->
         <app-sidebar v-if="showMarketListSidebar === true"></app-sidebar>
         <!-- End: App Sidebar -->
       </div>
       <!-- Main: Product -->
-      <div class="pr_0" :class="showMarketListSidebar ? 'c_md_9' : 'c_md_12' ">
+      <div class="pr_0" :class="showMarketListSidebar ? 'c_md_9' : 'c_md_12'">
         <!-- Start: App Data-->
         <app-data></app-data>
         <!-- End: App Data -->

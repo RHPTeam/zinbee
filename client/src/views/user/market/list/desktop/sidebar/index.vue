@@ -35,17 +35,14 @@ export default {
       isShowFilter: false
     };
   },
-  computed: {
-  },
+  computed: {},
   methods: {
-    closeFilterSidebar(){
+    closeFilterSidebar() {
       this.isShowFilter = true;
     }
   },
-  created() {
-  },
+  created() {}
 };
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

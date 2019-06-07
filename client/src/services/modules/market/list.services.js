@@ -5,4 +5,4 @@ export default {
   addToCollection(id) {
     return Api().post(`add/product/user?_id=${id}`);
   }
-}
+};
