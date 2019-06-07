@@ -70,9 +70,7 @@
               }
               .thumbnail {
                 cursor: pointer;
-                .thumbnail--bg {
-                  background-position: center;
-                  background-size: cover;
+                .thumbnail--img {
                   height: 172px;
                   width: 100%;
                 }

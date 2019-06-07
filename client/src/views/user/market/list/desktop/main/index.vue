@@ -1,5 +1,25 @@
 <template>
   <div class="list--main" :data-theme="currentTheme">
+    <!-- START: Selected filters -->
+    <div class="d_flex selected-filters align_items_center mb_4 mt_2">
+      <div class="total--product"><b>1234</b> items in</div>
+      <div class="d_flex pl_2 pr_3">
+        <div class="selected">
+          <div class="items">
+            <span class="name">All post</span>
+            <span class="px_1 cut">/</span>
+          </div>
+        </div>
+        <div class="selected">
+          <div class="items">
+            <span class="name">Post</span>
+            <span class="px_1 cut">/</span>
+          </div>
+        </div>
+      </div>
+      <div class="clear">Clear all</div>
+    </div>
+    <!-- End Selected filters -->
     <div class="r list--group m_0">
       <div
         class="c_12 list--group-item mb_3 p_0"
@@ -11,13 +31,12 @@
             <div class="c_md_9 left p_0">
               <div class="top r m_0">
                 <div class="thumbnail px_0 c_lg_6 c_md_12 c_xl_6">
-                  <div
-                    class="thumbnail--bg"
-                    :style="{
-                      backgroundImage: 'url(' + item.previews.thumbnail + ')'
-                    }"
+                  <img
+                    :src="item.previews.thumbnail"
                     @click="showDetailPopup(item)"
-                  ></div>
+                    alt="Images ne"
+                    class="thumbnail--img"
+                  />
                 </div>
                 <div class="info pr_0 c_lg_6 c_md_12 c_xl_6">
                   <div class="title" @click="showDetailPopup(item)">
@@ -49,9 +68,10 @@
               <div class="bottom mt_3">
                 <div class="tags">
                   <span>Tags:</span>
-                  <span v-for="(tag, tagIndex) in item.tags" :key="tagIndex">
-                    {{ tag }}{{ tagIndex === item.tags.length - 1 ? "" : ", " }}
-                  </span>
+                  <span v-for="(tag, tagIndex) in item.tags" :key="tagIndex"
+                    >{{ tag
+                    }}{{ tagIndex === item.tags.length - 1 ? "" : ", " }}</span
+                  >
                 </div>
               </div>
             </div>
@@ -79,7 +99,12 @@
                 </div>
               </div>
               <div class="right--item bottom text_center">
-                <div class="btn btn_outline_info">Thêm vào kho</div>
+                <div
+                  class="btn btn_outline_info"
+                  @click="addToCollection(item)"
+                >
+                  Thêm vào kho
+                </div>
               </div>
             </div>
           </div>
@@ -93,20 +118,27 @@
         :product="productSelected"
         @closePopup="isShowDetailPopup = $event"
       ></detail-popup>
+      <added-collection
+        v-if="isShowAddToCollectionPopup === true"
+        @closePopupAddToCollection="isShowAddToCollectionPopup = $event"
+      />
     </transition>
   </div>
 </template>
 
 <script>
 import DetailPopup from "../../../layouts/desktop/popup/detail";
+import AddedCollection from "../../../layouts/desktop/popup/addToCollection";
 export default {
   components: {
-    DetailPopup
+    DetailPopup,
+    AddedCollection
   },
   data() {
     return {
       isShowDetailPopup: false,
-      productSelected: {}
+      productSelected: {},
+      isShowAddToCollectionPopup: false
     };
   },
   computed: {
@@ -129,10 +161,14 @@ export default {
     showDetailPopup(val) {
       this.productSelected = val;
       this.isShowDetailPopup = true;
+    },
+    addToCollection(value) {
+      this.$store.dispatch("addToCollection", value);
+      this.isShowAddToCollectionPopup = true;
     }
   },
   created() {
-    this.$store.dispatch("products");
+    this.$store.dispatch("getProducts");
   }
 };
 </script>

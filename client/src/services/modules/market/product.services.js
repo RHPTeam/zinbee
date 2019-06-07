@@ -24,5 +24,10 @@ export default {
   // getInforProductById
   getInfoById(id) {
     return Api().get(`market/products?_id=${id}`);
+  },
+
+  // add to collection
+  addToCollection(id, content) {
+    return Api().post(`market/products/add/product/user?_id=${id}`, content);
   }
 };

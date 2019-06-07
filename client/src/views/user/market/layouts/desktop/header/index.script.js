@@ -10,11 +10,11 @@ export default {
     };
   },
   computed: {
-    user() {
+    userMember() {
       if ( this.$store.getters.userInfo === undefined ) {
         return;
       }
-      return this.$store.getters.userInfo;
+      return this.$store.getters.userInfoMember;
     },
     currentTheme() {
       return this.$store.getters.themeName;
@@ -33,10 +33,10 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch( "getUserInfo" );
+    await this.$store.dispatch( "getUserInfoMember" );
     await this.$store.dispatch( "getAllMarketCategoriesTree" );
     // Get User FB Accounts
-    this.$store.dispatch( "getAccountsFB" );
+    // this.$store.dispatch( "getAccountsFB" );
   },
   methods: {
     async logOut() {

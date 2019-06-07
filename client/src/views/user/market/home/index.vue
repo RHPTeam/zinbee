@@ -227,7 +227,7 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch("products");
+    await this.$store.dispatch("getProducts");
   },
   methods: {
     dateFormat(date) {

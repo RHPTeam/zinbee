@@ -58,26 +58,6 @@
         <!-- Start: Filter Product -->
         <filter-product />
         <!-- End: Filter Product -->
-        <!-- START: Selected filters -->
-        <div class="d_flex selected-filters align_items_center mb_4 mt_2">
-          <div class="total--product"><b>1234</b> items in</div>
-          <div class="d_flex pl_2 pr_3">
-            <div class="selected">
-              <div class="items">
-                <span class="name">All post</span>
-                <span class="px_1 cut">/</span>
-              </div>
-            </div>
-            <div class="selected">
-              <div class="items">
-                <span class="name">Post</span>
-                <span class="px_1 cut">/</span>
-              </div>
-            </div>
-          </div>
-          <div class="clear">Clear all</div>
-        </div>
-        <!-- End Selected filters -->
       </div>
     </div>
     <div class="ct r m_auto px_3">

@@ -8,6 +8,7 @@ const state = {
     _id: "",
     name: "",
     priceCents: "",
+    typeProduct: Number,
     attributes: [
       {
         name: "",
@@ -59,11 +60,16 @@ const mutations = {
   // setDeleteAtribute
   setDeleteAtribute: (state, payload) => {
     state.product.attributes.splice(payload, 1);
+  },
+
+  // setTypeProduct
+  setTypeProduct: (state, payload) => {
+    state.product.typeProduct = payload;
   }
 };
 const actions = {
   // get all product
-  products: async ({ commit }) => {
+  getProducts: async ({ commit }) => {
     const rsAllProduct = await ProductMarket.allProduct();
     commit("setAllProduct", rsAllProduct.data.data);
   },
@@ -113,6 +119,7 @@ const actions = {
       _id: "",
       name: "",
       priceCents: "",
+      typeProduct: Number,
       attributes: [
         {
           name: "",
@@ -141,6 +148,16 @@ const actions = {
   // delete attr
   deleteAttribute: async ({ commit }, payload) => {
     commit("setDeleteAtribute", payload);
+  },
+
+  //addToCollection
+  addToCollection: async payload => {
+    await ProductMarket.addToCollection(payload._id, payload);
+  },
+
+  // option choose post or campaign --- // 0 - Post | 1 - Campaign
+  typeProduct: async ({ commit }, payload) => {
+    commit("setTypeProduct", payload);
   }
 };
 

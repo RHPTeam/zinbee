@@ -43,7 +43,6 @@ export default {
   async created() {
     this.$store.dispatch("getcategories");
     this.$store.dispatch("getProductDefault");
-    this.$store.dispatch("createAttr");
     this.$store.dispatch("getAllMarketPosts");
   },
   methods: {
@@ -56,7 +55,11 @@ export default {
         tags: this.inforProductById.tags,
         updatedAt: this.inforProductById.updatedAt,
         content: this.inforProductById.content,
-        summary: this.inforProductById.summary
+        summary: this.inforProductById.summary,
+        previews: {
+          thumbnail: this.inforProductById.previews.thumbnail
+        },
+        typeProduct: this.inforProductById.typeProduct
       };
       this.$store.dispatch("createProduct", dataCreate);
       this.$router.push({ name: "manage_product" });
@@ -84,10 +87,12 @@ export default {
       this.inforProductById.content = post.id;
     },
     showOptionsPost() {
+      this.$store.dispatch("typeProduct", 0);
       this.isOptionsPost = true;
       this.isOptionsCapaign = false;
     },
     showOptionsCampaign() {
+      this.$store.dispatch("typeProduct", 1);
       this.isOptionsCapaign = true;
       this.isOptionsPost = false;
     },

@@ -14,6 +14,7 @@ import axios from "axios";
 const state = {
   allUser: [],
   userInfo: [],
+  userInfoMember: [],
   userDefault: [],
   authError: "",
   authStatus: "",
@@ -28,6 +29,7 @@ const getters = {
   authError: state => state.authError,
   authStatus: state => state.authStatus,
   userInfo: state => state.userInfo,
+  userInfoMember: state => state.userInfoMember,
   userDefault: state => state.userDefault,
   roles: state => state.roles,
   redirectDomain: state => state.redirectDomain,
@@ -51,6 +53,9 @@ const mutations = {
   },
   setUserById: (state, payload) => {
     state.userInfo = payload;
+  },
+  setUserMember: (state, payload) => {
+    state.userInfoMember = payload;
   },
   setUserDefault: (state, payload) => {
     state.userDefault = payload;
@@ -257,6 +262,13 @@ const actions = {
     const dataSender = CookieFunction.getCookie("uid");
     const userInfoRes = await AccountServices.getUserById(dataSender);
     commit("setUserById", userInfoRes.data.data);
+    commit("auth_success");
+  },
+  getUserInfoMember: async ({ commit }) => {
+    commit("auth_request");
+    // const dataSender = CookieFunction.getCookie("uid");
+    const rsUserInfoMember = await AccountServices.getUserMember();
+    commit("setUserMember", rsUserInfoMember.data.data);
     commit("auth_success");
   },
   getRoles: async ({ commit }) => {

@@ -1,10 +1,8 @@
 const MarketProduct = require( "../../models/market/Product.model" );
-const Account = require( "../../models/Account.model" );
 const Server = require( "../../models/Server.model" );
 const MarketPost = require( "../../models/market/products/post.model" );
 
 const { createSyncFromMarket } = require( "../../microservices/synchronize/productPost" );
-const { signToken } = require( "../../configs/jwt" );
 
 module.exports = {
   "index": async ( req, res ) => {
@@ -78,13 +76,13 @@ module.exports = {
   },
   "addToCollection": async ( req, res ) => {
     const productsSelected = await MarketProduct.findOne( { "_id": req.query._id } ),
-      userSelected = await Account.findOne( { "_id": req.uid } ).populate( "_role" ).lean(),
       serverContainUser = await Server.findOne( { "userAmount": req.uid } ).lean();
 
     // Check catch
     if ( !productsSelected ) {
       return res.status( 404 ).json( { "status": "error", "message": "Không tồn tại sản phẩm này!" } );
     }
+
 
     if ( productsSelected.typeProduct === 0 ) {
       const postSelected = await MarketPost.findOne( { "_id": productsSelected.content } ),
@@ -101,11 +99,11 @@ module.exports = {
           "content": postSelected.content,
           "attachments": attachmentsList
         }, {
-          "Authorization": `sid=${signToken( req.uid )}; uid=${req.uid}; cfr=${userSelected._role.level}`
+          "Authorization": req.headers.authorization
         } );
 
       if ( resPostSync.data.status !== "success" ) {
-        res.status( 500 ).json( { "status": "error", "message": "Có lỗi xảy ra trong quá trình thêm vào kho. Vui lòng liên hệ với bộ CSKH!" } );
+        return res.status( 500 ).json( { "status": "error", "message": "Có lỗi xảy ra trong quá trình thêm vào kho. Vui lòng liên hệ với bộ CSKH!" } );
       }
     }
 
