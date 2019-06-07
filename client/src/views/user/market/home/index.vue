@@ -87,7 +87,7 @@
                 </div>
               </div>
 
-              <div class="detail px_2 py_3">
+              <div class="detail px_3 py_3">
                 <div class="desc mb_2">
                   <h4 class="m_0">{{ item.title }}</h4>
                   <div class="editor d_flex align_items_center">
@@ -141,7 +141,7 @@
       </div>
     </div>
 
-    <div class="marketing--section p_4 ct">
+    <div class="marketing--section p_4 ct mb_5">
       <div class="r">
         <div class="c_md_6 c_lg_4 c_xl_4 mb_2 text_center">
           <img

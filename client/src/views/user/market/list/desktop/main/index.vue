@@ -10,18 +10,24 @@
           <div class="card_body d_flex">
             <div class="c_md_9 left p_0">
               <div class="top r m_0">
-                <div class="thumbnail px_0 c_lg_4 c_md_12 c_xl_4">
+                <div class="thumbnail px_0 c_lg_6 c_md_12 c_xl_6">
                   <div
                     class="thumbnail--bg"
+                    :style="{
+                      backgroundImage:
+                        'url(' +
+                        'https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg' +
+                        ')'
+                    }"
                     @click="showDetailPopup(item)"
                   ></div>
                 </div>
-                <div class="info pr_0 c_lg_8 c_md_12 c_xl_8">
+                <div class="info pr_0 c_lg_6 c_md_12 c_xl_6">
                   <div class="title" @click="showDetailPopup(item)">
                     {{ item.name }}
                   </div>
-                  <div class="editor">
-                    <span class="by">Bởi: </span>
+                  <div class="editor mb_2">
+                    <span class="by">Bởi </span>
                     <!-- <span class="avatar--user mr_1">
                       <img src="https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg" alt="">
                     </span> -->
@@ -55,7 +61,7 @@
             </div>
             <div class="c_md_3 right py_0 pr_0 pl_3">
               <div class="top"></div>
-              <div class="right--item content text_center mt_3">
+              <div class="right--item content text_center mt_1">
                 <div class="price font_weight_bold">
                   {{ item.priceCents }} ₫
                 </div>

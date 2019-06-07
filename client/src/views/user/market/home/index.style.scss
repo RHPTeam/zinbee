@@ -62,7 +62,9 @@
 }
 .popular {
   .card {
-    border-radius: .25rem;
+    border-radius: .375rem;
+    border: 0;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .1);
   }
 }
 .thumbnail {
@@ -158,7 +160,6 @@
   }
 }
 .marketing--section {
-  border-top: 1px solid #e4e4e4;
   img {
     width: 180px;
     height: 133px;
@@ -169,7 +170,6 @@
   background-position: bottom left , bottom right;
   background-repeat: no-repeat , no-repeat;
   background-size: 600px 300px , 600px 300px;
-  border-top: 1px solid #e4e4e4;
   min-height: 350px;
   .background--join {
     .desc {

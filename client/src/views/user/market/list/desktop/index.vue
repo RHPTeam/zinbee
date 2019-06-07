@@ -34,6 +34,6 @@ export default {
 
 <style scoped lang="scss">
 .top--search {
-  border-bottom: 2px solid hsl(0, 0%, 90%);
+  border-bottom: 1px solid #e1e8ed;
 }
 </style>

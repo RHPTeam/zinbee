@@ -33,7 +33,8 @@ export default {
         { name: "Du lịch", total: 152472 }
       ]
     };
-  }
+  },
+  computed: {}
 };
 </script>
 
