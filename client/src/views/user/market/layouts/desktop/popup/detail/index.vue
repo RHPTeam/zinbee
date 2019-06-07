@@ -20,7 +20,7 @@
             <div class="right">
               <div class="right--data">
                 <div class="title">{{ product.name }}</div>
-                <div class="editor mt_1">bởi {{ product._creator.name }}</div>
+                <div class="editor"> <i>by</i> {{ product._creator.name }}</div>
                 <div class="sale d_flex align_items_center mt_3">
                   <icon-base
                     class="icon--user mr_1"
