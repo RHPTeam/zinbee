@@ -17,7 +17,7 @@
               >
                 <a
                   @click="showDetailBlog(item._id)"
-                  v-html="item.content.slice(0, 120)"
+                  v-html="item.title.slice(0, 120)"
                 ></a>
               </li>
             </ul>
@@ -160,11 +160,13 @@ export default {
   },
   methods: {
     async showDetailBlog(val) {
-      await this.$store.dispatch("setHelpDefault", 0);
+      await this.$store.dispatch("setHelpDefault", {
+        right: 0,
+        left: 0
+      });
       await this.$store.dispatch("getBlogById", val);
       this.$router.push({
-        name: "help_detail",
-        params: { id: val }
+        name: "help_detail"
       });
     }
   }

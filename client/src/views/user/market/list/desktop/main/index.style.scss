@@ -1,0 +1,139 @@
+.list--main{
+  font-size: .875rem;
+  .list--group {
+    .list--group-item {
+      color: hsl(0, 0%, 60%);
+      border-radius: 4px;
+      box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+      .card {
+        border: 0;
+        border-radius: .5rem;
+        .left {
+          border-right: 1px solid #e4e4e4;
+          flex: 1;
+          .top {
+            .functions {
+              .list_group_item {
+                font-size: .875rem;
+              }
+            }
+            .info {
+              .title {
+                cursor: pointer;
+                font-weight: 700;
+                transition: all .4s ease;
+                color: hsl(0, 0%, 30%);
+                text-transform: capitalize;
+                max-height: 40px;
+                overflow: hidden;
+                white-space: nowrap;
+                max-width: 90%;
+                display: inline-block;
+                font-size: 1.0625rem;
+                text-overflow: ellipsis;
+                &:hover {
+                  color: #FFB94A;
+                }
+              }
+              .editor {
+                font-size: 0.75rem;
+                .by{
+                  font-style: italic;
+                }
+                .avatar--user{
+                  img{
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 50%;
+                  }
+                }
+              }
+              .description {
+                color: #4d4d4d;
+              }
+              .attribute{
+                li{
+                  list-style-type: none;
+                  font-weight: 400;
+                  padding-left: 1rem;
+                  position: relative;
+                  &:before{
+                    content: '• ';
+                    position: absolute;
+                    color: hsl(0, 0%, 60%);
+                    left: 0;
+                  }
+                }
+              }
+            }
+            .thumbnail {
+              cursor: pointer;
+              .thumbnail--bg {
+                height: 12.5rem;
+                width: 100%;
+                background: url("https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg") no-repeat;
+                background-size: cover;
+              }
+            }
+          }
+          .bottom {
+            .tags {
+              font-size: .75rem;
+            }
+          }
+        }
+        .right {
+          display: flex;
+          flex-grow: 1;
+          flex-direction: column;
+          .bottom {
+            display: flex;
+            flex-grow: 1;
+            align-items: flex-end;
+            .btn {
+              font-size: .875rem;
+              font-weight: 600;
+              width: 100%;
+            }
+          }
+          .content {
+            .price {
+              font-size: 1.15rem;
+              line-height: 28px;
+              font-weight: 700;
+              color: #4d4d4d;
+            }
+            .sale {
+              font-size: .825rem;
+              .icon--user {
+                color: #888;
+                stroke: #888;
+                stroke-width: .5;
+              }
+            }
+            .last--update {
+              color: #999;
+              font-size: .825rem;
+            }
+          }
+          .top {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// ____________________________ CHANGE THEME _________________________________
+
+// ---------- LGIHT
+.list--main[data-theme="light"] {
+
+}
+// ---------- DARK
+
+.list--main[data-theme="dark"] {
+
+}

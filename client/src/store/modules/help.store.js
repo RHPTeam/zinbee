@@ -5,7 +5,7 @@ const state = {
   contentDefault: [],
   categoryDefault: [],
   helpStatus: "",
-  helpDefault: null
+  helpDefault: []
 };
 const getters = {
   helpStatus: state => state.helpStatus,

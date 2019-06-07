@@ -29,7 +29,11 @@
       <!-- Start: Image -->
       <div class="item mb_4">
         <span>Hình ảnh</span>
-        <image-gallery :attachments="post.attachments"></image-gallery>
+        <image-gallery
+          :photos="post.photos"
+          @updatePhotos="updatePhotos($event)"
+          @removePhoto="post.photos = $event"
+        ></image-gallery>
       </div>
       <!-- End: Image -->
       <div class="item" @click="createPost">
@@ -51,7 +55,7 @@ export default {
       post: {
         title: "",
         content: "",
-        attachments: []
+        photos: []
       }
     };
   },
@@ -61,7 +65,20 @@ export default {
     }
   },
   methods: {
-    createPost() {}
+    async createPost() {
+      await this.$store.dispatch("createMarketPost", this.post);
+      // reset post
+      this.post.title = "";
+      this.post.content = "";
+      this.post.photos = [];
+      // redirect to post list
+      this.$router.push({ name: "market_post" });
+    },
+    updatePhotos(photos) {
+      photos.forEach(item => {
+        this.post.photos.push(item);
+      });
+    }
   }
 };
 </script>

@@ -121,6 +121,11 @@ const generalRouter = {
               path: "create",
               name: "market_post_create",
               component: require("@/views/admin/market/post/create").default
+            },
+            {
+              path: "update/:marketPostId",
+              name: "market_post_update",
+              component: require("@/views/admin/market/post/update").default
             }
           ]
         }

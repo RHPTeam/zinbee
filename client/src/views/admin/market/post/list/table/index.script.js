@@ -1,5 +1,5 @@
 import ConvertUnicode from "@/utils/functions/string.js";
-import DeletePopup from "@/components/popups/delete";
+import DeletePopup from "../../popups/delete";
 import ItemPost from "./item/index";
 
 export default {
@@ -7,16 +7,10 @@ export default {
     DeletePopup,
     ItemPost
   },
-  props: [
-    "currentPage",
-    "filterCategorySelected",
-    "filterShowSelected",
-    "search"
-  ],
+  props: ["currentPage", "filterShowSelected", "search"],
   data() {
     return {
       isShowDeletePopup: false,
-      isShowPostNowPopup: false,
       isSort: [
         {
           name: "title",
@@ -24,48 +18,27 @@ export default {
           desc: false
         }
       ],
-      postSelected: {},
-      targetDataDelete: {}
+      postSelected: {}
     };
   },
   computed: {
     currentTheme() {
       return this.$store.getters.themeName;
     },
-    allPost() {
-      return this.$store.getters.postsPage;
+    allMarketPosts() {
+      return this.$store.getters.allMarketPosts.reverse();
     },
-    filterAllPost() {
-      if (this.filterCategorySelected.id === "all") {
-        return this.allPost.filter(post => {
-          return post.title
-            .toString()
-            .toLowerCase()
-            .includes(this.search.toString().toLowerCase());
-        });
-      }
-      return this.allPost.filter(post => {
-        const checkedArr = post._categories.filter(category => {
-          return category._id === this.filterCategorySelected.id;
-        });
-
-        return (
-          post.title
-            .toString()
-            .toLowerCase()
-            .includes(this.search.toString().toLowerCase()) &&
-          checkedArr.length !== 0
-        );
+    filteredMarketPosts() {
+      return this.allMarketPosts.filter(item => {
+        return item.title
+          .toString()
+          .toLowerCase()
+          .includes(this.search.toString().toLowerCase());
       });
     }
   },
   async created() {
-    const dataSender = {
-      size: this.filterShowSelected.id,
-      page: this.currentPage
-    };
-
-    await this.$store.dispatch("getPostsByPage", dataSender);
+    await this.$store.dispatch("getAllMarketPosts");
   },
   methods: {
     activeCurrentSort(i, type) {
@@ -86,16 +59,7 @@ export default {
     },
     showDeletePopup(post) {
       this.postSelected = post;
-      this.targetDataDelete = {
-        id: post._id,
-        page: this.currentPage,
-        size: this.filterShowSelected.id
-      };
       this.isShowDeletePopup = true;
-    },
-    showPostNowPopup(post) {
-      this.postSelected = post;
-      this.isShowPostNowPopup = true;
     },
     sortPostsByProperty(sortSelected, index) {
       const attr = sortSelected.name;

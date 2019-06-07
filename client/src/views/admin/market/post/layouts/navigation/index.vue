@@ -41,84 +41,64 @@ export default {
 
 <style lang="scss" scoped>
 .post--navigation {
-  .nav--left {
+  height: 40px;
+  > button {
+    background-color: transparent;
+    border: 0;
+    border-radius: 0.625rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    height: 100%;
+    outline: none;
+    padding: 0 0.5rem;
+    transition: all 0.4s ease;
+  }
+  .btn--create {
+    background-color: #ffb94a;
+    border-radius: 0.5rem;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
     height: 40px;
-    > button {
-      background-color: transparent;
-      border: 0;
-      border-radius: 0.625rem;
-      cursor: pointer;
-      font-size: 0.95rem;
-      font-weight: 600;
-      height: 100%;
-      outline: none;
-      padding: 0 0.5rem;
-      transition: all 0.4s ease;
-    }
-    .btn--create {
-      background-color: #ffb94a;
-      border-radius: 0.5rem;
-      color: #fff;
-      cursor: pointer;
-      font-size: 0.95rem;
-      font-weight: 600;
-      height: 40px;
-      line-height: 40px;
-      padding: 0 0.75rem;
-      transition: all 0.4s ease;
-      &:hover {
-        background-color: #ff9e4a;
-      }
-    }
-    .divider {
-      height: 16px;
-      width: 2px;
+    line-height: 40px;
+    padding: 0 0.75rem;
+    transition: all 0.4s ease;
+    &:hover {
+      background-color: #ff9e4a;
     }
   }
-  .nav--right {
-    .icon--info {
-      cursor: pointer;
-      transition: all 0.4s ease;
-    }
+  .divider {
+    height: 16px;
+    width: 2px;
   }
 }
 
 /* Theme Color */
 .post--navigation[data-theme="light"] {
-  .nav--left {
-    button {
-      color: #999999;
-      &:hover,
-      &.active {
-        color: #ffb94a;
-      }
-    }
-    .divider {
-      background-color: #ccc;
+  button {
+    color: #999999;
+    &:hover,
+    &.active {
+      color: #ffb94a;
     }
   }
-  .nav--right {
-    .icon--info {
-      color: #999;
-      &:hover {
-        color: #444;
-      }
-    }
+  .divider {
+    background-color: #ccc;
   }
 }
 
 .post--navigation[data-theme="dark"] {
-  .nav--right {
-    button {
-      color: #999999;
-      &:hover,
-      &.active {
-        color: #ffb94a;
-      }
+  button {
+    color: #999999;
+    &:hover,
+    &.active {
+      color: #ffb94a;
     }
-    .divider {
-      background-color: #666;
-    }
+  }
+  .divider {
+    background-color: #666;
   }
 }
 </style>
