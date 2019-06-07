@@ -19,9 +19,7 @@
               >
                 <icon-logo-icon-white />
               </icon-base>
-              <div class="center--support ml_2">
-                Zinbee Store
-              </div>
+              <div class="center--support ml_2">Zinbee Store</div>
             </div>
           </div>
           <!-- End: Header logo-->
@@ -125,20 +123,22 @@
           >
             <div class="profile--image">
               <div
-                v-if="user.imageAvatar"
+                v-if="userMember.imageAvatar"
                 class="avatar--wrap avatar--img position_relative d_block"
-                :style="{ backgroundImage: 'url(' + user.imageAvatar + ')' }"
+                :style="{
+                  backgroundImage: 'url(' + userMember.imageAvatar + ')'
+                }"
               ></div>
               <div
                 v-else
                 class="avatar--wrap avatar--default position_relative d_block"
               >
-                <span class="position_absolute">{{
-                  user.name | getFirstLetter
-                }}</span>
+                <span class="position_absolute">
+                  {{ userMember.name | getFirstLetter }}
+                </span>
               </div>
             </div>
-            <span class="profile--name ml_2 mr_2">{{ user.name }}</span>
+            <span class="profile--name ml_2 mr_2">{{ userMember.name }}</span>
             <div class="profile--icon">
               <icon-base
                 icon-name="arrow-down"
@@ -161,21 +161,23 @@
                 class="d_flex align_items_center py_2 px_3 bg-orange border--custom text_white mb_2"
               >
                 <div
-                  v-if="user.imageAvatar"
+                  v-if="userMember.imageAvatar"
                   class="avatar--wrap avatar--img position_relative d_block"
-                  :style="{ backgroundImage: 'url(' + user.imageAvatar + ')' }"
+                  :style="{
+                    backgroundImage: 'url(' + userMember.imageAvatar + ')'
+                  }"
                 ></div>
                 <div
                   v-else
                   class="avatar--wrap avatar--default position_relative d_block"
                 >
-                  <span class="position_absolute">{{
-                    user.name | getFirstLetter
-                  }}</span>
+                  <span class="position_absolute">
+                    {{ userMember.name | getFirstLetter }}
+                  </span>
                 </div>
                 <div class="ml_2">
-                  <h4 class="mb_0">{{ user.name }}</h4>
-                  <p class="mb_0">{{ user.email }}</p>
+                  <h4 class="mb_0">{{ userMember.name }}</h4>
+                  <p class="mb_0">{{ userMember.email }}</p>
                 </div>
               </div>
               <router-link
@@ -226,8 +228,9 @@
                 v-for="(category, index) in allMarketCategoriesTree"
                 :key="index"
                 @click="chooseCategory(category)"
-                ><span>{{ category.name }}</span></a
               >
+                <span>{{ category.name }}</span>
+              </a>
             </div>
           </nav>
         </div>

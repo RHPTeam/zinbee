@@ -1,6 +1,7 @@
 import AppIntroVideo from "../introvideo";
 import AppAlert from "@/components/shared/layouts/alert";
 import ServerMutipart from "./popup/index";
+import CookieFunction from "@/utils/functions/cookie";
 
 // import axios from "axios/index";
 
@@ -44,7 +45,8 @@ export default {
         email: "",
         password: "",
         phone: "",
-        presenter: ""
+        presenter: "",
+        region: 0
       },
       isShowServerMutipart: false
     };
@@ -52,6 +54,9 @@ export default {
   computed: {
     currentTheme() {
       return this.$store.getters.themeName;
+    },
+    redirectDomain() {
+      return this.$store.getters.redirectDomain;
     }
   },
   methods: {
@@ -92,6 +97,23 @@ export default {
     },
     openPopupSelectServer() {
       this.isShowServerMutipart = true;
+    },
+    async redirectServer() {
+      await this.$store.dispatch("signUpByUser", this.user);
+      if (
+        this.$store.getters.authError === "403" ||
+        this.$store.getters.authError === "404"
+      ) {
+        return;
+      }
+      const token = `sid=${CookieFunction.getCookie(
+        "sid"
+      )}; uid=${CookieFunction.getCookie(
+        "uid"
+      )}; cfr=${CookieFunction.getCookie("cfr")};`;
+      window.location = `${
+        this.redirectDomain
+      }redirect?authorization=${encodeURIComponent(token)}`;
     }
   },
   watch: {

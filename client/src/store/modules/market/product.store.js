@@ -7,6 +7,7 @@ const state = {
     _id: "",
     name: "",
     priceCents: "",
+    typeProduct: Number,
     attributes: [
       {
         name: "",
@@ -21,15 +22,13 @@ const state = {
     previews: {
       thumbnail: ""
     }
-  },
-  collection: []
+  }
 };
 const getters = {
   allProduct: state => state.allProduct,
   newMarketProducts: state => state.allProduct.reverse().slice(0, 6),
   product: state => state.product,
-  nodeUpdate: state => state.nodeUpdate,
-  collection: state => state.collection
+  nodeUpdate: state => state.nodeUpdate
 };
 const mutations = {
   // all product
@@ -57,8 +56,9 @@ const mutations = {
     state.product.attributes.splice(payload, 1);
   },
 
-  setAddToCollection: (state, payload) => {
-    state.collection = payload;
+  // setTypeProduct
+  setTypeProduct: (state, payload) => {
+    state.product.typeProduct = payload;
   }
 };
 const actions = {
@@ -103,6 +103,7 @@ const actions = {
       _id: "",
       name: "",
       priceCents: "",
+      typeProduct: Number,
       attributes: [
         {
           name: "",
@@ -133,15 +134,14 @@ const actions = {
     commit("setDeleteAtribute", payload);
   },
 
-  /**
-   * add to collection
-   */
-  addToCollection: async ({ commit }, payload) => {
-    const rsAddToCollection = await ProductMarket.addToCollection(
-      payload._id,
-      payload
-    );
-    commit("setAddToCollection", rsAddToCollection.data.data);
+  //addToCollection
+  addToCollection: async payload => {
+    await ProductMarket.addToCollection(payload._id, payload);
+  },
+
+  // option choose post or campaign --- // 0 - Post | 1 - Campaign
+  typeProduct: async ({ commit }, payload) => {
+    commit("setTypeProduct", payload);
   }
 };
 

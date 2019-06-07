@@ -28,6 +28,6 @@ export default {
 
   // add to collection
   addToCollection(id, content) {
-    return Api().post(`add/product/user?_id=${id}`, content);
+    return Api().post(`market/products/add/product/user?_id=${id}`, content);
   }
 };

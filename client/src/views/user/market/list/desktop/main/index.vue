@@ -31,13 +31,12 @@
             <div class="c_md_9 left p_0">
               <div class="top r m_0">
                 <div class="thumbnail px_0 c_lg_6 c_md_12 c_xl_6">
-                  <div
-                    class="thumbnail--bg"
-                    :style="{
-                      backgroundImage: 'url(' + item.previews.thumbnail + ')'
-                    }"
+                  <img
+                    :src="item.previews.thumbnail"
                     @click="showDetailPopup(item)"
-                  ></div>
+                    alt="Images ne"
+                    class="thumbnail--img"
+                  />
                 </div>
                 <div class="info pr_0 c_lg_6 c_md_12 c_xl_6">
                   <div class="title" @click="showDetailPopup(item)">
@@ -119,20 +118,27 @@
         :product="productSelected"
         @closePopup="isShowDetailPopup = $event"
       ></detail-popup>
+      <added-collection
+        v-if="isShowAddToCollectionPopup === true"
+        @closePopupAddToCollection="isShowAddToCollectionPopup = $event"
+      />
     </transition>
   </div>
 </template>
 
 <script>
 import DetailPopup from "../../../layouts/desktop/popup/detail";
+import AddedCollection from "../../../layouts/desktop/popup/addToCollection";
 export default {
   components: {
-    DetailPopup
+    DetailPopup,
+    AddedCollection
   },
   data() {
     return {
       isShowDetailPopup: false,
-      productSelected: {}
+      productSelected: {},
+      isShowAddToCollectionPopup: false
     };
   },
   computed: {
@@ -158,6 +164,7 @@ export default {
     },
     addToCollection(value) {
       this.$store.dispatch("addToCollection", value);
+      this.isShowAddToCollectionPopup = true;
     }
   },
   created() {

@@ -62,6 +62,11 @@ module.exports = {
 
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
+  "getUserInfo": async ( req, res ) => {
+    const data = await Account.findOne( { "_id": req.uid } ).select( "-password" ).lean();
+
+    res.status( 200 ).json( jsonResponse( "success", data ) );
+  },
   "renewById": async ( req, res ) => {
     let data;
 

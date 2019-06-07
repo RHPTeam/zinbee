@@ -227,7 +227,7 @@
               <button
                 type="submit"
                 class="btn btn--submit"
-                @click="openPopupSelectServer"
+                @click="redirectServer"
               >
                 Tiếp tục
               </button>
@@ -249,12 +249,12 @@
       <!-- End: Main Form -->
     </div>
     <!-- Start: Popup choose server user use -->
-    <server-mutipart
+    <!-- <server-mutipart
       v-if="isShowServerMutipart === true"
       :currentTheme="currentTheme"
       @closePopupServerMutipart="isShowServerMutipart = $event"
     >
-    </server-mutipart>
+    </server-mutipart> -->
     <!-- End: Popup choose server user use -->
   </div>
 </template>
