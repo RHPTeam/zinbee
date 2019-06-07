@@ -1,10 +1,14 @@
 import AppFooter from "./desktop/footer";
 import AppHeader from "./desktop/header";
+import AppRootBanner from "./desktop/notification/hot";
+import AppNavigation from "./desktop/navigation";
 
 export default {
   components: {
     AppFooter,
-    AppHeader
+    AppHeader,
+    AppRootBanner,
+    AppNavigation
   },
   data() {
     return {

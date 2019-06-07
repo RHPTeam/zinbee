@@ -31,57 +31,19 @@
       </div>
     </div>
 
-    <div class="feature--products p_4 ct">
-      <div class="d_flex flex_column text_center p_4">
-        <h3>
-          <b>Khám phá những bài post/campaign mẫu HOT nhất trong tuần.</b>
-        </h3>
-        <span
-          >Hàng tuần, chúng tôi sẽ chọn ra những bài post/campaign được yêu
-          thích nhất.</span
-        >
+    <section
+      class="describe d_flex flex_column align_items_center justify_content_center py_4"
+    >
+      <h3 class="title mb_4">Lorem ipsum dolor sit amet, consectetur.</h3>
+      <div class="">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste,
+        quibusdam. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+        consectetur.
       </div>
-      <div class="list--products">
-        <ul class="d_flex justify_content_center">
-          <li class="mr_2">
-            <div class="card">
-              <a href="">
-                <img
-                  src="https://assets.shopfront.envato-static.com/images/home-page/marketing/discover.png"
-                  alt=""
-                />
-              </a>
-            </div>
-          </li>
-          <li class="mr_2">
-            <div class="card">
-              <a href="">
-                <img
-                  src="https://assets.shopfront.envato-static.com/images/home-page/marketing/discover.png"
-                  alt=""
-                />
-              </a>
-            </div>
-          </li>
-          <li class="mr_2">
-            <div class="card">
-              <a href="">
-                <img
-                  src="https://assets.shopfront.envato-static.com/images/home-page/marketing/discover.png"
-                  alt=""
-                />
-              </a>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="d_flex justify_content_center">
-        <button>Xem Thêm</button>
-      </div>
-    </div>
+    </section>
 
     <div class="products p_4 ct">
-      <div class="tab d_flex justify_content_center py_3">
+      <div class="tab d_flex justify_content_center py_3 mb_4">
         <div class="d_flex align_items_center">
           <button class="btn btn_outline_info mr_3">Post Popular</button>
           <button class="btn btn_outline_info">Campaigns Simple</button>
@@ -90,7 +52,7 @@
       <div class="popular">
         <div class="r">
           <div
-            class="c_md_6 c_lg_4 c_xl_4 mb_2"
+            class="item c_md_6 c_lg_4 c_xl_4 mb_2"
             v-for="(item, index) in posts"
             :key="index"
           >
@@ -102,537 +64,57 @@
                   @click="showDetailPopup(item)"
                 ></div>
                 <div class="icon position_absolute">
-                  <icon-base
-                    icon-name="logo"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 25 25"
-                  >
-                    <icon-info />
-                  </icon-base>
+                  <div class="uncheck d_none">
+                    <icon-base
+                      icon-name="logo"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 550 550"
+                    >
+                      <icon-heart />
+                    </icon-base>
+                  </div>
+                  <div class="check">
+                    <icon-base
+                      icon-name="logo"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 550 550"
+                    >
+                      <icon-select-heart />
+                    </icon-base>
+                  </div>
                 </div>
               </div>
 
-              <div class="detail px_3">
-                <div class="desc">
-                  <h4 class="m_0">Lorem ipsum dolor sit amet.</h4>
+              <div class="detail px_2 py_3">
+                <div class="desc mb_2">
+                  <h4 class="m_0">{{ item.title }}</h4>
                   <div class="editor d_flex align_items_center">
                     <div class="name mr_2">
-                      by Liu Kang
+                      <span>by</span> {{ item.editor }}
                     </div>
-                    <div class="avatar">
-                      <img
-                        src="https://pixel.nymag.com/imgs/daily/vulture/2018/11/02/02-avatar-2.w700.h700.jpg"
-                      />
-                    </div>
+                    <div
+                      class="avatar"
+                      :style="{ backgroundImage: 'url(' + item.img + ')' }"
+                    ></div>
                   </div>
                 </div>
                 <div class="info d_flex align_items_center">
                   <div class="left">
-                    <p class="price">$23</p>
-                    <div class="rate"></div>
-                    <div class="sales">56 sales</div>
+                    <div class="price">${{ item.price }}</div>
+                    <div class="sales">{{ item.sale }} sales</div>
                   </div>
                   <div class="right d_flex align_items_center ml_auto">
-                    <button class="btn btn_outline_info mr_2">Download</button>
-                    <div class="icon">
+                    <div class="action der_1 mr_2">Preview</div>
+                    <div class="icon der_1">
                       <icon-base
                         icon-name="logo"
                         width="24"
                         height="24"
                         viewBox="0 0 550 550"
                       >
-                        <icon-copy />
-                      </icon-base>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="c_md_6 c_lg_4 c_xl_4 mb_2"
-            v-for="(item, index) in posts"
-            :key="index"
-          >
-            <div class="card">
-              <div class="thumbnail position_relative">
-                <div
-                  class="thumbnail--bg"
-                  :style="{ backgroundImage: 'url(' + item.img + ')' }"
-                  @click="showDetailPopup(item)"
-                ></div>
-                <div class="icon position_absolute">
-                  <icon-base
-                    icon-name="logo"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 25 25"
-                  >
-                    <icon-info />
-                  </icon-base>
-                </div>
-              </div>
-
-              <div class="detail px_3">
-                <div class="desc">
-                  <h4 class="m_0">Lorem ipsum dolor sit amet.</h4>
-                  <div class="editor d_flex align_items_center">
-                    <div class="name mr_2">
-                      by Liu Kang
-                    </div>
-                    <div class="avatar">
-                      <img
-                        src="https://pixel.nymag.com/imgs/daily/vulture/2018/11/02/02-avatar-2.w700.h700.jpg"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="info d_flex align_items_center">
-                  <div class="left">
-                    <p class="price">$23</p>
-                    <div class="rate"></div>
-                    <div class="sales">56 sales</div>
-                  </div>
-                  <div class="right d_flex align_items_center ml_auto">
-                    <button class="btn btn_outline_info mr_2">Download</button>
-                    <div class="icon">
-                      <icon-base
-                        icon-name="logo"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 550 550"
-                      >
-                        <icon-copy />
-                      </icon-base>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="c_md_6 c_lg_4 c_xl_4 mb_2"
-            v-for="(item, index) in posts"
-            :key="index"
-          >
-            <div class="card">
-              <div class="thumbnail position_relative">
-                <div
-                  class="thumbnail--bg"
-                  :style="{ backgroundImage: 'url(' + item.img + ')' }"
-                  @click="showDetailPopup(item)"
-                ></div>
-                <div class="icon position_absolute">
-                  <icon-base
-                    icon-name="logo"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 25 25"
-                  >
-                    <icon-info />
-                  </icon-base>
-                </div>
-              </div>
-
-              <div class="detail px_3">
-                <div class="desc">
-                  <h4 class="m_0">Lorem ipsum dolor sit amet.</h4>
-                  <div class="editor d_flex align_items_center">
-                    <div class="name mr_2">
-                      by Liu Kang
-                    </div>
-                    <div class="avatar">
-                      <img
-                        src="https://pixel.nymag.com/imgs/daily/vulture/2018/11/02/02-avatar-2.w700.h700.jpg"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="info d_flex align_items_center">
-                  <div class="left">
-                    <p class="price">$23</p>
-                    <div class="rate"></div>
-                    <div class="sales">56 sales</div>
-                  </div>
-                  <div class="right d_flex align_items_center ml_auto">
-                    <button class="btn btn_outline_info mr_2">Download</button>
-                    <div class="icon">
-                      <icon-base
-                        icon-name="logo"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 550 550"
-                      >
-                        <icon-copy />
-                      </icon-base>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="c_md_6 c_lg_4 c_xl_4 mb_2"
-            v-for="(item, index) in posts"
-            :key="index"
-          >
-            <div class="card">
-              <div class="thumbnail position_relative">
-                <div
-                  class="thumbnail--bg"
-                  :style="{ backgroundImage: 'url(' + item.img + ')' }"
-                  @click="showDetailPopup(item)"
-                ></div>
-                <div class="icon position_absolute">
-                  <icon-base
-                    icon-name="logo"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 25 25"
-                  >
-                    <icon-info />
-                  </icon-base>
-                </div>
-              </div>
-
-              <div class="detail px_3">
-                <div class="desc">
-                  <h4 class="m_0">Lorem ipsum dolor sit amet.</h4>
-                  <div class="editor d_flex align_items_center">
-                    <div class="name mr_2">
-                      by Liu Kang
-                    </div>
-                    <div class="avatar">
-                      <img
-                        src="https://pixel.nymag.com/imgs/daily/vulture/2018/11/02/02-avatar-2.w700.h700.jpg"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="info d_flex align_items_center">
-                  <div class="left">
-                    <p class="price">$23</p>
-                    <div class="rate"></div>
-                    <div class="sales">56 sales</div>
-                  </div>
-                  <div class="right d_flex align_items_center ml_auto">
-                    <button class="btn btn_outline_info mr_2">Download</button>
-                    <div class="icon">
-                      <icon-base
-                        icon-name="logo"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 550 550"
-                      >
-                        <icon-copy />
-                      </icon-base>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="c_md_6 c_lg_4 c_xl_4 mb_2"
-            v-for="(item, index) in posts"
-            :key="index"
-          >
-            <div class="card">
-              <div class="thumbnail position_relative">
-                <div
-                  class="thumbnail--bg"
-                  :style="{ backgroundImage: 'url(' + item.img + ')' }"
-                  @click="showDetailPopup(item)"
-                ></div>
-                <div class="icon position_absolute">
-                  <icon-base
-                    icon-name="logo"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 25 25"
-                  >
-                    <icon-info />
-                  </icon-base>
-                </div>
-              </div>
-
-              <div class="detail px_3">
-                <div class="desc">
-                  <h4 class="m_0">Lorem ipsum dolor sit amet.</h4>
-                  <div class="editor d_flex align_items_center">
-                    <div class="name mr_2">
-                      by Liu Kang
-                    </div>
-                    <div class="avatar">
-                      <img
-                        src="https://pixel.nymag.com/imgs/daily/vulture/2018/11/02/02-avatar-2.w700.h700.jpg"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="info d_flex align_items_center">
-                  <div class="left">
-                    <p class="price">$23</p>
-                    <div class="rate"></div>
-                    <div class="sales">56 sales</div>
-                  </div>
-                  <div class="right d_flex align_items_center ml_auto">
-                    <button class="btn btn_outline_info mr_2">Download</button>
-                    <div class="icon">
-                      <icon-base
-                        icon-name="logo"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 550 550"
-                      >
-                        <icon-copy />
-                      </icon-base>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="c_md_6 c_lg_4 c_xl_4 mb_2"
-            v-for="(item, index) in posts"
-            :key="index"
-          >
-            <div class="card">
-              <div class="thumbnail position_relative">
-                <div
-                  class="thumbnail--bg"
-                  :style="{ backgroundImage: 'url(' + item.img + ')' }"
-                  @click="showDetailPopup(item)"
-                ></div>
-                <div class="icon position_absolute">
-                  <icon-base
-                    icon-name="logo"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 25 25"
-                  >
-                    <icon-info />
-                  </icon-base>
-                </div>
-              </div>
-
-              <div class="detail px_3">
-                <div class="desc">
-                  <h4 class="m_0">Lorem ipsum dolor sit amet.</h4>
-                  <div class="editor d_flex align_items_center">
-                    <div class="name mr_2">
-                      by Liu Kang
-                    </div>
-                    <div class="avatar">
-                      <img
-                        src="https://pixel.nymag.com/imgs/daily/vulture/2018/11/02/02-avatar-2.w700.h700.jpg"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="info d_flex align_items_center">
-                  <div class="left">
-                    <p class="price">$23</p>
-                    <div class="rate"></div>
-                    <div class="sales">56 sales</div>
-                  </div>
-                  <div class="right d_flex align_items_center ml_auto">
-                    <button class="btn btn_outline_info mr_2">Download</button>
-                    <div class="icon">
-                      <icon-base
-                        icon-name="logo"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 550 550"
-                      >
-                        <icon-copy />
-                      </icon-base>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="c_md_6 c_lg_4 c_xl_4 mb_2"
-            v-for="(item, index) in posts"
-            :key="index"
-          >
-            <div class="card">
-              <div class="thumbnail position_relative">
-                <div
-                  class="thumbnail--bg"
-                  :style="{ backgroundImage: 'url(' + item.img + ')' }"
-                  @click="showDetailPopup(item)"
-                ></div>
-                <div class="icon position_absolute">
-                  <icon-base
-                    icon-name="logo"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 25 25"
-                  >
-                    <icon-info />
-                  </icon-base>
-                </div>
-              </div>
-
-              <div class="detail px_3">
-                <div class="desc">
-                  <h4 class="m_0">Lorem ipsum dolor sit amet.</h4>
-                  <div class="editor d_flex align_items_center">
-                    <div class="name mr_2">
-                      by Liu Kang
-                    </div>
-                    <div class="avatar">
-                      <img
-                        src="https://pixel.nymag.com/imgs/daily/vulture/2018/11/02/02-avatar-2.w700.h700.jpg"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="info d_flex align_items_center">
-                  <div class="left">
-                    <p class="price">$23</p>
-                    <div class="rate"></div>
-                    <div class="sales">56 sales</div>
-                  </div>
-                  <div class="right d_flex align_items_center ml_auto">
-                    <button class="btn btn_outline_info mr_2">Download</button>
-                    <div class="icon">
-                      <icon-base
-                        icon-name="logo"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 550 550"
-                      >
-                        <icon-copy />
-                      </icon-base>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="c_md_6 c_lg_4 c_xl_4 mb_2"
-            v-for="(item, index) in posts"
-            :key="index"
-          >
-            <div class="card">
-              <div class="thumbnail position_relative">
-                <div
-                  class="thumbnail--bg"
-                  :style="{ backgroundImage: 'url(' + item.img + ')' }"
-                  @click="showDetailPopup(item)"
-                ></div>
-                <div class="icon position_absolute">
-                  <icon-base
-                    icon-name="logo"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 25 25"
-                  >
-                    <icon-info />
-                  </icon-base>
-                </div>
-              </div>
-
-              <div class="detail px_3">
-                <div class="desc">
-                  <h4 class="m_0">Lorem ipsum dolor sit amet.</h4>
-                  <div class="editor d_flex align_items_center">
-                    <div class="name mr_2">
-                      by Liu Kang
-                    </div>
-                    <div class="avatar">
-                      <img
-                        src="https://pixel.nymag.com/imgs/daily/vulture/2018/11/02/02-avatar-2.w700.h700.jpg"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="info d_flex align_items_center">
-                  <div class="left">
-                    <p class="price">$23</p>
-                    <div class="rate"></div>
-                    <div class="sales">56 sales</div>
-                  </div>
-                  <div class="right d_flex align_items_center ml_auto">
-                    <button class="btn btn_outline_info mr_2">Download</button>
-                    <div class="icon">
-                      <icon-base
-                        icon-name="logo"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 550 550"
-                      >
-                        <icon-copy />
-                      </icon-base>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="c_md_6 c_lg_4 c_xl_4 mb_2"
-            v-for="(item, index) in posts"
-            :key="index"
-          >
-            <div class="card">
-              <div class="thumbnail position_relative">
-                <div
-                  class="thumbnail--bg"
-                  :style="{ backgroundImage: 'url(' + item.img + ')' }"
-                  @click="showDetailPopup(item)"
-                ></div>
-                <div class="icon position_absolute">
-                  <icon-base
-                    icon-name="logo"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 25 25"
-                  >
-                    <icon-info />
-                  </icon-base>
-                </div>
-              </div>
-
-              <div class="detail px_3">
-                <div class="desc">
-                  <h4 class="m_0">Lorem ipsum dolor sit amet.</h4>
-                  <div class="editor d_flex align_items_center">
-                    <div class="name mr_2">
-                      by Liu Kang
-                    </div>
-                    <div class="avatar">
-                      <img
-                        src="https://pixel.nymag.com/imgs/daily/vulture/2018/11/02/02-avatar-2.w700.h700.jpg"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="info d_flex align_items_center">
-                  <div class="left">
-                    <p class="price">$23</p>
-                    <div class="rate"></div>
-                    <div class="sales">56 sales</div>
-                  </div>
-                  <div class="right d_flex align_items_center ml_auto">
-                    <button class="btn btn_outline_info mr_2">Download</button>
-                    <div class="icon">
-                      <icon-base
-                        icon-name="logo"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 550 550"
-                      >
-                        <icon-copy />
+                        <icon-download />
                       </icon-base>
                     </div>
                   </div>
@@ -644,31 +126,18 @@
       </div>
     </div>
 
-    <div class="join p_4 ct">
-      <div class="d_flex flex_column text_center background--join">
-        <div>
-          <!--<div class="background&#45;&#45;join r">-->
-          <!--<div-->
-          <!--class="c_6"-->
-          <!--:style="{ backgroundImage: 'url(' + srcDefault1 + ')' }"-->
-          <!--&gt;-->
-          <!--</div>-->
-          <!--<div-->
-          <!--class="c_6"-->
-          <!--:style="{ backgroundImage: 'url(' + srcDefault2 + ')' }"-->
-          <!--&gt;-->
-          <!--</div>-->
-          <!--</div>-->
-
-          <div class="mb_4">
-            <b
-              >Gia nhập hệ thống zinbee ngay hôm nay để trải nghiệm những sản
-              phẩm marketing tốt nhất</b
-            >
-          </div>
-
-          <button class="btn btn_outline_info">Đăng ký</button>
+    <div
+      class="join d_flex align_items_center justify_content_center p_4 mb_5"
+      :style="{
+        backgroundImage:
+          'url(' + srcDefault1 + ')' + ',' + 'url(' + srcDefault2 + ')'
+      }"
+    >
+      <div class="text_center background--join">
+        <div class="desc mb_4">
+          Trải nghiệm sản phẩm marketing tốt nhất
         </div>
+        <span class="signup">Đăng ký</span>
       </div>
     </div>
 
@@ -726,7 +195,7 @@
 </template>
 
 <script>
-import DetailPopup from "../layouts/desktop/popups/detail";
+import DetailPopup from "../layouts/desktop/popup/detail";
 
 export default {
   components: {
@@ -746,10 +215,30 @@ export default {
           tags: ["du lịch", "mỹ phẩm"],
           sale: 103,
           updatedAt: "2019-06-05T12:27:39.126+00:00"
+        },
+        {
+          img:
+            "https://png.pngtree.com/element_origin_min_pic/16/05/16/205739ba060e909.jpg",
+          title: "Tiền bán ngáo để mua Husky",
+          editor: "Yến Ngáo",
+          price: "100,000",
+          tags: ["du lịch", "mỹ phẩm"],
+          sale: 103,
+          updatedAt: "2019-06-05T12:27:39.126+00:00"
+        },
+        {
+          img:
+            "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681",
+          title: "Bán ngáo được bao tiền ?",
+          editor: "Ngáo Yến",
+          price: "100,000",
+          tags: ["du lịch", "mỹ phẩm"],
+          sale: 103,
+          updatedAt: "2019-06-05T12:27:39.126+00:00"
         }
       ],
-      srcDefault1: require("@/assets/images/market/join_us1.svg"),
-      srcDefault2: require("@/assets/images/market/join_us2.svg")
+      srcDefault1: require("@/assets/images/market/left_bottom_hero.png"),
+      srcDefault2: require("@/assets/images/market/right_bottom_hero.png")
     };
   },
   methods: {

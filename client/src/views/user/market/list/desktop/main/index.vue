@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import DetailPopup from "../../../layouts/desktop/popups/detail";
+import DetailPopup from "../../../layouts/desktop/popup/detail";
 
 export default {
   components: {

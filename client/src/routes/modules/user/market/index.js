@@ -1,7 +1,7 @@
 /** When your routing table is too long, you can split it into small modules**/
 
 const marketRouter = {
-  path: "/admin/market",
+  path: "/market",
   component: require("@/views/user/market/layouts").default,
   children: [
     {
