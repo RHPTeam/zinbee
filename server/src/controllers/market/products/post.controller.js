@@ -65,7 +65,7 @@ module.exports = {
     }
     const photosList = req.files.map( ( file ) => {
       if ( file.fieldname === "photos" && file.mimetype.includes( "image" ) ) {
-        return `${process.env.APP_URL}:${process.env.PORT_BASE}/${file.path}`;
+        return `${process.env.APP_URL}:${process.env.PORT_BASE}/${file.path.replace( /\\/gi, "/" )}`;
       }
     } );
 

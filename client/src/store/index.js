@@ -14,6 +14,7 @@ import HelpStore from "./modules/help.store";
 import CategoryMarket from "./modules/market/category.store";
 import MarketPostStore from "./modules/market/marketpost.store";
 import ProductMarket from "./modules/market/product.store";
+import ListProduct from "./modules/market/list.store";
 
 Vue.use(Vuex);
 
@@ -30,6 +31,7 @@ export default new Vuex.Store({
     // Market
     CategoryMarket,
     MarketPostStore,
-    ProductMarket
+    ProductMarket,
+    ListProduct
   }
 });

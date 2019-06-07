@@ -9,11 +9,6 @@ export default {
       isShowOptionsMoreDropdown: false
     };
   },
-  async created() {
-    await this.$store.dispatch( "getUserInfo" );
-    // Get User FB Accounts
-    this.$store.dispatch( "getAccountsFB" );
-  },
   computed: {
     user() {
       if ( this.$store.getters.userInfo === undefined ) {
@@ -29,13 +24,27 @@ export default {
     },
     allAccountFb() {
       return this.$store.getters.accountsFB;
+    },
+    allMarketCategoriesTree() {
+      return this.$store.getters.allMarketCategoriesTree;
+    },
+    currentParentMarketCategory() {
+      return this.$store.getters.currentParentMarketCategory;
     }
   },
-
+  async created() {
+    await this.$store.dispatch( "getUserInfo" );
+    await this.$store.dispatch( "getAllMarketCategoriesTree" );
+    // Get User FB Accounts
+    this.$store.dispatch( "getAccountsFB" );
+  },
   methods: {
     async logOut() {
       await this.$store.dispatch( "logOut" );
       window.location.href = `${process.env.VUE_APP_PARENT_URL}/#/redirect`;
+    },
+    chooseCategory(category) {
+      this.$store.dispatch( "currentParentMarketCategory", category );
     },
     toogleSidebar() {
       this.statusCollapse = !this.statusCollapse;
@@ -59,7 +68,9 @@ export default {
       this.showdropdown = false;
     },
     redirectToHelp() {
-      window.location = `${process.env.VUE_APP_PARENT_URL}help`;
+      const routeData = this.$router.resolve( { name: "help" } );
+
+      window.open(routeData.href, '_blank');
     },
     showOptionsMoreDropdown(){
       this.isShowOptionsMoreDropdown = true;
@@ -92,7 +103,6 @@ export default {
       this.isShowOptionsMoreDropdown = false;
     },
   },
-
   filters: {
     getFirstLetter( string ) {
       if ( string === undefined ) {

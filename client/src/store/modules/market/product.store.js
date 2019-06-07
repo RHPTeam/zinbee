@@ -3,6 +3,7 @@ import ProductMarket from "@/services/modules/market/product.services";
 const state = {
   allProduct: [],
   nodeUpdate: [],
+  marketCategoryProducts: [],
   product: {
     _id: "",
     name: "",
@@ -25,6 +26,8 @@ const state = {
 };
 const getters = {
   allProduct: state => state.allProduct,
+  newMarketProducts: state => state.allProduct.reverse().slice(0, 6),
+  marketCategoryProducts: state => state.marketCategoryProducts,
   product: state => state.product,
   nodeUpdate: state => state.nodeUpdate
 };
@@ -32,6 +35,10 @@ const mutations = {
   // all product
   setAllProduct: (state, payload) => {
     state.allProduct = payload;
+  },
+
+  setMarketCategoryProducts: (state, payload) => {
+    state.marketCategoryProducts = payload;
   },
 
   // info by id
@@ -60,6 +67,16 @@ const actions = {
     const rsAllProduct = await ProductMarket.allProduct();
     commit("setAllProduct", rsAllProduct.data.data);
   },
+  /**
+   * Get market products of category
+   */
+  // getMarketCategoryProducts: async ({ commit }, payload) => {
+  //   const res = await ProductMarket.allProduct(),
+  //     products = res.data.data;
+  //   const categoryProducts = products.filter( product => {
+  //   } );
+  //
+  // },
   // create
   createProduct: async ({ commit }, payload) => {
     await ProductMarket.create(payload);
@@ -69,7 +86,7 @@ const actions = {
   },
 
   // delete
-  delete: async ({ commit }, payload) => {
+  deleteProduct: async ({ commit }, payload) => {
     await ProductMarket.delete(payload);
 
     const rsAllProduct = await ProductMarket.allProduct();
@@ -105,7 +122,11 @@ const actions = {
       description: "",
       tags: [],
       updatedAt: "",
-      content: ""
+      content: "",
+      summary: "",
+      previews: {
+        thumbnail: ""
+      }
     });
   },
   setButtonDefault: async ({ commit }, payload) => {
