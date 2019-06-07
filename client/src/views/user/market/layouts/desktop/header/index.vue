@@ -32,10 +32,11 @@
           <!-- Start: Redirect to help -->
           <div class="help mr_2 ml_1" @click="redirectToHelp">
             <icon-base
+              class="icon--help mt_1"
               icon-name="menu"
-              width="25"
-              height="25"
-              viewBox="0 0 25 25"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
             >
               <icon-help />
             </icon-base>

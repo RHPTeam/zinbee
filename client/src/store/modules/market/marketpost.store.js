@@ -8,7 +8,6 @@ const state = {
 };
 const getters = {
   allMarketPosts: state => state.allMarketPosts,
-  allMarketPostsReverse: state => state.allMarketPosts.reverse(),
   marketPost: state => state.marketPost,
   marketPostStatus: state => state.marketPostStatus,
   marketPostPhotosUpload: state => state.marketPostPhotosUpload

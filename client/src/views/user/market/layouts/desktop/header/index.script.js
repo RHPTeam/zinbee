@@ -68,7 +68,9 @@ export default {
       this.showdropdown = false;
     },
     redirectToHelp() {
-      window.location = `${process.env.VUE_APP_PARENT_URL}help`;
+      const routeData = this.$router.resolve( { name: "help" } );
+
+      window.open(routeData.href, '_blank');
     },
     showOptionsMoreDropdown(){
       this.isShowOptionsMoreDropdown = true;

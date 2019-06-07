@@ -55,7 +55,7 @@
         <div class="r">
           <div
             class="item c_md_6 c_lg_4 c_xl_4 mb_2"
-            v-for="(item, index) in allMarketProduct.slice(0, 3)"
+            v-for="(item, index) in newMarketProducts"
             :key="index"
           >
             <div class="card">
@@ -220,8 +220,8 @@ export default {
     };
   },
   computed: {
-    allMarketProduct() {
-      return this.$store.getters.allMarketPostsReverse;
+    newMarketProducts() {
+      return this.$store.getters.newMarketProducts;
     }
   },
   async created() {
