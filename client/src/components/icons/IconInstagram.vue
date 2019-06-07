@@ -59,7 +59,12 @@
         <stop offset="0.6" style="stop-color:#C21975"></stop>
         <stop offset="1" style="stop-color:#7024C4"></stop>
       </linearGradient>
-      <circle style="fill:url(#SVGID_3_);" cx="418.31" cy="134.07" r="34.15"></circle>
+      <circle
+        style="fill:url(#SVGID_3_);"
+        cx="418.31"
+        cy="134.07"
+        r="34.15"
+      ></circle>
     </g>
     <g></g>
     <g></g>
