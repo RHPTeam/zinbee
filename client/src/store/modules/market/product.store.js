@@ -69,7 +69,7 @@ const actions = {
   },
 
   // delete
-  delete: async ({ commit }, payload) => {
+  deleteProduct: async ({ commit }, payload) => {
     await ProductMarket.delete(payload);
 
     const rsAllProduct = await ProductMarket.allProduct();

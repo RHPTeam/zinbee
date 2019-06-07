@@ -1,5 +1,5 @@
 <template>
-  <div class="ct wrap--footer py_4">
+  <div class="wrap--footer pt_4 pb_3">
     <div class="m_0 text_center content">
       <div class="d_inline_flex">
         <div class="copyright d_flex align_items_center mr_3">
@@ -33,6 +33,7 @@
 
 <style lang="scss" scoped>
 .wrap--footer {
+  background-color: #eeeeee;
   color: #666666;
   font-size: 0.875rem;
   .language {

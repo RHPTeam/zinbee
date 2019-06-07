@@ -74,6 +74,7 @@ const actions = {
     const res = await MarketPostService.uploadFiles(payload);
     await commit("setMarketPostPhotosUpload", res.data.data);
   }
+
 };
 
 export default {

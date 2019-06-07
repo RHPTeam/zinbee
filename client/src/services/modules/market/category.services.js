@@ -5,7 +5,9 @@ export default {
   getAll() {
     return Api().get("market/categories");
   },
-
+  getCategoriesTree() {
+    return Api().get("market/categories/rs");
+  },
   // create category
   create(name) {
     return Api().post("market/categories", name);

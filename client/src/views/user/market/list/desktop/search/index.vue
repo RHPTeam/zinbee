@@ -1,9 +1,18 @@
 <template>
   <div class="ct m_auto">
-    <div class="search py_3">
+    <div class="search py_5">
       <div class="input_group d_flex m_auto">
         <input type="text" class="input--search" placeholder="Tìm kiếm" />
-        <div class="btn--search d_flex justify_content_center">Search</div>
+        <div class="btn--search d_flex justify_content_center">
+          <icon-base
+            class="icon--search"
+            height="24px"
+            width="24px"
+            viewBox="0 0 20 20"
+          >
+            <icon-input-search></icon-input-search>
+          </icon-base>
+        </div>
       </div>
     </div>
   </div>
@@ -15,30 +24,37 @@ export default {};
 
 <style scoped lang="scss">
 .btn--search {
+  background-color: #ffb94a;
+  border-radius: 0 0.625rem 0.625rem 0;
+  cursor: pointer;
   font-size: 0.875rem;
-  background: #ffb94a;
-  font-size: 14px;
   transition: all 0.2s ease-in;
-  box-shadow: 1px 1px 3px -1px hsl(0, 0%, 90%);
-  box-shadow: 1px 1px 3px 0 hsla(0, 0%, 0%, 0.07);
   color: hsl(0, 0%, 100%);
   padding: 16px 0;
   margin-left: -2px;
-  width: 160px;
-  border-radius: 0 2px 2px 0;
+  width: 60px;
+  height: 50px;
   border: 0;
-  cursor: pointer;
+  .icon--search {
+    color: #fff;
+    stroke: #fff;
+    stroke-width: 0.5;
+  }
 }
-
 .input--search {
-  border-radius: 2px 0 0 2px;
-  font-size: 16px;
-  color: hsl(0, 0%, 10%);
-  border: 2px solid hsl(0, 0%, 90%);
-  background-color: hsl(0, 0%, 100%);
-  padding: 16px 24px;
+  background-color: #fff;
+  border: 0;
+  border-radius: 0.625rem 0 0 0.625rem;
+  font-size: 0.875rem;
+  color: #444;
+  padding: 0 1rem;
   flex: 1;
-  height: 56px;
+  height: 50px;
   outline: none;
+  line-height: 50px;
+  outline: 0;
+  &::placeholder {
+    color: #ccc;
+  }
 }
 </style>

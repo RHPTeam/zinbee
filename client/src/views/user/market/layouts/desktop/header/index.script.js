@@ -12,7 +12,7 @@ export default {
   async created() {
     await this.$store.dispatch( "getUserInfo" );
     // Get User FB Accounts
-    this.$store.dispatch( "getAccountsFB" );
+    // this.$store.dispatch( "getAccountsFB" );
   },
   computed: {
     user() {
