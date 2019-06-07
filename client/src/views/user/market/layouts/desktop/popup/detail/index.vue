@@ -15,7 +15,12 @@
         <div class="modal--body">
           <div class="general--info d_flex mb_3">
             <div class="left">
-              <div class="thumbnail mr_3"></div>
+              <div
+                class="thumbnail mr_3"
+                :style="{
+                  backgroundImage: 'url(' + product.previews.thumbnail + ')'
+                }"
+              ></div>
             </div>
             <div class="right">
               <div class="right--data">
@@ -32,7 +37,9 @@
                   </icon-base>
                   <span>{{ product.numberOfSales }} đã sử dụng</span>
                 </div>
-                <div class="price mt_3">{{ product.priceCents }} ₫</div>
+                <div class="price mt_3">
+                  {{ formatCurrency(product.priceCents) }} ₫
+                </div>
               </div>
               <div class="right--btn">
                 <div class="btn btn_outline_info">Thêm vào kho</div>
@@ -54,7 +61,7 @@
           </div>
           <div class="preview mt_3">
             <div class="preview--title mb_2">Xem trước</div>
-            <div class="preview--content">{{ product.content }}</div>
+            <div class="preview--content">{{ product.summary }}</div>
           </div>
         </div>
         <!-- End: Modal Body -->
@@ -77,6 +84,9 @@ export default {
   methods: {
     closePopup() {
       this.$emit("closePopup", false);
+    },
+    formatCurrency(num) {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     }
   }
 };
@@ -84,9 +94,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "./index.style";
-.thumbnail {
-  background: url("https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg")
-    no-repeat;
-  background-size: cover;
-}
 </style>

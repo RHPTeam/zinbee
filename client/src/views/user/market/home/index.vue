@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <!-- Start: Search Banner -->
     <div class="search p_4 ">
       <div class="d_flex flex_column text_center pb_4">
         <h3>
@@ -13,7 +14,6 @@
           esse.</span
         >
       </div>
-
       <div class=" d_flex justify_content_center p_4">
         <div class="form--search d_flex align_content_center position_relative">
           <div class="icon--search position_absolute btn">
@@ -30,7 +30,8 @@
         </div>
       </div>
     </div>
-
+    <!-- End: Search Banner -->
+    <!-- Start: Description -->
     <section
       class="describe d_flex flex_column align_items_center justify_content_center py_4"
     >
@@ -41,26 +42,29 @@
         consectetur.
       </div>
     </section>
-
+    <!-- End: Description -->
+    <!-- Start: Popular Products -->
     <div class="products p_4 ct">
       <div class="tab d_flex justify_content_center py_3 mb_4">
         <div class="d_flex align_items_center">
-          <button class="btn btn_outline_info mr_3">Post Popular</button>
-          <button class="btn btn_outline_info">Campaigns Simple</button>
+          <button class="btn btn_outline_info mr_3">Bài viết</button>
+          <button class="btn btn_outline_info">Chiến dịch</button>
         </div>
       </div>
       <div class="popular">
         <div class="r">
           <div
             class="item c_md_6 c_lg_4 c_xl_4 mb_2"
-            v-for="(item, index) in posts"
+            v-for="(item, index) in allMarketProduct.slice(0, 3)"
             :key="index"
           >
             <div class="card">
               <div class="thumbnail position_relative">
                 <div
                   class="thumbnail--bg"
-                  :style="{ backgroundImage: 'url(' + item.img + ')' }"
+                  :style="{
+                    backgroundImage: 'url(' + item.previews.thumbnail + ')'
+                  }"
                   @click="showDetailPopup(item)"
                 ></div>
                 <div class="icon position_absolute">
@@ -86,28 +90,31 @@
                   </div>
                 </div>
               </div>
-
               <div class="detail px_3 py_3">
                 <div class="desc mb_2">
-                  <h4 class="m_0">{{ item.title }}</h4>
+                  <h4 class="mb_1" @click="showDetailPopup(item)">
+                    {{ item.name }}
+                  </h4>
                   <div class="editor d_flex align_items_center">
                     <div class="name mr_2">
-                      <span>by</span> {{ item.editor }}
+                      <span>by</span> {{ item._creator.name }}
                     </div>
-                    <div
+                    <!--<div
                       class="avatar"
                       :style="{ backgroundImage: 'url(' + item.img + ')' }"
-                    ></div>
+                    ></div>-->
                   </div>
                 </div>
                 <div class="info d_flex align_items_center">
                   <div class="left">
-                    <div class="price">${{ item.price }}</div>
-                    <div class="sales">{{ item.sale }} sales</div>
+                    <div class="price">
+                      {{ formatCurrency(item.priceCents) }} ₫
+                    </div>
+                    <div class="sales">{{ item.numberOfSales }} đã sử dụng</div>
                   </div>
                   <div class="right d_flex align_items_center ml_auto">
-                    <div class="action der_1 mr_2">Preview</div>
-                    <div class="icon der_1">
+                    <div class="action der_1">Thêm vào kho</div>
+                    <!--<div class="icon der_1">
                       <icon-base
                         icon-name="logo"
                         width="24"
@@ -116,7 +123,7 @@
                       >
                         <icon-download />
                       </icon-base>
-                    </div>
+                    </div>-->
                   </div>
                 </div>
               </div>
@@ -125,7 +132,8 @@
         </div>
       </div>
     </div>
-
+    <!-- End: Popular Products -->
+    <!-- Start: Join With Us -->
     <div
       class="join d_flex align_items_center justify_content_center p_4 mb_5"
       :style="{
@@ -140,7 +148,8 @@
         <span class="signup">Đăng ký</span>
       </div>
     </div>
-
+    <!-- End: Join With Us -->
+    <!-- Start: Marketing Section -->
     <div class="marketing--section p_4 ct mb_5">
       <div class="r">
         <div class="c_md_6 c_lg_4 c_xl_4 mb_2 text_center">
@@ -182,6 +191,7 @@
         </div>
       </div>
     </div>
+    <!-- End: Marketing Section -->
 
     <!-- *************POPUP************* -->
     <transition name="popup">
@@ -205,41 +215,17 @@ export default {
     return {
       isShowDetailPopup: false,
       productSelected: {},
-      posts: [
-        {
-          img:
-            "https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg",
-          title: "Cho tôi một vé trở về tuổi thơ",
-          editor: "Đặng Yến",
-          price: "100,000",
-          tags: ["du lịch", "mỹ phẩm"],
-          sale: 103,
-          updatedAt: "2019-06-05T12:27:39.126+00:00"
-        },
-        {
-          img:
-            "https://png.pngtree.com/element_origin_min_pic/16/05/16/205739ba060e909.jpg",
-          title: "Tiền bán ngáo để mua Husky",
-          editor: "Yến Ngáo",
-          price: "100,000",
-          tags: ["du lịch", "mỹ phẩm"],
-          sale: 103,
-          updatedAt: "2019-06-05T12:27:39.126+00:00"
-        },
-        {
-          img:
-            "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681",
-          title: "Bán ngáo được bao tiền ?",
-          editor: "Ngáo Yến",
-          price: "100,000",
-          tags: ["du lịch", "mỹ phẩm"],
-          sale: 103,
-          updatedAt: "2019-06-05T12:27:39.126+00:00"
-        }
-      ],
       srcDefault1: require("@/assets/images/market/left_bottom_hero.png"),
       srcDefault2: require("@/assets/images/market/right_bottom_hero.png")
     };
+  },
+  computed: {
+    allMarketProduct() {
+      return this.$store.getters.allMarketPostsReverse;
+    }
+  },
+  async created() {
+    await this.$store.dispatch("products");
   },
   methods: {
     dateFormat(date) {
@@ -249,6 +235,9 @@ export default {
         year = dateTime.getFullYear();
 
       return `${day}/${month}/${year}`;
+    },
+    formatCurrency(num) {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     },
     showDetailPopup(val) {
       this.productSelected = val;

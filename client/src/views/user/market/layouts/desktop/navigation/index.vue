@@ -3,24 +3,29 @@
     <div class="ct">
       <ul class="nav--list" data-test-selector="category-menu">
         <li class="nav--item">
-          <a class="nav--link">Tất cả </a>
+          <a class="nav--link">Tất cả</a>
         </li>
-        <li class="nav--item">
-          <a class="nav--link">Động lực sống </a>
-        </li>
-        <li class="nav--item">
-          <a class="nav--link">Bán hàng </a>
-        </li>
-        <li class="nav--item">
-          <a class="nav--link">Thể thao </a>
-        </li>
-        <li class="nav--item">
-          <a class="nav--link">Giải trí </a>
+        <li
+          class="nav--item"
+          v-for="(category, index) in currentParentMarketCategory.children"
+          :key="index"
+        >
+          <a class="nav--link">{{ category.name }}</a>
         </li>
       </ul>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    currentParentMarketCategory() {
+      return this.$store.getters.currentParentMarketCategory;
+    }
+  }
+};
+</script>
 
 <style scoped lang="scss">
 .nav--root {

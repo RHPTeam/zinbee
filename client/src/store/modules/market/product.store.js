@@ -105,7 +105,11 @@ const actions = {
       description: "",
       tags: [],
       updatedAt: "",
-      content: ""
+      content: "",
+      summary: "",
+      previews: {
+        thumbnail: ""
+      }
     });
   },
   setButtonDefault: async ({ commit }, payload) => {

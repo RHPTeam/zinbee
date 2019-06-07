@@ -77,7 +77,7 @@ export default {
       });
 
       await this.$store.dispatch("uploadMarketPostPhotos", formData);
-      const dataEmit = this.$store.getters.marketPostPhotosUpload;
+      const dataEmit = await this.$store.getters.marketPostPhotosUpload;
       this.inforProductById.previews.thumbnail = dataEmit[0];
     },
     setProductContent(post) {
