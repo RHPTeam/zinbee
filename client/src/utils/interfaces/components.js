@@ -9,6 +9,9 @@ Vue.component("IconAutoAnswer", () =>
   import("@/components/icons/IconAutoAnswer")
 );
 Vue.component("IconAutopost", () => import("@/components/icons/IconAutopost"));
+Vue.component("IconApplication", () =>
+  import("@/components/icons/IconApplication")
+);
 Vue.component("IconArrowLeft", () =>
   import("@/components/icons/IconArrowLeft")
 );
@@ -44,6 +47,7 @@ Vue.component("IconGridLayout", () =>
 );
 Vue.component("IconGroup", () => import("@/components/icons/IconGroup"));
 Vue.component("IconHome", () => import("@/components/icons/IconHome"));
+Vue.component("IconHelp", () => import("@/components/icons/IconHelp"));
 Vue.component("IconHeart", () => import("@/components/icons/IconHeart"));
 Vue.component("IconHourglass", () =>
   import("@/components/icons/IconHourglass")
@@ -53,6 +57,9 @@ Vue.component("IconInfo", () => import("@/components/icons/IconInfinity"));
 Vue.component("IconInfinity", () => import("@/components/icons/IconInfo"));
 Vue.component("IconInputSearch", () =>
   import("@/components/icons/IconInputSearch")
+);
+Vue.component("IconInstagram", () =>
+  import("@/components/icons/IconInstagram")
 );
 Vue.component("IconLibs", () => import("@/components/icons/IconLibs"));
 Vue.component("IconList", () => import("@/components/icons/IconList"));
@@ -94,6 +101,9 @@ Vue.component("IconUser", () => import("@/components/icons/IconUser"));
 Vue.component("IconUploadImage", () =>
   import("@/components/icons/IconUploadImage")
 );
+Vue.component("IconZalo", () => import("@/components/icons/IconZalo"));
+Vue.component("IconZinChat", () => import("@/components/icons/IconZinChat"));
+Vue.component("IconZinPost", () => import("@/components/icons/IconZinPost"));
 
 // Icon Logo
 Vue.component("IconLogo", () => import("@/components/icons/IconLogo"));

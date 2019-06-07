@@ -26,6 +26,7 @@ const state = {
 };
 const getters = {
   allProduct: state => state.allProduct,
+  newMarketProducts: state => state.allProduct.reverse().slice(0, 6),
   product: state => state.product,
   nodeUpdate: state => state.nodeUpdate,
   collection: state => state.collection
