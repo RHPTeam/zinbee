@@ -25,7 +25,9 @@
           <div class="headerstrip-canvas is-hidden-desktop">
             <div class="headerstrip-content">
               <div class="headerstrip-text">
-                Zinbee Elements
+                <strong>
+                  Đăng ký ngay hôm nay để trải nghiệm đầy đủ các chức năng!!!
+                </strong>
                 <span
                   class="js-banner__link headerstrip-cta-mobile"
                   @click.prevent="$router.push({ name: 'market_home' })"
@@ -37,8 +39,8 @@
           <div class="headerstrip-canvas is-hidden-tablet-and-below">
             <div class="headerstrip-content">
               <div class="headerstrip-text">
-                <strong>Tải xuống không giới hạn cho tài khoản của bạn:</strong>
-                Bài viết, chiến dịch, danh mục bài viết, ảnh,...!
+                <strong>Đăng ký ngay để trải nghiệm đầy đủ các chức năng:</strong>
+                Bài viết, chiến dịch, quản lý nhóm, thống kê, ...!
               </div>
               <span
                 class="js-banner__link headerstrip-cta"

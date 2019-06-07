@@ -35,6 +35,7 @@ Vue.component("IconDownload", () => import("@/components/icons/IconDownload"));
 Vue.component("IconEdit", () => import("@/components/icons/IconEdit"));
 Vue.component("IconEditInfo", () => import("@/components/icons/IconEditInfo"));
 Vue.component("IconEnvelope", () => import("@/components/icons/IconEnvelope"));
+Vue.component("IconFacebookCirle", () => import("@/components/icons/IconFacebookCirle"));
 Vue.component("IconFolder", () => import("@/components/icons/IconFolder"));
 Vue.component("IconFilter", () => import("@/components/icons/IconFilter"));
 Vue.component("IconFriend", () => import("@/components/icons/IconFriend"));
@@ -116,7 +117,7 @@ Vue.component("IconLogoShort", () =>
   import("@/components/icons/IconLogoShort")
 );
 Vue.component("IconLogoText", () => import("@/components/icons/IconLogoText"));
-
+Vue.component("IconYoutubeCirle", () => import("@/components/icons/IconYoutubeCirle"));
 // Global Component
 Vue.component("VuePerfectScrollbar", () => import("vue-perfect-scrollbar"));
 Vue.component("VueQuillEditor", () => import("vue-quill-editor"));

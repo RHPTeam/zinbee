@@ -5,13 +5,11 @@
       <div class="d_flex flex_column text_center pb_4">
         <h3>
           <b
-            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem,
-            esse.</b
+            >Rất nhiều các bài post và chiến dịch mẫu đang đợi bạn.</b
           >
         </h3>
         <span
-          >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem,
-          esse.</span
+          >Nhập tên bài post hoặc chiến dịch mà bạn cần tìm. Sau đó nhấn mua hoặc thêm vào kho.</span
         >
       </div>
       <div class=" d_flex justify_content_center p_4">
@@ -32,23 +30,22 @@
     </div>
     <!-- End: Search Banner -->
     <!-- Start: Description -->
-    <section
-      class="describe d_flex flex_column align_items_center justify_content_center py_4"
-    >
-      <h3 class="title mb_4">Lorem ipsum dolor sit amet, consectetur.</h3>
-      <div class="">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste,
-        quibusdam. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-        consectetur.
-      </div>
-    </section>
+
     <!-- End: Description -->
     <!-- Start: Popular Products -->
     <div class="products p_4 ct">
+      <section
+        class="describe d_flex flex_column text_center py_4"
+      >
+        <h3 class="title mb_4">Khám phá những bài sản phẩm mới nhất trong tuần</h3>
+        <div class="">
+          Hàng tuần, những sản phẩm mới nhất được nhiều người yêu thích sẽ được giới thiệu ở đây.
+        </div>
+      </section>
       <div class="tab d_flex justify_content_center py_3 mb_4">
         <div class="d_flex align_items_center">
-          <button class="btn btn_outline_info mr_3">Bài viết</button>
-          <button class="btn btn_outline_info">Chiến dịch</button>
+          <button class="btn btn_outline_warning mr_3">Bài viết</button>
+          <button class="btn btn_outline_warning">Chiến dịch</button>
         </div>
       </div>
       <div class="popular">
@@ -145,7 +142,10 @@
         <div class="desc mb_4">
           Trải nghiệm sản phẩm marketing tốt nhất
         </div>
-        <span class="signup">Đăng ký</span>
+        <span
+          class="signup"
+          @click="redirectToSignup"
+        >Đăng ký</span>
       </div>
     </div>
     <!-- End: Join With Us -->
@@ -153,40 +153,39 @@
     <div class="marketing--section p_4 ct mb_5">
       <div class="r">
         <div class="c_md_6 c_lg_4 c_xl_4 mb_2 text_center">
-          <img
-            src="https://assets.shopfront.envato-static.com/images/home-page/marketing/support.png"
-            alt=""
-          />
-          <div><b>All the themes you need.</b></div>
+          <div class="marketing--section-image"
+            :style="{
+                    backgroundImage: 'url(' + srcSimpleInterface + ')'
+                  }"
+          ></div>
+          <div><b>Giao diện thân thiện.</b></div>
           <div>
-            Templates for the best CMS like WordPress and Joomla, e-commerce
-            templates for WooCommerce, Shopify and more… A huge library with
-            top-quality themes and templates.
+            Zinbee luôn cố gắng đem đến những sản phẩm dễ dàng sử dụng, thân thiện với người dùng.
+            Hoạt động tốt trên tất cả các trình duyệt web.
           </div>
         </div>
         <div class="c_md_6 c_lg_4 c_xl_4 mb_2 text_center">
-          <img
-            src="https://assets.shopfront.envato-static.com/images/home-page/marketing/everything.png"
-            alt=""
-          />
-
-          <div><b>All the themes you need.</b></div>
+          <div class="marketing--section-image"
+               :style="{
+                    backgroundImage: 'url(' + srcExamlePost + ')'
+                  }"
+          ></div>
+          <div><b>Bài post, chiến dịch mẫu.</b></div>
           <div>
-            Templates for the best CMS like WordPress andJoomla, e-commerce
-            templates for WooCommerce, Shopify and more… A huge library with
-            top-quality themes and templates.
+          Để tăng hiệu quả sử dụng phần mềm, Zinbee có
+            những post, chiến dịch mẫu để bạn tham khảo và sử dụng.
           </div>
         </div>
         <div class="c_md_6 c_lg_4 c_xl_4 mb_2 text_center">
-          <img
-            src="https://assets.shopfront.envato-static.com/images/home-page/marketing/discover.png"
-            alt=""
-          />
-          <div><b>All the themes you need.</b></div>
+          <div class="marketing--section-image"
+               :style="{
+                    backgroundImage: 'url(' + srcAutomatic + ')'
+                  }"
+          ></div>
+          <div><b>Hoàn toàn tự động.</b></div>
           <div>
-            Templates for the best CMS like WordPress and Joomla, e-commerce
-            templates for WooCommerce, Shopify and more… A huge library with
-            top-quality themes and templates.
+            Bạn chỉ cần thiết lập chiến dịch một lần.
+            Phần mềm sẽ tự động post bài theo lịch được cài đặt.
           </div>
         </div>
       </div>
@@ -215,8 +214,11 @@ export default {
     return {
       isShowDetailPopup: false,
       productSelected: {},
-      srcDefault1: require("@/assets/images/market/left_bottom_hero.png"),
-      srcDefault2: require("@/assets/images/market/right_bottom_hero.png")
+      srcDefault1: require("@/assets/images/market/left_join.svg"),
+      srcDefault2: require("@/assets/images/market/right_join.svg"),
+      srcAutomatic: require("@/assets/images/market/automatic.svg"),
+      srcExamlePost: require("@/assets/images/market/example_post.svg"),
+      srcSimpleInterface: require("@/assets/images/market/simple_interface.svg")
     };
   },
   computed: {
@@ -242,6 +244,11 @@ export default {
     showDetailPopup(val) {
       this.productSelected = val;
       this.isShowDetailPopup = true;
+    },
+    redirectToSignup() {
+      const routeData = this.$router.resolve( { name: "user_signup" } );
+
+      window.open(routeData.href, '_blank');
     }
   }
 };

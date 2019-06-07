@@ -1,5 +1,5 @@
 .search {
-  background-color: hsl(171, 72%, 43%);
+  background-color: #ffb94a;
   background-image:url("https://assets.shopfront.envato-static.com/assets/images/bg-page-section-light.png");
   color: white;
   .form--search {
@@ -13,11 +13,6 @@
     right: 0rem;
 
   }
-  //.search--input {
-  //  width : 100%;
-  //  border-radius: 10px;
-  //  color: gray;
-  //}
   input {
     width: 100%;
     border-radius: .625rem;
@@ -41,18 +36,6 @@
   }
 }
 
-.feature--products {
-  ul {
-    list-style: none;
-  }
-  background-color: whitesmoke;
-  button {
-    color: hsl(0, 0%, 100%);
-    background-color: hsl(87, 58%, 45%);
-    box-shadow: 0 2px 0 hsl(87, 58%, 35%);
-    border-radius: 4px;
-  }
-}
 .describe {
   .title {
     color: #253858;
@@ -168,16 +151,16 @@
   }
 }
 .marketing--section {
-  img {
-    width: 180px;
-    height: 133px;
+  .marketing--section-image {
+    background-size: 300px 130px;
+    min-height: 130px;
   }
 }
 .join {
   background-color: #fff;
   background-position: bottom left , bottom right;
   background-repeat: no-repeat , no-repeat;
-  background-size: 600px 300px , 600px 300px;
+  background-size: 540px 350px , 600px 350px;
   min-height: 350px;
   .background--join {
     .desc {
