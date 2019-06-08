@@ -67,7 +67,7 @@
         </div>
         <div class="component--form pb_4">
           <form class="d_flex justify_content_between">
-            <input class="component--form-input mr_3" type="text" placeholder="Địa chỉ Email">
+            <input class="component--form-input" type="text" placeholder="Địa chỉ Email">
             <span class="component--form-button">Subscribe</span>
           </form>
         </div>
@@ -176,7 +176,7 @@
   border-radius: 3px;
   font-size: .875rem;
   height: 40px;
-  width: 68%;
+  width: 100%;
   padding: 0 12px;
 }
 .component--form-button {
