@@ -39,16 +39,16 @@
           <div class="headerstrip-canvas is-hidden-tablet-and-below">
             <div class="headerstrip-content">
               <div class="headerstrip-text">
-                <strong>Đăng ký ngay để trải nghiệm đầy đủ các chức năng:</strong>
+                <strong
+                  >Đăng ký ngay để trải nghiệm đầy đủ các chức năng:</strong
+                >
                 Bài viết, chiến dịch, quản lý nhóm, thống kê, ...!
               </div>
               <router-link :to="{ name: 'user_signup' }">
-                <span
-                  class="js-banner__link headerstrip-cta"
-                >Trải nghiệm ngay</span
+                <span class="js-banner__link headerstrip-cta"
+                  >Trải nghiệm ngay</span
                 >
               </router-link>
-
             </div>
           </div>
         </a>

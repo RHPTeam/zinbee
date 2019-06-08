@@ -4,12 +4,11 @@
     <div class="search p_4 ">
       <div class="d_flex flex_column text_center pb_4">
         <h3>
-          <b
-            >Rất nhiều các bài post và chiến dịch mẫu đang đợi bạn.</b
-          >
+          <b>Rất nhiều các bài post và chiến dịch mẫu đang đợi bạn.</b>
         </h3>
         <span
-          >Nhập tên bài post hoặc chiến dịch mà bạn cần tìm. Sau đó nhấn mua hoặc thêm vào kho.</span
+          >Nhập tên bài post hoặc chiến dịch mà bạn cần tìm. Sau đó nhấn mua
+          hoặc thêm vào kho.</span
         >
       </div>
       <div class=" d_flex justify_content_center p_4">
@@ -34,12 +33,13 @@
     <!-- End: Description -->
     <!-- Start: Popular Products -->
     <div class="products p_4 ct">
-      <section
-        class="describe d_flex flex_column text_center py_4"
-      >
-        <h3 class="title mb_4">Khám phá những bài sản phẩm mới nhất trong tuần</h3>
+      <section class="describe d_flex flex_column text_center py_4">
+        <h3 class="title mb_4">
+          Khám phá những bài sản phẩm mới nhất trong tuần
+        </h3>
         <div class="">
-          Hàng tuần, những sản phẩm mới nhất được nhiều người yêu thích sẽ được giới thiệu ở đây.
+          Hàng tuần, những sản phẩm mới nhất được nhiều người yêu thích sẽ được
+          giới thiệu ở đây.
         </div>
       </section>
       <div class="tab d_flex justify_content_center py_3 mb_4">
@@ -142,10 +142,7 @@
         <div class="desc mb_4">
           Trải nghiệm sản phẩm marketing tốt nhất
         </div>
-        <span
-          class="signup"
-          @click="redirectToSignup"
-        >Đăng ký</span>
+        <span class="signup" @click="redirectToSignup">Đăng ký</span>
       </div>
     </div>
     <!-- End: Join With Us -->
@@ -153,39 +150,42 @@
     <div class="marketing--section p_4 ct mb_5">
       <div class="r">
         <div class="c_md_6 c_lg_4 c_xl_4 mb_2 text_center">
-          <div class="marketing--section-image"
+          <div
+            class="marketing--section-image"
             :style="{
-                    backgroundImage: 'url(' + srcSimpleInterface + ')'
-                  }"
+              backgroundImage: 'url(' + srcSimpleInterface + ')'
+            }"
           ></div>
           <div class="title mt_4"><b>Giao diện thân thiện.</b></div>
           <div>
-            Zinbee luôn cố gắng đem đến những sản phẩm dễ dàng sử dụng, thân thiện với người dùng.
-            Hoạt động tốt trên tất cả các trình duyệt web.
+            Zinbee luôn cố gắng đem đến những sản phẩm dễ dàng sử dụng, thân
+            thiện với người dùng. Hoạt động tốt trên tất cả các trình duyệt web.
           </div>
         </div>
         <div class="c_md_6 c_lg_4 c_xl_4 mb_2 text_center">
-          <div class="marketing--section-image"
-               :style="{
-                    backgroundImage: 'url(' + srcExamlePost + ')'
-                  }"
+          <div
+            class="marketing--section-image"
+            :style="{
+              backgroundImage: 'url(' + srcExamlePost + ')'
+            }"
           ></div>
           <div class="title mt_4"><b>Bài post, chiến dịch mẫu.</b></div>
           <div>
-          Để tăng hiệu quả sử dụng phần mềm, Zinbee có
-            những post, chiến dịch mẫu để bạn tham khảo và sử dụng.
+            Để tăng hiệu quả sử dụng phần mềm, Zinbee có những post, chiến dịch
+            mẫu để bạn tham khảo và sử dụng.
           </div>
         </div>
         <div class="c_md_6 c_lg_4 c_xl_4 mb_2 text_center">
-          <div class="marketing--section-image"
-               :style="{
-                    backgroundImage: 'url(' + srcAutomatic + ')'
-                  }"
+          <div
+            class="marketing--section-image"
+            :style="{
+              backgroundImage: 'url(' + srcAutomatic + ')'
+            }"
           ></div>
           <div class="title mt_4"><b>Hoàn toàn tự động.</b></div>
           <div>
-            Bạn chỉ cần thiết lập chiến dịch một lần.
-            Phần mềm sẽ tự động post bài theo lịch được cài đặt.
+            Bạn chỉ cần thiết lập chiến dịch một lần. Phần mềm sẽ tự động post
+            bài theo lịch được cài đặt.
           </div>
         </div>
       </div>
@@ -246,9 +246,9 @@ export default {
       this.isShowDetailPopup = true;
     },
     redirectToSignup() {
-      const routeData = this.$router.resolve( { name: "user_signup" } );
+      const routeData = this.$router.resolve({ name: "user_signup" });
 
-      window.open(routeData.href, '_blank');
+      window.open(routeData.href, "_blank");
     }
   }
 };

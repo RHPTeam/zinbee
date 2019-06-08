@@ -4,8 +4,7 @@
       <div class="d_flex flex_column c_lg_3 c_md_3 c_sm_6">
         <div class="component--heading pb_3">
           <h4 class="heading">
-            <b>Masso
-            </b>
+            <b>Masso </b>
           </h4>
         </div>
         <div class="component--content">
@@ -32,8 +31,7 @@
       <div class="d_flex flex_column c_lg_3 c_md_3 c_sm_6">
         <div class="component--heading pb_3">
           <h4 class="heading">
-            <b>Trợ giúp
-            </b>
+            <b>Trợ giúp </b>
           </h4>
         </div>
         <div class="component--content">
@@ -60,14 +58,17 @@
       <div class="d_flex flex_column c_lg_6 c_md_6 c_sm_12">
         <div class="component--heading-textblock pb_2">
           <h4 class="heading pb_3">
-            <b>Liên hệ
-            </b>
+            <b>Liên hệ </b>
           </h4>
           <p>Đăng ký mail để nhận thông tin mới nhất:</p>
         </div>
         <div class="component--form pb_4">
           <form class="d_flex justify_content_between">
-            <input class="component--form-input" type="text" placeholder="Địa chỉ Email">
+            <input
+              class="component--form-input"
+              type="text"
+              placeholder="Địa chỉ Email"
+            />
             <span class="component--form-button">Subscribe</span>
           </form>
         </div>
@@ -87,7 +88,7 @@
                       height="24"
                       viewBox="0 0 500 500"
                     >
-                      <icon-facebook-cirle/>
+                      <icon-facebook-cirle />
                     </icon-base>
                   </div>
                 </a>
@@ -172,9 +173,9 @@
 }
 
 .component--form-input {
-  border: 1px solid #C1C7D0;
+  border: 1px solid #c1c7d0;
   border-radius: 3px;
-  font-size: .875rem;
+  font-size: 0.875rem;
   height: 40px;
   width: 100%;
   padding: 0 12px;
@@ -187,12 +188,13 @@
   border-radius: 3px;
   color: #ffffff;
   cursor: pointer;
-  padding: .625rem 1.5rem;
-  &:hover, &:focus {
+  padding: 0.625rem 1.5rem;
+  &:hover,
+  &:focus {
     background-color: transparent;
     border-color: #e4e4e4;
     color: #444444;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
   }
 }
 .imkt--social-button {
@@ -200,5 +202,4 @@
     list-style: none;
   }
 }
-
 </style>
