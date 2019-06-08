@@ -33,16 +33,23 @@ const multer = require( "multer" ),
     }
   } );
 
+// General
 router.route( "/" )
-  .get( auth, ProductController.index )
+  .get( ProductController.index )
   .post( auth, permission, ProductController.create )
   .patch( auth, permission, ProductController.update )
   .delete( auth, permission, ProductController.delete );
 
+// Upload
 router.route( "/upload" )
   .post( auth, permission, upload.single( "previewImageUrl" ), ProductController.upload );
 
+// Add to Collection
 router.route( "/add/product/user" )
   .post( auth, ProductController.addToCollection );
+
+// Get all products by category
+router.route( "/:categoryId/products" )
+  .get( ProductController.getAllProductsByCategory );
 
 module.exports = router;

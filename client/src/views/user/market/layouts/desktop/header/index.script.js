@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-
+import CookieFunction from "@/utils/functions/cookie";
 export default {
   data() {
     return {
@@ -11,7 +10,7 @@ export default {
   },
   computed: {
     userMember() {
-      if ( this.$store.getters.userInfo === undefined ) {
+      if (this.$store.getters.userInfo === undefined) {
         return;
       }
       return this.$store.getters.userInfoMember;
@@ -33,22 +32,20 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch( "getUserInfoMember" );
-    await this.$store.dispatch( "getAllMarketCategoriesTree" );
-    // Get User FB Accounts
-    // this.$store.dispatch( "getAccountsFB" );
+    await this.$store.dispatch("getUserInfoMember");
+    await this.$store.dispatch("getAllMarketCategoriesTree");
   },
   methods: {
     async logOut() {
-      await this.$store.dispatch( "logOut" );
+      await this.$store.dispatch("logOut");
       window.location.href = `${process.env.VUE_APP_PARENT_URL}/#/redirect`;
     },
     chooseCategory(category) {
-      this.$store.dispatch( "currentParentMarketCategory", category );
+      this.$store.dispatch("currentParentMarketCategory", category);
     },
     toogleSidebar() {
       this.statusCollapse = !this.statusCollapse;
-      this.$store.dispatch( "changeMenu", this.statusCollapse );
+      this.$store.dispatch("changeMenu", this.statusCollapse);
     },
     showNotificationDropdown() {
       this.isShowProfileDropdown = false;
@@ -58,7 +55,7 @@ export default {
       this.isShowProfileDropdown = !this.isShowProfileDropdown;
       this.isShowNotificationDropdown = false;
     },
-    closeProfileDropdown(){
+    closeProfileDropdown() {
       this.isShowProfileDropdown = false;
     },
     closeNotificationDropdown() {
@@ -68,47 +65,53 @@ export default {
       this.showdropdown = false;
     },
     redirectToHelp() {
-      const routeData = this.$router.resolve( { name: "help" } );
+      const routeData = this.$router.resolve({ name: "help" });
 
-      window.open(routeData.href, '_blank');
+      window.open(routeData.href, "_blank");
     },
-    showOptionsMoreDropdown(){
+    showOptionsMoreDropdown() {
       this.isShowOptionsMoreDropdown = true;
     },
-    closeOptionsMoreDropdown(){
+    closeOptionsMoreDropdown() {
       this.isShowOptionsMoreDropdown = false;
     },
     gotoHomePost() {
-      if ( this.allAccountFb.length === 0 ) {
-        const routeData = this.$router.resolve( { name: "post_fbaccount" } );
+      if (this.allAccountFb.length === 0) {
+        const routeData = this.$router.resolve({ name: "post_fbaccount" });
 
-        window.open(routeData.href, '_blank');
+        window.open(routeData.href, "_blank");
       } else {
-        const routeData = this.$router.resolve( "/post" );
+        const routeData = this.$router.resolve("/post");
 
-        window.open(routeData.href, '_blank');
+        window.open(routeData.href, "_blank");
       }
       this.isShowOptionsMoreDropdown = false;
     },
-    gotoHomeChat(){
-      if ( this.allAccountFb.length === 0 ) {
-        const routeData = this.$router.resolve( { name: "facebook" } );
+    gotoHomeChat() {
+      if (this.allAccountFb.length === 0) {
+        const routeData = this.$router.resolve({ name: "facebook" });
 
-        window.open(routeData.href, '_blank');
+        window.open(routeData.href, "_blank");
       } else {
-        const routeData = this.$router.resolve( { name: "scripts" } );
+        const routeData = this.$router.resolve({ name: "scripts" });
 
-        window.open(routeData.href, '_blank');
+        window.open(routeData.href, "_blank");
       }
       this.isShowOptionsMoreDropdown = false;
     },
+    goToProfileSetting() {
+      window.location.href = `${CookieFunction.getCookie("_sub").replace(
+        "/welcome",
+        ""
+      )}/post/account`;
+    }
   },
   filters: {
-    getFirstLetter( string ) {
-      if ( string === undefined ) {
+    getFirstLetter(string) {
+      if (string === undefined) {
         return;
       }
-      return string.charAt( 0 ).toUpperCase();
+      return string.charAt(0).toUpperCase();
     }
   }
 };

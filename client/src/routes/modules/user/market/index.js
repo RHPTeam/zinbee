@@ -10,7 +10,7 @@ const marketRouter = {
       component: require("@/views/user/market/home").default
     },
     {
-      path: "list",
+      path: "category/:categoryParent/:subCategory",
       name: "market_list",
       component: require("@/views/user/market/list").default
     }

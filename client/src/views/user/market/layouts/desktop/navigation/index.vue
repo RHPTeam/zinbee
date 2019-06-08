@@ -3,12 +3,13 @@
     <div class="ct">
       <ul class="nav--list" data-test-selector="category-menu">
         <li class="nav--item">
-          <a class="nav--link">Tất cả</a>
+          <a class="nav--link" @click.prevent="goToHome">Tất cả</a>
         </li>
         <li
           class="nav--item"
           v-for="(category, index) in currentParentMarketCategory.children"
           :key="index"
+          @click.prevent="loadProductByCategory(category._id)"
         >
           <a class="nav--link">{{ category.name }}</a>
         </li>
@@ -22,6 +23,21 @@ export default {
   computed: {
     currentParentMarketCategory() {
       return this.$store.getters.currentParentMarketCategory;
+    }
+  },
+  methods: {
+    goToHome() {
+      this.$router.push({ name: "market_home" });
+    },
+    async loadProductByCategory(categoryId) {
+      await this.$store.dispatch("getProductsByCategory", categoryId);
+      this.$router.push({
+        name: "market_list",
+        params: {
+          categoryParent: this.currentParentMarketCategory._id,
+          subCategory: categoryId
+        }
+      });
     }
   }
 };

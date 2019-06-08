@@ -184,9 +184,9 @@
                   <p class="mb_0">{{ userMember.email }}</p>
                 </div>
               </div>
-              <router-link
+              <div
                 class="dropdown--item"
-                :to="{ name: 'post_account' }"
+                @click="goToProfileSetting"
               >
                 <icon-base
                   icon-name="account"
@@ -196,7 +196,7 @@
                 >
                   <icon-account /> </icon-base
                 >Thiết lập tài khoản
-              </router-link>
+              </div>
               <div class="dropdown--divider"></div>
               <a
                 class="dropdown--item"

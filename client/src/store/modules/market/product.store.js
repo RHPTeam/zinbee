@@ -23,14 +23,16 @@ const state = {
     previews: {
       thumbnail: ""
     }
-  }
+  },
+  productsByCategory: []
 };
 const getters = {
   allProduct: state => state.allProduct,
   newMarketProducts: state => state.allProduct.reverse().slice(0, 6),
   marketCategoryProducts: state => state.marketCategoryProducts,
   product: state => state.product,
-  nodeUpdate: state => state.nodeUpdate
+  nodeUpdate: state => state.nodeUpdate,
+  productsByCategory: state => state.productsByCategory
 };
 const mutations = {
   // all product
@@ -65,6 +67,11 @@ const mutations = {
   // setTypeProduct
   setTypeProduct: (state, payload) => {
     state.product.typeProduct = payload;
+  },
+
+  // set products by category
+  setProductsByCategory: (state, payload) => {
+    state.productsByCategory = payload;
   }
 };
 const actions = {
@@ -76,13 +83,6 @@ const actions = {
   /**
    * Get market products of category
    */
-  // getMarketCategoryProducts: async ({ commit }, payload) => {
-  //   const res = await ProductMarket.allProduct(),
-  //     products = res.data.data;
-  //   const categoryProducts = products.filter( product => {
-  //   } );
-  //
-  // },
   // create
   createProduct: async ({ commit }, payload) => {
     await ProductMarket.create(payload);
@@ -158,6 +158,15 @@ const actions = {
   // option choose post or campaign --- // 0 - Post | 1 - Campaign
   typeProduct: async ({ commit }, payload) => {
     commit("setTypeProduct", payload);
+  },
+
+  // get products by category
+  getProductsByCategory: async ({ commit }, payload) => {
+    const resData = await ProductMarket.loadProductsByCategory(payload);
+
+    console.log( resData );
+
+    commit("setProductsByCategory", resData.data.data);
   }
 };
 

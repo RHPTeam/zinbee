@@ -29,6 +29,10 @@ const mongoose = require( "mongoose" ),
       ]
     },
     "summary": String,
+    "_category": {
+      "type": Schema.Types.ObjectId,
+      "ref": "MarketCategory"
+    },
     "_creator": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"

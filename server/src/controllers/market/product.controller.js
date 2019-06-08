@@ -113,5 +113,10 @@ module.exports = {
     await productsSelected.save();
 
     res.status( 201 ).json( { "status": "success", "data": productsSelected } );
+  },
+  "getAllProductsByCategory": async ( req, res ) => {
+    const data = await MarketProduct.find( { "_category": req.params.categoryId } );
+
+    res.status( 200 ).json( { "status": "success", "data": data } );
   }
 };
