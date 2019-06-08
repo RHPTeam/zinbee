@@ -30,7 +30,7 @@
                 </strong>
                 <span
                   class="js-banner__link headerstrip-cta-mobile"
-                  @click.prevent="$router.push({ name: 'market_home' })"
+                  @click.prevent="$router.push({ name: 'user_signup' })"
                   >Trải nghiệm ngay</span
                 >
               </div>
@@ -42,11 +42,13 @@
                 <strong>Đăng ký ngay để trải nghiệm đầy đủ các chức năng:</strong>
                 Bài viết, chiến dịch, quản lý nhóm, thống kê, ...!
               </div>
-              <span
-                class="js-banner__link headerstrip-cta"
-                @click.prevent="$router.push({ name: 'market_home' })"
+              <router-link :to="{ name: 'user_signup' }">
+                <span
+                  class="js-banner__link headerstrip-cta"
                 >Trải nghiệm ngay</span
-              >
+                >
+              </router-link>
+
             </div>
           </div>
         </a>

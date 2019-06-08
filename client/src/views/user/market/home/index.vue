@@ -158,7 +158,7 @@
                     backgroundImage: 'url(' + srcSimpleInterface + ')'
                   }"
           ></div>
-          <div><b>Giao diện thân thiện.</b></div>
+          <div class="title mt_4"><b>Giao diện thân thiện.</b></div>
           <div>
             Zinbee luôn cố gắng đem đến những sản phẩm dễ dàng sử dụng, thân thiện với người dùng.
             Hoạt động tốt trên tất cả các trình duyệt web.
@@ -170,7 +170,7 @@
                     backgroundImage: 'url(' + srcExamlePost + ')'
                   }"
           ></div>
-          <div><b>Bài post, chiến dịch mẫu.</b></div>
+          <div class="title mt_4"><b>Bài post, chiến dịch mẫu.</b></div>
           <div>
           Để tăng hiệu quả sử dụng phần mềm, Zinbee có
             những post, chiến dịch mẫu để bạn tham khảo và sử dụng.
@@ -182,7 +182,7 @@
                     backgroundImage: 'url(' + srcAutomatic + ')'
                   }"
           ></div>
-          <div><b>Hoàn toàn tự động.</b></div>
+          <div class="title mt_4"><b>Hoàn toàn tự động.</b></div>
           <div>
             Bạn chỉ cần thiết lập chiến dịch một lần.
             Phần mềm sẽ tự động post bài theo lịch được cài đặt.
