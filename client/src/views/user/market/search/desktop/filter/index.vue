@@ -120,9 +120,7 @@ export default {
       this.productsSearch.results.sort(this.compareNewest);
     }
   },
-  created() {
-
-  }
+  created() {}
 };
 </script>
 <style lang="scss" scoped>

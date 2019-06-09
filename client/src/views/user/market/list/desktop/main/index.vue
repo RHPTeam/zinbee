@@ -2,11 +2,15 @@
   <div class="list--main" :data-theme="currentTheme">
     <!-- START: Selected filters -->
     <div class="d_flex selected-filters align_items_center mb_4 mt_2">
-      <div class="total--product"><b>{{ productsInCategory.length }}</b> items in</div>
+      <div class="total--product">
+        <b>{{ productsInCategory.length }}</b> items in
+      </div>
       <div class="d_flex pl_2 pr_3">
         <div class="selected">
           <div class="items">
-            <router-link class="name all--post" :to="{ name: 'market_home'}">All post</router-link>
+            <router-link class="name all--post" :to="{ name: 'market_home' }"
+              >All post</router-link
+            >
             <span class="px_1 cut">/</span>
           </div>
         </div>
@@ -119,7 +123,9 @@
         </div>
       </div>
     </div>
-    <div class="text_center py_3 card" v-if="productsInCategory.length === 0">Khong co san pham nao</div>
+    <div class="text_center py_3 card" v-if="productsInCategory.length === 0">
+      Khong co san pham nao
+    </div>
     <!-- *************POPUP************* -->
     <transition name="popup">
       <detail-popup
@@ -160,21 +166,22 @@ export default {
     productsInCategory() {
       return this.$store.getters.productsByCategory;
     },
-    currentParentMarketCategory(){
+    currentParentMarketCategory() {
       let nameParent = "";
       let idParent = this.$route.params.categoryParent;
       let categoryParent = this.$store.getters.currentParentMarketCategory;
-      if(categoryParent._id === idParent) {
-        nameParent = categoryParent.name
+      if (categoryParent._id === idParent) {
+        nameParent = categoryParent.name;
       }
       return nameParent;
     },
-    currentChildrenMarketCategory(){
+    currentChildrenMarketCategory() {
       let nameChildren = "";
       let idChildren = this.$route.params.subCategory;
-      let categoryChildren = this.$store.getters.currentParentMarketCategory.children;
+      let categoryChildren = this.$store.getters.currentParentMarketCategory
+        .children;
       categoryChildren.map(item => {
-        if(item._id === idChildren) {
+        if (item._id === idChildren) {
           nameChildren = item.name;
         }
       });

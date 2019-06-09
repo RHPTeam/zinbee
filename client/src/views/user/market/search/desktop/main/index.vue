@@ -110,7 +110,12 @@
         </div>
       </div>
     </div>
-    <div class="text_center py_3 card" v-if="productsSearch.results.length === 0">Khong co ket qua tim kiem</div>
+    <div
+      class="text_center py_3 card"
+      v-if="productsSearch.results.length === 0"
+    >
+      Khong co ket qua tim kiem
+    </div>
     <!-- *************POPUP************* -->
     <transition name="popup">
       <detail-popup
@@ -147,7 +152,7 @@ export default {
     },
     productsSearch() {
       return this.$store.getters.productsSearch;
-    },
+    }
   },
   methods: {
     dateFormat(date) {
@@ -169,10 +174,7 @@ export default {
   },
   created() {
     if (this.$route.params.keyword) {
-      this.$store.dispatch(
-        "searchProducts",
-        this.$route.params.keyword
-      );
+      this.$store.dispatch("searchProducts", this.$route.params.keyword);
     } else {
       return;
     }
