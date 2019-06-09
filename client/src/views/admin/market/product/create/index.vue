@@ -1,40 +1,44 @@
 <template>
   <div class="model--wrapper create--product">
     <div class="model--content card p_3">
+      <h5 class="text_center notification">
+        Tất cả các trường không được bỏ trống
+      </h5>
       <div class="form_group">
         <label for class>Chọn loại sản phẩm</label>
         <div class="mb_2 d_flex">
           <div class="mr_1 btn btn_info" @click="showOptionsPost">Post</div>
           <div class="btn btn_info" @click="showOptionsCampaign">Campaign</div>
         </div>
-        <div class="py_0 post" v-if="isOptionsPost === true">
+        <div class="py_0 post" v-if="inforProductById.typeProduct === 0">
           <multiselect
-            label="name"
+            label="title"
             class="form_control p_0"
-            :options="allMarketPostOptions"
+            :options="allMarketPosts"
             placeholder="Chọn bài viết mẫu..."
-            @input="setProductContent($event)"
+            v-model="inforProductById.content"
+            @input="getNamePostById"
           />
           <div class="post mt_2">
-            <label for class="">Danh mục</label>
+            <label for class="">Danh mục bài viết</label>
             <div class="form_control py_0">
               <multiselect
                 label="name"
                 placeholder="Chọn danh mục đăng bài..."
                 :options="categories"
-                v-model="categories.name"
+                v-model="inforProductById._category"
               />
             </div>
           </div>
         </div>
-        <div class="py_0 campaign" v-if="isOptionsCapaign === true">
+        <div class="py_0 campaign" v-if="inforProductById.typeProduct === 1">
           <multiselect
             label="name"
             class="form_control p_0"
             placeholder="Chọn chien dich de đăng..."
           />
           <div class="campaign mt_2">
-            <label for class>Danh mục</label>
+            <label for class>Danh mục chiến dịch</label>
             <div class="py_0">
               <multiselect
                 label="name"

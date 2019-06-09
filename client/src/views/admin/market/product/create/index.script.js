@@ -1,4 +1,5 @@
 export default {
+  // props: ["showOptionsPost"],
   data() {
     return {
       isOptionsPost: false,
@@ -18,6 +19,8 @@ export default {
       return arrCategoriesChildren;
     },
     inforProductById() {
+      // console.log("this.$store.getters.product");
+      // console.log(this.$store.getters.product);
       return this.$store.getters.product;
     },
     getProductDefault() {
@@ -29,15 +32,24 @@ export default {
     allMarketPosts() {
       return this.$store.getters.allMarketPosts;
     },
-    allMarketPostOptions() {
-      let res = [];
-      this.allMarketPosts.forEach(item => {
-        res.push({
-          id: item._id,
-          name: item.title
-        });
+    // get name categories by id
+    getNameCategoryById() {
+      // const arr = {
+      //   _id: "",
+      //   name: ""
+      // };
+      // this.categories.map(item => {
+      //   // if (item._id === this.inforProductById._category) {
+      //   // }
+      // });
+    },
+    // get name post by id
+    getNamePostById() {
+      this.allMarketPosts.map(item => {
+        if (item._id === this.inforProductById.content) {
+          this.inforProductById.content = item.title;
+        }
       });
-      return res;
     }
   },
   async created() {
@@ -59,7 +71,11 @@ export default {
         previews: {
           thumbnail: this.inforProductById.previews.thumbnail
         },
-        typeProduct: this.inforProductById.typeProduct
+        typeProduct: this.inforProductById.typeProduct,
+        _category: {
+          _id: this.inforProductById._category._id,
+          name: this.inforProductById._category.name
+        }
       };
       this.$store.dispatch("createProduct", dataCreate);
       this.$router.push({ name: "manage_product" });
@@ -97,6 +113,8 @@ export default {
       this.isOptionsPost = false;
     },
     updateProduct() {
+      // console.log("this.inforProductById");
+      // console.log(this.inforProductById);
       this.$store.dispatch("updateProduct", this.inforProductById);
       this.$router.push({ name: "manage_product" });
     },

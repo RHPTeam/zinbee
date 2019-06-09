@@ -4,7 +4,7 @@
       <div class="select">
         <button class="items active">Best sellers</button>
         <button class="items">Newest</button>
-        <button class="items">Trending</button>
+        <!-- <button class="items">Trending</button> -->
         <button class="items">
           Price
           <svg
