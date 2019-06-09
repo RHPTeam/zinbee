@@ -32,6 +32,7 @@
               <div class="top r m_0">
                 <div class="thumbnail px_0 c_lg_6 c_md_12 c_xl_6">
                   <div
+                    v-if="item.previews.thumbnail"
                     class="thumbnail--img"
                     :style="{
                       backgroundImage: 'url(' + item.previews.thumbnail + ')'
@@ -167,13 +168,35 @@ export default {
       this.isShowDetailPopup = true;
     },
     addToCollection(value) {
-      this.$store.dispatch("addToCollection", value);
+      this.$store.dispatch("addToCollection", value._id);
       this.isShowAddToCollectionPopup = true;
     }
+    // productsByPrice(){
+    //   this.productsInCategory.sort(this.compare);
+    // },
+    // compare(a, b) {
+    //   const genreA = a.priceCents;
+    //   const genreB = b.priceCents;
+
+    //   let comparison = 0;
+    //   if (genreA > genreB) {
+    //     comparison = 1;
+    //   } else if (genreA < genreB) {
+    //     comparison = -1;
+    //   }
+    //   return comparison;
+    // }
   },
   created() {
     // this.$store.dispatch("getProducts");
-    // this.$store.dispatch("getProductsInCategory");
+    if (this.$route.params.subCategory.length > 0) {
+      this.$store.dispatch(
+        "getProductsByCategory",
+        this.$route.params.subCategory
+      );
+    } else {
+      return;
+    }
   }
 };
 </script>

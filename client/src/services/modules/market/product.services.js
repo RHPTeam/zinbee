@@ -27,8 +27,8 @@ export default {
   },
 
   // add to collection
-  addToCollection(id, content) {
-    return Api().post(`market/products/add/product/user?_id=${id}`, content);
+  addToCollection(id) {
+    return Api().post(`market/products/add/product/user?_id=${id}`);
   },
 
   // get products by category

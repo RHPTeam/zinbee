@@ -28,8 +28,7 @@ const state = {
       name: ""
     }
   },
-  productsByCategory: [],
-  productsInCategory: []
+  productsByCategory: []
 };
 const getters = {
   allProduct: state => state.allProduct,
@@ -160,8 +159,9 @@ const actions = {
   },
 
   //addToCollection
-  addToCollection: async payload => {
-    await ProductMarket.addToCollection(payload._id, payload);
+  // eslint-disable-next-line no-unused-vars
+  addToCollection: async ({ commit }, payload) => {
+    await ProductMarket.addToCollection(payload);
   },
 
   // option choose post or campaign --- // 0 - Post | 1 - Campaign
