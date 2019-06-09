@@ -52,4 +52,7 @@ router.route( "/add/product/user" )
 router.route( "/:categoryId/products" )
   .get( ProductController.getAllProductsByCategory );
 
+// search product by keyword - /market/products/search?keyword=example&_size=12&_page=1
+router.route( "/search" ).post( auth, ProductController.search );
+
 module.exports = router;

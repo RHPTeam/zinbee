@@ -22,6 +22,7 @@ module.exports = {
       return res.status( 403 ).json( { "status": "fail", "content": "Nội dung bài viết mẫu này không được bỏ trống!" } );
     }
     // set value default post
+    body.content = body.content.replace( /(<br \/>)|(<br>)/gm, "\n" ).replace( /(<\/p>)|(<\/div>)/gm, "\n" ).replace( /(<([^>]+)>)/gm, "" );
     body._creator = req.uid;
 
     // set new object mongo
@@ -43,6 +44,8 @@ module.exports = {
     } else if ( !postInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Sản phẩm này không tồn tại!" } );
     }
+
+    body.content = body.content.replace( /(<br \/>)|(<br>)/gm, "\n" ).replace( /(<\/p>)|(<\/div>)/gm, "\n" ).replace( /(<([^>]+)>)/gm, "" );
 
     res.status( 200 ).json( { "status": "success", "data": ( await MarketPost.findByIdAndUpdate( query._id, { "$set": body }, { "new": true } ) ) } );
   },
