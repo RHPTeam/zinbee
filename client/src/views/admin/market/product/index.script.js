@@ -1,14 +1,21 @@
 export default {
   data() {
-    return {};
+    return {
+      isShowOptionsPost: true
+    };
   },
   computed: {
     products() {
       return this.$store.getters.allProduct;
+    },
+    getTypeProduct() {
+      return this.$store.getters.products;
     }
   },
   methods: {
     goToUpdate(value) {
+      // console.log("value");
+      // console.log(value);
       this.$store.dispatch("getInfoProductById", value);
       this.$store.dispatch("setButtonDefault", 0);
       this.$router.push({ name: "product_create" });

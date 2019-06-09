@@ -22,14 +22,18 @@ const state = {
     summary: "",
     previews: {
       thumbnail: ""
+    },
+    _category: {
+      _id: "",
+      name: ""
     }
   },
   productsByCategory: []
 };
 const getters = {
   allProduct: state => state.allProduct,
-  newMarketProducts: state => state.allProduct.reverse().slice(0, 6),
   marketCategoryProducts: state => state.marketCategoryProducts,
+  newMarketProducts: state => state.allProduct.reverse().slice(0, 6),
   product: state => state.product,
   nodeUpdate: state => state.nodeUpdate,
   productsByCategory: state => state.productsByCategory
@@ -133,6 +137,10 @@ const actions = {
       summary: "",
       previews: {
         thumbnail: ""
+      },
+      _category: {
+        _id: "",
+        name: ""
       }
     });
   },
@@ -151,8 +159,9 @@ const actions = {
   },
 
   //addToCollection
-  addToCollection: async payload => {
-    await ProductMarket.addToCollection(payload._id, payload);
+  // eslint-disable-next-line no-unused-vars
+  addToCollection: async ({ commit }, payload) => {
+    await ProductMarket.addToCollection(payload);
   },
 
   // option choose post or campaign --- // 0 - Post | 1 - Campaign
@@ -163,9 +172,6 @@ const actions = {
   // get products by category
   getProductsByCategory: async ({ commit }, payload) => {
     const resData = await ProductMarket.loadProductsByCategory(payload);
-
-    console.log( resData );
-
     commit("setProductsByCategory", resData.data.data);
   }
 };

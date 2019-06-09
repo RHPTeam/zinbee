@@ -18,7 +18,7 @@
                 width="18"
                 viewBox="0 0 18 18"
                 class="_2CX5O"
-                style="vertical-align:middle"
+                style="vertical-align:middle;margin-top: -4px"
               >
                 <g class="QDdL6" fill="#333333">
                   <rect x="0" y="3" width="18" height="2"></rect>

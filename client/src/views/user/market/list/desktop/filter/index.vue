@@ -1,41 +1,88 @@
 <template>
   <div class="modal--wrapper filter--product mb_3">
     <div class="modal--content">
-      <div class="select">
-        <button class="items active">Best sellers</button>
-        <button class="items">Newest</button>
-        <button class="items">Trending</button>
-        <button class="items">
-          Price
-          <svg
-            fill="currentColor"
-            preserveAspectRatio="xMidYMid meet"
-            height="1em"
-            width="1em"
-            viewBox="0 0 11 17"
-            class="ogwO6 KJMn5"
-            style="vertical-align:middle"
-          >
-            <title>Sort order</title>
-            <g>
-              <polygon
-                fill="#FFFFFF"
-                points="4.1,17.3 -0.7,12.5 0.7,11.1 2.1,12.5 2.1,0 4.1,0"
-              ></polygon>
-              <polygon
-                fill="#B3B3B3"
-                points="8.3,16.8 6.3,16.8 6.3,-0.6 11.2,4.3 9.7,5.7 8.3,4.3"
-              ></polygon>
-            </g>
-          </svg>
-        </button>
+      <div class="select d_flex">
+        <div class="items active" @click="productsByBestSell">Best sellers</div>
+        <div class="items">Newest</div>
+        <!-- <button class="items">Trending</button> -->
+        <div class="items">
+          <div @click="showDropdownPrice">Price</div>
+          <ul v-if="isShowDropdownPrice">
+            <li class="item--price" @click="productsByPriceGrow">Tăng</li>
+            <li class="item--price" @click="productsByPriceLose">Giảm</li>
+          </ul>
+        </div>
       </div>
     </div>
+    <!-- <div>{{ productsInCategory }}</div> -->
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isShowDropdownPrice: false
+    };
+  },
+  computed: {
+    productsInCategory() {
+      return this.$store.getters.productsByCategory;
+    }
+  },
+  methods: {
+    showDropdownPrice() {
+      this.isShowDropdownPrice = true;
+    },
+    comparePrice(a, b) {
+      const genreA = parseInt(a.priceCents);
+      const genreB = parseInt(b.priceCents);
+
+      let comparison = 0;
+      if (genreA > genreB) {
+        comparison = 1;
+      } else if (genreA < genreB) {
+        comparison = -1;
+      }
+      return comparison;
+    },
+    compareNumberOfSales(a, b) {
+      const genreA = parseInt(a.numberOfSales);
+      const genreB = parseInt(b.numberOfSales);
+
+      let comparison = 0;
+      if (genreA > genreB) {
+        comparison = 1;
+      } else if (genreA < genreB) {
+        comparison = -1;
+      }
+      return comparison;
+    },
+    productsByBestSell() {
+      this.productsInCategory.sort(this.compareNumberOfSales).reverse();
+    },
+    productsByPriceGrow() {
+      this.productsInCategory.sort(this.comparePrice);
+      this.isShowDropdownPrice = false;
+    },
+    productsByPriceLose() {
+      this.productsInCategory.sort(this.comparePrice).reverse();
+      this.isShowDropdownPrice = false;
+    }
+  },
+  created() {
+    // this.$store.dispatch("getProductsByCategory");
+    this.$store.dispatch(
+      "getProductsByCategory",
+      this.$route.params.subCategory
+    );
+    // if(this.$route.params.subCategory.length > 0){
+
+    // } else {
+    //   return;
+    // }
+  }
+};
 </script>
 <style lang="scss" scoped>
 @import "./index.style";

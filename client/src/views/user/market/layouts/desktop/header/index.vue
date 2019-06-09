@@ -20,9 +20,7 @@
                 >
                   <icon-logo-icon-white />
                 </icon-base>
-                <div class="center--support ml_2">
-                  Zinbee Store
-                </div>
+                <div class="center--support ml_2">Zinbee Store</div>
               </div>
             </router-link>
           </div>
@@ -137,9 +135,9 @@
                 v-else
                 class="avatar--wrap avatar--default position_relative d_block"
               >
-                <span class="position_absolute">
-                  {{ userMember.name | getFirstLetter }}
-                </span>
+                <span class="position_absolute">{{
+                  userMember.name | getFirstLetter
+                }}</span>
               </div>
             </div>
             <span class="profile--name ml_2 mr_2">{{ userMember.name }}</span>
@@ -175,19 +173,16 @@
                   v-else
                   class="avatar--wrap avatar--default position_relative d_block"
                 >
-                  <span class="position_absolute">
-                    {{ userMember.name | getFirstLetter }}
-                  </span>
+                  <span class="position_absolute">{{
+                    userMember.name | getFirstLetter
+                  }}</span>
                 </div>
                 <div class="ml_2">
                   <h4 class="mb_0">{{ userMember.name }}</h4>
                   <p class="mb_0">{{ userMember.email }}</p>
                 </div>
               </div>
-              <div
-                class="dropdown--item"
-                @click="goToProfileSetting"
-              >
+              <div class="dropdown--item" @click="goToProfileSetting">
                 <icon-base
                   icon-name="account"
                   width="20"

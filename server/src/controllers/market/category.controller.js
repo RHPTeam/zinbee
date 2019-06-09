@@ -1,4 +1,5 @@
 const MarketCategory = require( "../../models/market/Category.model" );
+const MarketProduct = require( "../../models/market/Product.model" );
 
 let getNestedChildren = ( arr, parent ) => {
   if ( arr.length > 0 ) {
@@ -115,6 +116,7 @@ module.exports = {
       await category.save();
     } ) );
 
+    await MarketProduct.deleteMany( { "_category": query._id } );
     await categoryInfo.remove();
 
     res.status( 200 ).json( { "status": "success", "data": null } );

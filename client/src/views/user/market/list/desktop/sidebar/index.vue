@@ -10,14 +10,13 @@
         </div>
       </div>
       <ul class="list_group list--group pl_0">
-        <li
+        <!--  <li
           class="list_group_item list--group-item d_flex align_items_center justify_content_between py_1"
-          v-for="(category, index) in categories"
+          v-for="(category, index) in categoryChild"
           :key="index"
         >
           <div class="category--name">{{ category.name }}</div>
-          <div class="category--total">{{ category.total }}</div>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
@@ -27,21 +26,35 @@
 export default {
   data() {
     return {
-      categories: [
-        { name: "Ăn uống", total: 15 },
-        { name: "Mỹ phẩm", total: 10001 },
-        { name: "Du lịch", total: 152472 }
-      ],
+      categories: [],
       isShowFilter: false
     };
   },
-  computed: {},
+  computed: {
+    // categoryChild() {
+    //   this.$store.getters.allCategory.map(item => {
+    //     if (item.level > 0) {
+    //       this.categories.push(item);
+    //     }
+    //   });
+    //   return this.categories;
+    // }
+  },
   methods: {
     closeFilterSidebar() {
       this.isShowFilter = true;
+    },
+    chooseCategory(category) {
+      this.$store.dispatch("currentParentMarketCategory", category);
     }
   },
-  created() {}
+  created() {
+    if (this.categoryChild.length > 0) {
+      return;
+    } else {
+      this.$store.dispatch("getcategories");
+    }
+  }
 };
 </script>
 
