@@ -50,7 +50,10 @@
                     @click="showDetailPopup(item)"
                   ></div>
                 </div>
-                <div class="info pr_0 c_lg_6 c_md_12 c_xl_6" @click="showDetailPopup(item)">
+                <div
+                  class="info pr_0 c_lg_6 c_md_12 c_xl_6"
+                  @click="showDetailPopup(item)"
+                >
                   <div class="title">
                     {{ item.name }}
                   </div>
@@ -61,7 +64,9 @@
                     </span>-->
                     {{ item._creator.name }}
                   </div>
-                  <div class="description mb_1">{{ item.description.slice(0, 120) }}</div>
+                  <div class="description mb_1">
+                    {{ item.description.slice(0, 120) }}
+                  </div>
                   <div class="attribute">
                     <ul class="m_0 p_0">
                       <li
@@ -90,7 +95,10 @@
             <div class="c_md_3 right py_0 pr_0 pl_3">
               <div class="top"></div>
               <div class="right--item content text_center mt_1">
-                <div class="price font_weight_bold" v-if="item.priceCents && item.priceCents.length > 0">
+                <div
+                  class="price font_weight_bold"
+                  v-if="item.priceCents && item.priceCents.length > 0"
+                >
                   {{ item.priceCents }} ₫
                 </div>
                 <div class="font_weight_bold" v-else>Miễn phí</div>
@@ -188,7 +196,7 @@ export default {
       });
       return nameChildren;
     },
-    status(){
+    status() {
       return this.$store.getters.marketStatus;
     }
   },

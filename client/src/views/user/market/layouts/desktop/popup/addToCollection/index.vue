@@ -1,7 +1,10 @@
 <template>
   <div class="modal--popup-add" :data-theme="currentTheme">
     <div class="modal--content position_relative">
-      <div class="content d_flex flex_column align_items_center justify_content_center p_3" v-click-outside="closeAddToCollectionPopup">
+      <div
+        class="content d_flex flex_column align_items_center justify_content_center p_3"
+        v-click-outside="closeAddToCollectionPopup"
+      >
         <div class="title font_weight_bold mb_3">
           <icon-base
             class="icon--user mr_1"
@@ -9,7 +12,7 @@
             height="100"
             viewBox="0 0 52 52"
           >
-            <icon-success/>
+            <icon-success />
           </icon-base>
         </div>
         <h3 class="m_0">Thành công</h3>
@@ -70,8 +73,8 @@ export default {
       }
     }
     .close {
-      border-radius: .625rem;
-      padding: .35rem 2rem;
+      border-radius: 0.625rem;
+      padding: 0.35rem 2rem;
     }
   }
 }

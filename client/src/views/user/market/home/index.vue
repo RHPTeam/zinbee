@@ -74,9 +74,7 @@
                   @click="showDetailPopup(item)"
                 ></div>
                 <div class="icon position_absolute">
-                  <div
-                    class="uncheck d_none"
-                  >
+                  <div class="uncheck d_none">
                     <icon-base
                       icon-name="logo"
                       width="24"
@@ -86,9 +84,7 @@
                       <icon-heart />
                     </icon-base>
                   </div>
-                  <div
-                    class="check"
-                  >
+                  <div class="check">
                     <icon-base
                       icon-name="logo"
                       width="24"
