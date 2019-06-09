@@ -28,7 +28,8 @@ const state = {
       name: ""
     }
   },
-  productsByCategory: []
+  productsByCategory: [],
+  productsSearch: []
 };
 const getters = {
   allProduct: state => state.allProduct,
@@ -36,7 +37,8 @@ const getters = {
   newMarketProducts: state => state.allProduct.reverse().slice(0, 6),
   product: state => state.product,
   nodeUpdate: state => state.nodeUpdate,
-  productsByCategory: state => state.productsByCategory
+  productsByCategory: state => state.productsByCategory,
+  productsSearch: state => state.productsSearch
 };
 const mutations = {
   // all product
@@ -76,6 +78,11 @@ const mutations = {
   // set products by category
   setProductsByCategory: (state, payload) => {
     state.productsByCategory = payload;
+  },
+
+  // setSearchProducts 
+  setSearchProducts: (state, payload) => {
+    state.productsSearch = payload;
   }
 };
 const actions = {
@@ -173,6 +180,12 @@ const actions = {
   getProductsByCategory: async ({ commit }, payload) => {
     const resData = await ProductMarket.loadProductsByCategory(payload);
     commit("setProductsByCategory", resData.data.data);
+  },
+
+  // search products
+  searchProducts: async ({ commit }, payload) => {
+    const resSearch = await ProductMarket.searchProducts(payload);
+    commit("setSearchProducts", resSearch.data.data);
   }
 };
 
