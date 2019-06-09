@@ -80,7 +80,7 @@ const mutations = {
     state.productsByCategory = payload;
   },
 
-  // setSearchProducts 
+  // setSearchProducts
   setSearchProducts: (state, payload) => {
     state.productsSearch = payload;
   }

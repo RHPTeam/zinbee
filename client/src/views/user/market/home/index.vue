@@ -23,7 +23,12 @@
               <icon-input-search />
             </icon-base>
           </div>
-          <input class="search--input" type="text" placeholder="Tìm Kiếm..." v-model="keywordSearch"/>
+          <input
+            class="search--input"
+            type="text"
+            placeholder="Tìm Kiếm..."
+            v-model="keywordSearch"
+          />
         </div>
       </div>
     </div>

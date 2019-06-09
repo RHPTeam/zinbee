@@ -2,10 +2,27 @@
   <div class="modal--wrapper filter--product mb_3">
     <div class="modal--content">
       <div class="select d_flex">
-        <div class="items" :class="isActiveBestSeller === true ? 'active' : ''" @click="productsByBestSell">Best sellers</div>
-        <div class="items" @click="productsNewest" :class="isActiveNewest === true ? 'active' : ''">Newest</div>
+        <div
+          class="items"
+          :class="isActiveBestSeller === true ? 'active' : ''"
+          @click="productsByBestSell"
+        >
+          Best sellers
+        </div>
+        <div
+          class="items"
+          @click="productsNewest"
+          :class="isActiveNewest === true ? 'active' : ''"
+        >
+          Newest
+        </div>
         <!-- <button class="items">Trending</button> -->
-        <div class="items" :class="isActivePrice === true ? 'active' : ''" @click="showDropdownPrice" v-click-outside="closeDropdownPrice">
+        <div
+          class="items"
+          :class="isActivePrice === true ? 'active' : ''"
+          @click="showDropdownPrice"
+          v-click-outside="closeDropdownPrice"
+        >
           <div>Price</div>
           <ul v-if="isShowDropdownPrice === true">
             <li class="item--price" @click="productsByPriceGrow">Tăng</li>
@@ -24,7 +41,7 @@ export default {
       isShowDropdownPrice: false,
       isActiveBestSeller: false,
       isActiveNewest: false,
-      isActivePrice: false,
+      isActivePrice: false
     };
   },
   computed: {

@@ -10,7 +10,7 @@
         </div>
       </div>
       <ul class="list_group list--group pl_0">
-         <li
+        <li
           class="list_group_item list--group-item d_flex align_items_center justify_content_between py_1 category--name"
           v-for="(category, index) in currentParentMarketCategory.children"
           :key="index"
@@ -31,7 +31,7 @@ export default {
       isShowFilter: false
     };
   },
-  computed: {    
+  computed: {
     currentParentMarketCategory() {
       return this.$store.getters.currentParentMarketCategory;
     }
@@ -62,10 +62,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.category--name{
+.category--name {
   cursor: pointer;
   transition: 0.4s;
-  &:hover{
+  &:hover {
     padding-left: 5px;
     color: #fff;
     background: #ffb94a;

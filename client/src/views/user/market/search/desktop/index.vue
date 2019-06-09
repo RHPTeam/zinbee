@@ -9,7 +9,9 @@
           class="filter--menu d_flex align_items_center"
           @click="changeFilterSidebarList"
         >
-          <div v-if="showMarketListSidebar === true" class="close--sidebar">x</div>
+          <div v-if="showMarketListSidebar === true" class="close--sidebar">
+            x
+          </div>
           <div class="icon pr_1" v-else>
             <div class="icon--menu">
               <svg
@@ -119,7 +121,7 @@ export default {
 .sidebar--active {
   display: none;
 }
-.close--sidebar{
+.close--sidebar {
   color: #999;
   font-weight: bold;
   font-size: 17px;
