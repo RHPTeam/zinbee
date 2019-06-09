@@ -34,5 +34,12 @@ export default {
   // get products by category
   loadProductsByCategory(categoryId) {
     return Api().get(`market/products/${categoryId}/products`);
+  },
+
+  // search products
+  searchProducts(name) {
+    return Api().post(
+      `/market/products/search?keyword=${name}&_size=12&_page=1`
+    );
   }
 };

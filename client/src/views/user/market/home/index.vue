@@ -23,7 +23,12 @@
               <icon-input-search />
             </icon-base>
           </div>
-          <input class="search--input" type="text" placeholder="Tìm Kiếm..." />
+          <input
+            class="search--input"
+            type="text"
+            placeholder="Tìm Kiếm..."
+            v-model="keywordSearch"
+          />
         </div>
       </div>
     </div>
@@ -218,7 +223,8 @@ export default {
       srcDefault2: require("@/assets/images/market/right_join.svg"),
       srcAutomatic: require("@/assets/images/market/automatic.svg"),
       srcExamlePost: require("@/assets/images/market/example_post.svg"),
-      srcSimpleInterface: require("@/assets/images/market/simple_interface.svg")
+      srcSimpleInterface: require("@/assets/images/market/simple_interface.svg"),
+      keywordSearch: ""
     };
   },
   computed: {

@@ -4,14 +4,22 @@ const state = {
   allCategory: [],
   allMarketCategoriesTree: [],
   currentParentMarketCategory: {},
-  currentChildrenMarketCategory: {}
+  currentChildrenMarketCategory: {},
+  categoriesChild: []
 };
 
 const getters = {
   allCategory: state => state.allCategory,
   allMarketCategoriesTree: state => state.allMarketCategoriesTree,
   currentParentMarketCategory: state => state.currentParentMarketCategory,
-  currentChildrenMarketCategory: state => state.currentChildrenMarketCategory
+  currentChildrenMarketCategory: state => state.currentChildrenMarketCategory,
+  categoriesChild: state => {
+    state.allCategory.map(item => {
+      if (item.level > 0) {
+        state.categoriesChild.push(item);
+      }
+    });
+  }
 };
 
 const mutations = {
@@ -26,6 +34,9 @@ const mutations = {
   },
   currentChildrenMarketCategory: (state, payload) => {
     state.currentChildrenMarketCategory = payload;
+  },
+  setProductsChild: (state, payload) => {
+    state.categoriesChild = payload;
   }
 };
 
@@ -75,6 +86,11 @@ const actions = {
 
     const rsGetAllCategory = await CategoryMarket.getAll();
     commit("setAllCategory", rsGetAllCategory.data.data);
+  },
+
+  // get products level 1
+  getCategoryChild: async ({ commit }) => {
+    commit("setProductsChild");
   }
 };
 
