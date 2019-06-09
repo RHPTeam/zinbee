@@ -152,6 +152,9 @@ export default {
     // },
     productsInCategory() {
       return this.$store.getters.productsByCategory;
+    },
+    status() {
+      return this.$store.getters.marketStatus;
     }
   },
   methods: {
@@ -167,9 +170,11 @@ export default {
       this.productSelected = val;
       this.isShowDetailPopup = true;
     },
-    addToCollection(value) {
-      this.$store.dispatch("addToCollection", value._id);
-      this.isShowAddToCollectionPopup = true;
+    async addToCollection(value) {
+      await this.$store.dispatch("addToCollection", value._id);
+      if (this.status === "success") {
+        this.isShowAddToCollectionPopup = true;
+      }
     }
     // productsByPrice(){
     //   this.productsInCategory.sort(this.compare);

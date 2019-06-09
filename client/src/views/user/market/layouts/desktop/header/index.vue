@@ -74,10 +74,7 @@
                     </icon-base>
                     <div class="pt_1">Zin Post</div>
                   </div>
-                  <div
-                    class="zin--post zin-chat item c_4"
-                    @click="gotoHomeChat"
-                  >
+                  <div class="zin--post zin-chat item c_4">
                     <icon-base
                       icon-name="bell"
                       width="50px"
@@ -118,50 +115,21 @@
           <!-- End: More Options -->
 
           <!-- Start: User Info -->
-          <div
-            class="profile position_relative d_flex justify_content_end align_items_center"
-            @click="showProfileDropdown"
-            v-click-outside="closeProfileDropdown"
-          >
-            <div class="profile--image">
-              <div
-                v-if="userMember.imageAvatar"
-                class="avatar--wrap avatar--img position_relative d_block"
-                :style="{
-                  backgroundImage: 'url(' + userMember.imageAvatar + ')'
-                }"
-              ></div>
-              <div
-                v-else
-                class="avatar--wrap avatar--default position_relative d_block"
-              >
-                <span class="position_absolute">{{
-                  userMember.name | getFirstLetter
-                }}</span>
-              </div>
-            </div>
-            <span class="profile--name ml_2 mr_2">{{ userMember.name }}</span>
-            <div class="profile--icon">
-              <icon-base
-                icon-name="arrow-down"
-                width="10"
-                height="10"
-                viewBox="0 0 130 130"
-              >
-                <icon-arrow-down />
-              </icon-base>
-            </div>
-            <!-- Start: Dropdown Menu -->
+          <div>
             <div
-              class="dropdown--menu dropdown--menu-right user--dd flipInY animated"
-              :class="{ show: isShowProfileDropdown }"
+              class="signin"
+              v-if="userMember && userMember.length === 0"
+              @click="redirectToSignin"
             >
-              <span class="with--arrow">
-                <span class="bg-orange"></span>
-              </span>
-              <div
-                class="d_flex align_items_center py_2 px_3 bg-orange border--custom text_white mb_2"
-              >
+              Đăng nhập ngay
+            </div>
+            <div
+              v-else
+              class="profile position_relative d_flex justify_content_end align_items_center"
+              @click="showProfileDropdown"
+              v-click-outside="closeProfileDropdown"
+            >
+              <div class="profile--image">
                 <div
                   v-if="userMember.imageAvatar"
                   class="avatar--wrap avatar--img position_relative d_block"
@@ -177,38 +145,77 @@
                     userMember.name | getFirstLetter
                   }}</span>
                 </div>
-                <div class="ml_2">
-                  <h4 class="mb_0">{{ userMember.name }}</h4>
-                  <p class="mb_0">{{ userMember.email }}</p>
-                </div>
               </div>
-              <div class="dropdown--item" @click="goToProfileSetting">
+              <span class="profile--name ml_2 mr_2">{{ userMember.name }}</span>
+              <div class="profile--icon">
                 <icon-base
-                  icon-name="account"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
+                  icon-name="arrow-down"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 130 130"
                 >
-                  <icon-account /> </icon-base
-                >Thiết lập tài khoản
+                  <icon-arrow-down />
+                </icon-base>
               </div>
-              <div class="dropdown--divider"></div>
-              <a
-                class="dropdown--item"
-                href="javascript:void(0)"
-                @click="logOut"
+              <!-- Start: Dropdown Menu -->
+              <div
+                class="dropdown--menu dropdown--menu-right user--dd flipInY animated"
+                :class="{ show: isShowProfileDropdown }"
               >
-                <icon-base
-                  icon-name="logout"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
+                <span class="with--arrow">
+                  <span class="bg-orange"></span>
+                </span>
+                <div
+                  class="d_flex align_items_center py_2 px_3 bg-orange border--custom text_white mb_2"
                 >
-                  <icon-logout /> </icon-base
-                >Đăng xuất
-              </a>
+                  <div
+                    v-if="userMember.imageAvatar"
+                    class="avatar--wrap avatar--img position_relative d_block"
+                    :style="{
+                      backgroundImage: 'url(' + userMember.imageAvatar + ')'
+                    }"
+                  ></div>
+                  <div
+                    v-else
+                    class="avatar--wrap avatar--default position_relative d_block"
+                  >
+                    <span class="position_absolute">{{
+                      userMember.name | getFirstLetter
+                    }}</span>
+                  </div>
+                  <div class="ml_2">
+                    <h4 class="mb_0">{{ userMember.name }}</h4>
+                    <p class="mb_0">{{ userMember.email }}</p>
+                  </div>
+                </div>
+                <div class="dropdown--item" @click="goToProfileSetting">
+                  <icon-base
+                    icon-name="account"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <icon-account /> </icon-base
+                  >Thiết lập tài khoản
+                </div>
+                <div class="dropdown--divider"></div>
+                <a
+                  class="dropdown--item"
+                  href="javascript:void(0)"
+                  @click="logOut"
+                >
+                  <icon-base
+                    icon-name="logout"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                  >
+                    <icon-logout /> </icon-base
+                  >Đăng xuất
+                </a>
+              </div>
+              <!-- End: Dropdown Menu -->
             </div>
-            <!-- End: Dropdown Menu -->
           </div>
           <!-- End: User Info -->
         </div>

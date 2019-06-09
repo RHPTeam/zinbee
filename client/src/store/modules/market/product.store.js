@@ -4,6 +4,8 @@ const state = {
   allProduct: [],
   nodeUpdate: [],
   marketCategoryProducts: [],
+  marketStatus: "",
+  marketRequestStatus: "",
   product: {
     _id: "",
     name: "",
@@ -34,6 +36,8 @@ const state = {
 const getters = {
   allProduct: state => state.allProduct,
   marketCategoryProducts: state => state.marketCategoryProducts,
+  marketStatus: state => state.marketStatus,
+  marketRequestStatus: state => state.marketRequestStatus,
   newMarketProducts: state => state.allProduct.reverse().slice(0, 6),
   product: state => state.product,
   nodeUpdate: state => state.nodeUpdate,
@@ -41,6 +45,15 @@ const getters = {
   productsSearch: state => state.productsSearch
 };
 const mutations = {
+  market_request: state => {
+    state.marketRequestStatus = "loading";
+  },
+  market_success: (state, payload) => {
+    state.marketStatus = payload;
+  },
+  market_request_success: state => {
+    state.marketRequestStatus = "success";
+  },
   // all product
   setAllProduct: (state, payload) => {
     state.allProduct = payload;
@@ -168,7 +181,10 @@ const actions = {
   //addToCollection
   // eslint-disable-next-line no-unused-vars
   addToCollection: async ({ commit }, payload) => {
-    await ProductMarket.addToCollection(payload);
+    commit("market_request");
+    const result = await ProductMarket.addToCollection(payload);
+    commit("market_success", result.data.status);
+    commit("market_request_success");
   },
 
   // option choose post or campaign --- // 0 - Post | 1 - Campaign

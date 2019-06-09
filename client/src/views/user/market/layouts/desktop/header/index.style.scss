@@ -82,7 +82,7 @@
             // background: #ffb94a;
             // color: #fff;
           }
-          &.instagram, &.zalo{
+          &.instagram, &.zalo, &.zin-chat{
             &:hover{
               cursor: not-allowed;
             }
@@ -106,6 +106,15 @@
     color: $color-dark;
   }
 }
+
+.signin {
+  border: 1px solid #ffb94a;
+  border-radius: .5rem;
+  background-color: transparent;
+  cursor: pointer;
+  padding: .5rem 1rem;
+}
+
 .profile {
   cursor: pointer;
   color: #F7F7F7;

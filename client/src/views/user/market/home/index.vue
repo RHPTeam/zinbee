@@ -50,7 +50,7 @@
       <div class="tab d_flex justify_content_center py_3 mb_4">
         <div class="d_flex align_items_center">
           <button class="btn btn_outline_warning mr_3">Bài viết</button>
-          <button class="btn btn_outline_warning">Chiến dịch</button>
+          <button class="btn btn_outline_warning campaigns">Chiến dịch</button>
         </div>
       </div>
       <div class="popular">
@@ -109,13 +109,25 @@
                 </div>
                 <div class="info d_flex align_items_center">
                   <div class="left">
+                    <div
+                      class="price"
+                      v-if="item.priceCents && item.priceCents.length === 0"
+                    ></div>
                     <div class="price">
-                      {{ formatCurrency(item.priceCents) }} ₫
+                      <span v-if="item.priceCents && item.priceCents.length > 0"
+                        >{{ formatCurrency(item.priceCents) }} ₫</span
+                      >
+                      <span class="free" v-else>Miễn phí</span>
                     </div>
                     <div class="sales">{{ item.numberOfSales }} đã sử dụng</div>
                   </div>
                   <div class="right d_flex align_items_center ml_auto">
-                    <div class="action der_1">Thêm vào kho</div>
+                    <div
+                      class="action der_1"
+                      @click="addToCollection(item._id)"
+                    >
+                      Thêm vào kho
+                    </div>
                     <!--<div class="icon der_1">
                       <icon-base
                         icon-name="logo"
@@ -204,20 +216,27 @@
         :product="productSelected"
         @closePopup="isShowDetailPopup = $event"
       ></detail-popup>
+      <added-collection
+        v-if="isShowAddToCollectionPopup === true"
+        @closePopupAddToCollection="isShowAddToCollectionPopup = $event"
+      ></added-collection>
     </transition>
   </div>
 </template>
 
 <script>
 import DetailPopup from "../layouts/desktop/popup/detail";
+import AddedCollection from "../layouts/desktop/popup/addToCollection";
 
 export default {
   components: {
+    AddedCollection,
     DetailPopup
   },
   data() {
     return {
       isShowDetailPopup: false,
+      isShowAddToCollectionPopup: false,
       productSelected: {},
       srcDefault1: require("@/assets/images/market/left_join.svg"),
       srcDefault2: require("@/assets/images/market/right_join.svg"),
@@ -230,12 +249,21 @@ export default {
   computed: {
     newMarketProducts() {
       return this.$store.getters.newMarketProducts;
+    },
+    status() {
+      return this.$store.getters.marketStatus;
     }
   },
   async created() {
     await this.$store.dispatch("getProducts");
   },
   methods: {
+    async addToCollection(value) {
+      await this.$store.dispatch("addToCollection", value);
+      if (this.status === "success") {
+        this.isShowAddToCollectionPopup = true;
+      }
+    },
     dateFormat(date) {
       const dateTime = new Date(date),
         day = String(dateTime.getDate()).padStart(2, 0),

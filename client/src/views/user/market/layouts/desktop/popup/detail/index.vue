@@ -42,7 +42,12 @@
                 </div>
               </div>
               <div class="right--btn">
-                <div class="btn btn_outline_info">Thêm vào kho</div>
+                <div
+                  class="btn btn_outline_info"
+                  @click="addToCollection(product._id)"
+                >
+                  Thêm vào kho
+                </div>
               </div>
             </div>
           </div>
@@ -74,14 +79,25 @@
 export default {
   props: ["product"],
   data() {
-    return {};
+    return {
+      isShowAddToCollectionPopup: false
+    };
   },
   computed: {
     currentTheme() {
       return this.$store.getters.themeName;
+    },
+    status() {
+      return this.$store.getters.marketStatus;
     }
   },
   methods: {
+    async addToCollection(value) {
+      await this.$store.dispatch("addToCollection", value);
+      if (this.status === "success") {
+        this.closePopup();
+      }
+    },
     closePopup() {
       this.$emit("closePopup", false);
     },
