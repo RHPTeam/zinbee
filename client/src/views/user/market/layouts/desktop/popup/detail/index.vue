@@ -1,7 +1,7 @@
 <template>
   <div class="modal--wrapper" :data-theme="currentTheme">
     <div class="modal--dialog d_flex justify_content_center align_items_center">
-      <div class="modal--content px_4 pb_4 pt_3">
+      <div class="modal--content px_4 pb_4 pt_3" v-click-outside="closePopup">
         <!-- Start: Modal Header -->
         <div class="modal--header position_relative">
           <div class="btn--close position_absolute" @click="closePopup">

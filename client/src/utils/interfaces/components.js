@@ -97,6 +97,7 @@ Vue.component("IconSecurity", () => import("@/components/icons/IconSecurity"));
 Vue.component("IconSelectHeart", () =>
   import("@/components/icons/IconSelectHeart")
 );
+Vue.component("IconSuccess", () => import("@/components/icons/IconSuccess"));
 Vue.component("IconSortDown", () => import("@/components/icons/IconSortDown"));
 Vue.component("IconSmile", () => import("@/components/icons/IconSmile"));
 Vue.component("IconStop", () => import("@/components/icons/IconStop"));

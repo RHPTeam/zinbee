@@ -13,7 +13,10 @@
       </div>
       <div class=" d_flex justify_content_center p_4">
         <div class="form--search d_flex align_content_center position_relative">
-          <div class="icon--search position_absolute btn">
+          <div
+            class="icon--search position_absolute btn"
+            @click="searchKeyword"
+          >
             <icon-base
               icon-name="logo"
               width="24"
@@ -28,6 +31,7 @@
             type="text"
             placeholder="Tìm Kiếm..."
             v-model="keywordSearch"
+            @keyup.enter="searchKeyword"
           />
         </div>
       </div>
@@ -70,7 +74,9 @@
                   @click="showDetailPopup(item)"
                 ></div>
                 <div class="icon position_absolute">
-                  <div class="uncheck d_none">
+                  <div
+                    class="uncheck d_none"
+                  >
                     <icon-base
                       icon-name="logo"
                       width="24"
@@ -80,7 +86,9 @@
                       <icon-heart />
                     </icon-base>
                   </div>
-                  <div class="check">
+                  <div
+                    class="check"
+                  >
                     <icon-base
                       icon-name="logo"
                       width="24"
@@ -283,6 +291,15 @@ export default {
       const routeData = this.$router.resolve({ name: "user_signup" });
 
       window.open(routeData.href, "_blank");
+    },
+    searchKeyword() {
+      this.$store.dispatch("searchProducts", this.keywordSearch);
+      this.$router.push({
+        name: "market_search",
+        params: {
+          keyword: this.keywordSearch
+        }
+      });
     }
   }
 };

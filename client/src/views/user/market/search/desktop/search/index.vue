@@ -2,8 +2,17 @@
   <div class="ct m_auto">
     <div class="search py_5">
       <div class="input_group d_flex m_auto">
-        <input type="text" class="input--search" placeholder="Tìm kiếm" />
-        <div class="btn--search d_flex justify_content_center">
+        <input
+          type="text"
+          class="input--search"
+          placeholder="Tìm kiếm"
+          v-model="keywordSearch"
+          @keyup.enter="searchKeyword"
+        />
+        <div
+          class="btn--search d_flex justify_content_center"
+          @click="searchKeyword"
+        >
           <icon-base
             class="icon--search"
             height="24px"
@@ -19,7 +28,25 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      keywordSearch: ""
+    };
+  },
+  methods: {
+    searchKeyword() {
+      this.$store.dispatch("searchProducts", this.keywordSearch);
+      this.$router.push({
+        name: "market_search",
+        params: {
+          keyword: this.keywordSearch
+        }
+      });
+    }
+  },
+  created() {}
+};
 </script>
 
 <style scoped lang="scss">

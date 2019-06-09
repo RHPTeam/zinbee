@@ -2,17 +2,27 @@
   <div class="list--main" :data-theme="currentTheme">
     <!-- START: Selected filters -->
     <div class="d_flex selected-filters align_items_center mb_4 mt_2">
-      <div class="total--product"><b>1234</b> items in</div>
+      <div class="total--product">
+        <b>{{ productsInCategory.length }}</b> items in
+      </div>
       <div class="d_flex pl_2 pr_3">
         <div class="selected">
           <div class="items">
-            <span class="name">All post</span>
+            <router-link class="name all--post" :to="{ name: 'market_home' }"
+              >All post</router-link
+            >
             <span class="px_1 cut">/</span>
           </div>
         </div>
         <div class="selected">
           <div class="items">
-            <span class="name">Post</span>
+            <span class="name">{{ currentParentMarketCategory }}</span>
+            <span class="px_1 cut">/</span>
+          </div>
+        </div>
+        <div class="selected">
+          <div class="items">
+            <span class="name">{{ currentChildrenMarketCategory }}</span>
             <span class="px_1 cut">/</span>
           </div>
         </div>
@@ -40,8 +50,8 @@
                     @click="showDetailPopup(item)"
                   ></div>
                 </div>
-                <div class="info pr_0 c_lg_6 c_md_12 c_xl_6">
-                  <div class="title" @click="showDetailPopup(item)">
+                <div class="info pr_0 c_lg_6 c_md_12 c_xl_6" @click="showDetailPopup(item)">
+                  <div class="title">
                     {{ item.name }}
                   </div>
                   <div class="editor mb_2">
@@ -51,7 +61,7 @@
                     </span>-->
                     {{ item._creator.name }}
                   </div>
-                  <div class="description mb_1">{{ item.description }}</div>
+                  <div class="description mb_1">{{ item.description.slice(0, 120) }}</div>
                   <div class="attribute">
                     <ul class="m_0 p_0">
                       <li
@@ -80,9 +90,10 @@
             <div class="c_md_3 right py_0 pr_0 pl_3">
               <div class="top"></div>
               <div class="right--item content text_center mt_1">
-                <div class="price font_weight_bold">
+                <div class="price font_weight_bold" v-if="item.priceCents && item.priceCents.length > 0">
                   {{ item.priceCents }} ₫
                 </div>
+                <div class="font_weight_bold" v-else>Miễn phí</div>
                 <div
                   class="sale d_flex align_items_center justify_content_center mt_1"
                 >
@@ -112,6 +123,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="text_center py_3 card" v-if="productsInCategory.length === 0">
+      Khong co san pham nao
     </div>
     <!-- *************POPUP************* -->
     <transition name="popup">
@@ -153,7 +167,28 @@ export default {
     productsInCategory() {
       return this.$store.getters.productsByCategory;
     },
-    status() {
+    currentParentMarketCategory() {
+      let nameParent = "";
+      let idParent = this.$route.params.categoryParent;
+      let categoryParent = this.$store.getters.currentParentMarketCategory;
+      if (categoryParent._id === idParent) {
+        nameParent = categoryParent.name;
+      }
+      return nameParent;
+    },
+    currentChildrenMarketCategory() {
+      let nameChildren = "";
+      let idChildren = this.$route.params.subCategory;
+      let categoryChildren = this.$store.getters.currentParentMarketCategory
+        .children;
+      categoryChildren.map(item => {
+        if (item._id === idChildren) {
+          nameChildren = item.name;
+        }
+      });
+      return nameChildren;
+    },
+    status(){
       return this.$store.getters.marketStatus;
     }
   },
@@ -176,24 +211,10 @@ export default {
         this.isShowAddToCollectionPopup = true;
       }
     }
-    // productsByPrice(){
-    //   this.productsInCategory.sort(this.compare);
-    // },
-    // compare(a, b) {
-    //   const genreA = a.priceCents;
-    //   const genreB = b.priceCents;
-
-    //   let comparison = 0;
-    //   if (genreA > genreB) {
-    //     comparison = 1;
-    //   } else if (genreA < genreB) {
-    //     comparison = -1;
-    //   }
-    //   return comparison;
-    // }
   },
   created() {
-    // this.$store.dispatch("getProducts");
+    // this.$store.dispatch("currentParentMarketCategory");
+    // this.$store.dispatch("currentChildrenMarketCategory");
     if (this.$route.params.subCategory.length > 0) {
       this.$store.dispatch(
         "getProductsByCategory",

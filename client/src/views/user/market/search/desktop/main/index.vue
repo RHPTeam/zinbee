@@ -1,8 +1,8 @@
 <template>
   <div class="list--main" :data-theme="currentTheme">
     <!-- START: Selected filters -->
-    <div class="d_flex selected-filters align_items_center mb_4 mt_2">
-      <div class="total--product"><b>1234</b> items in</div>
+    <!-- <div class="d_flex selected-filters align_items_center mb_4 mt_2">
+      <div class="total--product"><b>{{ productsSearch.results.length }}</b> items in</div>
       <div class="d_flex pl_2 pr_3">
         <div class="selected">
           <div class="items">
@@ -18,12 +18,12 @@
         </div>
       </div>
       <div class="clear">Clear all</div>
-    </div>
+    </div> -->
     <!-- End Selected filters -->
     <div class="r list--group m_0">
       <div
         class="c_12 list--group-item mb_3 p_0"
-        v-for="(item, index) in productsInCategory"
+        v-for="(item, index) in productsSearch.results"
         :key="index"
       >
         <div class="card">
@@ -46,12 +46,11 @@
                   </div>
                   <div class="editor mb_2">
                     <span class="by">Bởi</span>
-                    <!-- <span class="avatar--user mr_1">
-                      <img src="https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg" alt="">
-                    </span>-->
                     {{ item._creator.name }}
                   </div>
-                  <div class="description mb_1">{{ item.description }}</div>
+                  <div class="description mb_1">
+                    {{ item.description.slice(0, 120) }}
+                  </div>
                   <div class="attribute">
                     <ul class="m_0 p_0">
                       <li
@@ -80,9 +79,13 @@
             <div class="c_md_3 right py_0 pr_0 pl_3">
               <div class="top"></div>
               <div class="right--item content text_center mt_1">
-                <div class="price font_weight_bold">
+                <div
+                  class="price font_weight_bold"
+                  v-if="item.priceCents && item.priceCents.length > 0"
+                >
                   {{ item.priceCents }} ₫
                 </div>
+                <div class="font_weight_bold" v-else>Miễn phí</div>
                 <div
                   class="sale d_flex align_items_center justify_content_center mt_1"
                 >
@@ -103,7 +106,7 @@
               <div class="right--item bottom text_center">
                 <div
                   class="btn btn_outline_info"
-                  @click="addToCollection(item)"
+                  @click="addToCollection(item._id)"
                 >
                   Thêm vào kho
                 </div>
@@ -112,6 +115,12 @@
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="text_center py_3 card"
+      v-if="productsSearch.results && productsSearch.results.length === 0"
+    >
+      Khong co ket qua tim kiem
     </div>
     <!-- *************POPUP************* -->
     <transition name="popup">
@@ -147,14 +156,20 @@ export default {
     currentTheme() {
       return this.$store.getters.themeName;
     },
-    // products() {
-    //   return this.$store.getters.allProduct;
-    // },
-    productsInCategory() {
-      return this.$store.getters.productsByCategory;
+    productsSearch() {
+      return this.$store.getters.productsSearch;
+    },
+    status() {
+      return this.$store.getters.marketStatus;
     }
   },
   methods: {
+    async addToCollection(value) {
+      await this.$store.dispatch("addToCollection", value);
+      if (this.status === "success") {
+        this.isShowAddToCollectionPopup = true;
+      }
+    },
     dateFormat(date) {
       const dateTime = new Date(date),
         day = String(dateTime.getDate()).padStart(2, 0),
@@ -166,34 +181,11 @@ export default {
     showDetailPopup(val) {
       this.productSelected = val;
       this.isShowDetailPopup = true;
-    },
-    addToCollection(value) {
-      this.$store.dispatch("addToCollection", value._id);
-      this.isShowAddToCollectionPopup = true;
     }
-    // productsByPrice(){
-    //   this.productsInCategory.sort(this.compare);
-    // },
-    // compare(a, b) {
-    //   const genreA = a.priceCents;
-    //   const genreB = b.priceCents;
-
-    //   let comparison = 0;
-    //   if (genreA > genreB) {
-    //     comparison = 1;
-    //   } else if (genreA < genreB) {
-    //     comparison = -1;
-    //   }
-    //   return comparison;
-    // }
   },
   created() {
-    // this.$store.dispatch("getProducts");
-    if (this.$route.params.subCategory.length > 0) {
-      this.$store.dispatch(
-        "getProductsByCategory",
-        this.$route.params.subCategory
-      );
+    if (this.$route.params.keyword) {
+      this.$store.dispatch("searchProducts", this.$route.params.keyword);
     } else {
       return;
     }
