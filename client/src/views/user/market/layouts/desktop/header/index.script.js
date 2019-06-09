@@ -38,7 +38,7 @@ export default {
   methods: {
     async logOut() {
       await this.$store.dispatch("logOut");
-      window.location.href = `${process.env.VUE_APP_PARENT_URL}/#/redirect`;
+      this.$router.go({ name: "redirect" });
     },
     chooseCategory(category) {
       this.$store.dispatch("currentParentMarketCategory", category);
@@ -69,6 +69,11 @@ export default {
 
       window.open(routeData.href, "_blank");
     },
+    redirectToSignin() {
+      const routeData = this.$router.resolve({ name: "user_signin" });
+
+      window.open(routeData.href, "_blank");
+    },
     showOptionsMoreDropdown() {
       this.isShowOptionsMoreDropdown = true;
     },
@@ -76,15 +81,10 @@ export default {
       this.isShowOptionsMoreDropdown = false;
     },
     gotoHomePost() {
-      if (this.allAccountFb.length === 0) {
-        const routeData = this.$router.resolve({ name: "post_fbaccount" });
-
-        window.open(routeData.href, "_blank");
-      } else {
-        const routeData = this.$router.resolve("/post");
-
-        window.open(routeData.href, "_blank");
-      }
+      window.location.href = `${CookieFunction.getCookie("_sub").replace(
+        "/welcome",
+        ""
+      )}/post`;
       this.isShowOptionsMoreDropdown = false;
     },
     gotoHomeChat() {

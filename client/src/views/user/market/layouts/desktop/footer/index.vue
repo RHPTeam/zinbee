@@ -60,7 +60,7 @@
           <h4 class="heading pb_3">
             <b>Liên hệ </b>
           </h4>
-          <p>Đăng ký mail để nhận thông tin mới nhất:</p>
+          <p class="m_0">Đăng ký mail để nhận thông tin mới nhất:</p>
         </div>
         <div class="component--form pb_4">
           <form class="d_flex justify_content_between">
@@ -72,20 +72,20 @@
             <span class="component--form-button">Subscribe</span>
           </form>
         </div>
-        <div class="imkt--social d_flex justify_content_end">
-          <div class="imkt--social-heading mt_1">
-            Các trang Social
+        <div class="imkt--social d_flex align_items_center justify_content_end">
+          <div class="imkt--social-heading mt_1 mr_3">
+            <span>Các trang Social</span>
           </div>
           <div class="imkt--social-button">
-            <ul class="d_flex">
+            <ul class="d_flex pl_0 mb_0">
               <li>
                 <a href="http://facebook.com" target="_blank">
                   <div class="mr_2">
                     <icon-base
                       class="mt_1"
                       icon-name="menu"
-                      width="24"
-                      height="24"
+                      width="30"
+                      height="30"
                       viewBox="0 0 500 500"
                     >
                       <icon-facebook-cirle />
@@ -99,8 +99,8 @@
                     <icon-base
                       class="mt_1"
                       icon-name="menu"
-                      width="24"
-                      height="24"
+                      width="30"
+                      height="30"
                       viewBox="0 0 520 520"
                     >
                       <icon-youtube-cirle />
@@ -165,6 +165,7 @@
 }
 .component--content {
   .content {
+    margin-bottom: 8px;
     &:hover {
       text-decoration: underline;
       cursor: pointer;
@@ -200,6 +201,11 @@
 .imkt--social-button {
   ul {
     list-style: none;
+  }
+}
+.imkt--social {
+  .imkt--social-heading {
+    padding-bottom: -5px;
   }
 }
 </style>

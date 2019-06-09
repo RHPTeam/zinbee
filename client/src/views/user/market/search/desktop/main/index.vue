@@ -1,39 +1,29 @@
 <template>
   <div class="list--main" :data-theme="currentTheme">
     <!-- START: Selected filters -->
-    <div class="d_flex selected-filters align_items_center mb_4 mt_2">
-      <div class="total--product">
-        <b>{{ productsInCategory.length }}</b> items in
-      </div>
+    <!-- <div class="d_flex selected-filters align_items_center mb_4 mt_2">
+      <div class="total--product"><b>{{ productsSearch.results.length }}</b> items in</div>
       <div class="d_flex pl_2 pr_3">
         <div class="selected">
           <div class="items">
-            <router-link class="name all--post" :to="{ name: 'market_home' }"
-              >All post</router-link
-            >
+            <span class="name">All post</span>
             <span class="px_1 cut">/</span>
           </div>
         </div>
         <div class="selected">
           <div class="items">
-            <span class="name">{{ currentParentMarketCategory }}</span>
-            <span class="px_1 cut">/</span>
-          </div>
-        </div>
-        <div class="selected">
-          <div class="items">
-            <span class="name">{{ currentChildrenMarketCategory }}</span>
+            <span class="name">Post</span>
             <span class="px_1 cut">/</span>
           </div>
         </div>
       </div>
       <div class="clear">Clear all</div>
-    </div>
+    </div> -->
     <!-- End Selected filters -->
     <div class="r list--group m_0">
       <div
         class="c_12 list--group-item mb_3 p_0"
-        v-for="(item, index) in productsInCategory"
+        v-for="(item, index) in productsSearch.results"
         :key="index"
       >
         <div class="card">
@@ -50,18 +40,12 @@
                     @click="showDetailPopup(item)"
                   ></div>
                 </div>
-                <div
-                  class="info pr_0 c_lg_6 c_md_12 c_xl_6"
-                  @click="showDetailPopup(item)"
-                >
-                  <div class="title">
+                <div class="info pr_0 c_lg_6 c_md_12 c_xl_6">
+                  <div class="title" @click="showDetailPopup(item)">
                     {{ item.name }}
                   </div>
                   <div class="editor mb_2">
                     <span class="by">Bởi</span>
-                    <!-- <span class="avatar--user mr_1">
-                      <img src="https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg" alt="">
-                    </span>-->
                     {{ item._creator.name }}
                   </div>
                   <div class="description mb_1">
@@ -122,7 +106,7 @@
               <div class="right--item bottom text_center">
                 <div
                   class="btn btn_outline_info"
-                  @click="addToCollection(item)"
+                  @click="addToCollection(item._id)"
                 >
                   Thêm vào kho
                 </div>
@@ -132,8 +116,11 @@
         </div>
       </div>
     </div>
-    <div class="text_center py_3 card" v-if="productsInCategory.length === 0">
-      Khong co san pham nao
+    <div
+      class="text_center py_3 card"
+      v-if="productsSearch.results && productsSearch.results.length === 0"
+    >
+      Khong co ket qua tim kiem
     </div>
     <!-- *************POPUP************* -->
     <transition name="popup">
@@ -169,38 +156,20 @@ export default {
     currentTheme() {
       return this.$store.getters.themeName;
     },
-    // products() {
-    //   return this.$store.getters.allProduct;
-    // },
-    productsInCategory() {
-      return this.$store.getters.productsByCategory;
-    },
-    currentParentMarketCategory() {
-      let nameParent = "";
-      let idParent = this.$route.params.categoryParent;
-      let categoryParent = this.$store.getters.currentParentMarketCategory;
-      if (categoryParent._id === idParent) {
-        nameParent = categoryParent.name;
-      }
-      return nameParent;
-    },
-    currentChildrenMarketCategory() {
-      let nameChildren = "";
-      let idChildren = this.$route.params.subCategory;
-      let categoryChildren = this.$store.getters.currentParentMarketCategory
-        .children;
-      categoryChildren.map(item => {
-        if (item._id === idChildren) {
-          nameChildren = item.name;
-        }
-      });
-      return nameChildren;
+    productsSearch() {
+      return this.$store.getters.productsSearch;
     },
     status() {
       return this.$store.getters.marketStatus;
     }
   },
   methods: {
+    async addToCollection(value) {
+      await this.$store.dispatch("addToCollection", value);
+      if (this.status === "success") {
+        this.isShowAddToCollectionPopup = true;
+      }
+    },
     dateFormat(date) {
       const dateTime = new Date(date),
         day = String(dateTime.getDate()).padStart(2, 0),
@@ -212,22 +181,11 @@ export default {
     showDetailPopup(val) {
       this.productSelected = val;
       this.isShowDetailPopup = true;
-    },
-    async addToCollection(value) {
-      await this.$store.dispatch("addToCollection", value._id);
-      if (this.status === "success") {
-        this.isShowAddToCollectionPopup = true;
-      }
     }
   },
   created() {
-    // this.$store.dispatch("currentParentMarketCategory");
-    // this.$store.dispatch("currentChildrenMarketCategory");
-    if (this.$route.params.subCategory.length > 0) {
-      this.$store.dispatch(
-        "getProductsByCategory",
-        this.$route.params.subCategory
-      );
+    if (this.$route.params.keyword) {
+      this.$store.dispatch("searchProducts", this.$route.params.keyword);
     } else {
       return;
     }

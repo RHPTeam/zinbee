@@ -4,6 +4,8 @@ const state = {
   allProduct: [],
   nodeUpdate: [],
   marketCategoryProducts: [],
+  marketStatus: "",
+  marketRequestStatus: "",
   product: {
     _id: "",
     name: "",
@@ -28,17 +30,30 @@ const state = {
       name: ""
     }
   },
-  productsByCategory: []
+  productsByCategory: [],
+  productsSearch: []
 };
 const getters = {
   allProduct: state => state.allProduct,
   marketCategoryProducts: state => state.marketCategoryProducts,
+  marketStatus: state => state.marketStatus,
+  marketRequestStatus: state => state.marketRequestStatus,
   newMarketProducts: state => state.allProduct.reverse().slice(0, 6),
   product: state => state.product,
   nodeUpdate: state => state.nodeUpdate,
-  productsByCategory: state => state.productsByCategory
+  productsByCategory: state => state.productsByCategory,
+  productsSearch: state => state.productsSearch
 };
 const mutations = {
+  market_request: state => {
+    state.marketRequestStatus = "loading";
+  },
+  market_success: (state, payload) => {
+    state.marketStatus = payload;
+  },
+  market_request_success: state => {
+    state.marketRequestStatus = "success";
+  },
   // all product
   setAllProduct: (state, payload) => {
     state.allProduct = payload;
@@ -76,6 +91,11 @@ const mutations = {
   // set products by category
   setProductsByCategory: (state, payload) => {
     state.productsByCategory = payload;
+  },
+
+  // setSearchProducts
+  setSearchProducts: (state, payload) => {
+    state.productsSearch = payload;
   }
 };
 const actions = {
@@ -161,7 +181,10 @@ const actions = {
   //addToCollection
   // eslint-disable-next-line no-unused-vars
   addToCollection: async ({ commit }, payload) => {
-    await ProductMarket.addToCollection(payload);
+    commit("market_request");
+    const result = await ProductMarket.addToCollection(payload);
+    commit("market_success", result.data.status);
+    commit("market_request_success");
   },
 
   // option choose post or campaign --- // 0 - Post | 1 - Campaign
@@ -173,6 +196,12 @@ const actions = {
   getProductsByCategory: async ({ commit }, payload) => {
     const resData = await ProductMarket.loadProductsByCategory(payload);
     commit("setProductsByCategory", resData.data.data);
+  },
+
+  // search products
+  searchProducts: async ({ commit }, payload) => {
+    const resSearch = await ProductMarket.searchProducts(payload);
+    commit("setSearchProducts", resSearch.data.data);
   }
 };
 

@@ -1,26 +1,5 @@
 .list--main{
   font-size: .875rem;
-  .selected-filters {
-    .selected {
-      cursor: pointer;
-      .all--post {
-        color: inherit;
-        text-decoration: underline;
-      }
-      &:last-child {
-        .cut {
-          display: none;
-        }
-      }
-    }
-    .clear {
-      color: hsl(0, 0%, 20%);
-      font-size: 12px;
-      margin: 0 8px;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
   .list--group {
     .list--group-item {
       color: hsl(0, 0%, 60%);

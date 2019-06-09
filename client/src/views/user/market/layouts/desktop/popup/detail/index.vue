@@ -1,7 +1,7 @@
 <template>
   <div class="modal--wrapper" :data-theme="currentTheme">
     <div class="modal--dialog d_flex justify_content_center align_items_center">
-      <div class="modal--content px_4 pb_4 pt_3">
+      <div class="modal--content px_4 pb_4 pt_3" v-click-outside="closePopup">
         <!-- Start: Modal Header -->
         <div class="modal--header position_relative">
           <div class="btn--close position_absolute" @click="closePopup">
@@ -42,7 +42,12 @@
                 </div>
               </div>
               <div class="right--btn">
-                <div class="btn btn_outline_info">Thêm vào kho</div>
+                <div
+                  class="btn btn_outline_info"
+                  @click="addToCollection(product._id)"
+                >
+                  Thêm vào kho
+                </div>
               </div>
             </div>
           </div>
@@ -74,14 +79,25 @@
 export default {
   props: ["product"],
   data() {
-    return {};
+    return {
+      isShowAddToCollectionPopup: false
+    };
   },
   computed: {
     currentTheme() {
       return this.$store.getters.themeName;
+    },
+    status() {
+      return this.$store.getters.marketStatus;
     }
   },
   methods: {
+    async addToCollection(value) {
+      await this.$store.dispatch("addToCollection", value);
+      if (this.status === "success") {
+        this.closePopup();
+      }
+    },
     closePopup() {
       this.$emit("closePopup", false);
     },
