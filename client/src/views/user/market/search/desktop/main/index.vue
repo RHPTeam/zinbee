@@ -1,8 +1,8 @@
 <template>
   <div class="list--main" :data-theme="currentTheme">
     <!-- START: Selected filters -->
-    <div class="d_flex selected-filters align_items_center mb_4 mt_2">
-      <div class="total--product"><b>1234</b> items in</div>
+    <!-- <div class="d_flex selected-filters align_items_center mb_4 mt_2">
+      <div class="total--product"><b>{{ productsSearch.results.length }}</b> items in</div>
       <div class="d_flex pl_2 pr_3">
         <div class="selected">
           <div class="items">
@@ -18,12 +18,12 @@
         </div>
       </div>
       <div class="clear">Clear all</div>
-    </div>
+    </div> -->
     <!-- End Selected filters -->
     <div class="r list--group m_0">
       <div
         class="c_12 list--group-item mb_3 p_0"
-        v-for="(item, index) in productsInCategory"
+        v-for="(item, index) in productsSearch.results"
         :key="index"
       >
         <div class="card">
@@ -46,9 +46,6 @@
                   </div>
                   <div class="editor mb_2">
                     <span class="by">Bởi</span>
-                    <!-- <span class="avatar--user mr_1">
-                      <img src="https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg" alt="">
-                    </span>-->
                     {{ item._creator.name }}
                   </div>
                   <div class="description mb_1">{{ item.description }}</div>
@@ -113,6 +110,7 @@
         </div>
       </div>
     </div>
+    <div class="text_center py_3 card" v-if="productsSearch.results.length === 0">Khong co ket qua tim kiem</div>
     <!-- *************POPUP************* -->
     <transition name="popup">
       <detail-popup
@@ -147,12 +145,9 @@ export default {
     currentTheme() {
       return this.$store.getters.themeName;
     },
-    // products() {
-    //   return this.$store.getters.allProduct;
-    // },
-    productsInCategory() {
-      return this.$store.getters.productsByCategory;
-    }
+    productsSearch() {
+      return this.$store.getters.productsSearch;
+    },
   },
   methods: {
     dateFormat(date) {
@@ -171,28 +166,12 @@ export default {
       this.$store.dispatch("addToCollection", value._id);
       this.isShowAddToCollectionPopup = true;
     }
-    // productsByPrice(){
-    //   this.productsInCategory.sort(this.compare);
-    // },
-    // compare(a, b) {
-    //   const genreA = a.priceCents;
-    //   const genreB = b.priceCents;
-
-    //   let comparison = 0;
-    //   if (genreA > genreB) {
-    //     comparison = 1;
-    //   } else if (genreA < genreB) {
-    //     comparison = -1;
-    //   }
-    //   return comparison;
-    // }
   },
   created() {
-    // this.$store.dispatch("getProducts");
-    if (this.$route.params.subCategory.length > 0) {
+    if (this.$route.params.keyword) {
       this.$store.dispatch(
-        "getProductsByCategory",
-        this.$route.params.subCategory
+        "searchProducts",
+        this.$route.params.keyword
       );
     } else {
       return;

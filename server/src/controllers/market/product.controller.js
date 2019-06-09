@@ -140,8 +140,6 @@ module.exports = {
       }
     }
 
-    return res
-      .status( 200 )
-      .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
+    res.status( 200 ).json( { "status": "success", "data": { "results": dataResponse, "page": page } } );
   }
 };

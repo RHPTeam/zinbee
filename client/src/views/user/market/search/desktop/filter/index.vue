@@ -45,8 +45,8 @@ export default {
     };
   },
   computed: {
-    productsInCategory() {
-      return this.$store.getters.productsByCategory;
+    productsSearch() {
+      return this.$store.getters.productsSearch;
     }
   },
   methods: {
@@ -97,40 +97,31 @@ export default {
       this.isActiveBestSeller = true;
       this.isActiveNewest = false;
       this.isActivePrice = false;
-      this.productsInCategory.sort(this.compareNumberOfSales).reverse();
+      this.productsSearch.results.sort(this.compareNumberOfSales).reverse();
     },
     productsByPriceGrow() {
       this.isActiveBestSeller = false;
       this.isActiveNewest = false;
       this.isShowDropdownPrice = false;
       this.isActivePrice = true;
-      this.productsInCategory.sort(this.comparePrice);
+      this.productsSearch.results.sort(this.comparePrice);
     },
     productsByPriceLose() {
       this.isActiveBestSeller = false;
       this.isActiveNewest = false;
       this.isActivePrice = true;
       this.isShowDropdownPrice = false;
-      this.productsInCategory.sort(this.comparePrice).reverse();
+      this.productsSearch.results.sort(this.comparePrice).reverse();
     },
     productsNewest() {
       this.isActiveBestSeller = false;
       this.isActiveNewest = true;
       this.isActivePrice = false;
-      this.productsInCategory.sort(this.compareNewest);
+      this.productsSearch.results.sort(this.compareNewest);
     }
   },
   created() {
-    // this.$store.dispatch("getProductsByCategory");
-    this.$store.dispatch(
-      "getProductsByCategory",
-      this.$route.params.subCategory
-    );
-    // if(this.$route.params.subCategory.length > 0){
 
-    // } else {
-    //   return;
-    // }
   }
 };
 </script>
