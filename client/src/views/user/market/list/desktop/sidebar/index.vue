@@ -10,7 +10,7 @@
         </div>
       </div>
       <ul class="list_group list--group pl_0">
-       <!--  <li
+        <!--  <li
           class="list_group_item list--group-item d_flex align_items_center justify_content_between py_1"
           v-for="(category, index) in categoryChild"
           :key="index"
