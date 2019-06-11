@@ -38,9 +38,6 @@ export default {
     users() {
       return this.$store.getters.allUser;
     },
-    usersFilter() {
-      return this.$store.getters.usersFilter;
-    },
     selectAll: {
       get: function() {
         return this.users ? this.selected.length === this.users.length : false;
@@ -55,17 +52,15 @@ export default {
         }
         this.selected = selected;
       }
-    },
-    status() {
-      return this.$store.getters.statusFilter;
     }
   },
   methods: {
-    openPopupInfo(user) {
+    async openPopupInfo(user) {
+      await this.$store.dispatch("getUserAdminById", user);
       this.showInfo = true;
-      this.userSelectInfo = user;
     },
-    openPopupEdit(user) {
+    async openPopupEdit(user) {
+      await this.$store.dispatch("getUserAdminById", user);
       this.showEdit = true;
       this.userSelectEdit = user;
     },

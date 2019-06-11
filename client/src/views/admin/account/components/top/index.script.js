@@ -22,6 +22,13 @@ export default {
       return this.$store.getters.usersFilter;
     }
   },
+  watch: {
+    "search"(value) {
+      if(value.length === 0){
+        this.$store.dispatch("getAllUserAdmin");
+      }
+    }
+  },
   methods: {
     changeLayout() {
       this.$emit("changeLayout", !this.isGrid);
@@ -33,7 +40,7 @@ export default {
       this.statusFilter = val;
       this.searchUsers();
     },
-    searchUsers() {
+    async searchUsers() {
       let arr;
 
       if (this.statusFilter === "Tất cả") {
@@ -65,7 +72,7 @@ export default {
         });
       }
 
-      this.$store.dispatch("getUsersFilter", arr);
+      await this.$store.dispatch("getUsersFilter", arr);
       this.$store.dispatch("setFilter", 1);
     }
   },

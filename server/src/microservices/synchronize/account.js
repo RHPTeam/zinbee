@@ -23,7 +23,9 @@ module.exports = {
       // eslint-disable-next-line no-nested-ternary
       "url": url,
       "data": data,
-      "headers": headers
+      "headers": {
+        "Authorization": headers
+      }
     } );
   }
 };

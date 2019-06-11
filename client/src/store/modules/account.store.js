@@ -24,7 +24,9 @@ const state = {
   statusResetPassword: null,
   code: "",
   usersFilter: [],
-  statusFilter: 0
+  statusFilter: null,
+  userSelectInfo: null,
+  userEdit: null
 };
 const getters = {
   allUser: state => state.allUser,
@@ -40,7 +42,9 @@ const getters = {
   statusResetPassword: state => state.statusResetPassword,
   code: state => state.code,
   usersFilter: state => state.usersFilter,
-  statusFilter: state => state.statusFilter
+  statusFilter: state => state.statusFilter,
+  userSelectInfo: state => state.userSelectInfo,
+  userEdit: state => state.userEdit
 };
 const mutations = {
   auth_request: state => {
@@ -84,6 +88,12 @@ const mutations = {
   },
   setFilter: (state, payload) => {
     state.statusFilter = payload;
+  },
+  setUserInfo: (state, payload) => {
+    state.userSelectInfo = payload;
+  },
+  setUserEdit: (state, payload) => {
+    state.userEdit = payload;
   }
 };
 const actions = {
@@ -321,10 +331,41 @@ const actions = {
     commit("setCode", payload);
   },
   getUsersFilter: async ({ commit }, payload) => {
-    await commit("getUsersFilter", payload);
+    await commit("setAllUser", payload);
   },
   setFilter: async ({ commit }, payload) => {
     await commit("setFilter", payload);
+  },
+  setUserInfo: async ({ commit }, payload) => {
+    await commit("setUserInfo", payload);
+  },
+  setUserEdit: async ({ commit }, payload) => {
+    await commit("setUserEdit", payload);
+  },
+  changeStatusOfUser: async ({ commit }, payload) => {
+    commit("auth_request");
+    const objSender = {
+      id: payload.userId
+    };
+    await AccountServices.changeStatus(objSender);
+    const result = await AccountServices.getUserById(payload.userId);
+    commit("setUserById", result.data.data);
+    const results = await AccountServices.getAllUser();
+    commit("setAllUser", results.data.data);
+    commit("auth_success");
+  },
+  changeExpireDateOfUser: async ({ commit }, payload) => {
+    commit("auth_request");
+    const objSender = {
+      id: payload.userId,
+      expireDate: payload.value
+    };
+    await AccountServices.renewById(objSender);
+    const result = await AccountServices.getUserById(payload.userId);
+    commit("setUserById", result.data.data);
+    const results = await AccountServices.getAllUser();
+    commit("setAllUser", results.data.data);
+    commit("auth_success");
   }
 };
 
