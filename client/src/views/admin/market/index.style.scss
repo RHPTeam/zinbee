@@ -1,0 +1,17 @@
+.tab--manage {
+  .btn--active {
+    border: 1px solid #ffb94a;
+    border-radius: .625rem;
+    color: #ffb94a;
+    font-size: .875rem;
+    font-weight: 600;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 .75rem;
+    transition: all .4s ease;
+    &:hover {
+      background-color: #ffb94a;
+      color: #fff;
+    }
+  }
+}

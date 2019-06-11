@@ -1,3 +1,24 @@
+.modal--wrapper {
+  .modal--content {
+    .btn--active {
+      background-color: #ffb94a;
+      border-radius: 0.5rem;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 0.75rem;
+      -webkit-transition: all 0.4s ease;
+      transition: all 0.4s ease;
+      &:hover{
+        background-color: #ff9e4a;
+        cursor: pointer;
+      }
+    }
+  }
+}
 .list--product{
     .table{
         border: 1px solid #ccc;

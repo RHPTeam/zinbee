@@ -4,17 +4,17 @@
     <div class="tab--manage d_flex mb_3">
       <router-link
         :to="{ name: 'manage_product' }"
-        class="product text_left btn btn_info mr_3"
-        >Quan ly san pham</router-link
+        class="product text_left btn btn--active mr_3"
+        >Quản lý sản phẩm</router-link
       >
       <router-link
         :to="{ name: 'manage_categories' }"
-        class="categories text_left btn btn_info mr_3"
-        >Quan ly danh muc</router-link
+        class="categories text_left btn btn--active mr_3"
+        >Quản lý danh mục</router-link
       >
       <router-link
         :to="{ name: 'market_post' }"
-        class="categories text_left btn btn_info mr_3"
+        class="categories text_left btn btn--active mr_3"
         >Bài viết mẫu</router-link
       >
     </div>
@@ -32,9 +32,11 @@ export default {
   data() {
     return {
       breadTitle: "Quản lý market",
-      breadDesc: "giúp quản lý các bài viết, chien dich trên hệ thống"
+      breadDesc: "Giúp quản lý các bài viết, chiến dịch trên hệ thống"
     };
   }
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  @import "./index.style";
+</style>

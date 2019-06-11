@@ -1,8 +1,8 @@
 <template>
   <div class="modal--wrapper">
     <div class="modal--content">
-      <div class="create mb_3 text_left btn btn_primary" @click="goToCreate">
-        Tao moi
+      <div class="create mb_3 text_left btn btn--active " @click="goToCreate">
+        Tạo mới
       </div>
     </div>
     <!-- List product -->
@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="p_2 text_center" v-if="products.length === 0">
-            Khong co san pham nao
+            Không có sản phẩm nào
           </div>
         </div>
       </div>
