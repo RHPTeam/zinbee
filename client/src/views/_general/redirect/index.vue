@@ -5,15 +5,17 @@
 </template>
 
 <script>
-  import CookieFunction from "@/utils/functions/cookie";
+import CookieFunction from "@/utils/functions/cookie";
 export default {
   async created() {
-    CookieFunction.removeCookie( "sid" );
-    CookieFunction.removeCookie( "uid" );
-    CookieFunction.removeCookie( "cfr" );
-    CookieFunction.removeCookie( "token" );
-    CookieFunction.removeCookie( "_sub" );
-    CookieFunction.removeCookie( "__v" );
+    //remove Cookie
+    await CookieFunction.removeCookie("sid");
+    await CookieFunction.removeCookie("uid");
+    await CookieFunction.removeCookie("cfr");
+    await CookieFunction.removeCookie("token");
+    await CookieFunction.removeCookie("_sub");
+    await CookieFunction.removeCookie("__v");
+    //redirect to signin
     this.$router.push({ name: "user_signin" });
   }
 };

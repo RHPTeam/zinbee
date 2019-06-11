@@ -16,7 +16,7 @@ export default {
       return this.$store.getters.themeName;
     },
     users() {
-      return this.$store.getters.users;
+      return this.$store.getters.allUser;
     },
     usersFilter() {
       return this.$store.getters.usersFilter;
@@ -66,6 +66,7 @@ export default {
       }
 
       this.$store.dispatch("getUsersFilter", arr);
+      this.$store.dispatch("setFilter", 1);
     }
   },
   components: {

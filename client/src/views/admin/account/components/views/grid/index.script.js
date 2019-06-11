@@ -38,6 +38,9 @@ export default {
     users() {
       return this.$store.getters.allUser;
     },
+    usersFilter() {
+      return this.$store.getters.usersFilter;
+    },
     selectAll: {
       get: function() {
         return this.users ? this.selected.length === this.users.length : false;
@@ -52,6 +55,9 @@ export default {
         }
         this.selected = selected;
       }
+    },
+    status() {
+      return this.$store.getters.statusFilter;
     }
   },
   methods: {

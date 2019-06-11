@@ -22,7 +22,9 @@ const state = {
   redirectDomain: "",
   infoUserEmail: [],
   statusResetPassword: null,
-  code: ""
+  code: "",
+  usersFilter: [],
+  statusFilter: 0
 };
 const getters = {
   allUser: state => state.allUser,
@@ -36,7 +38,9 @@ const getters = {
   token: state => state.token,
   infoUserEmail: state => state.infoUserEmail,
   statusResetPassword: state => state.statusResetPassword,
-  code: state => state.code
+  code: state => state.code,
+  usersFilter: state => state.usersFilter,
+  statusFilter: state => state.statusFilter
 };
 const mutations = {
   auth_request: state => {
@@ -74,6 +78,12 @@ const mutations = {
   },
   setCode: (state, payload) => {
     state.code = payload;
+  },
+  getUsersFilter: (state, payload) => {
+    state.usersFilter = payload;
+  },
+  setFilter: (state, payload) => {
+    state.statusFilter = payload;
   }
 };
 const actions = {
@@ -309,6 +319,12 @@ const actions = {
   },
   setCodeResetPassword: async ({ commit }, payload) => {
     commit("setCode", payload);
+  },
+  getUsersFilter: async ({ commit }, payload) => {
+    await commit("getUsersFilter", payload);
+  },
+  setFilter: async ({ commit }, payload) => {
+    await commit("setFilter", payload);
   }
 };
 
