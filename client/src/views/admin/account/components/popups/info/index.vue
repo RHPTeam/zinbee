@@ -116,10 +116,9 @@
                 {{ user._role.level }}
               </div>
               <div class="info--history mt_4">
-                Đã thêm 1/{{ user.maxAccountFb }} tài
-                khoản Facebook
+                Đã thêm 1/{{ user.maxAccountFb }} tài khoản Facebook
               </div>
-<!--              {{ user._accountfb.length }}-->
+              <!--              {{ user._accountfb.length }}-->
             </div>
           </div>
         </div>

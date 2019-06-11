@@ -23,8 +23,8 @@ export default {
     }
   },
   watch: {
-    "search"(value) {
-      if(value.length === 0){
+    search(value) {
+      if (value.length === 0) {
         this.$store.dispatch("getAllUserAdmin");
       }
     }
