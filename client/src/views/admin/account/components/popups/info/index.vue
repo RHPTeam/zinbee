@@ -153,10 +153,10 @@ export default {
     closeAddInfo() {
       this.$emit("closeAddInfo", false);
     },
-    openAddEdit() {
+    async openAddEdit() {
+      await this.$store.dispatch("getUserAdminById", this.user._id);
+      await this.$emit("openAddEdit", true);
       this.closeAddInfo();
-      this.$emit("openAddEdit", true);
-      this.$emit("userSelectEdit", this.user);
     }
   }
 };

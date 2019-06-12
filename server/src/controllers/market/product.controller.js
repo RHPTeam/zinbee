@@ -75,6 +75,7 @@ module.exports = {
     return res.status( 200 ).json( { "status": "success", "data": previewImageUrl } );
   },
   "addToCollection": async ( req, res ) => {
+    console.log(req.uid);
     const productsSelected = await MarketProduct.findOne( { "_id": req.query._id } ),
       serverContainUser = await Server.findOne( { "userAmount": req.uid } ).lean();
 

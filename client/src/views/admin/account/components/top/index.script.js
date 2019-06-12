@@ -38,7 +38,13 @@ export default {
     },
     filterByStatus(val) {
       this.statusFilter = val;
-      this.searchUsers();
+      if (this.statusFilter === "Tất cả") {
+        this.$store.dispatch("getAllUserAdmin");
+      } else if (this.statusFilter === "Hoạt động") {
+        this.$store.dispatch("getUserWork");
+      } else if (this.statusFilter === "Đã ngừng") {
+        this.$store.dispatch("getUserDontWork");
+      }
     },
     async searchUsers() {
       let arr;
