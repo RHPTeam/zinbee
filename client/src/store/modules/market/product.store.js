@@ -25,10 +25,7 @@ const state = {
     previews: {
       thumbnail: ""
     },
-    _category: {
-      _id: "",
-      name: ""
-    }
+    _category: ""
   },
   productsByCategory: [],
   productsSearch: []
@@ -158,10 +155,7 @@ const actions = {
       previews: {
         thumbnail: ""
       },
-      _category: {
-        _id: "",
-        name: ""
-      }
+      _category: ""
     });
   },
   setButtonDefault: async ({ commit }, payload) => {

@@ -1,25 +1,18 @@
 <template>
-  <div>
-    <!--    <div v-if="!item">-->
-    <!--      <loading-component />-->
-    <!--    </div>-->
-    <div class="flex-table row" role="rowgroup">
-      <div class="flex-row first" role="cell">
-        <div>{{ item.title }}</div>
-      </div>
-      <div class="flex-row" role="cell">
-        <div v-html="item.content"></div>
-      </div>
-      <div class="flex-row" role="cell">{{ item._account.name }}</div>
-      <div class="flex-row" role="cell">
-        <div class="d_flex justify_content_center">
-          <button class="btn btn_warning" @click="showBlogById">
-            Sửa
-          </button>
-          <button class="btn btn_danger ml_3" @click="deleteBlog">
-            Xóa
-          </button>
-        </div>
+  <div class="d_flex list--help">
+    <div class="item">
+      {{ item.title }}
+    </div>
+    <div class="item" v-html="item.content"></div>
+    <div class="item">{{ item._account.name }}</div>
+    <div class="item">
+      <div class="d_flex justify_content_center">
+        <button class="btn btn_warning" @click="showBlogById">
+          Sửa
+        </button>
+        <button class="btn btn_danger ml_3" @click="deleteBlog">
+          Xóa
+        </button>
       </div>
     </div>
   </div>
@@ -44,5 +37,28 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../index.style";
+// @import "../index.style";
+$row-bg: #ccc6;
+$row-color: #666;
+$row-bg-hover: #cccccc40;
+$row-color-hover: #fff;
+.list--help {
+  transition: 0.4s;
+  &:hover {
+    background: $row-bg-hover;
+  }
+}
+.item {
+  text-align: center;
+  padding: 5px;
+  flex: 1;
+  border-right: 1px solid #ccc;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 32px;
+  height: 47px;
+  &:last-child {
+    border-right: 0;
+  }
+}
 </style>

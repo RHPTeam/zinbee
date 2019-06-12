@@ -62,8 +62,8 @@
               <div class="title p_2">Tiêu đề</div>
               <div class="cate--parent p_2">Danh muc cha</div>
               <div class="creator p_2">Nguoi tao</div>
-              <div class="creator p_2">Nguoi update</div>
-              <div class="action px_2 py_3"></div>
+              <div class="updator p_2">Nguoi update</div>
+              <div class="action p_2"></div>
             </div>
             <!-- End: title -->
             <!-- Start: Item list -->
@@ -80,18 +80,16 @@
                 <div v-else>None</div>
               </div>
               <div class="creator p_2">{{ category._creator.name }}</div>
-              <div class="creator p_2">
-                <div v-if="category._editor === undefined">
-                  Chua co nguoi update
-                </div>
-                <div v-else>{{ category._editor.name }}</div>
+              <div class="updator p_2" v-if="category._editor === undefined">
+                Chua co nguoi update
               </div>
+              <div class="updator p_2" v-else>{{ category._editor.name }}</div>
               <div class="d_flex px_2 action">
                 <div class="btn btn_info mr_1" @click="actionUpdate(category)">
-                  Update
+                  Sua
                 </div>
                 <div class="btn btn_danger" @click="deleteCategory(category)">
-                  Delete
+                  Xoa
                 </div>
               </div>
             </div>
@@ -111,41 +109,4 @@
 
 <style lang="scss" scoped>
 @import "./index.style.scss";
-.list {
-  .item--list-header {
-    background: #ffb94a;
-    color: #fff;
-  }
-  .item--list-content {
-    padding: 0.325rem 0;
-    transition: 0.4s;
-    &:hover {
-      background: #e9e9ec;
-      color: #2f3236;
-    }
-  }
-  .content {
-    border: 1px solid #ccc;
-  }
-  .header {
-    border: 0;
-    &.creator {
-      border: 0;
-    }
-  }
-  .title {
-    flex: 2;
-    border-right: 1px solid #ccc;
-  }
-  .cate--parent,
-  .creator {
-    flex: 1;
-    border-right: 1px solid #ccc;
-    // border-left: 0;
-  }
-  .creator,
-  .action {
-    flex: 1;
-  }
-}
 </style>

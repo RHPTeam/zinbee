@@ -19,7 +19,7 @@
 .wrapper {
   min-height: 100vh;
   .wrap--content-main {
-    width: 100%;
+    width: calc(100% - 300px);
     padding: 30px 60px 60px 0;
   }
   .mobile-scroll {

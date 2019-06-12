@@ -38,7 +38,7 @@
 .wrapper {
   min-height: 100vh;
   .wrap--content-main {
-    width: 100%;
+    width: calc(100% - 300px);
   }
   .mobile-scroll {
     height: calc(100vh - 110px);

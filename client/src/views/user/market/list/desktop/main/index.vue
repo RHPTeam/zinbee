@@ -221,8 +221,6 @@ export default {
     }
   },
   created() {
-    // this.$store.dispatch("currentParentMarketCategory");
-    // this.$store.dispatch("currentChildrenMarketCategory");
     if (this.$route.params.subCategory.length > 0) {
       this.$store.dispatch(
         "getProductsByCategory",
