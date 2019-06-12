@@ -1,10 +1,8 @@
 const MarketProduct = require( "../../models/market/Product.model" );
-const Account = require( "../../models/Account.model" );
 const Server = require( "../../models/Server.model" );
 const MarketPost = require( "../../models/market/products/post.model" );
 
 const { createSyncFromMarket } = require( "../../microservices/synchronize/productPost" );
-const { signToken } = require( "../../configs/jwt" );
 
 module.exports = {
   "index": async ( req, res ) => {
@@ -13,7 +11,7 @@ module.exports = {
     if ( req.query._id ) {
       data = await MarketProduct.findOne( { "_id": req.query._id } );
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await MarketProduct.find( {} ).populate( { "path": "_creator", "select": "name" } ).lean();
+      data = await MarketProduct.find( {} ).populate( { "path": "_creator", "select": "name" } ).populate( { "path": "_category", "select": "name" } ).lean();
     }
 
     res.status( 200 ).json( { "status": "success", "data": data } );
@@ -77,14 +75,15 @@ module.exports = {
     return res.status( 200 ).json( { "status": "success", "data": previewImageUrl } );
   },
   "addToCollection": async ( req, res ) => {
+    console.log(req.uid);
     const productsSelected = await MarketProduct.findOne( { "_id": req.query._id } ),
-      userSelected = await Account.findOne( { "_id": req.uid } ).populate( "_role" ).lean(),
       serverContainUser = await Server.findOne( { "userAmount": req.uid } ).lean();
 
     // Check catch
     if ( !productsSelected ) {
       return res.status( 404 ).json( { "status": "error", "message": "Không tồn tại sản phẩm này!" } );
     }
+
 
     if ( productsSelected.typeProduct === 0 ) {
       const postSelected = await MarketPost.findOne( { "_id": productsSelected.content } ),
@@ -101,11 +100,11 @@ module.exports = {
           "content": postSelected.content,
           "attachments": attachmentsList
         }, {
-          "Authorization": `sid=${signToken( req.uid )}; uid=${req.uid}; cfr=${userSelected._role.level}`
+          "Authorization": req.headers.authorization
         } );
 
       if ( resPostSync.data.status !== "success" ) {
-        res.status( 500 ).json( { "status": "error", "message": "Có lỗi xảy ra trong quá trình thêm vào kho. Vui lòng liên hệ với bộ CSKH!" } );
+        return res.status( 500 ).json( { "status": "error", "message": "Có lỗi xảy ra trong quá trình thêm vào kho. Vui lòng liên hệ với bộ CSKH!" } );
       }
     }
 
@@ -115,5 +114,33 @@ module.exports = {
     await productsSelected.save();
 
     res.status( 201 ).json( { "status": "success", "data": productsSelected } );
+  },
+  "getAllProductsByCategory": async ( req, res ) => {
+    const data = await MarketProduct.find( { "_category": req.params.categoryId } );
+
+    res.status( 200 ).json( { "status": "success", "data": data } );
+  },
+  "search": async ( req, res ) => {
+    if ( req.query.keyword === undefined ) {
+      return res.status( 404 ).json( { "status": "fail", "keyword": "Vui lòng cung cấp từ khóa để tìm kiếm!" } );
+    }
+
+    let page = null, dataResponse = null, data = ( await MarketProduct.find( { "$text": { "$search": req.query.keyword, "$language": "none" } } ).sort( { "numberOfSales": "desc" } ).lean() );
+
+    if ( req.query._size && req.query._page ) {
+      dataResponse = data.slice( ( Number( req.query._page ) - 1 ) * Number( req.query._size ), Number( req.query._size ) * Number( req.query._page ) );
+    } else if ( req.query._size ) {
+      dataResponse = data.slice( 0, Number( req.query._size ) );
+    }
+
+    if ( req.query._size ) {
+      if ( data.length % req.query._size === 0 ) {
+        page = Math.floor( data.length / req.query._size );
+      } else {
+        page = Math.floor( data.length / req.query._size ) + 1;
+      }
+    }
+
+    res.status( 200 ).json( { "status": "success", "data": { "results": dataResponse, "page": page } } );
   }
 };

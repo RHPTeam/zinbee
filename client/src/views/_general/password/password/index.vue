@@ -1,5 +1,5 @@
 <template>
-  <form @submit="sendPassword" class="text_center">
+  <form @submit.prevent="sendPassword" class="text_center">
     <div class="">
       <icon-base
         icon-name="logo"

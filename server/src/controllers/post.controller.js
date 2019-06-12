@@ -172,6 +172,7 @@ module.exports = {
     }
 
     // Random like and share by system
+    req.body.content = req.body.content.replace( /(<br \/>)|(<br>)/gm, "\n" ).replace( /(<\/p>)|(<\/div>)/gm, "\n" ).replace( /(<([^>]+)>)/gm, "" );
     req.body.share = Math.floor( Math.random() * 2000 ) + 700;
     req.body.like = Math.floor( Math.random() * 3000 ) + 800;
 

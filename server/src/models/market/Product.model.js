@@ -29,6 +29,10 @@ const mongoose = require( "mongoose" ),
       ]
     },
     "summary": String,
+    "_category": {
+      "type": Schema.Types.ObjectId,
+      "ref": "MarketCategory"
+    },
     "_creator": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"
@@ -38,12 +42,28 @@ const mongoose = require( "mongoose" ),
       "default": Date.now()
     },
     "updatedAt": Date
-  } ),
-  MarketProduct = mongoose.model( "MarketProduct", MarketProductSchema );
+  } );
+
+MarketProductSchema.index( {
+  "name": "text",
+  "description": "text",
+  "content": "text",
+  "tags": "text",
+  "summary": "text"
+} );
 
 MarketProductSchema.pre( "save", function( next ) {
   this.updatedAt = Date.now();
   next();
+} );
+
+// eslint-disable-next-line one-var
+const MarketProduct = mongoose.model( "MarketProduct", MarketProductSchema );
+
+MarketProduct.on( "index", function ( error ) {
+  if ( error ) {
+    console.log( error.message );
+  }
 } );
 
 module.exports = MarketProduct;

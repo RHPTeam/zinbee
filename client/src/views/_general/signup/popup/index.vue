@@ -27,7 +27,7 @@
               1
             </div>
             <div class="card_body">
-              <div class="">
+              <div class>
                 <div class="detail mb_3">
                   <div class="text--bold text_center">Miền Bắc</div>
                   <div class="desc">https://inbox.zinbee.vn</div>
@@ -35,7 +35,8 @@
 
                   <div class="desc">Số lượng còn trống: 18</div>
                   <div class="desc">
-                    Trạng thái: <span>Đang hoạt động</span>
+                    Trạng thái:
+                    <span>Đang hoạt động</span>
                   </div>
                 </div>
                 <div class="action">
@@ -62,14 +63,15 @@
               2
             </div>
             <div class="card_body">
-              <div class="">
+              <div class>
                 <div class="detail mb_3">
                   <div class="text--bold text_center">Miền Trung</div>
                   <div class="desc">https://inbox.zinbee.vn</div>
                   <div class="desc">https://chat.zinbee.vn</div>
                   <div class="desc">Số lượng còn trống: 18</div>
                   <div class="desc">
-                    Trạng thái: <span class="text_danger">Không hoạt động</span>
+                    Trạng thái:
+                    <span class="text_danger">Không hoạt động</span>
                   </div>
                 </div>
                 <div class="action">
@@ -90,14 +92,15 @@
               3
             </div>
             <div class="card_body">
-              <div class="">
+              <div class>
                 <div class="detail mb_3">
                   <div class="text--bold text_center">Miền Nam</div>
                   <div class="desc">https://inbox.zinbee.vn</div>
                   <div class="desc">https://chat.zinbee.vn</div>
                   <div class="desc">Số lượng còn trống: 18</div>
                   <div class="desc">
-                    Trạng thái: <span>Đang hoạt động</span>
+                    Trạng thái:
+                    <span>Đang hoạt động</span>
                   </div>
                 </div>
                 <div class="action">

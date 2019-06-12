@@ -16,6 +16,39 @@
             />
           </div>
         </div>
+
+        <div class="r form_group">
+          <div class="c_6">
+            <div class="mb_2 font_weight_bold">Số lượng like</div>
+            <input
+              type="text"
+              class="form_control"
+              placeholder="Nhập số lượng like"
+              v-model="postLibraries.like"
+            />
+          </div>
+          <div class="c_6">
+            <div class="mb_2 font_weight_bold">Số lượng share</div>
+            <input
+              type="text"
+              class="form_control"
+              placeholder="Nhập số lượng chia sẻ"
+              v-model="postLibraries.share"
+            />
+          </div>
+        </div>
+        <div class="r form_group">
+          <div class="c_6">
+            <div class="mb_2 font_weight_bold">ID bài viết</div>
+            <input
+              type="text"
+              class="form_control"
+              placeholder="Nhập id bài viết"
+              v-model="postLibraries.postID"
+            />
+          </div>
+        </div>
+
         <div
           v-if="
             postLibraries.attachments && postLibraries.attachments.length > 0

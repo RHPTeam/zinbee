@@ -6,36 +6,37 @@
     <div class="ct">
       <div class="r mx_0 mb_3">
         <div
-          class="c_md_6 header--left d_flex justify_content_start align_items_center "
+          class="c_md_6 header--left d_flex justify_content_start align_items_center px_0"
         >
           <!-- Start: Header logo -->
           <div class="logo">
-            <div class="logo d_flex align_items_center">
-              <icon-base
-                icon-name="logo"
-                width="40px"
-                height="40px"
-                viewBox="0 0 200 200"
-              >
-                <icon-logo-icon-white />
-              </icon-base>
-              <div class="center--support ml_2">
-                Zinbee Store
+            <router-link tag="div" :to="{ name: 'market_home' }">
+              <div class="logo d_flex align_items_center">
+                <icon-base
+                  icon-name="logo"
+                  width="40px"
+                  height="40px"
+                  viewBox="0 0 200 200"
+                >
+                  <icon-logo-icon-white />
+                </icon-base>
+                <div class="center--support ml_2">Zinbee Store</div>
               </div>
-            </div>
+            </router-link>
           </div>
           <!-- End: Header logo-->
         </div>
         <div
-          class="c_md_6 header--right d_flex justify_content_end align_items_center"
+          class="c_md_6 header--right d_flex justify_content_end align_items_center px_0"
         >
           <!-- Start: Redirect to help -->
           <div class="help mr_2 ml_1" @click="redirectToHelp">
             <icon-base
+              class="icon--help mt_1"
               icon-name="menu"
-              width="25"
-              height="25"
-              viewBox="0 0 25 25"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
             >
               <icon-help />
             </icon-base>
@@ -73,10 +74,7 @@
                     </icon-base>
                     <div class="pt_1">Zin Post</div>
                   </div>
-                  <div
-                    class="zin--post zin-chat item c_4"
-                    @click="gotoHomeChat"
-                  >
+                  <div class="zin--post zin-chat item c_4">
                     <icon-base
                       icon-name="bell"
                       width="50px"
@@ -117,118 +115,133 @@
           <!-- End: More Options -->
 
           <!-- Start: User Info -->
-          <div
-            class="profile position_relative d_flex justify_content_end align_items_center"
-            @click="showProfileDropdown"
-            v-click-outside="closeProfileDropdown"
-          >
-            <div class="profile--image">
-              <div
-                v-if="user.imageAvatar"
-                class="avatar--wrap avatar--img position_relative d_block"
-                :style="{ backgroundImage: 'url(' + user.imageAvatar + ')' }"
-              ></div>
-              <div
-                v-else
-                class="avatar--wrap avatar--default position_relative d_block"
-              >
-                <span class="position_absolute">{{
-                  user.name | getFirstLetter
-                }}</span>
-              </div>
-            </div>
-            <span class="profile--name ml_2 mr_2">{{ user.name }}</span>
-            <div class="profile--icon">
-              <icon-base
-                icon-name="arrow-down"
-                width="10"
-                height="10"
-                viewBox="0 0 130 130"
-              >
-                <icon-arrow-down />
-              </icon-base>
-            </div>
-            <!-- Start: Dropdown Menu -->
+          <div>
             <div
-              class="dropdown--menu dropdown--menu-right user--dd flipInY animated"
-              :class="{ show: isShowProfileDropdown }"
+              class="signin"
+              v-if="userMember && userMember.length === 0"
+              @click="redirectToSignin"
             >
-              <span class="with--arrow">
-                <span class="bg-orange"></span>
-              </span>
-              <div
-                class="d_flex align_items_center py_2 px_3 bg-orange border--custom text_white mb_2"
-              >
+              Đăng nhập ngay
+            </div>
+            <div
+              v-else
+              class="profile position_relative d_flex justify_content_end align_items_center"
+              @click="showProfileDropdown"
+              v-click-outside="closeProfileDropdown"
+            >
+              <div class="profile--image">
                 <div
-                  v-if="user.imageAvatar"
+                  v-if="userMember.imageAvatar"
                   class="avatar--wrap avatar--img position_relative d_block"
-                  :style="{ backgroundImage: 'url(' + user.imageAvatar + ')' }"
+                  :style="{
+                    backgroundImage: 'url(' + userMember.imageAvatar + ')'
+                  }"
                 ></div>
                 <div
                   v-else
                   class="avatar--wrap avatar--default position_relative d_block"
                 >
                   <span class="position_absolute">{{
-                    user.name | getFirstLetter
+                    userMember.name | getFirstLetter
                   }}</span>
                 </div>
-                <div class="ml_2">
-                  <h4 class="mb_0">{{ user.name }}</h4>
-                  <p class="mb_0">{{ user.email }}</p>
-                </div>
               </div>
-              <router-link
-                class="dropdown--item"
-                :to="{ name: 'post_account' }"
-              >
+              <span class="profile--name ml_2 mr_2">{{ userMember.name }}</span>
+              <div class="profile--icon">
                 <icon-base
-                  icon-name="account"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
+                  icon-name="arrow-down"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 130 130"
                 >
-                  <icon-account /> </icon-base
-                >Thiết lập tài khoản
-              </router-link>
-              <div class="dropdown--divider"></div>
-              <a
-                class="dropdown--item"
-                href="javascript:void(0)"
-                @click="logOut"
+                  <icon-arrow-down />
+                </icon-base>
+              </div>
+              <!-- Start: Dropdown Menu -->
+              <div
+                class="dropdown--menu dropdown--menu-right user--dd flipInY animated"
+                :class="{ show: isShowProfileDropdown }"
               >
-                <icon-base
-                  icon-name="logout"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
+                <span class="with--arrow">
+                  <span class="bg-orange"></span>
+                </span>
+                <div
+                  class="d_flex align_items_center py_2 px_3 bg-orange border--custom text_white mb_2"
                 >
-                  <icon-logout /> </icon-base
-                >Đăng xuất
-              </a>
+                  <div
+                    v-if="userMember.imageAvatar"
+                    class="avatar--wrap avatar--img position_relative d_block"
+                    :style="{
+                      backgroundImage: 'url(' + userMember.imageAvatar + ')'
+                    }"
+                  ></div>
+                  <div
+                    v-else
+                    class="avatar--wrap avatar--default position_relative d_block"
+                  >
+                    <span class="position_absolute">{{
+                      userMember.name | getFirstLetter
+                    }}</span>
+                  </div>
+                  <div class="ml_2">
+                    <h4 class="mb_0">{{ userMember.name }}</h4>
+                    <p class="mb_0">{{ userMember.email }}</p>
+                  </div>
+                </div>
+                <div class="dropdown--item" @click="goToProfileSetting">
+                  <icon-base
+                    icon-name="account"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <icon-account /> </icon-base
+                  >Thiết lập tài khoản
+                </div>
+                <div class="dropdown--divider"></div>
+                <a
+                  class="dropdown--item"
+                  href="javascript:void(0)"
+                  @click="logOut"
+                >
+                  <icon-base
+                    icon-name="logout"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                  >
+                    <icon-logout /> </icon-base
+                  >Đăng xuất
+                </a>
+              </div>
+              <!-- End: Dropdown Menu -->
             </div>
-            <!-- End: Dropdown Menu -->
           </div>
           <!-- End: User Info -->
         </div>
       </div>
+      <!-- Start: Header Bottom Menu -->
       <div class="header--bottom-wrapper">
         <div class="header--bottom">
           <nav>
             <div class="nav--label">
-              <a title="Bài viết mẫu" class="active nav--label-link"
-                ><span>Bài viết mẫu</span></a
+              <a
+                :title="category.name"
+                class="nav--label-link"
+                :class="{
+                  active: category._id === currentParentMarketCategory._id
+                }"
+                v-for="(category, index) in allMarketCategoriesTree"
+                :key="index"
+                @click="chooseCategory(category)"
               >
-              <a title="Chiến dịch mẫu" class="nav--label-link"
-                ><span>Chiến dịch mẫu</span></a
-              >
-              <a title="Ảnh trending" class="nav--label-link"
-                ><span>Ảnh trending</span></a
-              >
-              <a title="Khác" class="nav--label-link"><span>Khác</span></a>
+                <span>{{ category.name }}</span>
+              </a>
             </div>
           </nav>
         </div>
       </div>
+      <!-- End: Header Bottom Menu -->
     </div>
   </div>
 </template>

@@ -26,7 +26,7 @@
             :key="index"
           >
             <div class="kind--of--item p_2">{{ product.name }}</div>
-            <div class="category--item p_2">Chua co danh muc</div>
+            <div class="category--item p_2">{{ product._category.name }}</div>
             <div class="tag--item p_2">
               <span v-for="(tag, index) in product.tags" :key="`a-${index}`"
                 >{{ tag

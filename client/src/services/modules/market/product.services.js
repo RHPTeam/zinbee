@@ -24,5 +24,22 @@ export default {
   // getInforProductById
   getInfoById(id) {
     return Api().get(`market/products?_id=${id}`);
+  },
+
+  // add to collection
+  addToCollection(id) {
+    return Api().post(`market/products/add/product/user?_id=${id}`);
+  },
+
+  // get products by category
+  loadProductsByCategory(categoryId) {
+    return Api().get(`market/products/${categoryId}/products`);
+  },
+
+  // search products
+  searchProducts(name) {
+    return Api().post(
+      `/market/products/search?keyword=${name}&_size=12&_page=1`
+    );
   }
 };

@@ -2,19 +2,12 @@ import CookieFunction from "@/utils/functions/cookie";
 import router from "../../routes";
 import store from "../../store";
 
-/** ******************* SECURED ROUTER ************************/
+/********************* SECURED ROUTER ************************/
 router.beforeEach((to, from, next) => {
   if (
     CookieFunction.getCookie("_sub") &&
     CookieFunction.getCookie("sid") &&
-    CookieFunction.getCookie("cfr") === "member" &&
-    CookieFunction.getCookie("uid")
-  ) {
-    window.location = `${CookieFunction.getCookie("_sub")}`;
-  } else if (
-    CookieFunction.getCookie("_sub") &&
-    CookieFunction.getCookie("sid") &&
-    CookieFunction.getCookie("cfr") === "member" &&
+    CookieFunction.getCookie("cfr").toLowerCase() === "member" &&
     CookieFunction.getCookie("uid") &&
     to.path === "/signin"
   ) {
@@ -22,7 +15,7 @@ router.beforeEach((to, from, next) => {
   } else if (
     CookieFunction.getCookie("_sub") &&
     CookieFunction.getCookie("sid") &&
-    CookieFunction.getCookie("cfr") === "member" &&
+    CookieFunction.getCookie("cfr").toLowerCase() === "member" &&
     CookieFunction.getCookie("uid") &&
     to.path === "/signup"
   ) {

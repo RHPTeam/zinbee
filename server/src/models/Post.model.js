@@ -17,6 +17,7 @@ const mongoose = require( "mongoose" ),
     "like": Number,
     "share": Number,
     "vote": Number,
+    "postID": String,
     "generate": Boolean, // 1 crawl, 0 user, admin
     "_account": {
       "type": Schema.Types.ObjectId,

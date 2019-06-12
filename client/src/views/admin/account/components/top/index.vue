@@ -9,7 +9,7 @@
           type="text"
           placeholder="Tìm kiếm"
           v-model="search"
-          @input="searchUsers"
+          @keydown.enter="searchUsers"
         />
         <div class="search--icon position_absolute">
           <icon-base
@@ -90,7 +90,6 @@
     <active-popup
       v-if="isActivePopup === true"
       @close="isActivePopup = $event"
-      @updateStatusFilter="statusFilter = $event"
     ></active-popup>
     <!--End: Active Popup-->
   </div>
