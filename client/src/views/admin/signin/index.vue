@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="info d_flex align_items_center justify_content_center p_3 mt_5">
-      <form @submit="signIn">
+      <form @submit.prevent="signIn">
         <h3>Đăng nhập vào hệ thống Admin</h3>
         <div class="form_group">
           <label>Email đăng nhập</label>

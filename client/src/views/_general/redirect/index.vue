@@ -5,9 +5,17 @@
 </template>
 
 <script>
+import CookieFunction from "@/utils/functions/cookie";
 export default {
   async created() {
-    await localStorage.clear();
+    //remove Cookie
+    await CookieFunction.removeCookie("sid");
+    await CookieFunction.removeCookie("uid");
+    await CookieFunction.removeCookie("cfr");
+    await CookieFunction.removeCookie("token");
+    await CookieFunction.removeCookie("_sub");
+    await CookieFunction.removeCookie("__v");
+    //redirect to signin
     this.$router.push({ name: "user_signin" });
   }
 };

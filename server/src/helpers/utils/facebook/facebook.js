@@ -19,7 +19,7 @@ const {
     writeFileImageFail
   } = require( "../../../configs/errors" ),
   {
-    converSourceUnix,
+    convertSourceUnix,
     convertUnicodeToCharacter,
     findSubString
   } = require( "../functions/string" ),
@@ -400,7 +400,7 @@ module.exports = {
   },
   "handleImageUpload": ( url ) => {
     return new Promise( ( resolve ) => {
-      const urlFixed = converSourceUnix( url );
+      const urlFixed = convertSourceUnix( url );
 
       download( urlFixed )
         .then( ( data ) => {

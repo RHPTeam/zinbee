@@ -1,11 +1,95 @@
-
-.content--header-help{
-  background-color: $mainBrandColor;
+.header{
+  background-color: hsl(0,0%,15%);
   padding-top: 20px;
   ul{
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+  .header--right {
+    .help {
+      .icon--help {
+        cursor: pointer;
+        color: #F7F7F7;
+        &:hover {
+          color: #ccc;
+        }
+      }
+    }
+    .more--options{
+      .icon--application {
+        color: #F7F7F7;
+        cursor: pointer;
+        transition: all .4s ease;
+        &.active {
+          color: #ccc;
+        }
+        &:hover {
+          color: #ccc;
+        }
+      }
+      .more{
+        cursor: pointer;
+      }
+      .options{
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+        border-radius: .625rem;
+        color: #444;
+        font-size: 0.8125rem;
+        right: 0;
+        margin-top: 8px;
+        width: 333px;
+        transform-origin: top;
+        transition: all .4s ease-in-out;
+        z-index: 10;
+        .application{
+          padding: 1rem 1rem 0;
+        }
+        .view-more{
+          cursor: pointer;
+          background: rgb(245, 245, 245);
+          color: #444;
+          height: 40px;
+          line-height: 40px;
+          transition: all .4s ease;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        &:before{
+          background-color: #fff;
+          border-radius: 6px 0 0;
+          content: "";
+          height: 15px;
+          position: absolute;
+          right: 15px;
+          top: -6px;
+          -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+          width: 15px;
+          z-index: 3;
+        }
+        .item{
+          border: 1px solid transparent;
+          transition: 0.3s;
+          height: 84px;
+          padding: 0.3125rem 0;
+          margin-bottom: 1rem;
+          &:hover{
+            border: 1px solid #e5e5e5;
+            cursor: pointer;
+            // background: #ffb94a;
+            // color: #fff;
+          }
+          &.instagram, &.zalo, &.zin-chat{
+            &:hover{
+              cursor: not-allowed;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -23,197 +107,17 @@
   }
 }
 
-
-// header--search
-
-.wrap--search{
-  svg{
-    color: rgba(255, 255, 255, .5);
-  }
-  input{
-    background-color: #fff;
-    border: 0;
-    border-radius: 5px;
-    color: #444444;
-    font-size: .875rem;
-    height: 40px;
-    line-height: 40px;
-    outline: none;
-    padding-left: 2.25rem;
-    width: 100%;
-    &::placeholder{
-      color: $color-dark-1;
-      font-size: .825rem;
-    }
-  }
-  .search svg{
-    position: absolute;
-    top: 12px;
-    left: 25px;
-    z-index: 100;
-    color: #ffb94a;
-    stroke: #ffb94a;
-    stroke-width: .5;
-  }
-}
-
-// content--back
-
-.content--back{
-  color: #fff;
+.signin {
+  border: 1px solid #ffb94a;
+  border-radius: .5rem;
+  background-color: transparent;
   cursor: pointer;
-  display: flex;
-  opacity: .75;
-  transition: opacity .4s ease;
-  svg{
-    color: #fff;
-    margin-top: -7px;
-    margin-right: 5px;
-    transform: rotate(-180deg);
-    stroke: #fff;
-    stroke-width: 1;
-  }
-  &:hover{
-    opacity: 1;
-  }
-}
-
-a{
-  text-decoration: none;
-  color: inherit;
-}
-// menu
-.menu--help{
-  .item--active {
-    border-bottom: 2px solid #fff;
-    color: #fff !important;
-  }
-  .menu--help-item{
-    position: relative;
-    color: rgba(255, 255, 255, 0.75);
-    height: 45px;
-    cursor: pointer;
-    padding: .75rem 1rem;
-    font-size: .875rem;
-    font-weight: 600;
-    transition: all .4s ease;
-    &:hover {
-      background: #ffb138;
-      border-radius: .5rem .5rem 0 0;
-      color: #fff;
-      .dropdown--menu {
-        display: block;
-      }
-    }
-    .dropdown--menu {
-      box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: $mainDefault;
-      color: $color-dark-2;
-      min-width: 300px;
-      z-index: 100;
-      display: none;
-      &-item{
-        color: #666;
-        font-weight: normal;
-        padding: .5rem 1rem;
-        &:hover {
-          background-color: #f7f7f7;
-        }
-      }
-    }
-  }
-}
-
-.mail--help{
-  .icon--envelope{
-    margin-top: 4px;
-    svg {
-      color: #fff;
-      stroke: #fff;
-      stroke-width: .2;
-    }
-  }
-}
-
-.more--options{
-  .icon--application {
-    color: #a1a1a1;
-    transition: all .4s ease;
-    &.active {
-      color: #444;
-    }
-    &:hover {
-      color: #444;
-    }
-  }
-  .more{
-    cursor: pointer;
-  }
-  .options{
-    background: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
-    border-radius: .625rem;
-    color: #444;
-    font-size: 0.8125rem;
-    right: 0;
-    margin-top: 8px;
-    width: 333px;
-    transform-origin: top;
-    transition: all .4s ease-in-out;
-    z-index: 10;
-    .application{
-      padding: 1rem 1rem 0;
-    }
-    .view-more{
-      cursor: pointer;
-      background: rgb(245, 245, 245);
-      color: #444;
-      height: 40px;
-      line-height: 40px;
-      transition: all .4s ease;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-    &:before{
-      background-color: #fff;
-      border-radius: 6px 0 0;
-      content: "";
-      height: 15px;
-      position: absolute;
-      right: 15px;
-      top: -6px;
-      -webkit-transform: rotate(45deg);
-      transform: rotate(45deg);
-      width: 15px;
-      z-index: 3;
-    }
-    .item{
-      border: 1px solid transparent;
-      transition: 0.3s;
-      height: 84px;
-      padding: 0.3125rem 0;
-      margin-bottom: 1rem;
-      &:hover{
-        border: 1px solid #e5e5e5;
-        cursor: pointer;
-        // background: #ffb94a;
-        // color: #fff;
-      }
-      &.instagram, &.zalo{
-        &:hover{
-          cursor: not-allowed;
-        }
-      }
-    }
-  }
+  padding: .5rem 1rem;
 }
 
 .profile {
   cursor: pointer;
+  color: #F7F7F7;
   .avatar--wrap {
     border-radius: 50%;
     cursor: pointer;
@@ -364,6 +268,40 @@ a{
   }
   .profile--name {
     font-size: .875rem;
+  }
+}
+
+
+// Nav ( Sky Albert editor )
+.header--bottom-wrapper {
+  height: 56px;
+  .nav--label-link {
+    cursor: pointer;
+    height: 56px;
+    line-height: 56px;
+    opacity: 0.4;
+    position: relative;
+    color: hsl(0,0%,100%);
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 32px;
+    font-weight: 600;
+    &.active, &:hover, &:active, &:focus {
+      opacity: 1;
+    }
+    &.active:after {
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid whitesmoke;
+      border-top: none;
+      height: 0;
+      width: 0;
+      bottom: 0;
+      content: ' ';
+      left: 50%;
+      margin-left: -5px;
+      position: absolute;
+    }
   }
 }
 

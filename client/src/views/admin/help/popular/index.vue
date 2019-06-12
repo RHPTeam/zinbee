@@ -59,7 +59,44 @@
       </div>
     </div>
     <div class="body">
-      <div class="desc">Bài viết được chọn</div>
+      <div class="show">
+        <h4 class="desc py_2">Danh mục được chọn</h4>
+        <div
+          class="popular--section"
+          v-if="
+            popularHelp.popular_section &&
+              popularHelp.popular_section.length > 0
+          "
+        >
+          <div
+            class="item d_flex align_items_center justify_content_between"
+            v-for="(item, index) in popularHelp.popular_section"
+            :key="index"
+          >
+            <div>
+              <span class="mr_3">{{ index + 1 }}</span
+              >{{ item.title }}
+            </div>
+          </div>
+        </div>
+
+        <h4 class="desc py_2">Bài viết được chọn</h4>
+        <div
+          class="popular--blog"
+          v-if="popularHelp.popular_blog && popularHelp.popular_blog.length > 0"
+        >
+          <div
+            class="item d_flex align_items_center justify_content_between"
+            v-for="(blog, index) in popularHelp.popular_blog"
+            :key="index"
+          >
+            <div>
+              <span class="mr_3">{{ index + 1 }}</span
+              >{{ blog.title }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -90,12 +127,12 @@ export default {
   methods: {
     updateBlogPopular(val) {
       const arr = val.map(item => item._id);
-      const contentId = arr.splice(-1).toString();
+      const contentId = [...new Set(arr)];
       this.$store.dispatch("setIdContentBlog", contentId);
     },
     updateCategoryPopular(val) {
       const arr = val.map(item => item._id);
-      const contentId = arr.splice(-1).toString();
+      const contentId = [...new Set(arr)];
       this.$store.dispatch("setIdCategoryPopular", contentId);
     },
     updatePopularHelp() {

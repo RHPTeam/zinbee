@@ -3,11 +3,19 @@
     <!-- Start: Desktop Component-->
     <div class="wrap--content d_none d_md_flex">
       <div class="wrap--content-main">
+        <!-- Start: Root Banner-->
+        <app-root-banner />
+        <!-- End: Root Banner-->
         <!-- Start: Header-->
         <div class="main--header">
           <app-header />
         </div>
         <!-- End: Header-->
+        <!-- Start: Navigation-->
+        <div class="nav">
+          <app-navigation />
+        </div>
+        <!-- End: Navigation-->
         <!-- Start: Content-->
         <div class="main--content">
           <router-view />

@@ -4,7 +4,10 @@ const state = {
   allPostLibraries: [],
   newPostLibraries: [],
   postLibraries: {
-    content: ""
+    content: "",
+    like: null,
+    share: null,
+    postID: ""
   },
   postSearch: [],
   statusLib: ""

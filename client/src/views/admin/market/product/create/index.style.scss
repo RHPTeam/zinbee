@@ -1,30 +1,33 @@
 .model--content{
-    width: 70%;
-    margin: 0 auto;
+  width: 70%;
+  margin: 0 auto;
+  .notification{
+    color: #d23030;
+  }
 }
 .create--product{
-    .price{
-        .price--info{
-            font-size: 0.875rem;
-            opacity: 0;
-        }
-        input:focus{
-            & + .price--info{
-                opacity: 1;
-            }
-        }
+  .price{
+    .price--info{
+      font-size: 0.875rem;
+      opacity: 0;
     }
-    .add--att{
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        &:hover{
-            cursor: pointer;
-        }
+    input:focus{
+      & + .price--info{
+          opacity: 1;
+      }
     }
-    .icon-plus{
-        padding: 0.315rem;
+  }
+  .add--att{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    &:hover{
+      cursor: pointer;
     }
-    .icon--remove{
-        cursor: pointer;
-    }
+  }
+  .icon-plus{
+    padding: 0.315rem;
+  }
+  .icon--remove{
+    cursor: pointer;
+  }
 }

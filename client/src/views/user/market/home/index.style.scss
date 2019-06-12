@@ -1,5 +1,5 @@
 .search {
-  background-color: hsl(171, 72%, 43%);
+  background-color: #ffb94a;
   background-image:url("https://assets.shopfront.envato-static.com/assets/images/bg-page-section-light.png");
   color: white;
   .form--search {
@@ -13,11 +13,6 @@
     right: 0rem;
 
   }
-  //.search--input {
-  //  width : 100%;
-  //  border-radius: 10px;
-  //  color: gray;
-  //}
   input {
     width: 100%;
     border-radius: .625rem;
@@ -41,18 +36,6 @@
   }
 }
 
-.feature--products {
-  ul {
-    list-style: none;
-  }
-  background-color: whitesmoke;
-  button {
-    color: hsl(0, 0%, 100%);
-    background-color: hsl(87, 58%, 45%);
-    box-shadow: 0 2px 0 hsl(87, 58%, 35%);
-    border-radius: 4px;
-  }
-}
 .describe {
   .title {
     color: #253858;
@@ -60,9 +43,19 @@
     font-size: 2rem;
   }
 }
+
+.tab {
+  .campaigns {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+}
+
 .popular {
   .card {
-    border-radius: .25rem;
+    border-radius: .375rem;
+    border: 0;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .1);
   }
 }
 .thumbnail {
@@ -93,12 +86,17 @@
 
 .desc {
   h4 {
+    cursor: pointer;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     color: hsl(0, 0%, 30%);
     font-size: 1rem;
     font-weight: 700;
+    transition: all .4s ease;
+    &:hover {
+      color: #FFB94A;
+    }
   }
   .editor {
     font-size: calc(1rem - 3px);
@@ -123,11 +121,17 @@
   .left {
     .price {
       color: hsl(0, 0%, 30%);
-      font-size: 18px;
+      font-size: calc(1rem + 2px);
       font-weight: 700;
+      .free {
+        font-weight: 500;
+        font-style: italic;
+        font-size: .875rem;
+        color: #32cc55;
+      }
     }
     .sales {
-      font-size: calc(1rem - 1px);
+      font-size: .875rem;
     }
   }
   .right {
@@ -140,8 +144,11 @@
       padding: 0 1rem;
     }
     .action {
+      font-size: .875rem;
+      font-weight: 600;
       &:hover, &:focus {
         background-color: #ffb94a;
+        color: #fff;
         transition: all .75s  ease;
       }
     }
@@ -158,18 +165,20 @@
   }
 }
 .marketing--section {
-  border-top: 1px solid #e4e4e4;
-  img {
-    width: 180px;
-    height: 133px;
+  .marketing--section-image {
+    background-size: 300px 130px;
+    min-height: 130px;
   }
+    .title {
+      font-size: 1.25rem;
+    }
+
 }
 .join {
   background-color: #fff;
   background-position: bottom left , bottom right;
   background-repeat: no-repeat , no-repeat;
-  background-size: 600px 300px , 600px 300px;
-  border-top: 1px solid #e4e4e4;
+  background-size: 540px 350px , 600px 350px;
   min-height: 350px;
   .background--join {
     .desc {

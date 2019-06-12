@@ -1,5 +1,5 @@
 <template>
-  <form @submit="sendMail" class="text_center">
+  <form @submit.prevent="sendMail" class="text_center">
     <div class="form--reset-logo mb_5">
       <icon-base
         icon-name="logo"

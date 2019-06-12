@@ -11,12 +11,12 @@
       </div>
       <ul class="list_group list--group pl_0">
         <li
-          class="list_group_item list--group-item d_flex align_items_center justify_content_between py_1"
-          v-for="(category, index) in categories"
+          class="list_group_item list--group-item d_flex align_items_center justify_content_between py_1 category--name"
+          v-for="(category, index) in currentParentMarketCategory.children"
           :key="index"
+          @click.prevent="loadProductByCategory(category._id)"
         >
-          <div class="category--name">{{ category.name }}</div>
-          <div class="category--total">{{ category.total }}</div>
+          {{ category.name }}
         </li>
       </ul>
     </div>
@@ -27,18 +27,48 @@
 export default {
   data() {
     return {
-      categories: [
-        { name: "Ăn uống", total: 15 },
-        { name: "Mỹ phẩm", total: 10001 },
-        { name: "Du lịch", total: 152472 }
-      ]
+      categories: [],
+      isShowFilter: false
     };
+  },
+  computed: {
+    currentParentMarketCategory() {
+      return this.$store.getters.currentParentMarketCategory;
+    }
+  },
+  methods: {
+    closeFilterSidebar() {
+      this.isShowFilter = true;
+    },
+    chooseCategory(category) {
+      this.$store.dispatch("currentParentMarketCategory", category);
+    },
+    async loadProductByCategory(categoryId) {
+      await this.$store.dispatch("getProductsByCategory", categoryId);
+      this.$router.push({
+        name: "market_list",
+        params: {
+          categoryParent: this.currentParentMarketCategory._id,
+          subCategory: categoryId
+        }
+      });
+    }
+  },
+  async created() {
+    // this.$store.dispatch("getCategoryChild");
+    await this.$store.dispatch("getAllMarketCategoriesTree");
   }
 };
 </script>
 
 <style scoped lang="scss">
-.left--sidebar {
-  font-size: 0.875rem;
+.category--name {
+  cursor: pointer;
+  transition: 0.4s;
+  &:hover {
+    padding-left: 5px;
+    color: #fff;
+    background: #ffb94a;
+  }
 }
 </style>
