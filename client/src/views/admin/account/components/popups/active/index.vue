@@ -6,7 +6,10 @@
           <div class="title text_left">Kích hoạt tài khoản</div>
         </div>
         <div class="modal--body my_3">
-          <div class="alert alert_danger" v-if="this.$store.getters.activeAccount !== ''">
+          <div
+            class="alert alert_danger"
+            v-if="this.$store.getters.activeAccount !== ''"
+          >
             {{ activeAccountError }}
           </div>
           <div class="desc">
