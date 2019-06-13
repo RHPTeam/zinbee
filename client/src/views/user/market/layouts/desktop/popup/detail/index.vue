@@ -41,7 +41,15 @@
                   <span>{{ product.numberOfSales }} đã sử dụng</span>
                 </div>
                 <div class="price mt_3">
-                  {{ formatCurrency(product.priceCents) }} ₫
+                  <div
+                    class="price font_weight_bold"
+                    v-if="
+                      parseInt(product.priceCents) > 0 && product.priceCents.length > 0
+                    "
+                  >
+                    {{ product.priceCents }} ₫
+                  </div>
+                  <div class="font_weight_bold price" v-else>Miễn phí</div>
                 </div>
               </div>
               <div class="right--btn">

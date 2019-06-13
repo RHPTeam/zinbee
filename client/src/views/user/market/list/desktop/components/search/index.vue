@@ -67,7 +67,7 @@
               </div>
             </div>
             <div class="c_md_3 right py_0 pr_0 pl_3">
-              <div class="top"></div>
+              <!-- <div class="top"></div> -->
               <div class="right--item content text_center mt_1">
                 <div
                   class="price font_weight_bold"
@@ -89,7 +89,7 @@
                   </icon-base>
                   <span>{{ item.numberOfSales }} đã sử dụng</span>
                 </div>
-                <div class="last--update mt_1">
+                <div class="last--update my_1">
                   Cập nhật lần cuối: {{ dateFormat(item.updatedAt) }}
                 </div>
               </div>

@@ -143,7 +143,7 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": { "results": dataResponse, "page": page } } );
   },
   "getNewestProduct": async ( req, res ) => {
-    const data = await MarketProduct.find( { } )
+    const data = await MarketProduct.find( { } ).populate( { "path": "_creator", "select": "name" } )
       .sort( { "$natural": -1 } )
       .limit( parseInt( req.query.number ) );
     
