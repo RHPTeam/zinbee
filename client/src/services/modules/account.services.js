@@ -42,6 +42,17 @@ export default {
   upload(file) {
     return Api().post("users", file);
   },
+  updateUserByAdmin( data ) {
+    const uid = data._id,
+      dataSender = {
+        expireDate: data.expireDate,
+        maxAccountFb: data.maxAccountFb,
+        _role: data._role,
+        status: data.status
+      };
+
+    return Api().patch( `users/admin?_userId=${uid}`, dataSender );
+  },
   getInfoByEmail(email) {
     return Api().get(`users/info/reset-password?email=${email}`);
   },
