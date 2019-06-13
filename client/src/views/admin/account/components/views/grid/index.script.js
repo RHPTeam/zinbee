@@ -55,11 +55,12 @@ export default {
     }
   },
   methods: {
-    openPopupInfo(user) {
+    async openPopupInfo(user) {
+      await this.$store.dispatch("getUserAdminById", user);
       this.showInfo = true;
-      this.userSelectInfo = user;
     },
-    openPopupEdit(user) {
+    async openPopupEdit(user) {
+      await this.$store.dispatch("getUserAdminById", user);
       this.showEdit = true;
       this.userSelectEdit = user;
     },

@@ -121,13 +121,11 @@ export default {
     }
   },
   created() {
-    // this.$store.dispatch("getProductsByCategory");
-    this.$store.dispatch(
-      "getProductsByCategory",
-      this.$route.params.subCategory
-    );
     // if(this.$route.params.subCategory.length > 0){
-
+    //   this.$store.dispatch(
+    //     "getProductsByCategory",
+    //     this.$route.params.subCategory
+    //   );
     // } else {
     //   return;
     // }

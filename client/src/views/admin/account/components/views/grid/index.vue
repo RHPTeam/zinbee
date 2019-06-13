@@ -86,12 +86,12 @@
                     :style="{
                       backgroundImage: 'url(' + user.imageAvatar + ')'
                     }"
-                    @click="openPopupInfo(user)"
+                    @click="openPopupInfo(user._id)"
                   ></div>
                   <div
                     v-else
                     class="avatar--content avatar--default position_relative d_block"
-                    @click="openPopupInfo(user)"
+                    @click="openPopupInfo(user._id)"
                   >
                     <span class="position_absolute">{{
                       user.name | getFirstLetter
@@ -119,7 +119,7 @@
                 <!-- End: ExpireDate & Limited Accounts -->
                 <!-- Start: Edit Btn -->
                 <div class="user--edit text_center">
-                  <div class="btn--edit" @click="openPopupEdit(user)">
+                  <div class="btn--edit" @click="openPopupEdit(user._id)">
                     <span class="mr_2">Chỉnh sửa</span>
                     <icon-base
                       icon-name="edit"
@@ -150,14 +150,12 @@
     <transition name="popup">
       <edit-popup
         v-if="showEdit === true"
-        :user="userSelectEdit"
         @closeAddEdit="showEdit = $event"
       ></edit-popup>
     </transition>
     <transition name="popup">
       <info-popup
         v-if="showInfo === true"
-        :user="userSelectInfo"
         @closeAddInfo="showInfo = $event"
         @openAddEdit="showEdit = $event"
         @userSelectEdit="userSelectEdit = $event"

@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="popular">
-        <div class="r">
+        <div class="r" v-if="newMarketProducts && newMarketProducts.length > 0">
           <div
             class="item c_md_6 c_lg_4 c_xl_4 mb_2"
             v-for="(item, index) in newMarketProducts"
@@ -113,15 +113,17 @@
                 </div>
                 <div class="info d_flex align_items_center">
                   <div class="left">
-                    <div
-                      class="price"
-                      v-if="item.priceCents && item.priceCents.length === 0"
-                    ></div>
-                    <div class="price">
+                    <div class="price" v-if="item.priceCents">
                       <span v-if="item.priceCents && item.priceCents.length > 0"
                         >{{ formatCurrency(item.priceCents) }} ₫</span
                       >
-                      <span class="free" v-else>Miễn phí</span>
+                      <span
+                        class="free"
+                        v-if="
+                          item.priceCents === 0 && item.priceCents.length === 0
+                        "
+                        >Miễn phí</span
+                      >
                     </div>
                     <div class="sales">{{ item.numberOfSales }} đã sử dụng</div>
                   </div>
@@ -252,14 +254,14 @@ export default {
   },
   computed: {
     newMarketProducts() {
-      return this.$store.getters.newMarketProducts;
+      return this.$store.getters.newestProduct;
     },
     status() {
       return this.$store.getters.marketStatus;
     }
   },
   async created() {
-    await this.$store.dispatch("getProducts");
+    await this.$store.dispatch("getNewestProduct", 6);
   },
   methods: {
     async addToCollection(value) {

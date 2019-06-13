@@ -6,7 +6,10 @@
           <div class="title text_left">Kích hoạt tài khoản</div>
         </div>
         <div class="modal--body my_3">
-          <div class="alert alert_danger" v-if="activeAccountError !== ''">
+          <div
+            class="alert alert_danger"
+            v-if="this.$store.getters.activeAccount !== ''"
+          >
             {{ activeAccountError }}
           </div>
           <div class="desc">
@@ -72,9 +75,8 @@ export default {
     async activeAccount() {
       await this.$store.dispatch("activeAccount", this.user);
 
-      if (this.activeAccountError === "") {
-        this.$emit("close", false);
-        this.$emit("updateStatusFilter", "Tất cả");
+      if (this.$store.getters.activeAccount === "") {
+        this.closePopup();
       }
     },
     closePopup() {

@@ -115,7 +115,7 @@ module.exports = {
     res.status( 201 ).json( { "status": "success", "data": productsSelected } );
   },
   "getAllProductsByCategory": async ( req, res ) => {
-    const data = await MarketProduct.find( { "_category": req.params.categoryId } );
+    const data = await MarketProduct.find( { "_category": req.params.categoryId } ).populate( { "path": "_creator", "select": "name" } );
 
     res.status( 200 ).json( { "status": "success", "data": data } );
   },
@@ -124,7 +124,7 @@ module.exports = {
       return res.status( 404 ).json( { "status": "fail", "keyword": "Vui lòng cung cấp từ khóa để tìm kiếm!" } );
     }
 
-    let page = null, dataResponse = null, data = ( await MarketProduct.find( { "$text": { "$search": req.query.keyword, "$language": "none" } } ).sort( { "numberOfSales": "desc" } ).lean() );
+    let page = null, dataResponse = null, data = ( await MarketProduct.find( { "$text": { "$search": req.query.keyword, "$language": "none" } } ).sort( { "numberOfSales": "desc" } ).populate( { "path": "_creator", "select": "name" } ).lean() );
 
     if ( req.query._size && req.query._page ) {
       dataResponse = data.slice( ( Number( req.query._page ) - 1 ) * Number( req.query._size ), Number( req.query._size ) * Number( req.query._page ) );
@@ -141,5 +141,12 @@ module.exports = {
     }
 
     res.status( 200 ).json( { "status": "success", "data": { "results": dataResponse, "page": page } } );
+  },
+  "getNewestProduct": async ( req, res ) => {
+    const data = await MarketProduct.find( { } )
+      .sort( { "$natural": -1 } )
+      .limit( parseInt( req.query.number ) );
+    
+    res.status( 200 ).json( { "status": "success", "data": data } );
   }
 };

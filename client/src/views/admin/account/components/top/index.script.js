@@ -16,10 +16,17 @@ export default {
       return this.$store.getters.themeName;
     },
     users() {
-      return this.$store.getters.users;
+      return this.$store.getters.allUser;
     },
     usersFilter() {
       return this.$store.getters.usersFilter;
+    }
+  },
+  watch: {
+    search(value) {
+      if (value.length === 0) {
+        this.$store.dispatch("getAllUserAdmin");
+      }
     }
   },
   methods: {
@@ -31,9 +38,15 @@ export default {
     },
     filterByStatus(val) {
       this.statusFilter = val;
-      this.searchUsers();
+      if (this.statusFilter === "Tất cả") {
+        this.$store.dispatch("getAllUserAdmin");
+      } else if (this.statusFilter === "Hoạt động") {
+        this.$store.dispatch("getUserWork");
+      } else if (this.statusFilter === "Đã ngừng") {
+        this.$store.dispatch("getUserDontWork");
+      }
     },
-    searchUsers() {
+    async searchUsers() {
       let arr;
 
       if (this.statusFilter === "Tất cả") {
@@ -65,7 +78,8 @@ export default {
         });
       }
 
-      this.$store.dispatch("getUsersFilter", arr);
+      await this.$store.dispatch("getUsersFilter", arr);
+      this.$store.dispatch("setFilter", 1);
     }
   },
   components: {

@@ -1,12 +1,14 @@
 import Datepicker from "@/components/datepicker";
 export default {
-  props: ["user"],
   components: {
     Datepicker
   },
   computed: {
     roles() {
       return this.$store.getters.roles;
+    },
+    user() {
+      return this.$store.getters.userInfo;
     },
     formatDateCreate: {
       get() {
@@ -43,8 +45,27 @@ export default {
     closeAddEdit() {
       this.$emit("closeAddEdit", false);
     },
-    updateStatus() {
+    updateStatus(val) {
+      const dataSender = {
+        status: val.target.checked,
+        userId: this.user._id
+      };
+      this.$store.dispatch("changeStatusOfUser", dataSender);
       this.user.status = !this.user.status;
+    },
+    changeDateSetup(value) {
+      const dataSender = {
+        userId: this.user._id,
+        value: new Date(
+          new Date(value).getFullYear(),
+          new Date(value).getMonth(),
+          new Date(value).getDate(),
+          new Date(value).getHours(),
+          new Date(value).getMinutes(),
+          0
+        )
+      };
+      this.$store.dispatch("changeExpireDateOfUser", dataSender);
     },
     updateAccount() {
       const dataSender = {

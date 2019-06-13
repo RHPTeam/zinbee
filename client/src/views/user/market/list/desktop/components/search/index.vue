@@ -1,26 +1,9 @@
 <template>
   <div class="list--main" :data-theme="currentTheme">
-    <!-- START: Selected filters -->
-    <!-- <div class="d_flex selected-filters align_items_center mb_4 mt_2">
-      <div class="total--product"><b>{{ productsSearch.results.length }}</b> items in</div>
-      <div class="d_flex pl_2 pr_3">
-        <div class="selected">
-          <div class="items">
-            <span class="name">All post</span>
-            <span class="px_1 cut">/</span>
-          </div>
-        </div>
-        <div class="selected">
-          <div class="items">
-            <span class="name">Post</span>
-            <span class="px_1 cut">/</span>
-          </div>
-        </div>
-      </div>
-      <div class="clear">Clear all</div>
-    </div> -->
-    <!-- End Selected filters -->
     <div class="r list--group m_0">
+      <div v-if="this.$store.getters.statusSearchProducts === 'loading'">
+        <loading-component />
+      </div>
       <div
         class="c_12 list--group-item mb_3 p_0"
         v-for="(item, index) in productsSearch.results"
@@ -58,8 +41,15 @@
                         v-for="(attr, index) in item.attributes.slice(0, 3)"
                         :key="`c-${index}`"
                       >
-                        <span class="font_weight_bold">{{ attr.name }} :</span>
-                        <span>{{ attr.value }}</span>
+                        <span v-if="attr.name === '' || attr.value === ''"
+                          >Không có đặc điểm nào</span
+                        >
+                        <span v-else>
+                          <span class="font_weight_bold"
+                            >{{ attr.name }} :</span
+                          >
+                          <span>{{ attr.value }}</span>
+                        </span>
                       </li>
                       <li v-if="item.attributes.length > 1">....</li>
                     </ul>
@@ -117,7 +107,7 @@
       </div>
     </div>
     <div
-      class="text_center py_3 card"
+      class="text_center py_3 card mb_3"
       v-if="productsSearch.results && productsSearch.results.length === 0"
     >
       Khong co ket qua tim kiem
@@ -138,8 +128,8 @@
 </template>
 
 <script>
-import DetailPopup from "../../../layouts/desktop/popup/detail";
-import AddedCollection from "../../../layouts/desktop/popup/addToCollection";
+import DetailPopup from "../../../../layouts/desktop/popup/detail";
+import AddedCollection from "../../../../layouts/desktop/popup/addToCollection";
 export default {
   components: {
     DetailPopup,
@@ -184,10 +174,9 @@ export default {
     }
   },
   created() {
-    if (this.$route.params.keyword) {
+    const productsSearch = this.$store.getters.productsSearch;
+    if (productsSearch.length === 0) {
       this.$store.dispatch("searchProducts", this.$route.params.keyword);
-    } else {
-      return;
     }
   }
 };
