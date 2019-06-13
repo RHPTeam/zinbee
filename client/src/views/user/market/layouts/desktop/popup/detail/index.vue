@@ -44,7 +44,8 @@
                   <div
                     class="price font_weight_bold"
                     v-if="
-                      parseInt(product.priceCents) > 0 && product.priceCents.length > 0
+                      parseInt(product.priceCents) > 0 &&
+                        product.priceCents.length > 0
                     "
                   >
                     {{ product.priceCents }} ₫
