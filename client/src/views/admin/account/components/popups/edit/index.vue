@@ -137,7 +137,7 @@
         class="modal--footer d_flex justify_content_end align_items_center pl_4 pr_4 pb_4 pt_2"
       >
         <button class="btn-cancel" @click="closeAddEdit">Hủy</button>
-        <button class="btn-done ml_4" @click="updateAccount">Xong</button>
+        <button class="btn-done ml_4" @click="closeAddEdit">Xong</button>
       </div>
     </div>
   </div>

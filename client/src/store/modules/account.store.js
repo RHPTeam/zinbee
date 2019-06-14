@@ -550,6 +550,14 @@ const actions = {
       }
     }
     commit("auth_success");
+  },
+  updateUserByAdmin: async ({ commit }, payload) => {
+    const res = await AccountServices.updateUserByAdmin(payload);
+
+    commit("setUserById", res.data.data);
+    const users = await AccountServices.getAllUser();
+
+    await commit("setAllUser", users.data.data);
   }
 };
 
