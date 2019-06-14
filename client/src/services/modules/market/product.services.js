@@ -41,5 +41,10 @@ export default {
     return Api().post(
       `/market/products/search?keyword=${name}&_size=12&_page=1`
     );
+  },
+
+  // get newest product
+  getNewestProduct(number) {
+    return Api().get(`market/products/newest?number=${number}`);
   }
 };

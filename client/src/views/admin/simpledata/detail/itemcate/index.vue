@@ -2,15 +2,16 @@
   <div>
     <div v-if="!post"></div>
     <div v-else class="flex-table row" role="rowgroup">
-      <div class="flex-row first" role="cell">
-        <div v-if="post && post.title.length > 0">{{ post.title }}</div>
+      <div class="flex-row first" role="cell" v-if="post.title">
+        {{ post.title }}
       </div>
-      <div
-        class="flex-row content"
-        role="cell"
-        v-if="post && post.content.length > 0"
-      >
-        <div class="item--content" v-html="post.content.slice(0, 38)"></div>
+      <div class="flex-row content" role="cell" v-if="post.content">
+        <div
+          class="item--content"
+          v-html="
+            post.content.length > 38 ? post.content.slice(0, 38) : post.content
+          "
+        ></div>
       </div>
       <div class="flex-row action" role="cell">
         <div class="d_flex justify_content_center">

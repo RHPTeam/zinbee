@@ -55,4 +55,8 @@ router.route( "/:categoryId/products" )
 // search product by keyword - /market/products/search?keyword=example&_size=12&_page=1
 router.route( "/search" ).post( auth, ProductController.search );
 
+// get newest product
+router .route( "/newest" )
+  .get( ProductController.getNewestProduct );
+
 module.exports = router;

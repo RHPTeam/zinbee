@@ -2,8 +2,12 @@
   <div>
     <div v-if="!item"></div>
     <div v-else class="flex-table row" role="rowgroup">
-      <div class="flex-row first" role="cell">
-        <div v-if="item.content && item.title.length > 0">{{ item.title }}</div>
+      <div
+        class="flex-row first"
+        role="cell"
+        v-if="item.content && item.title.length > 0"
+      >
+        {{ item.title }}
       </div>
       <div
         class="flex-row content"

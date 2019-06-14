@@ -44,7 +44,7 @@ module.exports = {
     const { id } = req.body,
       userInfo = await Account.findOne( { "_id": id } );
 
-    userInfo.status = !userInfo;
+    userInfo.status = !userInfo.status;
     data = await Account.findByIdAndUpdate( id, { "$set": { "status": userInfo.status } }, { "new": true } ).select( "-password" );
 
     res.status( 200 ).json( jsonResponse( "success", data ) );
@@ -64,6 +64,11 @@ module.exports = {
     } else {
       data = await Account.find( req.query ).select( "-password" ).lean();
     }
+
+    res.status( 200 ).json( jsonResponse( "success", data ) );
+  },
+  "getUserInfo": async ( req, res ) => {
+    const data = await Account.findOne( { "_id": req.uid } ).select( "-password" ).lean();
 
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
@@ -90,7 +95,7 @@ module.exports = {
     // Update expire date
     data = await Account.findByIdAndUpdate( id, { "$set": { "status": 1, "expireDate": expireDate } }, { "new": true } ).select( "-password" );
 
-    resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.body.headers );
+    resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
     if ( resUserSync.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
     }

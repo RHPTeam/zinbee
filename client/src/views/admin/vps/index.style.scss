@@ -1,7 +1,10 @@
 $table-header: #ffb94a;
 $table-header-border: #fff6f4;
 $table-border: #d9d9d9;
-$row-bg: #f4f2f1;
+$row-bg: #ccc6;
+$row-color: #666;
+$row-bg-hover: #cccccc40;
+$row-color-hover: #fff;
 .desc {
   span {
     font-weight: 600;
@@ -30,10 +33,10 @@ $row-bg: #f4f2f1;
   }
   &.row:nth-child(odd) .flex-row {
     background: $row-bg;
+    color: $row-color;
   }
-  &:hover {
-    background: #F5F5F5;
-    transition: 500ms;
+  &.row:hover .flex-row {
+    background: $row-bg-hover;
   }
   .flex-row {
     overflow: hidden;

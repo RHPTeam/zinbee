@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="list--post">
     <div v-if="!item">
       <loading-component />
     </div>
@@ -14,7 +14,7 @@
       <div v-else class="flex-row first" role="cell">
         <div v-html="`Chưa cập nhật nội dung`"></div>
       </div>
-      <div class="flex-row" role="cell">
+      <div class="flex-row title--images" role="cell">
         <div
           v-if="item.attachments && item.attachments.length > 0"
           class="d_flex align_items_center"
@@ -40,7 +40,9 @@
         </div>
         <div v-else>Không có ảnh</div>
       </div>
-      <div class="flex-row" role="cell">{{ item._account.name }}</div>
+      <div class="flex-row name--user" role="cell">
+        {{ item._account.name }}
+      </div>
       <div class="flex-row" role="cell">
         <div class="d_flex justify_content_center">
           <button class="btn btn_warning" @click="showPostLibrariesById">
@@ -82,7 +84,6 @@ $table-header: #ffb94a;
 $table-header-border: #fff6f4;
 $table-border: #d9d9d9;
 $row-bg: #f5f5f5;
-
 .table-container {
   display: block;
   margin: auto;
@@ -107,10 +108,6 @@ $row-bg: #f5f5f5;
   &.row:nth-child(odd) .flex-row {
     background: $row-bg;
   }
-  &:hover {
-    background: #f5f5f5;
-    transition: 500ms;
-  }
   .flex-row {
     color: $blackLight !important;
     overflow: hidden;
@@ -121,6 +118,11 @@ $row-bg: #f5f5f5;
     padding: 0.5em 0.5em;
     border-right: solid 1px $table-border;
     border-bottom: solid 1px $table-border;
+    > div {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 .images {
@@ -141,6 +143,30 @@ $row-bg: #f5f5f5;
     left: 0;
     width: 100%;
     height: 100%;
+  }
+}
+
+// ====================== RESPONSIVE
+
+@media screen and (max-width: 1050px) {
+  .flex-table {
+    .flex-row {
+      width: 33.333%;
+    }
+    .title--images {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .flex-table {
+    .flex-row {
+      width: 50%;
+    }
+    .name--user {
+      display: none;
+    }
   }
 }
 </style>

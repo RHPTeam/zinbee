@@ -19,8 +19,6 @@ export default {
       return arrCategoriesChildren;
     },
     inforProductById() {
-      // console.log("this.$store.getters.product");
-      // console.log(this.$store.getters.product);
       return this.$store.getters.product;
     },
     getProductDefault() {
@@ -31,25 +29,6 @@ export default {
     },
     allMarketPosts() {
       return this.$store.getters.allMarketPosts;
-    },
-    // get name categories by id
-    getNameCategoryById() {
-      // const arr = {
-      //   _id: "",
-      //   name: ""
-      // };
-      // this.categories.map(item => {
-      //   // if (item._id === this.inforProductById._category) {
-      //   // }
-      // });
-    },
-    // get name post by id
-    getNamePostById() {
-      this.allMarketPosts.map(item => {
-        if (item._id === this.inforProductById.content) {
-          this.inforProductById.content = item.title;
-        }
-      });
     }
   },
   async created() {
@@ -72,13 +51,42 @@ export default {
           thumbnail: this.inforProductById.previews.thumbnail
         },
         typeProduct: this.inforProductById.typeProduct,
-        _category: {
-          _id: this.inforProductById._category._id,
-          name: this.inforProductById._category.name
-        }
+        _category: this.inforProductById._category
       };
       this.$store.dispatch("createProduct", dataCreate);
       this.$router.push({ name: "manage_product" });
+    },
+    convertProductContent(post) {
+      let dataPost = {
+        _id: "",
+        title: ""
+      };
+      this.allMarketPosts.map(item => {
+        if (item._id === post) {
+          dataPost._id = item._id;
+          dataPost.title = item.title;
+        }
+      });
+      return dataPost;
+    },
+    updateProductContent(value) {
+      this.inforProductById.content = value._id;
+    },
+    convertCategoryPost(category) {
+      let dataCategory = {
+        _id: "",
+        name: ""
+      };
+      this.categories.map(item => {
+        if (item._id === category) {
+          dataCategory._id = item._id;
+          dataCategory.name = item.name;
+        }
+      });
+      return dataCategory;
+    },
+    updateProductCategory(value) {
+      this.inforProductById._category = value._id;
     },
     selectFile() {
       this.file = this.$refs.file.files;
@@ -113,8 +121,6 @@ export default {
       this.isOptionsPost = false;
     },
     updateProduct() {
-      // console.log("this.inforProductById");
-      // console.log(this.inforProductById);
       this.$store.dispatch("updateProduct", this.inforProductById);
       this.$router.push({ name: "manage_product" });
     },
