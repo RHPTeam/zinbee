@@ -2,9 +2,9 @@
   <div
     class="modal--wrapper position_fixed d_flex justify_content_center align_items_center"
   >
-    <div class="modal--content">
+    <div class="modal--content" v-click-outside="closeAddEdit">
       <div class="modal--header pl_4 pr_4 pt_3 pb_3">Cấu hình tài khoản</div>
-      <div class="modal--body pt_3 pb_0 pl_4 pr_4">
+      <div class="modal--body pt_3 pb_0 pl_4 pr_4" v-if="user">
         <!-- Start: User General Info -->
         <div class="user d_flex justify_content_start align_items_center mb_4">
           <div class="user--avatar mr_4">
@@ -57,6 +57,7 @@
                 format="DD/MM/YYYY"
                 :default-value="new Date(user.expireDate)"
                 v-model="user.expireDate"
+                @change="changeDateSetup"
               ></datepicker>
             </div>
           </div>
@@ -131,11 +132,12 @@
         </div>
         <!-- End: User Edit -->
       </div>
+      <div v-else>Không có dữ liệu nhé mày</div>
       <div
         class="modal--footer d_flex justify_content_end align_items_center pl_4 pr_4 pb_4 pt_2"
       >
         <button class="btn-cancel" @click="closeAddEdit">Hủy</button>
-        <button class="btn-done ml_4" @click="updateAccount">Xong</button>
+        <button class="btn-done ml_4" @click="closeAddEdit">Xong</button>
       </div>
     </div>
   </div>

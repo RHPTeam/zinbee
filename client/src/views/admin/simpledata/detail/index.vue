@@ -56,7 +56,7 @@
           v-if="
             infoCateDefault.postList && infoCateDefault.postList.length === 0
           "
-          class="d_flex align_items_center justify_content_center py_3"
+          class="d_flex align_items_center justify_content_center no--post py_3"
         >
           Chưa có bài viết nào
         </div>

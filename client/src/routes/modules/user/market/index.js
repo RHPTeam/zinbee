@@ -11,13 +11,21 @@ const marketRouter = {
     },
     {
       path: "category/:categoryParent/:subCategory",
-      name: "market_list",
-      component: require("@/views/user/market/list").default
-    },
-    {
-      path: "products/search/:keyword",
-      name: "market_search",
-      component: require("@/views/user/market/search").default
+      component: require("@/views/user/market/list").default,
+      children: [
+        {
+          path: "",
+          name: "market_list",
+          component: require("@/views/user/market/list/desktop/components/main")
+            .default
+        },
+        {
+          path: "/market/products/search/:keyword",
+          name: "market_search",
+          component: require("@/views/user/market/list/desktop/components/search")
+            .default
+        }
+      ]
     }
   ]
 };

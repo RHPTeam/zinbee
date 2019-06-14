@@ -76,7 +76,7 @@
       <!-- Main: Product -->
       <div class="pr_0" :class="showMarketListSidebar ? 'c_md_9' : 'c_md_12'">
         <!-- Start: App Data-->
-        <app-data></app-data>
+        <router-view></router-view>
         <!-- End: App Data -->
       </div>
     </div>
@@ -84,14 +84,12 @@
 </template>
 
 <script>
-import AppData from "./main";
 import AppSearch from "./search";
 import AppSidebar from "./sidebar";
 import FilterProduct from "./filter";
 
 export default {
   components: {
-    AppData,
     AppSearch,
     AppSidebar,
     FilterProduct

@@ -1,5 +1,5 @@
 <template>
-  <form @submit="sendCode" class="text_center">
+  <form @submit.prevent="sendCode" class="text_center">
     <div class="form--reset-logo">
       <icon-base
         icon-name="logo"

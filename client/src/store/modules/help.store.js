@@ -25,10 +25,10 @@ const mutations = {
     state.popularHelp = payload;
   },
   setContentDefault: (state, payload) => {
-    state.contentDefault.push(payload);
+    state.contentDefault = payload;
   },
   setCategoryDefault: (state, payload) => {
-    state.categoryDefault.push(payload);
+    state.categoryDefault = payload;
   },
   setHelpDefault: (state, payload) => {
     state.helpDefault = payload;

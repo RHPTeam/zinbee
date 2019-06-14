@@ -25,13 +25,13 @@ const state = {
     previews: {
       thumbnail: ""
     },
-    _category: {
-      _id: "",
-      name: ""
-    }
+    _category: ""
   },
   productsByCategory: [],
-  productsSearch: []
+  productsSearch: [],
+  newestProduct: [],
+  statusProducts: "",
+  statusSearchProducts: ""
 };
 const getters = {
   allProduct: state => state.allProduct,
@@ -42,7 +42,10 @@ const getters = {
   product: state => state.product,
   nodeUpdate: state => state.nodeUpdate,
   productsByCategory: state => state.productsByCategory,
-  productsSearch: state => state.productsSearch
+  productsSearch: state => state.productsSearch,
+  newestProduct: state => state.newestProduct,
+  statusProducts: state => state.statusProducts,
+  statusSearchProducts: state => state.statusSearchProducts
 };
 const mutations = {
   market_request: state => {
@@ -96,6 +99,21 @@ const mutations = {
   // setSearchProducts
   setSearchProducts: (state, payload) => {
     state.productsSearch = payload;
+  },
+
+  // setGetNewestProduct
+  setGetNewestProduct: (state, payload) => {
+    state.newestProduct = payload;
+  },
+
+  // statusProducts
+  statusProducts: (state, payload) => {
+    state.statusProducts = payload;
+  },
+
+  // statusSearchProducts
+  statusSearchProducts: (state, payload) => {
+    state.statusSearchProducts = payload;
   }
 };
 const actions = {
@@ -158,10 +176,7 @@ const actions = {
       previews: {
         thumbnail: ""
       },
-      _category: {
-        _id: "",
-        name: ""
-      }
+      _category: ""
     });
   },
   setButtonDefault: async ({ commit }, payload) => {
@@ -194,14 +209,24 @@ const actions = {
 
   // get products by category
   getProductsByCategory: async ({ commit }, payload) => {
+    commit("statusProducts", "loading");
     const resData = await ProductMarket.loadProductsByCategory(payload);
     commit("setProductsByCategory", resData.data.data);
+    commit("statusProducts", "success");
   },
 
   // search products
   searchProducts: async ({ commit }, payload) => {
+    commit("statusSearchProducts", "loading");
     const resSearch = await ProductMarket.searchProducts(payload);
     commit("setSearchProducts", resSearch.data.data);
+    commit("statusSearchProducts", "success");
+  },
+
+  // get newest product -- home market
+  getNewestProduct: async ({ commit }, payload) => {
+    const resNewestProduct = await ProductMarket.getNewestProduct(payload);
+    commit("setGetNewestProduct", resNewestProduct.data.data);
   }
 };
 

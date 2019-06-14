@@ -16,5 +16,16 @@ module.exports = {
       "data": data,
       "headers": headers
     } );
+  },
+  "activeAccountSync": ( url, data, headers ) => {
+    return request( {
+      "method": "patch",
+      // eslint-disable-next-line no-nested-ternary
+      "url": url,
+      "data": data,
+      "headers": {
+        "Authorization": headers
+      }
+    } );
   }
 };

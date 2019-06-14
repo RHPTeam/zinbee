@@ -15,7 +15,7 @@ const fs = require( "fs" );
 const jsonResponse = require( "../configs/response" );
 
 const { signToken } = require( "../configs/jwt" );
-const { signUpSync, createNewPasswordSync } = require( "../microservices/synchronize/account" ),
+const { signUpSync, createNewPasswordSync, activeAccountSync } = require( "../microservices/synchronize/account" ),
   mail = require( "nodemailer" ),
   CronJob = require( "cron" ).CronJob;
 
@@ -44,7 +44,7 @@ module.exports = {
     const { id } = req.body,
       userInfo = await Account.findOne( { "_id": id } );
 
-    userInfo.status = !userInfo;
+    userInfo.status = !userInfo.status;
     data = await Account.findByIdAndUpdate( id, { "$set": { "status": userInfo.status } }, { "new": true } ).select( "-password" );
 
     res.status( 200 ).json( jsonResponse( "success", data ) );
@@ -68,7 +68,7 @@ module.exports = {
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   "renewById": async ( req, res ) => {
-    let data;
+    let data, resUserSync;
 
     // Check validator
     if ( req.body.id === undefined || req.body.id.length === 0 ) {
@@ -78,7 +78,9 @@ module.exports = {
     }
 
     const { id, expireDate } = req.body,
-      userInfo = await Account.findOne( { "_id": id } );
+      userInfo = await Account.findOne( { "_id": id } ),
+      vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
+
 
     // Check exists
     if ( !userInfo ) {
@@ -87,6 +89,11 @@ module.exports = {
 
     // Update expire date
     data = await Account.findByIdAndUpdate( id, { "$set": { "status": 1, "expireDate": expireDate } }, { "new": true } ).select( "-password" );
+
+    resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
+    if ( resUserSync.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    }
 
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
@@ -106,6 +113,10 @@ module.exports = {
       }
 
       await Promise.all( userList.map( async ( user ) => {
+        const vpsContainServer = await Server.findOne( { "userAmount": user._id } ).select( "info" ).lean();
+        let resUserSync,
+          id = user._id;
+
         user.status = 1;
         user.expireDate = req.body.expireDate;
 
@@ -114,6 +125,11 @@ module.exports = {
           { "$set": user },
           { "new": true }
         );
+        // Update expire date
+        resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, { "id": id, "expireDate": req.body.expireDate }, req.body.headers );
+        if ( resUserSync.data.status !== "success" ) {
+          return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+        }
       } ) );
     }
 
@@ -198,7 +214,7 @@ module.exports = {
       optimalServer = await Server.findOne( { "region": 0, "status": 1 } ).sort( { "slot": -1 } ),
       character = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    let newUser, resSyncNestedServer, isEnvironment, code = "", transporter;
+    let newUser, resSyncNestedServer, isEnvironment, code = "";
 
     // Random get six character
     for ( let i = 0; i < 6; i++ ) {
@@ -225,34 +241,6 @@ module.exports = {
     optimalServer.slot = optimalServer.amountMax - optimalServer.userAmount.length;
     optimalServer.save();
     // Send password to user
-    // Use Smtp Protocol to send Email
-    transporter = await mail.createTransport( {
-      "service": "Gmail",
-      "auth": {
-        "user": process.env.MAIL_USERNAME,
-        "pass": process.env.MAIL_PASSWORD
-      }
-    } );
-
-    // Setup template email
-    await transporter.sendMail(
-      {
-        "from": process.env.MAIL_USERNAME,
-        "to": email,
-        "subject": "Zinbee Version Update",
-        "html": `
-      <div>
-        <img src="http://zinbee.vn/assets/landing/image/logo/zinbee.png"> <br>
-        <span style="font-size: 20px">Mật khẩu của bạn sau khi hệ thống update</span><br>
-        <span style="font-size: 20px"><b>Password:<span>${code}</span></b> </span> 
-      </div>`
-      },
-      ( err ) => {
-        if ( err ) {
-          return next( err );
-        }
-      }
-    );
   },
   "resetPassword": async ( req, res, next ) => {
     const { email } = req.body,
