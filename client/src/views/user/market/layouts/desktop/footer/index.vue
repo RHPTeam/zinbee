@@ -79,14 +79,14 @@
           <div class="imkt--social-button">
             <ul class="d_flex pl_0 mb_0">
               <li>
-                <a href="http://facebook.com" target="_blank">
+                <a href="https://www.facebook.com/zinbeeauto/" target="_blank">
                   <div class="mr_2">
                     <icon-base
                       class="mt_1"
-                      icon-name="menu"
+                      icon-name="Facebook ZinBee"
                       width="30"
                       height="30"
-                      viewBox="0 0 500 500"
+                      viewBox="0 0 115 115"
                     >
                       <icon-facebook-cirle />
                     </icon-base>
@@ -94,11 +94,14 @@
                 </a>
               </li>
               <li>
-                <a href="http://youtube.com" target="_blank">
+                <a
+                  href="https://www.youtube.com/channel/UC95EoWnJWWbRUzc4BRgKCZg"
+                  target="_blank"
+                >
                   <div class="">
                     <icon-base
                       class="mt_1"
-                      icon-name="menu"
+                      icon-name="Youtube ZinBee"
                       width="30"
                       height="30"
                       viewBox="0 0 520 520"
@@ -130,7 +133,7 @@
           <div class="text">Tiếng Việt</div>
           <div class="icon--edit ml_1">
             <icon-base
-              icon-name="edit"
+              icon-name="Chỉnh sửa"
               width="14"
               height="14"
               viewBox="0 0 24 24"

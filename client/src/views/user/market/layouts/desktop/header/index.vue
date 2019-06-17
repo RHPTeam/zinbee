@@ -13,7 +13,7 @@
             <router-link tag="div" :to="{ name: 'market_home' }">
               <div class="logo d_flex align_items_center">
                 <icon-base
-                  icon-name="logo"
+                  icon-name="ZinBee"
                   width="40px"
                   height="40px"
                   viewBox="0 0 200 200"
@@ -32,13 +32,13 @@
           <!-- Start: Redirect to help -->
           <div class="help mr_2 ml_1" @click="redirectToHelp">
             <icon-base
-              class="icon--help mt_1"
-              icon-name="menu"
+              class="icon--help mt_2"
+              icon-name="Hỗ trợ"
               width="24"
               height="24"
-              viewBox="0 0 24 24"
+              viewBox="0 0 550 550"
             >
-              <icon-help />
+              <icon-support />
             </icon-base>
           </div>
           <!-- End: Redirect to help -->
@@ -52,6 +52,7 @@
                 width="24px"
                 height="24px"
                 viewBox="0 0 512 512"
+                icon-name="Xem thêm"
               >
                 <icon-application />
               </icon-base>
@@ -65,7 +66,7 @@
                 <div class="d_flex text_center r m_0 application">
                   <div class="zin--post item c_4" @click="gotoHomePost">
                     <icon-base
-                      icon-name="bell"
+                      icon-name="Zin Post"
                       width="50px"
                       height="50px"
                       viewBox="0 0 512 512"
@@ -76,7 +77,7 @@
                   </div>
                   <div class="zin--post zin-chat item c_4">
                     <icon-base
-                      icon-name="bell"
+                      icon-name="Zin Chat"
                       width="50px"
                       height="50px"
                       viewBox="0 0 512 512"
@@ -87,7 +88,7 @@
                   </div>
                   <div class="zin--post instagram item c_4">
                     <icon-base
-                      icon-name="bell"
+                      icon-name="Instagram"
                       width="50px"
                       height="50px"
                       viewBox="0 0 550 550"
@@ -98,7 +99,7 @@
                   </div>
                   <div class="zin--post zalo item c_4">
                     <icon-base
-                      icon-name="bell"
+                      icon-name="Zalo"
                       width="50px"
                       height="50px"
                       viewBox="0 0 512 512"
@@ -149,7 +150,7 @@
               <span class="profile--name ml_2 mr_2">{{ userMember.name }}</span>
               <div class="profile--icon">
                 <icon-base
-                  icon-name="arrow-down"
+                  icon-name="Xem thêm"
                   width="10"
                   height="10"
                   viewBox="0 0 130 130"

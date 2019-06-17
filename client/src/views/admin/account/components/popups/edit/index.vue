@@ -40,7 +40,7 @@
           >
             <div class="edit--desc d_flex align_items_center">
               <icon-base
-                icon-name="hourglass"
+                icon-name="Ngày hết hạn"
                 class="mr_3"
                 width="15.333"
                 height="20"
@@ -68,7 +68,7 @@
           >
             <div class="edit--desc d_flex align_items_center">
               <icon-base
-                icon-name="check-active"
+                icon-name="Kích hoạt"
                 class="mr_3"
                 width="20"
                 height="20"
@@ -95,7 +95,7 @@
           >
             <div class="edit--desc d_flex align_items_center">
               <icon-base
-                icon-name="infinity"
+                icon-name="Số lượng"
                 class="mr_3"
                 width="20"
                 height="20"
@@ -115,7 +115,7 @@
           >
             <div class="edit--desc d_flex align_items_center">
               <icon-base
-                icon-name="role"
+                icon-name="Loại"
                 class="mr_3"
                 width="16.667"
                 height="20"

@@ -2,7 +2,7 @@
   <form @submit.prevent="sendCode" class="text_center">
     <div class="form--reset-logo">
       <icon-base
-        icon-name="logo"
+        icon-name="ZinBee"
         width="210.21"
         height="78.65"
         viewBox="0 0 250.446 93.703"
@@ -37,7 +37,7 @@
       <div class="icon position_absolute">
         <icon-base
           class="ic--security"
-          icon-name="security"
+          icon-name="Bảo mật"
           width="22"
           height="22"
           viewBox="0 0 20 20"

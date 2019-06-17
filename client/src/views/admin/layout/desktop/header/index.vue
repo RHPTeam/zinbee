@@ -33,7 +33,7 @@
         >
           <icon-base
             :class="[isShowNotificationDropdown ? 'active' : null]"
-            icon-name="bell"
+            icon-name="Thông báo"
             width="20px"
             height="20px"
             viewBox="0 0 512 512"
@@ -80,7 +80,7 @@
         <span class="profile--name ml_2 mr_2">{{ user.name }}</span>
         <div class="profile--icon">
           <icon-base
-            icon-name="arrow-down"
+            icon-name="Hồ sơ"
             width="10"
             height="10"
             viewBox="0 0 130 130"
@@ -120,7 +120,7 @@
           <div class="dropdown--divider"></div>
           <a class="dropdown--item" href="javascript:void(0)" @click="logOut">
             <icon-base
-              icon-name="logout"
+              icon-name="Đăng xuất"
               width="20"
               height="20"
               viewBox="0 0 20 20"

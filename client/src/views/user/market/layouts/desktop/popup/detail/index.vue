@@ -35,6 +35,7 @@
                     width="16px"
                     height="16px"
                     viewBox="0 0 20 20"
+                    icon-name="User"
                   >
                     <icon-user></icon-user>
                   </icon-base>

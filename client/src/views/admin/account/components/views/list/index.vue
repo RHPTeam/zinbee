@@ -55,7 +55,7 @@
             <div class="list--item item--action text_right pr_2">
               <div class="icon--edit" @click="openPopupEdit(user)">
                 <icon-base
-                  icon-name="edit-info"
+                  icon-name="Sửa"
                   width="16"
                   height="16"
                   viewBox="0 0 24 24"
