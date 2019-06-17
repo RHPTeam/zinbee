@@ -19,6 +19,10 @@ const mongoose = require( "mongoose" ),
     "vote": Number,
     "postID": String,
     "generate": Boolean, // 1 crawl, 0 user, admin
+    "inFolderDefault": {
+      "type": Boolean,
+      "default": 0
+    },
     "_account": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"

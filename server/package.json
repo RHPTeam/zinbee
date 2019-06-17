@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "nodemon -r dotenv/config index.js",
     "lint": "./node_modules/.bin/eslint src/**/*.js",
-    "lint:fix": "./node_modules/.bin/eslint src/**/*.js --fix"
+    "lint:fix": "./node_modules/.bin/eslint src/**/*.js --fix",
+    "cwd": "/server"
   },
   "author": "RHP Team, MASSO Company",
   "license": "ISC",
