@@ -11,6 +11,11 @@ const helpGeneralRouter = {
       path: "detail",
       name: "help_detail",
       component: require("@/views/user/help/detail").default
+    },
+    {
+      path: "search",
+      name: "help_result_search",
+      component: require("@/views/user/help/detail/search").default
     }
   ]
 };

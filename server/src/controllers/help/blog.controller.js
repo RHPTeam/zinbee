@@ -117,6 +117,6 @@ module.exports = {
 
     return res
       .status( 200 )
-      .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
+      .json( jsonResponse( "success", { "results": dataResponse, "page": page, "total": data.length } ) );
   }
 };
