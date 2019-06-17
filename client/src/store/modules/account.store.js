@@ -56,6 +56,7 @@ const mutations = {
     state.authStatus = "success";
   },
   auth_error: (state, payload) => {
+    state.authStatus = "error";
     state.authError = payload;
   },
   setAllUser: (state, payload) => {
@@ -265,6 +266,7 @@ const actions = {
       axios.defaults.headers.common.Authorization = resData.headers.cookie;
 
       commit("auth_success");
+      commit("auth_error", "");
       commit("setRedirectDomain", `${resData.data.data.domain}`);
     } catch (e) {
       if (e.response.status === 401) {
