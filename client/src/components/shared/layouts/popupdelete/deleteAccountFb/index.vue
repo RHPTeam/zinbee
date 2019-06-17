@@ -1,12 +1,7 @@
 <template>
   <div class="rhp">
     <span @click.prevent="isShow = true">
-      <icon-base
-        width="20"
-        height="20"
-        viewBox="0 0 15 15"
-        icon-name="Xóa"
-      >
+      <icon-base width="20" height="20" viewBox="0 0 15 15" icon-name="Xóa">
         <icon-remove />
       </icon-base>
     </span>
