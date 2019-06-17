@@ -16,6 +16,7 @@ import signInRouter from "./modules/user/_general/signin";
 import signUpRouter from "./modules/user/_general/signup";
 import redirectRouter from "./modules/user/_general/redirect";
 import changePasswordRouter from "./modules/user/_general/password";
+import landingPageRouter from "./modules/user/_general/landingpage";
 
 /**
  * Router for Help
@@ -46,6 +47,7 @@ export default new Router({
     signUpRouter,
     redirectRouter,
     changePasswordRouter,
+    landingPageRouter,
     /**
      * Router for Help
      */
