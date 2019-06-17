@@ -15,5 +15,10 @@ export default {
   },
   deleteBlog(id) {
     return Api().delete(`help/posts?_id=${id}`);
+  },
+  searchBlog(keyword, size, page) {
+    return Api().post(
+      `help/posts/search?keyword=${keyword}&_size=${size}&_page=${page}`
+    );
   }
 };

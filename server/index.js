@@ -9,8 +9,11 @@ const express = require( "express" ),
 const api = require( "./src/routes" );
 const mongoose = require( "mongoose" );
 const passport = require( "passport" );
+const dotenv = require( "dotenv" );
 
 let server = null;
+
+dotenv.config( { "path": ".env" } );
 
 if ( process.env.APP_ENV === "production" ) {
   const options = {

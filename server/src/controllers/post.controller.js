@@ -17,9 +17,12 @@ Object.defineProperty( Array.prototype, "flat", {
 
 const PostFacebook = require( "../models/Post.model" );
 const Account = require( "../models/Account.model" );
+const Server = require( "../models/Server.model" );
 
 const jsonResponse = require( "../configs/response" );
-const dictionary = require( "../configs/dictionaries" );
+const dictionary = require( "../configs/dictionaries" ),
+  { syncPostFolderExample } = require( "../microservices/synchronize/post" );
+
 
 const { searchPost } = require( "../controllers/core/search.core" ),
   { agent, cookie } = require( "../configs/crawl" );
@@ -42,6 +45,7 @@ module.exports = {
     const newPostFacebook = new PostFacebook( { "title": dictionary.DEFAULT_NAME_POST, "_account": req.uid } );
 
     await newPostFacebook.save();
+
     res.status( 200 ).json( jsonResponse( "success", newPostFacebook ) );
   },
   "delete": async ( req, res ) => {
@@ -171,10 +175,7 @@ module.exports = {
       return res.status( 201 ).json( jsonResponse( "success", postInfo ) );
     }
 
-    // Random like and share by system
     req.body.content = req.body.content.replace( /(<br \/>)|(<br>)/gm, "\n" ).replace( /(<\/p>)|(<\/div>)/gm, "\n" ).replace( /(<([^>]+)>)/gm, "" );
-    req.body.share = Math.floor( Math.random() * 2000 ) + 700;
-    req.body.like = Math.floor( Math.random() * 3000 ) + 800;
 
     res.status( 201 ).json( jsonResponse( "success", await PostFacebook.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) ) );
   },
@@ -257,5 +258,29 @@ module.exports = {
     return res
       .status( 200 )
       .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
+  },
+  "duplicate": async ( req, res ) => {
+    const findPost = await PostFacebook.findOne( { "_id": req.query._postId } ),
+      userInfo = await Account.findOne( { "_id": req.uid } ),
+      vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
+
+    // Check catch when duplicate
+    if ( !findPost ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Bài viết không tồn tại!" } );
+    }
+
+    let data = {
+        "title": `${findPost.title} Copy`,
+        "content": findPost.content,
+        "attachments": findPost.attachments
+      },
+      resPostSync = await syncPostFolderExample( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/posts/sync/duplicate`, data, req.headers.authorization );
+
+
+    if ( resPostSync.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    }
+
+    res.status( 200 ).json( jsonResponse( "success", findPost ) );
   }
 };

@@ -48,5 +48,6 @@ router
 router.route( "/sync" ).patch( PostController.insert );
 router.route( "/search" ).post( auth, PostController.search );
 router.route( "/search-live" ).post( PostController.searchLive );
+router.route( "/duplicate" ).post( auth, PostController.duplicate );
 
 module.exports = router;

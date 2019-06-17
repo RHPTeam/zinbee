@@ -57,10 +57,10 @@
                 :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
               ></div>
               <div class="topic--name mt_2">GIỚI THIỆU</div>
-              <div class="title">Trang</div>
+              <div class="title">Chiến dịch</div>
               <div class="content mt_2">
-                Nhận trợ giúp quản lý Trang và hiểu cách tương tác với Trang mà
-                bạn quan tâm.
+                Nhận trợ giúp quản lý chiến dịch và hiểu cách tương tác với
+                chiến dịch mà bạn quan tâm.
               </div>
             </div>
           </div>
@@ -71,9 +71,10 @@
                 :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
               ></div>
               <div class="topic--name mt_2">GIỚI THIỆU</div>
-              <div class="title">Nhắn tin</div>
+              <div class="title">Trò chuyện</div>
               <div class="content mt_2">
-                Tìm câu trả lời về cách gửi và nhận tin nhắn trên Facebook.
+                Tìm câu trả lời về cách gửi và nhận tin nhắn trên hệ thống
+                Zinbee.
               </div>
             </div>
           </div>
@@ -86,7 +87,7 @@
               <div class="topic--name mt_2">GIỚI THIỆU</div>
               <div class="title">Thông báo</div>
               <div class="content mt_2">
-                Thay đổi nội dung bạn sẽ được thông báo trên Facebook và quyết
+                Thay đổi nội dung bạn sẽ được thông báo trên hệ thống và quyết
                 định cách nhận các thông báo đó.
               </div>
             </div>
@@ -110,12 +111,13 @@
               ></div>
               <div>
                 <a href="" class="access--public access--help">
-                  Truy cập Cộng đồng trợ giúp
+                  Nhắn tin với quản trị viên
                 </a>
               </div>
               <div class="des--content">
                 <div class="text">
-                  Nhận trợ giúp từ người khác trên Facebook có câu hỏi tương tự
+                  Nhắn tin với quản trị viên để được hỗ trợ những gì bạn đang
+                  thắc mắc.
                 </div>
               </div>
             </div>
@@ -126,13 +128,18 @@
                 :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
               ></div>
               <div>
-                <a href="" class="access--public access--help-advertise">
-                  Truy cập Cộng đồng trợ giúp
+                <a
+                  :href="hrefPage"
+                  target="_blank"
+                  class="access--public access--help-advertise"
+                >
+                  Truy cập cộng đồng trợ giúp
                 </a>
               </div>
               <div class="des--content">
                 <div class="text">
-                  Tìm hiểu thêm về cách quảng cáo doanh nghiệp trên Facebook
+                  Tìm hiểu thêm về cách sử dụng hệ thống qua những câu trả lời
+                  trên diễn dàn.
                 </div>
               </div>
             </div>
@@ -147,7 +154,8 @@
 export default {
   data() {
     return {
-      srcDefault: require("@/assets/images/home-help.png")
+      srcDefault: require("@/assets/images/home-help.png"),
+      hrefPage: "https://www.facebook.com/zinbeeauto"
     };
   },
   computed: {
