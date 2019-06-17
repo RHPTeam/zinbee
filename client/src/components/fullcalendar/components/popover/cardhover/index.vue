@@ -37,7 +37,12 @@
       <div class="card--hover-item">
         <div class="item--left">
           <div class="card--hover-icon icon--post">
-            <icon-base height="20px" width="20px" viewBox="0 0 520 520">
+            <icon-base
+              height="20px"
+              width="20px"
+              viewBox="0 0 520 520"
+              icon-name="Đăng"
+            >
               <icon-post></icon-post>
             </icon-base>
           </div>

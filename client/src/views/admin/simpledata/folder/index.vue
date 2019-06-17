@@ -11,7 +11,7 @@
           </div>
         </div>
         <div
-          class="c_3 mb_3 position_relative"
+          class="c_lg_6 c_xl_3 c_md_6 mb_3 position_relative"
           v-else
           v-for="(item, index) in categoryDefault"
           :key="`c-${index}`"
@@ -60,7 +60,7 @@
           </transition>
         </div>
 
-        <div class="c_3 mb_3">
+        <div class="c_lg_6 c_xl_3 c_md_6 mb_3">
           <div
             class="card d_flex flex_column align_items_center px_3 py_5"
             @click="isShowCreateGroup = true"

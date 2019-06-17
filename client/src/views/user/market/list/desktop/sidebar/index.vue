@@ -4,7 +4,7 @@
       <div class="title d_flex align_items_center justify_content_between">
         <div class="text font_weight_bold mb_2">Danh mục</div>
         <div class="icon">
-          <icon-base viewBox="0 0 240 240">
+          <icon-base viewBox="0 0 240 240" icon-name="Danh mục">
             <icon-arrow-down></icon-arrow-down>
           </icon-base>
         </div>

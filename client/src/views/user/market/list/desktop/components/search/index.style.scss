@@ -140,3 +140,30 @@
 .list--main[data-theme="dark"] {
 
 }
+
+
+// ================================  RESPONSIVE  ================================
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .list--main {
+    .list--group {
+      .list--group-item {
+        .card {
+          .card_body {
+            flex-direction: column;
+            .left, .right {
+              flex: 0 0 100%;
+              max-width: 100%;
+              padding-left: 0!important;
+              border-right: 0;
+            }
+            .left {
+              margin-bottom: 0.625rem;
+              padding-bottom: 0.625rem!important;
+              border-bottom: 1px solid #ccc;
+            }
+          }
+        }
+      }
+    }
+  }
+}

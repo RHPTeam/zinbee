@@ -2,7 +2,7 @@
   <form @submit.prevent="sendMail" class="text_center">
     <div class="form--reset-logo mb_5">
       <icon-base
-        icon-name="logo"
+        icon-name="ZinBee"
         width="210.21"
         height="78.65"
         viewBox="0 0 250.446 93.703"
@@ -32,7 +32,7 @@
       <div class="icon position_absolute">
         <icon-base
           class="ic--evelope"
-          icon-name="envelope"
+          icon-name="Email"
           width="20.554"
           height="15.713"
           viewBox="0 0 20.554 15.713"

@@ -23,7 +23,7 @@
                   >
                     <span class="file--cta-icon">
                       <icon-base
-                        icon-name="icon-upload-image"
+                        icon-name="Chọn một ảnh"
                         class="icon-sort-down"
                         width="90"
                         height="90"
