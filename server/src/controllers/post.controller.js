@@ -44,9 +44,6 @@ module.exports = {
   "create": async ( req, res ) => {
     const newPostFacebook = new PostFacebook( { "title": dictionary.DEFAULT_NAME_POST, "_account": req.uid } );
 
-    if ( req.query._status === "true" ) {
-      newPostFacebook.inFolderDefault = true;
-    }
     await newPostFacebook.save();
 
     res.status( 200 ).json( jsonResponse( "success", newPostFacebook ) );
@@ -270,10 +267,6 @@ module.exports = {
     // Check catch when duplicate
     if ( !findPost ) {
       return res.status( 404 ).json( { "status": "error", "message": "Bài viết không tồn tại!" } );
-    }
-    // Check that post is crawl on facebook
-    if ( !findPost.inFolderDefault ) {
-      return res.status( 405 ).json( { "status": "error", "message": "Bạn không thể tạo bài viết crawl từ facebook!" } );
     }
 
     let data = {
