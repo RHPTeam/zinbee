@@ -8,7 +8,7 @@
       <router-link to="/">
         <div class="sidebar--logo-icon">
           <icon-base
-            icon-name="logo"
+            icon-name="ZinBee"
             width="132.92"
             height="49.73"
             viewBox="0 0 250.446 93.703"

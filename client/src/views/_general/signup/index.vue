@@ -19,7 +19,7 @@
           <div class="form--header">
             <div class="header--logo">
               <icon-base
-                icon-name="logo"
+                icon-name="ZinBee"
                 width="210.21"
                 height="78.65"
                 viewBox="0 0 250.446 93.703"
@@ -63,7 +63,7 @@
             >
               <div class="icon position_absolute">
                 <icon-base
-                  icon-name="user"
+                  icon-name="Họ tên"
                   width="16.425"
                   height="16.425"
                   viewBox="0 0 16.425 16.425"
@@ -88,7 +88,7 @@
             >
               <div class="icon position_absolute">
                 <icon-base
-                  icon-name="phone"
+                  icon-name="Phone"
                   width="20.896"
                   height="20.857"
                   viewBox="0 0 20.896 20.857"
@@ -128,7 +128,7 @@
             >
               <div class="icon ic--security position_absolute">
                 <icon-base
-                  icon-name="security"
+                  icon-name="Mã giới thiệu"
                   width="22"
                   height="22"
                   viewBox="0 0 20 20"
@@ -154,7 +154,7 @@
             >
               <div class="icon position_absolute">
                 <icon-base
-                  icon-name="envelope"
+                  icon-name="Email"
                   width="20.554"
                   height="15.713"
                   viewBox="0 0 20.554 15.713"
@@ -180,7 +180,7 @@
             >
               <div class="icon position_absolute">
                 <icon-base
-                  icon-name="lock"
+                  icon-name="Mật khẩu"
                   width="14.782"
                   height="18.55"
                   viewBox="0 0 14.782 18.55"
@@ -206,7 +206,7 @@
             >
               <div class="icon position_absolute">
                 <icon-base
-                  icon-name="lock-check"
+                  icon-name="Mật khẩu"
                   width="14.8"
                   height="18.604"
                   viewBox="0 0 14.8 18.604"

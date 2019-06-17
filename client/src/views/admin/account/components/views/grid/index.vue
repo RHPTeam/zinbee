@@ -17,7 +17,7 @@
             v-if="selected.length > 0"
           >
             <icon-base
-              icon-name="remove"
+              icon-name="Xóa"
               width="20"
               height="20"
               viewBox="0 0 16 16"
@@ -122,7 +122,7 @@
                   <div class="btn--edit" @click="openPopupEdit(user._id)">
                     <span class="mr_2">Chỉnh sửa</span>
                     <icon-base
-                      icon-name="edit"
+                      icon-name="Sửa"
                       width="16"
                       height="16"
                       viewBox="0 0 20 20"

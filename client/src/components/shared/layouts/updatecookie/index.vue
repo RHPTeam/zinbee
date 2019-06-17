@@ -4,7 +4,7 @@
       <div class="modal--content">
         <div class="modal--header">
           <icon-base
-            icon-name="modal-cookie"
+            icon-name="Cookie"
             width="440.4"
             height="156.808"
             viewBox="0 0 440.4 156.808"

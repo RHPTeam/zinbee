@@ -49,7 +49,7 @@
           <div class="d_flex justify_content_end align_items_center">
             <div class="icon--edit mr_4" @click="openAddEdit">
               <icon-base
-                icon-name="edit-info"
+                icon-name="Sửa thông tin"
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
@@ -59,7 +59,7 @@
             </div>
             <div class="icon--close" @click="closeAddInfo">
               <icon-base
-                icon-name="close"
+                icon-name="đóng"
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"
@@ -76,7 +76,7 @@
               <div class="info--mail mt_4">
                 <span class="mr_4">
                   <icon-base
-                    icon-name="mail"
+                    icon-name="Email"
                     class="mr_2"
                     width="20"
                     height="14.286"
@@ -90,7 +90,7 @@
               <div class="info--phone mt_4">
                 <span class="mr_4">
                   <icon-base
-                    icon-name="phone-info"
+                    icon-name="phone"
                     class="mr_2"
                     width="20"
                     height="19.987"

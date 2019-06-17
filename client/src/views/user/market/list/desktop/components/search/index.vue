@@ -32,13 +32,14 @@
                     {{ item._creator.name }}
                   </div>
                   <div class="description mb_1">
-                    {{ item.description.slice(0, 120) }}
+                    {{ item.description.slice(0, 100)
+                    }}{{ item.description.length > 100 ? "..." : "" }}
                   </div>
                   <div class="attribute">
                     <ul class="m_0 p_0">
                       <li
                         class="list_group_item"
-                        v-for="(attr, index) in item.attributes.slice(0, 3)"
+                        v-for="(attr, index) in item.attributes.slice(0, 2)"
                         :key="`c-${index}`"
                       >
                         <span v-if="attr.name === '' || attr.value === ''"
@@ -84,6 +85,7 @@
                     width="16px"
                     height="16px"
                     viewBox="0 0 20 20"
+                    icon-name="User"
                   >
                     <icon-user></icon-user>
                   </icon-base>

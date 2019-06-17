@@ -18,7 +18,7 @@
             @click="searchKeyword"
           >
             <icon-base
-              icon-name="logo"
+              icon-name="Tìm kiếm"
               width="24"
               height="24"
               viewBox="0 0 16 16"
@@ -29,7 +29,7 @@
           <input
             class="search--input"
             type="text"
-            placeholder="Tìm Kiếm..."
+            placeholder="Tìm kiếm..."
             v-model="keywordSearch"
             @keyup.enter="searchKeyword"
           />
@@ -113,18 +113,16 @@
                 </div>
                 <div class="info d_flex align_items_center">
                   <div class="left">
-                    <div class="price" v-if="item.priceCents">
-                      <span v-if="item.priceCents && item.priceCents.length > 0"
-                        >{{ formatCurrency(item.priceCents) }} ₫</span
-                      >
-                      <span
-                        class="free"
-                        v-if="
-                          item.priceCents === 0 && item.priceCents.length === 0
-                        "
-                        >Miễn phí</span
-                      >
+                    <div
+                      class="price font_weight_bold"
+                      v-if="
+                        parseInt(item.priceCents) > 0 &&
+                          item.priceCents.length > 0
+                      "
+                    >
+                      {{ item.priceCents }} ₫
                     </div>
+                    <div class="font_weight_bold price" v-else>Miễn phí</div>
                     <div class="sales">{{ item.numberOfSales }} đã sử dụng</div>
                   </div>
                   <div class="right d_flex align_items_center ml_auto">
@@ -249,7 +247,9 @@ export default {
       srcAutomatic: require("@/assets/images/market/automatic.svg"),
       srcExamlePost: require("@/assets/images/market/example_post.svg"),
       srcSimpleInterface: require("@/assets/images/market/simple_interface.svg"),
-      keywordSearch: ""
+      keywordSearch: "",
+      currentPage: 1,
+      maxPerPage: 12
     };
   },
   computed: {

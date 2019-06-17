@@ -13,7 +13,7 @@
         />
         <div class="search--icon position_absolute">
           <icon-base
-            icon-name="input-search"
+            icon-name="Tìm kiếm"
             width="16.772"
             height="17.287"
             viewBox="0 0 16.772 17.287"
