@@ -14,13 +14,13 @@
             <span class="px_1 cut">/</span>
           </div>
         </div>
-        <div class="selected">
+        <div class="selected" v-if="currentParentMarketCategory">
           <div class="items">
             <span class="name">{{ currentParentMarketCategory }}</span>
             <span class="px_1 cut">/</span>
           </div>
         </div>
-        <div class="selected">
+        <div class="selected" v-if="currentChildrenMarketCategory">
           <div class="items">
             <span class="name">{{ currentChildrenMarketCategory }}</span>
             <span class="px_1 cut">/</span>
@@ -30,7 +30,11 @@
       <div class="clear">Clear all</div>
     </div>
     <!-- End Selected filters -->
-    <div class="r list--group m_0">
+    <!-- component loading  -->
+    <div v-if="statusProducts === 'loading'">
+      <loading-component />
+    </div>
+    <div class="r list--group m_0" v-else>
       <div
         class="c_12 list--group-item mb_3 p_0"
         v-for="(item, index) in productsInCategory"
@@ -58,11 +62,10 @@
                     {{ item.name }}
                   </div>
                   <div class="editor mb_2">
-                    <span class="by">Bởi</span>
+                    <span class="by">Bởi {{ item._creator.name }}</span>
                     <!-- <span class="avatar--user mr_1">
                       <img src="https://hinhanhdepvai.com/wp-content/uploads/2017/05/hot-girl.jpg" alt="">
                     </span>-->
-                    {{ item._creator.name }}
                   </div>
                   <div class="description mb_1">
                     {{ item.description.slice(0, 120) }}
@@ -74,8 +77,15 @@
                         v-for="(attr, index) in item.attributes.slice(0, 3)"
                         :key="`c-${index}`"
                       >
-                        <span class="font_weight_bold">{{ attr.name }} :</span>
-                        <span>{{ attr.value }}</span>
+                        <span v-if="attr.name === '' || attr.value === ''"
+                          >Không có đặc điểm nào</span
+                        >
+                        <span v-else>
+                          <span class="font_weight_bold"
+                            >{{ attr.name }} :</span
+                          >
+                          <span>{{ attr.value }}</span>
+                        </span>
                       </li>
                       <li v-if="item.attributes.length > 1">....</li>
                     </ul>
@@ -93,11 +103,13 @@
               </div>
             </div>
             <div class="c_md_3 right py_0 pr_0 pl_3">
-              <div class="top"></div>
+              <!-- <div class="top"></div> -->
               <div class="right--item content text_center mt_1">
                 <div
                   class="price font_weight_bold"
-                  v-if="item.priceCents && item.priceCents.length > 0"
+                  v-if="
+                    parseInt(item.priceCents) > 0 && item.priceCents.length > 0
+                  "
                 >
                   {{ item.priceCents }} ₫
                 </div>
@@ -115,7 +127,7 @@
                   </icon-base>
                   <span>{{ item.numberOfSales }} đã sử dụng</span>
                 </div>
-                <div class="last--update mt_1">
+                <div class="last--update my_1">
                   Cập nhật lần cuối: {{ dateFormat(item.updatedAt) }}
                 </div>
               </div>
@@ -151,8 +163,8 @@
 </template>
 
 <script>
-import DetailPopup from "../../../layouts/desktop/popup/detail";
-import AddedCollection from "../../../layouts/desktop/popup/addToCollection";
+import DetailPopup from "../../../../layouts/desktop/popup/detail";
+import AddedCollection from "../../../../layouts/desktop/popup/addToCollection";
 export default {
   components: {
     DetailPopup,
@@ -169,9 +181,9 @@ export default {
     currentTheme() {
       return this.$store.getters.themeName;
     },
-    // products() {
-    //   return this.$store.getters.allProduct;
-    // },
+    currentParentMarketCategories() {
+      return this.$store.getters.currentParentMarketCategory;
+    },
     productsInCategory() {
       return this.$store.getters.productsByCategory;
     },
@@ -186,8 +198,8 @@ export default {
     },
     currentChildrenMarketCategory() {
       let nameChildren = "";
-      let idChildren = this.$route.params.subCategory;
-      let categoryChildren = this.$store.getters.currentParentMarketCategory
+      const idChildren = this.$route.params.subCategory;
+      const categoryChildren = this.$store.getters.currentParentMarketCategory
         .children;
       categoryChildren.map(item => {
         if (item._id === idChildren) {
@@ -198,6 +210,9 @@ export default {
     },
     status() {
       return this.$store.getters.marketStatus;
+    },
+    statusProducts() {
+      return this.$store.getters.statusProducts;
     }
   },
   methods: {
@@ -221,15 +236,20 @@ export default {
     }
   },
   created() {
-    // this.$store.dispatch("currentParentMarketCategory");
-    // this.$store.dispatch("currentChildrenMarketCategory");
-    if (this.$route.params.subCategory.length > 0) {
+    const productsByCategory = this.$store.getters.productsByCategory;
+    if (productsByCategory.length === 0) {
       this.$store.dispatch(
         "getProductsByCategory",
         this.$route.params.subCategory
       );
-    } else {
-      return;
+    }
+    const currentParentMarketCategory = this.$store.getters
+      .currentParentMarketCategory;
+    if (currentParentMarketCategory.length === 0) {
+      this.$store.dispatch(
+        "currentParentMarketCategory",
+        this.$$route.params.subCategory
+      );
     }
   }
 };

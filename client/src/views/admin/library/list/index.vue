@@ -18,8 +18,8 @@
       <div class="table-container" role="table" aria-label="Destinations">
         <div class="flex-table header" role="rowgroup">
           <div class="flex-row first" role="columnheader">Nội dung</div>
-          <div class="flex-row" role="columnheader">Hình ảnh</div>
-          <div class="flex-row" role="columnheader">Người tạo</div>
+          <div class="flex-row title--images" role="columnheader">Hình ảnh</div>
+          <div class="flex-row name--user" role="columnheader">Người tạo</div>
           <div class="flex-row" role="columnheader">Hành động</div>
         </div>
         <div v-if="this.$store.getters.statusLib === 'loading'">
@@ -112,6 +112,29 @@ $row-bg: #f4f2f1;
     padding: 0.5em 0.5em;
     border-right: solid 1px $table-border;
     border-bottom: solid 1px $table-border;
+  }
+}
+// ====================== RESPONSIVE
+
+@media screen and (max-width: 1050px) {
+  .flex-table {
+    .flex-row {
+      width: 33.333%;
+    }
+    .title--images {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .flex-table {
+    .flex-row {
+      width: 50%;
+    }
+    .name--user {
+      display: none;
+    }
   }
 }
 </style>

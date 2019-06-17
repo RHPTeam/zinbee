@@ -8,7 +8,7 @@
     <!-- Start: Name Column -->
     <div class="col col--name px_2">
       <div class="col col--name-text" @click="updatePost()">
-        {{ item.title }}
+        {{ item.title.slice(0, 40) }}{{ item.title.length > 40 ? "..." : "" }}
       </div>
     </div>
     <!-- End: Name Column -->
@@ -16,7 +16,7 @@
     <div class="col col--category px_2">
       <span
         >{{ item.content.slice(0, 70)
-        }}{{ item.content.length > 50 ? "..." : "" }}</span
+        }}{{ item.content.length > 70 ? "..." : "" }}</span
       >
     </div>
     <!-- End: Category Column -->

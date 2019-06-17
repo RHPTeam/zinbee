@@ -16,8 +16,8 @@
             class="form_control p_0"
             :options="allMarketPosts"
             placeholder="Chọn bài viết mẫu..."
-            v-model="inforProductById.content"
-            @input="getNamePostById"
+            :value="convertProductContent(inforProductById.content)"
+            @input="updateProductContent"
           />
           <div class="post mt_2">
             <label for class="">Danh mục bài viết</label>
@@ -26,7 +26,8 @@
                 label="name"
                 placeholder="Chọn danh mục đăng bài..."
                 :options="categories"
-                v-model="inforProductById._category"
+                :value="convertCategoryPost(inforProductById._category)"
+                @input="updateProductCategory"
               />
             </div>
           </div>

@@ -9,16 +9,14 @@
       </router-link>
     </div>
     <div class="body mt_4">
-      <div class="table-container" role="table" aria-label="Destinations">
-        <div class="flex-table header" role="rowgroup">
-          <div class="flex-row first" role="columnheader">Tiêu đề</div>
-          <div class="flex-row" role="columnheader">Nội dung</div>
-          <div class="flex-row" role="columnheader">Người tạo</div>
-          <div class="flex-row" role="columnheader">Hành động</div>
-        </div>
-        <div v-for="(item, index) in allBlog" :key="index">
-          <item :item="item" />
-        </div>
+      <div class="header d_flex">
+        <div class="title first">Tiêu đề</div>
+        <div class="title">Nội dung</div>
+        <div class="title">Người tạo</div>
+        <div class="title">Hành động</div>
+      </div>
+      <div v-for="(item, index) in allBlog" :key="index">
+        <item :item="item" />
       </div>
     </div>
   </div>

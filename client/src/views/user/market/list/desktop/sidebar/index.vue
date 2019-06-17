@@ -40,9 +40,9 @@ export default {
     closeFilterSidebar() {
       this.isShowFilter = true;
     },
-    chooseCategory(category) {
-      this.$store.dispatch("currentParentMarketCategory", category);
-    },
+    // chooseCategory(category) {
+    //   this.$store.dispatch("currentParentMarketCategory", category);
+    // },
     async loadProductByCategory(categoryId) {
       await this.$store.dispatch("getProductsByCategory", categoryId);
       this.$router.push({
@@ -56,7 +56,7 @@ export default {
   },
   async created() {
     // this.$store.dispatch("getCategoryChild");
-    await this.$store.dispatch("getAllMarketCategoriesTree");
+    // await this.$store.dispatch("getAllMarketCategoriesTree");
   }
 };
 </script>

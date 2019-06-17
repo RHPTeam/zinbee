@@ -63,7 +63,10 @@
           />
         </div>
 
-        <button class="btn btn_info form_control" @click="redirectInside">
+        <button
+          class="btn btn_info form_control"
+          @click.prevent="redirectInside"
+        >
           Đăng ký
         </button>
       </form>

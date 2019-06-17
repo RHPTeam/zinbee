@@ -25,11 +25,14 @@
         .content:last-child{
             border-bottom: 0;
         }
+        .content .action {
+            border-right: 0;
+        }
     }
     .header--title{
         // background: #ffb94a;
         background: #000;
-        div{
+        .title{
             flex: 1;
             border-right: 1px solid #ccc;
             &:last-child{
@@ -39,9 +42,62 @@
     }
     .content {
         border-bottom: 1px solid #ccc;
-        .kind--of--item, .category--item, .tag--item, .price--item, .action{
+        .item{
             flex: 1;
             border-right: 1px solid #ccc;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+    }
+}
+
+
+
+// ***************** RESPONSIVE  __________________++
+
+@media screen and (max-width: 1160px) {
+    .list--product{
+        .content{
+            .price--item{
+                display: none;
+            }
+        }
+        .header--title {
+            .price--title{
+                display: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1130px) {
+    .list--product{
+        .content{
+            .tag--item{
+                display: none;
+            }
+        }
+        .header--title {
+            .tag--title{
+                display: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .list--product{
+        .content{
+            .creator{
+                display: none;
+            }
+        }
+        .header--title {
+            .creator{
+                display: none;
+            }
         }
     }
 }
