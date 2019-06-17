@@ -22,21 +22,24 @@
             <div v-if="this.$store.getters.blogHelpStatus === 'loading'">
               <loading-component />
             </div>
-            <div class="item" v-else v-for="(blog, index) in blogs" :key="index">
+            <div
+              class="item"
+              v-else
+              v-for="(blog, index) in blogs"
+              :key="index"
+            >
               <div class="title">
-                {{blog.title}}
+                {{ blog.title }}
               </div>
               <div class="desc" v-if="blog.content && blog.content.length > 0">
-                <span>{{blog.content.slice(0, 150)}}</span>
+                <span>{{ blog.content.slice(0, 150) }}</span>
                 <span>...</span>
                 <a href="">Xem thêm</a>
               </div>
             </div>
           </div>
           <!-- Start: Paginate help-->
-          <paginate
-            :currentPage="currentPage"
-          />
+          <paginate :currentPage="currentPage" />
           <!-- End: Paginate help-->
         </div>
       </div>
@@ -45,18 +48,18 @@
 </template>
 
 <script>
-  import Paginate from "../paginate";
+import Paginate from "../paginate";
 export default {
   components: {
     Paginate
   },
   data() {
     return {
-      currentPage: 1,
-    }
+      currentPage: 1
+    };
   },
   computed: {
-    blogs(){
+    blogs() {
       return this.$store.getters.resultSearch;
     }
   }
@@ -75,7 +78,7 @@ export default {
       .tab {
         cursor: pointer;
         font-weight: 700;
-        opacity: .5;
+        opacity: 0.5;
       }
       .active {
         border-bottom: 2px solid #0c5460;

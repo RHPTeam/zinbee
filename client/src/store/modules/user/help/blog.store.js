@@ -97,13 +97,17 @@ const actions = {
   },
   searchBlog: async ({ commit }, payload) => {
     commit("blog_help_request");
-    const result = await BlogHelpServices.searchBlog(payload.keyword, payload.size, payload.page);
+    const result = await BlogHelpServices.searchBlog(
+      payload.keyword,
+      payload.size,
+      payload.page
+    );
     commit("setResultSearchBlog", result.data.data.results);
     commit("setResultSearchBlogPage", result.data.data.page);
     commit("setResultSearchBlogTotal", result.data.data.total);
     commit("blog_help_success");
   },
-  setKeySearch: async ({commit}, payload) => {
+  setKeySearch: async ({ commit }, payload) => {
     commit("setKeySearch", payload);
   }
 };

@@ -128,7 +128,11 @@
                 :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
               ></div>
               <div>
-                <a :href="hrefPage" target="_blank" class="access--public access--help-advertise">
+                <a
+                  :href="hrefPage"
+                  target="_blank"
+                  class="access--public access--help-advertise"
+                >
                   Truy cập cộng đồng trợ giúp
                 </a>
               </div>
