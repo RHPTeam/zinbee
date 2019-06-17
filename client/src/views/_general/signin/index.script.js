@@ -48,15 +48,15 @@ export default {
       if (
         this.$store.getters.authError === "401" || this.$store.getters.authError === "405"
       ) {
-        return;
+        // return;
+        this.$router.push({name: "user_signin"}, 1000);
       }
-      console.log( "fuck u" );
       const token = `sid=${CookieFunction.getCookie(
         "sid"
       )}; uid=${CookieFunction.getCookie("uid")}; cfr=${CookieFunction.getCookie(
         "cfr"
       )};`;
-      window.location = `${this.redirectDomain}redirect?authorization=${encodeURIComponent(token)}`;
+      window.location.href = `${this.redirectDomain}redirect?authorization=${encodeURIComponent(token)}`;
     }
   },
   watch: {
