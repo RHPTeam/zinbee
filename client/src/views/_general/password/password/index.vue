@@ -2,7 +2,7 @@
   <form @submit.prevent="sendPassword" class="text_center">
     <div class="">
       <icon-base
-        icon-name="logo"
+        icon-name="ZinBee"
         width="210.21"
         height="78.65"
         viewBox="0 0 250.446 93.703"
@@ -33,7 +33,7 @@
       <div class="icon position_absolute">
         <icon-base
           class="ic--lock"
-          icon-name="lock"
+          icon-name="Mật khẩu"
           width="14.782"
           height="18.55"
           viewBox="0 0 14.782 18.55"
@@ -59,7 +59,7 @@
       <div class="icon position_absolute">
         <icon-base
           class="ic--lock-check"
-          icon-name="lock-check"
+          icon-name="Mật khẩu"
           width="14.8"
           height="18.604"
           viewBox="0 0 14.8 18.604"

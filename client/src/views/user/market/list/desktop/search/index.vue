@@ -15,6 +15,7 @@
         >
           <icon-base
             class="icon--search"
+            icon-name="Tìm kiếm"
             height="24px"
             width="24px"
             viewBox="0 0 20 20"
@@ -31,7 +32,9 @@
 export default {
   data() {
     return {
-      keywordSearch: ""
+      keywordSearch: "",
+      currentPage: 1,
+      maxPerPage: 12
     };
   },
   methods: {

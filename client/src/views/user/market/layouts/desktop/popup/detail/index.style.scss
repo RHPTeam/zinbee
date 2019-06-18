@@ -39,6 +39,7 @@
           height: 1px;
         }
         .general--info {
+          overflow: hidden;
           .left {
             .thumbnail {
               background-position: center;
@@ -61,7 +62,7 @@
                 max-height: 40px;
                 overflow: hidden;
                 white-space: nowrap;
-                max-width: 90%;
+                max-width: 60%;
                 display: inline-block;
                 font-size: 1.0625rem;
                 text-overflow: ellipsis

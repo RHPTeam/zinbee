@@ -4,13 +4,22 @@ const state = {
   blogHelpStatus: "",
   blogHelpError: "",
   allBlog: [],
-  blog: []
+  blog: [],
+  resultSearch: [],
+  resultSearchPage: 1,
+  resultSearchTotal: null,
+  keySearch: "",
+  sizeDefault: 25
 };
 const getters = {
   blogHelpStatus: state => state.blogHelpStatus,
   blogHelpError: state => state.blogHelpError,
   allBlog: state => state.allBlog,
-  blog: state => state.blog
+  blog: state => state.blog,
+  resultSearch: state => state.resultSearch,
+  resultSearchPage: state => state.resultSearchPage,
+  resultSearchTotal: state => state.resultSearchTotal,
+  keySearch: state => state.keySearch
 };
 const mutations = {
   blog_help_request: state => {
@@ -27,6 +36,18 @@ const mutations = {
   },
   setBlog: (state, payload) => {
     state.blog = payload;
+  },
+  setResultSearchBlog: (state, payload) => {
+    state.resultSearch = payload;
+  },
+  setResultSearchBlogPage: (state, payload) => {
+    state.resultSearchPage = payload;
+  },
+  setResultSearchBlogTotal: (state, payload) => {
+    state.resultSearchTotal = payload;
+  },
+  setKeySearch: (state, payload) => {
+    state.keySearch = payload;
   }
 };
 const actions = {
@@ -73,6 +94,21 @@ const actions = {
     await BlogHelpServices.deleteBlog(payload);
     const result = await BlogHelpServices.getAllBlog();
     commit("setAllBlog", result.data.data);
+  },
+  searchBlog: async ({ commit }, payload) => {
+    commit("blog_help_request");
+    const result = await BlogHelpServices.searchBlog(
+      payload.keyword,
+      payload.size,
+      payload.page
+    );
+    commit("setResultSearchBlog", result.data.data.results);
+    commit("setResultSearchBlogPage", result.data.data.page);
+    commit("setResultSearchBlogTotal", result.data.data.total);
+    commit("blog_help_success");
+  },
+  setKeySearch: async ({ commit }, payload) => {
+    commit("setKeySearch", payload);
   }
 };
 

@@ -8,7 +8,7 @@
         <div class="icon mr_2" @click="showInfoCategories(node._id)">
           <icon-base
             class="icon--arrow-left"
-            icon-name="arrow"
+            icon-name="Sửa"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -19,7 +19,7 @@
         <div class="icon" @click="deleteCategories(node._id)">
           <icon-base
             class="icon--arrow-left"
-            icon-name="arrow"
+            icon-name="Xóa"
             width="24"
             height="24"
             viewBox="0 0 18 18"

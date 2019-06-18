@@ -33,9 +33,9 @@
               </icon-base>
               <input
                 type="text"
-                name=""
-                id=""
                 placeholder="Chào ABC, chúng tôi có thể giúp gì cho bạn?"
+                v-model="keyword"
+                @keydown.enter="searchQuestion"
               />
             </div>
           </div>
@@ -96,8 +96,8 @@
             </li>
             <!-- End: Menu Items Loop -->
             <!-- Start: Mail -->
-            <li class="menu--help-item flex_fill">
-              <a href="">
+            <li class="menu--help-item flex_fill" @click="openEmail">
+              <a :href="`https://mail.google.com`" target="_blank">
                 <div class="mail--help d_flex">
                   <div class="icon--envelope mr_1">
                     <icon-base
@@ -124,6 +124,14 @@
 
 <script>
 export default {
+  data() {
+    return {
+      hrefDefault: "mailto:khangle0608@gmail.com",
+      keyword: "",
+      sizeDefault: 25,
+      pageDefault: 1
+    };
+  },
   computed: {
     allHelpCategories() {
       return this.$store.getters.allHelpCategoriesChild;
@@ -156,6 +164,19 @@ export default {
         name: "help_detail",
         params: { id: val }
       });
+    },
+    openEmail() {
+      window.location.assign("mailto: kythuatchatbee@gmail.com");
+    },
+    async searchQuestion() {
+      const dataSender = {
+        keyword: this.keyword,
+        size: this.sizeDefault,
+        page: this.pageDefault
+      };
+      await this.$store.dispatch("searchBlog", dataSender);
+      await this.$store.dispatch("setKeySearch", this.keyword);
+      this.$router.push({ name: "help_result_search" });
     }
   }
 };
