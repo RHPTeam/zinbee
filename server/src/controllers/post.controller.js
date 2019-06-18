@@ -272,7 +272,8 @@ module.exports = {
     let data = {
         "title": `${findPost.title} Copy`,
         "content": findPost.content,
-        "attachments": findPost.attachments
+        "attachments": findPost.attachments,
+        "_account": req.uid
       },
       resPostSync = await syncPostFolderExample( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/posts/sync/duplicate`, data, req.headers.authorization );
 
