@@ -281,6 +281,6 @@ module.exports = {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
     }
 
-    res.status( 200 ).json( jsonResponse( "success", findPost ) );
+    res.status( 200 ).json( jsonResponse( "success", resPostSync.data.data ) );
   }
 };
