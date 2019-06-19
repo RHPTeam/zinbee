@@ -6,17 +6,22 @@
     <!-- Start: Main -->
     <app-main></app-main>
     <!-- End: Main -->
+    <!-- Start: Footer -->
+    <app-footer />
+    <!-- End: Footer -->
   </div>
 </template>
 
 <script>
 import AppHeader from "./header";
 import AppMain from "./main";
+import AppFooter from "./footer";
 
 export default {
   components: {
     AppHeader,
-    AppMain
+    AppMain,
+    AppFooter
   }
 };
 </script>

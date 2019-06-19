@@ -7,14 +7,14 @@
           :class="isActiveBestSeller === true ? 'active' : ''"
           @click="productsByBestSell"
         >
-          Best sellers
+          Bán chạy nhất
         </div>
         <div
           class="items"
           @click="productsNewest"
           :class="isActiveNewest === true ? 'active' : ''"
         >
-          Newest
+          Mới nhất
         </div>
         <!-- <button class="items">Trending</button> -->
         <div
@@ -23,7 +23,7 @@
           @click="showDropdownPrice"
           v-click-outside="closeDropdownPrice"
         >
-          <div>Price</div>
+          <div>Giá bán</div>
           <ul v-if="isShowDropdownPrice === true">
             <li class="item--price" @click="productsByPriceGrow">Tăng</li>
             <li class="item--price" @click="productsByPriceLose">Giảm</li>

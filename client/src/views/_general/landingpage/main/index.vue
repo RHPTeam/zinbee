@@ -15,7 +15,7 @@
           TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC 100+ PAGE, GROUP, PROFILE
           FACEBOOK VỚI 1 CLICK
         </div>
-        <div class="register m_auto d_flex" @click="showTyped">
+        <div class="register m_auto d_flex">
           Đăng ký ngay
         </div>
         <img

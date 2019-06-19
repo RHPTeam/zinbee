@@ -47,6 +47,7 @@ Vue.component("IconFriend", () => import("@/components/icons/IconFriend"));
 Vue.component("IconFriendTag", () =>
   import("@/components/icons/IconFriendTag")
 );
+Vue.component("IconSad", () => import("@/components/icons/IconSad"));
 Vue.component("IconGrid", () => import("@/components/icons/IconGrid"));
 Vue.component("IconGridLayout", () =>
   import("@/components/icons/IconGridLayout")
