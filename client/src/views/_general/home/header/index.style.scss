@@ -29,7 +29,7 @@
     color: #fff;
     &.active {
       height: 93px;
-      background: -webkit-linear-gradient(90deg, #000 0%, #010206 100%);
+      background: #212121;
     }
   }
   .header-area {
@@ -38,8 +38,7 @@
     z-index: 1000;
     padding: 1.25rem 3.125rem;
     box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.18);
-    background-image: -webkit-linear-gradient(90deg, #000 0%, #010206 100%);
-    opacity: 0.7;
+    background: #1f1e1e;
   }
   .nav--menu {
     .items--header {
@@ -78,13 +77,13 @@
       cursor: pointer;
     }
     .nav--menu-res {
-      width: 150px;
+      width: 250px;
       right: 0;
       top: 24px;
       li {
         background: #010206;
         cursor: pointer;
-        padding: 6px 10px;
+        padding: 0.625rem 0.9375rem;
         border-bottom: 1px solid #484848;
         &:hover {
           background: none;

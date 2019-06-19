@@ -20,7 +20,7 @@
         </div>
         <img
           class="image--introduce mt_5"
-          src="@/assets/images/landingpage/banner.jpg"
+          src="@/assets/images/home/banner.jpg"
           alt="Banner ZinBee"
         />
       </div>
@@ -265,7 +265,7 @@
                 </div>
               </div>
               <img
-                src="@/assets/images/landingpage/dashboard.png"
+                src="@/assets/images/home/dashboard.png"
                 alt="Banner ZinBee"
               />
             </div>
@@ -280,7 +280,7 @@
                 </div>
               </div>
               <img
-                src="@/assets/images/landingpage/content.png"
+                src="@/assets/images/home/content.png"
                 alt="Banner ZinBee"
               />
             </div>
@@ -296,7 +296,7 @@
                 </div>
               </div>
               <img
-                src="@/assets/images/landingpage/tudong.png"
+                src="@/assets/images/home/tudong.png"
                 alt="Banner ZinBee"
               />
             </div>
@@ -311,7 +311,7 @@
                 </div>
               </div>
               <img
-                src="@/assets/images/landingpage/tinhnang.png"
+                src="@/assets/images/home/tinhnang.png"
                 alt="Banner ZinBee"
               />
             </div>
@@ -343,7 +343,7 @@
                     <div class="introduce--customer d_flex align_items_center">
                       <div>
                         <img
-                          src="@/assets/images/landingpage/NQK.jpg"
+                          src="@/assets/images/home/NQK.jpg"
                           alt="Banner ZinBee"
                         />
                       </div>
@@ -364,7 +364,7 @@
                     <div class="introduce--customer d_flex align_items_center">
                       <div>
                         <img
-                          src="@/assets/images/landingpage/NTL.jpg"
+                          src="@/assets/images/home/NTL.jpg"
                           alt="Banner ZinBee"
                         />
                       </div>
@@ -385,7 +385,7 @@
                     <div class="introduce--customer d_flex align_items_center">
                       <div>
                         <img
-                          src="@/assets/images/landingpage/NHL.jpg"
+                          src="@/assets/images/home/NHL.jpg"
                           alt="Banner ZinBee"
                         />
                       </div>
@@ -591,7 +591,7 @@
           <div class="r m_0">
             <div class="c_lg_6 c_md_12 mb_md_3  c">
               <img
-                src="@/assets/images/landingpage/giahan.png"
+                src="@/assets/images/home/giahan.png"
                 alt="Banner ZinBee"
               />
             </div>

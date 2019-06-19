@@ -31,9 +31,9 @@
         <div class="c_lg_3">
           <div class="title--footer">Chính Sách</div>
           <ul>
-            <li>Privacy</li>
-            <li>Terms</li>
-            <li>Advertise</li>
+            <li>Chính sách bảo mật</li>
+            <li>Điều kiện</li>
+            <li>Quảng cáo</li>
           </ul>
         </div>
         <div class="c_lg_3 register">
@@ -117,7 +117,7 @@
       <div class="ct m_auto d_flex align_items_center">
         <div>Copyright © 2018 zinbee.vn</div>
         <div class="ml_auto d_flex contact">
-          <div class="items">Privacy Policy</div>
+          <div class="items">Chính sách bảo mật</div>
           <div class="items">Giới thiệu</div>
           <div class="items">Hỏi đáp</div>
           <div class="items">Liên hệ hỗ trợ</div>

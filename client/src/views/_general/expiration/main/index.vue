@@ -147,7 +147,7 @@
         <div class="r m_0">
           <div class="c_lg_6 c_md_12 mb_md_3  c">
             <img
-              src="@/assets/images/landingpage/giahan.png"
+              src="@/assets/images/home/giahan.png"
               alt="Banner ZinBee"
             />
           </div>
@@ -183,7 +183,7 @@
 export default {
   data() {
     return {
-      backgroundMap: require("@/assets/images/landingpage/map-bg.jpg")
+      backgroundMap: require("@/assets/images/home/map-bg.jpg")
     };
   }
 };
