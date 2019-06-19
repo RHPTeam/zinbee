@@ -146,7 +146,10 @@
         </div>
       </div>
     </div>
-    <div class="text_center py_3 card mb_3" v-if="productsInCategory.length === 0">
+    <div
+      class="text_center py_3 card mb_3"
+      v-if="productsInCategory.length === 0"
+    >
       Khong co san pham nao
     </div>
     <!-- *************POPUP************* -->

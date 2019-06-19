@@ -158,16 +158,16 @@
                 đây:
               </li>
               <li>
-                Chuyển khoản số tiền theo các gói 3 tháng, 6 tháng, 1 năm đến
-                số tài khoản:
+                Chuyển khoản số tiền theo các gói 3 tháng, 6 tháng, 1 năm đến số
+                tài khoản:
               </li>
               <li><span class="pr_5">STK:</span> 0991 0000 43720</li>
               <li><span class="pr_5">Tên:</span> Nguyễn Văn Trường</li>
               <li>Ngân hàng: Vietcombank</li>
               <li>Chi nhánh: Tây Hồ - Hà Nội</li>
               <li>
-                Điền thông tin chuyển khoản với nội dung: "email đăng ký
-                Zinbee của bạn"
+                Điền thông tin chuyển khoản với nội dung: "email đăng ký Zinbee
+                của bạn"
               </li>
               <li>Zinbee sẽ nâng cấp cho bạn ngay lập tức</li>
             </ul>
@@ -182,10 +182,10 @@
 <script>
 export default {
   data() {
-    return {      
+    return {
       backgroundMap: require("@/assets/images/landingpage/map-bg.jpg")
-    }
-  },
+    };
+  }
 };
 </script>
 
@@ -200,7 +200,7 @@ export default {
     padding: 0;
   }
   a {
-    color:  inherit;
+    color: inherit;
     text-decoration: none;
   }
   section {
@@ -237,29 +237,36 @@ export default {
       }
     }
   }
-   // price
+  // price
   .price {
     color: #fff;
     .item {
-      background: linear-gradient(to right, #10171d 0%, #0e1f2c 100%)!important;
+      background: linear-gradient(
+        to right,
+        #10171d 0%,
+        #0e1f2c 100%
+      ) !important;
       box-shadow: 0px 1px 16px 2px rgba(26, 38, 74, 0.05);
       padding: 38px 0px 45px;
       border-radius: 5px;
       transition: all 0.6s linear;
       cursor: pointer;
-      .heading, .price--month {
+      .heading,
+      .price--month {
         transition: 0.4s;
         color: #fae59a;
       }
       &:hover {
-        .heading, .price--month {
+        .heading,
+        .price--month {
           color: #fff;
         }
         .register {
           background: #fae59a;
         }
       }
-      .month, .price--month {
+      .month,
+      .price--month {
         font-size: 20px;
         line-height: 60px;
         font-weight: 500;
@@ -293,7 +300,7 @@ export default {
   // guide
   .guide {
     padding: 130px 0px 140px;
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
   }
 }
 </style>

@@ -31,14 +31,14 @@ a {
   color: inherit;
 }
 .copy {
-    background: linear-gradient(to right, #000 0%, #0e1f2c 100%);
-    padding: 36px 0px;
-    color: #fff;
-    .contact {
-      .items {
-        padding: 0 1rem;
-        font: 700 16px/28px "Open Sans", sans-serif;
-      }
+  background: linear-gradient(to right, #000 0%, #0e1f2c 100%);
+  padding: 36px 0px;
+  color: #fff;
+  .contact {
+    .items {
+      padding: 0 1rem;
+      font: 700 16px/28px "Open Sans", sans-serif;
     }
   }
+}
 </style>

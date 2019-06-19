@@ -4,7 +4,9 @@
       <!-- Start: Header Top -->
       <div class="header--top text_right d_flex">
         <!-- Start: Logo -->
-        <div class="logo d_flex align_items_center justify_content_center mb_3 mr_auto">
+        <div
+          class="logo d_flex align_items_center justify_content_center mb_3 mr_auto"
+        >
           <!-- <icon-base
             class="icon--logo"
             width="100"
@@ -23,7 +25,11 @@
           </icon-base>
         </div>
         <!-- Start: Logo -->
-        <router-link :to="{ name: 'user_signin' }" tag="a" class="link--login ml_auto">
+        <router-link
+          :to="{ name: 'user_signin' }"
+          tag="a"
+          class="link--login ml_auto"
+        >
           Đăng nhập
         </router-link>
       </div>
@@ -45,7 +51,8 @@
               Tài khoản của bạn đã hết hạn :-(
             </div>
             <div class="desc mt_3">
-              Tài khoản của bạn đã hết hạn. Nếu muốn tiếp tục sử dụng dịch vụ. Bạn hãy gia hạn để sử dụng dịch vụ.
+              Tài khoản của bạn đã hết hạn. Nếu muốn tiếp tục sử dụng dịch vụ.
+              Bạn hãy gia hạn để sử dụng dịch vụ.
             </div>
           </div>
         </div>
@@ -57,8 +64,7 @@
 </template>
 
 <script>
-export default {
-};
+export default {};
 </script>
 
 <style scoped lang="scss">
