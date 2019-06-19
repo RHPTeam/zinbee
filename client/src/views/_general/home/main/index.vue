@@ -279,10 +279,7 @@
                   dàng và phù hợp cho khách hàng.
                 </div>
               </div>
-              <img
-                src="@/assets/images/home/content.png"
-                alt="Banner ZinBee"
-              />
+              <img src="@/assets/images/home/content.png" alt="Banner ZinBee" />
             </div>
           </transition>
           <transition name="fade">
@@ -295,10 +292,7 @@
                   bất kể ngày hay đêm
                 </div>
               </div>
-              <img
-                src="@/assets/images/home/tudong.png"
-                alt="Banner ZinBee"
-              />
+              <img src="@/assets/images/home/tudong.png" alt="Banner ZinBee" />
             </div>
           </transition>
           <transition name="fade">
@@ -590,10 +584,7 @@
           </div>
           <div class="r m_0">
             <div class="c_lg_6 c_md_12 mb_md_3  c">
-              <img
-                src="@/assets/images/home/giahan.png"
-                alt="Banner ZinBee"
-              />
+              <img src="@/assets/images/home/giahan.png" alt="Banner ZinBee" />
             </div>
             <div class="c_lg_6 c_md_12 mb_md_3 pl_md_3 pl_0">
               <ul>
