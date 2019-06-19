@@ -11,7 +11,7 @@
               height="49.73"
               viewBox="0 0 250.446 93.703"
             >
-              <icon-logo/>
+              <icon-logo />
             </icon-base>
           </div>
           <!--Start: Logo -->
@@ -22,7 +22,7 @@
               class="items--header"
               v-for="(item, index) in itemHeader"
               :key="index"
-              :class="{ 'active': activeIndex === index }"
+              :class="{ active: activeIndex === index }"
               @click="activeMenu(index)"
             >
               {{ item }}
@@ -32,8 +32,13 @@
           <!-- Start: MENU - 980px -->
           <div class="menu position_relative">
             <div @click="showMenu">
-              <icon-base icon-name="menu" width="20" height="20" viewBox="0 0 500 500">
-                <icon-menu/>
+              <icon-base
+                icon-name="menu"
+                width="20"
+                height="20"
+                viewBox="0 0 500 500"
+              >
+                <icon-menu />
               </icon-base>
             </div>
             <transition name="slide-fade">
@@ -43,7 +48,9 @@
                 v-click-outside="closeMenu"
               >
                 <ul>
-                  <li v-for="item in itemHeader" :key="item" @click="closeMenu">{{ item }}</li>
+                  <li v-for="item in itemHeader" :key="item" @click="closeMenu">
+                    {{ item }}
+                  </li>
                 </ul>
               </div>
             </transition>

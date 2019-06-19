@@ -2,13 +2,13 @@
   <div class="modal--wrapper">
     <div class="modal--content">
       <!-- Start: Header -->
-        <app-header />
+      <app-header />
       <!-- End: Header -->
       <!-- Start: Main -->
-        <app-main />
+      <app-main />
       <!-- Start: Main -->
       <!-- Start: Footer -->
-        <app-footer />
+      <app-footer />
       <!-- Start: Footer -->
     </div>
   </div>
@@ -24,9 +24,8 @@ export default {
     AppMain,
     AppFooter
   },
-  methods: {},
-}
+  methods: {}
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

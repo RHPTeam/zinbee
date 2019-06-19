@@ -64,7 +64,11 @@ export default {
     },
     showTyped() {
       new Typed(".test", {
-        strings: ["Công cụ hỗ trợ tuyệt vời", "Tiết kiệm tới 80% thời gian cho bạn", "Vũ khí không thể thiếu cho bán hàng trên facebook"],
+        strings: [
+          "Công cụ hỗ trợ tuyệt vời",
+          "Tiết kiệm tới 80% thời gian cho bạn",
+          "Vũ khí không thể thiếu cho bán hàng trên facebook"
+        ],
         // Optionally use an HTML element to grab strings from (must wrap each string in a <p>)
         stringsElement: null,
         // typing speed
