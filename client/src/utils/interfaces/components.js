@@ -112,7 +112,9 @@ Vue.component("IconZinPost", () => import("@/components/icons/IconZinPost"));
 
 // Icon Logo
 Vue.component("IconLogo", () => import("@/components/icons/IconLogo"));
-Vue.component("IconLogoBlack", () => import("@/components/icons/IconLogoBlack"));
+Vue.component("IconLogoBlack", () =>
+  import("@/components/icons/IconLogoBlack")
+);
 Vue.component("IconLogoIcon", () => import("@/components/icons/IconLogoIcon"));
 Vue.component("IconLogoIconWhite", () =>
   import("@/components/icons/IconLogoIconWhite")

@@ -23,6 +23,6 @@ export default {
 
 <style scoped lang="scss">
 .wrapper {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
 </style>

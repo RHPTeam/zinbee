@@ -24,8 +24,14 @@
         <!-- Start: Logo -->
         <!-- Start: Alert -->
         <div class="alert--expiration mx_auto p_4">
-          <div class="calendar--groups d_flex justify_content_center position_relative mb_4 mt_3">
-            <div class="calendar--day d_flex align_items_center justify_content_center position_absolute">19</div>
+          <div
+            class="calendar--groups d_flex justify_content_center position_relative mb_4 mt_3"
+          >
+            <div
+              class="calendar--day d_flex align_items_center justify_content_center position_absolute"
+            >
+              19
+            </div>
             <div class="calendar--bg position_relative">
               <div class="rect--small-left position_absolute"></div>
               <div class="rect--small-right position_absolute"></div>
@@ -38,8 +44,10 @@
               Tài khoản của bạn đã hết hạn :-(
             </div>
             <div class="desc mt_3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
             </div>
           </div>
         </div>
@@ -57,7 +65,7 @@ export default {};
 <style scoped lang="scss">
 .wrapper--header {
   /*background-image: linear-gradient(135deg,#00c4cc 0,#6e44bd 100%);*/
-  background-image: linear-gradient(135deg, #FFC837 10%, #FF8008 100%);
+  background-image: linear-gradient(135deg, #ffc837 10%, #ff8008 100%);
   /*background-image: linear-gradient(135deg,#2f3136 0,#27292c 100%);*/
   .header--top {
     .link--login {
@@ -100,7 +108,7 @@ export default {};
           height: 100px;
           width: 120px;
           .rect--small-left {
-            background-color: #F7F7F7;
+            background-color: #f7f7f7;
             border: 1px solid #e4e4e4;
             border-radius: 0.25rem;
             height: 20px;
@@ -110,7 +118,7 @@ export default {};
             z-index: 4;
           }
           .rect--small-right {
-            background-color: #F7F7F7;
+            background-color: #f7f7f7;
             border: 1px solid #e4e4e4;
             border-radius: 0.25rem;
             height: 20px;
@@ -128,7 +136,7 @@ export default {};
             z-index: 3;
           }
           .rectangle--top {
-            background-color: #F7F7F7;
+            background-color: #f7f7f7;
             border: 1px solid #e4e4e4;
             border-radius: 0.375rem 0.375rem 0 0;
             height: 26px;
@@ -145,7 +153,7 @@ export default {};
         }
         .desc {
           color: #999;
-          font-size: .875rem;
+          font-size: 0.875rem;
         }
       }
     }
