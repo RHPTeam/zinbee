@@ -1,13 +1,12 @@
-import carousel from "vue-owl-carousel";
 import Typed from "typed.js";
 export default {
   data() {
     return {
       activetab: 1,
-      backgroundBanner: require("@/assets/images/landingpage/bg--banner.jpg"),
-      backgroundTool: require("@/assets/images/landingpage/powerful-bg.jpg"),
-      backgroundCustomer: require("@/assets/images/landingpage/quote.png"),
-      backgroundMap: require("@/assets/images/landingpage/map-bg.jpg"),
+      backgroundBanner: require("@/assets/images/home/bg--banner.jpg"),
+      backgroundTool: require("@/assets/images/home/powerful-bg.jpg"),
+      backgroundCustomer: require("@/assets/images/home/quote.png"),
+      backgroundMap: require("@/assets/images/home/map-bg.jpg"),
       currentIndex: 1,
       typed: {
         strings: ["Developers.", "Designers.", "People."],
@@ -44,9 +43,6 @@ export default {
       }
     };
   },
-  components: {
-    carousel
-  },
   methods: {
     next() {
       if (this.currentIndex === 3) {
@@ -63,6 +59,9 @@ export default {
       }
     },
     showTyped() {
+      this.$router.push({ name: "user_signin" });
+    },
+    runInitEffect() {
       new Typed(".test", {
         strings: [
           "Công cụ hỗ trợ tuyệt vời",
@@ -101,8 +100,7 @@ export default {
       });
     }
   },
-  computed: {},
   mounted() {
-    this.showTyped();
+    this.runInitEffect();
   }
 };

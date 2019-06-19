@@ -272,7 +272,8 @@ module.exports = {
     let data = {
         "title": `${findPost.title} Copy`,
         "content": findPost.content,
-        "attachments": findPost.attachments
+        "attachments": findPost.attachments,
+        "_account": req.uid
       },
       resPostSync = await syncPostFolderExample( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/posts/sync/duplicate`, data, req.headers.authorization );
 
@@ -281,6 +282,6 @@ module.exports = {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
     }
 
-    res.status( 200 ).json( jsonResponse( "success", findPost ) );
+    res.status( 200 ).json( jsonResponse( "success", resPostSync.data.data ) );
   }
 };
