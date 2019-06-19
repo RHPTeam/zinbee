@@ -14,6 +14,7 @@ import signupRouterAdmin from "./modules/admin/signup";
 import userGeneralRouter from "./modules/user";
 import signInRouter from "./modules/user/_general/signin";
 import signUpRouter from "./modules/user/_general/signup";
+import introduceRouter from "./modules/user/landingpage";
 import redirectRouter from "./modules/user/_general/redirect";
 import changePasswordRouter from "./modules/user/_general/password";
 
@@ -44,6 +45,7 @@ export default new Router({
     userGeneralRouter,
     signInRouter,
     signUpRouter,
+    introduceRouter,
     redirectRouter,
     changePasswordRouter,
     /**

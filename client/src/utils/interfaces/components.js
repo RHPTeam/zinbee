@@ -15,6 +15,9 @@ Vue.component("IconApplication", () =>
 Vue.component("IconArrowLeft", () =>
   import("@/components/icons/IconArrowLeft")
 );
+Vue.component("IconArrowRight", () =>
+  import("@/components/icons/IconArrowRight")
+);
 
 Vue.component("IconBase", () => import("@/components/icons/IconBase"));
 Vue.component("IconBell", () => import("@/components/icons/IconBell"));
@@ -163,6 +166,32 @@ Vue.component("LoadingComponent", () =>
 Vue.component("DNotification", () =>
   import("@/components/shared/layouts/notification")
 );
+
+/********************* CUSTOM Icon Landing Page ****************************/
+Vue.component("IconEnterprise", () =>
+  import("@/components/icons/IconEnterprise")
+);
+Vue.component("IconChartBar", () => import("@/components/icons/IconChartBar"));
+Vue.component("IconSearchAuto", () =>
+  import("@/components/icons/IconSearchAuto")
+);
+Vue.component("IconAutomatic", () =>
+  import("@/components/icons/IconAutomatic")
+);
+Vue.component("IconLaptopPhone", () =>
+  import("@/components/icons/IconLaptopPhone")
+);
+Vue.component("IconDiamond", () => import("@/components/icons/IconDiamond"));
+Vue.component("IconRocket", () => import("@/components/icons/IconRocket"));
+Vue.component("IconDatabase", () => import("@/components/icons/IconDatabase"));
+Vue.component("IconWorld", () => import("@/components/icons/IconWorld"));
+Vue.component("IconProvider", () => import("@/components/icons/IconProvider"));
+Vue.component("IconFacebook", () => import("@/components/icons/IconFacebook"));
+Vue.component("IconInstagramSimple", () =>
+  import("@/components/icons/IconInstagramSimple")
+);
+Vue.component("IconYoutube", () => import("@/components/icons/IconYoutube"));
+Vue.component("IconTiwtter", () => import("@/components/icons/IconTiwtter"));
 
 /**
  * Assign Global Vue Directives
