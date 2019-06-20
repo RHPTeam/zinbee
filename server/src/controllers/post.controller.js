@@ -261,11 +261,18 @@ module.exports = {
       .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
   },
   "duplicateFolder": async ( req, res ) => {
-    const findCategoryDefault = await CategoryDefault.findOne( { "_id": req.query._categoryId } ).populate( { "path": "postList", "select": "_id title attachments content _account" } ),
+    const findCategoryDefault = await CategoryDefault.findOne( { "_id": req.query._categoryId } ).populate( { "path": "postList", "select": "_id title photos content " } ).lean(),
       userInfo = await Account.findOne( { "_id": req.uid } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean(),
-      resData = await Promise.all( findCategoryDefault.postList.map( ( item ) => {
+      resData = await Promise.all( findCategoryDefault.postList.map( async ( item ) => {
         item._account = req.uid;
+        item.attachments = await Promise.all( item.photos.map( ( image ) => {
+          return {
+            "link": image,
+            "typeAttachment": 1
+          };
+        } ) );
+        delete item.photos;
         return item;
       } ) ),
       postId = await Promise.all( findCategoryDefault.postList.map( ( item ) => {
