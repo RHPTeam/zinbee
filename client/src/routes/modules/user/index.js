@@ -1,6 +1,7 @@
 const userGeneralRouter = {
   path: "",
-  redirect: "/signin"
+  name: "homepage",
+  component: require("@/views/_general/home").default
 };
 
 export default userGeneralRouter;

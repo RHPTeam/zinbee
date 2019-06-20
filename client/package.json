@@ -33,6 +33,7 @@
     "husky": "^2.3.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
+    "typed.js": "^2.0.10",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {

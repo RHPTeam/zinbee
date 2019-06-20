@@ -53,8 +53,8 @@
               </svg>
             </div>
           </div>
-          <span class="name--filter">Filter</span>
-          <span class="name--filter">&amp; Refine</span>
+          <span class="name--filter">Bộ lọc</span>
+          <!-- <span class="name--filter">&amp; Refine</span> -->
         </div>
       </div>
       <div class="c_md_9 pr_0">

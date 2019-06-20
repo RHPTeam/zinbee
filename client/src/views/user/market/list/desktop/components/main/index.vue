@@ -6,14 +6,14 @@
         <b>{{ productsInCategory.length }}</b> items in
       </div>
       <div class="d_flex pl_2 pr_3">
-        <div class="selected">
+        <!-- <div class="selected">
           <div class="items">
             <router-link class="name all--post" :to="{ name: 'market_home' }"
-              >All post</router-link
+              >Tất cả</router-link
             >
             <span class="px_1 cut">/</span>
           </div>
-        </div>
+        </div> -->
         <div class="selected" v-if="currentParentMarketCategory">
           <div class="items">
             <span class="name">{{ currentParentMarketCategory }}</span>
@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="clear">Clear all</div>
+      <div class="clear">Xóa tất cả</div>
     </div>
     <!-- End Selected filters -->
     <!-- component loading  -->
@@ -146,7 +146,10 @@
         </div>
       </div>
     </div>
-    <div class="text_center py_3 card" v-if="productsInCategory.length === 0">
+    <div
+      class="text_center py_3 card mb_3"
+      v-if="productsInCategory.length === 0"
+    >
       Khong co san pham nao
     </div>
     <!-- *************POPUP************* -->

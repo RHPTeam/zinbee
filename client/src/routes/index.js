@@ -9,13 +9,15 @@ import signinRouterAdmin from "./modules/admin/signin";
 import signupRouterAdmin from "./modules/admin/signup";
 
 /**
- * Router for Sytem Member
+ * Router for System Member
  */
 import userGeneralRouter from "./modules/user";
 import signInRouter from "./modules/user/_general/signin";
 import signUpRouter from "./modules/user/_general/signup";
+import introduceRouter from "./modules/user/landingpage";
 import redirectRouter from "./modules/user/_general/redirect";
 import changePasswordRouter from "./modules/user/_general/password";
+import expirationRouter from "./modules/user/_general/expiration";
 
 /**
  * Router for Help
@@ -39,13 +41,15 @@ export default new Router({
     signinRouterAdmin,
     signupRouterAdmin,
     /**
-     * Router for Sytem Member
+     * Router for System Member
      */
     userGeneralRouter,
     signInRouter,
     signUpRouter,
+    introduceRouter,
     redirectRouter,
     changePasswordRouter,
+    expirationRouter,
     /**
      * Router for Help
      */

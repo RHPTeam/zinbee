@@ -45,9 +45,7 @@ export default {
       };
 
       await this.$store.dispatch( "signInByUser", dataSender );
-      if (
-        this.$store.getters.authError === "401" || this.$store.getters.authError === "405"
-      ) {
+      if ( this.$store.getters.authError === "401" ) {
         return false;
       }
       const token = `sid=${CookieFunction.getCookie(
@@ -55,7 +53,11 @@ export default {
       )}; uid=${CookieFunction.getCookie("uid")}; cfr=${CookieFunction.getCookie(
         "cfr"
       )};`;
-      window.location = `${this.redirectDomain}redirect?authorization=${encodeURIComponent(token)}`;  
+      if ( this.$store.getters.authError === "405" ) {
+        this.$router.push( { name: "user_expiration" } );
+      } else {
+        window.location = `${this.redirectDomain}redirect?authorization=${encodeURIComponent(token)}`;
+      }
     }
   },
   watch: {
