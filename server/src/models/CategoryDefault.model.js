@@ -13,7 +13,7 @@ const mongoose = require( "mongoose" ),
     "postList": [
       {
         "type": Schema.Types.ObjectId,
-        "ref": "PostFacebook"
+        "ref": "MarketProductPost"
       }
     ],
     "editor": {

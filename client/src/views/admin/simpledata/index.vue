@@ -8,7 +8,7 @@
 export default {
   created() {
     this.$store.dispatch("getAllCategoryDefault");
-    this.$store.dispatch("getAllPostLibraries");
+    this.$store.dispatch("getAllMarketPosts");
   }
 };
 </script>
