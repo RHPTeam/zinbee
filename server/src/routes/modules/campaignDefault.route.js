@@ -15,5 +15,5 @@ router
   .post( auth, permission, CampaignDefaultRoute.create )
   .patch( auth, permission, CampaignDefaultRoute.update )
   .delete( auth, permission, CampaignDefaultRoute.delete );
-
+router.route( "/duplicate" ).post( auth, CampaignDefaultRoute.duplicate )
 module.exports = router;

@@ -8,7 +8,11 @@
  */
 const MarketProductPost = require( "../models/market/products/post.model" );
 const CampaignDefault = require( "../models/CampaignDefault.model" );
-const jsonResponse = require( "../configs/response" );
+const Account = require( "../models/Account.model" );
+const Server = require( "../models/Server.model" );
+
+const jsonResponse = require( "../configs/response" ),
+  { syncCampaignExample } = require( "../microservices/synchronize/campaign" );
 
 
 module.exports = {
@@ -31,8 +35,7 @@ module.exports = {
       return res.status( 403 ).json( { "status": "fail", "data": { "title": "Tiêu đề chiến dịch không được bỏ trống!" } } );
     }
     // Handle create with mongodb
-    const i = 1,
-      listPost = await MarketProductPost.find( {} ).lean(),
+    const listPost = await MarketProductPost.find( {} ).lean(),
       newCampaignDefault = await new CampaignDefault( {
         "title": req.body.title,
         "totalDay": req.body.totalDay,
@@ -40,10 +43,8 @@ module.exports = {
         "_account": req.uid
       } );
 
-    while ( i <= req.body.totalDay * 2 ) {
+    for ( let i = 1; i <= req.body.totalDay * 2; i++ ) {
       let postSelectedFromRandom = await MarketProductPost.findOne( { "_id": listPost[ Math.floor( Math.random() * listPost.length ) ] } ).lean();
-
-      console.log( postSelectedFromRandom )
 
       newCampaignDefault.postList.push( postSelectedFromRandom._id );
     }
@@ -81,6 +82,29 @@ module.exports = {
 
     await CampaignDefault.findByIdAndRemove( req.query._id );
     res.status( 200 ).json( jsonResponse( "success", null ) );
+  },
+  "duplicate": async ( req, res ) => {
+    const findCampaignExample = await CampaignDefault.findOne( { "_id": req.query._campaignId } ).select( "-updated_at -__v" ).populate( "postList" ).lean(),
+      userInfo = await Account.findOne( { "_id": req.uid } ),
+      vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
+
+    // Check catch when duplicate
+    if ( !findCampaignExample ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Chiến dịch không tồn tại!" } );
+    }
+
+    let data = {
+        "campaignExample": findCampaignExample,
+        "facebookId": req.body.facebookId
+      },
+      resCampaignSync = await syncCampaignExample( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/campaigns/sync/duplicate`, data, req.headers.authorization );
+
+
+    if ( resCampaignSync.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    }
+
+    res.status( 200 ).json( jsonResponse( "success", resCampaignSync.data ) );
   }
 
 };
