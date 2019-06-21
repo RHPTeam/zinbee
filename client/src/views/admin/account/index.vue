@@ -15,7 +15,7 @@
       <div v-else class="list--content">
         <app-list-view />
       </div>
-      <app-paginate />
+      <!--      <app-paginate />-->
     </div>
   </div>
 </template>
@@ -23,14 +23,12 @@
 import AppTop from "./components/top/index";
 import AppGridView from "./components/views/grid/index";
 import AppListView from "./components/views/list/index";
-import AppPaginate from "./components/paginate/index";
 
 export default {
   components: {
     AppTop,
     AppGridView,
-    AppListView,
-    AppPaginate
+    AppListView
   },
   data() {
     return {

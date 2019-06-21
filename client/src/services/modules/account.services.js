@@ -64,5 +64,8 @@ export default {
   },
   createNewPassword(user) {
     return Api().post(`users/create-password`, user);
+  },
+  searchUser(keyword) {
+    return Api().post(`users/search?_keyword=${keyword}`);
   }
 };

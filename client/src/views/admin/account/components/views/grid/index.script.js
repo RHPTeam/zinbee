@@ -36,7 +36,7 @@ export default {
       return this.$store.getters.themeName;
     },
     users() {
-      return this.$store.getters.allUser;
+      return this.$store.getters.usersFilter;
     },
     selectAll: {
       get: function() {

@@ -87,7 +87,7 @@ const mutations = {
     state.code = payload;
   },
   getUsersFilter: (state, payload) => {
-    state.usersFilter = payload;
+    state.usersFilter.push(payload);
   },
   setFilter: (state, payload) => {
     state.statusFilter = payload;
@@ -560,6 +560,12 @@ const actions = {
     const users = await AccountServices.getAllUser();
 
     await commit("setAllUser", users.data.data);
+  },
+  searchUserByKey: async ({ commit }, payload) => {
+    commit("auth_request");
+    const result = await AccountServices.searchUser(payload);
+    commit("getUsersFilter", result.data.data);
+    commit("auth_success");
   }
 };
 
