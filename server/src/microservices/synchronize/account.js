@@ -27,5 +27,15 @@ module.exports = {
         "Authorization": headers
       }
     } );
+  },
+  "changeStatusAccountSync": ( url, data, headers ) => {
+    return request( {
+      "method": "patch",
+      "url": url,
+      "data": data,
+      "headers": {
+        "Authorization": headers
+      }
+    } );
   }
 };

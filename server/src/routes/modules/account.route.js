@@ -15,6 +15,8 @@ router
 
 router.route( "/sync" ).patch( auth, AccountController.updateSync );
 
+router.route( "/search" ).post( auth, permission, AccountController.searchUser );
+
 router.route( "/status" ).post( auth, permission, AccountController.changeStatus );
 router.route( "/renew/id" ).post( auth, permission, AccountController.renewById );
 router.route( "/renew/code" ).post( auth, permission, AccountController.renewByCode );
