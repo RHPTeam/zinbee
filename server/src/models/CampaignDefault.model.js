@@ -3,13 +3,8 @@
 const mongoose = require( "mongoose" ),
   Schema = mongoose.Schema,
 
-  PostCategorySchema = new Schema( {
-    "title": String,
-    "description": String,
-    "isDefault": {
-      "type": Boolean,
-      "default": true
-    },
+  CampaignExampleSchema = new Schema( {
+    "totalDay": Number,
     "postList": [
       {
         "type": Schema.Types.ObjectId,
@@ -20,7 +15,7 @@ const mongoose = require( "mongoose" ),
       "type": Schema.Types.ObjectId,
       "ref": "Account"
     },
-    "_account": {
+    "_creator": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"
     },
@@ -31,11 +26,11 @@ const mongoose = require( "mongoose" ),
     "updated_at": Date
   } );
 
-PostCategorySchema.pre( "save", function( next ) {
+CampaignExampleSchema.pre( "save", function( next ) {
   this.updated_at = Date.now();
   next();
 } );
 
-const PostCategory = mongoose.model( "PostCategory", PostCategorySchema );
+const CampaignExample = mongoose.model( "CampaignExample", CampaignExampleSchema );
 
-module.exports = PostCategory;
+module.exports = CampaignExample;
