@@ -4,6 +4,8 @@ const mongoose = require( "mongoose" ),
   Schema = mongoose.Schema,
 
   CampaignExampleSchema = new Schema( {
+    "title": String,
+    "description": String,
     "totalDay": Number,
     "postList": [
       {
