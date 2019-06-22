@@ -7,7 +7,9 @@ export default {
       backgroundTool: require("@/assets/images/home/powerful-bg.jpg"),
       backgroundCustomer: require("@/assets/images/home/quote.png"),
       backgroundMap: require("@/assets/images/home/map-bg.jpg"),
+      backgroundShow: require("@/assets/images/home/show.png"),
       currentIndex: 1,
+      currentIndexInfo: 1,
       typed: {
         strings: ["Developers.", "Designers.", "People."],
         // Optionally use an HTML element to grab strings from (must wrap each string in a <p>)
@@ -40,7 +42,21 @@ export default {
         onStringTyped: function() {},
         // callback for reset
         resetCallback: function() {}
-      }
+      },
+      imageTraining: [
+        require("@/assets/images/home/training1.jpg"),
+        require("@/assets/images/home/training2.jpg"),
+        require("@/assets/images/home/training3.jpg"),
+        require("@/assets/images/home/training4.jpg")
+      ],
+      imageTool1: require("@/assets/images/home/training1.jpg"),
+      imageTool2: require("@/assets/images/home/training4.jpg"),
+      benefit: require("@/assets/images/home/undraw_visual_data_b1wx.svg"),
+      automatic: require("@/assets/images/home/undraw_setup_analytics_8qkl.svg"),
+      currentSliderTraining: 1,
+      srcSimpleInterface: require("@/assets/images/home/undraw_empty_cart_co35.svg"),
+      srcAutomatic: require("@/assets/images/home/undraw_coming_home_52ir.svg"),
+      srcExamlePost: require("@/assets/images/home/undraw_team_page_pgpr.svg")
     };
   },
   methods: {
@@ -56,6 +72,20 @@ export default {
         this.currentIndex = 1;
       } else {
         this.currentIndex--;
+      }
+    },
+    nextInfo() {
+      if (this.currentIndexInfo === 4) {
+        this.currentIndexInfo = 4;
+      } else {
+        this.currentIndexInfo++;
+      }
+    },
+    prevInfo() {
+      if (this.currentIndexInfo === 1) {
+        this.currentIndexInfo = 1;
+      } else {
+        this.currentIndexInfo--;
       }
     },
     showTyped() {
@@ -103,9 +133,18 @@ export default {
       const routeSignUp = this.$router.resolve({ name: "user_signup" });
 
       window.open(routeSignUp.href, "_blank");
+    },
+    sliderTraining() {
+      setInterval(() => {
+        this.currentSliderTraining++;
+        if (this.currentSliderTraining === 4) {
+          this.currentSliderTraining = 0;
+        }
+      }, 3000);
     }
   },
   mounted() {
     this.runInitEffect();
+    this.sliderTraining();
   }
 };
