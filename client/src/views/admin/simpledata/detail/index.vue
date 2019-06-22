@@ -92,7 +92,7 @@ export default {
       return this.$store.getters.infoCateDefault;
     },
     allPost() {
-      return this.$store.getters.allPostLibraries;
+      return this.$store.getters.allMarketPosts;
     },
     listPost() {
       return this.$store.getters.listPost;

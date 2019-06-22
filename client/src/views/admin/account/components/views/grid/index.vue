@@ -36,8 +36,12 @@
       <div class="grid--content">
         <div class="ct_f p_0">
           <!-- Start: User Data -->
-          <div class="r" v-if="users.length > 0">
-            <div class="c_md_3 mt_4" v-for="user in users" :key="user._id">
+          <div class="r" v-if="users && users.length > 0">
+            <div
+              class="c_md_3 mt_4"
+              v-for="(user, index) in users"
+              :key="index"
+            >
               <div class="user">
                 <!-- Start: Checkbox -->
                 <div class="user--action d_flex">

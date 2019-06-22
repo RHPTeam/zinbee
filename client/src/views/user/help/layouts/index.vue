@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <!-- Start: Desktop Component-->
-    <div class="wrap--content d_none d_md_block">
+    <div class="wrap--content position_relative d_none d_md_block">
       <div class="wrap--content-header">
         <app-header />
       </div>
@@ -11,6 +11,9 @@
       <div class="wrap--content-footer">
         <app-footer />
       </div>
+      <!-- Start: Component chat fanpage -->
+      <!--      <plugin-messenger />-->
+      <!-- End: Component chat fanpage -->
     </div>
     <!-- End: Desktop Component-->
   </div>

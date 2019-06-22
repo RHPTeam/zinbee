@@ -6,16 +6,18 @@
  */
 const router = require( "express-promise-router" )();
 const CategoryDefaultController = require( "../../controllers/categorydefault.controller" );
+const auth = require( "../../helpers/middleware/authenticate.middleware" );
+const permission = require( "../../helpers/middleware/permission.middleware" );
 
 router
   .route( "/" )
-  .get( CategoryDefaultController.index )
-  .post( CategoryDefaultController.create )
-  .patch( CategoryDefaultController.update )
-  .delete( CategoryDefaultController.delete );
+  .get( auth, CategoryDefaultController.index )
+  .post( auth, permission, CategoryDefaultController.create )
+  .patch( auth, permission, CategoryDefaultController.update )
+  .delete( auth, permission, CategoryDefaultController.delete );
 
 router
   .route( "/:categoryId/post/:postId" )
-  .post( CategoryDefaultController.createPostByCategory )
-  .delete( CategoryDefaultController.removePostByCategory );
+  .post( auth, permission, CategoryDefaultController.createPostByCategory )
+  .delete( auth, permission, CategoryDefaultController.removePostByCategory );
 module.exports = router;

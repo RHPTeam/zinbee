@@ -98,6 +98,11 @@ export default {
         // callback for reset
         resetCallback: function() {}
       });
+    },
+    goToSignUp() {
+      const routeSignUp = this.$router.resolve({ name: "user_signup" });
+
+      window.open(routeSignUp.href, "_blank");
     }
   },
   mounted() {
