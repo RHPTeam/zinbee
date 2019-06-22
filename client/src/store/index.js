@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 import AccountStore from "./modules/account.store";
 import CategoryDefault from "./modules/categorydefault.store";
+import CampaignsDefault from "./modules/campaign.store";
 import DashBoard from "./modules/dashboard.store";
 import ServerStore from "./modules/server.store";
 import PostLibraries from "./modules/post.store";
@@ -22,6 +23,7 @@ export default new Vuex.Store({
   modules: {
     AccountStore,
     CategoryDefault,
+    CampaignsDefault,
     DashBoard,
     ServerStore,
     PostLibraries,

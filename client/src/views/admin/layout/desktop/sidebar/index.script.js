@@ -77,6 +77,17 @@ export default {
           to: "simple_data"
         },
         {
+          text: "Chiến dịch mẫu",
+          icon: {
+            iconName: "folder",
+            tagName: "icon-folder",
+            width: 24,
+            height: 24,
+            viewBox: "0 0 540 540"
+          },
+          to: "campaigns"
+        },
+        {
           text: "Quản lý market",
           icon: {
             iconName: "manage-market",
