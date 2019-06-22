@@ -16,7 +16,7 @@ export default {
     await CookieFunction.removeCookie("_sub");
     await CookieFunction.removeCookie("__v");
     //redirect to signin
-    this.$router.go({ name: "user_signin" });
+    this.$router.push({ name: "user_signin" });
   }
 };
 </script>
