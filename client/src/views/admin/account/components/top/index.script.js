@@ -47,39 +47,8 @@ export default {
       }
     },
     async searchUsers() {
-      let arr;
-
-      if (this.statusFilter === "Tất cả") {
-        arr = this.users.filter(user => {
-          return user.email
-            .toString()
-            .toLowerCase()
-            .includes(this.search.toString().toLowerCase());
-        });
-      } else if (this.statusFilter === "Hoạt động") {
-        arr = this.users.filter(user => {
-          return (
-            user.email
-              .toString()
-              .toLowerCase()
-              .includes(this.search.toString().toLowerCase()) &&
-            user.status === true
-          );
-        });
-      } else if (this.statusFilter === "Đã ngừng") {
-        arr = this.users.filter(user => {
-          return (
-            user.email
-              .toString()
-              .toLowerCase()
-              .includes(this.search.toString().toLowerCase()) &&
-            user.status === false
-          );
-        });
-      }
-
-      await this.$store.dispatch("getUsersFilter", arr);
-      this.$store.dispatch("setFilter", 1);
+      await this.$store.dispatch("setFilter", 1);
+      this.$store.dispatch("searchUserByKey", this.search);
     }
   },
   components: {

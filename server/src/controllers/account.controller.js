@@ -15,7 +15,7 @@ const fs = require( "fs" );
 const jsonResponse = require( "../configs/response" );
 
 const { signToken } = require( "../configs/jwt" );
-const { signUpSync, createNewPasswordSync, activeAccountSync } = require( "../microservices/synchronize/account" ),
+const { signUpSync, createNewPasswordSync, activeAccountSync, changeStatusAccountSync } = require( "../microservices/synchronize/account" ),
   mail = require( "nodemailer" ),
   CronJob = require( "cron" ).CronJob;
 
@@ -39,14 +39,17 @@ module.exports = {
     res.send( { "status": "success", "data": null } );
   },
   "changeStatus": async ( req, res ) => {
-    let data;
-
     const { id } = req.body,
-      userInfo = await Account.findOne( { "_id": id } );
+      userInfo = await Account.findOne( { "_id": id } ),
+      vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
 
     userInfo.status = !userInfo.status;
-    data = await Account.findByIdAndUpdate( id, { "$set": { "status": userInfo.status } }, { "new": true } ).select( "-password" );
+    let data = await Account.findByIdAndUpdate( id, { "$set": { "status": userInfo.status } }, { "new": true } ).select( "-password" ),
+      resUserSync = await changeStatusAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/sync/change-status`, req.body, req.headers.authorization );
 
+    if ( resUserSync.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    }
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   "getUserInfo": async ( req, res ) => {
@@ -55,17 +58,48 @@ module.exports = {
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   "index": async ( req, res ) => {
-    let data;
+    let dataResponse = null;
 
+    // Check if query get one item from _id
     if ( req.query._id ) {
-      data = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).lean();
+      dataResponse = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).lean();
+      return res.status( 200 ).json( jsonResponse( "success", dataResponse ) );
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await Account.find( {} ).select( "-password" ).lean();
-    } else {
-      data = await Account.find( req.query ).select( "-password" ).lean();
+      dataResponse = await Account.find( req.query ).select( "-password" ).lean();
+      return res.status( 200 ).json( jsonResponse( "success", dataResponse ) );
     }
 
-    res.status( 200 ).json( jsonResponse( "success", data ) );
+    // Handle get items by pagination from database
+    if ( req.query._size && req.query._page ) {
+      const pageNo = parseInt( req.query._page ),
+        size = parseInt( req.query._size ),
+        query = {},
+        totalPosts = await Account.countDocuments( {} );
+
+      // Check catch
+      if ( pageNo < 0 || pageNo === 0 ) {
+        return res.status( 403 ).json( { "status": "error", "message": "Dữ liệu số trang không đúng, phải bắt đầu từ 1." } );
+      }
+
+      // Handle input data before connect to mongodb
+      query.skip = size * ( pageNo - 1 );
+      query.limit = size;
+      query.sort = { "$natural": -1 };
+
+      // Handle with mongodb
+      dataResponse = await Account.find( {}, "-password -created_at -updated_at -__v", query ).lean();
+
+      return res.status( 200 ).json( jsonResponse( "success", { "results": dataResponse, "page": Math.ceil( totalPosts / size ), "size": size } ) );
+    }
+    res.status( 304 ).json( jsonResponse( "fail", "API này không được cung cấp!" ) );
+  },
+  "searchUser": async ( req, res ) => {
+    const findAccount = await Account.findOne( { "$or": [ { "email": req.query._keyword }, { "phone": req.query._keyword } ] } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).lean();
+
+    if ( !findAccount ) {
+      return res.status( 403 ).json( { "status": "fail", "message": "Tài khoản không tồn tại" } );
+    }
+    res.status( 200 ).json( jsonResponse( "success", findAccount ) );
   },
   "renewById": async ( req, res ) => {
     let data, resUserSync;
@@ -77,7 +111,7 @@ module.exports = {
       return res.status( 403 ).json( { "status": "fail", "expireDate": "Ngày gia hạn cần phải ở tương lai!" } );
     }
 
-    const { id, expireDate } = req.body,
+    const { id, maxAccountFb, expireDate } = req.body,
       userInfo = await Account.findOne( { "_id": id } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
 
@@ -88,7 +122,7 @@ module.exports = {
     }
 
     // Update expire date
-    data = await Account.findByIdAndUpdate( id, { "$set": { "status": 1, "expireDate": expireDate } }, { "new": true } ).select( "-password" );
+    data = await Account.findByIdAndUpdate( id, { "$set": { "status": 1, "expireDate": expireDate, "maxAccountFb": maxAccountFb } }, { "new": true } ).select( "-password" );
 
     resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
     if ( resUserSync.data.status !== "success" ) {
@@ -282,7 +316,7 @@ module.exports = {
         "subject": "Confirm reset password",
         "html": `
       <div>
-        <img src="http://zinbee.vn/assets/landing/image/logo/zinbee.png"> <br>
+        <img src="https://lh3.googleusercontent.com/_XAtvS1rUQ_UWyYo8Gg18vDWbWPyJkoca163rugtVTySS6UkWsHi6pwHPLrZZBPPtDxPcfK0RWD_szWuew2HVr3q_D_KAfEj43DmKUvxaVWzZV2zoO7iMzy7WxGI50bidhJwLKQ9zMwZjMVmmb4YoDoW9AHXKxj4iBlfZTFfwx_u329Zhsqf_sD99oFJtxl5CmvknEhJnX6mibCbU4UpRRIcfDsR8kZsJJR9dvXTzPP0WQskvOwVWuacYcnoSsvxZPOaA_crNo9TNujgMIs-xhrUlrpzadMNceOAu6imZM2BNL5V_ZAvTgOdZA7WW2K_gYNmzP7A1xlZAR7M2nD51zijsVFHA1pVSg-9Emwn7OBol83X0H5pF1-b2Z7dThXepid3ZSn8w5svgiBWKo-ycsqJrS_dutDslK41cwaFw4nxFSNj-JQs5XiKpHooYglfUydBhv6F1KhJBwKvrxHxwiGMWVQCCcY9oNzfJ9EZ9KJAUKc8mXHEf9A-d0Xle_Awd9Li20cqMtWf67prMyIy34NsXAQAaMtFW-bRao-2VxiqaKgs5jjF440xMvCHn9CWHplRVlIems7JSgfN7XPUNWknDhjecc_OqNCMNbc=w1366-h575"> <br>
         <span style="font-size: 20px">Email tự động xác nhận passcode</span><br>
         <span style="font-size: 20px"><b>Code: ${code}</b> </span> 
       </div>`

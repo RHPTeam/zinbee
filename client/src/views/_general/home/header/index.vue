@@ -4,7 +4,7 @@
       <nav class="navbar navbar-default header-area affix-top">
         <div class="d_flex align_items_center header">
           <!--Start: Logo -->
-          <div class="logo mr_auto">
+          <router-link class="logo mr_auto" to="/">
             <icon-base
               icon-name="ZinBee"
               width="132.92"
@@ -13,7 +13,7 @@
             >
               <icon-logo />
             </icon-base>
-          </div>
+          </router-link>
           <!--Start: Logo -->
 
           <!-- Start: Navbar -->
@@ -29,11 +29,11 @@
             </div>-->
             <nav>
               <ul class="d_flex nav--menu">
-                <li class="items--header">Trang chủ</li>
-                <li class="items--header">Giới thiệu</li>
-                <li class="items--header">Tiện ích</li>
-                <li class="items--header">Bảng giá</li>
-                <li class="items--header">Liên hệ</li>
+                <!--<li class="items&#45;&#45;header">Trang chủ</li>
+                <li class="items&#45;&#45;header">Giới thiệu</li>
+                <li class="items&#45;&#45;header">Tiện ích</li>
+                <li class="items&#45;&#45;header">Bảng giá</li>
+                <li class="items&#45;&#45;header">Liên hệ</li>-->
                 <li class="items--header" @click="goToSignIn">Đăng nhập</li>
                 <li class="items--header" @click="goToSignUp">Đăng ký</li>
               </ul>
@@ -58,21 +58,21 @@
                 v-if="menu === true"
                 v-click-outside="closeMenu"
               >
-                <li class="items--header">
+                <!--<li class="items&#45;&#45;header">
                   <a href="#">Trang chủ</a>
                 </li>
-                <li class="items--header">
+                <li class="items&#45;&#45;header">
                   <a href="#">Giới thiệu</a>
                 </li>
-                <li class="items--header">
+                <li class="items&#45;&#45;header">
                   <a href="#">Tiện ích</a>
                 </li>
-                <li class="items--header">
+                <li class="items&#45;&#45;header">
                   <a href="#">Bảng giá</a>
                 </li>
-                <li class="items--header">
+                <li class="items&#45;&#45;header">
                   <a href="#">Liên hệ</a>
-                </li>
+                </li>-->
                 <li class="items--header" @click="goToSignIn">
                   <a href="#">Đăng nhập</a>
                 </li>

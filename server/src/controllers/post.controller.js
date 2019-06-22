@@ -16,12 +16,14 @@ Object.defineProperty( Array.prototype, "flat", {
 } );
 
 const PostFacebook = require( "../models/Post.model" );
+const MarketProductPost = require( "../models/market/products/post.model" );
+const CategoryDefault = require( "../models/CategoryDefault.model" );
 const Account = require( "../models/Account.model" );
 const Server = require( "../models/Server.model" );
 
 const jsonResponse = require( "../configs/response" );
 const dictionary = require( "../configs/dictionaries" ),
-  { syncPostFolderExample } = require( "../microservices/synchronize/post" );
+  { syncPostFolderExample, syncFolderExample } = require( "../microservices/synchronize/post" );
 
 
 const { searchPost } = require( "../controllers/core/search.core" ),
@@ -259,8 +261,43 @@ module.exports = {
       .status( 200 )
       .json( jsonResponse( "success", { "results": dataResponse, "page": page } ) );
   },
+  "duplicateFolder": async ( req, res ) => {
+    const findCategoryDefault = await CategoryDefault.findOne( { "_id": req.query._categoryId } ).populate( { "path": "postList", "select": "_id title photos content " } ).lean(),
+      userInfo = await Account.findOne( { "_id": req.uid } ),
+      vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean(),
+      resData = await Promise.all( findCategoryDefault.postList.map( async ( item ) => {
+        item._account = req.uid;
+        item.attachments = await Promise.all( item.photos.map( ( image ) => {
+          return {
+            "link": image,
+            "typeAttachment": 1
+          };
+        } ) );
+        delete item.photos;
+        return item;
+      } ) ),
+      postId = await Promise.all( findCategoryDefault.postList.map( ( item ) => {
+        return item._id;
+      } ) );
+
+    let data = {
+        "categoryPost": {
+          "_id": findCategoryDefault._id.toString(),
+          "title": `${findCategoryDefault.title} Copy`,
+          "_account": req.uid
+        },
+        "postList": resData,
+        "postId": postId
+      },
+      resFolderSync = await syncFolderExample( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/posts/sync/duplicate/folder`, data, req.headers.authorization );
+
+    if ( resFolderSync.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    }
+    res.status( 200 ).json( jsonResponse( "success", resFolderSync.data.data ) );
+  },
   "duplicate": async ( req, res ) => {
-    const findPost = await PostFacebook.findOne( { "_id": req.query._postId } ),
+    const findPost = await MarketProductPost.findOne( { "_id": req.query._postId } ),
       userInfo = await Account.findOne( { "_id": req.uid } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
 
@@ -269,10 +306,16 @@ module.exports = {
       return res.status( 404 ).json( { "status": "error", "message": "Bài viết không tồn tại!" } );
     }
 
-    let data = {
+    let attachments = await Promise.all( findPost.photos.map( ( image ) => {
+        return {
+          "link": image,
+          "typeAttachment": 1
+        };
+      } ) ),
+      data = {
         "title": `${findPost.title} Copy`,
         "content": findPost.content,
-        "attachments": findPost.attachments,
+        "attachments": attachments,
         "_account": req.uid
       },
       resPostSync = await syncPostFolderExample( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/posts/sync/duplicate`, data, req.headers.authorization );

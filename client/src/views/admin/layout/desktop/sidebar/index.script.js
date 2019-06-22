@@ -21,17 +21,17 @@ export default {
           },
           to: "admin_dashboard"
         },
-        {
-          text: "Thư viện bài viết",
-          icon: {
-            iconName: "script",
-            tagName: "icon-post",
-            width: 20,
-            height: 20,
-            viewBox: "0 0 540 540"
-          },
-          to: "libraries"
-        },
+        // {
+        //   text: "Thư viện bài viết",
+        //   icon: {
+        //     iconName: "script",
+        //     tagName: "icon-post",
+        //     width: 20,
+        //     height: 20,
+        //     viewBox: "0 0 540 540"
+        //   },
+        //   to: "libraries"
+        // },
         {
           text: "Quản lý tài khoản",
           icon: {
