@@ -1,0 +1,22 @@
+.simple {
+  .body {
+    .c_md_6 {
+      &:hover, &:active, &:visited, &:focus {
+        > .above {
+          opacity: 1;
+        }
+      }
+      .above {
+        cursor: pointer;
+        top: .5rem;
+        right: 1rem;
+        z-index: 9;
+        opacity: 0;
+      }
+    }
+    .card {
+      cursor: pointer;
+      border-radius: 1rem;
+    }
+  }
+}
