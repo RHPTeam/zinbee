@@ -4,29 +4,46 @@
       <div class="modal--content px_4 py_3" v-click-outside="close">
         <!-- Start: Modal Body -->
         <div class="body">
-          <h4 class="">Tạo thư mục mới</h4>
-          <input
-            type="text"
-            class="form_control"
-            placeholder="Nhập tên thư mục"
-            v-model="campaign.title"
-          />
-          <div class="total mt_3">
-            <input
-              type="number"
-              class="form_control"
-              placeholder="Nhập số ngày hoạt động của chiến dịch"
-              v-model="campaign.totalDay"
-            />
+          <div class="r">
+            <div class="c_6">
+              <input
+                type="text"
+                class="form_control"
+                placeholder="Nhập tên thư mục"
+                v-model="campaign.title"
+              />
+            </div>
+            <div class="c_6">
+              <div class="total">
+                <input
+                  type="number"
+                  class="form_control"
+                  placeholder="Nhập số ngày hoạt động của chiến dịch"
+                  v-model="campaign.totalDay"
+                />
+              </div>
+            </div>
           </div>
           <div class="post mt_3">
-            <multiselect
-              multiple
-              label="title"
-              :options="post"
-              v-model="postList"
-              @input="updatePostToCampaign"
-            />
+            <div class="table-container" role="table" aria-label="Destinations">
+              <div class="flex-table header" role="rowgroup">
+                <div class="flex-row first" role="columnheader">Tiêu đề</div>
+                <div class="flex-row content" role="columnheader">Nội dung</div>
+                <div class="flex-row action" role="columnheader">Hành động</div>
+              </div>
+              <div
+                v-if="posts && posts.length === 0"
+                class="d_flex align_items_center justify_content_center no--post py_3"
+              >
+                Chưa có bài viết nào
+              </div>
+              <div v-else v-for="(post, index) in posts" :key="`p-${index}`">
+                <item
+                  :item="post"
+                  @pushPostToCampaign="pushToCampaign($event)"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <!-- End: Modal Body -->
@@ -48,7 +65,11 @@
 </template>
 
 <script>
+import Item from "./item";
 export default {
+  components: {
+    Item
+  },
   props: {
     currentTheme: String
   },
@@ -58,14 +79,11 @@ export default {
     };
   },
   computed: {
-    post() {
+    posts() {
       return this.$store.getters.allMarketPosts;
     },
     campaign() {
       return this.$store.getters.campaignDetail;
-    },
-    listPost() {
-      return this.$store.getters.listPost;
     }
   },
   async created() {
@@ -76,15 +94,12 @@ export default {
       this.$emit("closePopup", false);
     },
     async createNewFolder() {
-      this.campaign.postList = this.postList;
+      this.campaign.postCustom = [...new Set(this.postList)];
       await this.$store.dispatch("createCampaign", this.campaign);
       this.close();
     },
-    updatePostToCampaign(val) {
-      // const arr = val.map(item => item._id);
-      // console.log(arr);
-      this.postList = val;
-      // this.$store.dispatch("setPostToCampaign", contentId);
+    pushToCampaign(val) {
+      this.postList.push(val);
     }
   }
 };

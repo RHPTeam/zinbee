@@ -4,15 +4,13 @@ const state = {
   campaignStatus: "",
   campaigns: [],
   campaign: [],
-  campaignDetail: [],
-  listPost: []
+  campaignDetail: []
 };
 const getters = {
   campaignStatus: state => state.campaignStatus,
   campaigns: state => state.campaigns,
   campaign: state => state.campaign,
-  campaignDetail: state => state.campaignDetail,
-  listPost: state => state.listPost
+  campaignDetail: state => state.campaignDetail
 };
 const mutations = {
   campaign_request: state => {
@@ -40,9 +38,6 @@ const mutations = {
   },
   setCampaignDefault: (state, payload) => {
     state.campaignDetail = payload;
-  },
-  setPost: (state, payload) => {
-    state.listPost = payload;
   }
 };
 const actions = {
@@ -85,9 +80,6 @@ const actions = {
       title: "",
       totalDay: null
     });
-  },
-  setPostToCampaign: async ({ commit }, payload) => {
-    commit("setPost", payload);
   }
 };
 
