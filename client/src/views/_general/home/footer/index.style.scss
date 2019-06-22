@@ -87,3 +87,29 @@
     }
   }
 }
+
+
+// ============= RESPONSIVE
+@media screen and (max-width: 991px) {
+  .wrapper--footer {
+    .copy {
+      padding: 1rem 0;
+      .content--copy {
+        flex-direction: column;
+      }
+      .contact {
+        margin-left: 0!important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper--footer {
+    .copy {
+      .contact {
+        display: none!important;
+      }
+    }
+  }
+}

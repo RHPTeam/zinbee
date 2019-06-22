@@ -196,6 +196,7 @@ Vue.component("IconInstagramSimple", () =>
 );
 Vue.component("IconYoutube", () => import("@/components/icons/IconYoutube"));
 Vue.component("IconTiwtter", () => import("@/components/icons/IconTiwtter"));
+Vue.component("IconTimer", () => import("@/components/icons/IconTimer"));
 
 /**
  * Assign Global Vue Directives

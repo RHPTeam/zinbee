@@ -35,7 +35,7 @@
                 <li class="items&#45;&#45;header">Bảng giá</li>
                 <li class="items&#45;&#45;header">Liên hệ</li>-->
                 <li class="items--header" @click="goToSignIn">Đăng nhập</li>
-                <li class="items--header" @click="goToSignUp">Đăng ký</li>
+                <li class="items--header try" @click="goToSignUp">Trải nghiệm ngay</li>
               </ul>
             </nav>
           </div>
@@ -77,7 +77,7 @@
                   <a href="#">Đăng nhập</a>
                 </li>
                 <li class="items--header" @click="goToSignUp">
-                  <a href="#">Đăng ký</a>
+                  <a href="#">Trải nghiệm ngay</a>
                 </li>
               </ul>
             </transition>
