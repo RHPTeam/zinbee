@@ -74,7 +74,7 @@
         <!-- End: App Sidebar -->
       </div>
       <!-- Main: Product -->
-      <div class="pr_0" :class="showMarketListSidebar ? 'c_md_9' : 'c_md_12'">
+      <div class="px_0" :class="showMarketListSidebar ? 'c_md_9' : 'c_md_12'">
         <!-- Start: App Data-->
         <router-view></router-view>
         <!-- End: App Data -->

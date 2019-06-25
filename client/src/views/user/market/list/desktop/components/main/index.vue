@@ -3,7 +3,7 @@
     <!-- START: Selected filters -->
     <div class="d_flex selected-filters align_items_center mb_4 mt_2">
       <div class="total--product">
-        <b>{{ productsInCategory.length }}</b> items in
+        <b>{{ productsInCategory.length }}</b> sản phẩm trong
       </div>
       <div class="d_flex pl_2 pr_3">
         <!-- <div class="selected">
@@ -83,7 +83,7 @@
                         >
                         <span v-else>
                           <span class="font_weight_bold"
-                            >{{ attr.name }} :</span
+                            >{{ attr.name }}: </span
                           >
                           <span>{{ attr.value }}</span>
                         </span>
@@ -95,7 +95,7 @@
               </div>
               <div class="bottom mt_3">
                 <div class="tags">
-                  <span>Tags:</span>
+                  <span>Tags: </span>
                   <span v-for="(tag, tagIndex) in item.tags" :key="tagIndex"
                     >{{ tag
                     }}{{ tagIndex === item.tags.length - 1 ? "" : ", " }}</span
@@ -150,7 +150,7 @@
       class="text_center py_3 card mb_3"
       v-if="productsInCategory.length === 0"
     >
-      Khong co san pham nao
+      Không có sảm phẩm nào
     </div>
     <!-- *************POPUP************* -->
     <transition name="popup">

@@ -14,14 +14,14 @@
       <div class=" d_flex justify_content_center p_4">
         <div class="form--search d_flex align_content_center position_relative">
           <div
-            class="icon--search position_absolute btn"
+            class="icon--search position_absolute d_flex align_items_center btn"
             @click="searchKeyword"
           >
             <icon-base
               icon-name="Tìm kiếm"
-              width="24"
-              height="24"
-              viewBox="0 0 16 16"
+              width="30"
+              height="30"
+              viewBox="0 0 20 20"
             >
               <icon-input-search />
             </icon-base>
