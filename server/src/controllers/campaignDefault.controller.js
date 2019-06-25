@@ -43,7 +43,10 @@ module.exports = {
         "_account": req.uid
       } );
 
-    for ( let i = 1; i <= req.body.totalDay * 2; i++ ) {
+    await Promise.all( req.body.postCustom.map( async ( postCustom ) => {
+      await newCampaignDefault.postList.push( postCustom );
+    } ) );
+    for ( let i = 1; i <= ( req.body.totalDay * 2 - req.body.postCustom.length ); i++ ) {
       let postSelectedFromRandom = await MarketProductPost.findOne( { "_id": listPost[ Math.floor( Math.random() * listPost.length ) ] } ).lean();
 
       newCampaignDefault.postList.push( postSelectedFromRandom._id );
