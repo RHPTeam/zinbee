@@ -4,7 +4,7 @@
     <div class="wrap--content d_none d_md_flex">
       <div class="wrap--content-main">
         <!-- Start: Root Banner-->
-        <app-root-banner v-if="false"/>
+        <app-root-banner v-if="false" />
         <!-- End: Root Banner-->
         <!-- Start: Header-->
         <div class="main--header">

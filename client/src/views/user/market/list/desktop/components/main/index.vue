@@ -83,8 +83,8 @@
                         >
                         <span v-else>
                           <span class="font_weight_bold"
-                            >{{ attr.name }}: </span
-                          >
+                            >{{ attr.name }}:
+                          </span>
                           <span>{{ attr.value }}</span>
                         </span>
                       </li>
