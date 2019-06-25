@@ -48,7 +48,7 @@
               </div>
             </div>
           </div>
-          <div class="p_2 text_center" v-else>
+          <div class="p_2 text_center">
             Không có sản phẩm nào
           </div>
         </div>
