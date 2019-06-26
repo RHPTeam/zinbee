@@ -1,5 +1,5 @@
 /**
- * Controller post facebook for project
+ * Controller package for project
  * author: Sky Albert
  * updater: ___
  * date up: 26/06/2019

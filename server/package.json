@@ -64,6 +64,7 @@
         "forOf": true,
         "generators": true,
         "modules": true,
+        "experimentalObjectRestSpread": true,
         "objectLiteralComputedProperties": true,
         "objectLiteralDuplicateProperties": true,
         "objectLiteralShorthandMethods": true,
