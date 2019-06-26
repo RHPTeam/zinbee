@@ -6,7 +6,8 @@ const Help = require( "../models/help/Help.model" );
 
 ( async () => {
   const foundHelp = await Help.find( {} ),
-    foundRole = await Role.find( {} );
+    foundRole = await Role.find( {} ),
+    collaboratorsInfo = await Role.findOne( { "level": "Collaborator" } );
 
   // Check Role First Time Server running
   if ( foundRole.length === undefined || foundRole.length === 0 ) {
@@ -18,6 +19,13 @@ const Help = require( "../models/help/Help.model" );
 
     await Role.insertMany( arr );
     console.log( "Create role successfully!" );
+  }
+
+  // Check Collaborators exists right way?
+  if ( !collaboratorsInfo ) {
+    const newRole = new Role( { "level": "Collaborator" } );
+
+    await newRole.save();
   }
 
   // Check Help First Time Server running

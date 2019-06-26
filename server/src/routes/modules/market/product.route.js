@@ -2,6 +2,7 @@ const router = require( "express-promise-router" )();
 const ProductController = require( "../../../controllers/market/product.controller" );
 const auth = require( "../../../helpers/middleware/authenticate.middleware" );
 const permission = require( "../../../helpers/middleware/permission.middleware" );
+const collaborator = require( "../../../helpers/middleware/collaborator.middleware" );
 
 // Handle upload file image
 const multer = require( "multer" ),
@@ -36,13 +37,13 @@ const multer = require( "multer" ),
 // General
 router.route( "/" )
   .get( ProductController.index )
-  .post( auth, permission, ProductController.create )
-  .patch( auth, permission, ProductController.update )
-  .delete( auth, permission, ProductController.delete );
+  .post( auth, collaborator, permission, ProductController.create )
+  .patch( auth, collaborator, permission, ProductController.update )
+  .delete( auth, collaborator, permission, ProductController.delete );
 
 // Upload
 router.route( "/upload" )
-  .post( auth, permission, upload.single( "previewImageUrl" ), ProductController.upload );
+  .post( auth, collaborator, permission, upload.single( "previewImageUrl" ), ProductController.upload );
 
 // Add to Collection
 router.route( "/add/product/user" )
