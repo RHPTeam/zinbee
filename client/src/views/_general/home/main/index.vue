@@ -5,29 +5,32 @@
       <div
         class="border--right position_absolute"
         :style="{
-        backgroundImage: 'url(' + vienPhaiBanner + ')'
-      }"
+          backgroundImage: 'url(' + vienPhaiBanner + ')'
+        }"
       ></div>
       <div
         class="border--left position_absolute"
         :style="{
-        backgroundImage: 'url(' + vienTraiBanner + ')'
-      }"
+          backgroundImage: 'url(' + vienTraiBanner + ')'
+        }"
       ></div>
       <div class="ct m_auto position_relative content d_flex content">
         <div class="left">
-          <div class="title">VŨ KHÍ KHÔNG THỂ THIẾU CHO BÁN HÀNG TRÊN FACEBOOK</div>
-          <div
-            class="desc"
-          >TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC 100+ TRANG, NHÓM, TRANG CÁ NHÂN TRÊN FACEBOOK VÀI THAO TÁC</div>
+          <div class="title">
+            VŨ KHÍ KHÔNG THỂ THIẾU CHO BÁN HÀNG TRÊN FACEBOOK
+          </div>
+          <div class="desc">
+            TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC 100+ TRANG, NHÓM, TRANG CÁ
+            NHÂN TRÊN FACEBOOK VÀI THAO TÁC
+          </div>
           <div class="register" @click="goToSignUp">TRẢI NGHIỆM NGAY</div>
         </div>
         <div class="right">
           <div
             class="image--banner"
             :style="{
-            backgroundImage: 'url(' + backgroundBanner + ')'
-          }"
+              backgroundImage: 'url(' + backgroundBanner + ')'
+            }"
           ></div>
         </div>
       </div>
@@ -123,11 +126,18 @@
               ></div>
             </div>
             <div class="c_lg_6 c_md_12 right position_relative">
-              <div class="title--content">Những tính năng nổi trội của Zinbee</div>
+              <div class="title--content">
+                Những tính năng nổi trội của Zinbee
+              </div>
               <div class="items d_flex align_items_center">
                 <div class="icon">
-                  <icon-base icon-name="close" width="50" height="50" viewBox="0 0 70 70">
-                    <icon-database/>
+                  <icon-base
+                    icon-name="close"
+                    width="50"
+                    height="50"
+                    viewBox="0 0 70 70"
+                  >
+                    <icon-database />
                   </icon-base>
                 </div>
                 <div class="text">
@@ -140,8 +150,13 @@
               </div>
               <div class="items d_flex align_items_center">
                 <div class="icon">
-                  <icon-base icon-name="close" width="50" height="50" viewBox="0 0 500 500">
-                    <icon-search-auto/>
+                  <icon-base
+                    icon-name="close"
+                    width="50"
+                    height="50"
+                    viewBox="0 0 500 500"
+                  >
+                    <icon-search-auto />
                   </icon-base>
                 </div>
                 <div class="text">
@@ -153,8 +168,13 @@
               </div>
               <div class="items d_flex align_items_center">
                 <div class="icon">
-                  <icon-base icon-name="close" width="50" height="50" viewBox="0 0 500 500">
-                    <icon-chart-bar/>
+                  <icon-base
+                    icon-name="close"
+                    width="50"
+                    height="50"
+                    viewBox="0 0 500 500"
+                  >
+                    <icon-chart-bar />
                   </icon-base>
                 </div>
                 <div class="text">
@@ -172,8 +192,13 @@
               <div class="title--content">Lợi ích Zinbee mang lại</div>
               <div class="items d_flex align_items_center">
                 <div class="icon">
-                  <icon-base icon-name="close" width="50" height="50" viewBox="0 0 550 550">
-                    <icon-rocket/>
+                  <icon-base
+                    icon-name="close"
+                    width="50"
+                    height="50"
+                    viewBox="0 0 550 550"
+                  >
+                    <icon-rocket />
                   </icon-base>
                 </div>
                 <div class="text">
@@ -182,8 +207,13 @@
               </div>
               <div class="items d_flex align_items_center">
                 <div class="icon">
-                  <icon-base icon-name="close" width="48" height="48" viewBox="0 0 500 500">
-                    <icon-laptop-phone/>
+                  <icon-base
+                    icon-name="close"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 500 500"
+                  >
+                    <icon-laptop-phone />
                   </icon-base>
                 </div>
                 <div class="text">
@@ -192,8 +222,13 @@
               </div>
               <div class="items d_flex align_items_center">
                 <div class="icon">
-                  <icon-base icon-name="close" width="48" height="48" viewBox="0 0 60 60">
-                    <icon-diamond/>
+                  <icon-base
+                    icon-name="close"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 60 60"
+                  >
+                    <icon-diamond />
                   </icon-base>
                 </div>
                 <div class="text">
@@ -202,8 +237,13 @@
               </div>
               <div class="items d_flex align_items_center">
                 <div class="icon">
-                  <icon-base icon-name="close" width="48" height="48" viewBox="0 0 29 29">
-                    <icon-timer/>
+                  <icon-base
+                    icon-name="close"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 29 29"
+                  >
+                    <icon-timer />
                   </icon-base>
                 </div>
                 <div class="text">
@@ -235,7 +275,7 @@
         <div class="marketing--section px_4 ct mb_5">
           <div class="r">
             <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
-              <img class="marketing--section-image" :src="srcSimpleInterface">
+              <img class="marketing--section-image" :src="srcSimpleInterface" />
               <div class="title mt_4">
                 <b>Shop kinh doanh cá nhân</b>
               </div>
@@ -246,17 +286,18 @@
               </div>
             </div>
             <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
-              <img class="marketing--section-image" :src="srcExamlePost">
+              <img class="marketing--section-image" :src="srcExamlePost" />
               <div class="title mt_4">
                 <b>Các doanh nghiệp</b>
               </div>
               <div>
                 Các doanh nghiệp đang muốn triển khai marketing trên facebook
-                với giải pháp tối ưu, hoàn toàn tự động để giảm chi phí và nhân sự
+                với giải pháp tối ưu, hoàn toàn tự động để giảm chi phí và nhân
+                sự
               </div>
             </div>
             <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
-              <img class="marketing--section-image" :src="srcAutomatic">
+              <img class="marketing--section-image" :src="srcAutomatic" />
               <div class="title mt_4">
                 <b>Tổ chức marketing- sale</b>
               </div>
@@ -318,15 +359,15 @@
                   <div class="left text">
                     <div class="title--why">Giao diện thân thiện</div>
                     <div class="desc">
-                      Đội ngũ Zinbee không ngừng cải tiến, nâng cấp nhằm xây dựng
-                      một hệ thống tiện lợi nhất cho người dùng
+                      Đội ngũ Zinbee không ngừng cải tiến, nâng cấp nhằm xây
+                      dựng một hệ thống tiện lợi nhất cho người dùng
                     </div>
                   </div>
                   <div
                     class="right order"
                     :style="{
-                    backgroundImage: 'url(' + sliderUtilities[0] + ')'
-                  }"
+                      backgroundImage: 'url(' + sliderUtilities[0] + ')'
+                    }"
                   ></div>
                 </div>
               </transition>
@@ -335,64 +376,88 @@
                   <div class="left text">
                     <div class="title--why">Nội dung đa dạng</div>
                     <div class="desc">
-                      Kho nội dung được cập nhật tiên lục, đem đến sự lựa chọn dễ
-                      dàng và phù hợp cho khách hàng.
+                      Kho nội dung được cập nhật tiên lục, đem đến sự lựa chọn
+                      dễ dàng và phù hợp cho khách hàng.
                     </div>
                   </div>
                   <div
                     class="right order"
                     :style="{
-                    backgroundImage: 'url(' + sliderUtilities[1] + ')'
-                  }"
+                      backgroundImage: 'url(' + sliderUtilities[1] + ')'
+                    }"
                   ></div>
                 </div>
               </transition>
               <transition name="slide-fade">
-                <div class="automation items d_flex" v-if="currentIndexInfo === 2">
+                <div
+                  class="automation items d_flex"
+                  v-if="currentIndexInfo === 2"
+                >
                   <div class="right text">
                     <div class="title--why">Tự động hóa</div>
                     <div class="desc">
                       Bạn sẽ có nhiều thời gian hơn với hệ thống tự động hóa của
-                      Zinbee, mọi thứ chỉ cần setup và Zinbee sẽ thay bạn thực hiện
-                      bất kể ngày hay đêm
+                      Zinbee, mọi thứ chỉ cần setup và Zinbee sẽ thay bạn thực
+                      hiện bất kể ngày hay đêm
                     </div>
                   </div>
                   <div
                     class="left order"
                     :style="{
-                    backgroundImage: 'url(' + sliderUtilities[2] + ')'
-                  }"
+                      backgroundImage: 'url(' + sliderUtilities[2] + ')'
+                    }"
                   ></div>
                 </div>
               </transition>
               <transition name="slide-fade">
-                <div class="function items d_flex" v-if="currentIndexInfo === 3">
+                <div
+                  class="function items d_flex"
+                  v-if="currentIndexInfo === 3"
+                >
                   <div class="left text">
                     <div class="title--why">Rất nhiều tính năng khác</div>
                     <div class="desc">
-                      Hàng chục tính năng khác luôn được update liên tục, đem tới
-                      những tiện ích tối ưu nhất cho khách hàng của Zinbee
+                      Hàng chục tính năng khác luôn được update liên tục, đem
+                      tới những tiện ích tối ưu nhất cho khách hàng của Zinbee
                     </div>
                   </div>
                   <div
                     class="right order"
                     :style="{
-                    backgroundImage: 'url(' + sliderUtilities[3] + ')'
-                  }"
+                      backgroundImage: 'url(' + sliderUtilities[3] + ')'
+                    }"
                   ></div>
                 </div>
               </transition>
             </div>
             <div class="action text_center">
               <ul>
-                <li :class="[currentIndexInfo === 0 ? 'active' : '']" @click="currentIndexInfo = 0"></li>
-                <li :class="[currentIndexInfo === 1 ? 'active' : '']" @click="currentIndexInfo = 1"></li>
-                <li :class="[currentIndexInfo === 2 ? 'active' : '']" @click="currentIndexInfo = 2"></li>
-                <li :class="[currentIndexInfo === 3 ? 'active' : '']" @click="currentIndexInfo = 3"></li>
+                <li
+                  :class="[currentIndexInfo === 0 ? 'active' : '']"
+                  @click="currentIndexInfo = 0"
+                ></li>
+                <li
+                  :class="[currentIndexInfo === 1 ? 'active' : '']"
+                  @click="currentIndexInfo = 1"
+                ></li>
+                <li
+                  :class="[currentIndexInfo === 2 ? 'active' : '']"
+                  @click="currentIndexInfo = 2"
+                ></li>
+                <li
+                  :class="[currentIndexInfo === 3 ? 'active' : '']"
+                  @click="currentIndexInfo = 3"
+                ></li>
               </ul>
             </div>
-            <div class="position_absolute action--slider-info d_flex align_items_center">
-              <span class="prev action" @click="prevInfo" v-if="currentIndexInfo !== 0">
+            <div
+              class="position_absolute action--slider-info d_flex align_items_center"
+            >
+              <span
+                class="prev action"
+                @click="prevInfo"
+                v-if="currentIndexInfo !== 0"
+              >
                 <icon-base
                   class="icon--arrow-left"
                   icon-name="Prev"
@@ -403,7 +468,11 @@
                   <icon-arrow-left></icon-arrow-left>
                 </icon-base>
               </span>
-              <span class="next ml_auto action" @click="nextInfo" v-if="currentIndexInfo !== 3">
+              <span
+                class="next ml_auto action"
+                @click="nextInfo"
+                v-if="currentIndexInfo !== 3"
+              >
                 <icon-base
                   class="icon--arrow-left"
                   icon-name="Next"
@@ -422,28 +491,28 @@
             <div class="items display mb_4">
               <div class="title--why">Giao diện thân thiện</div>
               <div class="desc mb_2">
-                Đội ngũ Zinbee không ngừng cải tiến, nâng cấp nhằm xây dựng
-                một hệ thống tiện lợi nhất cho người dùng
+                Đội ngũ Zinbee không ngừng cải tiến, nâng cấp nhằm xây dựng một
+                hệ thống tiện lợi nhất cho người dùng
               </div>
               <div
                 class="right order"
                 :style="{
-                backgroundImage: 'url(' + sliderUtilities[0] + ')'
-              }"
+                  backgroundImage: 'url(' + sliderUtilities[0] + ')'
+                }"
               ></div>
             </div>
 
             <div class="content items mb_4">
               <div class="title--why">Nội dung đa dạng</div>
               <div class="desc mb_2">
-                Kho nội dung được cập nhật tiên lục, đem đến sự lựa chọn dễ
-                dàng và phù hợp cho khách hàng.
+                Kho nội dung được cập nhật tiên lục, đem đến sự lựa chọn dễ dàng
+                và phù hợp cho khách hàng.
               </div>
               <div
                 class="right order"
                 :style="{
-                backgroundImage: 'url(' + sliderUtilities[1] + ')'
-              }"
+                  backgroundImage: 'url(' + sliderUtilities[1] + ')'
+                }"
               ></div>
             </div>
 
@@ -458,8 +527,8 @@
               <div
                 class="right order"
                 :style="{
-                backgroundImage: 'url(' + sliderUtilities[2] + ')'
-              }"
+                  backgroundImage: 'url(' + sliderUtilities[2] + ')'
+                }"
               ></div>
             </div>
 
@@ -472,8 +541,8 @@
               <div
                 class="right order"
                 :style="{
-                backgroundImage: 'url(' + sliderUtilities[3] + ')'
-              }"
+                  backgroundImage: 'url(' + sliderUtilities[3] + ')'
+                }"
               ></div>
             </div>
           </div>
@@ -492,7 +561,9 @@
               }"
             >
               <div class="title--section">Ý kiến của khách hàng</div>
-              <div class="desc">Những phản hồi tích cực của khách hàng đã sử dụng Zinbee</div>
+              <div class="desc">
+                Những phản hồi tích cực của khách hàng đã sử dụng Zinbee
+              </div>
             </div>
             <!-- Satrt: Slider -->
             <div class="c_lg_7 c_md_12 right">
@@ -501,7 +572,10 @@
                   <div class="items" v-if="currentIndex === 1">
                     <div class="introduce--customer d_flex align_items_center">
                       <div>
-                        <img src="@/assets/images/home/NQK.jpg" alt="Banner ZinBee">
+                        <img
+                          src="@/assets/images/home/NQK.jpg"
+                          alt="Banner ZinBee"
+                        />
                       </div>
                       <div>
                         <h5>Quang Khải</h5>
@@ -519,7 +593,10 @@
                   <div class="items" v-if="currentIndex === 2">
                     <div class="introduce--customer d_flex align_items_center">
                       <div>
-                        <img src="@/assets/images/home/NTL.jpg" alt="Banner ZinBee">
+                        <img
+                          src="@/assets/images/home/NTL.jpg"
+                          alt="Banner ZinBee"
+                        />
                       </div>
                       <div>
                         <h5>Thùy Linh</h5>
@@ -537,7 +614,10 @@
                   <div class="items" v-if="currentIndex === 3">
                     <div class="introduce--customer d_flex align_items_center">
                       <div>
-                        <img src="@/assets/images/home/NHL.jpg" alt="Banner ZinBee">
+                        <img
+                          src="@/assets/images/home/NHL.jpg"
+                          alt="Banner ZinBee"
+                        />
                       </div>
                       <div>
                         <h5>Huy Lâm</h5>
@@ -552,8 +632,14 @@
                   </div>
                 </transition>
               </div>
-              <div class="position_absolute action--slider d_flex align_items_center">
-                <span @click="prev" class="prev action" v-if="currentIndex !== 1">
+              <div
+                class="position_absolute action--slider d_flex align_items_center"
+              >
+                <span
+                  @click="prev"
+                  class="prev action"
+                  v-if="currentIndex !== 1"
+                >
                   <icon-base
                     class="icon--arrow-left"
                     icon-name="Prev"
@@ -564,7 +650,11 @@
                     <icon-arrow-left></icon-arrow-left>
                   </icon-base>
                 </span>
-                <span @click="next" class="next ml_auto action" v-if="currentIndex !== 3">
+                <span
+                  @click="next"
+                  class="next ml_auto action"
+                  v-if="currentIndex !== 3"
+                >
                   <icon-base
                     class="icon--arrow-left"
                     icon-name="Next"
@@ -578,9 +668,18 @@
               </div>
               <div class="action text_center">
                 <ul>
-                  <li :class="[currentIndex === 1 ? 'active' : '']" @click="currentIndex = 1"></li>
-                  <li :class="[currentIndex === 2 ? 'active' : '']" @click="currentIndex = 2"></li>
-                  <li :class="[currentIndex === 3 ? 'active' : '']" @click="currentIndex = 3"></li>
+                  <li
+                    :class="[currentIndex === 1 ? 'active' : '']"
+                    @click="currentIndex = 1"
+                  ></li>
+                  <li
+                    :class="[currentIndex === 2 ? 'active' : '']"
+                    @click="currentIndex = 2"
+                  ></li>
+                  <li
+                    :class="[currentIndex === 3 ? 'active' : '']"
+                    @click="currentIndex = 3"
+                  ></li>
                 </ul>
               </div>
             </div>
@@ -708,7 +807,8 @@
                   <a
                     href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                     target="_blank"
-                  >Liên hệ</a>
+                    >Liên hệ</a
+                  >
                 </li>
               </ul>
             </div>
@@ -720,7 +820,8 @@
                   <a
                     href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                     target="_blank"
-                  >Liên hệ</a>
+                    >Liên hệ</a
+                  >
                 </li>
               </ul>
             </div>
@@ -732,7 +833,8 @@
                   <a
                     href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                     target="_blank"
-                  >Liên hệ</a>
+                    >Liên hệ</a
+                  >
                 </li>
               </ul>
             </div>
@@ -744,7 +846,8 @@
                   <a
                     href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                     target="_blank"
-                  >Liên hệ</a>
+                    >Liên hệ</a
+                  >
                 </li>
               </ul>
             </div>
@@ -782,7 +885,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -793,7 +896,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -804,7 +907,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -815,7 +918,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
               </div>
@@ -829,7 +932,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -840,7 +943,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -851,7 +954,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -862,7 +965,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
               </div>
@@ -876,7 +979,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -887,7 +990,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -898,7 +1001,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -909,7 +1012,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
               </div>
@@ -923,7 +1026,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -934,7 +1037,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -945,7 +1048,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -956,7 +1059,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
               </div>
@@ -970,7 +1073,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -981,7 +1084,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -992,7 +1095,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -1003,7 +1106,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
               </div>
@@ -1017,7 +1120,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -1028,7 +1131,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -1039,7 +1142,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -1050,7 +1153,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
               </div>
@@ -1064,7 +1167,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -1075,7 +1178,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -1086,7 +1189,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
                 <div class="items--main">
@@ -1097,7 +1200,7 @@
                     height="20"
                     viewBox="0 0 290 290"
                   >
-                    <icon-check-circle/>
+                    <icon-check-circle />
                   </icon-base>
                 </div>
               </div>
@@ -1106,7 +1209,9 @@
         </div>
         <div class="d_md_none d_block content--tablet">
           <div class="items--content mb_4">
-            <div class="item--header text_center main--price first align_items_center">
+            <div
+              class="item--header text_center main--price first align_items_center"
+            >
               <ul>
                 <li class="month">1 THÁNG</li>
                 <li class="money">2.800.000đ</li>
@@ -1114,7 +1219,8 @@
                   <a
                     href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                     target="_blank"
-                  >Liên hệ</a>
+                    >Liên hệ</a
+                  >
                 </li>
               </ul>
             </div>
@@ -1142,7 +1248,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1156,7 +1262,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1170,7 +1276,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1184,7 +1290,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1198,7 +1304,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1212,7 +1318,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1226,7 +1332,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1234,7 +1340,9 @@
             </div>
           </div>
           <div class="items--content mb_4">
-            <div class="item--header text_center main--price first align_items_center">
+            <div
+              class="item--header text_center main--price first align_items_center"
+            >
               <ul>
                 <li class="month">6 THÁNG</li>
                 <li class="money">16.199.000đ</li>
@@ -1242,7 +1350,8 @@
                   <a
                     href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                     target="_blank"
-                  >Liên hệ</a>
+                    >Liên hệ</a
+                  >
                 </li>
               </ul>
             </div>
@@ -1270,7 +1379,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1284,7 +1393,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1298,7 +1407,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1312,7 +1421,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1326,7 +1435,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1340,7 +1449,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1354,7 +1463,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1362,7 +1471,9 @@
             </div>
           </div>
           <div class="items--content mb_4">
-            <div class="item--header text_center main--price first align_items_center">
+            <div
+              class="item--header text_center main--price first align_items_center"
+            >
               <ul>
                 <li class="month">1 NĂM</li>
                 <li class="money">28.799.000đ</li>
@@ -1370,7 +1481,8 @@
                   <a
                     href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                     target="_blank"
-                  >Liên hệ</a>
+                    >Liên hệ</a
+                  >
                 </li>
               </ul>
             </div>
@@ -1398,7 +1510,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1412,7 +1524,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1426,7 +1538,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1440,7 +1552,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1454,7 +1566,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1468,7 +1580,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1482,7 +1594,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1490,7 +1602,9 @@
             </div>
           </div>
           <div class="items--content mb_4">
-            <div class="item--header text_center main--price first align_items_center">
+            <div
+              class="item--header text_center main--price first align_items_center"
+            >
               <ul>
                 <li class="month mb_2">DOANH NGHIỆP</li>
                 <!-- <li class="money">2.800.000đ</li> -->
@@ -1498,7 +1612,8 @@
                   <a
                     href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                     target="_blank"
-                  >Liên hệ</a>
+                    >Liên hệ</a
+                  >
                 </li>
               </ul>
             </div>
@@ -1526,7 +1641,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1540,7 +1655,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1554,7 +1669,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1568,7 +1683,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1582,7 +1697,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1596,7 +1711,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1610,7 +1725,7 @@
                       height="20"
                       viewBox="0 0 290 290"
                     >
-                      <icon-check-circle/>
+                      <icon-check-circle />
                     </icon-base>
                   </div>
                 </div>
@@ -1681,17 +1796,24 @@
           backgroundImage: 'url(' + backgroundShow + ')'
         }"
       >
-        <div class="title">Hơn 5000 doanh nghiệp và chủ shop đã 
+        <div class="title">
+          Hơn 5000 doanh nghiệp và chủ shop đã
           <a
-                    href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-                    target="_blank"
-                  >Liên hệ</a> sử dụng!</div>
-        <div class="desc">Liên hệ ngay để được tư vấn dùng thử 3 ngày miễn phí!</div>
+            href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+            target="_blank"
+            >Liên hệ</a
+          >
+          sử dụng!
+        </div>
+        <div class="desc">
+          Liên hệ ngay để được tư vấn dùng thử 3 ngày miễn phí!
+        </div>
         <a
           class="btn--live-chat"
           target="_blank"
           href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-        >LIÊN HỆ NGAY BÂY GIỜ</a>
+          >LIÊN HỆ NGAY BÂY GIỜ</a
+        >
       </section>
       <!-- End: Show owner -->
     </div>

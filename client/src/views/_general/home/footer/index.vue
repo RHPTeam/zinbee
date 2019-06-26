@@ -1,8 +1,10 @@
 <template>
-  <div class="wrapper--footer"
-  :style="{
-    backgroundImage: 'url(' + backgroundFooter + ')'
-  }">
+  <div
+    class="wrapper--footer"
+    :style="{
+      backgroundImage: 'url(' + backgroundFooter + ')'
+    }"
+  >
     <div class="content ct">
       <div class="r m_0">
         <div class="c_lg_3">
@@ -129,7 +131,8 @@
               class="btn--live-chat"
               target="_blank"
               href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-            >Liên hệ hỗ trợ</a>
+              >Liên hệ hỗ trợ</a
+            >
           </div>
         </div>
       </div>
@@ -140,10 +143,10 @@
 <script>
 export default {
   data() {
-    return {      
+    return {
       backgroundFooter: require("@/assets/images/home/bg--footer.jpg")
-    }
-  },
+    };
+  }
 };
 </script>
 
