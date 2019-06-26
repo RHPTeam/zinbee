@@ -90,17 +90,17 @@ const actions = {
     const res = await MarketPostService.uploadFiles(payload);
     await commit("setMarketPostPhotosUpload", res.data.data);
   },
-  setPostDefaultStatus: async ({commit}, payload) => {
+  setPostDefaultStatus: async ({ commit }, payload) => {
     await commit("setStatus", payload);
   },
-  setPostDefaultMarket: async ({commit}) => {
+  setPostDefaultMarket: async ({ commit }) => {
     await commit("setPostDefault", {
       title: "",
       content: "",
       photos: []
     });
   },
-  setVariableControl: async ({commit}, payload) => {
+  setVariableControl: async ({ commit }, payload) => {
     await commit("setVariableControl", payload);
   }
 };

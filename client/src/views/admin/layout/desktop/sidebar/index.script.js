@@ -114,7 +114,7 @@ export default {
       return this.$store.getters.collapseMenu;
     }
   },
-  async created(){
+  async created() {
     const res = CookieFunction.getCookie("cfr");
     this.roles = res;
   }

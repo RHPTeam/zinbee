@@ -21,7 +21,6 @@
               <multiselect
                 label="name"
                 placeholder="Chọn danh mục cha"
-                
                 :options="categories"
                 v-model="parent"
                 :value="parent.name"
