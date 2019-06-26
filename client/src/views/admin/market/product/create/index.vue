@@ -5,11 +5,7 @@
         Tất cả các trường không được bỏ trống
       </h5>
       <div class="form_group">
-        <label for class>Chọn loại sản phẩm</label>
-        <div class="mb_2 d_flex">
-          <div class="mr_1 btn btn_info" @click="showOptionsPost">Post</div>
-          <div class="btn btn_info" @click="showOptionsCampaign">Campaign</div>
-        </div>
+        <label for class>Chọn bài viết</label>
         <div class="py_0 post" v-if="inforProductById.typeProduct === 0">
           <multiselect
             label="title"

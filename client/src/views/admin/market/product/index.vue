@@ -1,13 +1,13 @@
 <template>
   <div class="modal--wrapper">
-    <div class="modal--content">
-      <div class="create mb_3 text_left btn btn_primary" @click="goToCreate">
-        Tao moi
+    <div class="modal--content d_flex">
+      <div class="create mb_3 ml_auto btn btn_primary" @click="goToCreate">
+        Tạo sản phẩm mới
       </div>
     </div>
     <!-- List product -->
     <div class="list--product">
-      <h3>Danh sach san pham</h3>
+      <h3>Danh sách sản phẩm</h3>
       <div class="card p_3">
         <div class="table">
           <!-- Header Table -->

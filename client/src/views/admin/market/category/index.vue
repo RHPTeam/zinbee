@@ -7,46 +7,51 @@
         <!-- create -->
         <form action class="card card_body" v-if="isCreateCategory === true">
           <div class="form_group">
-            <label for class>Ten tieu de</label>
+            <label for class>Tên danh mục</label>
             <input
               type="text"
               class="form_control"
-              placeholder="Tieu de ..."
+              placeholder="Nhập tên danh mục"
               v-model="nameCategory"
             />
           </div>
           <div class="form_group">
-            <label for class>Danh muc cha</label>
-            <multiselect
-              label="name"
-              placeholder="Chọn danh mục cha ..."
-              :options="categories"
-              v-model="parent"
-              :value="parent.name"
-            />
+            <label for class>Lựa chọn danh mục cha</label>
+            <div class="multi">
+              <multiselect
+                label="name"
+                placeholder="Chọn danh mục cha"
+                
+                :options="categories"
+                v-model="parent"
+                :value="parent.name"
+              />
+            </div>
           </div>
           <div class="btn btn_success" @click="create">Tao moi</div>
         </form>
         <!-- update -->
         <form action class="card card_body" v-if="isUpdateCategory === true">
           <div class="form_group">
-            <label for class>Ten tiet de</label>
+            <label for class>Tên danh mục</label>
             <input
               type="text"
               class="form_control"
-              placeholder="Tieu de ..."
+              placeholder="Nhập tên danh mục"
               v-model="categoryUpdate.name"
             />
           </div>
           <div class="form_group">
-            <label for class>Danh muc cha</label>
-            <multiselect
-              label="name"
-              placeholder="Chọn danh mục cha ..."
-              :options="categories"
-              :value="nameParent"
-              @input="updateParentCategory"
-            />
+            <label for class>Lựa chọn danh mục cha</label>
+            <div class="multi">
+              <multiselect
+                label="name"
+                placeholder="Chọn danh mục cha ..."
+                :options="categories"
+                :value="nameParent"
+                @input="updateParentCategory"
+              />
+            </div>
           </div>
           <div class="btn btn_success" @click="updateCategory">Update</div>
         </form>

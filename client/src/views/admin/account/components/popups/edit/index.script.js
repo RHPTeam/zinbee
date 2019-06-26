@@ -68,15 +68,15 @@ export default {
       this.$store.dispatch("changeExpireDateOfUser", dataSender);
     },
     updateAccount() {
-      const dataSender = {
-        _id: this.user._id,
-        expireDate: this.user.expireDate,
-        maxAccountFb: this.user.maxAccountFb,
-        _role: this.user._role.level,
-        status: this.user.status
-      };
+      // const dataSender = {
+      //   _id: this.user._id,
+      //   expireDate: this.user.expireDate,
+      //   maxAccountFb: this.user.maxAccountFb,
+      //   _role: this.user._role.level,
+      //   status: this.user.status
+      // };
 
-      this.$store.dispatch("updateUserByAdmin", dataSender);
+      this.$store.dispatch("updateUserByAdmin", this.user);
       this.$emit("closeAddEdit", false);
     }
   },

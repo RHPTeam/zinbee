@@ -20,6 +20,28 @@
     </div>
     <ul class="sidebar--menu">
       <router-link
+        v-if="roles && roles !== 'Admin'"
+        class="menu--item d_flex align_items_center"
+        tag="li"
+        active-class="active"
+        exact
+        :to="{ name: 'manage_product' }"
+      >
+        <a href="#">
+          <icon-base
+            icon-name="icon-account"
+            width="24"
+            height="24"
+            viewBox="0 0 26 26"
+          >
+            <icon-account />
+          </icon-base>
+          <span class="ml_2">Quản lý market</span>
+        </a>
+      </router-link>
+
+      <router-link
+        v-else
         class="menu--item d_flex align_items_center"
         tag="li"
         active-class="active"
@@ -44,7 +66,7 @@
   </div>
 </template>
 
-<script src="./index.script"></script>
+<script src="./index.script.js"></script>
 
 <style scoped lang="scss">
 @import "./index.style";

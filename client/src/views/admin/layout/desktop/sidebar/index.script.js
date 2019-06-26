@@ -1,14 +1,8 @@
+import CookieFunction from "@/utils/functions/cookie";
 export default {
-  computed: {
-    currentTheme() {
-      return this.$store.getters.themeName;
-    },
-    collapseMenu() {
-      return this.$store.getters.collapseMenu;
-    }
-  },
   data() {
     return {
+      roles: "",
       menus: [
         {
           text: "Bảng điều khiển",
@@ -111,5 +105,17 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    currentTheme() {
+      return this.$store.getters.themeName;
+    },
+    collapseMenu() {
+      return this.$store.getters.collapseMenu;
+    }
+  },
+  async created(){
+    const res = CookieFunction.getCookie("cfr");
+    this.roles = res;
   }
 };

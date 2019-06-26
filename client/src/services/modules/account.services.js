@@ -46,7 +46,7 @@ export default {
     const uid = data._id,
       dataSender = {
         expireDate: data.expireDate,
-        maxAccountFb: data.maxAccountFb,
+        maxAccountFb: parseInt(data.maxAccountFb),
         _role: data._role,
         status: data.status
       };
