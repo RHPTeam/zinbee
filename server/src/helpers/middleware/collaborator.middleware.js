@@ -7,10 +7,7 @@ module.exports = async ( req, res, next ) => {
     const userInfo = await Account.findOne( { "_id": id } ),
       roleInfo = await Role.findOne( { "_id": userInfo._role } );
     
-    if ( roleInfo.level.toLowerCase() !== "collaborator" || roleInfo.level.toLowerCase() !== "admin" || roleInfo.level.toLowerCase() !== "superadmin" ) {
-      return false;
-    }
-    return true;
+    return !( roleInfo.level.toLowerCase() !== "collaborator" && roleInfo.level.toLowerCase() !== "admin" && roleInfo.level.toLowerCase() !== "superadmin" );
   };
 
   if ( await isAllowed( findSubString( req.headers.authorization, "uid=", ";" ) ) ) {

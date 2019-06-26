@@ -2,6 +2,7 @@ const router = require( "express-promise-router" )();
 const MarketPostController = require( "../../../../controllers/market/products/post.controller" );
 const auth = require( "../../../../helpers/middleware/authenticate.middleware" );
 const permission = require( "../../../../helpers/middleware/permission.middleware" );
+const collaborator = require( "../../../../helpers/middleware/collaborator.middleware" );
 
 // Handle upload file image
 const multer = require( "multer" ),
@@ -35,10 +36,10 @@ const multer = require( "multer" ),
 
 router.route( "/" )
   .get( auth, MarketPostController.index )
-  .post( auth, permission, MarketPostController.create )
-  .patch( auth, permission, MarketPostController.update )
-  .delete( auth, permission, MarketPostController.delete );
-router.route( "/upload" ).post( auth, permission,
+  .post( auth, collaborator, MarketPostController.create )
+  .patch( auth, collaborator, MarketPostController.update )
+  .delete( auth, collaborator, MarketPostController.delete );
+router.route( "/upload" ).post( auth, collaborator,
   upload.array( "photos" ), MarketPostController.upload );
 
 module.exports = router;

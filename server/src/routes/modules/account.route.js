@@ -8,10 +8,11 @@ const router = require( "express-promise-router" )();
 const AccountController = require( "../../controllers/account.controller" );
 const auth = require( "../../helpers/middleware/authenticate.middleware" );
 const permission = require( "../../helpers/middleware/permission.middleware" );
+const collaborator = require( "../../helpers/middleware/collaborator.middleware" );
 
 router
   .route( "/" )
-  .get( auth, permission, AccountController.index );
+  .get( auth, collaborator, AccountController.index );
 
 router.route( "/sync" ).patch( auth, AccountController.updateSync );
 

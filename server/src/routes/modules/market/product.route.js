@@ -37,13 +37,13 @@ const multer = require( "multer" ),
 // General
 router.route( "/" )
   .get( ProductController.index )
-  .post( auth, collaborator, permission, ProductController.create )
-  .patch( auth, collaborator, permission, ProductController.update )
-  .delete( auth, collaborator, permission, ProductController.delete );
+  .post( auth, collaborator, ProductController.create )
+  .patch( auth, collaborator, ProductController.update )
+  .delete( auth, collaborator, ProductController.delete );
 
 // Upload
 router.route( "/upload" )
-  .post( auth, collaborator, permission, upload.single( "previewImageUrl" ), ProductController.upload );
+  .post( auth, collaborator, upload.single( "previewImageUrl" ), ProductController.upload );
 
 // Add to Collection
 router.route( "/add/product/user" )

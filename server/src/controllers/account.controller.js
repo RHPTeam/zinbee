@@ -418,6 +418,7 @@ module.exports = {
     // check code admin from headers
     const { name, email, phone, password } = req.body,
       adminRole = await Role.findOne( { "level": "Admin" } ),
+      collaboratorRole = await Role.findOne( { "level": "Collaborator" } ),
       isEmail = await Account.findOne( { "email": email } ),
       isPhone = await Account.findOne( { "phone": phone } );
 
@@ -428,13 +429,20 @@ module.exports = {
       return res.status( 404 ).json( { "status": "error", "message": "Số điện thoại đã tồn tại." } );
     }
 
-    let buffer, header, key, newUser;
+    let buffer, header, key, newUser, roleCurrent;
 
     buffer = fs.readFileSync( "./src/databases/key.json" );
     key = JSON.parse( buffer );
 
-    if ( key.staffKey.includes( req.headers.token ) === false ) {
+    if ( key.staffKey.includes( req.headers.token ) === false && key.collaboratorKey.includes( req.headers.token ) === false ) {
       return res.status( 404 ).json( { "status": "error", "message": "Mã xác thực nhân viên của bạn không đúng hoặc IP không hợp lệ!" } );
+    }
+
+    // Check role
+    if ( key.collaboratorKey.includes( req.headers.token ) === true ) {
+      roleCurrent = collaboratorRole._id;
+    } else if ( key.staffKey.includes( req.headers.token ) === true ) {
+      roleCurrent = adminRole._id;
     }
 
     // Check validator
@@ -455,7 +463,7 @@ module.exports = {
       "phone": phone,
       "password": password,
       "status": 1,
-      "_role": adminRole._id
+      "_role": roleCurrent
     } );
 
     // Save
