@@ -37,6 +37,10 @@ const mongoose = require( "mongoose" ),
       "type": Date,
       "default": Date.now()
     },
+    "keywordSearch": [ {
+      "content": String,
+      "time": Date
+    } ],
     "other01": String, // id of phpMyadmin from older server
     "other02": String,
     "updated_at": Date
