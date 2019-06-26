@@ -4,7 +4,7 @@
       <nav class="navbar navbar-default header-area affix-top">
         <div class="d_flex align_items_center header">
           <!--Start: Logo -->
-          <router-link class="logo mr_auto" to="/">
+          <router-link class="logo mr_auto d_none d_md_block" to="/">
             <icon-base
               icon-name="ZinBee"
               width="132.92"
@@ -12,6 +12,16 @@
               viewBox="0 0 250.446 93.703"
             >
               <icon-logo />
+            </icon-base>
+          </router-link>
+          <router-link class="logo mr_auto d_block d_md_none" to="/">
+            <icon-base
+              icon-name="ZinBee"
+              width="60"
+              height="50"
+              viewBox="0 0 100 100"
+            >
+              <icon-logo-short />
             </icon-base>
           </router-link>
           <!--Start: Logo -->
