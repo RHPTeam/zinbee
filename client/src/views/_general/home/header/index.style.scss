@@ -15,21 +15,22 @@
     transition: all .3s ease;
   }
   .slide-fade-leave-active {
-    transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
   }
   .slide-fade-enter, .slide-fade-leave-to
   /* .slide-fade-leave-active below version 2.1.8 */ {
-    transform: translateX(50px);
+    transform: translateX(100%);
     opacity: 0;
   }
 
   // STYLE
   .content {
     overflow: hidden;
+    // height: 90px;
     color: #fff;
     &.active {
       height: 93px;
-      background: #212121;
+      // background: #ccc;
     }
   }
   .header-area {
@@ -37,14 +38,14 @@
     width: 100vw;
     z-index: 1000;
     padding: 1.25rem 3.125rem;
-    box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.18);
-    background: #1f1e1e;
+    // box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.18);
+    // background: #fafafa;
   }
   .nav--menu {
     .items--header {
       cursor: pointer;
       position: relative;
-      color: #fff;
+      color: #333;
       padding: 0.325rem 1rem;
       &.try {
         color: #f8b448;
@@ -52,29 +53,14 @@
         border-radius: 10px;
         transition: 0.4s;
       }
-      // &::before {
-      //   content: "";
-      //   width: 100%;
-      //   height: 2px;
-      //   background: #fff;
-      //   opacity: 0;
-      //   position: absolute;
-      //   left: 0;
-      //   bottom: -2px;
-      //   transition: all 0.4s linear 0s;
-      //   transform: scale(0);
-      // }
       &.active, &:hover {
-        // border-bottom: 2px solid #fff;
-        color: #fff;
-        // &::before {
-        //   content: "";
-        //   opacity: 1;
-        //   transform: scale(1);
-        // }
       }
       &:last-child {
         margin-right: 0;
+        &:hover {
+          color: #fff;
+          background: #f8b448;
+        }
       }
     }
   }
@@ -114,6 +100,9 @@
 
 @media screen and (max-width: 980px) {
   .wrapper--header {
+    .header-area {
+      padding: 1.25rem 1rem;
+    }
     .header {
       // flex-direction: column;
       .logo {
@@ -123,7 +112,9 @@
         display: none!important;
       }
       .menu {
+        z-index: 100;
         display: block;
+        color: #f8b448;
       }
     }
   }
