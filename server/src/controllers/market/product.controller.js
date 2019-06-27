@@ -17,7 +17,8 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": data } );
   },
   "create": async ( req, res ) => {
-    let { body } = req, newProduct;
+    let { body } = req, newProduct,
+      findMarketPost = await MarketPost.findOne( { "_id": body.content } );
 
     // Check catch
     if ( body.name === "" || body.name === undefined ) {
@@ -32,7 +33,8 @@ module.exports = {
     newProduct = await new MarketProduct( body );
 
     await newProduct.save();
-
+    findMarketPost.assign = true;
+    await findMarketPost.save();
     res.status( 201 ).json( { "status": "success", "data": newProduct } );
   },
   "update": async ( req, res ) => {
@@ -46,17 +48,29 @@ module.exports = {
       return res.status( 404 ).json( { "status": "error", "message": "Sản phẩm này không tồn tại!" } );
     }
 
+
+    if ( req.body.content ) {
+      const findMarketPostOlder = await MarketPost.findOne( { "_id": productInfo.content } ),
+        findMarketPostUpdate = await MarketPost.findOne( { "_id": req.body.content } );
+
+      findMarketPostOlder.assign = false;
+      await findMarketPostOlder.save();
+      findMarketPostUpdate.assign = true;
+      await findMarketPostUpdate.save();
+    }
     res.status( 200 ).json( { "status": "success", "data": ( await MarketProduct.findByIdAndUpdate( query._id, { "$set": body }, { "new": true } ) ) } );
   },
   "delete": async ( req, res ) => {
     const { query } = req,
-      productInfo = await MarketProduct.findOne( { "_id": query._id } );
+      productInfo = await MarketProduct.findOne( { "_id": query._id } ),
+      findMarketPostOlder = await MarketPost.findOne( { "_id": productInfo.content } );
 
     // check catch
     if ( !productInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Sản phẩm này không tồn tại!" } );
     }
-
+    findMarketPostOlder.assign = false;
+    await findMarketPostOlder.save();
     await productInfo.remove();
 
     res.status( 200 ).json( { "status": "success", "data": null } );
