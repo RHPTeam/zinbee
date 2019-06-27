@@ -64,7 +64,7 @@ export default {
       this.postSelected = post;
       this.isShowDeletePopup = true;
     },
-    showCreatePopup(value){
+    showCreatePopup(value) {
       this.postSelected = value;
       this.isShowCreateProductPopup = true;
     },

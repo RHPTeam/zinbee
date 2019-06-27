@@ -142,10 +142,7 @@
           <button class="btn--submit" @click="closePopup()">
             HỦY
           </button>
-          <button
-            class="btn--skip"
-            @click="createProduct()"
-          >
+          <button class="btn--skip" @click="createProduct()">
             Cập nhật
           </button>
         </div>
