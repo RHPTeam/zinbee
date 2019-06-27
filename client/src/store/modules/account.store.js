@@ -554,12 +554,18 @@ const actions = {
     commit("auth_success");
   },
   updateUserByAdmin: async ({ commit }, payload) => {
-    const res = await AccountServices.updateUserByAdmin(payload);
-
-    commit("setUserById", res.data.data);
-    const users = await AccountServices.getAllUser();
-
-    await commit("setAllUser", users.data.data);
+    commit("auth_request");
+    const objSender = {
+      id: payload.userId,
+      expireDate: payload.expireDate,
+      maxAccountFb: payload.maxAccountFb
+    };
+    await AccountServices.renewById(objSender);
+    const result = await AccountServices.getUserById(payload.userId);
+    commit("setUserById", result.data.data);
+    // const results = await AccountServices.getAllUser();
+    // commit("setAllUser", results.data.data);
+    commit("auth_success");
   },
   searchUserByKey: async ({ commit }, payload) => {
     commit("auth_request");
