@@ -62,13 +62,15 @@ module.exports = {
   },
   "delete": async ( req, res ) => {
     const { query } = req,
-      productInfo = await MarketProduct.findOne( { "_id": query._id } );
+      productInfo = await MarketProduct.findOne( { "_id": query._id } ),
+      findMarketPostOlder = await MarketPost.findOne( { "_id": productInfo.content } );
 
     // check catch
     if ( !productInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Sản phẩm này không tồn tại!" } );
     }
-
+    findMarketPostOlder.assign = false;
+    await findMarketPostOlder.save();
     await productInfo.remove();
 
     res.status( 200 ).json( { "status": "success", "data": null } );
