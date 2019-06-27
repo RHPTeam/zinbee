@@ -3,6 +3,8 @@ require( "./scrape" );
 
 const Role = require( "../models/Role.model" );
 const Help = require( "../models/help/Help.model" );
+const Product = require( "../models/market/Product.model" );
+const MarketPost = require( "../models/market/products/post.model" );
 
 ( async () => {
   const foundHelp = await Help.find( {} ),
@@ -34,4 +36,10 @@ const Help = require( "../models/help/Help.model" );
 
     await defaultHelp.save();
   }
+
+  let foundProduct = await Product.find( {} );
+
+  await Promise.all( foundProduct.map( async ( product ) => {
+    await MarketPost.findByIdAndUpdate( { "_id": product.content }, { "$set": { "assign": true } }, { "new": true } );
+  } ) );
 } )();

@@ -5,6 +5,7 @@ const mongoose = require( "mongoose" ),
     "title": String,
     "content": String,
     "photos": Array,
+    "assign": { "type": Boolean, "default": 0 },
     "_creator": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"
@@ -16,6 +17,11 @@ const mongoose = require( "mongoose" ),
     "updatedAt": Date
   } );
 
+MarketProductPostSchema.index( {
+  "title": "text",
+  "content": "text"
+} );
+
 MarketProductPostSchema.pre( "save", function( next ) {
   this.updatedAt = Date.now();
   next();
@@ -23,5 +29,11 @@ MarketProductPostSchema.pre( "save", function( next ) {
 
 // eslint-disable-next-line one-var
 const MarketProductPost = mongoose.model( "MarketProductPost", MarketProductPostSchema );
+
+MarketProductPost.on( "index", function ( error ) {
+  if ( error ) {
+    console.log( error.message );
+  }
+} );
 
 module.exports = MarketProductPost;
