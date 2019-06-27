@@ -38,6 +38,7 @@ router.route( "/" )
   .post( auth, permission, MarketPostController.create )
   .patch( auth, permission, MarketPostController.update )
   .delete( auth, permission, MarketPostController.delete );
+router.route( "/search" ).post( auth, MarketPostController.search )
 router.route( "/upload" ).post( auth, permission,
   upload.array( "photos" ), MarketPostController.upload );
 
