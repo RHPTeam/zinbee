@@ -23,7 +23,7 @@ const Server = require( "../models/Server.model" );
 
 const jsonResponse = require( "../configs/response" );
 const dictionary = require( "../configs/dictionaries" ),
-  { syncPostFolderExample, syncFolderExample } = require( "../microservices/synchronize/post" );
+  { syncPostFolderExample, syncFolderExample, syncKeyWordSearch } = require( "../microservices/synchronize/post" );
 
 
 const { searchPost } = require( "../controllers/core/search.core" ),
@@ -132,9 +132,17 @@ module.exports = {
     if ( req.query.keyword === undefined ) {
       return res.status( 404 ).json( { "status": "fail", "keyword": "Vui lòng cung cấp từ khóa để tìm kiếm!" } );
     }
+    const userInfo = await Account.findOne( { "_id": req.uid } ).select( "-password" ),
+      vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
 
-    let page = null, dataResponse = null, data = ( await PostFacebook.find( { "$text": { "$search": req.query.keyword, "$language": "none" } } ).sort( { "share": "desc", "vote": "desc", "like": "desc" } ).lean() );
+    let page = null, dataResponse = null, data = ( await PostFacebook.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).sort( { "share": "desc", "vote": "desc", "like": "desc" } ).lean() ), resKeywordSync;
 
+    await Account.findByIdAndUpdate( { "_id": req.uid }, { "$push": { "keywordSearch": { "content": req.query.keyword, "time": Date.now() } } }, { "new": true } ).select( "-password" );
+    resKeywordSync = await syncKeyWordSearch( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/search`, { "content": req.query.keyword, "time": Date.now() }, req.headers.authorization );
+
+    if ( resKeywordSync.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    }
     if ( req.query._size && req.query._page ) {
       dataResponse = data.slice( ( Number( req.query._page ) - 1 ) * Number( req.query._size ), Number( req.query._size ) * Number( req.query._page ) );
     } else if ( req.query._size ) {
@@ -182,11 +190,19 @@ module.exports = {
     res.status( 201 ).json( jsonResponse( "success", await PostFacebook.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) ) );
   },
   "searchLive": async ( req, res ) => {
-    let listPostByKeyword,
-      page = null, dataResponse = null;
-
     if ( req.query.keyword === undefined ) {
       return res.status( 404 ).json( { "status": "fail", "keyword": "Vui lòng cung cấp từ khóa để tìm kiếm!" } );
+    }
+    const userInfo = await Account.findOne( { "_id": req.uid } ).select( "-password" ),
+      vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
+    let listPostByKeyword,
+      page = null, dataResponse = null, resKeywordSync;
+
+    await Account.findByIdAndUpdate( { "_id": req.uid }, { "$push": { "keywordSearch": { "content": req.query.keyword, "time": Date.now() } } }, { "new": true } ).select( "-password" );
+    resKeywordSync = await syncKeyWordSearch( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/search`, { "content": req.query.keyword, "time": Date.now() }, req.headers.authorization );
+
+    if ( resKeywordSync.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
     }
     // Search post by keyword
     listPostByKeyword = await searchPost( {
