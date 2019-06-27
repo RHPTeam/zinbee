@@ -75,7 +75,7 @@ export default {
       };
 
       this.$store.dispatch("updateUserByAdmin", dataSender);
-      // this.$emit("closeAddEdit", false);
+      this.$emit("closeAddEdit", false);
     }
   },
   async created() {

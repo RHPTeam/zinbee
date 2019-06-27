@@ -563,8 +563,8 @@ const actions = {
     await AccountServices.renewById(objSender);
     const result = await AccountServices.getUserById(payload.userId);
     commit("setUserById", result.data.data);
-    // const results = await AccountServices.getAllUser();
-    // commit("setAllUser", results.data.data);
+    const results = await AccountServices.getAllUser();
+    commit("setAllUser", results.data.data);
     commit("auth_success");
   },
   searchUserByKey: async ({ commit }, payload) => {

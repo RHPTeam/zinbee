@@ -66,6 +66,7 @@
           :key="index"
           :item="item"
           @showDeletePopup="showDeletePopup($event)"
+          @showCreatePopup="showCreatePopup($event)"
         ></item-post>
       </div>
     </div>
@@ -77,6 +78,12 @@
         :post="postSelected"
         @closePopup="isShowDeletePopup = $event"
       ></delete-popup>
+      <product-market
+        v-if="isShowCreateProductPopup === true"
+        :post="postSelected"
+        @close="isShowCreateProductPopup = $event"
+      >
+      </product-market>
     </transition>
   </div>
 </template>
