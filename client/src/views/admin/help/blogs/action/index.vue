@@ -1,8 +1,8 @@
 <template>
   <div class="action">
-    <router-link tag="label" class="top" :to="{ name: 'blogs' }">
-      Quay lại
-    </router-link>
+    <router-link tag="label" class="top" :to="{ name: 'blogs' }"
+      >Quay lại</router-link
+    >
     <div class="body">
       <div class="form_group">
         <label>Tên bài viết</label>
@@ -41,9 +41,12 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 
-import { quillEditor, Quill } from "vue-quill-editor";
+import Quill from "quill";
+import { quillEditor } from "vue-quill-editor";
 import { container, ImageExtend, QuillWatch } from "quill-image-extend-module";
+import ImageResize from "quill-image-resize-module";
 Quill.register("modules/ImageExtend", ImageExtend);
+Quill.register("modules/imageResize", ImageResize);
 import CookieFunction from "@/utils/functions/cookie";
 
 export default {
@@ -52,9 +55,17 @@ export default {
   },
   data() {
     return {
-      // 富文本框参数设置 ~ config upload image middleware
       editorOption: {
         modules: {
+          toolbar: {
+            container: container,
+            handlers: {
+              image: function() {
+                QuillWatch.emit(this.quill.id);
+              }
+            }
+          },
+          imageResize: true,
           ImageExtend: {
             loading: true,
             name: "file",
@@ -72,14 +83,6 @@ export default {
                   "uid"
                 )}; cfr=${CookieFunction.getCookie("cfr")}`
               );
-            }
-          },
-          toolbar: {
-            container: container,
-            handlers: {
-              image: function() {
-                QuillWatch.emit(this.quill.id);
-              }
             }
           }
         }

@@ -1,7 +1,10 @@
 <template>
-  <div class="wrapper--header">
+  <div
+    class="wrapper--header"
+    :class="changeBackgroundHeader === 2 ? 'active' : ''"
+  >
     <div class="content">
-      <nav class="navbar navbar-default header-area affix-top">
+      <nav class="navbar navbar-default header-area affix-top ct">
         <div class="d_flex align_items_center header">
           <!--Start: Logo -->
           <router-link class="logo mr_auto d_none d_md_block" to="/">
@@ -123,16 +126,23 @@ export default {
       this.menu = false;
     },
     goToSignIn() {
-      const routeSignIn = this.$router.resolve({ name: "user_signin" });
+      // const routeSignIn = this.$router.resolve({ name: "user_signin" });
 
-      window.open(routeSignIn.href, "_blank");
+      // window.open(routeSignIn.href, "_blank");
       this.menu = false;
+      this.$router.push({ name: "user_signin" });
     },
     goToSignUp() {
-      const routeSignUp = this.$router.resolve({ name: "user_signup" });
+      // const routeSignUp = this.$router.resolve({ name: "user_signup" });
 
-      window.open(routeSignUp.href, "_blank");
+      // window.open(routeSignUp.href, "_blank");
       this.menu = false;
+      this.$router.push({ name: "user_signup" });
+    }
+  },
+  computed: {
+    changeBackgroundHeader() {
+      return this.$store.getters.backgroundHeader;
     }
   }
 };
