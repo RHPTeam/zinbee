@@ -1,7 +1,6 @@
 const router = require( "express-promise-router" )();
 const MarketPostController = require( "../../../../controllers/market/products/post.controller" );
 const auth = require( "../../../../helpers/middleware/authenticate.middleware" );
-const permission = require( "../../../../helpers/middleware/permission.middleware" );
 const collaborator = require( "../../../../helpers/middleware/collaborator.middleware" );
 
 // Handle upload file image

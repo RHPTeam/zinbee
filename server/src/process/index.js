@@ -5,7 +5,7 @@ const Role = require( "../models/Role.model" );
 const Help = require( "../models/help/Help.model" );
 
 ( async () => {
-  const foundHelp = await Help.find( {} ),
+  const foundHelp = await Help.find( { "name": "help_homepage" } ),
     foundRole = await Role.find( {} ),
     collaboratorsInfo = await Role.findOne( { "level": "Collaborator" } );
 
@@ -30,7 +30,7 @@ const Help = require( "../models/help/Help.model" );
 
   // Check Help First Time Server running
   if ( foundHelp.length === undefined || foundHelp.length === 0 ) {
-    const defaultHelp = await new Help( {} );
+    const defaultHelp = await new Help( { "name": "help_homepage" } );
 
     await defaultHelp.save();
   }
