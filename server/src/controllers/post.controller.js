@@ -23,6 +23,7 @@ const Server = require( "../models/Server.model" );
 
 const jsonResponse = require( "../configs/response" );
 const dictionary = require( "../configs/dictionaries" ),
+  convertUnicode = require( "../helpers/utils/unicode.util" ),
   { syncPostFolderExample, syncFolderExample, syncKeyWordSearch } = require( "../microservices/synchronize/post" );
 
 
@@ -135,14 +136,22 @@ module.exports = {
     const userInfo = await Account.findOne( { "_id": req.uid } ).select( "-password" ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
 
-    let page = null, dataResponse = null, data = ( await PostFacebook.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).sort( { "share": "desc", "vote": "desc", "like": "desc" } ).lean() ), resKeywordSync;
+    let page = null, dataResponse = null, data = ( await PostFacebook.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).sort( { "share": "desc", "vote": "desc", "like": "desc" } ).lean() ), resKeywordSync,
+      keywordExist = ( content ) => {
+        return userInfo.keywordSearch.some( function( el ) {
+          return convertUnicode( el.content.toLowerCase() ) === content;
+        } );
+      };
 
-    await Account.findByIdAndUpdate( { "_id": req.uid }, { "$push": { "keywordSearch": { "content": req.query.keyword, "time": Date.now() } } }, { "new": true } ).select( "-password" );
-    resKeywordSync = await syncKeyWordSearch( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/search`, { "content": req.query.keyword, "time": Date.now() }, req.headers.authorization );
-
-    if ( resKeywordSync.data.status !== "success" ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    // Check key word exists in db of acc
+    if ( keywordExist( convertUnicode( req.query.keyword.toLowerCase() ) ) === false ) {
+      await Account.findByIdAndUpdate( { "_id": req.uid }, { "$push": { "keywordSearch": { "content": req.query.keyword, "time": Date.now() } } }, { "new": true } ).select( "-password" );
+      resKeywordSync = await syncKeyWordSearch( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/search`, { "content": req.query.keyword, "time": Date.now() }, req.headers.authorization );
+      if ( resKeywordSync.data.status !== "success" ) {
+        return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+      }
     }
+
     if ( req.query._size && req.query._page ) {
       dataResponse = data.slice( ( Number( req.query._page ) - 1 ) * Number( req.query._size ), Number( req.query._size ) * Number( req.query._page ) );
     } else if ( req.query._size ) {
@@ -196,14 +205,22 @@ module.exports = {
     const userInfo = await Account.findOne( { "_id": req.uid } ).select( "-password" ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
     let listPostByKeyword,
-      page = null, dataResponse = null, resKeywordSync;
+      page = null, dataResponse = null, resKeywordSync,
+      keywordExist = ( content ) => {
+        return userInfo.keywordSearch.some( function( el ) {
+          return convertUnicode( el.content.toLowerCase() ) === content;
+        } );
+      };
 
-    await Account.findByIdAndUpdate( { "_id": req.uid }, { "$push": { "keywordSearch": { "content": req.query.keyword, "time": Date.now() } } }, { "new": true } ).select( "-password" );
-    resKeywordSync = await syncKeyWordSearch( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/search`, { "content": req.query.keyword, "time": Date.now() }, req.headers.authorization );
-
-    if ( resKeywordSync.data.status !== "success" ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    // Check key word exists in db of acc
+    if ( keywordExist( convertUnicode( req.query.keyword.toLowerCase() ) ) === false ) {
+      await Account.findByIdAndUpdate( { "_id": req.uid }, { "$push": { "keywordSearch": { "content": req.query.keyword, "time": Date.now() } } }, { "new": true } ).select( "-password" );
+      resKeywordSync = await syncKeyWordSearch( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/search`, { "content": req.query.keyword, "time": Date.now() }, req.headers.authorization );
+      if ( resKeywordSync.data.status !== "success" ) {
+        return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+      }
     }
+
     // Search post by keyword
     listPostByKeyword = await searchPost( {
       "keyword": req.query.keyword,
