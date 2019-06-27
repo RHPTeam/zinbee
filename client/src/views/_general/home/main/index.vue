@@ -1,19 +1,12 @@
 <template>
   <div class="wrapper--main">
     <!-- Start: banner -->
-    <section class="banner position_relative">
-      <div
-        class="border--right position_absolute"
-        :style="{
-          backgroundImage: 'url(' + vienPhaiBanner + ')'
-        }"
-      ></div>
-      <div
-        class="border--left position_absolute"
-        :style="{
-          backgroundImage: 'url(' + vienTraiBanner + ')'
-        }"
-      ></div>
+    <section
+      class="banner position_relative"
+      :style="{
+        backgroundImage: 'url(' + backgroundTool + ')'
+      }"
+    >
       <div class="ct m_auto position_relative content d_flex content">
         <div class="left">
           <div class="title">
@@ -105,7 +98,19 @@
       <!-- End:  introduce-->
 
       <!-- Start: tool -->
-      <section id="tool" class="tool">
+      <section id="tool" class="tool position_relative">
+        <div
+          class="border--right position_absolute"
+          :style="{
+            backgroundImage: 'url(' + vienPhaiBanner + ')'
+          }"
+        ></div>
+        <div
+          class="border--left position_absolute"
+          :style="{
+            backgroundImage: 'url(' + vienTraiBanner + ')'
+          }"
+        ></div>
         <div class="ct">
           <div class="section--title-content">
             <h3 class="title">Công cụ hỗ trợ marketing – bán hàng</h3>
@@ -143,8 +148,7 @@
                 <div class="text">
                   <p>
                     Zinbee cung cấp kho content mẫu đa dạng, cùng tính năng đăng
-                    bài theo chiến dịch. Sau khi thiết lập chiến dịch, các bài
-                    đăng sẽ được đăng tự đông theo giờ đã cài đặt sặn
+                    bài tự động
                   </p>
                 </div>
               </div>
@@ -690,113 +694,15 @@
       <!-- End: Customer -->
 
       <!-- Start: Price -->
-      <section id="price" class="price ct">
-        <div class="section--title-content text_center">
+      <section id="price" class="price">
+        <div class="section--title-content text_center ct">
           <h3 class="title">BẢNG GIÁ DỊCH VỤ</h3>
           <h4 class="desc">
             Zinbee cung cấp nhiều gói khác nhau linh hoạt cho từng nhu cầu của
             khách hàng.
           </h4>
         </div>
-        <!-- <div class="r text_center">
-          <div class="c_lg_6 c_md_6 mb_lg_3 mb_md_3 c_xl_3 items">
-            <div class="item">
-              <div class="heading">
-                <icon-base icon-name="close" width="50" height="50" viewBox="0 0 550 550">
-                  <icon-rocket/>
-                </icon-base>
-                <div class="month">1 THÁNG</div>
-              </div>
-              <ul class="list-unstyled plan-lists">
-                <li>1 tài khoản facebook</li>
-                <li>5 pages</li>
-                <li>500 groups</li>
-                <li>Tìm nội dung hot</li>
-                <li>Tự động tìm nội dung</li>
-                <li>Tự động đăng bài</li>
-                <li>Tự động like</li>
-                <li>Tự động thêm bạn</li>
-                <li>Tự động huỷ kết bạn</li>
-                <li>Chatbot profile</li>
-              </ul>
-              <div class="price--month">2.800.000đ/Tháng</div>
-              <div class="register">Đăng ký</div>
-            </div>
-          </div>
-          <div class="c_lg_6 c_md_6 mb_lg_3 mb_md_3 c_xl_3 items">
-            <div class="item">
-              <div class="heading">
-                <icon-base icon-name="close" width="48" height="48" viewBox="0 0 60 60">
-                  <icon-diamond/>
-                </icon-base>
-                <div class="month">6 THÁNG</div>
-              </div>
-              <ul class="list-unstyled plan-lists">
-                <li>1 tài khoản facebook</li>
-                <li>10 pages</li>
-                <li>500 groups</li>
-                <li>Tìm nội dung hot</li>
-                <li>Tự động tìm nội dung</li>
-                <li>Tự động đăng bài</li>
-                <li>Tự động like</li>
-                <li>Tự động thêm bạn</li>
-                <li>Tự động huỷ kết bạn</li>
-                <li>Chatbot profile</li>
-              </ul>
-              <div class="price--month">16.199.000đ/6 tháng</div>
-              <div class="register">Đăng ký</div>
-            </div>
-          </div>
-          <div class="c_lg_6 c_md_6 mb_lg_3 mb_md_3 c_xl_3 items">
-            <div class="item">
-              <div class="heading">
-                <icon-base icon-name="close" width="50" height="50" viewBox="0 0 500 500">
-                  <icon-world/>
-                </icon-base>
-                <div class="month">1 NĂM</div>
-              </div>
-              <ul class="list-unstyled plan-lists">
-                <li>2 tài khoản facebook</li>
-                <li>30 pages</li>
-                <li>1000 groups</li>
-                <li>Tìm nội dung hot</li>
-                <li>Tự động tìm nội dung</li>
-                <li>Tự động đăng bài</li>
-                <li>Tự động like</li>
-                <li>Tự động thêm bạn</li>
-                <li>Tự động huỷ kết bạn</li>
-                <li>Chatbot profile</li>
-              </ul>
-              <div class="price--month">28.799.000đ/1 năm</div>
-              <div class="register">Đăng ký</div>
-            </div>
-          </div>
-          <div class="c_lg_6 c_md_6 mb_lg_3 mb_md_3 c_xl_3 items">
-            <div class="item">
-              <div class="heading">
-                <icon-base icon-name="close" width="50" height="50" viewBox="0 0 500 500">
-                  <icon-enterprise/>
-                </icon-base>
-                <div class="month">DOANH NGHIỆP</div>
-              </div>
-              <ul class="list-unstyled plan-lists">
-                <li>Liên hệ</li>
-                <li>Liên hệ</li>
-                <li>Liên hệ</li>
-                <li>Tìm nội dung hot</li>
-                <li>Tự động tìm nội dung</li>
-                <li>Tự động đăng bài</li>
-                <li>Tự động like</li>
-                <li>Tự động thêm bạn</li>
-                <li>Tự động huỷ kết bạn</li>
-                <li>Chatbot profile</li>
-              </ul>
-              <div class="price--month">Liên hệ</div>
-              <div class="register">Đăng ký</div>
-            </div>
-          </div>
-        </div>-->
-        <div class="d_none d_md_block">
+        <div class="d_none d_md_block ct">
           <div class="item--header d_flex align_items_center">
             <div class="items text_center function"></div>
             <div class="items text_center main--price first">
@@ -858,22 +764,22 @@
                 <div class="items--main function">Tài khoản facebook</div>
                 <div class="items--main">1</div>
                 <div class="items--main">2</div>
-                <div class="items--main">3</div>
-                <div class="items--main">Liên hệ</div>
+                <div class="items--main">2</div>
+                <div class="items--main">Không giới hạn</div>
               </div>
               <div class="items d_flex align_items_center">
                 <div class="items--main function">Pages</div>
-                <div class="items--main">5</div>
-                <div class="items--main">10</div>
-                <div class="items--main">30</div>
-                <div class="items--main">Liên hệ</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
               </div>
               <div class="items d_flex align_items_center">
                 <div class="items--main function">Groups</div>
-                <div class="items--main">500</div>
-                <div class="items--main">500</div>
-                <div class="items--main">1000</div>
-                <div class="items--main">Liên hệ</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
               </div>
               <div class="items d_flex align_items_center">
                 <div class="items--main function">Tìm nội dung hot</div>
@@ -1063,7 +969,7 @@
                   </icon-base>
                 </div>
               </div>
-              <div class="items d_flex align_items_center">
+              <!-- <div class="items d_flex align_items_center">
                 <div class="items--main function">Tự động thêm bạn</div>
                 <div class="items--main">
                   <icon-base
@@ -1109,7 +1015,7 @@
                     <icon-check-circle />
                   </icon-base>
                 </div>
-              </div>
+              </div> -->
               <div class="items d_flex align_items_center">
                 <div class="items--main function">Tự động huỷ kết bạn</div>
                 <div class="items--main">
@@ -1206,8 +1112,19 @@
               </div>
             </VuePerfectScrollbar>
           </div>
+          <div class="item--footer text_center">
+            <div class="title">
+              Liên hệ ngay để có giá tốt nhất
+            </div>
+            <a
+              class="btn--live-chat"
+              target="_blank"
+              href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+              >LIÊN HỆ NGAY BÂY GIỜ</a
+            >
+          </div>
         </div>
-        <div class="d_md_none d_block content--tablet">
+        <div class="d_md_none d_block content--tablet ct">
           <div class="items--content mb_4">
             <div
               class="item--header text_center main--price first align_items_center"
@@ -1732,6 +1649,17 @@
               </VuePerfectScrollbar>
             </div>
           </div>
+          <div class="item--footer text_center">
+            <div class="title">
+              Liên hệ ngay để có giá tốt nhất
+            </div>
+            <a
+              class="btn--live-chat"
+              target="_blank"
+              href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+              >LIÊN HỆ NGAY BÂY GIỜ</a
+            >
+          </div>
         </div>
         <!--  -->
       </section>
@@ -1797,13 +1725,7 @@
         }"
       >
         <div class="title">
-          Hơn 5000 doanh nghiệp và chủ shop đã
-          <a
-            href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-            target="_blank"
-            >Liên hệ</a
-          >
-          sử dụng!
+          Hơn 5000 doanh nghiệp và chủ shop đã sử dụng!
         </div>
         <div class="desc">
           Liên hệ ngay để được tư vấn dùng thử 3 ngày miễn phí!

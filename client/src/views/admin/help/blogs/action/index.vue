@@ -1,8 +1,8 @@
 <template>
   <div class="action">
-    <router-link tag="label" class="top" :to="{ name: 'blogs' }">
-      Quay lại
-    </router-link>
+    <router-link tag="label" class="top" :to="{ name: 'blogs' }"
+      >Quay lại</router-link
+    >
     <div class="body">
       <div class="form_group">
         <label>Tên bài viết</label>
@@ -15,7 +15,11 @@
       </div>
       <div class="form_group">
         <label>Nội dung bài viết</label>
-        <quill-editor ref="myQuillEditor" v-model="blog.content" />
+        <quill-editor
+          ref="myQuillEditor"
+          v-model="blog.content"
+          :options="editorOption"
+        />
       </div>
       <div class="form_group">
         <button
@@ -37,11 +41,39 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 
+import Quill from "quill";
 import { quillEditor } from "vue-quill-editor";
+import ImageResize from "quill-image-resize-module";
+Quill.register("modules/imageResize", ImageResize);
 
 export default {
   components: {
     quillEditor
+  },
+  data() {
+    return {
+      editorOption: {
+        modules: {
+          toolbar: [
+            ["bold", "italic", "underline"],
+            ["blockquote", "code-block"],
+            [{ header: 1 }, { header: 2 }],
+            [{ list: "ordered" }, { list: "bullet" }],
+
+            [{ indent: "-1" }, { indent: "+1" }],
+            [{ direction: "rtl" }],
+            [{ size: ["small", false, "large", "huge"] }],
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ color: [] }, { background: [] }],
+            [{ align: [] }],
+            ["clean"],
+            ["link", "image"]
+          ],
+          imageResize: true
+        }
+      }
+    };
   },
   computed: {
     allCategories() {

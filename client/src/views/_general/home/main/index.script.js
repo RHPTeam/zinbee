@@ -11,6 +11,7 @@ export default {
       // Tool
       benefit: require("@/assets/images/home/undraw_visual_data_b1wx.svg"),
       automatic: require("@/assets/images/home/undraw_setup_analytics_8qkl.svg"),
+      backgroundTool: require("@/assets/images/home/bg--polygon.png"),
       // Customer
       backgroundCustomer: require("@/assets/images/home/quote.png"),
       // Contact
