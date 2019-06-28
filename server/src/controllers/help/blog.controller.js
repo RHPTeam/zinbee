@@ -118,5 +118,15 @@ module.exports = {
     return res
       .status( 200 )
       .json( jsonResponse( "success", { "results": dataResponse, "page": page, "total": data.length } ) );
+  },
+  "upload": async ( req, res ) => {
+    if ( !req.file ) {
+      return res.status( 403 ).json( { "status": "fail", "photos": "Không có ảnh upload, vui lòng kiểm tra lại!" } );
+    }
+
+    // Check multer object
+    if ( req.file.fieldname === "file" && req.file.mimetype.includes( "image" ) ) {
+      return res.status( 200 ).json( { "status": "success", "data": `${process.env.APP_URL}:${process.env.PORT_BASE}/${req.file.path.replace( /\\/gi, "/" )}` } );
+    }
   }
 };

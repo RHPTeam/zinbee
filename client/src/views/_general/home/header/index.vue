@@ -1,10 +1,13 @@
 <template>
-  <div class="wrapper--header">
+  <div
+    class="wrapper--header"
+    :class="changeBackgroundHeader === 2 ? 'active' : ''"
+  >
     <div class="content">
-      <nav class="navbar navbar-default header-area affix-top">
+      <nav class="navbar navbar-default header-area affix-top ct">
         <div class="d_flex align_items_center header">
           <!--Start: Logo -->
-          <router-link class="logo mr_auto" to="/">
+          <router-link class="logo mr_auto d_none d_md_block" to="/">
             <icon-base
               icon-name="ZinBee"
               width="132.92"
@@ -12,6 +15,16 @@
               viewBox="0 0 250.446 93.703"
             >
               <icon-logo />
+            </icon-base>
+          </router-link>
+          <router-link class="logo mr_auto d_block d_md_none" to="/">
+            <icon-base
+              icon-name="ZinBee"
+              width="60"
+              height="50"
+              viewBox="0 0 100 100"
+            >
+              <icon-logo-short />
             </icon-base>
           </router-link>
           <!--Start: Logo -->
@@ -35,7 +48,9 @@
                 <li class="items&#45;&#45;header">Bảng giá</li>
                 <li class="items&#45;&#45;header">Liên hệ</li>-->
                 <li class="items--header" @click="goToSignIn">Đăng nhập</li>
-                <li class="items--header" @click="goToSignUp">Đăng ký</li>
+                <li class="items--header try" @click="goToSignUp">
+                  Trải nghiệm ngay
+                </li>
               </ul>
             </nav>
           </div>
@@ -77,7 +92,7 @@
                   <a href="#">Đăng nhập</a>
                 </li>
                 <li class="items--header" @click="goToSignUp">
-                  <a href="#">Đăng ký</a>
+                  <a href="#">Trải nghiệm ngay</a>
                 </li>
               </ul>
             </transition>
@@ -111,16 +126,23 @@ export default {
       this.menu = false;
     },
     goToSignIn() {
-      const routeSignIn = this.$router.resolve({ name: "user_signin" });
+      // const routeSignIn = this.$router.resolve({ name: "user_signin" });
 
-      window.open(routeSignIn.href, "_blank");
+      // window.open(routeSignIn.href, "_blank");
       this.menu = false;
+      this.$router.push({ name: "user_signin" });
     },
     goToSignUp() {
-      const routeSignUp = this.$router.resolve({ name: "user_signup" });
+      // const routeSignUp = this.$router.resolve({ name: "user_signup" });
 
-      window.open(routeSignUp.href, "_blank");
+      // window.open(routeSignUp.href, "_blank");
       this.menu = false;
+      this.$router.push({ name: "user_signup" });
+    }
+  },
+  computed: {
+    changeBackgroundHeader() {
+      return this.$store.getters.backgroundHeader;
     }
   }
 };

@@ -15,12 +15,9 @@
     />
     <!-- End: Data List -->
     <!-- Start: pagination post-->
-    <!--<div class="mt_3">
-      <app-paginate
-        :currentPage="currentPage"
-        :filterShowSelected="filterShowSelected"
-      />
-    </div>-->
+    <div class="mt_3">
+      <app-paginate :currentPage="currentPage" />
+    </div>
     <!-- End: pagination post-->
   </div>
 </template>
@@ -28,10 +25,12 @@
 <script>
 import AppAction from "../layouts/actions/posts/index";
 import AppTable from "./table/index";
+import AppPaginate from "./paginate";
 
 export default {
   components: {
     AppAction,
+    AppPaginate,
     AppTable
   },
   data() {
@@ -40,6 +39,13 @@ export default {
       filterShowSelected: { id: 25, name: "Hiển thị 25" },
       search: ""
     };
+  },
+  async created() {
+    const dataSender = {
+      size: 25,
+      page: 1
+    };
+    await this.$store.dispatch("getAllMarketPosts", dataSender);
   },
   methods: {
     updateFilterShowSelected(selected) {

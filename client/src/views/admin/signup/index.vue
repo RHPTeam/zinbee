@@ -2,7 +2,7 @@
   <div class="wrap position_relative" :data-theme="currentTheme">
     <div class="info d_flex align_items_center justify_content_center p_3 mt_5">
       <form>
-        <h3>Đăng nhập vào hệ thống Admin</h3>
+        <h3>Đăng ký quản trị viên</h3>
         <div class="form_group">
           <label>Tên đăng nhập</label>
           <input

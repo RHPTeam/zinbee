@@ -23,9 +23,12 @@ export default {
     deleteProduct(value) {
       this.$store.dispatch("deleteProduct", value);
     },
-    goToCreate() {
-      this.$store.dispatch("setButtonDefault", 1);
-      this.$router.push({ name: "product_create" });
+    async goToCreate() {
+      await this.$store.dispatch("setPostDefaultMarket");
+      await this.$store.dispatch("getProductDefault");
+      await this.$store.dispatch("setPostDefaultStatus", 1);
+      await this.$store.dispatch("setVariableControl", 0);
+      this.$router.push({ name: "market_post_create" });
     }
   },
   async created() {

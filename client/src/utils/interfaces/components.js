@@ -29,6 +29,9 @@ Vue.component("IconCancel", () => import("@/components/icons/IconCancel"));
 Vue.component("IconClose", () => import("@/components/icons/IconClose"));
 Vue.component("IconChat", () => import("@/components/icons/IconChat"));
 Vue.component("IconCheck", () => import("@/components/icons/IconCheck"));
+Vue.component("IconCheckCircle", () =>
+  import("@/components/icons/IconCheckCircle")
+);
 Vue.component("IconCheckActive", () =>
   import("@/components/icons/IconCheckActive")
 );
@@ -196,6 +199,7 @@ Vue.component("IconInstagramSimple", () =>
 );
 Vue.component("IconYoutube", () => import("@/components/icons/IconYoutube"));
 Vue.component("IconTiwtter", () => import("@/components/icons/IconTiwtter"));
+Vue.component("IconTimer", () => import("@/components/icons/IconTimer"));
 
 /**
  * Assign Global Vue Directives

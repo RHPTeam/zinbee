@@ -2,7 +2,8 @@
 const state = {
     themeName: "light",
     collapseMenu: false,
-    hideChatSidebar: false
+    hideChatSidebar: false,
+    backgroundHeader: false
   },
   getters = {
     themeName: ( s ) => {
@@ -13,6 +14,11 @@ const state = {
     },
     hideChatSidebar: ( s ) => {
       return s.hideChatSidebar;
+    },
+
+    // change backgroundHeader
+    backgroundHeader: ( s ) => {
+      return s.backgroundHeader;
     }
   },
   mutations = {
@@ -24,6 +30,11 @@ const state = {
     },
     changeThemeName: ( s, payload ) => {
       s.themeName = payload;
+    },
+
+    // Change background header when scroll top = 0
+    changeBackgroundHeader: ( s, payload ) => {
+      s.backgroundHeader = payload;
     }
   },
   actions = {
@@ -35,6 +46,11 @@ const state = {
     },
     changeThemeName: ( { commit }, payload ) => {
       commit( "changeThemeName", payload );
+    },
+
+    // Change background header when scroll top = 0
+    changeBackgroundHeader: ( {commit}, payload ) => {
+      commit("changeBackgroundHeader", payload);
     }
   };
 

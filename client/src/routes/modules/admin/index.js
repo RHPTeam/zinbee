@@ -130,6 +130,38 @@ const generalRouter = {
           ]
         }
       ]
+    },
+    {
+      path: "campaigns",
+      component: require("@/views/admin/campaigns").default,
+      children: [
+        {
+          path: "",
+          name: "campaigns",
+          component: require("@/views/admin/campaigns/folder").default
+        },
+        {
+          path: "edit/:id",
+          name: "campaigns_edit",
+          component: require("@/views/admin/campaigns/detail").default
+        }
+      ]
+    },
+    {
+      path: "agency",
+      component: require("@/views/admin/agency").default,
+      children: [
+        {
+          path: "list",
+          name: "agency_list",
+          component: require("@/views/admin/agency/manager").default
+        },
+        {
+          path: "agency-package",
+          name: "agency_package",
+          component: require("@/views/admin/agency/package").default
+        }
+      ]
     }
   ]
 };

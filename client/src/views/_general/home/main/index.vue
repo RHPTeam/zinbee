@@ -2,39 +2,41 @@
   <div class="wrapper--main">
     <!-- Start: banner -->
     <section
-      class="banner text_center"
+      class="banner position_relative"
       :style="{
-        backgroundImage: 'url(' + backgroundBanner + ')'
+        backgroundImage: 'url(' + backgroundTool + ')'
       }"
     >
-      <div class="ct m_auto position_relative content">
-        <div class="title">
-          <h1 class="hero-title" ref="showTyped"><span class="test"></span></h1>
+      <div class="ct m_auto position_relative content d_flex content">
+        <div class="left">
+          <div class="title">
+            VŨ KHÍ KHÔNG THỂ THIẾU CHO BÁN HÀNG TRÊN FACEBOOK
+          </div>
+          <div class="desc">
+            TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC 100+ TRANG, NHÓM, TRANG CÁ
+            NHÂN TRÊN FACEBOOK VÀI THAO TÁC
+          </div>
+          <div class="register" @click="goToSignUp">TRẢI NGHIỆM NGAY</div>
         </div>
-        <div class="desc">
-          TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC 100+ PAGE, GROUP, PROFILE
-          FACEBOOK VỚI 1 CLICK
+        <div class="right">
+          <div
+            class="image--banner"
+            :style="{
+              backgroundImage: 'url(' + backgroundBanner + ')'
+            }"
+          ></div>
         </div>
-        <div class="register m_auto d_flex" @click="goToSignUp">
-          Đăng ký ngay
-        </div>
-        <img
-          class="image--introduce mt_5"
-          src="@/assets/images/home/banner.jpg"
-          alt="Banner ZinBee"
-        />
       </div>
     </section>
     <!-- End: Banner -->
 
     <div class="content">
       <!-- Start:  introduce-->
-      <section class="introduce text_center ct">
+      <!-- <section class="introduce text_center ct">
         <div class="section--title-content">
-          <h3 class="title">TẠI SAO BẠN CẦN ZINBEE NGAY HÔM NAY?</h3>
+          <h3 class="title">ZINBEE GIÚP BẠN ĐƯỢC NHỮNG GÌ</h3>
           <h4 class="desc">
-            TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC 100 PAGE, GROUP, PROFILE
-            FACEBOOK CHỈ VỚI 1 CLICK
+            TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC 100+ TRANG, NHÓM, TRANG CÁ NHÂN TRÊN FACEBOOK VÀI THAO TÁC
           </h4>
         </div>
         <div class="r content">
@@ -53,7 +55,7 @@
               <div class="title">CUNG CẤP KHO NỘI DUNG</div>
             </div>
             <div class="desc">
-              Zinbee sẽ cung cấp cho bạn các nội dung hot, nhiều lượt tương tác
+              Zinbee sẽ cung cấp cho bạn các nội dung hot, nổi bật, nhiều lượt tương tác
               nhất trên facebook
             </div>
           </div>
@@ -92,75 +94,46 @@
             </div>
           </div>
         </div>
-      </section>
+      </section>-->
       <!-- End:  introduce-->
 
       <!-- Start: tool -->
-      <section
-        id="tool"
-        class="tool"
-        :style="{
-          backgroundImage: 'url(' + backgroundTool + ')'
-        }"
-      >
+      <section id="tool" class="tool position_relative">
+        <div
+          class="border--right position_absolute"
+          :style="{
+            backgroundImage: 'url(' + vienPhaiBanner + ')'
+          }"
+        ></div>
+        <div
+          class="border--left position_absolute"
+          :style="{
+            backgroundImage: 'url(' + vienTraiBanner + ')'
+          }"
+        ></div>
         <div class="ct">
-          <div class="title text_center">CÔNG CỤ HỖ TRỢ TUYỆT VỜI</div>
-          <div class="r content">
-            <div class="c_lg_6 c_md_12 left">
-              <div class="items d_flex align_items_center">
-                <div class="icon">
-                  <icon-base
-                    icon-name="close"
-                    width="48"
-                    height="48"
-                    viewBox="0 0 500 500"
-                  >
-                    <icon-laptop-phone />
-                  </icon-base>
-                </div>
-                <div class="text">
-                  <p>Bạn sẽ có nhiều thời gian hơn</p>
-                  <p>Tự động chăm sóc page, group, profile</p>
-                </div>
-              </div>
-              <div class="items d_flex align_items_center">
-                <div class="icon">
-                  <icon-base
-                    icon-name="close"
-                    width="48"
-                    height="48"
-                    viewBox="0 0 600 600"
-                  >
-                    <icon-diamond />
-                  </icon-base>
-                </div>
-                <div class="text">
-                  <p>Tự động hoàn toàn</p>
-                  <p>Tự động hoàn toàn ngay cả khi bạn đang ngủ.</p>
-                </div>
-              </div>
-              <div class="items d_flex align_items_center">
-                <div class="icon">
-                  <icon-base
-                    icon-name="close"
-                    width="50"
-                    height="50"
-                    viewBox="0 0 550 550"
-                  >
-                    <icon-rocket />
-                  </icon-base>
-                </div>
-                <div class="text">
-                  <p>Hỗ trợ nhiều tài khoản</p>
-                  <p>
-                    Bạn có thể chăm sóc nhiều page, group, profile chỉ với vài
-                    click.
-                  </p>
-                </div>
-              </div>
+          <div class="section--title-content">
+            <h3 class="title">Công cụ hỗ trợ marketing – bán hàng</h3>
+            <div class="desc">
+              Zinbee cung cấp bộ công cụ giúp quản lý cũng như tự động nhiều
+              hoạt động trong quá trình làm marketing, bán hàng và tương tác với
+              khách hàng trên Facebook.
+            </div>
+          </div>
+          <div class="r content mb_md_4">
+            <div class="c_lg_6 c_md_12 mb_md_3 left">
+              <!-- <img :src="imageTool1" alt> -->
+              <div
+                class="marketing--section-image"
+                :style="{
+                  backgroundImage: 'url(' + benefit + ')'
+                }"
+              ></div>
             </div>
             <div class="c_lg_6 c_md_12 right position_relative">
-              <div class="info position_absolute">ZinBee</div>
+              <div class="title--content">
+                Những tính năng nổi trội của Zinbee
+              </div>
               <div class="items d_flex align_items_center">
                 <div class="icon">
                   <icon-base
@@ -173,8 +146,10 @@
                   </icon-base>
                 </div>
                 <div class="text">
-                  <p>Hỗ trợ cả máy tính và điện thoại</p>
-                  <p>Thao tác đơn giản với máy tính hoặc smart phone.</p>
+                  <p>
+                    Zinbee cung cấp kho content mẫu đa dạng, cùng tính năng đăng
+                    bài tự động
+                  </p>
                 </div>
               </div>
               <div class="items d_flex align_items_center">
@@ -189,8 +164,10 @@
                   </icon-base>
                 </div>
                 <div class="text">
-                  <p>Tự động tìm kiếm nội dung</p>
-                  <p>Tự động tìm nội dung theo chủ đề bạn mong muốn.</p>
+                  <p>
+                    Tự động tăng tương tác với khách hàng. Lọc và xây dựng tệp
+                    khách hàng tiềm năng.
+                  </p>
                 </div>
               </div>
               <div class="items d_flex align_items_center">
@@ -205,111 +182,374 @@
                   </icon-base>
                 </div>
                 <div class="text">
-                  <p>Hơn 5000 khách hàng đang tin dùng</p>
                   <p>
-                    Zinbee tuyệt vời đang được hàng nghìn khách hàng và doanh
-                    nghiệp tin dùng
+                    Zinbee là bộ công cụ giúp tự động hóa việc marketing, bán
+                    hàng cũng như tự động tương tác với khách hàng trên
+                    facebook.
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="r content benefit">
+            <div class="c_lg_6 c_md_12 mb_md_3 left">
+              <div class="title--content">Lợi ích Zinbee mang lại</div>
+              <div class="items d_flex align_items_center">
+                <div class="icon">
+                  <icon-base
+                    icon-name="close"
+                    width="50"
+                    height="50"
+                    viewBox="0 0 550 550"
+                  >
+                    <icon-rocket />
+                  </icon-base>
+                </div>
+                <div class="text">
+                  <p>Tăng hiệu quả kinh doanh</p>
+                </div>
+              </div>
+              <div class="items d_flex align_items_center">
+                <div class="icon">
+                  <icon-base
+                    icon-name="close"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 500 500"
+                  >
+                    <icon-laptop-phone />
+                  </icon-base>
+                </div>
+                <div class="text">
+                  <p>Dễ dàng quản lý nội dung bài đăng, chiến dich.</p>
+                </div>
+              </div>
+              <div class="items d_flex align_items_center">
+                <div class="icon">
+                  <icon-base
+                    icon-name="close"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 60 60"
+                  >
+                    <icon-diamond />
+                  </icon-base>
+                </div>
+                <div class="text">
+                  <p>Tăng tương tác và xây dựng tệp khách hàng tiềm năng</p>
+                </div>
+              </div>
+              <div class="items d_flex align_items_center">
+                <div class="icon">
+                  <icon-base
+                    icon-name="close"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 29 29"
+                  >
+                    <icon-timer />
+                  </icon-base>
+                </div>
+                <div class="text">
+                  <p>Tiết kiệm thời gian, chi phí cho quảng cáo và nhân sự</p>
+                </div>
+              </div>
+            </div>
+            <div class="c_lg_6 c_md_12 right position_relative">
+              <!-- <div class="info position_absolute">ZinBee</div> -->
+              <!-- <img :src="imageTool2" alt> -->
+              <div
+                class="marketing--section-image"
+                :style="{
+                  backgroundImage: 'url(' + automatic + ')'
+                }"
+              ></div>
             </div>
           </div>
         </div>
       </section>
       <!-- End: tool -->
 
-      <!-- Start: Utilities -->
-      <section id="utilities" class="utilities ct">
-        <div class="d_flex options mb_4">
-          <div class="d_flex first">
-            <div
-              class="title"
-              :class="[activetab === 1 ? 'active' : '']"
-              @click="activetab = 1"
-            >
-              <p>01. Giao diện thân thiện</p>
+      <!-- Start: Why Choose ZinBee -->
+      <section id="why--chose" class="why--choose position_relative">
+        <div class="section--title-content">
+          <h3 class="title">Phần mềm này giành cho ai</h3>
+        </div>
+
+        <div class="marketing--section px_4 ct mb_5">
+          <div class="r">
+            <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
+              <img class="marketing--section-image" :src="srcSimpleInterface" />
+              <div class="title mt_4">
+                <b>Shop kinh doanh cá nhân</b>
+              </div>
+              <div>
+                Các shop đang kinh doanh cá nhân đang cần giải pháp, công cụ hỗ
+                trợ bán hàng, tương tác với khách hàng tốt hơn. Tiết kiệm thời
+                gian và chi phí
+              </div>
             </div>
-            <div
-              class="title"
-              :class="[activetab === 2 ? 'active' : '']"
-              @click="activetab = 2"
-            >
-              <p>02. Nội dung đa dạng</p>
+            <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
+              <img class="marketing--section-image" :src="srcExamlePost" />
+              <div class="title mt_4">
+                <b>Các doanh nghiệp</b>
+              </div>
+              <div>
+                Các doanh nghiệp đang muốn triển khai marketing trên facebook
+                với giải pháp tối ưu, hoàn toàn tự động để giảm chi phí và nhân
+                sự
+              </div>
             </div>
-          </div>
-          <div class="d_flex second">
-            <div
-              class="title"
-              :class="[activetab === 3 ? 'active' : '']"
-              @click="activetab = 3"
-            >
-              <p>03. Tự động hóa</p>
-            </div>
-            <div
-              class="title"
-              :class="[activetab === 4 ? 'active' : '']"
-              @click="activetab = 4"
-            >
-              <p>04. Rất nhiều tính năng khác</p>
+            <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
+              <img class="marketing--section-image" :src="srcAutomatic" />
+              <div class="title mt_4">
+                <b>Tổ chức marketing- sale</b>
+              </div>
+              <div>
+                Các tổ chức, cá nhân làm marketing và sale muốn tăng hiệu quả
+                làm việc với công cụ quản lý các hoạt động trên facebook
+              </div>
             </div>
           </div>
         </div>
-        <div class="content--options text_center">
-          <transition name="fade">
-            <div class="items display" v-if="activetab === 1">
-              <div class="section--title-content">
-                <div class="title">01. Giao diện thân thiện</div>
-                <div class="desc">
-                  Đội ngũ Zinbee không ngừng cải tiến, nâng cấp nhằm xây dựng
-                  một hệ thống tiện lợi nhất cho người dùng
-                </div>
+        <!-- End: Marketing Section -->
+      </section>
+      <!-- End: Why Choose ZinBee -->
+
+      <!-- Start: Utilities -->
+      <section id="utilities" class="utilities ct">
+        <div class="section--title-content mb_0">
+          <h3 class="title">Tại sao bạn chọn ZinBee</h3>
+        </div>
+        <div class="d_none d_md_block">
+          <div class="options mb_4 d_none">
+            <div class="d_flex first">
+              <div
+                class="title"
+                :class="[currentIndexInfo === 1 ? 'active' : '']"
+                @click="currentIndexInfo = 1"
+              >
+                <p>01. Giao diện thân thiện</p>
               </div>
-              <img
-                src="@/assets/images/home/dashboard.png"
-                alt="Banner ZinBee"
-              />
-            </div>
-          </transition>
-          <transition name="fade">
-            <div class="content items" v-if="activetab === 2">
-              <div class="section--title-content">
-                <div class="title">02. Nội dung đa dạng</div>
-                <div class="desc">
-                  Kho nội dung được cập nhật tiên lục, đem đến sự lựa chọn dễ
-                  dàng và phù hợp cho khách hàng.
-                </div>
+              <div
+                class="title"
+                :class="[currentIndexInfo === 2 ? 'active' : '']"
+                @click="currentIndexInfo = 2"
+              >
+                <p>02. Nội dung đa dạng</p>
               </div>
-              <img src="@/assets/images/home/content.png" alt="Banner ZinBee" />
             </div>
-          </transition>
-          <transition name="fade">
-            <div class="automation items" v-if="activetab === 3">
-              <div class="section--title-content">
-                <div class="title">03. Tự động hóa</div>
-                <div class="desc">
-                  Bạn sẽ có nhiều thời gian hơn với hệ thống tự động hóa của
-                  Zinbee, mọi thứ chỉ cần setup và Zinbee sẽ thay bạn thực hiện
-                  bất kể ngày hay đêm
-                </div>
+            <div class="d_flex second">
+              <div
+                class="title"
+                :class="[currentIndexInfo === 3 ? 'active' : '']"
+                @click="currentIndexInfo = 3"
+              >
+                <p>03. Tự động hóa</p>
               </div>
-              <img src="@/assets/images/home/tudong.png" alt="Banner ZinBee" />
-            </div>
-          </transition>
-          <transition name="fade">
-            <div class="function items" v-if="activetab === 4">
-              <div class="section--title-content">
-                <div class="title">04. Rất nhiều tính năng khác</div>
-                <div class="desc">
-                  Hàng chục tính năng khác luôn được update liên tục, đem tới
-                  những tiện ích tối ưu nhất cho khách hàng của Zinbee
-                </div>
+              <div
+                class="title"
+                :class="[currentIndexInfo === 4 ? 'active' : '']"
+                @click="currentIndexInfo = 4"
+              >
+                <p>04. Rất nhiều tính năng khác</p>
               </div>
-              <img
-                src="@/assets/images/home/tinhnang.png"
-                alt="Banner ZinBee"
-              />
             </div>
-          </transition>
+          </div>
+          <div class="content--options position_relative pt_4">
+            <div class="px_3 slide--image">
+              <transition name="slide-fade">
+                <div class="items display d_flex" v-if="currentIndexInfo === 0">
+                  <div class="left text">
+                    <div class="title--why">Giao diện thân thiện</div>
+                    <div class="desc">
+                      Đội ngũ Zinbee không ngừng cải tiến, nâng cấp nhằm xây
+                      dựng một hệ thống tiện lợi nhất cho người dùng
+                    </div>
+                  </div>
+                  <div
+                    class="right order"
+                    :style="{
+                      backgroundImage: 'url(' + sliderUtilities[0] + ')'
+                    }"
+                  ></div>
+                </div>
+              </transition>
+              <transition name="slide-fade">
+                <div class="content items d_flex" v-if="currentIndexInfo === 1">
+                  <div class="left text">
+                    <div class="title--why">Nội dung đa dạng</div>
+                    <div class="desc">
+                      Kho nội dung được cập nhật tiên lục, đem đến sự lựa chọn
+                      dễ dàng và phù hợp cho khách hàng.
+                    </div>
+                  </div>
+                  <div
+                    class="right order"
+                    :style="{
+                      backgroundImage: 'url(' + sliderUtilities[1] + ')'
+                    }"
+                  ></div>
+                </div>
+              </transition>
+              <transition name="slide-fade">
+                <div
+                  class="automation items d_flex"
+                  v-if="currentIndexInfo === 2"
+                >
+                  <div class="right text">
+                    <div class="title--why">Tự động hóa</div>
+                    <div class="desc">
+                      Bạn sẽ có nhiều thời gian hơn với hệ thống tự động hóa của
+                      Zinbee, mọi thứ chỉ cần setup và Zinbee sẽ thay bạn thực
+                      hiện bất kể ngày hay đêm
+                    </div>
+                  </div>
+                  <div
+                    class="left order"
+                    :style="{
+                      backgroundImage: 'url(' + sliderUtilities[2] + ')'
+                    }"
+                  ></div>
+                </div>
+              </transition>
+              <transition name="slide-fade">
+                <div
+                  class="function items d_flex"
+                  v-if="currentIndexInfo === 3"
+                >
+                  <div class="left text">
+                    <div class="title--why">Rất nhiều tính năng khác</div>
+                    <div class="desc">
+                      Hàng chục tính năng khác luôn được update liên tục, đem
+                      tới những tiện ích tối ưu nhất cho khách hàng của Zinbee
+                    </div>
+                  </div>
+                  <div
+                    class="right order"
+                    :style="{
+                      backgroundImage: 'url(' + sliderUtilities[3] + ')'
+                    }"
+                  ></div>
+                </div>
+              </transition>
+            </div>
+            <div class="action text_center">
+              <ul>
+                <li
+                  :class="[currentIndexInfo === 0 ? 'active' : '']"
+                  @click="currentIndexInfo = 0"
+                ></li>
+                <li
+                  :class="[currentIndexInfo === 1 ? 'active' : '']"
+                  @click="currentIndexInfo = 1"
+                ></li>
+                <li
+                  :class="[currentIndexInfo === 2 ? 'active' : '']"
+                  @click="currentIndexInfo = 2"
+                ></li>
+                <li
+                  :class="[currentIndexInfo === 3 ? 'active' : '']"
+                  @click="currentIndexInfo = 3"
+                ></li>
+              </ul>
+            </div>
+            <div
+              class="position_absolute action--slider-info d_flex align_items_center"
+            >
+              <span
+                class="prev action"
+                @click="prevInfo"
+                v-if="currentIndexInfo !== 0"
+              >
+                <icon-base
+                  class="icon--arrow-left"
+                  icon-name="Prev"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <icon-arrow-left></icon-arrow-left>
+                </icon-base>
+              </span>
+              <span
+                class="next ml_auto action"
+                @click="nextInfo"
+                v-if="currentIndexInfo !== 3"
+              >
+                <icon-base
+                  class="icon--arrow-left"
+                  icon-name="Next"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <icon-arrow-left></icon-arrow-left>
+                </icon-base>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="d_md_none d_block">
+          <div class="content--options px_3">
+            <div class="items display mb_4">
+              <div class="title--why">Giao diện thân thiện</div>
+              <div class="desc mb_2">
+                Đội ngũ Zinbee không ngừng cải tiến, nâng cấp nhằm xây dựng một
+                hệ thống tiện lợi nhất cho người dùng
+              </div>
+              <div
+                class="right order"
+                :style="{
+                  backgroundImage: 'url(' + sliderUtilities[0] + ')'
+                }"
+              ></div>
+            </div>
+
+            <div class="content items mb_4">
+              <div class="title--why">Nội dung đa dạng</div>
+              <div class="desc mb_2">
+                Kho nội dung được cập nhật tiên lục, đem đến sự lựa chọn dễ dàng
+                và phù hợp cho khách hàng.
+              </div>
+              <div
+                class="right order"
+                :style="{
+                  backgroundImage: 'url(' + sliderUtilities[1] + ')'
+                }"
+              ></div>
+            </div>
+
+            <div class="automation items mb_4">
+              <div class="title--why">Tự động hóa</div>
+              <div class="desc mb_2">
+                Bạn sẽ có nhiều thời gian hơn với hệ thống tự động hóa của
+                Zinbee, mọi thứ chỉ cần setup và Zinbee sẽ thay bạn thực hiện
+                bất kể ngày hay đêm
+              </div>
+
+              <div
+                class="right order"
+                :style="{
+                  backgroundImage: 'url(' + sliderUtilities[2] + ')'
+                }"
+              ></div>
+            </div>
+
+            <div class="function items mb_4">
+              <div class="title--why">Rất nhiều tính năng khác</div>
+              <div class="desc mb_2">
+                Hàng chục tính năng khác luôn được update liên tục, đem tới
+                những tiện ích tối ưu nhất cho khách hàng của Zinbee
+              </div>
+              <div
+                class="right order"
+                :style="{
+                  backgroundImage: 'url(' + sliderUtilities[3] + ')'
+                }"
+              ></div>
+            </div>
+          </div>
         </div>
       </section>
       <!-- End: Utilities -->
@@ -324,9 +564,9 @@
                 backgroundImage: 'url(' + backgroundCustomer + ')'
               }"
             >
-              <div class="title--section">Ý kiến khách hàng</div>
+              <div class="title--section">Ý kiến của khách hàng</div>
               <div class="desc">
-                Những phản hồi tích cực của khách hàng Zinbee
+                Những phản hồi tích cực của khách hàng đã sử dụng Zinbee
               </div>
             </div>
             <!-- Satrt: Slider -->
@@ -430,6 +670,22 @@
                   </icon-base>
                 </span>
               </div>
+              <div class="action text_center">
+                <ul>
+                  <li
+                    :class="[currentIndex === 1 ? 'active' : '']"
+                    @click="currentIndex = 1"
+                  ></li>
+                  <li
+                    :class="[currentIndex === 2 ? 'active' : '']"
+                    @click="currentIndex = 2"
+                  ></li>
+                  <li
+                    :class="[currentIndex === 3 ? 'active' : '']"
+                    @click="currentIndex = 3"
+                  ></li>
+                </ul>
+              </div>
             </div>
             <!-- End: Slider -->
           </div>
@@ -438,179 +694,1050 @@
       <!-- End: Customer -->
 
       <!-- Start: Price -->
-      <section id="price" class="price ct">
-        <div class="section--title-content text_center">
+      <section id="price" class="price">
+        <div class="section--title-content text_center ct">
           <h3 class="title">BẢNG GIÁ DỊCH VỤ</h3>
           <h4 class="desc">
             Zinbee cung cấp nhiều gói khác nhau linh hoạt cho từng nhu cầu của
             khách hàng.
           </h4>
         </div>
-        <div class="r text_center">
-          <div class="c_lg_6 c_md_6 mb_lg_3 mb_md_3 c_xl_3 items">
-            <div class="item">
-              <div class="heading">
-                <icon-base
-                  icon-name="close"
-                  width="50"
-                  height="50"
-                  viewBox="0 0 550 550"
-                >
-                  <icon-rocket />
-                </icon-base>
-                <div class="month">1 THÁNG</div>
-              </div>
-              <ul class="list-unstyled plan-lists">
-                <li>1 tài khoản facebook</li>
-                <li>5 pages</li>
-                <li>500 groups</li>
-                <li>Tìm nội dung hot</li>
-                <li>Tự động tìm nội dung</li>
-                <li>Tự động đăng bài</li>
-                <li>Tự động like</li>
-                <li>Tự động thêm bạn</li>
-                <li>Tự động huỷ kết bạn</li>
-                <li>Chatbot profile</li>
+        <div class="d_none d_md_block ct">
+          <div class="item--header d_flex align_items_center">
+            <div class="items text_center function"></div>
+            <div class="items text_center main--price first">
+              <ul>
+                <li class="month">1 THÁNG</li>
+                <li class="money">2.800.000đ</li>
+                <li class="register">
+                  <a
+                    href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+                    target="_blank"
+                    >Liên hệ</a
+                  >
+                </li>
               </ul>
-              <div class="price--month">2.800.000đ/Tháng</div>
-              <div class="register">Đăng ký</div>
+            </div>
+            <div class="items text_center main--price">
+              <ul>
+                <li class="month">6 THÁNG</li>
+                <li class="money">16.199.000đ</li>
+                <li class="register">
+                  <a
+                    href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+                    target="_blank"
+                    >Liên hệ</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="items text_center main--price">
+              <ul>
+                <li class="month">1 NĂM</li>
+                <li class="money">28.799.000đ</li>
+                <li class="register">
+                  <a
+                    href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+                    target="_blank"
+                    >Liên hệ</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="items text_center main--price">
+              <ul>
+                <li class="month">DOANH NGHIỆP</li>
+                <li class="money">Liên hệ</li>
+                <li class="register">
+                  <a
+                    href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+                    target="_blank"
+                    >Liên hệ</a
+                  >
+                </li>
+              </ul>
             </div>
           </div>
-          <div class="c_lg_6 c_md_6 mb_lg_3 mb_md_3 c_xl_3 items">
-            <div class="item">
-              <div class="heading">
-                <icon-base
-                  icon-name="close"
-                  width="50"
-                  height="50"
-                  viewBox="0 0 650 650"
-                >
-                  <icon-diamond />
-                </icon-base>
-                <div class="month">6 THÁNG</div>
+          <div class="item--body text_center">
+            <VuePerfectScrollbar class="scroll--price">
+              <div class="items d_flex align_items_center">
+                <div class="items--main function">Tài khoản facebook</div>
+                <div class="items--main">1</div>
+                <div class="items--main">2</div>
+                <div class="items--main">2</div>
+                <div class="items--main">Không giới hạn</div>
               </div>
-              <ul class="list-unstyled plan-lists">
-                <li>1 tài khoản facebook</li>
-                <li>10 pages</li>
-                <li>500 groups</li>
-                <li>Tìm nội dung hot</li>
-                <li>Tự động tìm nội dung</li>
-                <li>Tự động đăng bài</li>
-                <li>Tự động like</li>
-                <li>Tự động thêm bạn</li>
-                <li>Tự động huỷ kết bạn</li>
-                <li>Chatbot profile</li>
-              </ul>
-              <div class="price--month">16.199.000đ/6 tháng</div>
-              <div class="register">Đăng ký</div>
-            </div>
+              <div class="items d_flex align_items_center">
+                <div class="items--main function">Pages</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
+              </div>
+              <div class="items d_flex align_items_center">
+                <div class="items--main function">Groups</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
+                <div class="items--main">Không giới hạn</div>
+              </div>
+              <div class="items d_flex align_items_center">
+                <div class="items--main function">Tìm nội dung hot</div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tìm nội dung hot"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tìm nội dung hot"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tìm nội dung hot"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tìm nội dung hot"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+              </div>
+              <div class="items d_flex align_items_center">
+                <div class="items--main function">Tự động tìm nội dung</div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động tìm nội dung"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động tìm nội dung"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động tìm nội dung"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động tìm nội dung"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+              </div>
+              <div class="items d_flex align_items_center">
+                <div class="items--main function">Tự động đăng bài</div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động đăng bài"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động đăng bài"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động đăng bài"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động đăng bài"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+              </div>
+              <div class="items d_flex align_items_center">
+                <div class="items--main function">Tự động like</div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động like"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động like"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động like"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động like"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+              </div>
+              <!-- <div class="items d_flex align_items_center">
+                <div class="items--main function">Tự động thêm bạn</div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động thêm bạn"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động thêm bạn"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động thêm bạn"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động thêm bạn"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+              </div> -->
+              <div class="items d_flex align_items_center">
+                <div class="items--main function">Tự động huỷ kết bạn</div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động huỷ kết bạn"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động huỷ kết bạn"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động huỷ kết bạn"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Tự động huỷ kết bạn"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+              </div>
+              <div class="items d_flex align_items_center">
+                <div class="items--main function">Chatbot profile</div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Chatbot profile"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Chatbot profile"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Chatbot profile"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+                <div class="items--main">
+                  <icon-base
+                    icon-name="Chatbot profile"
+                    class
+                    width="20"
+                    height="20"
+                    viewBox="0 0 290 290"
+                  >
+                    <icon-check-circle />
+                  </icon-base>
+                </div>
+              </div>
+            </VuePerfectScrollbar>
           </div>
-          <div class="c_lg_6 c_md_6 mb_lg_3 mb_md_3 c_xl_3 items">
-            <div class="item">
-              <div class="heading">
-                <icon-base
-                  icon-name="close"
-                  width="50"
-                  height="50"
-                  viewBox="0 0 500 500"
-                >
-                  <icon-world />
-                </icon-base>
-                <div class="month">1 NĂM</div>
-              </div>
-              <ul class="list-unstyled plan-lists">
-                <li>2 tài khoản facebook</li>
-                <li>30 pages</li>
-                <li>1000 groups</li>
-                <li>Tìm nội dung hot</li>
-                <li>Tự động tìm nội dung</li>
-                <li>Tự động đăng bài</li>
-                <li>Tự động like</li>
-                <li>Tự động thêm bạn</li>
-                <li>Tự động huỷ kết bạn</li>
-                <li>Chatbot profile</li>
-              </ul>
-              <div class="price--month">28.799.000đ/1 năm</div>
-              <div class="register">Đăng ký</div>
+          <div class="item--footer text_center">
+            <div class="title">
+              Liên hệ ngay để có giá tốt nhất
             </div>
-          </div>
-          <div class="c_lg_6 c_md_6 mb_lg_3 mb_md_3 c_xl_3 items">
-            <div class="item">
-              <div class="heading">
-                <icon-base
-                  icon-name="close"
-                  width="50"
-                  height="50"
-                  viewBox="0 0 500 500"
-                >
-                  <icon-enterprise />
-                </icon-base>
-                <div class="month">DOANH NGHIỆP</div>
-              </div>
-              <ul class="list-unstyled plan-lists">
-                <li>Liên hệ</li>
-                <li>Liên hệ</li>
-                <li>Liên hệ</li>
-                <li>Tìm nội dung hot</li>
-                <li>Tự động tìm nội dung</li>
-                <li>Tự động đăng bài</li>
-                <li>Tự động like</li>
-                <li>Tự động thêm bạn</li>
-                <li>Tự động huỷ kết bạn</li>
-                <li>Chatbot profile</li>
-              </ul>
-              <div class="price--month">Liên hệ</div>
-              <div class="register">Đăng ký</div>
-            </div>
+            <a
+              class="btn--live-chat"
+              target="_blank"
+              href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+              >LIÊN HỆ NGAY BÂY GIỜ</a
+            >
           </div>
         </div>
+        <div class="d_md_none d_block content--tablet ct">
+          <div class="items--content mb_4">
+            <div
+              class="item--header text_center main--price first align_items_center"
+            >
+              <ul>
+                <li class="month">1 THÁNG</li>
+                <li class="money">2.800.000đ</li>
+                <li class="register">
+                  <a
+                    href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+                    target="_blank"
+                    >Liên hệ</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="item--body text_center align_items_center">
+              <VuePerfectScrollbar class="scroll--price-mobile">
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tài khoản facebook</div>
+                  <div class="content">1</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Pages</div>
+                  <div class="content">5</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Groups</div>
+                  <div class="content">500</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tìm nội dung hot</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động tìm nội dung</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động đăng bài</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động like</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động thêm bạn</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động huỷ kết bạn</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Chatbot profile</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+              </VuePerfectScrollbar>
+            </div>
+          </div>
+          <div class="items--content mb_4">
+            <div
+              class="item--header text_center main--price first align_items_center"
+            >
+              <ul>
+                <li class="month">6 THÁNG</li>
+                <li class="money">16.199.000đ</li>
+                <li class="register">
+                  <a
+                    href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+                    target="_blank"
+                    >Liên hệ</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="item--body text_center align_items_center">
+              <VuePerfectScrollbar class="scroll--price-mobile">
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tài khoản facebook</div>
+                  <div class="content">2</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Pages</div>
+                  <div class="content">10</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Groups</div>
+                  <div class="content">500</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tìm nội dung hot</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động tìm nội dung</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động đăng bài</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động like</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động thêm bạn</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động huỷ kết bạn</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Chatbot profile</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+              </VuePerfectScrollbar>
+            </div>
+          </div>
+          <div class="items--content mb_4">
+            <div
+              class="item--header text_center main--price first align_items_center"
+            >
+              <ul>
+                <li class="month">1 NĂM</li>
+                <li class="money">28.799.000đ</li>
+                <li class="register">
+                  <a
+                    href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+                    target="_blank"
+                    >Liên hệ</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="item--body text_center align_items_center">
+              <VuePerfectScrollbar class="scroll--price-mobile">
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tài khoản facebook</div>
+                  <div class="content">1</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Pages</div>
+                  <div class="content">5</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Groups</div>
+                  <div class="content">500</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tìm nội dung hot</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động tìm nội dung</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động đăng bài</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động like</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động thêm bạn</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động huỷ kết bạn</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Chatbot profile</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+              </VuePerfectScrollbar>
+            </div>
+          </div>
+          <div class="items--content mb_4">
+            <div
+              class="item--header text_center main--price first align_items_center"
+            >
+              <ul>
+                <li class="month mb_2">DOANH NGHIỆP</li>
+                <!-- <li class="money">2.800.000đ</li> -->
+                <li class="register">
+                  <a
+                    href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+                    target="_blank"
+                    >Liên hệ</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="item--body text_center align_items_center">
+              <VuePerfectScrollbar class="scroll--price-mobile">
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tài khoản facebook</div>
+                  <div class="content">1</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Pages</div>
+                  <div class="content">5</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Groups</div>
+                  <div class="content">500</div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tìm nội dung hot</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động tìm nội dung</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động đăng bài</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động like</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động thêm bạn</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Tự động huỷ kết bạn</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+                <div class="items d_flex align_items_center">
+                  <div class="title">Chatbot profile</div>
+                  <div class="content">
+                    <icon-base
+                      icon-name="Tự động tìm nội dung"
+                      class
+                      width="20"
+                      height="20"
+                      viewBox="0 0 290 290"
+                    >
+                      <icon-check-circle />
+                    </icon-base>
+                  </div>
+                </div>
+              </VuePerfectScrollbar>
+            </div>
+          </div>
+          <div class="item--footer text_center">
+            <div class="title">
+              Liên hệ ngay để có giá tốt nhất
+            </div>
+            <a
+              class="btn--live-chat"
+              target="_blank"
+              href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+              >LIÊN HỆ NGAY BÂY GIỜ</a
+            >
+          </div>
+        </div>
+        <!--  -->
       </section>
       <!-- End: Price -->
 
-      <!-- Start: guide -->
-      <section
-        id="guide"
-        class="guide"
-        :style="{
-          backgroundImage: 'url(' + backgroundMap + ')'
-        }"
-      >
-        <div class="ct">
-          <div class="section--title-content text_center">
-            <h3 class="title">HƯỚNG DẪN NÂNG CẤP GÓI SỬ DỤNG</h3>
-            <h4 class="desc">
-              Để nâng cấp gói sử dụng các bạn vui lòng theo hướng dẫn dưới đây
-            </h4>
+      <!-- Start: Class Marketing -->
+      <section id="training" class="training position_relative px_3">
+        <div class="section--title-content">
+          <h3 class="title">Đào tạo thường xuyên về marketing</h3>
+          <h4 class="desc d_md_block">
+            Được cung cấp các tài liệu, kiến thức, hỗ trợ kinh doanh và cách vận
+            dụng công cụ vào kinh doanh bán hàng
+          </h4>
+        </div>
+        <div class="slider--training ct">
+          <!-- <transition name="slide--img" v-for="(item, index) in imageTraining" :key="index">
+            <div
+              class="img--training"
+              :style="{
+                backgroundImage: 'url(' + item + ')'
+              }"
+              v-if="currentSliderTraining === index"
+            ></div>
+          </transition>-->
+          <div class="d_flex items">
+            <div
+              class="img--training"
+              :style="{
+                backgroundImage: 'url(' + imageTraining[0] + ')'
+              }"
+            ></div>
+            <div
+              class="img--training"
+              :style="{
+                backgroundImage: 'url(' + imageTraining[1] + ')'
+              }"
+            ></div>
           </div>
-          <div class="r m_0">
-            <div class="c_lg_6 c_md_12 mb_md_3  c">
-              <img src="@/assets/images/home/giahan.png" alt="Banner ZinBee" />
-            </div>
-            <div class="c_lg_6 c_md_12 mb_md_3 pl_md_3 pl_0">
-              <ul>
-                <li>
-                  Để nâng cấp gói sử dụng các bạn vui lòng theo hướng dẫn dưới
-                  đây:
-                </li>
-                <li>
-                  Chuyển khoản số tiền theo các gói 3 tháng, 6 tháng, 1 năm đến
-                  số tài khoản:
-                </li>
-                <li><span class="pr_5">STK:</span> 0991 0000 43720</li>
-                <li><span class="pr_5">Tên:</span> Nguyễn Văn Trường</li>
-                <li>Ngân hàng: Vietcombank</li>
-                <li>Chi nhánh: Tây Hồ - Hà Nội</li>
-                <li>
-                  Điền thông tin chuyển khoản với nội dung: "email đăng ký
-                  Zinbee của bạn"
-                </li>
-                <li>Zinbee sẽ nâng cấp cho bạn ngay lập tức</li>
-              </ul>
-            </div>
+          <div class="d_flex items">
+            <div
+              class="img--training"
+              :style="{
+                backgroundImage: 'url(' + imageTraining[2] + ')'
+              }"
+            ></div>
+            <div
+              class="img--training"
+              :style="{
+                backgroundImage: 'url(' + imageTraining[3] + ')'
+              }"
+            ></div>
           </div>
         </div>
       </section>
-      <!-- End: guide -->
+      <!-- End: Class Marketing -->
+
+      <!-- Start: Show owner -->
+      <section
+        id="owner"
+        class="owner text_center px_3"
+        :style="{
+          backgroundImage: 'url(' + backgroundShow + ')'
+        }"
+      >
+        <div class="title">
+          Hơn 5000 doanh nghiệp và chủ shop đã sử dụng!
+        </div>
+        <div class="desc">
+          Liên hệ ngay để được tư vấn dùng thử 3 ngày miễn phí!
+        </div>
+        <a
+          class="btn--live-chat"
+          target="_blank"
+          href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+          >LIÊN HỆ NGAY BÂY GIỜ</a
+        >
+      </section>
+      <!-- End: Show owner -->
     </div>
   </div>
 </template>

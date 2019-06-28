@@ -9,6 +9,14 @@ router.beforeEach((to, from, next) => {
     CookieFunction.getCookie("sid") &&
     CookieFunction.getCookie("cfr").toLowerCase() === "member" &&
     CookieFunction.getCookie("uid") &&
+    to.path === "/"
+  ) {
+    window.location = `${CookieFunction.getCookie("_sub")}`;
+  } else if (
+    CookieFunction.getCookie("_sub") &&
+    CookieFunction.getCookie("sid") &&
+    CookieFunction.getCookie("cfr").toLowerCase() === "member" &&
+    CookieFunction.getCookie("uid") &&
     to.path === "/signin"
   ) {
     window.location = `${CookieFunction.getCookie("_sub")}`;
@@ -41,6 +49,13 @@ router.beforeEach((to, from, next) => {
     } else if (
       CookieFunction.getCookie("sid") &&
       CookieFunction.getCookie("cfr").toLowerCase() === "superadmin" &&
+      CookieFunction.getCookie("uid")
+    ) {
+      next();
+      return;
+    } else if (
+      CookieFunction.getCookie("sid") &&
+      CookieFunction.getCookie("cfr").toLowerCase() === "collaborator" &&
       CookieFunction.getCookie("uid")
     ) {
       next();

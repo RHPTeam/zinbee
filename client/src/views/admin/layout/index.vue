@@ -22,9 +22,6 @@
     width: calc(100% - 300px);
     padding: 30px 60px 60px 0;
   }
-  .mobile-scroll {
-    height: calc(100vh - 110px);
-  }
 }
 
 .wrapper[data-theme="light"] {

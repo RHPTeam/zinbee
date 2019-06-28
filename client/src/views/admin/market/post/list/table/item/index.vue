@@ -1,15 +1,17 @@
 <template>
-  <div class="item--body d_flex align_items_center px_3 py_2">
-    <!--<div class="col col--checkbox px_2">
-      <label class="detail--checkbox mb_0">
-        <input type="checkbox" checked />
-      </label>
-    </div>-->
+  <div
+    class="item--body d_flex align_items_center px_3 py_2"
+    :class="item.assign === true ? 'disable' : ''"
+  >
     <!-- Start: Name Column -->
     <div class="col col--name px_2">
-      <div class="col col--name-text" @click="updatePost()">
+      <router-link
+        class="col col--name-text"
+        :to="{ name: 'market_post_update', params: { marketPostId: item._id } }"
+        @click="updatePost()"
+      >
         {{ item.title.slice(0, 40) }}{{ item.title.length > 40 ? "..." : "" }}
-      </div>
+      </router-link>
     </div>
     <!-- End: Name Column -->
     <!-- Start: Category Column -->
@@ -50,6 +52,16 @@
     <div
       class="col d_flex align_items_center justify_content_center col--action px_4 text_center"
     >
+      <span class="mx_1" @click="showCreatePopup">
+        <icon-base
+          width="20"
+          height="20"
+          icon-name="post"
+          viewBox="0 0 520 520"
+        >
+          <icon-automatic />
+        </icon-base>
+      </span>
       <span class="mx_1" @click="updatePost">
         <icon-base icon-name="icon-edit" viewBox="0 0 20 20">
           <icon-edit />
@@ -87,6 +99,9 @@ export default {
     },
     showDeletePopup() {
       this.$emit("showDeletePopup", this.item);
+    },
+    showCreatePopup() {
+      this.$emit("showCreatePopup", this.item);
     }
   }
 };
