@@ -99,7 +99,7 @@ module.exports = {
       return res.status( 404 ).json( { "status": "fail", "keyword": "Vui lòng cung cấp từ khóa để tìm kiếm!" } );
     }
 
-    let page = null, dataResponse = null, data = ( await BlogHelp.find( { "$text": { "$search": req.query.keyword, "$language": "none" } } ).sort( { "vote": "desc" } ).lean() );
+    let page = null, dataResponse = null, data = ( await BlogHelp.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).sort( { "vote": "desc" } ).lean() );
 
     if ( req.query._size && req.query._page ) {
       dataResponse = data.slice( ( Number( req.query._page ) - 1 ) * Number( req.query._size ), Number( req.query._size ) * Number( req.query._page ) );
@@ -118,5 +118,15 @@ module.exports = {
     return res
       .status( 200 )
       .json( jsonResponse( "success", { "results": dataResponse, "page": page, "total": data.length } ) );
+  },
+  "upload": async ( req, res ) => {
+    if ( !req.file ) {
+      return res.status( 403 ).json( { "status": "fail", "photos": "Không có ảnh upload, vui lòng kiểm tra lại!" } );
+    }
+
+    // Check multer object
+    if ( req.file.fieldname === "file" && req.file.mimetype.includes( "image" ) ) {
+      return res.status( 200 ).json( { "status": "success", "data": `${process.env.APP_URL}:${process.env.PORT_BASE}/${req.file.path.replace( /\\/gi, "/" )}` } );
+    }
   }
 };

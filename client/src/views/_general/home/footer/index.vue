@@ -1,5 +1,10 @@
 <template>
-  <div class="wrapper--footer">
+  <div
+    class="wrapper--footer"
+    :style="{
+      backgroundImage: 'url(' + backgroundFooter + ')'
+    }"
+  >
     <div class="content ct">
       <div class="r m_0">
         <div class="c_lg_3">
@@ -69,8 +74,8 @@
                 </icon-base>
               </a>
             </div>
-            <div class="icon">
-              <!-- <a href="https://www.facebook.com/zinbeeauto/" target="_blank"></a>    -->
+            <!-- <div class="icon">
+              <a href="https://www.facebook.com/zinbeeauto/" target="_blank"></a>   
               <icon-base
                 class="instagram"
                 icon-name="instagram"
@@ -80,7 +85,7 @@
               >
                 <icon-instagram-simple />
               </icon-base>
-            </div>
+            </div> -->
             <div class="icon">
               <a
                 href="https://www.youtube.com/channel/UC95EoWnJWWbRUzc4BRgKCZg"
@@ -97,8 +102,8 @@
                 </icon-base>
               </a>
             </div>
-            <div class="icon">
-              <!-- <a href="https://www.facebook.com/zinbeeauto/" target="_blank"></a>      -->
+            <!-- <div class="icon">
+              <a href="https://www.facebook.com/zinbeeauto/" target="_blank"></a>     
               <icon-base
                 class="twitter"
                 icon-name="twitter"
@@ -108,7 +113,7 @@
               >
                 <icon-tiwtter />
               </icon-base>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -117,10 +122,18 @@
       <div class="ct m_auto d_flex align_items_center content--copy">
         <div class="title">Copyright © 2018 zinbee.vn</div>
         <div class="ml_auto d_flex contact">
-          <div class="items">Chính sách bảo mật</div>
+          <!-- <div class="items">Chính sách bảo mật</div>
           <div class="items">Giới thiệu</div>
-          <div class="items">Hỏi đáp</div>
-          <div class="items">Liên hệ hỗ trợ</div>
+          <div class="items">Hỏi đáp</div> -->
+          <!-- <div class="items">Liên hệ hỗ trợ</div> -->
+          <div class="items">
+            <a
+              class="btn--live-chat"
+              target="_blank"
+              href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
+              >Liên hệ hỗ trợ</a
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -128,7 +141,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      backgroundFooter: require("@/assets/images/home/bg--footer.jpg")
+    };
+  }
+};
 </script>
 
 <style lang="scss" scoped>

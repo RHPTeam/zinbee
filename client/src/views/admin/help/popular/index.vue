@@ -27,17 +27,17 @@
     </div>
     <div class="header py_3">
       <!-- Start: Choose 5 blogs popular -->
-      <h4 class="py_3">Chọn 4 danh mục phổ biến nhất</h4>
-      <div class="item mb_3">
-        <multiselect
-          multiple
-          label="title"
-          placeholder="Chọn danh mục ..."
-          :options="allCategories"
-          @input="updateCategoryPopular"
-          v-model="popularHelp.popular_section"
-        />
-      </div>
+      <!--      <h4 class="py_3">Chọn 4 danh mục phổ biến nhất</h4>-->
+      <!--      <div class="item mb_3">-->
+      <!--        <multiselect-->
+      <!--          multiple-->
+      <!--          label="title"-->
+      <!--          placeholder="Chọn danh mục ..."-->
+      <!--          :options="allCategories"-->
+      <!--          @input="updateCategoryPopular"-->
+      <!--          v-model="popularHelp.popular_section"-->
+      <!--        />-->
+      <!--      </div>-->
       <!-- End: Choose 5 blogs popular -->
       <!-- Start: Choose categories -->
       <h4 class="py_3">Chọn 5 bài viết phổ biến nhất</h4>
@@ -60,25 +60,25 @@
     </div>
     <div class="body">
       <div class="show">
-        <h4 class="desc py_2">Danh mục được chọn</h4>
-        <div
-          class="popular--section"
-          v-if="
-            popularHelp.popular_section &&
-              popularHelp.popular_section.length > 0
-          "
-        >
-          <div
-            class="item d_flex align_items_center justify_content_between"
-            v-for="(item, index) in popularHelp.popular_section"
-            :key="index"
-          >
-            <div>
-              <span class="mr_3">{{ index + 1 }}</span
-              >{{ item.title }}
-            </div>
-          </div>
-        </div>
+        <!--        <h4 class="desc py_2">Danh mục được chọn</h4>-->
+        <!--        <div-->
+        <!--          class="popular&#45;&#45;section"-->
+        <!--          v-if="-->
+        <!--            popularHelp.popular_section &&-->
+        <!--              popularHelp.popular_section.length > 0-->
+        <!--          "-->
+        <!--        >-->
+        <!--          <div-->
+        <!--            class="item d_flex align_items_center justify_content_between"-->
+        <!--            v-for="(item, index) in popularHelp.popular_section"-->
+        <!--            :key="index"-->
+        <!--          >-->
+        <!--            <div>-->
+        <!--              <span class="mr_3">{{ index + 1 }}</span-->
+        <!--              >{{ item.title }}-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
 
         <h4 class="desc py_2">Bài viết được chọn</h4>
         <div

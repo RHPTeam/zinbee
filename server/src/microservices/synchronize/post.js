@@ -20,5 +20,15 @@ module.exports = {
         "Authorization": headers
       }
     } );
+  },
+  "syncKeyWordSearch": ( url, data, headers ) => {
+    return request( {
+      "method": "patch",
+      "url": url,
+      "data": data,
+      "headers": {
+        "Authorization": headers
+      }
+    } );
   }
 };

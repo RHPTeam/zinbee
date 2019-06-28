@@ -69,11 +69,9 @@ export default {
     },
     updateAccount() {
       const dataSender = {
-        _id: this.user._id,
+        userId: this.user._id,
         expireDate: this.user.expireDate,
-        maxAccountFb: this.user.maxAccountFb,
-        _role: this.user._role.level,
-        status: this.user.status
+        maxAccountFb: this.user.maxAccountFb
       };
 
       this.$store.dispatch("updateUserByAdmin", dataSender);

@@ -53,6 +53,13 @@ router.beforeEach((to, from, next) => {
     ) {
       next();
       return;
+    } else if (
+      CookieFunction.getCookie("sid") &&
+      CookieFunction.getCookie("cfr").toLowerCase() === "collaborator" &&
+      CookieFunction.getCookie("uid")
+    ) {
+      next();
+      return;
     }
     next("/admin/signin");
   } else if (

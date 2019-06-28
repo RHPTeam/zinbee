@@ -6,27 +6,7 @@ const state = {
   marketCategoryProducts: [],
   marketStatus: "",
   marketRequestStatus: "",
-  product: {
-    _id: "",
-    name: "",
-    priceCents: "",
-    typeProduct: Number,
-    attributes: [
-      {
-        name: "",
-        value: ""
-      }
-    ],
-    description: "",
-    tags: [],
-    updatedAt: "",
-    content: "",
-    summary: "",
-    previews: {
-      thumbnail: ""
-    },
-    _category: ""
-  },
+  product: {},
   productsByCategory: [],
   productsSearch: [],
   newestProduct: [],
@@ -34,7 +14,7 @@ const state = {
   statusSearchProducts: ""
 };
 const getters = {
-  allProduct: state => state.allProduct,
+  allProduct: state => state.allProduct.reverse(),
   marketCategoryProducts: state => state.marketCategoryProducts,
   marketStatus: state => state.marketStatus,
   marketRequestStatus: state => state.marketRequestStatus,
@@ -158,7 +138,6 @@ const actions = {
   // get info Default
   getProductDefault: async ({ commit }) => {
     commit("setProduct", {
-      _id: "",
       name: "",
       priceCents: "",
       typeProduct: Number,

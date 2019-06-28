@@ -19,20 +19,12 @@
         </span>
         <input
           type="text"
-          placeholder="Tìm kiếm"
+          placeholder="Tìm kiếm bài viết"
           v-model="search"
-          @input="updateSearch()"
+          @keydown.enter="updateSearch()"
         />
       </div>
     </div>
-    <!--<div class="d_flex action--right c_lg_8 pr_0">
-      <app-filter
-        class="mr_2"
-        :filterList="filterShowList"
-        :filterSelected="filterShowSelected"
-        @updateFilterSelected="updateFilterShowSelected($event)"
-      />
-    </div>-->
   </div>
 </template>
 
@@ -46,15 +38,25 @@ export default {
         { id: 50, name: "Hiển thị 50" },
         { id: 100, name: "Hiển thị 100" }
       ],
-      search: ""
+      search: "",
+      pageCurrent: 1,
+      sizeDefault: 25
     };
   },
   computed: {
     currentTheme() {
       return this.$store.getters.themeName;
-    },
-    allCategories() {
-      return this.$store.getters.allCategories;
+    }
+  },
+  watch: {
+    search(value) {
+      if (value.length === 0) {
+        const dataSender = {
+          size: this.sizeDefault,
+          page: this.pageCurrent
+        };
+        this.$store.dispatch("getAllMarketPosts", dataSender);
+      }
     }
   },
   methods: {
@@ -62,7 +64,12 @@ export default {
       this.$emit("updateFilterShowSelected", val);
     },
     updateSearch() {
-      this.$emit("updateSearch", this.search);
+      const dataSender = {
+        keyword: this.search,
+        size: this.sizeDefault,
+        page: this.pageCurrent
+      };
+      this.$store.dispatch("searchPostMarketByKey", dataSender);
     }
   }
 };

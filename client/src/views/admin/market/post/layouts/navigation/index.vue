@@ -33,6 +33,10 @@ export default {
   },
   methods: {
     async createPost() {
+      await this.$store.dispatch("setPostDefaultMarket");
+      await this.$store.dispatch("getProductDefault");
+      await this.$store.dispatch("setPostDefaultStatus", 1);
+      await this.$store.dispatch("setVariableControl", 0);
       this.$router.push({ name: "market_post_create" });
     }
   }

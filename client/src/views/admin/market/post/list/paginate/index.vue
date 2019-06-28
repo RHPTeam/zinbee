@@ -1,8 +1,6 @@
 <template>
   <div class="post--info d_flex justify_content_between align_items_center">
-    <div class="post--info-show">
-      Hiển thị {{ postsPage.length }} trong số {{ allPosts.length }}
-    </div>
+    <div class="post--info-show">Hiển thị {{ allPosts.length }} bản ghi</div>
     <paginate
       :pageCount="postsPageSize"
       :clickHandler="goToPage"
@@ -26,32 +24,32 @@ export default {
   },
   computed: {
     allPosts() {
-      return this.$store.getters.allPost;
+      return this.$store.getters.allMarketPosts;
     },
     postsPage() {
       return this.$store.getters.postsPage;
     },
     postsPageSize() {
-      return this.$store.getters.postsPageSize;
+      return this.$store.getters.pageCurrent;
     }
   },
-  async created() {
-    const dataSender = {
-      size: this.filterShowSelected.id,
-      page: this.currentPage
-    };
-
-    await this.$store.dispatch("getPostsByPage", dataSender);
-    await this.$store.dispatch("getAllPost");
-  },
+  // async created() {
+  //   const dataSender = {
+  //     size: this.filterShowSelected.id,
+  //     page: this.currentPage
+  //   };
+  //
+  //   await this.$store.dispatch("getPostsByPage", dataSender);
+  //   await this.$store.dispatch("getAllPost");
+  // },
   methods: {
     goToPage(page) {
       const dataSender = {
-        size: this.filterShowSelected.id,
+        size: 25,
         page: page
       };
 
-      this.$store.dispatch("getPostsByPage", dataSender);
+      this.$store.dispatch("getAllMarketPosts", dataSender);
     },
     updateCurrentPage(val) {
       this.$emit("updateCurrentPage", val);

@@ -2,15 +2,38 @@ const MarketPost = require( "../../../models/market/products/post.model" );
 
 module.exports = {
   "index": async ( req, res ) => {
-    let data;
+    let dataResponse = null;
 
+    // Check if query get one item from _id
     if ( req.query._id ) {
-      data = await MarketPost.findOne( { "_id": req.query._id } );
-    } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await MarketPost.find( {} ).lean();
+      dataResponse = await MarketPost.findOne( { "_id": req.query._id } ).lean();
+      return res.status( 200 ).json( { "status": "success", "data": dataResponse } );
     }
 
-    res.status( 200 ).json( { "status": "success", "data": data } );
+    // Handle get items by pagination from database
+    if ( req.query._size && req.query._page ) {
+      const pageNo = parseInt( req.query._page ),
+        size = parseInt( req.query._size ),
+        query = {},
+        totalPosts = await MarketPost.countDocuments( { } );
+
+      // Check catch
+      if ( pageNo < 0 || pageNo === 0 ) {
+        return res.status( 403 ).json( { "status": "error", "message": "Dữ liệu số trang không đúng, phải bắt đầu từ 1." } );
+      }
+
+      // Handle input data before connect to mongodb
+      query.skip = size * ( pageNo - 1 );
+      query.limit = size;
+      query.sort = { "$natural": -1 };
+
+      // Handle with mongodb
+      dataResponse = await MarketPost.find( {}, "-__v", query ).lean();
+
+      return res.status( 200 ).json( { "status": "success", "data": { "results": dataResponse, "page": Math.ceil( totalPosts / size ), "size": size } } );
+    }
+
+    res.status( 304 ).json( { "status": "fail", "data": "API này không được cung cấp!" } );
   },
   "create": async ( req, res ) => {
     let { body } = req, newPost;
@@ -73,5 +96,36 @@ module.exports = {
     } );
 
     return res.status( 200 ).json( { "status": "success", "data": photosList } );
+  },
+  "search": async ( req, res ) => {
+    if ( req.query.keyword === undefined ) {
+      return res
+        .status( 404 )
+        .json( {
+          "status": "fail",
+          "keyword": "Vui lòng cung cấp từ khóa để tìm kiếm!"
+        } );
+    }
+
+    let page = null, dataResponse = null, data = ( await MarketPost.find( { "$text": { "$search": `\"${req.query.keyword}\"`, "$language": "none" } } ).lean() );
+
+    if ( req.query._size && req.query._page ) {
+      dataResponse = data.slice(
+        ( Number( req.query._page ) - 1 ) * Number( req.query._size ),
+        Number( req.query._size ) * Number( req.query._page )
+      );
+    } else if ( req.query._size ) {
+      dataResponse = data.slice( 0, Number( req.query._size ) );
+    }
+
+    if ( req.query._size ) {
+      if ( data.length % req.query._size === 0 ) {
+        page = Math.floor( data.length / req.query._size );
+      } else {
+        page = Math.floor( data.length / req.query._size ) + 1;
+      }
+    }
+
+    res.status( 200 ).json( { "status": "success", "data": { "results": dataResponse, "page": page, "total": data.length } } );
   }
 };

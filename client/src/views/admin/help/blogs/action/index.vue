@@ -1,8 +1,8 @@
 <template>
   <div class="action">
-    <router-link tag="label" class="top" :to="{ name: 'blogs' }">
-      Quay lại
-    </router-link>
+    <router-link tag="label" class="top" :to="{ name: 'blogs' }"
+      >Quay lại</router-link
+    >
     <div class="body">
       <div class="form_group">
         <label>Tên bài viết</label>
@@ -15,7 +15,11 @@
       </div>
       <div class="form_group">
         <label>Nội dung bài viết</label>
-        <quill-editor ref="myQuillEditor" v-model="blog.content" />
+        <quill-editor
+          ref="myQuillEditor"
+          v-model="blog.content"
+          :options="editorOption"
+        />
       </div>
       <div class="form_group">
         <button
@@ -37,11 +41,53 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 
+import Quill from "quill";
 import { quillEditor } from "vue-quill-editor";
+import { container, ImageExtend, QuillWatch } from "quill-image-extend-module";
+import ImageResize from "quill-image-resize-module";
+Quill.register("modules/ImageExtend", ImageExtend);
+Quill.register("modules/imageResize", ImageResize);
+import CookieFunction from "@/utils/functions/cookie";
 
 export default {
   components: {
     quillEditor
+  },
+  data() {
+    return {
+      editorOption: {
+        modules: {
+          toolbar: {
+            container: container,
+            handlers: {
+              image: function() {
+                QuillWatch.emit(this.quill.id);
+              }
+            }
+          },
+          imageResize: true,
+          ImageExtend: {
+            loading: true,
+            name: "file",
+            size: 25,
+            action: `${process.env.VUE_APP_API_URL}/help/posts/upload`,
+            response: res => {
+              return res.data;
+            },
+            headers: xhr => {
+              xhr.setRequestHeader(
+                "Authorization",
+                `sid=${CookieFunction.getCookie(
+                  "sid"
+                )}; uid=${CookieFunction.getCookie(
+                  "uid"
+                )}; cfr=${CookieFunction.getCookie("cfr")}`
+              );
+            }
+          }
+        }
+      }
+    };
   },
   computed: {
     allCategories() {
