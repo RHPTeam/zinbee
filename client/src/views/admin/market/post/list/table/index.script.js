@@ -29,7 +29,7 @@ export default {
       return this.$store.getters.themeName;
     },
     allMarketPosts() {
-      return this.$store.getters.allMarketPosts.reverse();
+      return this.$store.getters.allMarketPosts;
     },
     filteredMarketPosts() {
       return this.allMarketPosts.filter(item => {

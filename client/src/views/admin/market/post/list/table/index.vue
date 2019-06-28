@@ -62,7 +62,7 @@
       </div>
       <div v-else>
         <item-post
-          v-for="(item, index) in filteredMarketPosts"
+          v-for="(item, index) in allMarketPosts"
           :key="index"
           :item="item"
           @showDeletePopup="showDeletePopup($event)"

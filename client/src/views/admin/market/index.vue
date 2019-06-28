@@ -34,6 +34,9 @@ export default {
       breadTitle: "Quản lý market",
       breadDesc: "giúp quản lý các bài viết, chien dich trên hệ thống"
     };
+  },
+  async created() {
+    await this.$store.dispatch("getAllMarketPosts");
   }
 };
 </script>
