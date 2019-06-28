@@ -1,10 +1,17 @@
 <template>
-  <div class="item--body d_flex align_items_center px_3 py_2">
+  <div
+    class="item--body d_flex align_items_center px_3 py_2"
+    :class="item.assign === true ? 'disable' : ''"
+  >
     <!-- Start: Name Column -->
     <div class="col col--name px_2">
-      <div class="col col--name-text" @click="updatePost()">
+      <router-link
+        class="col col--name-text"
+        :to="{ name: 'market_post_update', params: { marketPostId: item._id } }"
+        @click="updatePost()"
+      >
         {{ item.title.slice(0, 40) }}{{ item.title.length > 40 ? "..." : "" }}
-      </div>
+      </router-link>
     </div>
     <!-- End: Name Column -->
     <!-- Start: Category Column -->

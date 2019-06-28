@@ -30,18 +30,24 @@ export default {
     },
     allMarketPosts() {
       return this.$store.getters.allMarketPosts;
-    },
-    filteredMarketPosts() {
-      return this.allMarketPosts.filter(item => {
-        return item.title
-          .toString()
-          .toLowerCase()
-          .includes(this.search.toString().toLowerCase());
-      });
     }
   },
   async created() {
-    await this.$store.dispatch("getAllMarketPosts");
+    const res = this.$store.getters.allMarketPosts;
+    if (res.length === 0) {
+      const dataSender = {
+        size: 25,
+        page: 1
+      };
+      await this.$store.dispatch("getAllMarketPosts", dataSender);
+    }
+    // this.$router.replace( {
+    //   name: "market_post",
+    //   query: {
+    //     size: 25,
+    //     page: 1
+    //   }
+    // } );
   },
   methods: {
     activeCurrentSort(i, type) {

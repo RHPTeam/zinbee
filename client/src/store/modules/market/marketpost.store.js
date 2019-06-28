@@ -7,7 +7,8 @@ const state = {
   marketControlStatus: 0,
   marketPostPhotosUpload: [],
   postMarket: {},
-  variableControl: 0
+  variableControl: 0,
+  pageCurrent: 1
 };
 const getters = {
   allMarketPosts: state => state.allMarketPosts,
@@ -16,7 +17,8 @@ const getters = {
   marketControlStatus: state => state.marketControlStatus,
   marketPostPhotosUpload: state => state.marketPostPhotosUpload,
   postMarket: state => state.postMarket,
-  variableControl: state => state.variableControl
+  variableControl: state => state.variableControl,
+  pageCurrent: state => state.pageCurrent
 };
 const mutations = {
   setAllMarketPosts: (state, payload) => {
@@ -39,6 +41,9 @@ const mutations = {
   },
   setVariableControl: (state, payload) => {
     state.variableControl = payload;
+  },
+  setPageMarketPosts: (state, payload) => {
+    state.pageCurrent = payload;
   }
 };
 const actions = {
@@ -62,10 +67,22 @@ const actions = {
   /**
    * Get all market posts
    */
-  getAllMarketPosts: async ({ commit }) => {
+  getAllMarketPosts: async ({ commit }, payload) => {
     commit("setMarketPostStatus", "loading");
-    const res = await MarketPostService.index();
-    await commit("setAllMarketPosts", res.data.data);
+    const res = await MarketPostService.index(payload.size, payload.page);
+    await commit("setAllMarketPosts", res.data.data.results);
+    await commit("setPageMarketPosts", res.data.data.page);
+    commit("setMarketPostStatus", "success");
+  },
+  searchPostMarketByKey: async ({ commit }, payload) => {
+    commit("setMarketPostStatus", "loading");
+    const res = await MarketPostService.searchByKey(
+      payload.keyword,
+      payload.size,
+      payload.page
+    );
+    await commit("setAllMarketPosts", res.data.data.results);
+    await commit("setPageMarketPosts", res.data.data.page);
     commit("setMarketPostStatus", "success");
   },
   /**

@@ -9,7 +9,11 @@ export default {
   created() {
     this.$store.dispatch("getAllCategoryDefault");
     this.$store.dispatch("getAllCampaign");
-    this.$store.dispatch("getAllMarketPosts");
+    const dataSender = {
+      size: 25,
+      page: 1
+    };
+    this.$store.dispatch("getAllMarketPosts", dataSender);
   }
 };
 </script>

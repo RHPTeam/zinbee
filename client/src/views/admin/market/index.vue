@@ -34,10 +34,14 @@ export default {
       breadTitle: "Quản lý market",
       breadDesc: "giúp quản lý các bài viết, chien dich trên hệ thống"
     };
-  },
-  async created() {
-    await this.$store.dispatch("getAllMarketPosts");
   }
+  // async created() {
+  //   const dataSender = {
+  //     size: 1,
+  //     page: 1
+  //   };
+  //   await this.$store.dispatch("getAllMarketPosts", dataSender);
+  // }
 };
 </script>
 <style lang="scss" scoped></style>
