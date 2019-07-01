@@ -2,7 +2,7 @@
   <div class="modal--wrapper">
     <VuePerfectScrollbar
       class="scroll-homepage"
-      @ps-scroll-y="scrollHanle"
+      @ps-scroll-y="scrollHandle"
       ref="menu"
     >
       <div class="modal--content">
@@ -33,9 +33,8 @@ export default {
     VuePerfectScrollbar
   },
   methods: {
-    scrollHanle(evt) {
-      // Position ScrollTop = evt.srcElement.scrollTop
-
+    scrollHandle(evt) {
+      // Position ScrollTop = evt.srcElement.scrollTo
       if (evt.srcElement.scrollTop === 0) {
         this.$store.dispatch("changeBackgroundHeader", 1);
       } else {

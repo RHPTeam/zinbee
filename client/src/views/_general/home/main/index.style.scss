@@ -1,8 +1,18 @@
 .wrapper--main {
   font: 400 15px/28px "Open Sans", sans-serif;
-    letter-spacing: 0px;
+  letter-spacing: 0px;
   color: #8283a4;
   overflow: hidden;
+
+  .owl-stage-outer .owl-stage .owl-item {
+    max-width: 470px !important;
+  }
+  .owl-theme .owl-nav {
+    display: none;
+  }
+  .owl-theme .owl-dots {
+    display: none;
+  }
 
   //  ============ Start: Common
   & > .content {
@@ -106,7 +116,7 @@
     background-repeat: no-repeat;
     // background-position: right;
     .title {      
-      color: #f8b448;
+      color: #444;
       font-size: 2.5rem;
       line-height: 50px;
       text-transform: capitalize;
@@ -116,27 +126,31 @@
       font-size: 18px;
       padding: 2rem 0;
     }
-    .register {
-      font: 600 15px/27px "Open Sans", sans-serif;
+    .register, .goto--market {
+      font-weight: 600;
+      font-size: 1.15rem;
       color: #fff;
-      background: #4b4c78;
+      background-color: #f8b448;
       text-transform: uppercase;
-      letter-spacing: 2.1px;
       border-radius: 27px;
-      border: 2px solid #4b4c78;
+      border: 2px solid #f8b448;
       box-shadow: 5px 8.66px 20px 0px rgba(68, 84, 255, 0.078);
-      padding: 13px 0px;
+      padding: 13px 1.25rem;
       position: relative;
       transition: all 400ms linear 0s;
       overflow: hidden;
-      width: 254px;
       text-align: center;
-      margin-bottom: 40px;
       cursor: pointer;
       &:hover {
-        background: #f8b448;
-        border-color: #f8b448;
+        color: #fff;
+        background: #585a88;
+        border-color: #585a88;
       }
+    }
+    .goto--market {
+      background-color: transparent;
+      color: #f8b448;
+      border: 1.5px solid #f8b448;
     }
     .left {
       flex: 1;
@@ -598,22 +612,20 @@
           flex: 1;
           .month {
             font-size: 1.2rem;
-            letter-spacing: 1.4px;
           }
           .money {
             font-size: 1.4rem;
-            letter-spacing: 1.4px;
             padding: 0.6rem 0;
             font-weight: 600;
           }
           .register {
             cursor: pointer;
-            font-size: 0.875rem;
-            width: 60%;
+            font-size: 0.95rem;
+            font-weight: 600;
+            width: 50%;
             margin: 0 auto;
             color: #fff;
             text-transform: uppercase;
-            letter-spacing: 2.1px;
             padding: 0.3rem;
             background: #f8b448;
             border-radius: 25px;
@@ -634,7 +646,7 @@
         .items {
           border: 1px solid #e8e9eb;
           border-bottom: 0;
-          transition: 0.4s;
+          transition: all 0.4s ease;
           &:hover {
             background: #f5f5f5bf;
           }
@@ -646,12 +658,16 @@
           }
           &--main {
             border-left: solid 1px #e8e9eb;
-            padding: 1rem 0;
+            padding: 0.375rem 0;
             flex: 1;
-            font-size: 1rem;
+            font-size: 0.95rem;
             &.function {
               border-left: 0;
               font-weight: 600;
+            }
+            svg {
+              vertical-align: text-bottom;
+              margin-bottom: 0;
             }
           }
         }
@@ -749,6 +765,11 @@
     background-size: cover;
     color: #333;
     padding: 6.25rem 0;
+    &:before {
+      background-color: rgba(0, 0, 0, .4);
+      width: 100%;
+      height: 100%;
+    }
     .title {
       font-size: 38px;
       line-height: 44px;
@@ -776,7 +797,7 @@
   }
 
 }
-  
+
 
 
 //  =================================== RESPONSIVE

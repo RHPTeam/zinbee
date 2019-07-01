@@ -61,8 +61,8 @@ export default {
       float: left;
       position: relative;
       &:hover .nav--link {
-        background-color: hsl(0, 0%, 60%);
-        color: hsl(0, 0%, 100%);
+        background-color: #ddd;
+        color: #000;
         cursor: pointer;
       }
     }
@@ -75,6 +75,7 @@ export default {
       line-height: 35px;
       height: 35px;
       text-decoration: none;
+      transition: all 0.4s ease;
     }
   }
 }

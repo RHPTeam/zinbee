@@ -2,10 +2,11 @@
   font: 400 15px/28px "Open Sans", sans-serif;
   letter-spacing: 0px;
   color: #333;
-  background-size: cover;
-  background-position: bottom;
-
+  background-color: #F7F7F7;
   //  Common
+  .font--13 {
+    font-size: .825rem;
+  }
   img {
     max-width: 100%;
   }
@@ -31,36 +32,45 @@
     .title--footer {
       font: 600 21px/34px "Open Sans", sans-serif;
       color: #fdb849;
-      padding-bottom: 50px;
+      padding-bottom: 2rem;
     }
     .logo {
       padding-bottom: 26px;
     }
     ul {
-      font: 400 15px/30px "Open Sans", sans-serif;
+      font-size: .825rem;
       // color: #fff;
     }
     .register {
       input {
-        font: 300 14px/40px "Open Sans", sans-serif;
-        padding: 0px 0px 0px 30px;
+        font-size: .825rem;
+        padding: 1rem;
         color: #333;
         height: 40px;
         box-shadow: none;
         outline: none;
         text-shadow: none;
-        border: 0px;
+        border: 0;
         width: 100%;
-        border-radius: 50px;
-        background: #f3f9ff;
+        border-radius: .625rem;
+        background: #fff;
+        &::placeholder {
+          color: #999;
+        }
       }
       .icon--submit {
         right: 10px;
         top: 63%;
         transform: translateY(-50%);
         z-index: 10;
-        color: #10171d;
         cursor: pointer;
+        svg {
+          color: #999;
+          transition: all .4s ease;
+          &:hover {
+            color: #666;
+          }
+        }
       }
       .list--contact {
         .icon {
@@ -69,8 +79,15 @@
           // color: #fae9a0;
           transition: 0.4s;
           cursor: pointer;
-            &:hover {
-              color: #fdb849;
+            &.facebook {
+              &:hover {
+                color: #4267b2;
+              }
+            }
+            &.youtube {
+              &:hover {
+                color: #ff0000;
+              }
             }
           }
         }
@@ -78,13 +95,18 @@
     }
   }
   .copy {
-    color: #fff;
-    background: linear-gradient(to right, #000 0%, #0e1f2c 100%);
-    padding: 36px 0px;
+    color: #666;
+    background-color: #eeeeee;
+    padding: 1rem 0;
+    font-size: .825rem;
     .contact {
       .items {
         padding: 0 1rem;
-        font: 700 16px/28px "Open Sans", sans-serif;
+        transition: all .4s ease;
+        &:hover {
+          color: #444;
+          text-decoration: underline;
+        }
       }
     }
   }

@@ -20,7 +20,7 @@
     .modal--content {
       border-radius: .625rem;
       padding: 1.25rem;
-      width: 70vh;
+      width: 50vw;
       .modal--header {
         .btn--close {
           cursor: pointer;
@@ -57,15 +57,14 @@
               .title {
                 font-weight: 700;
                 transition: all .4s ease;
-                color: #4d4d4d;
-                text-transform: capitalize;
-                max-height: 40px;
-                overflow: hidden;
-                white-space: nowrap;
-                max-width: 60%;
-                display: inline-block;
+                color: #444;
                 font-size: 1.0625rem;
-                text-overflow: ellipsis
+                text-transform: capitalize;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
               }
               .price {
                 color: #f96f4b;
@@ -94,6 +93,15 @@
               .btn {
                 font-size: .875rem;
                 font-weight: 600;
+                &.btn_outline_info {
+                  border-radius: .375rem;
+                  border-color: #FFB94A;
+                  color: #FFB94A;
+                  &:hover, &:focus {
+                    background-color: #FFB94A;
+                    color: #fff;
+                  }
+                }
               }
             }
           }
