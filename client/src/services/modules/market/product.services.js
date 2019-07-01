@@ -46,5 +46,10 @@ export default {
   // get newest product
   getNewestProduct(number) {
     return Api().get(`market/products/newest?number=${number}`);
+  },
+
+  // get info statistic posts product from homepage
+  statisticHomepage() {
+    return Api().get("market/products/s/homepage");
   }
 };
