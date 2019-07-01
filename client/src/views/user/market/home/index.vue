@@ -4,7 +4,10 @@
     <div class="search p_4 ">
       <div class="d_flex flex_column text_center pb_4">
         <h3>
-          <b>{{ totalPostProducts }}+ bài viết mẫu chất lượng, phong phú đang đợi bạn.</b>
+          <b
+            >{{ totalPostProducts }}+ bài viết mẫu chất lượng, phong phú đang
+            đợi bạn.</b
+          >
         </h3>
         <span
           >Nhập tên bài viết hoặc chiến dịch mẫu mà bạn cần tìm. Sau đó nhấn mua

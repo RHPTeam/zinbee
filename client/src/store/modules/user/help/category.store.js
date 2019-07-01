@@ -134,7 +134,7 @@ const actions = {
   setHelpCategoryChildrenLevel: async ({ commit }, payload) => {
     commit("setCategoryChildren", payload);
   },
-  getHelpCategoryParent: async ({commit}, payload) => {
+  getHelpCategoryParent: async ({ commit }, payload) => {
     const result = await HelpCategoryServices.getAllCategories();
     // const results = result.data.data.filter(item =>
     //   item.parent === payload.parentId
