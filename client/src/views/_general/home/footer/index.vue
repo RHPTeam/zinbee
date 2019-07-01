@@ -1,9 +1,6 @@
 <template>
   <div
     class="wrapper--footer"
-    :style="{
-      backgroundImage: 'url(' + backgroundFooter + ')'
-    }"
   >
     <div class="content ct">
       <div class="r m_0">
@@ -11,26 +8,24 @@
           <div class="title--footer logo">
             <icon-base
               icon-name="ZinBee"
-              width="132.92"
+              width="100"
               height="49.73"
               viewBox="0 0 250.446 93.703"
             >
               <icon-logo />
             </icon-base>
           </div>
-          <div>
+          <div class="font--13">
             Zinbee luôn mong muốn hỗ trợ mọi người kinh doanh online tốt hơn, có
-            nhiều thời gian hơn bên gia đình, người thân
+            nhiều thời gian hơn bên gia đình và người thân.
           </div>
         </div>
         <div class="c_lg_3">
           <div class="title--footer">Thông Tin Hỗ Trợ</div>
           <ul>
-            <li>Địa Chỉ: Toàn Nhà Capital 102 Trường Chinh Hà Nội</li>
-            <li>Phone: (+84) 856449666 - (+84) 799449666</li>
+            <li>Địa Chỉ: Toàn Nhà Capital, 102 Trường Chinh, Hà Nội</li>
+            <li>Hotline: (+84) 856449666 - (+84) 799449666</li>
             <li>Email: Cskh@Zinbee.Vn</li>
-            <li>Click Để Liên Hệ Facebook</li>
-            <li>Thứ 2 - Chủ Nhật: 08:00 - 22:00</li>
           </ul>
         </div>
         <div class="c_lg_3">
@@ -66,8 +61,8 @@
                 <icon-base
                   class="facebook"
                   icon-name="facebook"
-                  width="30"
-                  height="30"
+                  width="24"
+                  height="24"
                   viewBox="0 0 105 105"
                 >
                   <icon-facebook />
@@ -94,8 +89,8 @@
                 <icon-base
                   class="youtube"
                   icon-name="youtube"
-                  width="30"
-                  height="30"
+                  width="26"
+                  height="26"
                   viewBox="0 0 100 100"
                 >
                   <icon-youtube />

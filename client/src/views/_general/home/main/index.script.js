@@ -1,6 +1,27 @@
 import Typed from "typed.js";
+
+import AppBanner from "./banner";
+// import AppCustomer from "./customer";
+// import AppOwner from "./owner";
+// import AppPrice from "./price";
+// import AppTool from "./tool";
+// import AppTraining from "./training";
+// import AppUtilities from "./utilities";
+// import AppWhyChoose from "./whychoose";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
+
 export default {
+  components: {
+    AppBanner,
+    // AppCustomer,
+    // AppOwner,
+    // AppPrice,
+    // AppTool,
+    // AppTraining,
+    // AppUtilities,
+    // AppWhyChoose,
+    VuePerfectScrollbar
+  },
   data() {
     return {
       activetab: 1,
@@ -15,7 +36,7 @@ export default {
       // Customer
       backgroundCustomer: require("@/assets/images/home/quote.png"),
       // Contact
-      backgroundShow: require("@/assets/images/home/polygon.jpg"),
+      backgroundShow: require("@/assets/images/home/owner_bg.jpg"),
       currentIndex: 1,
       currentIndexInfo: 0,
       typed: {
@@ -71,6 +92,11 @@ export default {
         require("@/assets/images/home/undraw_task_31wc.svg")
       ]
     };
+  },
+  mounted() {
+    // this.runInitEffect();
+    this.sliderCustomer();
+    this.sliderWhyChooseZinbee();
   },
   methods: {
     next() {
@@ -147,6 +173,11 @@ export default {
 
       window.open(routeSignUp.href, "_blank");
     },
+    goToMarket() {
+      const route = this.$router.resolve({ name: "market_home" });
+
+      window.open(route.href, "_blank");
+    },
     sliderCustomer() {
       setInterval(() => {
         this.currentIndex++;
@@ -163,13 +194,5 @@ export default {
         }
       }, 6000);
     }
-  },
-  mounted() {
-    // this.runInitEffect();
-    this.sliderCustomer();
-    this.sliderWhyChooseZinbee();
-  },
-  components: {
-    VuePerfectScrollbar
   }
 };
