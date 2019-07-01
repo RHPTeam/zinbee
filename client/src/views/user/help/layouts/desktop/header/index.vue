@@ -160,12 +160,12 @@ export default {
         left: 1
       });
       await this.$store.dispatch("getHelpCategoryById", val._id);
-      await this.$store.dispatch("getAllCategoriesChildren");
+      await this.$store.dispatch("getHelpCategoryParent", { parentId: cateId });
       await this.$store.dispatch("setHelpCategoryChildrenLevel", val);
       this.$router.replace({
         name: "help_detail",
         params: { id: val._id },
-        query: { cateId: val._id, parenId: cateId }
+        query: { parentId: cateId }
       });
     },
     openEmail() {

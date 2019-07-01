@@ -2,7 +2,7 @@ import HelpCategoryServices from "@/services/modules/user/help/category.service"
 
 const state = {
   allHelpCategories: [],
-  helpCategory: [],
+  helpCategory: {},
   helpCategoryStatus: "",
   allHelpCategoriesChild: [],
   helpCategoryById: [],
@@ -74,7 +74,7 @@ const mutations = {
   setCateParent: (state, payload) => {
     const childs = payload.cate
       .map(item => {
-        if (payload.child === item.parent) return item;
+        if (payload.parentId === item.parent) return item;
       })
       .filter(item => item !== undefined);
 
@@ -133,6 +133,16 @@ const actions = {
   },
   setHelpCategoryChildrenLevel: async ({ commit }, payload) => {
     commit("setCategoryChildren", payload);
+  },
+  getHelpCategoryParent: async ({commit}, payload) => {
+    const result = await HelpCategoryServices.getAllCategories();
+    // const results = result.data.data.filter(item =>
+    //   item.parent === payload.parentId
+    // );
+    commit("setCateParent", {
+      cate: result.data.data,
+      parentId: payload.parentId
+    });
   }
 };
 

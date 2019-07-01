@@ -22,10 +22,27 @@
       cursor: pointer;
       color: #4267b2;
       padding-bottom: 25px;
-      font-size: 23px;
+      font-size: 20px;
       font-weight: bold;
       &:hover, &:focus {
         text-decoration: underline;
+      }
+    }
+    .blog--detail {
+      img {
+        width: 100%;
+      }
+      .text {
+        width: 100%;
+        p {
+          width: 100%;
+          > img {
+            width: 100% !important;
+          }
+        }
+        > img {
+          width: 100% !important;
+        }
       }
     }
     .infor--useful{
