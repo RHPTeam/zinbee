@@ -164,7 +164,7 @@ module.exports = {
     res.status( 200 ).json( { "status": "success", "data": data } );
   },
   "statisticHomepage": async( req, res ) => {
-    const totalPostProducts = MarketProduct.countDocuments( { "typeProduct": 0 } );
+    const totalPostProducts = await MarketProduct.countDocuments( { "typeProduct": 0 } );
 
     res.status( 200 ).json( { "status": "success", "data": { "totalPostProducts": totalPostProducts, "totalCampaignProducts": 0, "totalTrendingProducts": 0 } } );
   }
