@@ -5,23 +5,30 @@
         <!-- Start: Left Navigation -->
         <div class="c_3 list--problem px_0 pt_5">
           <nav class="navigation" v-if="helpDefault.left === 1">
-            <ul
-              v-if="
-                categoryChildren.children &&
-                  categoryChildren.children.length > 0
-              "
-            >
+            <ul v-if="cateChildren && cateChildren.length > 0">
               <li
                 class="navigation--item"
-                v-for="(item, index) in categoryChildren.children"
+                v-for="(item, index) in cateChildren"
                 :key="`l-${index}`"
                 @click="showInfoCategory(item._id)"
               >
                 {{ item.title }}
               </li>
             </ul>
-            <div v-else>Danh mục đang được nâng cấp</div>
+            <div v-else>
+              <ul v-if="cateLevel && cateLevel.length > 0">
+                <li
+                  class="navigation--item"
+                  v-for="(cate, index) in cateLevel"
+                  :key="`c-${index}`"
+                  @click="showInfoCategoryDefault(cate._id)"
+                >
+                  {{ cate.title }}
+                </li>
+              </ul>
+            </div>
           </nav>
+
           <nav class="navigation" v-if="helpDefault.left === 0">
             <ul v-if="cateLevel && cateLevel.length > 0">
               <li
@@ -307,9 +314,18 @@ export default {
     blogHelpCategory() {
       if (this.helpCategory._blogHelp === undefined) return;
       return this.helpCategory._blogHelp;
+    },
+    cateChildren() {
+      return this.$store.getters.cateChildren;
     }
   },
   async created() {
+    const post = this.$store.getters.blog;
+    if (post.length === 0) {
+      const postId = this.$route.params.id;
+      await this.$store.dispatch("getAllCategoriesChildren");
+      await this.$store.dispatch("getBlogById", postId);
+    }
     await this.$store.dispatch("getAllBlog");
   },
   methods: {

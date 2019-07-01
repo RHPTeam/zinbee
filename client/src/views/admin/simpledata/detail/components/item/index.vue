@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../index.style";
+@import "../../index.style";
 .item--content {
   width: 100%;
 }

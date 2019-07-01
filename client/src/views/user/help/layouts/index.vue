@@ -12,7 +12,6 @@
         <app-footer />
       </div>
       <!-- Start: Component chat fanpage -->
-      <!--      <plugin-messenger />-->
       <!-- End: Component chat fanpage -->
     </div>
     <!-- End: Desktop Component-->

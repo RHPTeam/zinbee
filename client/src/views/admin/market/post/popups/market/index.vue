@@ -1,151 +1,157 @@
 <template>
   <div class="modal--wrapper" :data-theme="currentTheme">
     <div class="modal--dialog d_flex justify_content_center align_items_center">
-      <div class="modal--content px_3 py_4">
-        <div class="modal--header">
-          <div class="title">Thêm bài viết vào market</div>
-        </div>
-        <div class="modal--body my_3">
-          <div class="section--body">
-            <!-- Start: Name -->
-            <div class="item mb_4">
-              <span>Tên bài viết</span>
-              <input
-                type="text"
-                class="item--input mt_2"
-                placeholder="Nhập tên bài viết"
-                v-model="product.name"
-              />
-            </div>
-            <!-- End: Name -->
-
-            <!-- Start: Categrories and Price -->
-            <div class="enhance d_flex align_items_center">
-              <div class="item mb_4 pr_2">
-                <span>Danh mục bài viết</span>
-                <div class="cate mt_2">
-                  <multiselect
-                    label="name"
-                    placeholder="Chọn danh mục đăng bài..."
-                    :options="categories"
-                    :value="convertCategoryPost(product._category)"
-                    @input="updateProductCategory"
-                  />
-                </div>
-              </div>
-              <div class="item mb_4 pl_2">
-                <span>Đơn giá</span>
+      <div class="modal--content px_3 py_4" v-click-outside="closePopup">
+        <VuePerfectScrollbar class="body">
+          <div class="modal--header">
+            <div class="title">Thêm bài viết vào market</div>
+          </div>
+          <div class="modal--body my_3">
+            <div class="section--body">
+              <!-- Start: Name -->
+              <div class="item mb_4">
+                <span>Tên sản phẩm</span>
                 <input
-                  type="number"
+                  type="text"
                   class="item--input mt_2"
-                  placeholder="Nhập đơn giá bài viết"
-                  v-model="product.priceCents"
+                  placeholder="Nhập tên bài viết"
+                  v-model="product.name"
                 />
               </div>
-            </div>
-            <!-- End:  Categrories and Price -->
+              <!-- End: Name -->
 
-            <!-- Start: Attribute and Property -->
-            <div class="item mb_4">
-              <span>Đặc điểm</span>
-              <div
-                class="enhance d_flex align_items_center position_relative pr_4"
-                v-for="(att, index) in product.attributes"
-                :key="index"
-              >
-                <div class="item pr_3">
+              <!-- Start: Categrories and Price -->
+              <div class="enhance d_flex align_items_center">
+                <div class="item mb_4 pr_2">
+                  <span>Danh mục sản phẩm</span>
+                  <div class="cate mt_2">
+                    <multiselect
+                      label="name"
+                      placeholder="Chọn danh mục đăng bài..."
+                      :options="categories"
+                      :value="convertCategoryPost(product._category)"
+                      @input="updateProductCategory"
+                    />
+                  </div>
+                </div>
+                <div class="item mb_4 pl_2">
+                  <span>Đơn giá</span>
                   <input
-                    type="text"
+                    type="number"
                     class="item--input mt_2"
-                    placeholder="Nhập tên"
-                    v-model="att.name"
+                    placeholder="Nhập đơn giá bài viết"
+                    v-model="product.priceCents"
                   />
                 </div>
-                <div class="item">
-                  <input
-                    type="text"
-                    class="item--input mt_2"
-                    placeholder="Nhập giá trị"
-                    v-model="att.value"
-                  />
-                </div>
+              </div>
+              <!-- End:  Categrories and Price -->
+
+              <!-- Start: Attribute and Property -->
+              <div class="item mb_4">
+                <span>Đặc điểm</span>
                 <div
-                  class="icon--remove position_absolute"
-                  @click="deleteAttribute(index)"
+                  class="enhance d_flex align_items_center position_relative pr_4"
+                  v-for="(att, index) in product.attributes"
+                  :key="index"
+                >
+                  <div class="item pr_3">
+                    <input
+                      type="text"
+                      class="item--input mt_2"
+                      placeholder="Nhập tên"
+                      v-model="att.name"
+                    />
+                  </div>
+                  <div class="item">
+                    <input
+                      type="text"
+                      class="item--input mt_2"
+                      placeholder="Nhập giá trị"
+                      v-model="att.value"
+                    />
+                  </div>
+                  <div
+                    class="icon--remove position_absolute"
+                    @click="deleteAttribute(index)"
+                  >
+                    <icon-base
+                      icon-name="remove"
+                      class="icon--remove"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 16 16"
+                    >
+                      <icon-remove />
+                    </icon-base>
+                  </div>
+                </div>
+
+                <div
+                  class="add--attribute d_inline_flex mt_3 align_items_center p_2"
+                  @click="addAtttibute"
                 >
                   <icon-base
-                    icon-name="remove"
-                    class="icon--remove"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 16 16"
+                    icon-name="icon-plus"
+                    class="icon-plus mr_2"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 60 70"
                   >
-                    <icon-remove />
+                    <icon-plus />
                   </icon-base>
+                  Thêm đặc điểm
                 </div>
               </div>
+              <!-- End: Attribute and Property -->
 
-              <div
-                class="add--attribute d_inline_flex mt_3 align_items_center p_2"
-                @click="addAtttibute"
-              >
-                <icon-base
-                  icon-name="icon-plus"
-                  class="icon-plus mr_2"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 60 70"
-                >
-                  <icon-plus />
-                </icon-base>
-                Thêm đặc điểm
+              <!-- Start: tag -->
+              <div class="item mb_4">
+                <span>Thẻ</span>
+                <div class="mt_2">
+                  <taggle
+                    class="taggle form_control"
+                    placeholder="Nhập từ khóa và enter để kết thúc"
+                    v-model="product.tags"
+                  />
+                </div>
               </div>
-            </div>
-            <!-- End: Attribute and Property -->
+              <!-- End: tag -->
 
-            <!-- Start: tag -->
-            <div class="item mb_4">
-              <span>Thẻ</span>
-              <div class="mt_2">
-                <taggle
-                  class="taggle form_control"
-                  placeholder="Nhập từ khóa và enter để kết thúc"
-                  v-model="product.tags"
-                />
+              <!-- Start: image -->
+              <div class="form_group">
+                <label for class>Ảnh đại diện</label>
+                <div class="img--preview mb_2" v-if="product.previews">
+                  <img
+                    :src="product.previews.thumbnail"
+                    alt=""
+                    height="120px"
+                  />
+                </div>
+                <div class>
+                  <input
+                    type="file"
+                    ref="file"
+                    @change="selectFile()"
+                    accept="image/x-png,image/gif,image/jpeg"
+                    class="form_control p_1"
+                  />
+                </div>
+                <div class="contain--images"></div>
               </div>
+              <!-- End: image -->
             </div>
-            <!-- End: tag -->
-
-            <!-- Start: image -->
-            <div class="form_group">
-              <label for class>Ảnh đại diện</label>
-              <div class="img--preview mb_2" v-if="product.previews">
-                <img :src="product.previews.thumbnail" alt="" height="120px" />
-              </div>
-              <div class>
-                <input
-                  type="file"
-                  ref="file"
-                  @change="selectFile()"
-                  accept="image/x-png,image/gif,image/jpeg"
-                  class="form_control p_1"
-                />
-              </div>
-              <div class="contain--images"></div>
-            </div>
-            <!-- End: image -->
           </div>
-        </div>
-        <div
-          class="modal--footer d_flex justify_content_between align_items_center"
-        >
-          <button class="btn--submit" @click="closePopup()">
-            HỦY
-          </button>
-          <button class="btn--skip" @click="createProduct()">
-            Cập nhật
-          </button>
-        </div>
+          <div
+            class="modal--footer d_flex justify_content_between align_items_center"
+          >
+            <button class="btn--submit" @click="closePopup()">
+              HỦY
+            </button>
+            <button class="btn--skip" @click="createProduct()">
+              Cập nhật
+            </button>
+          </div>
+        </VuePerfectScrollbar>
       </div>
     </div>
   </div>

@@ -5,7 +5,10 @@ const state = {
   contentDefault: [],
   categoryDefault: [],
   helpStatus: "",
-  helpDefault: []
+  helpDefault: {
+    left: 0,
+    right: 0
+  }
 };
 const getters = {
   helpStatus: state => state.helpStatus,

@@ -25,6 +25,7 @@
           <item :item="item" :infoCateDefault="infoCateDefault.postList" />
         </div>
       </div>
+      <post-paginate />
     </div>
     <!-- End: Select List content simple data -->
     <!-- Start: List content simple data -->
@@ -74,12 +75,14 @@
 </template>
 
 <script>
-import Item from "./item";
-import ItemCate from "./itemcate";
+import Item from "./components/item";
+import ItemCate from "./components/itemcate";
+import PostPaginate from "./components/paginate";
 export default {
   components: {
     Item,
-    ItemCate
+    ItemCate,
+    PostPaginate
   },
   data() {
     return {

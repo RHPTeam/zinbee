@@ -88,7 +88,7 @@
                   class="dropdown--menu-item"
                   v-for="(categoryChild, cindex) in category.children"
                   :key="cindex"
-                  @click="showInfoCategory(categoryChild)"
+                  @click="showInfoCategory(categoryChild, category._id)"
                 >
                   <a>{{ categoryChild.title }}</a>
                 </li>
@@ -154,15 +154,18 @@ export default {
     goToHelpHome() {
       this.$router.push({ name: "help" });
     },
-    async showInfoCategory(val) {
+    async showInfoCategory(val, cateId) {
       await this.$store.dispatch("setHelpDefault", {
         right: 1,
         left: 1
       });
+      await this.$store.dispatch("getHelpCategoryById", val._id);
+      await this.$store.dispatch("getAllCategoriesChildren");
       await this.$store.dispatch("setHelpCategoryChildrenLevel", val);
-      this.$router.push({
+      this.$router.replace({
         name: "help_detail",
-        params: { id: val }
+        params: { id: val._id },
+        query: { cateId: val._id, parenId: cateId }
       });
     },
     openEmail() {

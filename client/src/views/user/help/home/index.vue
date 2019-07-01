@@ -174,7 +174,8 @@ export default {
       });
       await this.$store.dispatch("getBlogById", val);
       this.$router.push({
-        name: "help_detail"
+        name: "help_detail",
+        params: { id: val }
       });
     }
   }
