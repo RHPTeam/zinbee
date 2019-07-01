@@ -3,8 +3,8 @@
     <div class="section--title-content text_center ct">
       <h3 class="title">BẢNG GIÁ DỊCH VỤ</h3>
       <h4 class="desc">
-        Zinbee cung cấp nhiều gói khác nhau linh hoạt cho từng nhu cầu của
-        khách hàng.
+        Zinbee cung cấp nhiều gói khác nhau linh hoạt cho từng nhu cầu của khách
+        hàng.
       </h4>
     </div>
     <div class="d_none d_md_block ct">
@@ -18,7 +18,7 @@
               <a
                 href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                 target="_blank"
-              >Liên hệ</a
+                >Liên hệ</a
               >
             </li>
           </ul>
@@ -31,7 +31,7 @@
               <a
                 href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                 target="_blank"
-              >Liên hệ</a
+                >Liên hệ</a
               >
             </li>
           </ul>
@@ -44,7 +44,7 @@
               <a
                 href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                 target="_blank"
-              >Liên hệ</a
+                >Liên hệ</a
               >
             </li>
           </ul>
@@ -57,7 +57,7 @@
               <a
                 href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                 target="_blank"
-              >Liên hệ</a
+                >Liên hệ</a
               >
             </li>
           </ul>
@@ -425,7 +425,7 @@
           class="btn--live-chat"
           target="_blank"
           href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-        >LIÊN HỆ NGAY BÂY GIỜ</a
+          >LIÊN HỆ NGAY BÂY GIỜ</a
         >
       </div>
     </div>
@@ -441,7 +441,7 @@
               <a
                 href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                 target="_blank"
-              >Liên hệ</a
+                >Liên hệ</a
               >
             </li>
           </ul>
@@ -572,7 +572,7 @@
               <a
                 href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                 target="_blank"
-              >Liên hệ</a
+                >Liên hệ</a
               >
             </li>
           </ul>
@@ -703,7 +703,7 @@
               <a
                 href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                 target="_blank"
-              >Liên hệ</a
+                >Liên hệ</a
               >
             </li>
           </ul>
@@ -834,7 +834,7 @@
               <a
                 href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
                 target="_blank"
-              >Liên hệ</a
+                >Liên hệ</a
               >
             </li>
           </ul>
@@ -962,7 +962,7 @@
           class="btn--live-chat"
           target="_blank"
           href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-        >LIÊN HỆ NGAY BÂY GIỜ</a
+          >LIÊN HỆ NGAY BÂY GIỜ</a
         >
       </div>
     </div>

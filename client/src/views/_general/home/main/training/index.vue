@@ -21,28 +21,28 @@
         <div
           class="img--training"
           :style="{
-                backgroundImage: 'url(' + imageTraining[0] + ')'
-              }"
+            backgroundImage: 'url(' + imageTraining[0] + ')'
+          }"
         ></div>
         <div
           class="img--training"
           :style="{
-                backgroundImage: 'url(' + imageTraining[1] + ')'
-              }"
+            backgroundImage: 'url(' + imageTraining[1] + ')'
+          }"
         ></div>
       </div>
       <div class="d_flex items">
         <div
           class="img--training"
           :style="{
-                backgroundImage: 'url(' + imageTraining[2] + ')'
-              }"
+            backgroundImage: 'url(' + imageTraining[2] + ')'
+          }"
         ></div>
         <div
           class="img--training"
           :style="{
-                backgroundImage: 'url(' + imageTraining[3] + ')'
-              }"
+            backgroundImage: 'url(' + imageTraining[3] + ')'
+          }"
         ></div>
       </div>
     </div>

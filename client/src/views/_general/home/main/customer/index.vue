@@ -5,8 +5,8 @@
         <div
           class="c_lg_5 left c_md_12 mb_md_3"
           :style="{
-                backgroundImage: 'url(' + backgroundCustomer + ')'
-              }"
+            backgroundImage: 'url(' + backgroundCustomer + ')'
+          }"
         >
           <div class="title--section">Ý kiến của khách hàng</div>
           <div class="desc">
@@ -31,9 +31,9 @@
                   </div>
                 </div>
                 <div class="desc">
-                  Tôi đã tiết kiệm được rất nhiều thời gian kể từ khi sử
-                  dụng Zinbee, tôi không phải lo nghĩ lúc nào cũng phải ngồi
-                  đăng bài, kết bạn,... thật sự tuyệt vời.
+                  Tôi đã tiết kiệm được rất nhiều thời gian kể từ khi sử dụng
+                  Zinbee, tôi không phải lo nghĩ lúc nào cũng phải ngồi đăng
+                  bài, kết bạn,... thật sự tuyệt vời.
                 </div>
               </div>
             </transition>
@@ -52,9 +52,9 @@
                   </div>
                 </div>
                 <div class="desc">
-                  Trước kia lúc nào tôi cũng phải vội vàng sắp xếp thời gian
-                  để đăng bài, tương tác, lên từng page, group, từ khi có
-                  Zinbee, mọi thứ thật đơn giản.
+                  Trước kia lúc nào tôi cũng phải vội vàng sắp xếp thời gian để
+                  đăng bài, tương tác, lên từng page, group, từ khi có Zinbee,
+                  mọi thứ thật đơn giản.
                 </div>
               </div>
             </transition>
@@ -73,9 +73,9 @@
                   </div>
                 </div>
                 <div class="desc">
-                  Hiệu quả công việc của công ty tôi tăng lên rõ rệt từ khi
-                  sử dụng Zinbee, cám ơn Zinbee rất nhiều, tôi chắc chắn sẽ
-                  sử dụng Zinbee cho tất cả các đại lý của tôi.
+                  Hiệu quả công việc của công ty tôi tăng lên rõ rệt từ khi sử
+                  dụng Zinbee, cám ơn Zinbee rất nhiều, tôi chắc chắn sẽ sử dụng
+                  Zinbee cho tất cả các đại lý của tôi.
                 </div>
               </div>
             </transition>
@@ -83,36 +83,32 @@
           <div
             class="position_absolute action--slider d_flex align_items_center"
           >
-                <span
-                  @click="prev"
-                  class="prev action"
-                  v-if="currentIndex !== 1"
-                >
-                  <icon-base
-                    class="icon--arrow-left"
-                    icon-name="Prev"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <icon-arrow-left></icon-arrow-left>
-                  </icon-base>
-                </span>
+            <span @click="prev" class="prev action" v-if="currentIndex !== 1">
+              <icon-base
+                class="icon--arrow-left"
+                icon-name="Prev"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <icon-arrow-left></icon-arrow-left>
+              </icon-base>
+            </span>
             <span
               @click="next"
               class="next ml_auto action"
               v-if="currentIndex !== 3"
             >
-                  <icon-base
-                    class="icon--arrow-left"
-                    icon-name="Next"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <icon-arrow-left></icon-arrow-left>
-                  </icon-base>
-                </span>
+              <icon-base
+                class="icon--arrow-left"
+                icon-name="Next"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <icon-arrow-left></icon-arrow-left>
+              </icon-base>
+            </span>
           </div>
           <div class="action text_center">
             <ul>

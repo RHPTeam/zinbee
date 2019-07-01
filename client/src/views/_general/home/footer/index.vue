@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="wrapper--footer"
-  >
+  <div class="wrapper--footer">
     <div class="content ct">
       <div class="r m_0">
         <div class="c_lg_3">

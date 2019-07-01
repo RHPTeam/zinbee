@@ -12,9 +12,9 @@
             <b>Shop kinh doanh cá nhân</b>
           </div>
           <div>
-            Các shop đang kinh doanh cá nhân đang cần giải pháp, công cụ hỗ
-            trợ bán hàng, tương tác với khách hàng tốt hơn. Tiết kiệm thời
-            gian và chi phí.
+            Các shop đang kinh doanh cá nhân đang cần giải pháp, công cụ hỗ trợ
+            bán hàng, tương tác với khách hàng tốt hơn. Tiết kiệm thời gian và
+            chi phí.
           </div>
         </div>
         <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
@@ -23,9 +23,8 @@
             <b>Các doanh nghiệp</b>
           </div>
           <div>
-            Các doanh nghiệp đang muốn triển khai marketing trên Facebook
-            với giải pháp tối ưu, hoàn toàn tự động để giảm chi phí và nhân
-            lực.
+            Các doanh nghiệp đang muốn triển khai marketing trên Facebook với
+            giải pháp tối ưu, hoàn toàn tự động để giảm chi phí và nhân lực.
           </div>
         </div>
         <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
@@ -34,8 +33,8 @@
             <b>Tổ chức Marketing - Sale</b>
           </div>
           <div>
-            Các tổ chức, cá nhân Marketing - Sale mong muốn tăng hiệu quả
-            công việc với công cụ quản lý các hoạt động trên Facebook.
+            Các tổ chức, cá nhân Marketing - Sale mong muốn tăng hiệu quả công
+            việc với công cụ quản lý các hoạt động trên Facebook.
           </div>
         </div>
       </div>

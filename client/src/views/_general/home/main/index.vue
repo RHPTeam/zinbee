@@ -13,12 +13,16 @@
             VŨ KHÍ KHÔNG THỂ THIẾU CHO BÁN HÀNG TRÊN FACEBOOK
           </div>
           <div class="desc">
-            CỬA HÀNG NỘI DUNG PHONG PHÚ, TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC 100+ TRANG, NHÓM, TRANG CÁ
-            NHÂN TRÊN FACEBOOK CHỈ VỚI VÀI THAO TÁC
+            CỬA HÀNG NỘI DUNG PHONG PHÚ, TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC
+            100+ TRANG, NHÓM, TRANG CÁ NHÂN TRÊN FACEBOOK CHỈ VỚI VÀI THAO TÁC
           </div>
           <div class="d_flex">
-            <div class="register mr_3" @click="goToSignUp">TRẢI NGHIỆM NGAY</div>
-            <div class="goto--market" @click="goToMarket">CỬA HÀNG NỘI DUNG</div>
+            <div class="register mr_3" @click="goToSignUp">
+              TRẢI NGHIỆM NGAY
+            </div>
+            <div class="goto--market" @click="goToMarket">
+              CỬA HÀNG NỘI DUNG
+            </div>
           </div>
         </div>
         <div class="right">
@@ -150,8 +154,8 @@
                 </div>
                 <div class="text">
                   <p>
-                    Zinbee cung cấp kho nội dung mẫu đa dạng, cùng tính năng đăng
-                    bài tự động
+                    Zinbee cung cấp kho nội dung mẫu đa dạng, cùng tính năng
+                    đăng bài tự động
                   </p>
                 </div>
               </div>

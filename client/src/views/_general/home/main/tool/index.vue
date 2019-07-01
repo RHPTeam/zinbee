@@ -3,22 +3,22 @@
     <div
       class="border--right position_absolute"
       :style="{
-            backgroundImage: 'url(' + vienPhaiBanner + ')'
-          }"
+        backgroundImage: 'url(' + vienPhaiBanner + ')'
+      }"
     ></div>
     <div
       class="border--left position_absolute"
       :style="{
-            backgroundImage: 'url(' + vienTraiBanner + ')'
-          }"
+        backgroundImage: 'url(' + vienTraiBanner + ')'
+      }"
     ></div>
     <div class="ct">
       <div class="section--title-content">
         <h3 class="title">Công cụ hỗ trợ marketing – bán hàng</h3>
         <div class="desc">
-          Zinbee cung cấp bộ công cụ giúp quản lý cũng như tự động nhiều
-          hoạt động trong quá trình làm marketing, bán hàng và tương tác với
-          khách hàng trên Facebook.
+          Zinbee cung cấp bộ công cụ giúp quản lý cũng như tự động nhiều hoạt
+          động trong quá trình làm marketing, bán hàng và tương tác với khách
+          hàng trên Facebook.
         </div>
       </div>
       <div class="r content mb_md_4">
@@ -27,8 +27,8 @@
           <div
             class="marketing--section-image"
             :style="{
-                  backgroundImage: 'url(' + benefit + ')'
-                }"
+              backgroundImage: 'url(' + benefit + ')'
+            }"
           ></div>
         </div>
         <div class="c_lg_6 c_md_12 right position_relative">
@@ -66,8 +66,8 @@
             </div>
             <div class="text">
               <p>
-                Tự động tăng tương tác với khách hàng. Lọc và xây dựng tệp
-                khách hàng tiềm năng.
+                Tự động tăng tương tác với khách hàng. Lọc và xây dựng tệp khách
+                hàng tiềm năng.
               </p>
             </div>
           </div>
@@ -84,9 +84,8 @@
             </div>
             <div class="text">
               <p>
-                Zinbee là bộ công cụ giúp tự động hóa việc marketing, bán
-                hàng cũng như tự động tương tác với khách hàng trên
-                Facebook.
+                Zinbee là bộ công cụ giúp tự động hóa việc marketing, bán hàng
+                cũng như tự động tương tác với khách hàng trên Facebook.
               </p>
             </div>
           </div>
@@ -162,8 +161,8 @@
           <div
             class="marketing--section-image"
             :style="{
-                  backgroundImage: 'url(' + automatic + ')'
-                }"
+              backgroundImage: 'url(' + automatic + ')'
+            }"
           ></div>
         </div>
       </div>
