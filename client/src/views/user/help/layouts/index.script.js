@@ -1,6 +1,5 @@
 import AppHeader from "./desktop/header";
 import AppFooter from "./desktop/footer";
-import PluginMessenger from "./plugin";
 
 export default {
   data() {
@@ -25,7 +24,6 @@ export default {
   },
   components: {
     AppHeader,
-    AppFooter,
-    PluginMessenger
+    AppFooter
   }
 };

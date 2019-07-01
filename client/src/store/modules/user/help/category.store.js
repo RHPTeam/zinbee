@@ -2,14 +2,15 @@ import HelpCategoryServices from "@/services/modules/user/help/category.service"
 
 const state = {
   allHelpCategories: [],
-  helpCategory: [],
+  helpCategory: {},
   helpCategoryStatus: "",
   allHelpCategoriesChild: [],
   helpCategoryById: [],
   categoryChildren: [],
   parentCate: [],
   cateLevel: [],
-  cateChildren: []
+  cateChildren: [],
+  children: []
 };
 const getters = {
   allHelpCategories: state => state.allHelpCategories,
@@ -20,7 +21,8 @@ const getters = {
   categoryChildren: state => state.categoryChildren,
   parentCate: state => state.parentCate,
   cateLevel: state => state.cateLevel,
-  cateChildren: state => state.cateChildren
+  cateChildren: state => state.cateChildren,
+  children: state => state.children
 };
 const mutations = {
   help_category_request: state => {
@@ -68,6 +70,15 @@ const mutations = {
   },
   setCategoryChildren: (state, payload) => {
     state.categoryChildren = payload;
+  },
+  setCateParent: (state, payload) => {
+    const childs = payload.cate
+      .map(item => {
+        if (payload.parentId === item.parent) return item;
+      })
+      .filter(item => item !== undefined);
+
+    state.children = childs;
   }
 };
 const actions = {
@@ -122,6 +133,16 @@ const actions = {
   },
   setHelpCategoryChildrenLevel: async ({ commit }, payload) => {
     commit("setCategoryChildren", payload);
+  },
+  getHelpCategoryParent: async ({ commit }, payload) => {
+    const result = await HelpCategoryServices.getAllCategories();
+    // const results = result.data.data.filter(item =>
+    //   item.parent === payload.parentId
+    // );
+    commit("setCateParent", {
+      cate: result.data.data,
+      parentId: payload.parentId
+    });
   }
 };
 

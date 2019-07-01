@@ -5,9 +5,12 @@
         <li class="nav--item">
           <a class="nav--link" @click.prevent="goToHome">Tất cả</a>
         </li>
+        <li class="nav--item" v-if="!currentParentMarketCategory.children"></li>
         <li
+          v-else
           class="nav--item"
-          v-for="(category, index) in currentParentMarketCategory.children"
+          v-for="(category,
+          index) in currentParentMarketCategory.children.slice(0, 7)"
           :key="index"
           @click.prevent="loadProductByCategory(category._id)"
         >

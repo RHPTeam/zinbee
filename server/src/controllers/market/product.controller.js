@@ -162,5 +162,10 @@ module.exports = {
       .limit( parseInt( req.query.number ) );
 
     res.status( 200 ).json( { "status": "success", "data": data } );
+  },
+  "statisticHomepage": async( req, res ) => {
+    const totalPostProducts = await MarketProduct.countDocuments( { "typeProduct": 0 } );
+
+    res.status( 200 ).json( { "status": "success", "data": { "totalPostProducts": totalPostProducts, "totalCampaignProducts": 0, "totalTrendingProducts": 0 } } );
   }
 };

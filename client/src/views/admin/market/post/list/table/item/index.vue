@@ -1,7 +1,8 @@
 <template>
   <div
+    v-if="item"
     class="item--body d_flex align_items_center px_3 py_2"
-    :class="item.assign === true ? 'disable' : ''"
+    :class="item.assign && item.assign === true ? 'disable' : ''"
   >
     <!-- Start: Name Column -->
     <div class="col col--name px_2">
