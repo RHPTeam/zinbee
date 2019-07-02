@@ -14,6 +14,7 @@ router.use( "/keywords", require( "./modules/keyword.route" ) );
 router.use( "/category-default", require( "./modules/categorydefault.route" ) );
 router.use( "/campaign-default", require( "./modules/campaignDefault.route" ) );
 router.use( "/backup-account", require( "./modules/backupAccount.route" ) );
+router.use( "/log", require( "./modules/log.route" ) );
 
 // Help Route
 router.use( "/help", require( "./modules/help/help.route" ) );
