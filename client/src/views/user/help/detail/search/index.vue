@@ -32,7 +32,7 @@
                 {{ blog.title }}
               </div>
               <div class="desc" v-if="blog.content && blog.content.length > 0">
-                <span>{{ blog.content.slice(0, 150) }}</span>
+                <span v-html="blog.content.slice(0, 150)"></span>
                 <span>...</span>
                 <a href="">Xem thêm</a>
               </div>

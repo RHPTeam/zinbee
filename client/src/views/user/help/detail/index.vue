@@ -258,7 +258,7 @@ export default {
     showInfoCategoryDefault(val) {
       this.$store.dispatch("setHelpDefault", {
         left: 0,
-        right: 3
+        right: 2
       });
       this.$store.dispatch("getHelpCategoryById", val);
     }
