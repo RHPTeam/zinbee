@@ -18,7 +18,7 @@
                   height="40px"
                   viewBox="0 0 200 200"
                 >
-                  <icon-logo-icon-white />
+                  <icon-logo-icon />
                 </icon-base>
                 <div class="center--support ml_2">Zinbee Store</div>
               </div>

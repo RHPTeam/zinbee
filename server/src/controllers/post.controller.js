@@ -35,12 +35,22 @@ module.exports = {
     const keywordsList = ( await Account.find( {} )
         .select( "keywords" )
         .lean() ).map( ( account ) => account.keywords ).flat( 1 ),
+      keywordSearchList = await Promise.all( ( await Account.find( {} )
+        .select( "keywordSearch" )
+        .lean() ).filter( ( account ) => account.keywordSearch !== undefined ).map( async ( user ) => user.keywordSearch.map( ( keyword ) => {
+        return keyword.content;
+      } ) ) ),
       postList = await PostFacebook.find( { "generate": 1 } )
         .select( "feedId" )
         .lean();
 
+    let resultKeywordList = [].concat.apply( [], keywordSearchList );
+
+    resultKeywordList = resultKeywordList.concat( resultKeywordList, keywordsList );
+    resultKeywordList = [ ...new Set( resultKeywordList ) ]
+
     res.send( {
-      "keywords": keywordsList,
+      "keywords": resultKeywordList,
       "data": postList
     } );
   },
