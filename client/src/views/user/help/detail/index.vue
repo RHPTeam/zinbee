@@ -221,6 +221,9 @@ export default {
       id = this.$route.params.id,
       cateParent = this.$route.query.parentId;
 
+    // Issuses catch
+    this.$store.dispatch("getBlogById", id);
+
     if (post && post.length === 0 && cateParent === undefined) {
       await this.$store.dispatch("getAllCategoriesChildren");
       await this.$store.dispatch("getBlogById", id);
