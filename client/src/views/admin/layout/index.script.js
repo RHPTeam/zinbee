@@ -4,7 +4,7 @@ import AppSidebar from "./desktop/sidebar";
 export default {
   data() {
     return {
-      statusNetwork: true,
+      statusNetwork: true
     };
   },
   created() {
