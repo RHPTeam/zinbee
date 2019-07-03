@@ -4,24 +4,27 @@
     <div class="search p_4 ">
       <div class="d_flex flex_column text_center pb_4">
         <h3>
-          <b>Rất nhiều các bài post và chiến dịch mẫu đang đợi bạn.</b>
+          <b
+            >{{ totalPostProducts }}+ bài viết mẫu chất lượng, phong phú đang
+            đợi bạn.</b
+          >
         </h3>
         <span
-          >Nhập tên bài post hoặc chiến dịch mà bạn cần tìm. Sau đó nhấn mua
+          >Nhập tên bài viết hoặc chiến dịch mẫu mà bạn cần tìm. Sau đó nhấn mua
           hoặc thêm vào kho.</span
         >
       </div>
       <div class=" d_flex justify_content_center p_4">
         <div class="form--search d_flex align_content_center position_relative">
           <div
-            class="icon--search position_absolute btn"
+            class="icon--search position_absolute d_flex align_items_center btn"
             @click="searchKeyword"
           >
             <icon-base
               icon-name="Tìm kiếm"
-              width="24"
-              height="24"
-              viewBox="0 0 16 16"
+              width="30"
+              height="30"
+              viewBox="0 0 20 20"
             >
               <icon-input-search />
             </icon-base>
@@ -258,10 +261,14 @@ export default {
     },
     status() {
       return this.$store.getters.marketStatus;
+    },
+    totalPostProducts() {
+      return this.$store.getters.totalPostProducts;
     }
   },
-  async created() {
-    await this.$store.dispatch("getNewestProduct", 6);
+  created() {
+    this.$store.dispatch("getTotalPostProducts");
+    this.$store.dispatch("getNewestProduct", 6);
   },
   methods: {
     async addToCollection(value) {

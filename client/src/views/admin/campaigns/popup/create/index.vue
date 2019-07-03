@@ -6,14 +6,16 @@
         <div class="body">
           <div class="r">
             <div class="c_6">
+              <div class="font_weight_bold">Tên chiến dịch</div>
               <input
                 type="text"
                 class="form_control"
-                placeholder="Nhập tên thư mục"
+                placeholder="Nhập tên chiến dịch mẫu"
                 v-model="campaign.title"
               />
             </div>
             <div class="c_6">
+              <div class="font_weight_bold">Số ngày hoạt động</div>
               <div class="total">
                 <input
                   type="number"
@@ -24,7 +26,10 @@
               </div>
             </div>
           </div>
-          <div class="post mt_3">
+          <div class="font_weight_bold mt_2">
+            Chọn bài viết sử dụng trong chiến dịch
+          </div>
+          <div class="post mt_1">
             <div class="table-container" role="table" aria-label="Destinations">
               <div class="flex-table header" role="rowgroup">
                 <div class="flex-row first" role="columnheader">Tiêu đề</div>
@@ -45,6 +50,7 @@
               </div>
             </div>
           </div>
+          <post-paginate class="mt_3" />
         </div>
         <!-- End: Modal Body -->
         <!-- Start: Modal Footer -->
@@ -65,10 +71,13 @@
 </template>
 
 <script>
-import Item from "./item";
+import Item from "./components/item";
+import PostPaginate from "./components/paginate";
+
 export default {
   components: {
-    Item
+    Item,
+    PostPaginate
   },
   props: {
     currentTheme: String

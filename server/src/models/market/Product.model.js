@@ -5,7 +5,7 @@ const mongoose = require( "mongoose" ),
     "description": String,
     "content": String,
     "typeProduct": Number, // 0 - Post | 1 - Campaign
-    "priceCents": String,
+    "priceCents": { "type": String, "default": "0" },
     "numberOfSales": { "type": Number, "default": 0 },
     "trending": {
       "type": Boolean,

@@ -10,7 +10,7 @@
           <router-link class="logo mr_auto d_none d_md_block" to="/">
             <icon-base
               icon-name="ZinBee"
-              width="132.92"
+              width="100"
               height="49.73"
               viewBox="0 0 250.446 93.703"
             >
@@ -48,7 +48,11 @@
                 <li class="items&#45;&#45;header">Bảng giá</li>
                 <li class="items&#45;&#45;header">Liên hệ</li>-->
                 <li class="items--header" @click="goToSignIn">Đăng nhập</li>
-                <li class="items--header try" @click="goToSignUp">
+                <li
+                  class="items--header try ml_2"
+                  v-if="changeBackgroundHeader === 2"
+                  @click="goToSignUp"
+                >
                   Trải nghiệm ngay
                 </li>
               </ul>
@@ -88,7 +92,7 @@
                 <li class="items&#45;&#45;header">
                   <a href="#">Liên hệ</a>
                 </li>-->
-                <li class="items--header" @click="goToSignIn">
+                <li class="items--header mr_3" @click="goToSignIn">
                   <a href="#">Đăng nhập</a>
                 </li>
                 <li class="items--header" @click="goToSignUp">

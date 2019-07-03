@@ -13,10 +13,17 @@
             VŨ KHÍ KHÔNG THỂ THIẾU CHO BÁN HÀNG TRÊN FACEBOOK
           </div>
           <div class="desc">
-            TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC 100+ TRANG, NHÓM, TRANG CÁ
-            NHÂN TRÊN FACEBOOK VÀI THAO TÁC
+            CỬA HÀNG NỘI DUNG PHONG PHÚ, TỰ ĐỘNG TÌM KIẾM NỘI DUNG VÀ CHĂM SÓC
+            100+ TRANG, NHÓM, TRANG CÁ NHÂN TRÊN FACEBOOK CHỈ VỚI VÀI THAO TÁC
           </div>
-          <div class="register" @click="goToSignUp">TRẢI NGHIỆM NGAY</div>
+          <div class="d_flex">
+            <div class="register mr_3" @click="goToSignUp">
+              TRẢI NGHIỆM NGAY
+            </div>
+            <div class="goto--market" @click="goToMarket">
+              CỬA HÀNG NỘI DUNG
+            </div>
+          </div>
         </div>
         <div class="right">
           <div
@@ -147,8 +154,8 @@
                 </div>
                 <div class="text">
                   <p>
-                    Zinbee cung cấp kho content mẫu đa dạng, cùng tính năng đăng
-                    bài tự động
+                    Zinbee cung cấp kho nội dung mẫu đa dạng, cùng tính năng
+                    đăng bài tự động
                   </p>
                 </div>
               </div>
@@ -185,7 +192,7 @@
                   <p>
                     Zinbee là bộ công cụ giúp tự động hóa việc marketing, bán
                     hàng cũng như tự động tương tác với khách hàng trên
-                    facebook.
+                    Facebook.
                   </p>
                 </div>
               </div>
@@ -251,7 +258,7 @@
                   </icon-base>
                 </div>
                 <div class="text">
-                  <p>Tiết kiệm thời gian, chi phí cho quảng cáo và nhân sự</p>
+                  <p>Tiết kiệm thời gian, chi phí cho quảng cáo và nhân lực</p>
                 </div>
               </div>
             </div>
@@ -273,7 +280,7 @@
       <!-- Start: Why Choose ZinBee -->
       <section id="why--chose" class="why--choose position_relative">
         <div class="section--title-content">
-          <h3 class="title">Phần mềm này giành cho ai</h3>
+          <h3 class="title">Ai có thể sử dụng zinbee ?</h3>
         </div>
 
         <div class="marketing--section px_4 ct mb_5">
@@ -286,7 +293,7 @@
               <div>
                 Các shop đang kinh doanh cá nhân đang cần giải pháp, công cụ hỗ
                 trợ bán hàng, tương tác với khách hàng tốt hơn. Tiết kiệm thời
-                gian và chi phí
+                gian và chi phí.
               </div>
             </div>
             <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
@@ -295,19 +302,19 @@
                 <b>Các doanh nghiệp</b>
               </div>
               <div>
-                Các doanh nghiệp đang muốn triển khai marketing trên facebook
+                Các doanh nghiệp đang muốn triển khai marketing trên Facebook
                 với giải pháp tối ưu, hoàn toàn tự động để giảm chi phí và nhân
-                sự
+                lực.
               </div>
             </div>
             <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
               <img class="marketing--section-image" :src="srcAutomatic" />
               <div class="title mt_4">
-                <b>Tổ chức marketing- sale</b>
+                <b>Tổ chức Marketing - Sale</b>
               </div>
               <div>
-                Các tổ chức, cá nhân làm marketing và sale muốn tăng hiệu quả
-                làm việc với công cụ quản lý các hoạt động trên facebook
+                Các tổ chức, cá nhân Marketing - Sale mong muốn tăng hiệu quả
+                công việc với công cụ quản lý các hoạt động trên Facebook.
               </div>
             </div>
           </div>
@@ -319,7 +326,7 @@
       <!-- Start: Utilities -->
       <section id="utilities" class="utilities ct">
         <div class="section--title-content mb_0">
-          <h3 class="title">Tại sao bạn chọn ZinBee</h3>
+          <h3 class="title">Tại sao nên chọn ZinBee ?</h3>
         </div>
         <div class="d_none d_md_block">
           <div class="options mb_4 d_none">
@@ -759,358 +766,356 @@
             </div>
           </div>
           <div class="item--body text_center">
-            <VuePerfectScrollbar class="scroll--price">
-              <div class="items d_flex align_items_center">
-                <div class="items--main function">Tài khoản facebook</div>
-                <div class="items--main">1</div>
-                <div class="items--main">2</div>
-                <div class="items--main">2</div>
-                <div class="items--main">Không giới hạn</div>
+            <div class="items d_flex align_items_center">
+              <div class="items--main function">Tài khoản facebook</div>
+              <div class="items--main">1</div>
+              <div class="items--main">2</div>
+              <div class="items--main">2</div>
+              <div class="items--main">Không giới hạn</div>
+            </div>
+            <div class="items d_flex align_items_center">
+              <div class="items--main function">Pages</div>
+              <div class="items--main">Không giới hạn</div>
+              <div class="items--main">Không giới hạn</div>
+              <div class="items--main">Không giới hạn</div>
+              <div class="items--main">Không giới hạn</div>
+            </div>
+            <div class="items d_flex align_items_center">
+              <div class="items--main function">Groups</div>
+              <div class="items--main">Không giới hạn</div>
+              <div class="items--main">Không giới hạn</div>
+              <div class="items--main">Không giới hạn</div>
+              <div class="items--main">Không giới hạn</div>
+            </div>
+            <div class="items d_flex align_items_center">
+              <div class="items--main function">Tìm nội dung hot</div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tìm nội dung hot"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
               </div>
-              <div class="items d_flex align_items_center">
-                <div class="items--main function">Pages</div>
-                <div class="items--main">Không giới hạn</div>
-                <div class="items--main">Không giới hạn</div>
-                <div class="items--main">Không giới hạn</div>
-                <div class="items--main">Không giới hạn</div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tìm nội dung hot"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
               </div>
-              <div class="items d_flex align_items_center">
-                <div class="items--main function">Groups</div>
-                <div class="items--main">Không giới hạn</div>
-                <div class="items--main">Không giới hạn</div>
-                <div class="items--main">Không giới hạn</div>
-                <div class="items--main">Không giới hạn</div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tìm nội dung hot"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
               </div>
-              <div class="items d_flex align_items_center">
-                <div class="items--main function">Tìm nội dung hot</div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tìm nội dung hot"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tìm nội dung hot"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tìm nội dung hot"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tìm nội dung hot"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tìm nội dung hot"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
               </div>
-              <div class="items d_flex align_items_center">
-                <div class="items--main function">Tự động tìm nội dung</div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động tìm nội dung"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động tìm nội dung"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động tìm nội dung"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động tìm nội dung"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
+            </div>
+            <div class="items d_flex align_items_center">
+              <div class="items--main function">Tự động tìm nội dung</div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động tìm nội dung"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
               </div>
-              <div class="items d_flex align_items_center">
-                <div class="items--main function">Tự động đăng bài</div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động đăng bài"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động đăng bài"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động đăng bài"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động đăng bài"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động tìm nội dung"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
               </div>
-              <div class="items d_flex align_items_center">
-                <div class="items--main function">Tự động like</div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động like"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động like"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động like"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động like"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động tìm nội dung"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
               </div>
-              <!-- <div class="items d_flex align_items_center">
-                <div class="items--main function">Tự động thêm bạn</div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động thêm bạn"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động thêm bạn"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động thêm bạn"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động thêm bạn"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-              </div> -->
-              <div class="items d_flex align_items_center">
-                <div class="items--main function">Tự động huỷ kết bạn</div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động huỷ kết bạn"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động huỷ kết bạn"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động huỷ kết bạn"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Tự động huỷ kết bạn"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động tìm nội dung"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
               </div>
-              <div class="items d_flex align_items_center">
-                <div class="items--main function">Chatbot profile</div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Chatbot profile"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Chatbot profile"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Chatbot profile"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
-                <div class="items--main">
-                  <icon-base
-                    icon-name="Chatbot profile"
-                    class
-                    width="20"
-                    height="20"
-                    viewBox="0 0 290 290"
-                  >
-                    <icon-check-circle />
-                  </icon-base>
-                </div>
+            </div>
+            <div class="items d_flex align_items_center">
+              <div class="items--main function">Tự động đăng bài</div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động đăng bài"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
               </div>
-            </VuePerfectScrollbar>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động đăng bài"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động đăng bài"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động đăng bài"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+            </div>
+            <div class="items d_flex align_items_center">
+              <div class="items--main function">Tự động like</div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động like"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động like"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động like"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động like"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+            </div>
+            <!-- <div class="items d_flex align_items_center">
+              <div class="items--main function">Tự động thêm bạn</div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động thêm bạn"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động thêm bạn"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động thêm bạn"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động thêm bạn"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+            </div> -->
+            <div class="items d_flex align_items_center">
+              <div class="items--main function">Tự động huỷ kết bạn</div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động huỷ kết bạn"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động huỷ kết bạn"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động huỷ kết bạn"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Tự động huỷ kết bạn"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+            </div>
+            <div class="items d_flex align_items_center">
+              <div class="items--main function">Chatbot profile</div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Chatbot profile"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Chatbot profile"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Chatbot profile"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+              <div class="items--main">
+                <icon-base
+                  icon-name="Chatbot profile"
+                  class
+                  width="20"
+                  height="20"
+                  viewBox="0 0 290 290"
+                >
+                  <icon-check-circle />
+                </icon-base>
+              </div>
+            </div>
           </div>
           <div class="item--footer text_center">
             <div class="title">
@@ -1742,7 +1747,7 @@
   </div>
 </template>
 
-<script src="./index.script"></script>
+<script src="./index.script.js"></script>
 
 <style lang="scss" scoped>
 @import "./index.style";

@@ -47,7 +47,7 @@
     </div>
     <!-- if all post === undefined call component loading -->
     <div
-      v-if="filteredMarketPosts.length === 0"
+      v-if="allMarketPosts.length === 0"
       class="item--body data--empty d_flex align_items_center justify_content_center px_3 py_2"
     >
       Không có dữ liệu.
@@ -62,7 +62,7 @@
       </div>
       <div v-else>
         <item-post
-          v-for="(item, index) in filteredMarketPosts"
+          v-for="(item, index) in allMarketPosts"
           :key="index"
           :item="item"
           @showDeletePopup="showDeletePopup($event)"

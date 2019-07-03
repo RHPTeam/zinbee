@@ -77,7 +77,7 @@
                     >Không có đặc điểm nào</span
                   >
                   <span v-else>
-                    <span class="font_weight_bold">{{ attr.name }} :</span>
+                    <span class="font_weight_bold">{{ attr.name }}: </span>
                     <span>{{ attr.value }}</span>
                   </span>
                 </li>

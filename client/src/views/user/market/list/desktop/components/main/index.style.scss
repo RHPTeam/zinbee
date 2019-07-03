@@ -2,7 +2,10 @@
   font-size: .875rem;
   .selected-filters {
     .selected {
-      cursor: pointer;
+      .name {
+        cursor: pointer;
+        text-decoration: underline;
+      }
       .all--post {
         color: inherit;
         text-decoration: underline;
@@ -14,7 +17,7 @@
       }
     }
     .clear {
-      color: hsl(0, 0%, 20%);
+      color: #666;
       font-size: 12px;
       margin: 0 8px;
       text-decoration: underline;
@@ -117,6 +120,15 @@
                 font-size: .875rem;
                 font-weight: 600;
                 width: 100%;
+                &.btn_outline_info {
+                  border-radius: .375rem;
+                  border-color: #FFB94A;
+                  color: #FFB94A;
+                  &:hover, &:focus {
+                    background-color: #FFB94A;
+                    color: #fff;
+                  }
+                }
               }
             }
             .content {
@@ -124,7 +136,7 @@
                 font-size: 1.15rem;
                 line-height: 28px;
                 font-weight: 700;
-                color: #4d4d4d;
+                color: #f96f4b;
               }
               .sale {
                 font-size: .825rem;

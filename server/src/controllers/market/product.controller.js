@@ -6,15 +6,99 @@ const { createSyncFromMarket } = require( "../../microservices/synchronize/produ
 
 module.exports = {
   "index": async ( req, res ) => {
-    let data;
+    let dataResponse = null;
 
+    // Check if query get one item from _id
     if ( req.query._id ) {
-      data = await MarketProduct.findOne( { "_id": req.query._id } );
-    } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await MarketProduct.find( {} ).populate( { "path": "_creator", "select": "name" } ).populate( { "path": "_category", "select": "name" } ).lean();
+      dataResponse = await MarketProduct.findOne( { "_id": req.query._id } ).lean();
+      return res.status( 200 ).json( { "status": "success", "data": dataResponse } );
     }
 
-    res.status( 200 ).json( { "status": "success", "data": data } );
+    // Handle get items by pagination from database
+    if ( req.query._size && req.query._page ) {
+      const pageNo = parseInt( req.query._page ),
+        size = parseInt( req.query._size ),
+        query = {},
+        queryCon = {},
+        totalPosts = await MarketProduct.countDocuments( { } );
+
+      // Check catch
+      if ( pageNo < 0 || pageNo === 0 ) {
+        return res.status( 403 ).json( { "status": "error", "message": "Dữ liệu số trang không đúng, phải bắt đầu từ 1." } );
+      }
+
+      // Handle input data before connect to mongodb
+      query.skip = size * ( pageNo - 1 );
+      query.limit = size;
+
+      /** Multi condition search **/
+
+      /** If user choose filter by tags using split to create condition search **/
+      if ( req.query._tags ) {
+        queryCon.tags = { "$all": req.query._tags.split( "," ) };
+      }
+
+      /** If user choose filter by Date: query._date
+       *  + this_date: get product in a day
+       *  + this_month: get product in a month
+       *  + this_year: get product in a year
+       */
+      if ( req.query._date === "this_date" ) {
+        let date = new Date(),
+          dateNow = new Date(),
+          oldDate = new Date( date.setDate( date.getDate() - 1 ) );
+
+        queryCon.createdAt = { "$gte": oldDate, "$lt": dateNow };
+      } else if ( req.query._date === "this_month" ) {
+        let date = new Date(),
+          dateNow = new Date(),
+          oldDate = new Date( date.setMonth( date.getMonth() - 1 ) );
+
+        queryCon.createdAt = { "$gte": oldDate, "$lt": dateNow };
+      } else if ( req.query._date === "this_year" ) {
+        let date = new Date(),
+          dateNow = new Date(),
+          oldDate = new Date( date.setFullYear( date.getFullYear() - 1 ) );
+
+        queryCon.createdAt = { "$gte": oldDate, "$lt": dateNow };
+      }
+
+      /**
+       *  Sort by: query._sort_by
+       *  + newest or none => get product from newest to older
+       *  + price_desc => get product from min price to max price
+       *  + price_asc => get product from max price to min price
+       *  + best_sell =>  get product from many sell to some sell
+       */
+      let sort = { "$natural": -1 };
+
+      if ( req.query._sort_by === "newest" ) {
+        sort = { "$natural": -1 };
+      } else if ( req.query._sort_by === "price_desc" ) {
+        sort = { "priceCents": 1 };
+      } else if ( req.query._sort_by === "price_asc" ) {
+        sort = { "priceCents": -1 };
+      } else if ( req.query._sort_by === "best_sell" ) {
+        sort = { "numberOfSales": -1 };
+      }
+
+      /** Handle with mongodb **/
+      dataResponse = await MarketProduct.find( queryCon, "-created_at -updated_at -__v", query ).sort( sort ).populate( { "path": "_creator", "select": "name" } ).populate( { "path": "_category", "select": "name" } ).lean();
+
+      /** Filter if have range price **/
+      if ( req.query._price_min && req.query._price_max ) {
+        dataResponse = dataResponse.filter( ( item ) => Number( item.priceCents ) >= Number( req.query._price_min ) && Number( item.priceCents ) <= Number( req.query._price_max ) );
+      } else if ( req.query._price_min && !req.query._price_max ) {
+        dataResponse = dataResponse.filter( ( item ) => Number( item.priceCents ) >= Number( req.query._price_min ) && Number( item.priceCents ) <= ( Number( req.query._price_min ) + 500000 ) );
+      } else if ( !req.query._price_min && req.query._price_max ) {
+        dataResponse = dataResponse.filter( ( item ) => Number( item.priceCents ) >= ( Number( req.query._price_max ) - 100000 ) && Number( item.priceCents ) <= Number( req.query._price_max ) );
+      }
+
+      return res.status( 200 ).json( { "status": "success", "data": { "results": dataResponse, "page": Math.ceil( totalPosts / size ), "size": size } } );
+
+    }
+
+    res.status( 304 ).json( { "status": "fail", "data": "API này không được cung cấp!" } );
   },
   "create": async ( req, res ) => {
     let { body } = req, newProduct,
@@ -162,5 +246,10 @@ module.exports = {
       .limit( parseInt( req.query.number ) );
 
     res.status( 200 ).json( { "status": "success", "data": data } );
+  },
+  "statisticHomepage": async( req, res ) => {
+    const totalPostProducts = await MarketProduct.countDocuments( { "typeProduct": 0 } );
+
+    res.status( 200 ).json( { "status": "success", "data": { "totalPostProducts": totalPostProducts, "totalCampaignProducts": 0, "totalTrendingProducts": 0 } } );
   }
 };

@@ -1,8 +1,8 @@
 import Api from "@/services";
 
 export default {
-  index() {
-    return Api().get("market/p/posts");
+  index(size, page) {
+    return Api().get(`market/p/posts?_size=${size}&_page=${page}`);
   },
   create(data) {
     return Api().post("market/p/posts", data);
@@ -18,5 +18,10 @@ export default {
   },
   delete(id) {
     return Api().delete(`market/p/posts?_id=${id}`);
+  },
+  searchByKey(keyword, size, page) {
+    return Api().post(
+      `market/p/posts/search?keyword=${keyword}&_size=${size}&_page=${page}`
+    );
   }
 };

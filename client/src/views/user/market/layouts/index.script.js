@@ -18,6 +18,7 @@ export default {
   },
   created() {
     this.startUpdateTimer();
+    this.$store.dispatch("getAllMarketCategoriesTree");
   },
   beforeDestroy() {
     this.stopUpdateTimer();
