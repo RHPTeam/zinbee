@@ -21,11 +21,15 @@ module.exports = {
     if ( !findLog ) {
       const newLog = await new Log( { "_account": body._account } );
 
-      newLog.logs.push( body.logs );
+      Promise.all( body.data.map( async ( log ) => {
+        newLog.logs.push( log.logs );
+      } ) );
       await newLog.save();
       return res.send( { "status": "success", "data": "Synchronized..." } );
     }
-    findLog.logs.push( body.logs );
+    Promise.all( body.data.map( async ( log ) => {
+      findLog.logs.push( log.logs );
+    } ) );
     await findLog.save();
     res.send( { "status": "success", "data": "Synchronized..." } );
   }
