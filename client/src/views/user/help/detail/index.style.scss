@@ -29,20 +29,8 @@
       }
     }
     .blog--detail {
-      img {
+      .text >>> img {
         width: 100%;
-      }
-      .text {
-        width: 100%;
-        p {
-          width: 100%;
-          > img {
-            width: 100% !important;
-          }
-        }
-        > img {
-          width: 100% !important;
-        }
       }
     }
     .infor--useful{

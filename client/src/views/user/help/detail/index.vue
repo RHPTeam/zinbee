@@ -7,7 +7,7 @@
           <nav class="navigation" v-if="helpDefault.left === 1">
             <ul v-if="childrenLevel1 && childrenLevel1.length > 0">
               <li
-                class="navigation--item"
+                class="navigation--item font_weight_bold"
                 v-for="(item, index) in childrenLevel1"
                 :key="`l-${index}`"
                 @click="showInfoCategory(item._id)"
@@ -18,7 +18,7 @@
             <div v-else>
               <ul v-if="cateLevel && cateLevel.length > 0">
                 <li
-                  class="navigation--item"
+                  class="navigation--item font_weight_bold"
                   v-for="(cate, index) in cateLevel"
                   :key="`c-${index}`"
                   @click="showInfoCategoryDefault(cate._id)"
@@ -32,7 +32,7 @@
           <nav class="navigation" v-if="helpDefault.left === 0">
             <ul v-if="cateLevel && cateLevel.length > 0">
               <li
-                class="navigation--item"
+                class="navigation--item font_weight_bold"
                 v-for="(cate, index) in cateLevel"
                 :key="`c-${index}`"
                 @click="showInfoCategoryDefault(cate._id)"
@@ -54,9 +54,9 @@
             </div>
             <div v-else-if="blogHelpCategory && blogHelpCategory.length === 1">
               <h2 class="title--question">
-                {{ blogHelpCategory[0].title }}
+                {{ blogHelpCategory.title }}
               </h2>
-              <div class="text" v-html="blogHelpCategory[0].content"></div>
+              <div class="text" v-html="blogHelpCategory.content"></div>
             </div>
             <!-- End: If category contain 1 blog -->
             <!-- Start: If category contain bigger 1 blog -->
@@ -68,9 +68,11 @@
                 >
                   {{ blog.title }}
                 </h2>
-                <div class="text" v-if="isShowDetailBlog === bindex">
-                  {{ blog.content }}
-                </div>
+                <div
+                  class="text"
+                  v-if="isShowDetailBlog === bindex"
+                  v-html="blog.content"
+                ></div>
               </div>
             </div>
             <!-- End: If category contain bigger 1 blog -->
@@ -101,24 +103,11 @@
               </div>
             </div>
             <div v-else>
-              <div v-if="blogHelpCategory[0]">
-                <h2
-                  class="title--question"
-                  v-if="
-                    blogHelpCategory[0] &&
-                      blogHelpCategory[0].title !== undefined
-                  "
-                >
-                  {{ blogHelpCategory[0].title }}
+              <div v-if="blogHelpCategory">
+                <h2 class="title--question">
+                  {{ blogHelpCategory.title }}
                 </h2>
-                <div
-                  v-if="
-                    blogHelpCategory[0] &&
-                      blogHelpCategory[0].content !== undefined
-                  "
-                >
-                  <div class="text" v-html="blogHelpCategory[0].content"></div>
-                </div>
+                <div class="text" v-html="blogHelpCategory.content"></div>
               </div>
             </div>
           </div>
@@ -188,16 +177,6 @@ export default {
     categoryChildren() {
       return this.$store.getters.categoryChildren;
     },
-    getBlogFirstCateChildren() {
-      const blogs = [];
-      if (this.categoryChildren.children === undefined) return;
-      this.categoryChildren.children.map(item => {
-        item._blogHelp.map(blog => {
-          blogs.push(blog);
-        });
-      });
-      return blogs;
-    },
     helpDefault() {
       return this.$store.getters.helpDefault;
     },
@@ -222,7 +201,7 @@ export default {
       cateParent = this.$route.query.parentId;
 
     // Issuses catch
-    this.$store.dispatch("getBlogById", id);
+    // this.$store.dispatch("getBlogById", id);
 
     if (post && post.length === 0 && cateParent === undefined) {
       await this.$store.dispatch("getAllCategoriesChildren");
@@ -257,6 +236,7 @@ export default {
     },
     showDetailBlogCategory(val) {
       this.isShowDetailBlog = val;
+      // this.$parent.$parent.$parent.$parent.$el.clientHeight = 0;
     },
     showInfoCategoryDefault(val) {
       this.$store.dispatch("setHelpDefault", {

@@ -33,7 +33,7 @@
               </icon-base>
               <input
                 type="text"
-                placeholder="Chào ABC, chúng tôi có thể giúp gì cho bạn?"
+                placeholder="Xin chào, chúng tôi có thể giúp gì cho bạn?"
                 v-model="keyword"
                 @keydown.enter="searchQuestion"
               />
@@ -135,22 +135,16 @@ export default {
   computed: {
     allHelpCategories() {
       return this.$store.getters.allHelpCategoriesChild;
-    },
-    navigationCategories() {
-      return this.allHelpCategories.filter(category => {
-        return category.level === 0;
-      });
     }
   },
   async created() {
-    await this.$store.dispatch("getAllCategoriesChildren");
+    // let helpCategories = this.$store.getters.allHelpCategoriesChild;
+    // console.log(helpCategories);
+    // if (helpCategories && helpCategories.length === 0) {
+    //   await this.$store.dispatch("getAllCategoriesChildren");
+    // }
   },
   methods: {
-    childrenOfCategory(id) {
-      return this.allHelpCategories.filter(category => {
-        return category.parent === id;
-      });
-    },
     goToHelpHome() {
       this.$router.push({ name: "help" });
     },
@@ -179,7 +173,10 @@ export default {
       };
       await this.$store.dispatch("searchBlog", dataSender);
       await this.$store.dispatch("setKeySearch", this.keyword);
-      this.$router.push({ name: "help_result_search" });
+      this.$router.push({
+        name: "help_result_search",
+        query: { key: this.keyword }
+      });
     }
   }
 };

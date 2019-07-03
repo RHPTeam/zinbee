@@ -31,4 +31,8 @@ router.use( "/vps", auth, permission, require( "./modules/server.route" ) );
 // Backup Route
 router.use( "/backup", auth, permission, require( "./modules/backup/marketCategoryDefault.route" ) );
 
+// Agency Route
+router.use( "/package", auth, permission, require( "./modules/agency/package.route" ) );
+router.use( "/agency", auth, permission, require( "./modules/agency/agency.route" ) );
+
 module.exports = router;

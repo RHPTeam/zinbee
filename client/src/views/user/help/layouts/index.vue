@@ -26,6 +26,7 @@
   min-height: 100vh;
   .wrap--content-main {
     width: 100%;
+    min-height: calc(100vh - 196px);
   }
   .wrap--content-mobile {
     background-color: #fff;
