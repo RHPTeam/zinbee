@@ -1,7 +1,7 @@
 <template>
   <div class="modal--wrapper">
     <div class="modal--dialog d_flex justify_content_center">
-      <div class="modal--content px_4 py_3" v-click-outside="close">
+      <div class="modal--content px_4 py_3">
         <!-- Start: Modal Body -->
         <div class="body">
           <div class="name mt_2">
@@ -38,7 +38,7 @@
                 <date-picker
                   role="date"
                   format="DD/MM/YYYY"
-                  :default-value="new Date(agency.expire.start)"
+                  :default-value="timeDefault"
                   v-model="agency.expire.start"
                   @change="changeDateStartAgency"
                 ></date-picker>
@@ -119,8 +119,19 @@
             <button class="btn bg_danger mr_2" @click="close">
               Hủy bỏ
             </button>
-            <button class="btn bg_primary" @click="createNewAgency">
+            <button
+              class="btn bg_primary"
+              v-if="this.$store.getters.variableControlAgency === 0"
+              @click="createNewAgency"
+            >
               Tạo mới
+            </button>
+            <button
+              class="btn bg_primary"
+              v-if="this.$store.getters.variableControlAgency === 1"
+              @click="updateAgency"
+            >
+              Cập nhật
             </button>
           </div>
         </div>

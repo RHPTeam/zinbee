@@ -1,40 +1,40 @@
 <template>
-  <div class="item--body d_flex align_items_center px_3 py_2">
+  <div class="item--body d_flex align_items_center px_3 py_2" v-if="item">
     <!-- Start: Name Column -->
-    <div class="col col--name px_2">
-      <!--      <router-link class="col col&#45;&#45;name-text">-->
-      <!--        {{ item.title-->
-      <!--      </router-link>-->
+    <div class="col col--name px_2" @click="showEditPopup">
+      <div class="col col--name-text" v-if="item._account">
+        {{ item._account.name }}
+      </div>
     </div>
     <!-- End: Name Column -->
     <!-- Start: Category Column -->
     <div class="col col--category px_2">
-      <span>{{ item.content</span>
+      <span>{{ item.customer.total }}</span>
+    </div>
+    <!-- End: Category Column -->
+    <!-- Start: Category Column -->
+    <div class="col col--category px_2">
+      <span>{{ item.expire.usedTime }}</span>
     </div>
     <!-- End: Category Column -->
     <!-- Start: Image Column -->
-    <div class="col col--image px_2"></div>
+    <div class="col col--image px_2">{{ item.expire.leftTime }}</div>
+    <!-- End: Image Column -->
+    <!-- Start: Image Column -->
+    <div class="col col--image px_2" v-if="item._package">
+      {{ item._package.title }}
+    </div>
     <!-- End: Image Column -->
     <!-- Start: Action Column -->
     <div
       class="col d_flex align_items_center justify_content_center col--action px_4 text_center"
     >
-      <span class="mx_1" @click="showCreatePopup">
-        <icon-base
-          width="20"
-          height="20"
-          icon-name="post"
-          viewBox="0 0 520 520"
-        >
-          <icon-automatic />
-        </icon-base>
-      </span>
-      <span class="mx_1" @click="updatePost">
+      <span class="mx_1" @click="showEditPopup">
         <icon-base icon-name="icon-edit" viewBox="0 0 20 20">
           <icon-edit />
         </icon-base>
       </span>
-      <span class="mr_1" @click="showDeletePopup()">
+      <span class="mr_1" @click="showDeletePopup">
         <icon-base
           icon-name="remove"
           width="20"
@@ -51,14 +51,17 @@
 
 <script>
 export default {
-  props: {},
+  props: {
+    item: Object
+  },
   methods: {
-    updatePost() {},
-    showDeletePopup() {
-      // this.$emit("showDeletePopup", this.item);
+    async showEditPopup() {
+      await this.$emit("showCreatePopup", true);
+      await this.$store.dispatch("getInfoAgency", this.item._id);
+      this.$store.dispatch("setVaribleControlAgency", 1);
     },
-    showCreatePopup() {
-      // this.$emit("showCreatePopup", this.item);
+    showDeletePopup() {
+      this.$emit("showDeletePopup", this.item._id);
     }
   }
 };

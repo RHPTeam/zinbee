@@ -10,7 +10,29 @@ export default {
   data() {
     return {
       isShowInfo: false,
-      isShowDeleteAgency: false
+      isShowDeleteAgency: false,
+      agencyId: ""
     };
+  },
+  computed: {
+    agencies(){
+      return this.$store.getters.agencies;
+    }
+  },
+  async created(){
+    await this.$store.dispatch("getAllAgency");
+  },
+  methods: {
+    async createAgency(){
+      await this.$store.dispatch("setAgencyDefault");
+      this.isShowInfo = true
+    },
+    showCreatePopup(val) {
+      this.isShowInfo = val;
+    },
+    showDeletePopup(val) {
+      this.agencyId = val;
+      this.isShowDeleteAgency = true;
+    }
   }
 };

@@ -6,5 +6,14 @@ export default {
   },
   index() {
     return Api().get("agency");
+  },
+  getInfo(agencyId) {
+    return Api().get(`agency?_id=${agencyId}`);
+  },
+  delete(agencyId) {
+    return Api().delete(`agency?_id=${agencyId}`);
+  },
+  update(agencyId, data) {
+    return Api().patch(`agency?_id=${agencyId}`, data);
   }
 };

@@ -61,7 +61,7 @@
       <div class="c_lg_3 c_xl_3 c_md_6 mb_3">
         <div
           class="card d_flex flex_column align_items_center px_3 py_4"
-          @click="isShowCreate = true"
+          @click="createPackage"
         >
           <div class="icon mb_2">
             <icon-base
@@ -90,8 +90,8 @@
 </template>
 
 <script>
-import CreatePackage from "../popup/create";
-import DeletePackage from "../popup/delete";
+import CreatePackage from "./components/popup/create";
+import DeletePackage from "./components/popup/delete";
 export default {
   components: {
     CreatePackage,
@@ -113,6 +113,13 @@ export default {
     await this.$store.dispatch("getAllPackage");
   },
   methods: {
+    async createPackage() {
+      await this.$store.dispatch("setPackageDefault", {
+        title: "",
+        total: ""
+      });
+      this.isShowCreate = true;
+    },
     async showInfoPackage(val) {
       await this.$store.dispatch("getPackageById", val);
       this.variableControl = true;

@@ -13,7 +13,7 @@
             <button class="btn bg_danger mr_2" @click="close">
               Hủy bỏ
             </button>
-            <button class="btn bg_primary" @click="deletePackage">
+            <button class="btn bg_primary" @click="deleteAgency">
               Xóa
             </button>
           </div>
@@ -27,13 +27,16 @@
 <script>
 export default {
   props: {
-    item: String
+    agencyId: String
   },
   methods: {
     close() {
       this.$emit("close", false);
     },
-    deletePackage() {}
+    async deleteAgency() {
+      await this.$store.dispatch("deleteAgency", this.agencyId);
+      this.close();
+    }
   }
 };
 </script>
