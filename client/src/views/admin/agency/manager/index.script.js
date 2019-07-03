@@ -15,17 +15,17 @@ export default {
     };
   },
   computed: {
-    agencies(){
+    agencies() {
       return this.$store.getters.agencies;
     }
   },
-  async created(){
+  async created() {
     await this.$store.dispatch("getAllAgency");
   },
   methods: {
-    async createAgency(){
+    async createAgency() {
       await this.$store.dispatch("setAgencyDefault");
-      this.isShowInfo = true
+      this.isShowInfo = true;
     },
     showCreatePopup(val) {
       this.isShowInfo = val;

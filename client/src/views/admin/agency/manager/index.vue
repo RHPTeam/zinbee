@@ -46,7 +46,11 @@
             :agencyId="agencyId"
             @close="isShowDeleteAgency = $event"
           ></delete-agency>
-          <info-agency v-if="isShowInfo === true" :isShowInfo="isShowInfo" @closePopup="isShowInfo = $event">
+          <info-agency
+            v-if="isShowInfo === true"
+            :isShowInfo="isShowInfo"
+            @closePopup="isShowInfo = $event"
+          >
           </info-agency>
         </transition>
       </div>
