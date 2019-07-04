@@ -12,10 +12,15 @@ import HelpCategoriesStore from "./modules/user/help/category.store";
 import HelpStore from "./modules/help.store";
 
 // Market
+import HomepageMarket from "./modules/market/homepage.store";
 import CategoryMarket from "./modules/market/category.store";
 import MarketPostStore from "./modules/market/marketpost.store";
 import ProductMarket from "./modules/market/product.store";
 import ListProduct from "./modules/market/list.store";
+
+//Agency
+import PackageStore from "./modules/package.store";
+import AgencyStore from "./modules/agency.store";
 
 Vue.use(Vuex);
 
@@ -31,9 +36,13 @@ export default new Vuex.Store({
     HelpCategoriesStore,
     HelpStore,
     // Market
+    HomepageMarket,
     CategoryMarket,
     MarketPostStore,
     ProductMarket,
-    ListProduct
+    ListProduct,
+    //Agency
+    PackageStore,
+    AgencyStore
   }
 });

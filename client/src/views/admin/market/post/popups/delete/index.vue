@@ -46,7 +46,6 @@ export default {
     },
     deleteTargets() {
       this.$store.dispatch("deleteMarketPost", this.post._id);
-
       this.$emit("closePopup", false);
     }
   }

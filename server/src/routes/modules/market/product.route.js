@@ -56,7 +56,10 @@ router.route( "/:categoryId/products" )
 router.route( "/search" ).post( auth, ProductController.search );
 
 // get newest product
-router .route( "/newest" )
+router.route( "/newest" )
   .get( ProductController.getNewestProduct );
+
+// statistic homepage
+router.route( "/s/homepage" ).get( ProductController.statisticHomepage );
 
 module.exports = router;

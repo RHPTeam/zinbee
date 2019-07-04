@@ -1,5 +1,5 @@
 <template>
-  <div class="left--sidebar p_3">
+  <div class="left--sidebar py_3 pr_3">
     <div class="categories">
       <div class="title d_flex align_items_center justify_content_between">
         <div class="text font_weight_bold mb_2">Danh mục</div>

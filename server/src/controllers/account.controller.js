@@ -8,12 +8,13 @@
  */
 const Account = require( "../models/Account.model" );
 const Role = require( "../models/Role.model" );
-
+const Agency = require( "../models/agency/Agency.model" );
 const Server = require( "../models/Server.model" );
 
 const fs = require( "fs" );
 const jsonResponse = require( "../configs/response" );
 
+const { findSubString } = require( "../helpers/utils/functions/string" );
 const { signToken } = require( "../configs/jwt" );
 const { signUpSync, createNewPasswordSync, activeAccountSync, changeStatusAccountSync } = require( "../microservices/synchronize/account" ),
   mail = require( "nodemailer" ),
@@ -234,6 +235,17 @@ module.exports = {
     // Assign cookie to headers
     cookie = `sid=${signToken( newUser )}; uid=${newUser._id}; cfr=${memberRole.level};`;
     res.set( "Cookie", cookie );
+
+    // check browser user have link and cookie affiliate
+    if ( req.headers.authorization && findSubString( req.headers.authorization, "aid=", ";" ) ) {
+      const findAgency = await Agency.findOne( { "_id": findSubString( req.headers.authorization, "aid=", ";" ) } );
+
+      if ( findAgency ) {
+        findAgency.customer.total += 1;
+        findAgency.customer.listOfUser.push( newUser._id );
+        await findAgency.save();
+      }
+    }
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${newUser.email} đăng ký thành công!`,

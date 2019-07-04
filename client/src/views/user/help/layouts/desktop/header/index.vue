@@ -33,7 +33,7 @@
               </icon-base>
               <input
                 type="text"
-                placeholder="Chào ABC, chúng tôi có thể giúp gì cho bạn?"
+                placeholder="Xin chào, chúng tôi có thể giúp gì cho bạn?"
                 v-model="keyword"
                 @keydown.enter="searchQuestion"
               />
@@ -88,7 +88,7 @@
                   class="dropdown--menu-item"
                   v-for="(categoryChild, cindex) in category.children"
                   :key="cindex"
-                  @click="showInfoCategory(categoryChild)"
+                  @click="showInfoCategory(categoryChild, category._id)"
                 >
                   <a>{{ categoryChild.title }}</a>
                 </li>
@@ -135,34 +135,31 @@ export default {
   computed: {
     allHelpCategories() {
       return this.$store.getters.allHelpCategoriesChild;
-    },
-    navigationCategories() {
-      return this.allHelpCategories.filter(category => {
-        return category.level === 0;
-      });
     }
   },
   async created() {
-    await this.$store.dispatch("getAllCategoriesChildren");
+    // let helpCategories = this.$store.getters.allHelpCategoriesChild;
+    // console.log(helpCategories);
+    // if (helpCategories && helpCategories.length === 0) {
+    //   await this.$store.dispatch("getAllCategoriesChildren");
+    // }
   },
   methods: {
-    childrenOfCategory(id) {
-      return this.allHelpCategories.filter(category => {
-        return category.parent === id;
-      });
-    },
     goToHelpHome() {
       this.$router.push({ name: "help" });
     },
-    async showInfoCategory(val) {
+    async showInfoCategory(val, cateId) {
       await this.$store.dispatch("setHelpDefault", {
         right: 1,
         left: 1
       });
+      await this.$store.dispatch("getHelpCategoryById", val._id);
+      await this.$store.dispatch("getHelpCategoryParent", { parentId: cateId });
       await this.$store.dispatch("setHelpCategoryChildrenLevel", val);
-      this.$router.push({
+      this.$router.replace({
         name: "help_detail",
-        params: { id: val }
+        params: { id: val._id },
+        query: { parentId: cateId }
       });
     },
     openEmail() {
@@ -176,7 +173,10 @@ export default {
       };
       await this.$store.dispatch("searchBlog", dataSender);
       await this.$store.dispatch("setKeySearch", this.keyword);
-      this.$router.push({ name: "help_result_search" });
+      this.$router.push({
+        name: "help_result_search",
+        query: { key: this.keyword }
+      });
     }
   }
 };

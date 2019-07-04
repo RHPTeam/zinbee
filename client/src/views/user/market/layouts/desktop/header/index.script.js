@@ -32,7 +32,10 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch("getUserInfoMember");
+    const cookie = CookieFunction.getCookie("cfr");
+    if (cookie) {
+      await this.$store.dispatch("getUserInfoMember");
+    }
     await this.$store.dispatch("getAllMarketCategoriesTree");
   },
   methods: {

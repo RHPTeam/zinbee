@@ -8,7 +8,7 @@ const helpGeneralRouter = {
       component: require("@/views/user/help/home").default
     },
     {
-      path: "detail",
+      path: ":id",
       name: "help_detail",
       component: require("@/views/user/help/detail").default
     },

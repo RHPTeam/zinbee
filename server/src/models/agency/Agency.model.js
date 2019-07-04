@@ -48,6 +48,8 @@ const mongoose = require( "mongoose" ),
       "type": Schema.Types.ObjectId,
       "ref": "Package"
     },
+    "linkAffiliate": String,
+    "subDomain": String,
     "createdAt": { // Auto generate
       "type": Date,
       "default": Date.now()

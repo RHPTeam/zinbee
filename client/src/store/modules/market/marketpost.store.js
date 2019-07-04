@@ -44,6 +44,9 @@ const mutations = {
   },
   setPageMarketPosts: (state, payload) => {
     state.pageCurrent = payload;
+  },
+  setDeleteMarketPost: (state, payload) => {
+    state.allMarketPosts = payload;
   }
 };
 const actions = {
@@ -59,10 +62,10 @@ const actions = {
   /**
    * Delete a market post
    */
-  deleteMarketPost: async ({ commit }, payload) => {
+  deleteMarketPost: async ({ commit, state }, payload) => {
+    const listPost = state.allMarketPosts.filter(item => item._id !== payload);
+    commit("setDeleteMarketPost", listPost);
     await MarketPostService.delete(payload);
-    const res = await MarketPostService.index();
-    await commit("setAllMarketPosts", res.data.data);
   },
   /**
    * Get all market posts

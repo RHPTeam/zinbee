@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import ItemCate from "./itemcate";
+import ItemCate from "./components/itemcate";
 export default {
   components: {
     ItemCate

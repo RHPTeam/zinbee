@@ -18,6 +18,8 @@ router
   .post( auth, permission, AgencyController.create )
   .delete( auth, permission, AgencyController.delete );
 router.route( "/user" )
-  .post( auth, agency, AgencyController.createUserByAgency );
+  .get( AgencyController.setCookieWithLinkAffiliate )
+  .post( auth, agency, AgencyController.createUserByAgency )
+  .patch( auth, agency, AgencyController.expireUserByAgency );
 
 module.exports = router;
