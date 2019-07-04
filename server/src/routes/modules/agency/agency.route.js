@@ -9,6 +9,7 @@ const AgencyController = require( "../../../controllers/agency/agency.controller
 
 const auth = require( "../../../helpers/middleware/authenticate.middleware" );
 const permission = require( "../../../helpers/middleware/permission.middleware" );
+const agency = require( "../../../helpers/middleware/agency.middleware" );
 
 router
   .route( "/" )
@@ -16,5 +17,7 @@ router
   .patch( auth, permission, AgencyController.update )
   .post( auth, permission, AgencyController.create )
   .delete( auth, permission, AgencyController.delete );
+router.route( "/user" )
+  .post( auth, agency, AgencyController.createUserByAgency );
 
 module.exports = router;

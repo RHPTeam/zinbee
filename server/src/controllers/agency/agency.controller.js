@@ -11,6 +11,8 @@ const jsonResponse = require( "../../configs/response" );
 const Agency = require( "../../models/agency/Agency.model" );
 const Package = require( "../../models/agency/Package.model" );
 
+const { signUp } = require( "../account.controller" );
+
 module.exports = {
   "create": async ( req, res ) => {
     if ( req.body._account === undefined || req.body._account.length === 0 ) {
@@ -71,5 +73,16 @@ module.exports = {
     req.body._editor = req.uid;
 
     res.status( 200 ).json( jsonResponse( "success", await Package.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) ) );
+  },
+  "createUserByAgency": async ( req, res ) => {
+    const findAgency = await Agency.findOne( { "_account": req.uid } );
+
+    if ( !findAgency ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Đại lý không tồn tại!" } );
+    }
+
+    // let userSignupByAgency = await signUp( req, res );
+
+
   }
 };
