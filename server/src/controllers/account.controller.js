@@ -205,7 +205,7 @@ module.exports = {
     if ( isEmailExist ) {
       return res.status( 403 ).json( { "status": "fail", "phone": "Email đã tồn tại!" } );
     } else if ( isPhoneExist ) {
-      return res.status( 403 ).json( { "status": "fail", "phone": "Số điện thoại đã tồn tại!" } );
+      return res.status( 405 ).json( { "status": "fail", "phone": "Số điện thoại đã tồn tại!" } );
     }
 
     newUser = await new Account( {
@@ -243,7 +243,7 @@ module.exports = {
 
       if ( findAgency ) {
         findAgency.customer.total += 1;
-        findAgency.customer.listOfUser.push( newUser._id );
+        findAgency.customer.listOfUser.push( { "user": newUser._id, "typeUser": 0 } );
         await findAgency.save();
       }
     }

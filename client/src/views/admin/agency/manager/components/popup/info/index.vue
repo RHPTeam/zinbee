@@ -16,19 +16,6 @@
             </div>
           </div>
 
-          <div class="user mt_2">
-            <div class="font_weight_bold">Chọn thành viên</div>
-            <div class="agency--select">
-              <multiselect
-                multiple
-                label="name"
-                v-model="agency.customer.listOfUser"
-                :options="users"
-                @input="selectListOfUser"
-              />
-            </div>
-          </div>
-
           <div
             class="time d_flex align_items_center justify_content_between mt_2"
           >
