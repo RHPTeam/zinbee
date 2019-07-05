@@ -23,7 +23,6 @@ export default {
   },
   methods: {
     async createNewAgency() {
-      this.agency.customer.listOfUser = this.listOfUser;
       await this.$store.dispatch("createNewAgency", this.agency);
       await this.$store.dispatch("setAgencyDefault");
       this.close();
@@ -48,15 +47,6 @@ export default {
     selectAgency(val) {
       this.agency._account.name = val.name;
       this.agency._account._id = val._id;
-    },
-    selectListOfUser(val) {
-      const listUser = val.map(item => {
-        return {
-          name: item.name,
-          _id: item._id
-        };
-      });
-      this.listOfUser = listUser;
     },
     selectPackage(val) {
       this.agency._package.name = val.title;

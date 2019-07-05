@@ -6,9 +6,6 @@ const state = {
       name: "",
       _id: ""
     },
-    customer: {
-      listOfUser: []
-    },
     expire: {
       start: Date.now(),
       end: Date.now(),
@@ -71,7 +68,7 @@ const actions = {
     const dataSender = {
       _account: payload._account._id,
       customer: {
-        listOfUser: payload.customer.listOfUser.map(item => item._id)
+        listOfUser: []
       },
       expire: {
         start: new Date(payload.expire.start),
@@ -133,7 +130,7 @@ const actions = {
     const dataSender = {
       _account: payload._account._id,
       customer: {
-        listOfUser: payload.customer.listOfUser.map(item => item._id)
+        listOfUser: []
       },
       expire: {
         start: payload.expire.start,

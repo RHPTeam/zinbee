@@ -12,10 +12,9 @@ const Agency = require( "../../models/agency/Agency.model" );
 const Package = require( "../../models/agency/Package.model" );
 const Account = require( "../../models/Account.model" );
 const Role = require( "../../models/Role.model" );
-const Server = require( "../../models/Server.model" )
+const Server = require( "../../models/Server.model" );
 
-const { signUp } = require( "../account.controller" );
-const { activeAccountSync } = require( "../../microservices/synchronize/account" );
+const { signUpSync, activeAccountSync } = require( "../../microservices/synchronize/account" );
 const { signAffiliate } = require( "../../configs/jwt" );
 
 
@@ -70,9 +69,11 @@ module.exports = {
     let dataResponse = null;
 
     if ( req.query._id ) {
-      dataResponse = await Agency.findOne( { "_id": req.query._id } ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser", "select": "_id name" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
+      dataResponse = await Agency.findOne( { "_id": req.query._id } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "_id name phone email" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
+    } else if ( req.query._account ) {
+      dataResponse = await Agency.findOne( { "_account": req.query._account } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "_id name phone email" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      dataResponse = await Agency.find( {} ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser", "select": "_id name" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
+      dataResponse = await Agency.find( {} ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "_id name phone email" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
     }
 
     res.status( 200 ).json( jsonResponse( "success", dataResponse ) );
@@ -92,20 +93,54 @@ module.exports = {
     res.status( 200 ).json( jsonResponse( "success", await Agency.findByIdAndUpdate( req.query._id, { "$set": req.body }, { "new": true } ) ) );
   },
   "createUserByAgency": async ( req, res ) => {
-    const findAgency = await Agency.findOne( { "_account": req.uid } );
+    const { name, email, phone, password, presenter, region } = req.body,
+      findAgency = await Agency.findOne( { "_account": req.uid } ),
+      isEmailExist = await Account.findOne( { email } ),
+      isPhoneExist = await Account.findOne( { phone } ),
+      memberRole = await Role.findOne( { "level": "Member" } ),
+      optimalServer = await Server.findOne( { region, "status": 1 } ).sort( { "slot": -1 } );
 
-    if ( !findAgency ) {
+    let newUser, resSyncNestedServer, isEnvironment;
+
+    if ( isEmailExist ) {
+      return res.status( 403 ).json( { "status": "fail", "phone": "Email đã tồn tại!" } );
+    } else if ( isPhoneExist ) {
+      return res.status( 405 ).json( { "status": "fail", "phone": "Số điện thoại đã tồn tại!" } );
+    } else if ( !findAgency ) {
       return res.status( 404 ).json( { "status": "error", "message": "Đại lý không tồn tại!" } );
     }
 
-    await signUp( req, res );
+    newUser = await new Account( {
+      name,
+      email,
+      phone,
+      presenter,
+      password,
+      "status": 1,
+      "expireDate": new Date().setDate( new Date().getDate() + 3 ),
+      "_role": memberRole._id
+    } );
 
-    // eslint-disable-next-line one-var
-    const findAccount = await Account.findOne( { "email": req.body.email } );
+    // Sync with nested server
+    isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup` : `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup`;
+    resSyncNestedServer = await signUpSync( isEnvironment, newUser.toObject() );
+    if ( resSyncNestedServer.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Quá trình đăng ký xảy ra vấn đề!" } );
+    }
+
+    await newUser.save();
+
+    // Push account to server
+    optimalServer.userAmount.push( newUser._id );
+    optimalServer.slot = optimalServer.amountMax - optimalServer.userAmount.length;
+    optimalServer.save();
 
     findAgency.customer.total += 1;
-    findAgency.customer.listOfUser.push( findAccount._id );
+    findAgency.customer.listOfUser.push( { "user": newUser._id, "typeUser": 0 } );
     await findAgency.save();
+
+    res.status( 201 ).json( jsonResponse( "success", findAgency ) );
+
   },
   "expireUserByAgency": async ( req, res ) => {
     const findAgency = await Agency.findOne( { "_account": req.uid } ),
