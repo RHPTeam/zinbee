@@ -21,5 +21,6 @@ router.route( "/user" )
   .get( AgencyController.setCookieWithLinkAffiliate )
   .post( auth, agency, AgencyController.createUserByAgency )
   .patch( auth, agency, AgencyController.expireUserByAgency );
+router.route( "user/search", auth, agency, AgencyController.searchUserByAgency );
 
 module.exports = router;

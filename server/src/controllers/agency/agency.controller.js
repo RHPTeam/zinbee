@@ -16,6 +16,7 @@ const Server = require( "../../models/Server.model" );
 
 const { signUpSync, activeAccountSync } = require( "../../microservices/synchronize/account" );
 const { signAffiliate } = require( "../../configs/jwt" );
+const { convertUnicode } = require( "../../helpers/utils/functions/string" );
 
 
 module.exports = {
@@ -42,7 +43,7 @@ module.exports = {
 
     let newAgency = new Agency( req.body );
 
-    newAgency.linkAffiliate = process.env.APP_URL + "/#/?a=" + newAgency._id.toString();
+    newAgency.linkAffiliate = `${process.env.APP_URL }/#/?a=${ newAgency._id.toString()}`;
     await newAgency.save();
     await Account.findByIdAndUpdate( { "_id": req.body._account }, { "$set": { "_role": findRole._id } }, { "new": true } );
 
@@ -181,7 +182,7 @@ module.exports = {
   "setCookieWithLinkAffiliate": async ( req, res ) => {
     const findAgency = await Agency.findOne( { "$or": [ { "_id": req.query._agency }, { "subDomain": req.query._subDomain } ] } );
 
-    console.log( findAgency )
+    console.log( findAgency );
     if ( !findAgency ) {
       return res.status( 404 ).json( { "status": "error", "message": "Đại lý không tồn tại!" } );
     }
@@ -190,5 +191,22 @@ module.exports = {
 
     res.set( "Cookie", cookie );
     res.status( 201 ).json( jsonResponse( "success", null ) );
+  },
+  "searchUserByAgency": async ( req, res ) => {
+    const findAgency = await Agency.findOne( { "_id": req.uid } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "_id name phone email" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
+
+    if ( !findAgency ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Đại lý không tồn tại!" } );
+    }
+
+    let dataRespone = Promise.all( findAgency.listOfUser.map( ( user ) => {
+      if ( convertUnicode( user.user.email ).toLowerCase().includes( req.query.value ) === true || ( user.user.phone ).includes( req.query.value ) === true ) {
+        return user;
+      }
+    } ) );
+
+    res.status( 201 ).json( jsonResponse( "success", dataRespone.filter( function ( el ) {
+      return el != null;
+    } ) ) );
   }
 };
