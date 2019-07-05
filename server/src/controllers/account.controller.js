@@ -10,6 +10,7 @@ const Account = require( "../models/Account.model" );
 const Role = require( "../models/Role.model" );
 const Agency = require( "../models/agency/Agency.model" );
 const Server = require( "../models/Server.model" );
+const { writeForgotPassword } = require( "../databases/templates/email" );
 
 const fs = require( "fs" );
 const jsonResponse = require( "../configs/response" );
@@ -325,13 +326,8 @@ module.exports = {
       {
         "from": process.env.MAIL_USERNAME,
         "to": req.body.email,
-        "subject": "Confirm reset password",
-        "html": `
-      <div>
-        <img src="https://lh3.googleusercontent.com/_XAtvS1rUQ_UWyYo8Gg18vDWbWPyJkoca163rugtVTySS6UkWsHi6pwHPLrZZBPPtDxPcfK0RWD_szWuew2HVr3q_D_KAfEj43DmKUvxaVWzZV2zoO7iMzy7WxGI50bidhJwLKQ9zMwZjMVmmb4YoDoW9AHXKxj4iBlfZTFfwx_u329Zhsqf_sD99oFJtxl5CmvknEhJnX6mibCbU4UpRRIcfDsR8kZsJJR9dvXTzPP0WQskvOwVWuacYcnoSsvxZPOaA_crNo9TNujgMIs-xhrUlrpzadMNceOAu6imZM2BNL5V_ZAvTgOdZA7WW2K_gYNmzP7A1xlZAR7M2nD51zijsVFHA1pVSg-9Emwn7OBol83X0H5pF1-b2Z7dThXepid3ZSn8w5svgiBWKo-ycsqJrS_dutDslK41cwaFw4nxFSNj-JQs5XiKpHooYglfUydBhv6F1KhJBwKvrxHxwiGMWVQCCcY9oNzfJ9EZ9KJAUKc8mXHEf9A-d0Xle_Awd9Li20cqMtWf67prMyIy34NsXAQAaMtFW-bRao-2VxiqaKgs5jjF440xMvCHn9CWHplRVlIems7JSgfN7XPUNWknDhjecc_OqNCMNbc=w1366-h575"> <br>
-        <span style="font-size: 20px">Email tự động xác nhận passcode</span><br>
-        <span style="font-size: 20px"><b>Code: ${code}</b> </span> 
-      </div>`
+        "subject": "Xác nhận thay đổi mật khẩu",
+        "html": writeForgotPassword( code )
       },
       ( err ) => {
         if ( err ) {
