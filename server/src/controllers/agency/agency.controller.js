@@ -193,7 +193,7 @@ module.exports = {
     res.status( 201 ).json( jsonResponse( "success", null ) );
   },
   "searchUserByAgency": async ( req, res ) => {
-    const findAgency = await Agency.findOne( { "_id": req.uid } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "_id name phone email" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
+    const findAgency = await Agency.findOne( { "_id": req.uid } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "-password" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
 
     if ( !findAgency ) {
       return res.status( 404 ).json( { "status": "error", "message": "Đại lý không tồn tại!" } );
