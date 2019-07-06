@@ -1,36 +1,36 @@
 <template>
   <div class="wrapper--main">
     <!-- Start: banner -->
-    <app-banner/>
+    <app-banner />
     <!-- End: Banner -->
 
     <div class="content">
       <!-- Start: tool -->
-      <app-tool/>
+      <app-tool />
       <!-- End: tool -->
 
       <!-- Start: Why Choose ZinBee -->
-      <app-why-choose/>
+      <app-why-choose />
       <!-- End: Why Choose ZinBee -->
 
       <!-- Start: Utilities -->
-      <app-utilities/>
+      <app-utilities />
       <!-- End: Utilities -->
 
       <!-- Start: Customer -->
-      <app-customer/> 
+      <app-customer />
       <!-- End: Customer -->
 
       <!-- Start: Price -->
-      <app-price/>
+      <app-price />
       <!-- End: Price -->
 
       <!-- Start: Class Marketing -->
-      <app-training/>
+      <app-training />
       <!-- End: Class Marketing -->
 
       <!-- Start: Show owner -->
-      <app-owner/>
+      <app-owner />
       <!-- End: Show owner -->
     </div>
   </div>

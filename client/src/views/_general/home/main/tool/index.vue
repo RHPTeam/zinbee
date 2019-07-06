@@ -35,7 +35,12 @@
           <div class="title--content">Những tính năng nổi trội của Zinbee</div>
           <div class="items d_flex align_items_center">
             <div class="icon">
-              <icon-base icon-name="close" width="50" height="50" viewBox="0 0 70 70">
+              <icon-base
+                icon-name="close"
+                width="50"
+                height="50"
+                viewBox="0 0 70 70"
+              >
                 <icon-database />
               </icon-base>
             </div>
@@ -48,7 +53,12 @@
           </div>
           <div class="items d_flex align_items_center">
             <div class="icon">
-              <icon-base icon-name="close" width="50" height="50" viewBox="0 0 500 500">
+              <icon-base
+                icon-name="close"
+                width="50"
+                height="50"
+                viewBox="0 0 500 500"
+              >
                 <icon-search-auto />
               </icon-base>
             </div>
@@ -61,7 +71,12 @@
           </div>
           <div class="items d_flex align_items_center">
             <div class="icon">
-              <icon-base icon-name="close" width="50" height="50" viewBox="0 0 500 500">
+              <icon-base
+                icon-name="close"
+                width="50"
+                height="50"
+                viewBox="0 0 500 500"
+              >
                 <icon-chart-bar />
               </icon-base>
             </div>
@@ -79,7 +94,12 @@
           <div class="title--content">Lợi ích Zinbee mang lại</div>
           <div class="items d_flex align_items_center">
             <div class="icon">
-              <icon-base icon-name="close" width="50" height="50" viewBox="0 0 550 550">
+              <icon-base
+                icon-name="close"
+                width="50"
+                height="50"
+                viewBox="0 0 550 550"
+              >
                 <icon-rocket />
               </icon-base>
             </div>
@@ -89,7 +109,12 @@
           </div>
           <div class="items d_flex align_items_center">
             <div class="icon">
-              <icon-base icon-name="close" width="48" height="48" viewBox="0 0 500 500">
+              <icon-base
+                icon-name="close"
+                width="48"
+                height="48"
+                viewBox="0 0 500 500"
+              >
                 <icon-laptop-phone />
               </icon-base>
             </div>
@@ -99,7 +124,12 @@
           </div>
           <div class="items d_flex align_items_center">
             <div class="icon">
-              <icon-base icon-name="close" width="48" height="48" viewBox="0 0 60 60">
+              <icon-base
+                icon-name="close"
+                width="48"
+                height="48"
+                viewBox="0 0 60 60"
+              >
                 <icon-diamond />
               </icon-base>
             </div>
@@ -109,7 +139,12 @@
           </div>
           <div class="items d_flex align_items_center">
             <div class="icon">
-              <icon-base icon-name="close" width="48" height="48" viewBox="0 0 29 29">
+              <icon-base
+                icon-name="close"
+                width="48"
+                height="48"
+                viewBox="0 0 29 29"
+              >
                 <icon-timer />
               </icon-base>
             </div>

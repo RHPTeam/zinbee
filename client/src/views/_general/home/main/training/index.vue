@@ -60,12 +60,10 @@ export default {
         require("@/assets/images/home/training3.jpg"),
         require("@/assets/images/home/training4.jpg")
       ]
-    }
+    };
   },
-  methods: {
-    
-  },
-}
+  methods: {}
+};
 </script>
 
 <style scoped lang="scss">
@@ -87,5 +85,4 @@ export default {
     }
   }
 }
-
 </style>

@@ -112,14 +112,32 @@
         </div>
         <div class="action text_center">
           <ul>
-            <li :class="[currentIndexInfo === 0 ? 'active' : '']" @click="currentIndexInfo = 0"></li>
-            <li :class="[currentIndexInfo === 1 ? 'active' : '']" @click="currentIndexInfo = 1"></li>
-            <li :class="[currentIndexInfo === 2 ? 'active' : '']" @click="currentIndexInfo = 2"></li>
-            <li :class="[currentIndexInfo === 3 ? 'active' : '']" @click="currentIndexInfo = 3"></li>
+            <li
+              :class="[currentIndexInfo === 0 ? 'active' : '']"
+              @click="currentIndexInfo = 0"
+            ></li>
+            <li
+              :class="[currentIndexInfo === 1 ? 'active' : '']"
+              @click="currentIndexInfo = 1"
+            ></li>
+            <li
+              :class="[currentIndexInfo === 2 ? 'active' : '']"
+              @click="currentIndexInfo = 2"
+            ></li>
+            <li
+              :class="[currentIndexInfo === 3 ? 'active' : '']"
+              @click="currentIndexInfo = 3"
+            ></li>
           </ul>
         </div>
-        <div class="position_absolute action--slider-info d_flex align_items_center">
-          <span class="prev action" @click="prevInfo" v-if="currentIndexInfo !== 0">
+        <div
+          class="position_absolute action--slider-info d_flex align_items_center"
+        >
+          <span
+            class="prev action"
+            @click="prevInfo"
+            v-if="currentIndexInfo !== 0"
+          >
             <icon-base
               class="icon--arrow-left"
               icon-name="Prev"
@@ -130,7 +148,11 @@
               <icon-arrow-left></icon-arrow-left>
             </icon-base>
           </span>
-          <span class="next ml_auto action" @click="nextInfo" v-if="currentIndexInfo !== 3">
+          <span
+            class="next ml_auto action"
+            @click="nextInfo"
+            v-if="currentIndexInfo !== 3"
+          >
             <icon-base
               class="icon--arrow-left"
               icon-name="Next"

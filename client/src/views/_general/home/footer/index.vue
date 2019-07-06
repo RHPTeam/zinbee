@@ -9,7 +9,12 @@
       <div class="r m_0">
         <div class="c_lg_3 mb_3">
           <div class="title--footer logo">
-            <icon-base icon-name="ZinBee" width="100" height="49.73" viewBox="0 0 250.446 93.703">
+            <icon-base
+              icon-name="ZinBee"
+              width="100"
+              height="49.73"
+              viewBox="0 0 250.446 93.703"
+            >
               <icon-logo />
             </icon-base>
           </div>
@@ -39,7 +44,13 @@
           <div class="position_relative">
             <input type="text" placeholder="Email" />
             <span class="icon--submit position_absolute">
-              <icon-base class icon-name="Submit" width="22" height="22" viewBox="0 0 33 33">
+              <icon-base
+                class
+                icon-name="Submit"
+                width="22"
+                height="22"
+                viewBox="0 0 33 33"
+              >
                 <icon-arrow-right />
               </icon-base>
               <!-- <icon-base class="fb" icon-name="Submit" width="24" height="24" viewBox="0 0 25 25">
@@ -74,7 +85,10 @@
               </icon-base>
             </div>-->
             <div class="icon">
-              <a href="https://www.youtube.com/channel/UC95EoWnJWWbRUzc4BRgKCZg" target="_blank">
+              <a
+                href="https://www.youtube.com/channel/UC95EoWnJWWbRUzc4BRgKCZg"
+                target="_blank"
+              >
                 <icon-base
                   class="youtube"
                   icon-name="youtube"
@@ -115,7 +129,8 @@
               class="btn--live-chat"
               target="_blank"
               href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-            >Liên hệ hỗ trợ</a>
+              >Liên hệ hỗ trợ</a
+            >
           </div>
         </div>
       </div>
