@@ -190,13 +190,13 @@
               <!-- End: Form Group-->
               <!-- Start: Forgot Password -->
               <div class="text_right mt_2 mb_3">
-                <a
+                <router-link
                   class="text--forgot"
-                  :href="{ name: 'help' }"
+                  :to="{ name: 'check_mail' }"
                   target="_blank"
                 >
                   Quên mật khẩu?
-                </a>
+                </router-link>
               </div>
               <!-- End: Forgot Password-->
               <!-- Start: Btn Group-->

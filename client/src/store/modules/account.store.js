@@ -381,15 +381,21 @@ const actions = {
    * @returns {Promise<void>}
    */
   getInfoByEmail: async ({ commit }, payload) => {
-    commit("auth_request");
-    const sendEmail = {
-      email: payload
-    };
+    try {
+      const sendEmail = {
+        email: payload
+      };
 
-    await AccountServices.resetPassword(sendEmail);
-    const result = await AccountServices.getInfoByEmail(payload);
-    commit("setInfoEmail", result.data.data);
-    commit("auth_success");
+      await AccountServices.resetPassword(sendEmail);
+      const result = await AccountServices.getInfoByEmail(payload);
+      commit("setInfoEmail", result.data.data);
+      commit("auth_success");
+    } catch (e) {
+      if (e.response) {
+        commit("auth_error", e.response.data);
+      }
+      return;
+    }
   },
   /**
    * @Description: check code get from email
