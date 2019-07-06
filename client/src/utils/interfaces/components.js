@@ -197,7 +197,9 @@ Vue.component("IconLaptopPhone", () =>
 );
 Vue.component("IconDiamond", () => import("@/components/icons/IconDiamond"));
 Vue.component("IconRocket", () => import("@/components/icons/IconRocket"));
-Vue.component("IconResetPassword", () => import("@/components/icons/IconResetPassword"));
+Vue.component("IconResetPassword", () =>
+  import("@/components/icons/IconResetPassword")
+);
 
 Vue.component("IconDatabase", () => import("@/components/icons/IconDatabase"));
 Vue.component("IconWorld", () => import("@/components/icons/IconWorld"));

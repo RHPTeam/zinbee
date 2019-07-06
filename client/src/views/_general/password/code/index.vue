@@ -14,11 +14,7 @@
     <div class="card px_5 py_4 text_center">
       <!-- Start: Header -->
       <div class="card--header mt_4 mb_3">
-        <icon-base
-          width="100"
-          height="100"
-          viewBox="0 0 280 280"
-        >
+        <icon-base width="100" height="100" viewBox="0 0 280 280">
           <icon-reset-password></icon-reset-password>
         </icon-base>
       </div>
@@ -27,17 +23,15 @@
       <div class="card--body">
         <div class="title mt_2"></div>
         <div class="alert mt_4">
-          Chúng tôi vừa gửi một email với đường dẫn đặt lại mật khẩu tới email của bạn. Vui lòng kiểm tra để khôi phục tài khoản.
+          Chúng tôi vừa gửi một email với đường dẫn đặt lại mật khẩu tới email
+          của bạn. Vui lòng kiểm tra để khôi phục tài khoản.
         </div>
       </div>
       <!-- End: Body -->
       <!-- Start: Footer -->
       <div class="card--footer mt_3">
         <div class="btn--submit mb_5" @click="gotoEmail">Đi tới email</div>
-        <router-link
-          class="link--custom"
-          to="/signin"
-        >Đăng nhập</router-link>
+        <router-link class="link--custom" to="/signin">Đăng nhập</router-link>
       </div>
       <!-- End: Footer -->
     </div>
@@ -95,12 +89,12 @@
             &:active,
             &:hover,
             &:focus {
-              border-color: #FFB94A;
+              border-color: #ffb94a;
               box-shadow: none;
               outline: 0;
             }
             &.error {
-              border-color: #F96666;
+              border-color: #f96666;
             }
           }
           .icon {
@@ -118,7 +112,7 @@
     }
     .card--footer {
       .btn--submit {
-        background-color: #FFB94A;
+        background-color: #ffb94a;
         border-radius: 0.625rem;
         color: #fff;
         cursor: pointer;
@@ -126,11 +120,11 @@
         padding: 0.5rem 0.75rem;
         transition: all 0.4s ease;
         &:hover {
-          background-color: #FF9E4A;
+          background-color: #ff9e4a;
         }
       }
       .link--custom {
-        color: #FFB94A;
+        color: #ffb94a;
         font-size: 0.875rem;
         text-transform: uppercase;
       }

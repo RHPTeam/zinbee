@@ -12,7 +12,8 @@
     </div>
     <h3 class="mb_4">Đặt lại mật khẩu</h3>
     <div class="form--reset-title mb_3">
-      Nhập địa chỉ email tài khoản Zinbee của bạn bên dưới. Chúng tôi sẽ gửi đường dẫn đặt lại mật khẩu trong email.
+      Nhập địa chỉ email tài khoản Zinbee của bạn bên dưới. Chúng tôi sẽ gửi
+      đường dẫn đặt lại mật khẩu trong email.
     </div>
     <app-alert
       :type="this.$store.getters.authError === 'loading' ? 'alert_danger' : ''"

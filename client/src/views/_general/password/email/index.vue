@@ -14,11 +14,7 @@
     <div class="card px_5 py_4 text_center">
       <!-- Start: Header -->
       <div class="card--header mt_4 mb_3">
-        <icon-base
-          width="100"
-          height="100"
-          viewBox="0 0 280 280"
-        >
+        <icon-base width="100" height="100" viewBox="0 0 280 280">
           <icon-reset-password></icon-reset-password>
         </icon-base>
       </div>
@@ -26,11 +22,17 @@
       <!-- Start: Body -->
       <div class="card--body">
         <div class="title mt_2">Đặt lại mật khẩu</div>
-        <div class="desc my_3">Nhập email tài khoản Zinbee của bạn, chúng tôi sẽ gửi đường dẫn đặt lại mật khẩu thông qua email.</div>
+        <div class="desc my_3">
+          Nhập email tài khoản Zinbee của bạn, chúng tôi sẽ gửi đường dẫn đặt
+          lại mật khẩu thông qua email.
+        </div>
         <!-- Start: Alert -->
-        <div class="alert--error text_left mb_2"
+        <div
+          class="alert--error text_left mb_2"
           v-if="this.$store.getters.authError.status === 'error'"
-        >{{ this.$store.getters.authError.message }}</div>
+        >
+          {{ this.$store.getters.authError.message }}
+        </div>
         <!-- End: Alert -->
         <!-- Start: Form Wrap -->
         <div class="form--wrap">
@@ -64,10 +66,7 @@
       <!-- Start: Footer -->
       <div class="card--footer mt_3">
         <div class="btn--submit mb_5" @click="sendMail">Tiếp theo</div>
-        <router-link
-          class="link--custom"
-          to="/signin"
-        >Đăng nhập</router-link>
+        <router-link class="link--custom" to="/signin">Đăng nhập</router-link>
       </div>
       <!-- End: Footer -->
     </div>
