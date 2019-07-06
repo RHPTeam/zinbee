@@ -30,21 +30,15 @@
             <!-- Start: Alert -->
             <app-alert
               :type="
-                this.$store.getters.authError === '403' ? 'alert_danger' : ''
-              "
-              :message="
-                this.$store.getters.authError === '403'
-                  ? 'Số điện thoại hoặc email đã tồn tại'
+                this.$store.getters.authError === '403' ||
+                this.$store.getters.authError === '404'
+                  ? 'alert_danger'
                   : ''
               "
-            ></app-alert>
-            <app-alert
-              :type="
-                this.$store.getters.authError === '404' ? 'alert_danger' : ''
-              "
               :message="
+                this.$store.getters.authError === '403' ||
                 this.$store.getters.authError === '404'
-                  ? 'Đã xảy ra lỗi trong quá trình đăng ký vui lòng thử lại'
+                  ? this.$store.getters.errorText
                   : ''
               "
             ></app-alert>

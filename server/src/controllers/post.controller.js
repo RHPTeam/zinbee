@@ -44,10 +44,11 @@ module.exports = {
         .select( "feedId" )
         .lean();
 
+    // eslint-disable-next-line prefer-spread
     let resultKeywordList = [].concat.apply( [], keywordSearchList );
 
     resultKeywordList = resultKeywordList.concat( resultKeywordList, keywordsList );
-    resultKeywordList = [ ...new Set( resultKeywordList ) ]
+    resultKeywordList = [ ...new Set( resultKeywordList ) ];
 
     res.send( {
       "keywords": resultKeywordList,
