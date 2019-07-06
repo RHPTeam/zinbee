@@ -120,12 +120,12 @@ export default {};
     }
   }
 }
-@media screen and (max-width: 767px){
+@media screen and (max-width: 767px) {
   .wrapper--header {
     .header--main {
       .alert--expiration {
         width: 80vw;
-        padding: 0!important;
+        padding: 0 !important;
       }
     }
   }
