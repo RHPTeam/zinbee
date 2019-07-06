@@ -230,10 +230,8 @@ const actions = {
       commit("auth_success");
       commit("setRedirectDomain", `${resData.data.data.domain}`);
     } catch (e) {
-      if (e.response.status === 403) {
-        commit("auth_error", "403");
-      } else if (e.response.status === 404) {
-        commit("auth_error", "404");
+      if (e.response) {
+        commit("auth_error", e.response.data);
       }
       return;
     }

@@ -1,32 +1,63 @@
 <template>
-  <div
-    class="main ct_f p_0 position_relative"
-    :style="{ backgroundImage: 'url(' + srcDefaultLogin + ')' }"
-  >
-    <div class="main--above position_absolute"></div>
-    <div class="r m_0">
-      <!-- Start: Intro Video -->
-      <div class="c_12 c_md_12 c_xl_8 p_0 main--video d_none d_xl_block">
-        <app-intro-video />
-      </div>
-      <!-- End: Intro Video -->
-      <!-- Start: Main Form -->
-      <div class="c_12 c_md_12 c_xl_4 p_0 main--form">
-        <div
-          class="form--wrap m_auto d_flex flex_column justify_content_center align_items_center"
+  <div class="wrapper position_relative">
+    <div class="container">
+      <!-- Start: Logo -->
+      <div class="wrapper--logo position_absolute">
+        <!-- Start: Logo Xl Screen -->
+        <icon-base
+          class="d_none d_xl_block"
+          icon-name="ZinBee"
+          width="120"
+          height="49.73"
+          viewBox="0 0 250.446 93.703"
         >
-          <!-- Start: Form Header -->
-          <div class="from--header">
-            <div class="header--logo">
-              <icon-base
-                icon-name="ZinBee"
-                width="210.21"
-                height="78.65"
-                viewBox="0 0 250.446 93.703"
-              >
-                <icon-logo />
-              </icon-base>
+          <icon-logo></icon-logo>
+        </icon-base>
+        <!-- End: Logo Xl Screen -->
+        <!-- Start: Logo Large Screen -->
+        <icon-base
+          class="d_none d_md_block d_xl_none"
+          icon-name="ZinBee"
+          width="100"
+          height="49.73"
+          viewBox="0 0 250.446 93.703"
+        >
+          <icon-logo></icon-logo>
+        </icon-base>
+        <!-- End: Logo Large Screen -->
+      </div>
+      <div class="wrapper--logo d_md_none text_center">
+        <icon-base
+          icon-name="ZinBee"
+          width="160"
+          height="78.65"
+          viewBox="0 0 250.446 93.703"
+        >
+          <icon-logo />
+        </icon-base>
+      </div>
+      <!-- End: Logo -->
+      <!-- Start: Content -->
+      <div class="r wrapper--content mx_0">
+        <!-- Start: Background -->
+        <div
+          class="c_lg_8 wrapper--bg d_lg_flex align_items_center justify_content_center"
+        >
+          <img class="bg--image" :src="loginImage" alt="" />
+        </div>
+        <!-- End: Background -->
+        <!-- Start: Main -->
+        <div class="c_12 c_lg_4 wrapper--main d_flex align_items_center">
+          <div class="w--100">
+            <!-- Start: Main Header-->
+            <div class="main--header">
+              <div class="d_none d_md_block title mb_3">Zinbee xin chào</div>
+              <div class="desc">
+                &rdquo;Khách hàng sẽ quên những điều bạn làm. Nhưng họ sẽ không
+                bao giờ quên những cảm nhận mà bạn mang đến cho họ.&rdquo;
+              </div>
             </div>
+            <!-- End: Main Header-->
             <!-- Start: Alert -->
             <!--Start: Notification change password success -->
             <app-alert
@@ -42,118 +73,168 @@
               "
             ></app-alert>
             <!--End: Notification change password success -->
-            <app-alert
-              :type="
-                this.$store.getters.authError === '401' ? 'alert_danger' : ''
-              "
-              :message="
-                this.$store.getters.authError === '401'
-                  ? 'Tài khoản email hoặc mật khẩu không đúng!'
-                  : ''
-              "
-            ></app-alert>
-            <app-alert
-              :type="
-                this.$store.getters.authError === '405' ? 'alert_danger' : ''
-              "
-              :message="
-                this.$store.getters.authError === '405'
-                  ? 'Tài khoản của bạn đã hết hạn hoặc bị ngừng truy cập!'
-                  : ''
-              "
-            ></app-alert>
+            <div
+              v-if="this.$store.getters.authError === '401'"
+              class="alert--error position_relative mt_3"
+            >
+              Tài khoản email hoặc mật khẩu không đúng!
+            </div>
+            <div
+              v-if="this.$store.getters.authError === '405'"
+              class="alert--error position_relative mt_3"
+            >
+              Tài khoản của bạn đã hết hạn hoặc bị ngừng truy cập!
+            </div>
             <!-- End: Alert -->
-            <h3 class="title text_center">Đăng nhập</h3>
-          </div>
-          <!-- End: Form Header -->
-          <!-- Start: Form Body -->
-          <form @submit.prevent="signIn" class="form--body">
-            <div
-              class="form_group position_relative"
-              :class="{
-                errors: statusClassError.email,
-                passed: statusClassPassed.email
-              }"
-            >
-              <div class="icon position_absolute">
-                <icon-base
-                  icon-name="Email"
-                  width="20.554"
-                  height="15.713"
-                  viewBox="0 0 20.554 15.713"
+            <!-- Start: Main Body-->
+            <div class="main--body mb_5 mt_4">
+              <!-- Start: Form Group-->
+              <div class="form--group">
+                <!-- Start: Email -->
+                <div
+                  class="form--card d_flex align_items_center position_relative px_3"
                 >
-                  <icon-envelope />
-                </icon-base>
-              </div>
-
-              <input
-                id="emailField"
-                type="email"
-                placeholder="Email"
-                v-model="user.email"
-              />
-            </div>
-            <div class="text--error">{{ errorText.email }}</div>
-            <div
-              class="form_group position_relative"
-              :class="{
-                errors: statusClassError.password,
-                passed: statusClassPassed.password
-              }"
-            >
-              <div class="icon position_absolute">
-                <icon-base
-                  icon-name="Mật khẩu"
-                  width="14.782"
-                  height="18.55"
-                  viewBox="0 0 14.782 18.55"
+                  <div class="form--icon mr_3">
+                    <icon-base
+                      class="icon--envelope"
+                      width="26px"
+                      height="26px"
+                      viewBox="0 0 23 23"
+                    >
+                      <icon-envelope></icon-envelope>
+                    </icon-base>
+                  </div>
+                  <div class="form--control mr_2">
+                    <div class="desc">Email</div>
+                    <input
+                      type="text"
+                      class="form--input"
+                      placeholder="nguyenvana@gmail.com"
+                      v-model="user.email"
+                    />
+                  </div>
+                  <div class="form--validate">
+                    <icon-base
+                      v-if="statusClassPassed.email"
+                      class="icon--check"
+                      width="16px"
+                      height="16px"
+                      viewBox="0 0 20 20"
+                    >
+                      <icon-check-active></icon-check-active>
+                    </icon-base>
+                    <icon-base
+                      v-if="statusClassError.email"
+                      class="icon--attention"
+                      width="16px"
+                      height="16px"
+                      viewBox="0 0 520 520"
+                    >
+                      <icon-attention></icon-attention>
+                    </icon-base>
+                    <div class="tooltip--error position_absolute">
+                      {{ errorText.email }}
+                    </div>
+                  </div>
+                </div>
+                <!-- End: Email -->
+                <!-- Start: Password -->
+                <div
+                  class="form--card d_flex align_items_center position_relative px_3"
                 >
-                  <icon-lock />
-                </icon-base>
+                  <div class="form--icon mr_3">
+                    <icon-base
+                      class="icon--lock"
+                      width="20px"
+                      height="26px"
+                      viewBox="0 0 14 20"
+                    >
+                      <icon-lock></icon-lock>
+                    </icon-base>
+                  </div>
+                  <div class="form--control mr_2">
+                    <div class="desc">Mật khẩu</div>
+                    <input
+                      type="password"
+                      class="form--input"
+                      placeholder="Nhập mật khẩu"
+                      v-model="user.password"
+                    />
+                  </div>
+                  <div class="form--validate">
+                    <icon-base
+                      v-if="statusClassPassed.password"
+                      class="icon--check"
+                      width="16px"
+                      height="16px"
+                      viewBox="0 0 20 20"
+                    >
+                      <icon-check-active></icon-check-active>
+                    </icon-base>
+                    <icon-base
+                      v-if="statusClassError.password"
+                      class="icon--attention"
+                      width="16px"
+                      height="16px"
+                      viewBox="0 0 520 520"
+                    >
+                      <icon-attention></icon-attention>
+                    </icon-base>
+                    <div class="tooltip--error position_absolute">
+                      {{ errorText.password }}
+                    </div>
+                  </div>
+                </div>
+                <!-- End: Password -->
               </div>
-              <input
-                id="passwordField"
-                type="password"
-                placeholder="Mật khẩu"
-                v-model="user.password"
-              />
+              <!-- End: Form Group-->
+              <!-- Start: Forgot Password -->
+              <div class="text_right mt_2 mb_3">
+                <a
+                  class="text--forgot"
+                  :href="{ name: 'help' }"
+                  target="_blank"
+                >
+                  Quên mật khẩu?
+                </a>
+              </div>
+              <!-- End: Forgot Password-->
+              <!-- Start: Btn Group-->
+              <div class="btn--group d_md_flex">
+                <div class="btn--control btn--orange mr_3" @click="signIn">
+                  Đăng nhập
+                </div>
+                <router-link
+                  class="btn--control btn--white mt_3 mt_md_0"
+                  tag="div"
+                  to="/signup"
+                >
+                  Đăng kí
+                </router-link>
+              </div>
+              <!-- End: Btn Group-->
+              <div class="mt_3">
+                <a
+                  class="text--forgot"
+                  :href="{ name: 'help' }"
+                  target="_blank"
+                >
+                  Bạn gặp sự cố khi đăng nhập?
+                </a>
+              </div>
             </div>
-            <div class="text--error">{{ errorText.password }}</div>
-            <router-link
-              :to="{ name: 'check_mail' }"
-              class="forgot--pass text_left d_block"
-              >Quên mật khẩu?</router-link
-            >
-            <div class="form--action">
-              <button type="submit" class="btn btn--submit">
-                {{
-                  this.$store.getters.authStatus === "loading"
-                    ? "Đang đăng nhập..."
-                    : "Đăng nhập"
-                }}
-              </button>
-            </div>
-          </form>
-          <!-- End: Form Body -->
-          <!-- Start: Form Footer -->
-          <div class="form--footer text_left">
-            <div class="form--footer-note">
-              <span
-                >Bạn chưa có tài khoản?
-                <router-link to="/signup">Đăng ký ngay</router-link>
-              </span>
-            </div>
+            <!-- Start: Main Body-->
           </div>
-          <!-- End: Form Footer -->
         </div>
+        <!-- End: main -->
       </div>
-      <!-- End: Main Form -->
+      <!-- End: Content -->
     </div>
   </div>
 </template>
 
 <script src="./index.script.js"></script>
 
-<style lang="scss" scoped>
-@import "../styles/index.style";
+<style scoped lang="scss">
+@import "./index.style";
 </style>

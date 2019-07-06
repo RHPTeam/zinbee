@@ -7,25 +7,27 @@
   right: 0;
   top: 0;
   z-index: 999;
-
   .modal--dialog {
     align-items: center;
     display: flex;
     height: 100%;
     justify-content: center;
     width: 100%;
-
     .modal--content {
       background-color: #fafafa;
       border-radius: .625rem;
       max-height: calc( 100vh - 10% );
       width: 56%;
-      .header {}
-      .body {
-        .maintenance {
-          cursor: not-allowed;
-          opacity: .5;
+      .header {
+        h4 {
+          font-weight: 600;
         }
+        .desc {
+          padding: 0.5rem 0.75rem;
+          font-size: 0.95rem;
+        }
+      }
+      .body {
         .card {
           background-position: 50% 50%;
           background-repeat: no-repeat;
@@ -33,62 +35,50 @@
           border-radius: .625rem;
           cursor: pointer;
           width: 32%;
+          min-height: 80px;
+          transition: all 0.4s ease;
           &:hover, &:focus, &:active, &:visited {
-          > .alert--card {
-            opacity: 1;
+            border-color: #FFB94A;
+            box-shadow: 0 0 10px rgba(255, 185, 74, 0.4);
           }
-        }
-          .item {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            top: -10px;
-            left: -10px;
-            z-index: 9;
+          .card_body {
+            font-size: 1.25rem;
+            font-weight: 600;
           }
-          .earth {
+          .selected {
             background-color: #ffb94a;
             border: 1px solid #ffb94a;
-          }
-          .detail {
-            .text--bold {
-              font-weight: 600;
-            }
-            .desc {
-              font-size: 14px;
-              span {
-                color: #00c853;
-              }
-            }
-            .action {
-              width: 100%;
-              button {
-                &:hover, &:focus, &:active, &:visited {
-                  box-shadow: none;
-                  outline: 0;
-                }
-              }
-            }
-          }
-          .alert--card {
-            background-color: rgba(153, 153, 153, 0.8);
-            color: #ff0000;
-            width: 100%;
-            height: 100%;
-            border-radius: .625rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            top: -5px;
+            left: -5px;
             z-index: 9;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            font-size: 14px;
+            &::before {
+              border-bottom: 2px solid #fff;
+              border-right: 2px solid #fff;
+              content: "";
+              display: block;
+              height: 10px;
+              position: relative;
+              left: 50%;
+              top: 40%;
+              transform: translate(-50%, -50%) rotate(45deg);
+              width: 7px;
+            }
           }
         }
       }
       .footer {
-        button {
+        .btn--submit {
+          background-color: #FFB94A;
+          border-radius: 0.625rem;
           color: #ffffff;
-          width: 50%;
+          font-size: 0.95rem;
+          font-weight: 600;
+          transition: all 0.4s ease;
           &:hover, &:focus, &:active, &:visited {
+            background-color: #FF9E4A;
             box-shadow: none;
             outline: 0;
           }

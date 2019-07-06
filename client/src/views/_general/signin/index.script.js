@@ -16,7 +16,7 @@ export default {
         email: "",
         password: ""
       },
-      srcDefaultLogin: require( "@/assets/images/images-login.jpg" ),
+      loginImage: require("@/assets/images/zinbee-login-image.svg"),
       statusFinishForm: false,
       statusClassError: {
         email: false,

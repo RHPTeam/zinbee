@@ -30,7 +30,7 @@ MarketProductPostSchema.pre( "save", function( next ) {
 // eslint-disable-next-line one-var
 const MarketProductPost = mongoose.model( "MarketProductPost", MarketProductPostSchema );
 
-MarketProductPost.on( "index", function ( error ) {
+MarketProductPost.on( "old.vue", function (error ) {
   if ( error ) {
     console.log( error.message );
   }

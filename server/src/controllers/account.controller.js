@@ -201,9 +201,9 @@ module.exports = {
     let cookie, newUser, resSyncNestedServer, isEnvironment;
 
     if ( isEmailExist ) {
-      return res.status( 403 ).json( { "status": "fail", "phone": "Email đã tồn tại!" } );
+      return res.status( 403 ).json( { "status": "error", "message": "Email đã tồn tại trên hệ thống!" } );
     } else if ( isPhoneExist ) {
-      return res.status( 403 ).json( { "status": "fail", "phone": "Số điện thoại đã tồn tại!" } );
+      return res.status( 403 ).json( { "status": "error", "message": "Số điện thoại đã tồn tại trên hệ thống!" } );
     }
 
     newUser = await new Account( {
