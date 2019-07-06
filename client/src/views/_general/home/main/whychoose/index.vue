@@ -8,8 +8,8 @@
       <div class="r">
         <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
           <img class="marketing--section-image" :src="srcSimpleInterface" />
-          <div class="title mt_4">
-            <b>Shop kinh doanh cá nhân</b>
+          <div class="title">
+            Shop kinh doanh cá nhân
           </div>
           <div>
             Các shop đang kinh doanh cá nhân đang cần giải pháp, công cụ hỗ trợ
@@ -19,8 +19,8 @@
         </div>
         <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
           <img class="marketing--section-image" :src="srcExamlePost" />
-          <div class="title mt_4">
-            <b>Các doanh nghiệp</b>
+          <div class="title">
+            Các doanh nghiệp
           </div>
           <div>
             Các doanh nghiệp đang muốn triển khai marketing trên Facebook với
@@ -29,8 +29,8 @@
         </div>
         <div class="c_md_12 items c_lg_4 c_xl_4 mb_4 text_center">
           <img class="marketing--section-image" :src="srcAutomatic" />
-          <div class="title mt_4">
-            <b>Tổ chức Marketing - Sale</b>
+          <div class="title">
+            Tổ chức Marketing - Sale
           </div>
           <div>
             Các tổ chức, cá nhân Marketing - Sale mong muốn tăng hiệu quả công
@@ -43,8 +43,60 @@
   </section>
 </template>
 
-<script src="../index.script.js"></script>
+<script>
+export default {
+  data() {
+    return {
+      // Why choose
+      srcSimpleInterface: require("@/assets/images/home/undraw_empty_cart_co35.svg"),
+      srcAutomatic: require("@/assets/images/home/undraw_coming_home_52ir.svg"),
+      srcExamlePost: require("@/assets/images/home/undraw_team_page_pgpr.svg")
+    };
+  },
+  methods: {}
+};
+</script>
 
 <style scoped lang="scss">
 @import "../index.style";
+// why choose zinbee
+.why--choose {
+  padding: 6.25rem 0;
+  background: #f7f7f7;
+  color: #333;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background: #f8b44873;
+    // z-index: 1;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 150px;
+    right: -50px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background: #f8b44873;
+    // z-index: 1;
+  }
+  .marketing--section {
+    .marketing--section-image {
+      background-size: 300px 130px;
+      height: 80px;
+      background-repeat: no-repeat;
+    }
+    .title {
+      font-size: 1.9rem;
+      padding: 1rem 0;
+      font-weight: 500;
+    }
+  }
+}
 </style>

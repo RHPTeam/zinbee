@@ -320,7 +320,7 @@
                 <icon-check-circle />
               </icon-base>
             </div>
-          </div> -->
+          </div>-->
           <div class="items d_flex align_items_center">
             <div class="items--main function">Tự động huỷ kết bạn</div>
             <div class="items--main">
@@ -418,9 +418,7 @@
         </VuePerfectScrollbar>
       </div>
       <div class="item--footer text_center">
-        <div class="title">
-          Liên hệ ngay để có giá tốt nhất
-        </div>
+        <div class="title">Liên hệ ngay để có giá tốt nhất</div>
         <a
           class="btn--live-chat"
           target="_blank"
@@ -955,9 +953,7 @@
         </div>
       </div>
       <div class="item--footer text_center">
-        <div class="title">
-          Liên hệ ngay để có giá tốt nhất
-        </div>
+        <div class="title">Liên hệ ngay để có giá tốt nhất</div>
         <a
           class="btn--live-chat"
           target="_blank"
@@ -970,8 +966,158 @@
   </section>
 </template>
 
-<script src="../index.script.js"></script>
+<script></script>
 
 <style scoped lang="scss">
 @import "../index.style";
+// price
+.price {
+  color: #333;
+  padding: 6.25rem 0;
+  border-bottom: 1px solid #e8e9eb;
+  .item {
+    &--header {
+      .items {
+        border: 1px solid #e8e9eb;
+        border-left: 0;
+        border-bottom: 0;
+        padding: 1rem 0;
+        &:first-child {
+          border: 0;
+        }
+        &.first {
+          border-left: 1px solid #e8e9eb;
+        }
+        flex: 1;
+        .month {
+          font-size: 1.2rem;
+        }
+        .money {
+          font-size: 1.4rem;
+          padding: 0.6rem 0;
+          font-weight: 600;
+        }
+        .register {
+          cursor: pointer;
+          font-size: 1rem;
+          font-weight: 600;
+          width: 50%;
+          margin: 0 auto;
+          color: #fff;
+          text-transform: uppercase;
+          padding: 0.3rem;
+          background: #f8b448;
+          border-radius: 25px;
+          transition: 0.4s;
+          &:hover {
+            background: #4b4c78;
+          }
+        }
+      }
+    }
+    &--body {
+      border: 1px solid #e8e9eb;
+      border-left: 0;
+      border-right: 0;
+      .scroll--price {
+        max-height: 40vh;
+      }
+      .items {
+        border: 1px solid #e8e9eb;
+        border-bottom: 0;
+        transition: all 0.4s ease;
+        &:hover {
+          background: #f5f5f5bf;
+        }
+        &:last-child {
+          border-bottom: 0;
+        }
+        &:first-child {
+          border-top: 0;
+        }
+        &--main {
+          border-left: solid 1px #e8e9eb;
+          padding: 0.375rem 0;
+          flex: 1;
+          &.function {
+            border-left: 0;
+            font-weight: 600;
+            font-size: 0.975rem;
+          }
+          svg {
+            vertical-align: text-bottom;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+    &--footer {
+      padding-top: 2rem;
+      .title {
+        font-size: 1.375rem;
+        margin: 1rem 0;
+      }
+      .btn--live-chat {
+        display: block;
+        cursor: pointer;
+        width: 290px;
+        padding: 0.7rem 0;
+        margin: 0 auto;
+        text-align: center;
+        border-radius: 40px;
+        font-size: 20px;
+        background: #f8b448;
+        color: #fff;
+        font-weight: 600;
+        transition: 0.4s;
+        &:hover {
+          background: #4b4c78;
+        }
+      }
+    }
+  }
+  .content--tablet {
+    padding: 0 1rem;
+    .scroll--price-mobile {
+      max-height: 40vh;
+    }
+    .item {
+      &--header {
+        padding: 1rem 0.5rem;
+        border: 1px solid #e8e9eb;
+        border-bottom: 0;
+        .month {
+          font-size: 1.5rem;
+        }
+        .money {
+          font-size: 1.25rem;
+          margin: 0.7rem 0;
+        }
+        .register {
+          font-size: 1rem;
+          width: 60%;
+          margin: 0 auto;
+          color: #fff;
+          text-transform: uppercase;
+          letter-spacing: 2.1px;
+          padding: 0.5rem 0.3rem;
+          background: #f8b448;
+          border-radius: 25px;
+          transition: 0.4s;
+        }
+      }
+      &--body {
+        .items {
+          .title {
+            border-right: 1px solid #e8e9eb;
+          }
+          & > div {
+            padding: 0.5rem 0.3rem;
+            flex: 1;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

@@ -133,8 +133,169 @@
   </section>
 </template>
 
-<script src="../index.script.js"></script>
+<script>
+export default {
+  data() {
+    return {
+      // Customer
+      currentIndex: 1,
+      backgroundCustomer: require("@/assets/images/home/quote.png")
+    };
+  },
+  methods: {
+    next() {
+      if (this.currentIndex === 3) {
+        this.currentIndex = 3;
+      } else {
+        this.currentIndex++;
+      }
+    },
+    prev() {
+      if (this.currentIndex === 1) {
+        this.currentIndex = 1;
+      } else {
+        this.currentIndex--;
+      }
+    },
+    sliderCustomer() {
+      setInterval(() => {
+        this.currentIndex++;
+        if (this.currentIndex === 4) {
+          this.currentIndex = 1;
+        }
+      }, 5000);
+    }
+  },
+  mounted() {
+    this.sliderCustomer();
+  }
+};
+</script>
 
 <style scoped lang="scss">
 @import "../index.style";
+// customer
+.customer {
+  background: #f3f9ff;
+  padding: 6.25rem 0;
+  .left {
+    background-size: cover;
+    background-repeat: no-repeat;
+    .title--section {
+      font-weight: 500;
+      font-size: 2.1875rem;
+      line-height: 3.4375rem;
+      color: #333;
+      position: relative;
+      padding-bottom: 1.625rem;
+      margin-bottom: 0.625rem;
+      &::before {
+        content: "";
+        width: 2.5rem;
+        height: 2px;
+        background: #333;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: translateX(0);
+      }
+    }
+    .desc {
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 2.1875rem;
+      color: #333;
+    }
+  }
+  .slider {
+    max-height: 369px;
+    overflow: hidden;
+    .items {
+      max-width: 470px;
+      background: #fff;
+      padding: 50px 50px 59px;
+      box-shadow: 0px 5px 10px 0px rgba(26, 38, 74, 0.031);
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 0 auto;
+      .introduce--customer {
+        img {
+          height: 160px;
+          width: 160px;
+          border-radius: 50%;
+          margin-right: 22px;
+        }
+        h5 {
+          font-size: 18px;
+          line-height: 25px;
+          color: #222;
+          font-weight: 500;
+        }
+        p {
+          font-size: 16px;
+          line-height: 24px;
+          color: #666;
+        }
+      }
+      .desc {
+        padding-top: 28px;
+        font-size: 1rem;
+      }
+    }
+  }
+  .right {
+    .next {
+      transform: rotate(180deg);
+    }
+    .action--slider {
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+      z-index: 5;
+      .action {
+        cursor: pointer;
+        border-radius: 50%;
+        color: #f8b448;
+        transition: 0.4s;
+        &:hover {
+          background: #f8b448;
+          color: #fff;
+        }
+      }
+      .next {
+        margin-right: 30px;
+        padding: 0.25rem 0.625rem;
+        height: 44px;
+        width: 44px;
+        svg {
+          margin-top: 6px;
+        }
+      }
+      .prev {
+        padding: 0.25rem 0.625rem;
+        height: 44px;
+        width: 44px;
+        svg {
+          margin-top: 6px;
+        }
+      }
+    }
+    & > .action {
+      margin-top: 1rem;
+      display: none;
+      li {
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 5px;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        background: #ccc;
+        &.active {
+          background: #f8b448;
+        }
+      }
+    }
+  }
+}
 </style>

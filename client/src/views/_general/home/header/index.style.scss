@@ -4,7 +4,7 @@
   position: fixed;
   width: 100vw;
   z-index: 1000;
-  padding: .5rem 3.125rem;
+  padding: .5rem 0;
   &.active {
     background-color: #585a88;
     box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.18);
@@ -72,7 +72,7 @@
       cursor: pointer;
       position: relative;
       color: #333;
-      font-size: .925rem;
+      font-size: 1rem;
       font-weight: 600;
       padding: 0.5rem .75rem;
       &.try {

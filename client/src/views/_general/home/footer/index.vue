@@ -1,8 +1,13 @@
 <template>
-  <div class="wrapper--footer">
+  <div
+    class="wrapper--footer"
+    :style="{
+      backgroundImage: 'url(' + backgroundShow + ')'
+    }"
+  >
     <div class="content ct">
       <div class="r m_0">
-        <div class="c_lg_3">
+        <div class="c_lg_3 mb_3">
           <div class="title--footer logo">
             <icon-base
               icon-name="ZinBee"
@@ -18,7 +23,7 @@
             nhiều thời gian hơn bên gia đình và người thân.
           </div>
         </div>
-        <div class="c_lg_3">
+        <div class="c_lg_3 mb_3">
           <div class="title--footer">Thông Tin Hỗ Trợ</div>
           <ul>
             <li>Địa Chỉ: Toàn Nhà Capital, 102 Trường Chinh, Hà Nội</li>
@@ -26,7 +31,7 @@
             <li>Email: Cskh@Zinbee.Vn</li>
           </ul>
         </div>
-        <div class="c_lg_3">
+        <div class="c_lg_3 mb_3">
           <div class="title--footer">Chính Sách</div>
           <ul>
             <li>Chính sách bảo mật</li>
@@ -34,13 +39,13 @@
             <li>Quảng cáo</li>
           </ul>
         </div>
-        <div class="c_lg_3 register">
+        <div class="c_lg_3 mb_3 register">
           <div class="title--footer">Đăng Ký Bản Tin</div>
           <div class="position_relative">
             <input type="text" placeholder="Email" />
             <span class="icon--submit position_absolute">
               <icon-base
-                class=""
+                class
                 icon-name="Submit"
                 width="22"
                 height="22"
@@ -50,7 +55,7 @@
               </icon-base>
               <!-- <icon-base class="fb" icon-name="Submit" width="24" height="24" viewBox="0 0 25 25">
                 <icon-close/>
-              </icon-base> -->
+              </icon-base>-->
             </span>
           </div>
           <div class="list--contact d_flex mt_4">
@@ -78,7 +83,7 @@
               >
                 <icon-instagram-simple />
               </icon-base>
-            </div> -->
+            </div>-->
             <div class="icon">
               <a
                 href="https://www.youtube.com/channel/UC95EoWnJWWbRUzc4BRgKCZg"
@@ -106,7 +111,7 @@
               >
                 <icon-tiwtter />
               </icon-base>
-            </div> -->
+            </div>-->
           </div>
         </div>
       </div>
@@ -117,7 +122,7 @@
         <div class="ml_auto d_flex contact">
           <!-- <div class="items">Chính sách bảo mật</div>
           <div class="items">Giới thiệu</div>
-          <div class="items">Hỏi đáp</div> -->
+          <div class="items">Hỏi đáp</div>-->
           <!-- <div class="items">Liên hệ hỗ trợ</div> -->
           <div class="items">
             <a
@@ -137,7 +142,7 @@
 export default {
   data() {
     return {
-      backgroundFooter: require("@/assets/images/home/bg--footer.jpg")
+      backgroundShow: require("@/assets/images/home/map-bg.jpg")
     };
   }
 };
