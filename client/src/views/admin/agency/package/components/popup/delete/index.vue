@@ -1,10 +1,10 @@
 <template>
-  <div class="modal--wrapper" :data-theme="currentTheme">
+  <div class="modal--wrapper">
     <div class="modal--dialog d_flex justify_content_center">
       <div class="modal--content px_4 py_3" v-click-outside="close">
         <!-- Start: Modal Body -->
         <div class="body">
-          <h4>Bạn có chắc chắn muốn xóa thư mục này không ?</h4>
+          <h4>Bạn có chắc chắn muốn xóa gói tài khoản này không ?</h4>
         </div>
         <!-- End: Modal Body -->
         <!-- Start: Modal Footer -->
@@ -13,7 +13,7 @@
             <button class="btn bg_danger mr_2" @click="close">
               Hủy bỏ
             </button>
-            <button class="btn bg_primary" @click="deleteFolder">
+            <button class="btn bg_primary" @click="deletePackage">
               Xóa
             </button>
           </div>
@@ -27,14 +27,15 @@
 <script>
 export default {
   props: {
-    currentTheme: String,
     item: String
   },
   methods: {
     close() {
       this.$emit("close", false);
     },
-    deleteFolder() {}
+    deletePackage() {
+      this.$store.dispatch("deletePackage", this.item);
+    }
   }
 };
 </script>

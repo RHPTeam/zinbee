@@ -10,7 +10,8 @@ const state = {
   parentCate: [],
   cateLevel: [],
   cateChildren: [],
-  children: []
+  children: [],
+  variableControlBlog: 0
 };
 const getters = {
   allHelpCategories: state => state.allHelpCategories,
@@ -22,7 +23,8 @@ const getters = {
   parentCate: state => state.parentCate,
   cateLevel: state => state.cateLevel,
   cateChildren: state => state.cateChildren,
-  children: state => state.children
+  children: state => state.children,
+  variableControlBlog: state => state.variableControlBlog
 };
 const mutations = {
   help_category_request: state => {
@@ -79,6 +81,9 @@ const mutations = {
       .filter(item => item !== undefined);
 
     state.children = childs;
+  },
+  setControlBlog: (state, payload) => {
+    state.variableControlBlog = payload;
   }
 };
 const actions = {
@@ -143,6 +148,9 @@ const actions = {
       cate: result.data.data,
       parentId: payload.parentId
     });
+  },
+  setVaribleControlBlog: async ({ commit }, payload) => {
+    await commit("setControlBlog", payload);
   }
 };
 

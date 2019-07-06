@@ -9,7 +9,8 @@ const MarketPost = require( "../models/market/products/post.model" );
 ( async () => {
   const foundHelp = await Help.find( { "name": "help_homepage" } ),
     foundRole = await Role.find( {} ),
-    collaboratorsInfo = await Role.findOne( { "level": "Collaborator" } );
+    collaboratorsInfo = await Role.findOne( { "level": "Collaborator" } ),
+    agency = await Role.findOne( { "level": "Agency" } );
 
   // Check Role First Time Server running
   if ( foundRole.length === undefined || foundRole.length === 0 ) {
@@ -26,6 +27,13 @@ const MarketPost = require( "../models/market/products/post.model" );
   // Check Collaborators exists right way?
   if ( !collaboratorsInfo ) {
     const newRole = new Role( { "level": "Collaborator" } );
+
+    await newRole.save();
+  }
+
+  // Check agency exists right way?
+  if ( !agency ) {
+    const newRole = new Role( { "level": "Agency" } );
 
     await newRole.save();
   }

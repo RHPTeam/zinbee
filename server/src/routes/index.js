@@ -14,6 +14,7 @@ router.use( "/keywords", require( "./modules/keyword.route" ) );
 router.use( "/category-default", require( "./modules/categorydefault.route" ) );
 router.use( "/campaign-default", require( "./modules/campaignDefault.route" ) );
 router.use( "/backup-account", require( "./modules/backupAccount.route" ) );
+router.use( "/log", require( "./modules/log.route" ) );
 
 // Help Route
 router.use( "/help", require( "./modules/help/help.route" ) );
@@ -30,5 +31,9 @@ router.use( "/vps", auth, permission, require( "./modules/server.route" ) );
 
 // Backup Route
 router.use( "/backup", auth, permission, require( "./modules/backup/marketCategoryDefault.route" ) );
+
+// Agency Route
+router.use( "/package", auth, permission, require( "./modules/agency/package.route" ) );
+router.use( "/agency", require( "./modules/agency/agency.route" ) );
 
 module.exports = router;

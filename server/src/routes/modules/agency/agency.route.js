@@ -9,6 +9,7 @@ const AgencyController = require( "../../../controllers/agency/agency.controller
 
 const auth = require( "../../../helpers/middleware/authenticate.middleware" );
 const permission = require( "../../../helpers/middleware/permission.middleware" );
+const agency = require( "../../../helpers/middleware/agency.middleware" );
 
 router
   .route( "/" )
@@ -16,5 +17,10 @@ router
   .patch( auth, permission, AgencyController.update )
   .post( auth, permission, AgencyController.create )
   .delete( auth, permission, AgencyController.delete );
+router.route( "/user" )
+  .get( AgencyController.setCookieWithLinkAffiliate )
+  .post( auth, agency, AgencyController.createUserByAgency )
+  .patch( auth, agency, AgencyController.expireUserByAgency );
+router.route( "user/search", auth, agency, AgencyController.searchUserByAgency );
 
 module.exports = router;

@@ -11,8 +11,11 @@ const mongoose = require( "mongoose" ),
       },
       "listOfUser": [ // Create method
         {
-          "type": Schema.Types.ObjectId,
-          "ref": "Account"
+          "user": {
+            "type": Schema.Types.ObjectId,
+            "ref": "Account"
+          },
+          "typeUser": Number // 0 - Agency add, 1 - Link affiliate
         }
       ]
     },
@@ -48,6 +51,8 @@ const mongoose = require( "mongoose" ),
       "type": Schema.Types.ObjectId,
       "ref": "Package"
     },
+    "linkAffiliate": String,
+    "subDomain": String,
     "createdAt": { // Auto generate
       "type": Date,
       "default": Date.now()

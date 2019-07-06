@@ -11,5 +11,15 @@ module.exports = {
       },
       process.env.APP_KEY
     );
+  },
+  "signAffiliate": () => {
+    return JWT.sign(
+      {
+        "iss": "RHPTeam",
+        "iat": new Date().getTime(),
+        "exp": new Date().setDate( new Date().getDate() + 30 )
+      },
+      process.env.APP_KEY
+    );
   }
 };
