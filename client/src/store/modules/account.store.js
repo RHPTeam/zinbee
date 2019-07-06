@@ -230,10 +230,8 @@ const actions = {
       commit("auth_success");
       commit("setRedirectDomain", `${resData.data.data.domain}`);
     } catch (e) {
-      if (e.response.status === 403) {
-        commit("auth_error", "403");
-      } else if (e.response.status === 404) {
-        commit("auth_error", "404");
+      if (e.response) {
+        commit("auth_error", e.response.data);
       }
       return;
     }
@@ -383,15 +381,21 @@ const actions = {
    * @returns {Promise<void>}
    */
   getInfoByEmail: async ({ commit }, payload) => {
-    commit("auth_request");
-    const sendEmail = {
-      email: payload
-    };
+    try {
+      const sendEmail = {
+        email: payload
+      };
 
-    await AccountServices.resetPassword(sendEmail);
-    const result = await AccountServices.getInfoByEmail(payload);
-    commit("setInfoEmail", result.data.data);
-    commit("auth_success");
+      await AccountServices.resetPassword(sendEmail);
+      const result = await AccountServices.getInfoByEmail(payload);
+      commit("setInfoEmail", result.data.data);
+      commit("auth_success");
+    } catch (e) {
+      if (e.response) {
+        commit("auth_error", e.response.data);
+      }
+      return;
+    }
   },
   /**
    * @Description: check code get from email

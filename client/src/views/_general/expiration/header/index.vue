@@ -69,6 +69,8 @@ export default {};
 
 <style scoped lang="scss">
 .wrapper--header {
+  height: 100vh;
+  width: 100vw;
   .header--top {
     .link--login {
       color: #fff;
@@ -114,6 +116,16 @@ export default {};
           font-size: 0.9375rem;
           // font-size: 0.875rem;
         }
+      }
+    }
+  }
+}
+@media screen and (max-width: 767px){
+  .wrapper--header {
+    .header--main {
+      .alert--expiration {
+        width: 80vw;
+        padding: 0!important;
       }
     }
   }

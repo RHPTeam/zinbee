@@ -7,6 +7,8 @@ export default {
         password: "",
         confirmPassword: ""
       },
+      isShowPassword: false,
+      isShowConfirmPassword: false,
       reset: {
         password: "",
         confirmPassword: ""
@@ -33,8 +35,8 @@ export default {
     async sendPassword() {
       const dataSender = {
         password: this.reset.password,
-        code: this.code,
-        email: this.userInfo.email
+        email: this.userInfo.email,
+        token: window.location.href
       };
       await this.$store.dispatch( "getNewPassword", dataSender );
       this.$router.push({name: "user_signin"});

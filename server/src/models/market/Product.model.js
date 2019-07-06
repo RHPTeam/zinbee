@@ -60,7 +60,7 @@ MarketProductSchema.pre( "save", function( next ) {
 // eslint-disable-next-line one-var
 const MarketProduct = mongoose.model( "MarketProduct", MarketProductSchema );
 
-MarketProduct.on( "index", function ( error ) {
+MarketProduct.on( "old.vue", function (error ) {
   if ( error ) {
     console.log( error.message );
   }

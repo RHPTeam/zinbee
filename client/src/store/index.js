@@ -18,6 +18,10 @@ import MarketPostStore from "./modules/market/marketpost.store";
 import ProductMarket from "./modules/market/product.store";
 import ListProduct from "./modules/market/list.store";
 
+//Agency
+import PackageStore from "./modules/package.store";
+import AgencyStore from "./modules/agency.store";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -36,6 +40,9 @@ export default new Vuex.Store({
     CategoryMarket,
     MarketPostStore,
     ProductMarket,
-    ListProduct
+    ListProduct,
+    //Agency
+    PackageStore,
+    AgencyStore
   }
 });

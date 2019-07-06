@@ -11,7 +11,8 @@ const password = {
     {
       path: "code",
       name: "check_code",
-      component: require("@/views/_general/password/code").default
+      component: require("@/views/_general/password/code").default,
+      props: true
     },
     {
       path: "final",

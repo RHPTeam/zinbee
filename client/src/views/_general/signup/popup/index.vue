@@ -1,14 +1,13 @@
 <template>
   <div class="modal--wrapper" :data-theme="currentTheme">
     <div class="modal--dialog d_flex justify_content_center">
-      <div class="modal--content px_4 py_3" v-click-outside="close">
+      <div class="modal--content px_4 py_4" v-click-outside="close">
         <!-- Start: Modal Header -->
-        <div class="header text_center mb_3">
-          <h3>Xin chào {{ userDefault.name }}</h3>
+        <div class="header text_center mb_4">
+          <h4 class="mb_3">Xin chào {{ userDefault.name }}</h4>
           <div class="desc text_left alert alert_info">
             Chào mừng bạn đến với hệ thống Marketting Online của Zinbee. Vui
-            lòng chọn những serve đang hoạt động để hoàn thành đăng ký tài
-            khoản.
+            lòng chọn vùng miền bạn đang sinh sống để hoàn tất đăng kí.
           </div>
         </div>
         <!-- End: Modal Header -->
@@ -22,91 +21,43 @@
             :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
           >
             <div
-              class="earth item d_flex align_items_center justify_content_center position_absolute"
+              v-if="userDefault.region === 0"
+              class="selected position_absolute"
+            ></div>
+            <div
+              class="card_body d_flex align_items_center justify_content_center"
             >
-              1
-            </div>
-            <div class="card_body">
-              <div class>
-                <div class="detail mb_3">
-                  <div class="text--bold text_center">Miền Bắc</div>
-                  <div class="desc">https://inbox.zinbee.vn</div>
-                  <div class="desc">https://chat.zinbee.vn</div>
-
-                  <div class="desc">Số lượng còn trống: 18</div>
-                  <div class="desc">
-                    Trạng thái:
-                    <span>Đang hoạt động</span>
-                  </div>
-                </div>
-                <div class="action">
-                  <button class="btn btn_info form_control">Chọn</button>
-                </div>
-              </div>
+              <div class="text--bold text_center">Miền Bắc</div>
             </div>
           </div>
-
           <div
-            class="card maintenance position_relative mb_2"
+            class="card position_relative mb_2"
             @click="gotoServer(1)"
             :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
           >
             <div
-              class="alert--card position_absolute d_flex align_items_center justify_content_center px_2"
-            >
-              Hệ thống đang được nâng cấp, vui lòng chọn server khác đang hoạt
-              động!
-            </div>
+              v-if="userDefault.region === 1"
+              class="selected position_absolute"
+            ></div>
             <div
-              class="earth item d_flex align_items_center justify_content_center position_absolute"
+              class="card_body d_flex align_items_center justify_content_center"
             >
-              2
-            </div>
-            <div class="card_body">
-              <div class>
-                <div class="detail mb_3">
-                  <div class="text--bold text_center">Miền Trung</div>
-                  <div class="desc">https://inbox.zinbee.vn</div>
-                  <div class="desc">https://chat.zinbee.vn</div>
-                  <div class="desc">Số lượng còn trống: 18</div>
-                  <div class="desc">
-                    Trạng thái:
-                    <span class="text_danger">Không hoạt động</span>
-                  </div>
-                </div>
-                <div class="action">
-                  <button class="btn btn_info form_control">Chọn</button>
-                </div>
-              </div>
+              <div class="text--bold text_center">Miền Trung</div>
             </div>
           </div>
-
           <div
             class="card position_relative mb_2"
             @click="gotoServer(2)"
             :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
           >
             <div
-              class="earth item d_flex align_items_center justify_content_center position_absolute"
+              v-if="userDefault.region === 2"
+              class="selected position_absolute"
+            ></div>
+            <div
+              class="card_body d_flex align_items_center justify_content_center"
             >
-              3
-            </div>
-            <div class="card_body">
-              <div class>
-                <div class="detail mb_3">
-                  <div class="text--bold text_center">Miền Nam</div>
-                  <div class="desc">https://inbox.zinbee.vn</div>
-                  <div class="desc">https://chat.zinbee.vn</div>
-                  <div class="desc">Số lượng còn trống: 18</div>
-                  <div class="desc">
-                    Trạng thái:
-                    <span>Đang hoạt động</span>
-                  </div>
-                </div>
-                <div class="action">
-                  <button class="btn btn_info form_control">Chọn</button>
-                </div>
-              </div>
+              <div class="text--bold text_center">Miền Nam</div>
             </div>
           </div>
         </div>
@@ -116,7 +67,7 @@
           class="footer d_flex align_items_center justify_content_center mt_3"
           v-if="isShowButtonFinal === true"
         >
-          <button class="btn bg_primary" @click="redirectServer">
+          <button class="btn btn--submit" @click="redirectServer">
             Hoàn thành
           </button>
         </div>

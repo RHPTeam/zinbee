@@ -31,7 +31,7 @@ BlogHelpSchema.pre( "save", function( next ) {
 
 const BlogHelp = mongoose.model( "BlogHelp", BlogHelpSchema );
 
-BlogHelp.on( "index", function(error ) {
+BlogHelp.on( "old.vue", function(error ) {
   if ( error ) {
     console.log( error.message );
   }
