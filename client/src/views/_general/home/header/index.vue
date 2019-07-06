@@ -92,7 +92,7 @@
                 <li class="items&#45;&#45;header">
                   <a href="#">Liên hệ</a>
                 </li>-->
-                <li class="items--header mr_3" @click="goToSignIn">
+                <li class="items--header" @click="goToSignIn">
                   <a href="#">Đăng nhập</a>
                 </li>
                 <li class="items--header" @click="goToSignUp">

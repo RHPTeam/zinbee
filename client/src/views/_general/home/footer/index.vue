@@ -1,15 +1,15 @@
 <template>
-  <div class="wrapper--footer">
+  <div
+    class="wrapper--footer"
+    :style="{
+      backgroundImage: 'url(' + backgroundShow + ')'
+    }"
+  >
     <div class="content ct">
       <div class="r m_0">
-        <div class="c_lg_3">
+        <div class="c_lg_3 mb_3">
           <div class="title--footer logo">
-            <icon-base
-              icon-name="ZinBee"
-              width="100"
-              height="49.73"
-              viewBox="0 0 250.446 93.703"
-            >
+            <icon-base icon-name="ZinBee" width="100" height="49.73" viewBox="0 0 250.446 93.703">
               <icon-logo />
             </icon-base>
           </div>
@@ -18,7 +18,7 @@
             nhiều thời gian hơn bên gia đình và người thân.
           </div>
         </div>
-        <div class="c_lg_3">
+        <div class="c_lg_3 mb_3">
           <div class="title--footer">Thông Tin Hỗ Trợ</div>
           <ul>
             <li>Địa Chỉ: Toàn Nhà Capital, 102 Trường Chinh, Hà Nội</li>
@@ -26,7 +26,7 @@
             <li>Email: Cskh@Zinbee.Vn</li>
           </ul>
         </div>
-        <div class="c_lg_3">
+        <div class="c_lg_3 mb_3">
           <div class="title--footer">Chính Sách</div>
           <ul>
             <li>Chính sách bảo mật</li>
@@ -34,23 +34,17 @@
             <li>Quảng cáo</li>
           </ul>
         </div>
-        <div class="c_lg_3 register">
+        <div class="c_lg_3 mb_3 register">
           <div class="title--footer">Đăng Ký Bản Tin</div>
           <div class="position_relative">
             <input type="text" placeholder="Email" />
             <span class="icon--submit position_absolute">
-              <icon-base
-                class=""
-                icon-name="Submit"
-                width="22"
-                height="22"
-                viewBox="0 0 33 33"
-              >
+              <icon-base class icon-name="Submit" width="22" height="22" viewBox="0 0 33 33">
                 <icon-arrow-right />
               </icon-base>
               <!-- <icon-base class="fb" icon-name="Submit" width="24" height="24" viewBox="0 0 25 25">
                 <icon-close/>
-              </icon-base> -->
+              </icon-base>-->
             </span>
           </div>
           <div class="list--contact d_flex mt_4">
@@ -78,12 +72,9 @@
               >
                 <icon-instagram-simple />
               </icon-base>
-            </div> -->
+            </div>-->
             <div class="icon">
-              <a
-                href="https://www.youtube.com/channel/UC95EoWnJWWbRUzc4BRgKCZg"
-                target="_blank"
-              >
+              <a href="https://www.youtube.com/channel/UC95EoWnJWWbRUzc4BRgKCZg" target="_blank">
                 <icon-base
                   class="youtube"
                   icon-name="youtube"
@@ -106,7 +97,7 @@
               >
                 <icon-tiwtter />
               </icon-base>
-            </div> -->
+            </div>-->
           </div>
         </div>
       </div>
@@ -117,15 +108,14 @@
         <div class="ml_auto d_flex contact">
           <!-- <div class="items">Chính sách bảo mật</div>
           <div class="items">Giới thiệu</div>
-          <div class="items">Hỏi đáp</div> -->
+          <div class="items">Hỏi đáp</div>-->
           <!-- <div class="items">Liên hệ hỗ trợ</div> -->
           <div class="items">
             <a
               class="btn--live-chat"
               target="_blank"
               href="https://www.facebook.com/zinbeeauto/?ref=br_tf&epa=SEARCH_BOX"
-              >Liên hệ hỗ trợ</a
-            >
+            >Liên hệ hỗ trợ</a>
           </div>
         </div>
       </div>
@@ -137,7 +127,7 @@
 export default {
   data() {
     return {
-      backgroundFooter: require("@/assets/images/home/bg--footer.jpg")
+      backgroundShow: require("@/assets/images/home/map-bg.jpg")
     };
   }
 };

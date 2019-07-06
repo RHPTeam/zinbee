@@ -49,8 +49,43 @@
   </section>
 </template>
 
-<script src="../index.script.js"></script>
+<script>
+export default {
+  data() {
+    return {
+      // Slider Training
+      imageTraining: [
+        require("@/assets/images/home/training2.jpg"),
+        require("@/assets/images/home/training1.jpg"),
+        require("@/assets/images/home/training3.jpg"),
+        require("@/assets/images/home/training4.jpg")
+      ]
+    }
+  },
+  methods: {
+    
+  },
+}
+</script>
 
 <style scoped lang="scss">
 @import "../index.style";
+// training
+.training {
+  padding: 6.25rem 0;
+  .slider--training {
+    overflow: hidden;
+    .items {
+      height: 330px;
+      width: 100%;
+    }
+    .img--training {
+      background-size: cover;
+      height: 300px;
+      width: 100%;
+      margin: 1rem;
+    }
+  }
+}
+
 </style>
