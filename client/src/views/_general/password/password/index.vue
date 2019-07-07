@@ -36,37 +36,171 @@
         <!-- End: Alert -->
         <!-- Start: Form Wrap -->
         <div class="form--wrap">
-          <div class="form_group position_relative mb_0">
-            <div class="icon position_absolute">
+          <!-- Start: Password -->
+          <div
+            class="form--card d_flex align_items_center position_relative px_3"
+          >
+            <div class="form--icon mr_3">
               <icon-base
-                class="icon--envelope"
-                icon-name="Email"
-                width="20.554"
-                height="15.713"
-                viewBox="0 0 20.554 15.713"
+                class="icon--lock"
+                width="20px"
+                height="26px"
+                viewBox="0 0 14 20"
               >
-                <icon-envelope />
+                <icon-lock></icon-lock>
               </icon-base>
             </div>
-            <input
-              type="text"
-              class="form_control"
-              :class="{ error: statusClassError }"
-              placeholder="Nhập email"
-              v-model="email"
-            />
+            <div class="form--control mr_2">
+              <div class="desc">Mật khẩu</div>
+              <input
+                v-if="isShowPassword === false"
+                type="password"
+                class="form--input"
+                placeholder="Nhập mật khẩu"
+                v-model="reset.password"
+              />
+              <input
+                v-if="isShowPassword === true"
+                type="text"
+                class="form--input"
+                placeholder="Nhập mật khẩu"
+                v-model="reset.password"
+              />
+            </div>
+            <div class="form--validate d_flex align_items_center">
+              <div @click="isShowPassword = !isShowPassword">
+                <icon-base
+                  v-if="isShowPassword === true"
+                  class="icon--eye"
+                  width="22px"
+                  height="18px"
+                  viewBox="0 0 400 480"
+                >
+                  <icon-eye></icon-eye>
+                </icon-base>
+                <icon-base
+                  v-if="isShowPassword === false"
+                  class="icon--eye"
+                  width="22px"
+                  height="18px"
+                  viewBox="0 0 400 480"
+                >
+                  <icon-eye-hidden></icon-eye-hidden>
+                </icon-base>
+              </div>
+              <div class="ml_2">
+                <icon-base
+                  v-if="statusClassPassed.password"
+                  class="icon--check"
+                  width="16px"
+                  height="16px"
+                  viewBox="0 0 20 20"
+                >
+                  <icon-check-active></icon-check-active>
+                </icon-base>
+                <icon-base
+                  v-if="statusClassError.password"
+                  class="icon--attention"
+                  width="16px"
+                  height="16px"
+                  viewBox="0 0 520 520"
+                >
+                  <icon-attention></icon-attention>
+                </icon-base>
+                <div class="tooltip--error position_absolute">
+                  {{ errorText.password }}
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="text--error text_left mt_2">
-            {{ errorText }}
+          <!-- End: Password -->
+          <!-- Start: Confirm Password -->
+          <div
+            class="form--card d_flex align_items_center position_relative px_3"
+          >
+            <div class="form--icon mr_3">
+              <icon-base
+                class="icon--lock"
+                width="20px"
+                height="26px"
+                viewBox="0 0 14 20"
+              >
+                <icon-lock-check></icon-lock-check>
+              </icon-base>
+            </div>
+            <div class="form--control mr_2">
+              <div class="desc">Xác nhận mật khẩu</div>
+              <input
+                v-if="isShowConfirmPassword === false"
+                type="password"
+                class="form--input"
+                placeholder="Nhập lại mật khẩu"
+                v-model="reset.confirmPassword"
+              />
+              <input
+                v-if="isShowConfirmPassword === true"
+                type="text"
+                class="form--input"
+                placeholder="Nhập lại mật khẩu"
+                v-model="reset.confirmPassword"
+              />
+            </div>
+            <div class="form--validate d_flex align_items_center">
+              <div
+                @click="isShowConfirmPassword = !isShowConfirmPassword"
+              >
+                <icon-base
+                  v-if="isShowConfirmPassword === true"
+                  class="icon--eye"
+                  width="22px"
+                  height="18px"
+                  viewBox="0 0 400 480"
+                >
+                  <icon-eye></icon-eye>
+                </icon-base>
+                <icon-base
+                  v-if="isShowConfirmPassword === false"
+                  class="icon--eye"
+                  width="22px"
+                  height="18px"
+                  viewBox="0 0 400 480"
+                >
+                  <icon-eye-hidden></icon-eye-hidden>
+                </icon-base>
+              </div>
+              <div class="ml_2">
+                <icon-base
+                  v-if="statusClassPassed.confirmPassword"
+                  class="icon--check"
+                  width="16px"
+                  height="16px"
+                  viewBox="0 0 20 20"
+                >
+                  <icon-check-active></icon-check-active>
+                </icon-base>
+                <icon-base
+                  v-if="statusClassError.confirmPassword"
+                  class="icon--attention"
+                  width="16px"
+                  height="16px"
+                  viewBox="0 0 520 520"
+                >
+                  <icon-attention></icon-attention>
+                </icon-base>
+                <div class="tooltip--error position_absolute">
+                  {{ errorText.confirmPassword }}
+                </div>
+              </div>
+            </div>
           </div>
+          <!-- End: Confirm Password -->
         </div>
         <!-- End: Form Wrap -->
       </div>
       <!-- End: Body -->
       <!-- Start: Footer -->
       <div class="card--footer mt_3">
-        <div class="btn--submit mb_5" @click="sendMail">Đổi mật khẩu</div>
-        <router-link class="link--custom" to="/signin">Đăng nhập</router-link>
+        <div class="btn--submit" @click="sendPassword">Đổi mật khẩu</div>
       </div>
       <!-- End: Footer -->
     </div>

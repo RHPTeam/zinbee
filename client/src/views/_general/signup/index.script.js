@@ -231,6 +231,16 @@ export default {
         this.statusClassError.password = false;
         this.statusClassPassed.password = false;
       }
+      if (value !== this.confirmPassword) {
+        this.errorText.confirmPassword = "Mật khẩu không trùng nhau!";
+        this.statusClassError.confirmPassword = true;
+        this.statusClassPassed.confirmPassword = false;
+      }
+      if (value === this.confirmPassword) {
+        this.errorText.confirmPassword = "";
+        this.statusClassError.confirmPassword = false;
+        this.statusClassPassed.confirmPassword = true;
+      }
     },
     confirmPassword(value) {
       this.errorText.confirmPassword = "Mật khẩu không trùng nhau!";

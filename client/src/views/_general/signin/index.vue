@@ -59,20 +59,12 @@
             </div>
             <!-- End: Main Header-->
             <!-- Start: Alert -->
-            <!--Start: Notification change password success -->
-            <app-alert
-              :type="
-                this.$store.getters.statusResetPassword === true
-                  ? 'alert_success'
-                  : ''
-              "
-              :message="
-                this.$store.getters.statusResetPassword === true
-                  ? 'Bạn đã đặt lại mật khẩu thành công!'
-                  : ''
-              "
-            ></app-alert>
-            <!--End: Notification change password success -->
+            <div
+              v-if="this.$store.getters.statusResetPassword === true"
+              class="alert--success position_relative mt_3"
+            >
+              Bạn đã đặt lại mật khẩu thành công!
+            </div>
             <div
               v-if="this.$store.getters.authError === '401'"
               class="alert--error position_relative mt_3"
@@ -155,33 +147,63 @@
                   <div class="form--control mr_2">
                     <div class="desc">Mật khẩu</div>
                     <input
+                      v-if="isShowPassword === false"
                       type="password"
                       class="form--input"
                       placeholder="Nhập mật khẩu"
                       v-model="user.password"
                     />
+                    <input
+                      v-if="isShowPassword === true"
+                      type="text"
+                      class="form--input"
+                      placeholder="Nhập mật khẩu"
+                      v-model="user.password"
+                    />
                   </div>
-                  <div class="form--validate">
-                    <icon-base
-                      v-if="statusClassPassed.password"
-                      class="icon--check"
-                      width="16px"
-                      height="16px"
-                      viewBox="0 0 20 20"
-                    >
-                      <icon-check-active></icon-check-active>
-                    </icon-base>
-                    <icon-base
-                      v-if="statusClassError.password"
-                      class="icon--attention"
-                      width="16px"
-                      height="16px"
-                      viewBox="0 0 520 520"
-                    >
-                      <icon-attention></icon-attention>
-                    </icon-base>
-                    <div class="tooltip--error position_absolute">
-                      {{ errorText.password }}
+                  <div class="form--validate d_flex align_items_center">
+                    <div @click="isShowPassword = !isShowPassword">
+                      <icon-base
+                        v-if="isShowPassword === true"
+                        class="icon--eye"
+                        width="22px"
+                        height="18px"
+                        viewBox="0 0 400 480"
+                      >
+                        <icon-eye></icon-eye>
+                      </icon-base>
+                      <icon-base
+                        v-if="isShowPassword === false"
+                        class="icon--eye"
+                        width="22px"
+                        height="18px"
+                        viewBox="0 0 400 480"
+                      >
+                        <icon-eye-hidden></icon-eye-hidden>
+                      </icon-base>
+                    </div>
+                    <div class="ml_2">
+                      <icon-base
+                        v-if="statusClassPassed.password"
+                        class="icon--check"
+                        width="16px"
+                        height="16px"
+                        viewBox="0 0 20 20"
+                      >
+                        <icon-check-active></icon-check-active>
+                      </icon-base>
+                      <icon-base
+                        v-if="statusClassError.password"
+                        class="icon--attention"
+                        width="16px"
+                        height="16px"
+                        viewBox="0 0 520 520"
+                      >
+                        <icon-attention></icon-attention>
+                      </icon-base>
+                      <div class="tooltip--error position_absolute">
+                        {{ errorText.password }}
+                      </div>
                     </div>
                   </div>
                 </div>

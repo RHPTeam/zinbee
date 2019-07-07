@@ -23,8 +23,7 @@
       <div class="card--body">
         <div class="title mt_2"></div>
         <div class="alert mt_4">
-          Chúng tôi vừa gửi một email với đường dẫn đặt lại mật khẩu tới email
-          của bạn. Vui lòng kiểm tra để khôi phục tài khoản.
+          Chúng tôi vừa gửi một email với đường dẫn đặt lại mật khẩu tới <span class="text--bold">{{ email }}</span>. Vui lòng kiểm tra email để khôi phục tài khoản của bạn.
         </div>
       </div>
       <!-- End: Body -->
@@ -51,118 +50,5 @@
 <script src="./index.script.js"></script>
 
 <style scoped lang="scss">
-.session {
-  .card {
-    background-color: #fff;
-    border-color: #ebebeb;
-    border-radius: 0.625rem;
-    font-size: 0.95rem;
-    width: 460px;
-    height: 560px;
-    .card--body {
-      .alert {
-        background-color: rgba(255, 248, 230, 0.7);
-        border-radius: 0.5rem;
-        color: #444;
-        font-size: 0.95rem;
-        padding: 0.75rem;
-      }
-      .title {
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
-      .form--wrap {
-        .form_group {
-          .form_control {
-            border: 0;
-            border-bottom: 1px solid #e4e4e4;
-            border-radius: 0;
-            font-size: 0.95rem;
-            font-weight: 600;
-            padding: 0.75rem 0.75rem 0.75rem 2rem !important;
-            transition: all 0.4s ease;
-            &::placeholder {
-              color: #ccc;
-              font-size: 0.875rem;
-              font-weight: normal;
-            }
-            &:active,
-            &:hover,
-            &:focus {
-              border-color: #ffb94a;
-              box-shadow: none;
-              outline: 0;
-            }
-            &.error {
-              border-color: #f96666;
-            }
-          }
-          .icon {
-            top: 8px;
-            .icon--envelope {
-              color: #999;
-            }
-          }
-        }
-        .text--error {
-          color: #ff3333;
-          font-size: 0.825rem;
-        }
-      }
-    }
-    .card--footer {
-      .btn--submit {
-        background-color: #ffb94a;
-        border-radius: 0.625rem;
-        color: #fff;
-        cursor: pointer;
-        font-weight: 600;
-        padding: 0.5rem 0.75rem;
-        transition: all 0.4s ease;
-        &:hover {
-          background-color: #ff9e4a;
-        }
-      }
-      .link--custom {
-        color: #ffb94a;
-        font-size: 0.875rem;
-        text-transform: uppercase;
-      }
-    }
-  }
-  .footer {
-    .link--group {
-      &-item {
-        color: #999;
-        font-size: 0.825rem;
-        font-weight: 600;
-        text-decoration: none;
-        opacity: 0.8;
-        transition: all 0.4s ease;
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
-  }
-}
-
-/* Responsive */
-@media screen and (max-width: 576px) {
-  .session {
-    .card {
-      border: 0;
-      font-size: 0.875rem;
-      width: 100%;
-      height: auto;
-    }
-    .footer {
-      .link--group {
-        &-item {
-          font-size: 0.8rem;
-        }
-      }
-    }
-  }
-}
+@import "./index.style";
 </style>

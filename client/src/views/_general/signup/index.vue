@@ -185,7 +185,7 @@
                     <input
                       type="text"
                       class="form--input"
-                      placeholder="ZB009204"
+                      placeholder="K009"
                       v-model="user.presenter"
                     />
                   </div>

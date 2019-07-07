@@ -118,14 +118,7 @@
           <!-- Start: User Info -->
           <div>
             <div
-              class="signin"
-              v-if="userMember && userMember.length === 0"
-              @click="redirectToSignin"
-            >
-              Đăng nhập ngay
-            </div>
-            <div
-              v-else
+              v-if="userMember && userMember.length > 0"
               class="profile position_relative d_flex justify_content_end align_items_center"
               @click="showProfileDropdown"
               v-click-outside="closeProfileDropdown"
@@ -216,6 +209,9 @@
                 </a>
               </div>
               <!-- End: Dropdown Menu -->
+            </div>
+            <div v-else class="signin" @click="redirectToSignin">
+              Đăng nhập ngay
             </div>
           </div>
           <!-- End: User Info -->
