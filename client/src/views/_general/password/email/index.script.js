@@ -33,7 +33,10 @@ export default {
   methods: {
     async sendMail() {
       await this.$store.dispatch( "getInfoByEmail", this.email );
-      this.$router.push( { name: "check_code" } );
+      if ( this.$store.getters.authStatus === "error" ) {
+        return;
+      }
+      this.$router.push( { name: "check_code", params: { email: this.email } } );
     }
   },
   components: {

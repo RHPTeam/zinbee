@@ -48,8 +48,8 @@
       }}</a>
       <a
         v-else
-        @click="handlePageSelected(page.index + 1)"
-        @keyup.enter="handlePageSelected(page.index + 1)"
+        @click="handlePageSelected(page.old + 1)"
+        @keyup.enter="handlePageSelected(page.old + 1)"
         :class="pageLinkClass"
         tabindex="0"
         >{{ page.content }}</a
@@ -127,8 +127,8 @@
       <a
         v-else
         :key="page"
-        @click="handlePageSelected(page.index + 1)"
-        @keyup.enter="handlePageSelected(page.index + 1)"
+        @click="handlePageSelected(page.old + 1)"
+        @keyup.enter="handlePageSelected(page.old + 1)"
         :class="[pageLinkClass, page.selected ? activeClass : '']"
         tabindex="0"
         >{{ page.content }}</a

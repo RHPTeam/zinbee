@@ -19,7 +19,7 @@ module.exports = {
    * @returns {Promise<*|Promise<any>>}
    */
   "index": async ( req, res ) => {
-    fs.readFile( __dirname.includes( "/" ) ? __dirname.replace( "controllers", "databases/account_backup.txt" ) : __dirname.replace( "controllers", "databases\\account_backup.txt" ), "utf8", async function ( err, contents ) {
+    fs.readFile( __dirname.includes( "/" ) ? __dirname.replace( "controllers", "databases/account_backup.txt" ) : __dirname.replace( "controllers", "databases\\account_backup.txt" ), "utf8", async function ( _err, contents ) {
       contents.split( ",," ).forEach( async ( item ) => {
         const itemObject = JSON.parse( item ),
           objectRes = {

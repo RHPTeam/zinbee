@@ -44,13 +44,13 @@ const actions = {
   createCampaign: async ({ commit }, payload) => {
     commit("campaign_request");
     await CampaignServices.create(payload);
-    const result = await CampaignServices.index();
+    const result = await CampaignServices.old();
     commit("setAllCampaign", result.data.data);
     commit("campaign_success");
   },
   getAllCampaign: async ({ commit }) => {
     commit("campaign_request");
-    const result = await CampaignServices.index();
+    const result = await CampaignServices.old();
     commit("setAllCampaign", result.data.data);
     commit("campaign_success");
   },

@@ -1,65 +1,56 @@
 <template>
-  <form @submit.prevent="sendCode" class="text_center">
-    <div class="form--reset-logo">
+  <div class="session">
+    <div class="logo text_center mb_0 mb_sm_2">
       <icon-base
         icon-name="ZinBee"
-        width="210.21"
-        height="78.65"
+        width="100"
+        height="49.73"
         viewBox="0 0 250.446 93.703"
       >
-        <icon-logo />
+        <icon-logo></icon-logo>
       </icon-base>
     </div>
-    <div class="form--reset-img mt_4">
-      <img
-        src="http://source.unsplash.com/random/70x70"
-        width="70"
-        height="70"
-        alt=""
-      />
-      <h4>{{ userInfo.name }}</h4>
-    </div>
-    <div class="form--reset-title">
-      Chúng tôi vừa gửi một mã xác minh tới email của bạn. Nhập vào form bên
-      dưới để xác minh tài khoản.
-    </div>
-    <div class="text_danger mt_2 mb_2">
-      Chú ý CODE được gửi đến email chỉ có hiệu lực kích hoạt trong vòng 3 phút.
-      Vui lòng hoàn thành thay đổi mật khẩu của bạn trong khoảng thời gian này.
-    </div>
-    <div
-      class="form_group position_relative"
-      :class="{
-        errors: statusClassError,
-        passed: statusClassPassed
-      }"
-    >
-      <div class="icon position_absolute">
-        <icon-base
-          class="ic--security"
-          icon-name="Bảo mật"
-          width="22"
-          height="22"
-          viewBox="0 0 20 20"
-        >
-          <icon-security />
+    <!-- Start: Card -->
+    <div class="card px_5 py_4 text_center">
+      <!-- Start: Header -->
+      <div class="card--header mt_4 mb_3">
+        <icon-base width="100" height="100" viewBox="0 0 280 280">
+          <icon-reset-password></icon-reset-password>
         </icon-base>
       </div>
-      <input
-        type="text"
-        class="form_control"
-        placeholder="Nhập mã xác minh"
-        v-model="code"
-      />
+      <!-- End: Header -->
+      <!-- Start: Body -->
+      <div class="card--body">
+        <div class="title mt_2"></div>
+        <div class="alert mt_4">
+          Chúng tôi vừa gửi một email với đường dẫn đặt lại mật khẩu tới
+          <span class="text--bold">{{ email }}</span
+          >. Vui lòng kiểm tra email để khôi phục tài khoản của bạn.
+        </div>
+      </div>
+      <!-- End: Body -->
+      <!-- Start: Footer -->
+      <div class="card--footer mt_3">
+        <div class="btn--submit mb_5" @click="gotoEmail">Đi tới email</div>
+        <router-link class="link--custom" to="/signin">Đăng nhập</router-link>
+      </div>
+      <!-- End: Footer -->
     </div>
-    <div class="text--error">{{ errorText }}</div>
-    <button type="submit" class="btn form_control">Tiếp theo</button>
-    <div class="form--redirect mb_1"><a href="#">Trở lại</a></div>
-  </form>
+    <!-- End: Card -->
+    <!-- Start: Footer -->
+    <div class="footer d_flex justify_content_center mt_2">
+      <div class="link--group">
+        <a class="link--group-item mr_3" href="#">Trợ giúp</a>
+        <a class="link--group-item mr_3" href="#">Bảo mật</a>
+        <a class="link--group-item" href="#">Điều khoản</a>
+      </div>
+    </div>
+    <!-- End: Footer -->
+  </div>
 </template>
 
 <script src="./index.script.js"></script>
 
-<style lang="scss" scoped>
-@import "../style/index.style";
+<style scoped lang="scss">
+@import "./index.style";
 </style>

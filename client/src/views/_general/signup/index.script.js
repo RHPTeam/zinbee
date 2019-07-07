@@ -1,6 +1,6 @@
 import AppIntroVideo from "../introvideo";
 import AppAlert from "@/components/shared/layouts/alert";
-import ServerMutipart from "./popup/index";
+import ServerPopup from "./popup/index";
 import CookieFunction from "@/utils/functions/cookie";
 
 // import axios from "axios/index";
@@ -9,7 +9,7 @@ export default {
   components: {
     AppAlert,
     AppIntroVideo,
-    ServerMutipart
+    ServerPopup
   },
   data() {
     return {
@@ -22,8 +22,11 @@ export default {
         presenter: ""
       },
       isStatusNetwork: false,
+      isShowServerMutipart: false,
+      isShowPassword: false,
+      isShowConfirmPassword: false,
       network: "",
-      srcDefaultSinup: require("@/assets/images/images-login.jpg"),
+      loginImage: require("@/assets/images/zinbee-login-image.svg"),
       statusFinishForm: false,
       statusClassError: {
         name: false,
@@ -47,8 +50,7 @@ export default {
         phone: "",
         presenter: "",
         region: 0
-      },
-      isShowServerMutipart: false
+      }
     };
   },
   computed: {
@@ -61,13 +63,69 @@ export default {
   },
   methods: {
     async submit() {
-      if (this.confirmPassword !== this.user.password) {
-        this.$store.dispatch("set_error", "Mật khẩu không trùng nhau!");
+      // Validate before request
+      if (this.user.name === "") {
+        this.$store.dispatch("set_error", {
+          status: "error",
+          message: "Tên không được để trống!"
+        });
+        return;
+      } else if (this.user.phone === "") {
+        this.$store.dispatch("set_error", {
+          status: "error",
+          message: "Số điện thoại không được để trống!"
+        });
+        return;
+      } else if (this.user.email === "") {
+        this.$store.dispatch("set_error", {
+          status: "error",
+          message: "Email không được để trống!"
+        });
         return;
       } else if (this.confirmPassword === "" || this.user.password === "") {
-        this.$store.dispatch("set_error", "Mật khẩu không được để trống");
+        this.$store.dispatch("set_error", {
+          status: "error",
+          message: "Mật khẩu không được để trống!"
+        });
+        return;
+      } else if (this.statusClassError.name) {
+        this.$store.dispatch("set_error", {
+          status: "error",
+          message: this.errorText.name
+        });
+        return;
+      } else if (this.statusClassError.phone) {
+        this.$store.dispatch("set_error", {
+          status: "error",
+          message: this.errorText.phone
+        });
+        return;
+      } else if (this.statusClassError.presenter) {
+        this.$store.dispatch("set_error", {
+          status: "error",
+          message: this.errorText.presenter
+        });
+        return;
+      } else if (this.statusClassError.email) {
+        this.$store.dispatch("set_error", {
+          status: "error",
+          message: this.errorText.email
+        });
+        return;
+      } else if (this.statusClassError.password) {
+        this.$store.dispatch("set_error", {
+          status: "error",
+          message: this.errorText.password
+        });
+        return;
+      } else if (this.statusClassError.confirmPassword) {
+        this.$store.dispatch("set_error", {
+          status: "error",
+          message: this.errorText.confirmPassword
+        });
         return;
       }
+
       let dataSender = {};
 
       if (this.user.presenter === "") {
@@ -75,7 +133,8 @@ export default {
           name: this.user.name,
           email: this.user.email,
           password: this.user.password,
-          phone: this.user.phone
+          phone: this.user.phone,
+          region: 0
         };
       } else {
         dataSender = {
@@ -83,17 +142,27 @@ export default {
           email: this.user.email,
           password: this.user.password,
           phone: this.user.phone,
-          presenter: this.user.presenter
+          presenter: this.user.presenter,
+          region: 0
         };
       }
-      await this.$store.dispatch("setSingUpByUser", dataSender);
-      this.isShowServerMutipart = true;
-
-      // if (resData === false) {
-      //   return;
-      // }
-      // this.$store.dispatch("getUserInfo" );
-      // this.$router.push( "/welcome" );
+      // Reset error status before send request
+      this.$store.dispatch("set_error", "");
+      // Request sign up user account
+      await this.$store.dispatch("signUpByUser", dataSender);
+      // Check error after request
+      if (this.$store.getters.authError.status === "error") {
+        return;
+      }
+      // Redirect if create account successfully
+      const token = `sid=${CookieFunction.getCookie(
+        "sid"
+      )}; uid=${CookieFunction.getCookie(
+        "uid"
+      )}; cfr=${CookieFunction.getCookie("cfr")};`;
+      window.location.href = `${
+        this.redirectDomain
+      }redirect?authorization=${encodeURIComponent(token)}`;
     },
     openPopupSelectServer() {
       this.isShowServerMutipart = true;
@@ -161,6 +230,16 @@ export default {
         this.errorText.password = "";
         this.statusClassError.password = false;
         this.statusClassPassed.password = false;
+      }
+      if (value !== this.confirmPassword) {
+        this.errorText.confirmPassword = "Mật khẩu không trùng nhau!";
+        this.statusClassError.confirmPassword = true;
+        this.statusClassPassed.confirmPassword = false;
+      }
+      if (value === this.confirmPassword) {
+        this.errorText.confirmPassword = "";
+        this.statusClassError.confirmPassword = false;
+        this.statusClassPassed.confirmPassword = true;
       }
     },
     confirmPassword(value) {

@@ -8,18 +8,18 @@
  */
 const Account = require( "../models/Account.model" );
 const Role = require( "../models/Role.model" );
-const Agency = require( "../models/agency/Agency.model" );
+// const Agency = require( "../models/agency/Agency.model" );
 const Server = require( "../models/Server.model" );
 const { writeForgotPassword } = require( "../databases/templates/email" );
 
 const fs = require( "fs" );
+const cryptoRandomString = require( "crypto-random-string" );
 const jsonResponse = require( "../configs/response" );
 
-const { findSubString } = require( "../helpers/utils/functions/string" );
-const { signToken } = require( "../configs/jwt" );
+// const { findSubString } = require( "../helpers/utils/functions/string" );
+const { decodeToken, signToken } = require( "../configs/jwt" );
 const { signUpSync, createNewPasswordSync, activeAccountSync, changeStatusAccountSync } = require( "../microservices/synchronize/account" ),
-  mail = require( "nodemailer" ),
-  CronJob = require( "cron" ).CronJob;
+  mail = require( "nodemailer" );
 
 module.exports = {
   "changePasswordSync": async ( req, res ) => {
@@ -243,15 +243,15 @@ module.exports = {
     res.set( "Cookie", cookie );
 
     // check browser user have link and cookie affiliate
-    if ( req.headers.authorization && findSubString( req.headers.authorization, "aid=", ";" ) ) {
-      const findAgency = await Agency.findOne( { "_id": findSubString( req.headers.authorization, "aid=", ";" ) } );
-
-      if ( findAgency ) {
-        findAgency.customer.total += 1;
-        findAgency.customer.listOfUser.push( { "user": newUser._id, "typeUser": 0 } );
-        await findAgency.save();
-      }
-    }
+    // if ( req.headers.authorization && findSubString( req.headers.authorization, "aid=", ";" ) ) {
+    //   const findAgency = await Agency.findOne( { "_id": findSubString( req.headers.authorization, "aid=", ";" ) } );
+    //
+    //   if ( findAgency ) {
+    //     findAgency.customer.total += 1;
+    //     findAgency.customer.listOfUser.push( { "user": newUser._id, "typeUser": 0 } );
+    //     await findAgency.save();
+    //   }
+    // }
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${newUser.email} đăng ký thành công!`,
@@ -295,10 +295,9 @@ module.exports = {
     // Send password to user
   },
   "resetPassword": async ( req, res, next ) => {
-    const { email } = req.body,
-      character = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const { email } = req.body;
 
-    let code = "", cronCode, transporter, userAssignCode, userInfo;
+    let transporter, userInfo;
 
     // Check validator
     if ( !email ) {
@@ -312,10 +311,19 @@ module.exports = {
       return res.status( 404 ).json( { "status": "error", "message": "Email không tồn tại trên hệ thống!" } );
     }
 
-    // Random get six character
-    for ( let i = 0; i < 6; i++ ) {
-      code += character.charAt( Math.floor( Math.random() * character.length ) );
+    // eslint-disable-next-line one-var
+    const serverContainUser = await Server.findOne( { "userAmount": userInfo._id } );
+
+    // check catch
+    if ( !serverContainUser ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Tài khoản này hiện tại không còn khả dụng trên hệ thống! Vui lòng liên hệ với bên bộ phận CSKH" } );
     }
+
+    // Generate link to reset by email
+    // eslint-disable-next-line one-var
+    let linkReset = process.env.APP_ENV === "production" ? `${process.env.APP_URL}/#/` : `${process.env.APP_URL}:8080/#/`;
+
+    linkReset += `reset-password/final?authorization=${cryptoRandomString( { "length": 50, "type": "url-safe" } )}&timestamp=${cryptoRandomString( { "length": 10, "characters": "1234567890" } )}&serverToken=${serverContainUser.info.domain}&token=${signToken( userInfo )}&__a=1`;
 
     // Use Smtp Protocol to send Email
     transporter = await mail.createTransport( {
@@ -331,8 +339,8 @@ module.exports = {
       {
         "from": process.env.MAIL_USERNAME,
         "to": req.body.email,
-        "subject": "Xác nhận thay đổi mật khẩu",
-        "html": writeForgotPassword( code )
+        "subject": "Yêu cầu đặt lại mật khẩu Tài khoản Zinbee của bạn",
+        "html": writeForgotPassword( linkReset )
       },
       ( err ) => {
         if ( err ) {
@@ -341,60 +349,23 @@ module.exports = {
       }
     );
 
-    // Update code temp
-    userAssignCode = await Account.findOneAndUpdate( { "_id": userInfo._id }, { "code": code } ).select( "-password" );
-
-    if ( !userAssignCode ) {
-      return res.status( 404 ).json( { "status": "error", "message": "[Email] Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
-    }
-
-    res.status( 201 ).json( { "status": "success", "message": `Vui lòng check email ${req.body.email} để lấy code` } );
-
-    cronCode = await new CronJob( "* 5 * * * *", async () => {
-      const user = await Account.findOne( { "_id": userInfo._id } );
-
-      if ( user.code === "" || user.code === null ) {
-        return;
-      }
-
-      await Account.findByIdAndUpdate( userInfo._id, { "$set": { "code": "" } }, { "new": true } ).select( "-password" );
-    }, () => {
-      cronCode.stop();
-    }, null,
-    true,
-    "Asia/Ho_Chi_Minh" );
-  },
-  "checkCode": async ( req, res ) => {
-    const { email, code } = req.body;
-
-    let userInfo;
-
-    if ( !email || !code ) {
-      return res.status( 405 ).json( { "status": "error", "message": "Vui lòng cung cấp mã!" } );
-    }
-
-    userInfo = await Account.findOne( { email, code } );
-
-    if ( !userInfo ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Mã xác thực không chính xác!" } );
-    }
-
-    return res.status( 201 ).json( { "status": "success", "message": `${email} xác thực code thành công!` } );
+    res.status( 200 ).json( { "status": "success", "data": `Vui lòng check email ${req.body.email} để lấy code` } );
   },
   "createNewPassword": async ( req, res ) => {
-    const { code, email, password } = req.body,
-      userInfo = await Account.findOne( { code, email } ),
+    const { token, password } = req.body;
+
+    let decodeTokenResult = decodeToken( token ), resUserSync;
+
+    // eslint-disable-next-line one-var
+    const userInfo = await Account.findOne( { "_id": decodeTokenResult.sub } ),
       memberRole = await Role.findOne( { "_id": userInfo._role } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
-
-    let resUserSync;
 
     if ( !userInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Phiên tạo mới mật khẩu của bạn đã hết hạn!" } );
     }
 
     // Sync
-    console.log( "du ma sai gon" );
     resUserSync = await createNewPasswordSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/create-password`, { password }, { "Authorization": `sid=${signToken( userInfo._id )}; uid=${userInfo._id}; cfr=${memberRole.level};` } );
     if ( resUserSync.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
@@ -404,10 +375,7 @@ module.exports = {
     // Save
     await userInfo.save();
 
-    // Reset code
-    await Account.findByIdAndUpdate( userInfo._id, { "$set": { "code": "" } }, { "new": true } ).select( "-password" );
-
-    res.status( 201 ).json( jsonResponse( "Change Password successfully!", null ) );
+    res.status( 201 ).json( jsonResponse( "success", "Tạo mới mật khẩu thành công!" ) );
   },
   "getUserInfoLostPass": async ( req, res ) => {
     const userInfo = await Account.findOne( { "email": req.query.email } ).select( "name email imageAvatar" );
