@@ -152,7 +152,8 @@ module.exports = {
     if ( !findAccount ) {
       return res.status( 404 ).json( { "status": "fail", "_account": "Người dùng không tồn tại!" } );
     }
-    if ( findAgency.customer.listOfUser.indexOf( req.query._account ) < 0 ) {
+
+    if ( findAgency.customer.listOfUser.filter( ( user ) => user.user.toString() === req.query._account ).length < 1 ) {
       return res.status( 405 ).json( { "status": "fail", "_account": "Bạn không có quyền gia hạn cho người dùng này!" } );
     }
     // handle date agency

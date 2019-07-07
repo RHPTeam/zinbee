@@ -55,8 +55,13 @@ module.exports = {
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   "getUserInfo": async ( req, res ) => {
-    const data = await Account.findOne( { "_id": req.uid } ).select( "-password" ).lean();
+    let data = null;
 
+    if ( req.query._id ) {
+      data = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).lean();
+      return res.status( 200 ).json( jsonResponse( "success", data ) );
+    }
+    data = await Account.findOne( { "_id": req.uid } ).select( "-password" ).lean();
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   "index": async ( req, res ) => {
