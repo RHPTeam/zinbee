@@ -2,7 +2,12 @@
   <div class="wrapper--modal-mobile p_3">
     <div class="wrapper--content">
       <div class="items--header text_center mb_3">
-        <icon-base icon-name="ZinBee" width="210.21" height="78.65" viewBox="0 0 250.446 93.703">
+        <icon-base
+          icon-name="ZinBee"
+          width="210.21"
+          height="78.65"
+          viewBox="0 0 250.446 93.703"
+        >
           <icon-logo />
         </icon-base>
       </div>
@@ -57,11 +62,13 @@
           <router-link
             :to="{ name: 'check_mail' }"
             class="forgot--pass text_left d_block text_center mb_3"
-          >Quên mật khẩu?</router-link>
+            >Quên mật khẩu?</router-link
+          >
           <router-link
             :to="{ name: 'check_mail' }"
             class="forgot--pass text_left d_block text_center mb_3"
-          >Bạn đang gặp sự cố?</router-link>
+            >Bạn đang gặp sự cố?</router-link
+          >
         </div>
         <div class="bottom mt_auto">
           <p class="choose--options text_center my_2">HOẶC</p>
@@ -93,7 +100,7 @@
   .bottom {
     .answer {
       color: #8a8a8a;
-      font-size: .8rem;
+      font-size: 0.8rem;
       line-height: 1.33;
     }
   }
