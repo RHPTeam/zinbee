@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable prettier/prettier */
 /* eslint-disable global-require */
-import AppIntroVideo from "../introvideo";
+import AppIntroVideo from "../../introvideo";
 import AppAlert from "@/components/shared/layouts/alert";
 
 import CookieFunction from "@/utils/functions/cookie";
