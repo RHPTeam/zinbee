@@ -23,7 +23,9 @@
       <div class="card--body">
         <div class="title mt_2"></div>
         <div class="alert mt_4">
-          Chúng tôi vừa gửi một email với đường dẫn đặt lại mật khẩu tới <span class="text--bold">{{ email }}</span>. Vui lòng kiểm tra email để khôi phục tài khoản của bạn.
+          Chúng tôi vừa gửi một email với đường dẫn đặt lại mật khẩu tới
+          <span class="text--bold">{{ email }}</span
+          >. Vui lòng kiểm tra email để khôi phục tài khoản của bạn.
         </div>
       </div>
       <!-- End: Body -->

@@ -146,9 +146,7 @@
               />
             </div>
             <div class="form--validate d_flex align_items_center">
-              <div
-                @click="isShowConfirmPassword = !isShowConfirmPassword"
-              >
+              <div @click="isShowConfirmPassword = !isShowConfirmPassword">
                 <icon-base
                   v-if="isShowConfirmPassword === true"
                   class="icon--eye"
