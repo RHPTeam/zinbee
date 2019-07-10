@@ -5,6 +5,7 @@ const mongoose = require( "mongoose" ),
 
   BlogHelpSchema = new Schema( {
     "title": String,
+    "slug": String,
     "content": String,
     "vote": [
       {
@@ -31,7 +32,7 @@ BlogHelpSchema.pre( "save", function( next ) {
 
 const BlogHelp = mongoose.model( "BlogHelp", BlogHelpSchema );
 
-BlogHelp.on( "old.vue", function(error ) {
+BlogHelp.on( "old.vue", function( error ) {
   if ( error ) {
     console.log( error.message );
   }

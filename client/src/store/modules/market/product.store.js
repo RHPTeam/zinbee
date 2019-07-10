@@ -99,7 +99,9 @@ const mutations = {
 const actions = {
   // get all product
   getProducts: async ({ commit }) => {
+    console.log( "Cak" );
     const rsAllProduct = await ProductMarket.allProduct();
+    console.log( rsAllProduct );
     commit("setAllProduct", rsAllProduct.data.data);
   },
   /**

@@ -8,6 +8,7 @@ export default {
 
   // get all product
   allProduct() {
+    console.log( "Hehehe" );
     return Api().get("market/products");
   },
 
