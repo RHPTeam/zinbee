@@ -56,7 +56,9 @@ const actions = {
   createMarketPost: async ({ commit }, payload) => {
     const result = await MarketPostService.create(payload);
     commit("setMarketPost", result.data.data);
-    const res = await MarketPostService.old();
+    const sizeDefault = 25,
+      pageDefault = 1;
+    const res = await MarketPostService.index(sizeDefault, pageDefault);
     await commit("setAllMarketPosts", res.data.data);
   },
   /**
@@ -72,7 +74,7 @@ const actions = {
    */
   getAllMarketPosts: async ({ commit }, payload) => {
     commit("setMarketPostStatus", "loading");
-    const res = await MarketPostService.old(payload.size, payload.page);
+    const res = await MarketPostService.index(payload.size, payload.page);
     await commit("setAllMarketPosts", res.data.data.results);
     await commit("setPageMarketPosts", res.data.data.page);
     commit("setMarketPostStatus", "success");
@@ -100,7 +102,7 @@ const actions = {
    */
   updateMarketPost: async ({ commit }, payload) => {
     await MarketPostService.update(payload._id, payload);
-    const res = await MarketPostService.old();
+    const res = await MarketPostService();
     await commit("setAllMarketPosts", res.data.data);
   },
   /**

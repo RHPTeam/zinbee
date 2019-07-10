@@ -227,7 +227,7 @@ export default {
       this.product.name = this.postMarket.title;
       this.product.typeProduct = 0;
       this.product.description = this.postMarket.content.slice(0, 50);
-      this.product.summary = this.postMarket.content.slice(0, 260);
+      this.product.summary = this.postMarket.content.slice(0, 460);
 
       await this.$store.dispatch("createProduct", this.product);
       // reset post

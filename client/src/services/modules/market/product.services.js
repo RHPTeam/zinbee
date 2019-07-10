@@ -7,8 +7,8 @@ export default {
   },
 
   // get all product
-  allProduct() {
-    return Api().get("market/products");
+  index(size, page) {
+    return Api().get(`market/products?_size=${size}&_page=${page}`);
   },
 
   // delete
