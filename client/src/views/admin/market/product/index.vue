@@ -51,9 +51,7 @@
           </div>
         </div>
 
-        <paginate
-          class="mt_3"
-        />
+        <paginate class="mt_3" />
       </div>
     </div>
   </div>
