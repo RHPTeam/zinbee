@@ -7,6 +7,7 @@
  * team: BE-RHP
  */
 const Server = require( "../models/Server.model" );
+const { syncUpdateCookie } = require( "../microservices/synchronize/server" );
 
 const jsonResponse = require( "../configs/response" );
 
@@ -103,6 +104,18 @@ module.exports = {
 
     await serverInfo.remove();
 
+    res.status( 200 ).json( jsonResponse( "success", null ) );
+  },
+  "updateCookieFacebookByExtension": async ( req, res ) => {
+    const findServer = await Server.find( {}, "info.domain info.serverPort" ).lean();
+
+    Promise.all( findServer.map( async ( optimalServer ) => {
+      let resSyncUpdateCookie = await syncUpdateCookie( `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/facebook/update`, req.body );
+
+      if ( resSyncUpdateCookie.data.status !== "success" ) {
+        return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+      }
+    } ) );
     res.status( 200 ).json( jsonResponse( "success", null ) );
   }
 };
