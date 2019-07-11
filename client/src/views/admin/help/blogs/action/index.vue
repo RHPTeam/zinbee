@@ -99,7 +99,10 @@ export default {
           }
         }
       },
-      slug: process.env.VUE_APP_ENV === "local" ? `${process.env.VUE_APP_ROOT + ':'  + process.env.VUE_APP_PORT}/#/` : `${process.env.VUE_APP_ROOT}/#/`
+      slug:
+        process.env.VUE_APP_ENV === "local"
+          ? `${process.env.VUE_APP_ROOT + ":" + process.env.VUE_APP_PORT}/#/`
+          : `${process.env.VUE_APP_ROOT}/#/`
     };
   },
   computed: {
