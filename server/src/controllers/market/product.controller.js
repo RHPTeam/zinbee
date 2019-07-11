@@ -98,7 +98,7 @@ module.exports = {
 
     }
 
-    res.status( 304 ).json( { "status": "fail", "data": "API này không được cung cấp!" } );
+    res.status( 404 ).json( { "status": "fail", "data": "API này không được cung cấp!" } );
   },
   "create": async ( req, res ) => {
     let { body } = req, newProduct,

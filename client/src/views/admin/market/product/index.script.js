@@ -18,8 +18,6 @@ export default {
   },
   methods: {
     goToUpdate(value) {
-      // console.log("value");
-      // console.log(value);
       this.$store.dispatch("getInfoProductById", value);
       this.$store.dispatch("setButtonDefault", 0);
       this.$router.push({ name: "product_create" });
