@@ -67,6 +67,7 @@ const actions = {
   getBlogDefault: async ({ commit }) => {
     commit("setBlog", {
       title: "",
+      slug: "",
       content: ""
     });
   },

@@ -19,8 +19,8 @@ module.exports = {
 
     let data;
 
-    if ( req.query.slug ) {
-      data = await BlogHelp.findOne( { "slug": req.query.slug } ).populate( { "path": "_account", "select": "_id name" } ).lean();
+    if ( req.query.slug || req.query._id ) {
+      data = await BlogHelp.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( { "path": "_account", "select": "_id name" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await BlogHelp.find( {} ).populate( { "path": "_account", "select": "_id name" } ).lean();
     }
@@ -38,9 +38,10 @@ module.exports = {
     }
 
     // Create
-    const { title, content } = req.body,
+    const { title, slug, content } = req.body,
       newBlog = await new BlogHelp( {
         "title": title,
+        "slug": slug,
         "content": content,
         "_account": req.uid
       } );

@@ -102,7 +102,7 @@ const actions = {
    */
   updateMarketPost: async ({ commit }, payload) => {
     await MarketPostService.update(payload._id, payload);
-    const res = await MarketPostService();
+    const res = await MarketPostService.index();
     await commit("setAllMarketPosts", res.data.data);
   },
   /**
