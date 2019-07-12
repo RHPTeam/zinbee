@@ -100,6 +100,7 @@ module.exports = {
     }
 
     categoryInfo.title = req.body.title;
+    categoryInfo.slug = req.body.slug;
 
     // Check logic
     if ( req.body.parent ) {

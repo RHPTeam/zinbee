@@ -117,7 +117,6 @@ export default {
       this.categories.parent = val._id;
     },
     updateBlogHelp(val) {
-
       const arr = val.map(item => item._id);
       const newArr = arr.slice(-1).toString();
       this.categories._blogHelp.push(newArr);
