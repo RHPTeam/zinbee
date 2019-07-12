@@ -463,5 +463,5 @@
 <script src="./index.script.js"></script>
 
 <style lang="scss" scoped>
-@import "../signin/desktop/index.style";
+@import "../signin/index.style";
 </style>

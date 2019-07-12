@@ -69,8 +69,6 @@ export default {};
 
 <style scoped lang="scss">
 .wrapper--header {
-  height: 100vh;
-  width: 100vw;
   .header--top {
     .link--login {
       color: #fff;
