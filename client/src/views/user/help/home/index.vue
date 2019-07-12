@@ -16,7 +16,7 @@
                 :key="`c-${index}`"
               >
                 <a
-                  @click="showDetailBlog(item.title)"
+                  @click="showDetailBlog(item)"
                   v-html="item.title.slice(0, 120)"
                 ></a>
               </li>
@@ -151,7 +151,6 @@
   </div>
 </template>
 <script>
-// import StringFunction from "@/utils/functions/string";
 export default {
   data() {
     return {
@@ -168,19 +167,15 @@ export default {
     await this.$store.dispatch("getPopularHelp");
   },
   methods: {
-    async showDetailBlog(val) {
-      // const convertTitle = StringFunction.convertUnicode(val);
-
-      // const convertSlug = StringFunction.convertToSlug(convertTitle);
-
+    async showDetailBlog(item) {
       await this.$store.dispatch("setHelpDefault", {
         right: 0,
         left: 0
       });
-      await this.$store.dispatch("getBlogById", val);
+      await this.$store.dispatch("getBlogBySlug", item.slug);
       this.$router.push({
         name: "help_detail",
-        params: { id: val }
+        params: { id: item.slug }
       });
     }
   }

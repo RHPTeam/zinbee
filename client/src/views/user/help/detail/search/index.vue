@@ -8,7 +8,7 @@
             class="cate font_weight_bold py_2"
             v-for="(cate, index) in helpCategories"
             :key="index"
-            @click="showInfoCategory(cate._id)"
+            @click="showInfoCategory(cate.slug)"
           >
             {{ cate.title }}
           </div>
@@ -16,8 +16,8 @@
       </div>
       <div class="c_9 body">
         <div class="top d_flex align_items_center pt_4">
-          <div class="tab active mr_3 pb_4">69 bài viết</div>
-          <div class="tab pb_4">0câu trả lời từ cộng đồng</div>
+          <div class="tab active mr_3 pb_4">{{ blogs.length }} bài viết</div>
+          <div class="tab pb_4">0 câu trả lời từ cộng đồng</div>
         </div>
         <div class="wrap py_4">
           <!-- Start : Show result blog when user search by key -->
@@ -35,7 +35,7 @@
                 v-for="(blog, index) in blogs"
                 :key="index"
               >
-                <div class="title" @click="showDetailBlog(blog._id)">
+                <div class="title" @click="showDetailBlog(blog.slug)">
                   {{ blog.title }}
                 </div>
                 <div
@@ -43,7 +43,7 @@
                   v-if="blog.content && blog.content.length > 0"
                 >
                   <span v-html="blog.content.slice(0, 150)"></span>
-                  <a @click="showDetailBlog(blog._id)">Xem thêm</a>
+                  <a @click="showDetailBlog(blog.slug)">Xem thêm</a>
                 </div>
               </div>
             </div>
@@ -80,7 +80,7 @@
                   v-for="(blog, index) in blogHelpCategory"
                   :key="index"
                 >
-                  <div class="title" @click="showDetailBlog(blog._id)">
+                  <div class="title" @click="showDetailBlog(blog.slug)">
                     {{ blog.title }}
                   </div>
                   <div
@@ -88,7 +88,7 @@
                     v-if="blog.content && blog.content.length > 0"
                   >
                     <span v-html="blog.content.slice(0, 150)"></span>
-                    <a @click="showDetailBlog(blog._id)">Xem thêm</a>
+                    <a @click="showDetailBlog(blog.slug)">Xem thêm</a>
                   </div>
                 </div>
               </div>
@@ -152,19 +152,19 @@ export default {
   },
   methods: {
     async showInfoCategory(val) {
-      await this.$store.dispatch("getHelpCategoryById", val);
+      await this.$store.dispatch("getHelpCategoryBySlug", val);
       await this.$store.dispatch("setVaribleControlBlog", 2);
       this.$router.replace({
         name: "help_result_search",
         query: { cateId: val }
       });
     },
-    async showDetailBlog(blogId) {
-      await this.$store.dispatch("getBlogById", blogId);
+    async showDetailBlog(blog) {
+      await this.$store.dispatch("getBlogBySlug", blog);
       await this.$store.dispatch("setVaribleControlBlog", 1);
       this.$router.replace({
         name: "help_result_search",
-        query: { blogId: blogId }
+        query: { blogId: blog }
       });
     }
   }
@@ -177,6 +177,16 @@ export default {
     color: #444444;
     cursor: pointer;
     .list {
+      .cate {
+        cursor: pointer;
+        font-size: 1.25rem;
+        text-transform: capitalize;
+        padding: 0.5rem 0.75rem;
+        color: #4267b2;
+        &:hover {
+          background: #f7f7f7;
+        }
+      }
     }
   }
   .body {
@@ -195,9 +205,12 @@ export default {
     .wrap {
       .title {
         font-weight: 700;
+        color: #4267b2;
       }
-      .desc>>p {
-        margin-bottom: 0;
+      .desc {
+        /deep/ img {
+          width: 100%;
+        }
       }
     }
   }

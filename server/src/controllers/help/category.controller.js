@@ -34,8 +34,8 @@ module.exports = {
   "index": async ( req, res ) => {
     let data;
 
-    if ( req.query._id ) {
-      data = await HelpCategory.findOne( { "_id": req.query._id } ).populate( "_blogHelp" ).lean();
+    if ( req.query.slug || req.query._id ) {
+      data = await HelpCategory.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( "_blogHelp" ).lean();
     } else if ( req.query._type === "rs" ) {
       data = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
       data = getNestedChildren( data, "" );
@@ -56,7 +56,7 @@ module.exports = {
     let newCategory;
 
     // Create
-    const { title, parent } = req.body;
+    const { title, slug, parent } = req.body;
 
     // Set default parent
     req.body.level = 0;
@@ -74,6 +74,7 @@ module.exports = {
 
     newCategory = await new HelpCategory( {
       "title": title,
+      "slug": slug,
       "level": req.body.level,
       "parent": parent !== undefined && parent !== "" ? parent : "",
       "_blogHelp": req.body._blogHelp ? req.body._blogHelp : [],

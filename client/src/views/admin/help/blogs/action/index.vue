@@ -20,7 +20,7 @@
           placeholder="Link hiển thị"
           readonly
           class="form_control"
-          v-model="blog.slug"
+          v-model="convertSlug"
         />
       </div>
       <div class="form_group">
@@ -111,16 +111,22 @@ export default {
     },
     blog() {
       return this.$store.getters.blog;
+    },
+    convertSlug() {
+      return this.slug + this.blog.slug;
     }
   },
   async created() {
     await this.$store.dispatch("getBlogDefault");
   },
+  watch: {
+    "blog.title"(val) {
+      const convertTitle = StringFunction.convertUnicode(val);
+      this.blog.slug = StringFunction.convertToSlug(convertTitle);
+    }
+  },
   methods: {
     createNewBlog() {
-      const convertTitle = StringFunction.convertUnicode(this.blog.title);
-      const slugTitle = StringFunction.convertToSlug(convertTitle);
-      this.blog.slug = this.slug + slugTitle;
       this.$store.dispatch("createNewBlog", this.blog);
       this.$router.push({ name: "blogs" });
     },

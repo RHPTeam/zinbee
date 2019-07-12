@@ -88,7 +88,7 @@
                   class="dropdown--menu-item"
                   v-for="(categoryChild, cindex) in category.children"
                   :key="cindex"
-                  @click="showInfoCategory(categoryChild, category._id)"
+                  @click="showInfoCategory(categoryChild, category)"
                 >
                   <a>{{ categoryChild.title }}</a>
                 </li>
@@ -148,18 +148,20 @@ export default {
     goToHelpHome() {
       this.$router.push({ name: "help" });
     },
-    async showInfoCategory(val, cateId) {
+    async showInfoCategory(val, cate) {
+      await localStorage.setItem("parentId", cate._id);
       await this.$store.dispatch("setHelpDefault", {
         right: 1,
         left: 1
       });
-      await this.$store.dispatch("getHelpCategoryById", val._id);
-      await this.$store.dispatch("getHelpCategoryParent", { parentId: cateId });
+      await this.$store.dispatch("getHelpCategoryBySlug", val.slug);
+      await this.$store.dispatch("getHelpCategoryParent", {
+        parentId: cate._id
+      });
       await this.$store.dispatch("setHelpCategoryChildrenLevel", val);
       this.$router.replace({
-        name: "help_detail",
-        params: { id: val._id },
-        query: { parentId: cateId }
+        name: "help_detail_category",
+        params: { parentId: cate.slug, cateId: val.slug }
       });
     },
     openEmail() {

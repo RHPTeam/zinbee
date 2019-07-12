@@ -116,6 +116,12 @@ const actions = {
     commit("setHelpCategory", result.data.data);
     commit("help_category_success");
   },
+  getHelpCategoryBySlug: async ({ commit }, payload) => {
+    commit("help_category_request");
+    const result = await HelpCategoryServices.getCategoryBySlug(payload);
+    commit("setHelpCategory", result.data.data);
+    commit("help_category_success");
+  },
   updateHelpCategory: async ({ commit }, payload) => {
     await HelpCategoryServices.updateCategory(payload._id, payload);
     const result = await HelpCategoryServices.getAllCategories();

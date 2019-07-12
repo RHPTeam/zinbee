@@ -84,6 +84,19 @@ const actions = {
       }
     }
   },
+  getBlogBySlug: async ({ commit }, payload) => {
+    try {
+      commit("blog_help_error", "");
+      commit("blog_help_request");
+      const result = await BlogHelpServices.getBlogBySlug(payload);
+      commit("setBlog", result.data.data);
+      commit("blog_help_success");
+    } catch (e) {
+      if (e.response.status === 500) {
+        commit("blog_help_error", 500);
+      }
+    }
+  },
   updateBlog: async ({ commit }, payload) => {
     commit("blog_help_request");
     await BlogHelpServices.updateBlog(payload._id, payload);
