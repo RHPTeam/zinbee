@@ -50,12 +50,14 @@
             Khong co san pham nao
           </div>
         </div>
+
+        <paginate class="mt_3" />
       </div>
     </div>
   </div>
 </template>
 
-<script src="./index.script"></script>
+<script src="./index.script.js"></script>
 
 <style lang="scss" scoped>
 @import "./index.style";

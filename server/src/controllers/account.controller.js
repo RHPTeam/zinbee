@@ -8,7 +8,7 @@
  */
 const Account = require( "../models/Account.model" );
 const Role = require( "../models/Role.model" );
-const Agency = require( "../models/agency/Agency.model" );
+// const Agency = require( "../models/agency/Agency.model" );
 const Server = require( "../models/Server.model" );
 const { writeForgotPassword } = require( "../databases/templates/email" );
 
@@ -16,7 +16,7 @@ const fs = require( "fs" );
 const cryptoRandomString = require( "crypto-random-string" );
 const jsonResponse = require( "../configs/response" );
 
-const { findSubString } = require( "../helpers/utils/functions/string" );
+// const { findSubString } = require( "../helpers/utils/functions/string" );
 const { decodeToken, signToken } = require( "../configs/jwt" );
 const { signUpSync, createNewPasswordSync, activeAccountSync, changeStatusAccountSync } = require( "../microservices/synchronize/account" ),
   mail = require( "nodemailer" );
@@ -203,9 +203,9 @@ module.exports = {
     let cookie, newUser, resSyncNestedServer, isEnvironment;
 
     if ( isEmailExist ) {
-      return res.status( 403 ).json( { "status": "fail", "phone": "Email đã tồn tại!" } );
+      return res.status( 403 ).json( { "status": "error", "message": "Email đã tồn tại trên hệ thống!" } );
     } else if ( isPhoneExist ) {
-      return res.status( 405 ).json( { "status": "fail", "phone": "Số điện thoại đã tồn tại!" } );
+      return res.status( 403 ).json( { "status": "error", "message": "Số điện thoại đã tồn tại trên hệ thống!" } );
     }
 
     newUser = await new Account( {
@@ -349,14 +349,12 @@ module.exports = {
   "createNewPassword": async ( req, res ) => {
     const { token, password } = req.body;
 
-    let decodeTokenResult = decodeToken( token );
+    let decodeTokenResult = decodeToken( token ), resUserSync;
 
     // eslint-disable-next-line one-var
     const userInfo = await Account.findOne( { "_id": decodeTokenResult.sub } ),
       memberRole = await Role.findOne( { "_id": userInfo._role } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
-
-    let resUserSync;
 
     if ( !userInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Phiên tạo mới mật khẩu của bạn đã hết hạn!" } );

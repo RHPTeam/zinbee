@@ -76,6 +76,7 @@
   </div>
 </template>
 <script>
+import StringFunction from "@/utils/functions/string";
 export default {
   props: {
     currentTheme: String,
@@ -105,6 +106,9 @@ export default {
       this.$emit("close", false);
     },
     createNewCategories() {
+      const convertTitle = StringFunction.convertUnicode(this.categories.title);
+      this.categories.slug = StringFunction.convertToSlug(convertTitle);
+
       this.$store.dispatch("createHelpCategory", this.categories);
     },
     updateCategories() {

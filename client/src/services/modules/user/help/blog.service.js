@@ -10,6 +10,9 @@ export default {
   getBlogById(id) {
     return Api().get(`help/posts?_id=${id}`);
   },
+  getBlogBySlug(slug) {
+    return Api().get(`help/posts?slug=${slug}`);
+  },
   updateBlog(id, content) {
     return Api().patch(`help/posts?_id=${id}`, content);
   },

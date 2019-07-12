@@ -19,8 +19,8 @@ module.exports = {
 
     let data;
 
-    if ( req.query._id ) {
-      data = await BlogHelp.findOne( { "_id": req.query._id } ).populate( { "path": "_account", "select": "_id name" } ).lean();
+    if ( req.query.slug || req.query._id ) {
+      data = await BlogHelp.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( { "path": "_account", "select": "_id name" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await BlogHelp.find( {} ).populate( { "path": "_account", "select": "_id name" } ).lean();
     }
@@ -38,9 +38,10 @@ module.exports = {
     }
 
     // Create
-    const { title, content } = req.body,
+    const { title, slug, content } = req.body,
       newBlog = await new BlogHelp( {
         "title": title,
+        "slug": slug,
         "content": content,
         "_account": req.uid
       } );
@@ -58,7 +59,7 @@ module.exports = {
       return res.status( 403 ).json( { "status": "fail", "data": { "content": "Nội dung blog không được bỏ trống!" } } );
     }
 
-    const { title, content } = req.body,
+    const { title, slug, content } = req.body,
       blogInfo = await BlogHelp.findOne( { "_id": req.query._id } ).lean();
 
     // Check error
@@ -74,7 +75,7 @@ module.exports = {
       req.body.vote = req.body.vote.concat( blogInfo.vote );
     }
 
-    res.status( 200 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._id, { "$set": { "title": title, "content": content, "vote": req.body.vote, "_account": req.uid } }, { "new": true } ) ) );
+    res.status( 200 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._id, { "$set": { "title": title, "slug": slug, "content": content, "vote": req.body.vote, "_account": req.uid } }, { "new": true } ) ) );
   },
   "delete": async ( req, res ) => {
     const blogInfo = await BlogHelp.findOne( { "_id": req.query._id } ),

@@ -35,13 +35,6 @@ export default {
       breadDesc: "giúp quản lý các bài viết, chien dich trên hệ thống"
     };
   }
-  // async created() {
-  //   const dataSender = {
-  //     size: 1,
-  //     page: 1
-  //   };
-  //   await this.$store.dispatch("getAllMarketPosts", dataSender);
-  // }
 };
 </script>
 <style lang="scss" scoped></style>

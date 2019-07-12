@@ -14,6 +14,16 @@
         />
       </div>
       <div class="form_group">
+        <label>Slug</label>
+        <input
+          type="text"
+          placeholder="Link hiển thị"
+          readonly
+          class="form_control"
+          v-model="convertSlug"
+        />
+      </div>
+      <div class="form_group">
         <label>Nội dung bài viết</label>
         <quill-editor
           ref="myQuillEditor"
@@ -47,7 +57,9 @@ import { container, ImageExtend, QuillWatch } from "quill-image-extend-module";
 import ImageResize from "quill-image-resize-module";
 Quill.register("modules/ImageExtend", ImageExtend);
 Quill.register("modules/imageResize", ImageResize);
+
 import CookieFunction from "@/utils/functions/cookie";
+import StringFunction from "@/utils/functions/string";
 
 export default {
   components: {
@@ -86,7 +98,11 @@ export default {
             }
           }
         }
-      }
+      },
+      slug:
+        process.env.VUE_APP_ENV === "local"
+          ? `${process.env.VUE_APP_ROOT + ":" + process.env.VUE_APP_PORT}/#/`
+          : `${process.env.VUE_APP_ROOT}/#/`
     };
   },
   computed: {
@@ -95,10 +111,19 @@ export default {
     },
     blog() {
       return this.$store.getters.blog;
+    },
+    convertSlug() {
+      return this.slug + this.blog.slug;
     }
   },
   async created() {
     await this.$store.dispatch("getBlogDefault");
+  },
+  watch: {
+    "blog.title"(val) {
+      const convertTitle = StringFunction.convertUnicode(val);
+      this.blog.slug = StringFunction.convertToSlug(convertTitle);
+    }
   },
   methods: {
     createNewBlog() {

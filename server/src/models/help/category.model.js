@@ -3,6 +3,7 @@ const mongoose = require( "mongoose" ),
 
   HelpCategorySchema = new Schema( {
     "title": String,
+    "slug": String,
     "level": {
       "type": Number,
       "default": 1

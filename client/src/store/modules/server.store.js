@@ -28,13 +28,13 @@ const actions = {
   createNewDomain: async ({ commit }, payload) => {
     commit("server_request");
     await ServerServices.create(payload);
-    const result = await ServerServices.old();
+    const result = await ServerServices.index();
     commit("setAllDomain", result.data.data);
     commit("server_success");
   },
   getAllDomain: async ({ commit }) => {
     commit("server_request");
-    const result = await ServerServices.old();
+    const result = await ServerServices.index();
     commit("setAllDomain", result.data.data);
     commit("server_success");
   },
@@ -47,14 +47,14 @@ const actions = {
   deleteDomain: async ({ commit }, payload) => {
     commit("server_request");
     await ServerServices.deleteVps(payload);
-    const result = await ServerServices.old();
+    const result = await ServerServices.index();
     commit("setAllDomain", result.data.data);
     commit("server_success");
   },
   updateDomain: async ({ commit }, payload) => {
     commit("server_request");
     await ServerServices.updateVps(payload._id, payload);
-    const result = await ServerServices.old();
+    const result = await ServerServices.index();
     commit("setAllDomain", result.data.data);
     commit("server_success");
   },

@@ -10,7 +10,7 @@
                 class="navigation--item font_weight_bold"
                 v-for="(item, index) in childrenLevel1"
                 :key="`l-${index}`"
-                @click="showInfoCategory(item._id)"
+                @click="showInfoCategory(item.slug)"
               >
                 {{ item.title }}
               </li>
@@ -21,7 +21,7 @@
                   class="navigation--item font_weight_bold"
                   v-for="(cate, index) in cateLevel"
                   :key="`c-${index}`"
-                  @click="showInfoCategoryDefault(cate._id)"
+                  @click="showInfoCategoryDefault(cate.slug)"
                 >
                   {{ cate.title }}
                 </li>
@@ -35,7 +35,7 @@
                 class="navigation--item font_weight_bold"
                 v-for="(cate, index) in cateLevel"
                 :key="`c-${index}`"
-                @click="showInfoCategoryDefault(cate._id)"
+                @click="showInfoCategoryDefault(cate.slug)"
               >
                 {{ cate.title }}
               </li>
@@ -50,13 +50,14 @@
           <div class="blog--detail" v-if="helpDefault.right === 1">
             <!-- Start: If category contain 1 blog -->
             <div v-if="blogHelpCategory && blogHelpCategory.length === 0">
-              Không có kết quả để hiển thị
+              Danh mục chưa có bài viết !
             </div>
             <div v-else-if="blogHelpCategory && blogHelpCategory.length === 1">
-              <h2 class="title--question">
-                {{ blogHelpCategory.title }}
-              </h2>
-              <div class="text" v-html="blogHelpCategory.content"></div>
+              <h2
+                class="title--question"
+                v-html="blogHelpCategory[0].title"
+              ></h2>
+              <div class="text" v-html="blogHelpCategory[0].content"></div>
             </div>
             <!-- End: If category contain 1 blog -->
             <!-- Start: If category contain bigger 1 blog -->
@@ -65,9 +66,8 @@
                 <h2
                   class="title--question"
                   @click="showDetailBlogCategory(bindex)"
-                >
-                  {{ blog.title }}
-                </h2>
+                  v-html="blog.title"
+                ></h2>
                 <div
                   class="text"
                   v-if="isShowDetailBlog === bindex"
@@ -79,35 +79,37 @@
           </div>
 
           <div class="blog--detail" v-if="helpDefault.right === 0">
-            <h2 class="title--question">{{ blogDetail.title }}</h2>
+            <h2 class="title--question" v-html="blogDetail.title"></h2>
             <div class="text" v-html="blogDetail.content"></div>
           </div>
           <!-- Start: If info category when choose category in sidebar -->
           <div class="blog--detail" v-if="helpDefault.right === 2">
             <div v-if="blogHelpCategory && blogHelpCategory.length === 0">
-              Không có kết quả để hiển thị
-            </div>
-            <div v-if="blogHelpCategory && blogHelpCategory.length > 1">
-              <div v-for="(blog, bindex) in blogHelpCategory" :key="bindex">
-                <h2
-                  class="title--question"
-                  @click="showDetailBlogCategory(bindex)"
-                >
-                  {{ blog.title }}
-                </h2>
-                <div
-                  class="text"
-                  v-if="isShowDetailBlog === bindex"
-                  v-html="blog.content"
-                ></div>
-              </div>
+              Danh mục chưa có bài viết !
             </div>
             <div v-else>
-              <div v-if="blogHelpCategory">
-                <h2 class="title--question">
-                  {{ blogHelpCategory.title }}
-                </h2>
-                <div class="text" v-html="blogHelpCategory.content"></div>
+              <div v-if="blogHelpCategory && blogHelpCategory.length > 1">
+                <div v-for="(blog, bindex) in blogHelpCategory" :key="bindex">
+                  <h2
+                    class="title--question"
+                    @click="showDetailBlogCategory(bindex)"
+                    v-html="blog.title"
+                  ></h2>
+                  <div
+                    class="text"
+                    v-if="isShowDetailBlog === bindex"
+                    v-html="blog.content"
+                  ></div>
+                </div>
+              </div>
+              <div v-else>
+                <div v-if="blogHelpCategory">
+                  <h2
+                    class="title--question"
+                    v-html="blogHelpCategory[0].title"
+                  ></h2>
+                  <div class="text" v-html="blogHelpCategory[0].content"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -133,7 +135,7 @@
             <nav>
               <ul v-if="sliceAllBlog && sliceAllBlog.length > 0">
                 <li v-for="(post, index) in sliceAllBlog" :key="`p-${index}`">
-                  <a @click="showDetailBlog(post._id)">{{ post.title }}</a>
+                  <a @click="showDetailBlog(post)">{{ post.title }}</a>
                 </li>
               </ul>
               <div v-else>Bài viết đang được cập nhật</div>
@@ -174,9 +176,6 @@ export default {
       if (this.allBlog === undefined) return;
       return this.allBlog.slice(-5);
     },
-    categoryChildren() {
-      return this.$store.getters.categoryChildren;
-    },
     helpDefault() {
       return this.$store.getters.helpDefault;
     },
@@ -197,22 +196,23 @@ export default {
   },
   async created() {
     let post = this.$store.getters.blog,
-      id = this.$route.params.id,
-      cateParent = this.$route.query.parentId;
+      idPost = this.$route.params.id,
+      id = this.$route.params.cateId,
+      cateParent = localStorage.getItem("parentId");
 
     // Issuses catch
     // this.$store.dispatch("getBlogById", id);
 
-    if (post && post.length === 0 && cateParent === undefined) {
+    if (post && post.length === 0 && cateParent === null) {
       await this.$store.dispatch("getAllCategoriesChildren");
-      await this.$store.dispatch("getBlogById", id);
+      await this.$store.dispatch("getBlogBySlug", idPost);
     }
     if (cateParent) {
       await this.$store.dispatch("setHelpDefault", {
         right: 1,
         left: 1
       });
-      await this.$store.dispatch("getHelpCategoryById", id);
+      await this.$store.dispatch("getHelpCategoryBySlug", id);
       await this.$store.dispatch("getHelpCategoryParent", {
         parentId: cateParent
       });
@@ -221,29 +221,36 @@ export default {
   },
   methods: {
     async showDetailBlog(val) {
-      this.$store.dispatch("setHelpDefault", {
+      await localStorage.removeItem("parentId");
+      await this.$store.dispatch("setHelpDefault", {
         left: 0,
         right: 0
       });
-      await this.$store.dispatch("getBlogById", val);
+      await this.$store.dispatch("getBlogBySlug", val.slug);
+      this.$router.push({
+        name: "help_detail",
+        params: { id: val.slug }
+      });
     },
-    showInfoCategory(val) {
-      this.$store.dispatch("setHelpDefault", {
+    async showInfoCategory(val) {
+      await localStorage.removeItem("parentId");
+      await this.$store.dispatch("setHelpDefault", {
         left: 1,
         right: 2
       });
-      this.$store.dispatch("getHelpCategoryById", val);
+      this.$store.dispatch("getHelpCategoryBySlug", val);
     },
     showDetailBlogCategory(val) {
       this.isShowDetailBlog = val;
       // this.$parent.$parent.$parent.$parent.$el.clientHeight = 0;
     },
-    showInfoCategoryDefault(val) {
-      this.$store.dispatch("setHelpDefault", {
+    async showInfoCategoryDefault(val) {
+      await localStorage.removeItem("parentId");
+      await this.$store.dispatch("setHelpDefault", {
         left: 0,
         right: 2
       });
-      this.$store.dispatch("getHelpCategoryById", val);
+      this.$store.dispatch("getHelpCategoryBySlug", val);
     }
   }
 };
