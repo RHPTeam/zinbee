@@ -1,6 +1,10 @@
 <template>
   <div class="modal--wrapper">
-    <VuePerfectScrollbar class="scroll-homepage" @ps-scroll-y="scrollHandle" ref="menu">
+    <VuePerfectScrollbar
+      class="scroll-homepage"
+      @ps-scroll-y="scrollHandle"
+      ref="menu"
+    >
       <div class="modal--content">
         <!-- Start: Header -->
         <app-header />

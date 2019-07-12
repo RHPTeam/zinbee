@@ -45,7 +45,7 @@ export default {
   background-color: #f7f7f7;
 }
 .contact--fb {
-  a {    
+  a {
     background: #ecbf7b;
     display: block;
     padding: 0.625rem 0;
