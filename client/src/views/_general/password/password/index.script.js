@@ -20,7 +20,9 @@ export default {
       statusClassPassed: {
         password: false,
         confirmPassword: false
-      }
+      },
+      validateError: false,
+      validateErrorText: ""
     };
   },
   computed: {
@@ -38,6 +40,30 @@ export default {
         email: this.userInfo.email,
         token: window.location.href
       };
+
+      // Validate
+      if (this.reset.password === "") {
+        this.validateError = true;
+        this.validateErrorText = "Bạn chưa nhập mật khẩu!";
+        return;
+      } else if (this.reset.confirmPassword === "") {
+        this.validateError = true;
+        this.validateErrorText = "Bạn chưa xác nhận mật khẩu!";
+        return;
+      } else if ( this.statusClassError.password ) {
+        this.validateError = true;
+        this.validateErrorText = this.errorText.password;
+        return;
+      } else if ( this.statusClassError.confirmPassword ) {
+        this.validateError = true;
+        this.validateErrorText = this.errorText.confirmPassword;
+        return;
+      }
+
+      // Reset validateError & validateErrorText before send request
+      this.validateError = false;
+      this.validateErrorText = "";
+
       await this.$store.dispatch( "getNewPassword", dataSender );
       this.$router.push({name: "user_signin"});
     }

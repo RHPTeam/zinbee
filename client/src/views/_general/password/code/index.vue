@@ -40,9 +40,24 @@
     <!-- Start: Footer -->
     <div class="footer d_flex justify_content_center mt_2">
       <div class="link--group">
-        <a class="link--group-item mr_3" href="#">Trợ giúp</a>
-        <a class="link--group-item mr_3" href="#">Bảo mật</a>
-        <a class="link--group-item" href="#">Điều khoản</a>
+        <a
+          class="link--group-item mr_3"
+          href="https://www.zinbee.vn/#/help"
+          target="_blank"
+          >Trợ giúp</a
+        >
+        <a
+          class="link--group-item mr_3"
+          href="https://www.zinbee.vn/#/help"
+          target="_blank"
+          >Bảo mật</a
+        >
+        <a
+          class="link--group-item"
+          href="https://www.zinbee.vn/#/help"
+          target="_blank"
+          >Điều khoản</a
+        >
       </div>
     </div>
     <!-- End: Footer -->
