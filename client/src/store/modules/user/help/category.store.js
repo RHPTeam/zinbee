@@ -43,6 +43,10 @@ const mutations = {
     state.helpCategoryById = payload;
   },
   setAllHelpCategoriesChild: (state, payload) => {
+    if (payload === undefined) {
+      return;
+    }
+
     const level = [];
     const children = [];
 
@@ -85,10 +89,16 @@ const mutations = {
   setControlBlog: (state, payload) => {
     state.variableControlBlog = payload;
   }
+
 };
 const actions = {
   createHelpCategory: async ({ commit }, payload) => {
     commit("help_category_request");
+    payload._blogHelp = await Promise.all(
+      payload._blogHelp.map(blog => {
+        return blog._id;
+      })
+    );
     await HelpCategoryServices.createCategory(payload);
     const result = await HelpCategoryServices.getAllCategories();
     commit("setAllHelpCategories", result.data.data);

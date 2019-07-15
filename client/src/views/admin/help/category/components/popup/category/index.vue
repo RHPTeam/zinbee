@@ -4,7 +4,10 @@
       <div class="modal--content" v-click-outside="close">
         <!-- Start: Modal Body -->
         <div class="action">
-          <div class="back d_flex align_items_center py_2 px_2 mb_5">
+          <span
+            class="back d_flex align_items_center py_3 px_3"
+            @click.prevent="close"
+          >
             <div class="icon mr_3">
               <icon-base
                 class="icon--arrow-left"
@@ -19,17 +22,18 @@
             <div>
               Danh sách danh mục
             </div>
-          </div>
-          <form class="py_3 px_5">
+          </span>
+          <form class="py_3 px_3">
             <div class="form_group">
               <label>Tên danh mục</label>
               <input
                 type="text"
                 class="form_control"
                 placeholder="Nhập tên danh mục ..."
-                v-model="categories.title"
+                v-model="category.title"
               />
             </div>
+
             <div class="form_group">
               <label>Chọn bài viết</label>
               <div class="option">
@@ -37,30 +41,34 @@
                   label="title"
                   multiple
                   placeholder="Chọn bài viết"
-                  :options="allBlog"
-                  @input="updateBlogHelp"
-                  :value="categories._blogHelp"
+                  :options="blogList"
+                  :value="blogList.title"
+                  @input="handleBlogList"
                 />
               </div>
             </div>
+
             <div class="form_group">
               <label>Chọn danh mục cha</label>
               <div class="option">
                 <multiselect
                   label="title"
                   placeholder="Chọn danh mục cha ..."
-                  :options="allCategories"
-                  @input="updateParent"
-                  :value="titleParent.parent.title"
+                  :options="categories"
+                  :value="categories.title"
+                  @input="handleCategoryParent"
                 />
               </div>
             </div>
             <div class="form_group">
               <button
                 class="btn btn_primary form_control"
-                @click="updateCategories"
+                @click="createCategory"
               >
-                Cập nhật
+                Tạo mới
+              </button>
+              <button class="btn btn_danger form_control mt_3" @click.prevent="close">
+                Hủy bỏ
               </button>
             </div>
           </form>
@@ -70,60 +78,7 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  props: {
-    currentTheme: String,
-    isDefault: Boolean
-  },
-  computed: {
-    allCategories() {
-      return this.$store.getters.allHelpCategories;
-    },
-    categories() {
-      return this.$store.getters.helpCategory;
-    },
-    titleParent() {
-      const newCategory = this.$store.getters.helpCategory;
-      this.allCategories.map(category => {
-        if (newCategory.parent === category._id) {
-          newCategory.parent = {
-            _id: category._id,
-            title: category.title
-          };
-        }
-      });
-      return newCategory;
-    },
-    allBlog() {
-      return this.$store.getters.allBlog;
-    }
-  },
-  async created() {
-    await this.$store.dispatch("getHelpCategoryDefault");
-    await this.$store.dispatch("getAllHelpCategories");
-    await this.$store.dispatch("getAllBlog");
-  },
-  methods: {
-    close() {
-      this.$emit("close", false);
-    },
-    updateCategories() {
-      this.$store.dispatch("updateHelpCategory", this.categories);
-      this.$emit("backDefault", true);
-      this.close();
-    },
-    updateParent(val) {
-      this.categories.parent = val._id;
-    },
-    updateBlogHelp(val) {
-      const arr = val.map(item => item._id);
-      const newArr = arr.slice(-1).toString();
-      this.categories._blogHelp.push(newArr);
-    }
-  }
-};
-</script>
+<script src="./index.script.js"></script>
 <style lang="scss" scoped>
-@import "./index.style";
+@import "index.style";
 </style>

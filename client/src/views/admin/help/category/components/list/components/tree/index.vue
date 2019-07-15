@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Node from "./node";
+import Node from "./node/index";
 export default {
   components: {
     Node

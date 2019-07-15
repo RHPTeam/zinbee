@@ -36,20 +36,10 @@
         :key="index"
       />
     </ol>
-
-    <!-- START: POPUP update category -->
-
-    <update-category
-      v-if="isShowPopupUpdateCategory === true"
-      @close="isShowPopupUpdateCategory = $event"
-    />
-
-    <!-- END: POPUP update category -->
   </div>
 </template>
 
 <script>
-import UpdateCategory from "../../../../popup/update";
 export default {
   name: "node",
   props: {
@@ -72,9 +62,6 @@ export default {
     closePopupUpdateCategory() {
       this.$emit("isShowPopupUpdateCategory", false);
     }
-  },
-  components: {
-    UpdateCategory
   }
 };
 </script>
