@@ -36,6 +36,7 @@ module.exports = {
 
     if ( req.query.slug || req.query._id ) {
       data = await HelpCategory.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( "_blogHelp" ).lean();
+      data.parent = await HelpCategory.findOne( { "_id": data.parent } );
     } else if ( req.query._type === "rs" ) {
       data = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
       data = getNestedChildren( data, "" );
