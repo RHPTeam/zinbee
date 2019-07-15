@@ -4,57 +4,40 @@
       <router-link tag="label" class="link" :to="{ name: 'admin_help' }">
         Quay lại
       </router-link>
-      <label class="link" @click="isShowPopupCategories = true">
+      <label class="link" @click="isActiveCategoryPopup = true">
         Tạo mới
       </label>
     </div>
     <div class="desc mb_3">Danh sách các danh mục hiện có</div>
     <div class="body px_3 py_2">
-      <!-- <categories-list /> -->
-      <app-tree :tree-data="getCategoryTable" />
+      <app-tree :tree-data="categories" />
     </div>
-    <!--Start: Popup new and update categories-->
-    <popup-categories
-      v-if="isShowPopupCategories === true"
-      @close="isShowPopupCategories = $event"
-      @backDefault="isDefault = $event"
-      :currentTheme="currentTheme"
-      :isDefault="isDefault"
-    />
-    <!--Start: Popup new and update categories-->
+
+    <!--Start: Custom Category Popup-->
+    <category-popup v-if="isActiveCategoryPopup === true" @close="isActiveCategoryPopup = $event" />
+    <!--End: Custom Category Popup-->
   </div>
 </template>
 <script>
-import PopupCategories from "./popup/create";
-import AppTree from "./list/components/tree";
+import AppTree from "./components/list/components/tree";
+import CategoryPopup from "./components/popup/category";
 export default {
   components: {
-    PopupCategories,
-    AppTree
+    AppTree,
+    CategoryPopup
   },
   data() {
     return {
-      isShowPopupCategories: false,
-      isDefault: true,
-      isShowPopupUpdate: false
+      isActiveCategoryPopup: false,
+      isDefault: true
     };
   },
   computed: {
     currentTheme() {
       return this.$store.getters.themeName;
     },
-    getCategoryTable() {
+    categories() {
       return this.$store.getters.allHelpCategoriesChild;
-    }
-  },
-  methods: {
-    showInfoCategories(val) {
-      this.$store.dispatch("getCategoriesById", val);
-      this.isShowPopupCategories = true;
-      this.isDefault = false;
-    },
-    deleteCategories(val) {
-      this.$store.dispatch("deleteCategories", val);
     }
   },
   async created() {
