@@ -170,9 +170,12 @@
         }
         .btn--group {
           .btn--control {
+            border: 0;
             border-radius: 1.5rem;
+            box-shadow: none;
             cursor: pointer;
             font-weight: 600;
+            outline: 0;
             padding: 0.75rem 0;
             text-align: center;
             transition: all 0.4s ease;

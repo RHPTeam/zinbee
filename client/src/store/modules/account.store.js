@@ -576,6 +576,9 @@ const actions = {
     const result = await AccountServices.searchUser(payload);
     commit("getUsersFilter", result.data.data);
     commit("auth_success");
+  },
+  setAuthError: ({ commit }, payload) => {
+    commit("auth_error", payload);
   }
 };
 
