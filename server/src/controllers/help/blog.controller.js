@@ -19,9 +19,9 @@ module.exports = {
     let data;
 
     if ( req.query.slug || req.query._id ) {
-      data = await BlogHelp.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "popularBlog", "select": "_id title" } ).populate( { "path": "popularCategory", "select": "_id title" } ).lean();
+      data = await BlogHelp.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "popularBlog", "select": "_id title slug" } ).populate( { "path": "popularCategory", "select": "_id title slug" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await BlogHelp.find( {} ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "popularBlog", "select": "_id title" } ).populate( { "path": "popularCategory", "select": "_id title" } ).lean();
+      data = await BlogHelp.find( {} ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "popularBlog", "select": "_id title slug" } ).populate( { "path": "popularCategory", "select": "_id title slug" } ).lean();
     }
 
     res

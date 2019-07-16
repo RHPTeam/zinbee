@@ -1,6 +1,7 @@
 <template>
   <div class="detail ct">
     <div class="r">
+      <!-- Start: sidebar show category-->
       <div class="sidebar c_xl_3 c_lg_3 c_md_3 c_12 pl_0 pr_0 pt_4">
         <div class="item">
           <div class="parent py_2">Quản lý tài khoản</div>
@@ -18,38 +19,30 @@
           </div>
         </div>
       </div>
-      <div class="c_xl_9 c_lg_9 c_md_9 c_12">
+      <!-- End: sidebar show category-->
+      <!-- Start: blog detail -->
+      <div class="right c_xl_9 c_lg_9 c_md_9 c_12">
         <div class="body p_3">
-          <div class="post py_2">
-            <div class="introduce">
-              <label>Giới thiệu</label>
+          <div>
+            <div class="post py_2" v-if="blogDetail">
+              <div
+                class="introduce"
+                v-if="blogDetail.label && blogDetail.label.length > 0"
+              >
+                <label>{{ blogDetail.label }}</label>
+              </div>
+              <div
+                class="introduce--img"
+                v-if="blogDetail.icon && blogDetail.icon.length > 0"
+                :style="{ backgroundImage: 'url(' + blogDetail.icon + ')' }"
+              ></div>
+              <h2 class="title">{{ blogDetail.title }}</h2>
+              <div class="desc pb_3" v-html="blogDetail.content"></div>
             </div>
-            <div
-              class="introduce--img"
-              :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
-            ></div>
-            <h2 class="title">Lorem ipsum dolor sit amet, consectetur.</h2>
-            <div class="desc pb_3">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
-              dolorem esse explicabo fugiat labore nam quos sit. Eum fuga
-              perspiciatis quis veniam. Accusantium at commodi dolorem doloribus
-              ducimus esse eum rem. Culpa doloremque harum impedit incidunt sint
-              veniam? Eos ipsam laudantium quae quas! Adipisci commodi cumque
-              nemo perspiciatis totam veniam. Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Ab dolorem esse explicabo fugiat
-              labore nam quos sit. Eum fuga perspiciatis quis veniam.
-              Accusantium at commodi dolorem doloribus ducimus esse eum rem.
-              Culpa doloremque harum impedit incidunt sint veniam? Eos ipsam
-              laudantium quae quas! Adipisci commodi cumque nemo perspiciatis
-              totam veniam. Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit. Ab dolorem esse explicabo fugiat labore nam quos sit. Eum
-              fuga perspiciatis quis veniam. Accusantium at commodi dolorem
-              doloribus ducimus esse eum rem. Culpa doloremque harum impedit
-              incidunt sint veniam? Eos ipsam laudantium quae quas! Adipisci
-              commodi cumque nemo perspiciatis totam veniam.
-            </div>
+            <div v-else>Không có dữ liệu bài viết</div>
           </div>
-          <div class="posts py_2">
+          <!-- Start: Show blogs on category -->
+          <div class="posts d_none py_2">
             <div class="top d_flex align_items_center justify_content_between">
               <h4 class="title">Lorem ipsum dolor sit amet, consectetur.</h4>
               <div class="icon">
@@ -72,77 +65,57 @@
               tempore veniam voluptas voluptatibus. Error perspiciatis, sit!
             </div>
           </div>
+          <!-- End: Show blogs on category -->
         </div>
+        <!-- Start: Blog and categories introduce -->
         <div class="footer mb_4">
-          <div class="more p_3">
+          <div
+            class="more p_3"
+            v-if="blogDetail.popularBlog && blogDetail.popularBlog.length > 0"
+          >
             <h3 class="mb_4">Bài viết phổ biến đến chủ đề này</h3>
 
-            <div class="more--item">
-              Lorem ipsum dolor sit amet, consectetur.
-            </div>
-            <div class="more--item">
-              Lorem ipsum dolor sit amet, consectetur.
-            </div>
-            <div class="more--item">
-              Lorem ipsum dolor sit amet, consectetur.
-            </div>
-            <div class="more--item">
-              Lorem ipsum dolor sit amet, consectetur.
+            <div
+              class="more--item"
+              v-for="(blog, index) in blogDetail.popularBlog"
+              :key="`b-${index}`"
+              @click="detailPopularBlog(blog)"
+            >
+              {{ blog.title }}
             </div>
           </div>
-          <h3 class="p_3">Chủ đề liên quan</h3>
-          <div class="r theme px_4">
-            <div
-              class="c_4 card p_3 d_flex flex_column align_items_center justify_content_center"
-            >
+          <div
+            v-if="
+              blogDetail.popularCategory &&
+                blogDetail.popularCategory.length > 0
+            "
+          >
+            <h3 class="p_3">Chủ đề liên quan</h3>
+            <div class="r theme px_4">
               <div
-                class="theme--img"
-                :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
-              ></div>
-              <div class="content">
-                <h5 class="describe">Giới thiệu</h5>
-                <h5 class="title mb_3">Lorem ipsum dolor sit.</h5>
-                <div class="theme--desc">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab,
-                  eos.
-                </div>
-              </div>
-            </div>
-            <div
-              class="c_4 card p_3 d_flex flex_column align_items_center justify_content_center"
-            >
-              <div
-                class="theme--img"
-                :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
-              ></div>
-              <div class="content">
-                <h5 class="describe">Giới thiệu</h5>
-                <h5 class="title mb_3">Lorem ipsum dolor sit.</h5>
-                <div class="theme--desc">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab,
-                  eos.
-                </div>
-              </div>
-            </div>
-            <div
-              class="c_4 card p_3 d_flex flex_column align_items_center justify_content_center"
-            >
-              <div
-                class="theme--img"
-                :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
-              ></div>
-              <div class="content">
-                <h5 class="describe">Giới thiệu</h5>
-                <h5 class="title mb_3">Lorem ipsum dolor sit.</h5>
-                <div class="theme--desc">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab,
-                  eos.
+                class="c_4 card p_4 d_flex flex_column align_items_center justify_content_center"
+                v-for="(cate, index) in blogDetail.popularCategory"
+                :key="`c-${index}`"
+              >
+                <div
+                  class="theme--img"
+                  :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
+                ></div>
+                <div class="content">
+                  <h5 class="describe mb_1">Giới thiệu</h5>
+                  <h5 class="title mb_2">{{ cate.title }}</h5>
+                  <div class="theme--desc">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Ab, eos.
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- End: Blog and categories introduce -->
       </div>
+      <!-- End: blog detail -->
     </div>
   </div>
 </template>
@@ -156,22 +129,29 @@ export default {
     };
   },
   computed: {
+    blogDetail() {
+      return this.$store.getters.blog;
+    },
     categories() {
       return this.$store.getters.allHelpCategories;
-    },
-    filterCategories() {
-      const slug = this.$route.params.slug;
-
-      const listCate = this.categories.map(item => {
-        item._blogHelp.map(blog => {
-          if (blog.slug == slug) return blog.title;
-        });
-      });
-      return listCate;
     }
   },
   async created() {
+    const slug = this.$route.params.slug,
+      blog = this.$store.getters.blog;
+    // Check slug in router and blog on store
+    if (slug && blog && blog.length === 0) {
+      await this.$store.dispatch("getBlogBySlug", slug);
+    }
+
     await this.$store.dispatch("getAllHelpCategories");
+  },
+  methods: {
+    detailPopularBlog(val) {
+      this.$store.dispatch("getBlogBySlug", val.slug);
+      // Replace params in router
+      this.$router.replace({ params: { slug: val.slug } });
+    }
   }
 };
 </script>
