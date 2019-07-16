@@ -16,7 +16,7 @@
                 :key="`c-${index}`"
                 @click="showInfoBlog(item)"
               >
-                {{item.title}}
+                {{ item.title }}
               </span>
             </div>
             <div v-else>Chưa có bài viết nào</div>
@@ -172,7 +172,7 @@ export default {
         params: { slug: val.slug }
       });
     }
-  },
+  }
 };
 </script>
 

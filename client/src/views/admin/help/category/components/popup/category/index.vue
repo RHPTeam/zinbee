@@ -4,10 +4,7 @@
       <div class="modal--content" v-click-outside="close">
         <!-- Start: Modal Body -->
         <div class="action">
-          <span
-            class="back d_flex align_items_center py_3 px_3"
-            @click="close"
-          >
+          <span class="back d_flex align_items_center py_3 px_3" @click="close">
             <div class="icon mr_3">
               <icon-base
                 class="icon--arrow-left"

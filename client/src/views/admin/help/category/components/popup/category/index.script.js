@@ -37,7 +37,7 @@ export default {
       this.$store.dispatch("createHelpCategory", this.category);
       this.close();
     },
-    updateCategory(){
+    updateCategory() {
       this.$store.dispatch("updateHelpCategory", this.category);
       this.close();
     },

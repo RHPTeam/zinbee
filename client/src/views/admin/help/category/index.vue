@@ -51,7 +51,7 @@ export default {
       this.$store.dispatch("setVariableControlCate", 0);
       this.isActiveCategoryPopup = true;
     }
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
