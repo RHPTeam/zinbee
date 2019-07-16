@@ -145,12 +145,15 @@
     .card--footer {
       .btn--submit {
         background-color: #FFB94A;
+        border: 0;
         border-radius: 0.625rem;
         color: #fff;
         cursor: pointer;
         font-weight: 600;
+        outline: 0;
         padding: 0.5rem 0.75rem;
         transition: all 0.4s ease;
+        width: 100%;
         &:hover {
           background-color: #FF9E4A;
         }
