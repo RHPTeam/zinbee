@@ -13,10 +13,16 @@ export default {
     },
     blogList() {
       return this.$store.getters.allBlog;
+    },
+    variableControl() {
+      return this.$store.getters.variableControlCate;
     }
   },
   async created() {
-    await this.$store.dispatch("getHelpCategoryDefault");
+    const variableControl = this.$store.getters.variableControlCate;
+    if (variableControl === 0) {
+      await this.$store.dispatch("getHelpCategoryDefault");
+    }
     await this.$store.dispatch("getAllHelpCategories");
     await this.$store.dispatch("getAllBlog");
   },
@@ -29,6 +35,11 @@ export default {
       this.category.slug = StringFunction.convertToSlug(convertTitle);
 
       this.$store.dispatch("createHelpCategory", this.category);
+      this.close();
+    },
+    updateCategory(){
+      this.$store.dispatch("updateHelpCategory", this.category);
+      this.close();
     },
     handleBlogList(value) {
       this.category._blogHelp = value;

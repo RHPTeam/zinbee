@@ -24,6 +24,61 @@
         />
       </div>
       <div class="form_group">
+        <label>Giới thiệu</label>
+        <input
+          type="text"
+          placeholder="Giới thiệu"
+          class="form_control"
+          v-model="blog.label"
+        />
+      </div>
+      <!-- Start: image -->
+      <div class="form_group">
+        <label for class>Ảnh đại diện</label>
+        <div class="img--preview mb_2">
+          <img :src="blog.icon" alt="" height="120px" />
+        </div>
+        <div class>
+          <input
+            type="file"
+            ref="file"
+            @change="selectFile()"
+            accept="image/x-png,image/gif,image/jpeg"
+            class="form_control p_1"
+          />
+        </div>
+        <div class="contain--images"></div>
+      </div>
+      <!-- End: image -->
+      <div class="form_group">
+        <label>Bài viết có liên quan</label>
+        <div class="multi">
+          <multiselect
+            multiple
+            label="title"
+            placeholder="Chọn bài viết liên quan"
+            :options="blogs"
+            :value="blog.popularBlog"
+            @input="selectBlog"
+          >
+          </multiselect>
+        </div>
+      </div>
+      <div class="form_group">
+        <label>Chủ đề liên quan</label>
+        <div class="multi">
+          <multiselect
+            multiple
+            label="title"
+            placeholder="Chọn chủ đề liên quan"
+            :options="categories"
+            :value="blog.popularCategory"
+            @input="selectCategories"
+          >
+          </multiselect>
+        </div>
+      </div>
+      <div class="form_group">
         <label>Nội dung bài viết</label>
         <quill-editor
           ref="myQuillEditor"
@@ -102,22 +157,47 @@ export default {
       slug:
         process.env.VUE_APP_ENV === "local"
           ? `${process.env.VUE_APP_ROOT + ":" + process.env.VUE_APP_PORT}/#/`
-          : `${process.env.VUE_APP_ROOT}/#/`
+          : `${process.env.VUE_APP_ROOT}/#/`,
+      listBlog: [],
+      listCategory: []
     };
   },
   computed: {
-    allCategories() {
-      return this.$store.getters.allCategories;
+    categories() {
+      return this.$store.getters.allHelpCategories;
     },
     blog() {
       return this.$store.getters.blog;
     },
+    blogs() {
+      return this.$store.getters.allBlog;
+    },
     convertSlug() {
       return this.slug + this.blog.slug;
+    },
+    convertBlog() {
+      return this.blog.popularBlog.map(item => item.title);
+    },
+    convertCategories() {
+      return this.blog.popularCategory.map(item => item.title);
     }
   },
   async created() {
+    const categories = this.$store.getters.allHelpCategories,
+      blog = this.$route.params.id,
+      blogs = this.$store.getters.allBlog;
+
     await this.$store.dispatch("getBlogDefault");
+
+    if (categories && categories.length === 0) {
+      this.$store.dispatch("getAllHelpCategories");
+    }
+    if (blogs && blogs.length === 0) {
+      this.$store.dispatch("getAllBlog");
+    }
+    if (blog !== undefined) {
+      await this.$store.dispatch("getBlogById", blog);
+    }
   },
   watch: {
     "blog.title"(val) {
@@ -133,6 +213,31 @@ export default {
     updateBlog() {
       this.$store.dispatch("updateBlog", this.blog);
       this.$router.push({ name: "blogs" });
+    },
+    selectFile() {
+      this.file = this.$refs.file.files;
+      this.sendFile();
+
+      // reset ref
+      const input = this.$refs.file;
+      input.type = "text";
+      input.type = "file";
+    },
+    async sendFile() {
+      const formData = new FormData();
+      Array.from(this.file).forEach(file => {
+        formData.append("file", file);
+      });
+
+      await this.$store.dispatch("uploadIconBlog", formData);
+      const dataEmit = await this.$store.getters.blogIcon;
+      this.blog.icon = dataEmit;
+    },
+    selectBlog(val) {
+      this.blog.popularBlog = val;
+    },
+    selectCategories(val) {
+      this.blog.popularCategory = val;
     }
   }
 };

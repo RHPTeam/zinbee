@@ -6,7 +6,7 @@
         <div class="action">
           <span
             class="back d_flex align_items_center py_3 px_3"
-            @click.prevent="close"
+            @click="close"
           >
             <div class="icon mr_3">
               <icon-base
@@ -42,7 +42,7 @@
                   multiple
                   placeholder="Chọn bài viết"
                   :options="blogList"
-                  :value="blogList.title"
+                  :value="category._blogHelp"
                   @input="handleBlogList"
                 />
               </div>
@@ -55,19 +55,30 @@
                   label="title"
                   placeholder="Chọn danh mục cha ..."
                   :options="categories"
-                  :value="categories.title"
+                  :value="category.parent"
                   @input="handleCategoryParent"
                 />
               </div>
             </div>
             <div class="form_group">
               <button
+                v-if="variableControl === 0"
                 class="btn btn_primary form_control"
                 @click="createCategory"
               >
                 Tạo mới
               </button>
-              <button class="btn btn_danger form_control mt_3" @click.prevent="close">
+              <button
+                v-if="variableControl === 1"
+                class="btn btn_primary form_control"
+                @click="updateCategory"
+              >
+                Cập nhật
+              </button>
+              <button
+                class="btn btn_danger form_control mt_3"
+                @click.prevent="close"
+              >
                 Hủy bỏ
               </button>
             </div>

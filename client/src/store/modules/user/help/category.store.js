@@ -11,7 +11,8 @@ const state = {
   cateLevel: [],
   cateChildren: [],
   children: [],
-  variableControlBlog: 0
+  variableControlBlog: 0,
+  variableControlCate: 0
 };
 const getters = {
   allHelpCategories: state => state.allHelpCategories,
@@ -24,7 +25,8 @@ const getters = {
   cateLevel: state => state.cateLevel,
   cateChildren: state => state.cateChildren,
   children: state => state.children,
-  variableControlBlog: state => state.variableControlBlog
+  variableControlBlog: state => state.variableControlBlog,
+  variableControlCate: state => state.variableControlCate
 };
 const mutations = {
   help_category_request: state => {
@@ -88,17 +90,35 @@ const mutations = {
   },
   setControlBlog: (state, payload) => {
     state.variableControlBlog = payload;
+  },
+  setVariableControlCate: (state, payload) => {
+    state.variableControlCate = payload;
+  },
+  setDeleteCategory: (state, payload) => {
+    state.allHelpCategories = payload;
+  },
+  setUpdateCategory: (state, payload) => {
+    const position = state.allHelpCategories
+      .map((item, index) => {
+        if (item._id === payload._id) return index;
+      })
+      .filter(item => item !== undefined);
+    state.allHelpCategories[position] = payload;
   }
-
 };
 const actions = {
   createHelpCategory: async ({ commit }, payload) => {
     commit("help_category_request");
-    payload._blogHelp = await Promise.all(
-      payload._blogHelp.map(blog => {
+
+    if (payload._blogHelp && payload._blogHelp.length > 0) {
+      payload._blogHelp = payload._blogHelp.map(blog => {
         return blog._id;
-      })
-    );
+      });
+    }
+    if (payload.parent && payload.parent.length > 0) {
+      payload.parent = payload.parent._id;
+    }
+
     await HelpCategoryServices.createCategory(payload);
     const result = await HelpCategoryServices.getAllCategories();
     commit("setAllHelpCategories", result.data.data);
@@ -133,17 +153,31 @@ const actions = {
     commit("help_category_success");
   },
   updateHelpCategory: async ({ commit }, payload) => {
+    commit("help_category_request");
+
+    commit("setUpdateCategory", payload);
+
+    if (payload._blogHelp && payload._blogHelp.length > 0) {
+      payload._blogHelp = payload._blogHelp.map(blog => {
+        return blog._id;
+      });
+    }
+    if (payload.parent && payload.parent.length > 0) {
+      payload.parent = payload.parent._id;
+    }
+
     await HelpCategoryServices.updateCategory(payload._id, payload);
-    const result = await HelpCategoryServices.getAllCategories();
-    commit("setAllHelpCategories", result.data.data);
 
     const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
     commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
+    commit("help_category_success");
   },
-  deleteHelpCategory: async ({ commit }, payload) => {
+  deleteHelpCategory: async ({ commit, state }, payload) => {
+    const categories = state.allHelpCategories.filter(
+      item => item._id !== payload._id
+    );
+    commit("setDeleteCategory", categories);
     await HelpCategoryServices.deleteCategory(payload);
-    const result = await HelpCategoryServices.getAllCategories();
-    commit("setAllHelpCategories", result.data.data);
 
     const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
     commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
@@ -167,6 +201,9 @@ const actions = {
   },
   setVaribleControlBlog: async ({ commit }, payload) => {
     await commit("setControlBlog", payload);
+  },
+  setVariableControlCate: async ({ commit }, payload) => {
+    await commit("setVariableControlCate", payload);
   }
 };
 
