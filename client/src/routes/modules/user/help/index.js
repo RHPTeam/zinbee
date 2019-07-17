@@ -16,7 +16,7 @@ const helpGeneralRouter = {
       path: ":parentId/:cateId",
       name: "help_detail_category",
       component: require("@/views/user/help/components/detail").default
-    },
+    }
     // {
     //   path: "search",
     //   name: "help_result_search",
