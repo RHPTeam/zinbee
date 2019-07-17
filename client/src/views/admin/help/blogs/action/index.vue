@@ -15,16 +15,29 @@
       </div>
       <div class="form_group">
         <label>Slug</label>
-        <input
-          type="text"
-          placeholder="Link hiển thị"
-          readonly
-          class="form_control"
-          v-model="convertSlug"
-        />
+        <div
+          class="slug d_flex align_items_center"
+          v-if="this.$route.params.id === undefined"
+        >
+          <span class="mr_2">{{ slug }}</span>
+          <input
+            type="text"
+            placeholder="Link hiển thị"
+            class="form_control"
+            v-model="blog.slug"
+          />
+        </div>
+        <div class="" v-else>
+          <input
+            type="text"
+            placeholder="Link hiển thị"
+            class="form_control"
+            v-model="blog.slug"
+          />
+        </div>
       </div>
       <div class="form_group">
-        <label>Giới thiệu</label>
+        <label>Nhãn dán</label>
         <input
           type="text"
           placeholder="Giới thiệu"
@@ -156,10 +169,10 @@ export default {
       },
       slug:
         process.env.VUE_APP_ENV === "local"
-          ? `${process.env.VUE_APP_ROOT + ":" + process.env.VUE_APP_PORT}/#/`
-          : `${process.env.VUE_APP_ROOT}/#/`,
-      listBlog: [],
-      listCategory: []
+          ? `${process.env.VUE_APP_ROOT +
+              ":" +
+              process.env.VUE_APP_PORT}/#/help/`
+          : `${process.env.VUE_APP_ROOT}/#/help/`
     };
   },
   computed: {
@@ -171,15 +184,6 @@ export default {
     },
     blogs() {
       return this.$store.getters.allBlog;
-    },
-    convertSlug() {
-      return this.slug + this.blog.slug;
-    },
-    convertBlog() {
-      return this.blog.popularBlog.map(item => item.title);
-    },
-    convertCategories() {
-      return this.blog.popularCategory.map(item => item.title);
     }
   },
   async created() {
@@ -199,14 +203,16 @@ export default {
       await this.$store.dispatch("getBlogById", blog);
     }
   },
-  watch: {
-    "blog.title"(val) {
-      const convertTitle = StringFunction.convertUnicode(val);
-      this.blog.slug = StringFunction.convertToSlug(convertTitle);
-    }
-  },
   methods: {
     createNewBlog() {
+      if (this.blog.slug === "") {
+        const convertTitle = StringFunction.convertUnicode(this.blog.title);
+        const slugConvert = StringFunction.convertToSlug(convertTitle);
+
+        this.blog.slug = this.slug + slugConvert;
+      } else {
+        this.blog.slug = this.slug + this.blog.slug;
+      }
       this.$store.dispatch("createNewBlog", this.blog);
       this.$router.push({ name: "blogs" });
     },
@@ -254,6 +260,13 @@ export default {
     .multi {
       border: 1px solid #e4e4e4;
       border-radius: 0.625rem;
+    }
+    .slug {
+      span {
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        background-color: #ffb94a;
+      }
     }
   }
 }
