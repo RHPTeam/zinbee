@@ -3,7 +3,7 @@
  * author: hoc-anms
  * updater: Tran Toan (Sky Albert)
  * date up: 15/05/2019
- * date to: 04/06/2019
+ * date to: 16/07/2019
  * team: BE-RHP
  */
 
@@ -47,7 +47,7 @@ module.exports = {
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
     }
-    
+
     res
       .status( 200 )
       .json( jsonResponse( "success", data ) );
