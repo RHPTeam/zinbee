@@ -8,8 +8,14 @@ const mongoose = require( "mongoose" ),
       "type": String,
       "default": ""
     },
-    "title": String,
-    "content": String,
+    "title": {
+      "type": String,
+      "text": true
+    },
+    "content": {
+      "type": String,
+      "text": true
+    },
     "attachments": [ {
       "link": String,
       "typeAttachment": Number // 0 video 1 image

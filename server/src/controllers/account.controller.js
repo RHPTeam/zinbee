@@ -119,7 +119,7 @@ module.exports = {
     res.status( 304 ).json( jsonResponse( "fail", "API này không được cung cấp!" ) );
   },
   "searchUser": async ( req, res ) => {
-    const findAccount = await Account.findOne( { "$or": [ { "email": req.query._keyword }, { "phone": req.query._keyword } ] } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).lean();
+    const findAccount = await Account.find( { "$or": [ { "email": req.query._keyword }, { "phone": req.query._keyword }, { "presenter": req.query._keyword } ] } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).lean();
 
     if ( !findAccount ) {
       return res.status( 403 ).json( { "status": "fail", "message": "Tài khoản không tồn tại" } );
