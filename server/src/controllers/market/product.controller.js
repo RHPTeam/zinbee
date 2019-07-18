@@ -98,7 +98,7 @@ module.exports = {
 
     }
 
-    res.status( 304 ).json( { "status": "fail", "data": "API này không được cung cấp!" } );
+    res.status( 404 ).json( { "status": "fail", "data": "API này không được cung cấp!" } );
   },
   "create": async ( req, res ) => {
     let { body } = req, newProduct,
@@ -153,8 +153,10 @@ module.exports = {
     if ( !productInfo ) {
       return res.status( 404 ).json( { "status": "error", "message": "Sản phẩm này không tồn tại!" } );
     }
-    findMarketPostOlder.assign = false;
-    await findMarketPostOlder.save();
+    if ( findMarketPostOlder ) {
+      findMarketPostOlder.assign = false;
+      await findMarketPostOlder.save();
+    }
     await productInfo.remove();
 
     res.status( 200 ).json( { "status": "success", "data": null } );

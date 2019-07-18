@@ -1,40 +1,37 @@
 <template>
-  <div class="wrap--home-help">
-    <!-- Start: Top Question -->
-    <div class="question--wrapper p_0">
+  <div class="home">
+    <div class="top">
       <div class="ct">
-        <div class="r m_0 question pd">
-          <div class="c_12 c_lg_6 choose">
-            <div class="title--home">Câu hỏi bạn có thể có</div>
-            <ul
+        <div class="r pd">
+          <div class="left c_xl_6 c_lg_6 c_md_6 c_12">
+            <h3 class="mb_3">Có thể bạn chưa biết ?</h3>
+            <div
+              class="blog d_flex flex_column"
               v-if="
                 popularHelp.popular_blog && popularHelp.popular_blog.length > 0
               "
             >
-              <li
+              <span
                 v-for="(item, index) in popularHelp.popular_blog"
                 :key="`c-${index}`"
+                @click="showInfoBlog(item)"
               >
-                <a
-                  @click="showDetailBlog(item._id)"
-                  v-html="item.title.slice(0, 120)"
-                ></a>
-              </li>
-            </ul>
-            <div v-else>Chức năng đang nâng cấp vui lòng quay lại sau</div>
+                {{ item.title }}
+              </span>
+            </div>
+            <div v-else>Chưa có bài viết nào</div>
           </div>
           <div
-            class="c_12 c_lg_6 descri--img"
+            class="right c_xl_6 c_lg_6 c_md_6 c_12"
             :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
           ></div>
         </div>
       </div>
     </div>
-    <!-- End: Top Question -->
     <div class="ct">
       <!-- Start: Top Subject -->
       <div class="popular--topics pd">
-        <div class="title--home">Chủ đề phổ biến</div>
+        <h3 class="mb_4">Chủ đề phổ biến</h3>
         <div class="r m_0">
           <div class="c_12 c_md_6 c_lg_3 topic--card text_center mb_3 mb_lg_0">
             <div class="topic--card-content">
@@ -96,8 +93,10 @@
       </div>
       <!-- End: Top Subject -->
       <!-- Start: Other Search-->
-      <div class="search--other pd">
-        <div class="title--home text_center">Bạn tìm kiếm điều khác?</div>
+      <div
+        class="search--other pd d_flex flex_column justify_content_center align_items_center"
+      >
+        <h3 class="text_center mb_3">Bạn tìm kiếm điều khác?</h3>
         <div class="text_center description">
           Khám phá Cộng đồng trợ giúp của chúng tôi hoặc tìm hiểu thêm về Quảng
           cáo trên Facebook
@@ -129,7 +128,6 @@
               ></div>
               <div>
                 <a
-                  :href="hrefPage"
                   target="_blank"
                   class="access--public access--help-advertise"
                 >
@@ -150,12 +148,12 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
     return {
-      srcDefault: require("@/assets/images/home-help.png"),
-      hrefPage: "https://www.facebook.com/zinbeeauto"
+      srcDefault: require("@/assets/images/home-help.png")
     };
   },
   computed: {
@@ -167,20 +165,17 @@ export default {
     await this.$store.dispatch("getPopularHelp");
   },
   methods: {
-    async showDetailBlog(val) {
-      await this.$store.dispatch("setHelpDefault", {
-        right: 0,
-        left: 0
-      });
-      await this.$store.dispatch("getBlogById", val);
+    showInfoBlog(val) {
+      this.$store.dispatch("getBlogBySlug", val.slug);
       this.$router.push({
         name: "help_detail",
-        params: { id: val }
+        params: { slug: val.slug }
       });
     }
   }
 };
 </script>
+
 <style lang="scss" scoped>
 @import "./index.style";
 </style>

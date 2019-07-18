@@ -4,10 +4,7 @@
       <div class="modal--content" v-click-outside="close">
         <!-- Start: Modal Body -->
         <div class="action">
-          <div
-            class="back d_flex align_items_center py_2 px_2 mb_5"
-            @click="backListCategories"
-          >
+          <span class="back d_flex align_items_center py_3 px_3" @click="close">
             <div class="icon mr_3">
               <icon-base
                 class="icon--arrow-left"
@@ -22,15 +19,15 @@
             <div>
               Danh sách danh mục
             </div>
-          </div>
-          <form class="py_3 px_5">
+          </span>
+          <form class="py_3 px_3">
             <div class="form_group">
               <label>Tên danh mục</label>
               <input
                 type="text"
                 class="form_control"
                 placeholder="Nhập tên danh mục ..."
-                v-model="categories.title"
+                v-model="category.title"
               />
             </div>
 
@@ -41,9 +38,9 @@
                   label="title"
                   multiple
                   placeholder="Chọn bài viết"
-                  :options="allBlog"
-                  @input="updateBlogHelp"
-                  :value="allBlog.title"
+                  :options="blogList"
+                  :value="category._blogHelp"
+                  @input="handleBlogList"
                 />
               </div>
             </div>
@@ -54,18 +51,32 @@
                 <multiselect
                   label="title"
                   placeholder="Chọn danh mục cha ..."
-                  :options="allCategories"
-                  @input="updateParent"
-                  :value="allCategories.title"
+                  :options="categories"
+                  :value="category.parent"
+                  @input="handleCategoryParent"
                 />
               </div>
             </div>
             <div class="form_group">
               <button
+                v-if="variableControl === 0"
                 class="btn btn_primary form_control"
-                @click="createNewCategories"
+                @click="createCategory"
               >
                 Tạo mới
+              </button>
+              <button
+                v-if="variableControl === 1"
+                class="btn btn_primary form_control"
+                @click="updateCategory"
+              >
+                Cập nhật
+              </button>
+              <button
+                class="btn btn_danger form_control mt_3"
+                @click.prevent="close"
+              >
+                Hủy bỏ
               </button>
             </div>
           </form>
@@ -75,54 +86,7 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  props: {
-    currentTheme: String,
-    isDefault: Boolean
-  },
-  computed: {
-    allCategories() {
-      return this.$store.getters.allHelpCategories;
-    },
-    categories() {
-      return this.$store.getters.helpCategory;
-    },
-    allBlog() {
-      return this.$store.getters.allBlog;
-    }
-  },
-  async created() {
-    await this.$store.dispatch("getHelpCategoryDefault");
-    await this.$store.dispatch("getAllHelpCategories");
-    await this.$store.dispatch("getAllBlog");
-  },
-  methods: {
-    backListCategories() {
-      this.$router.push("/admin/help/categories");
-    },
-    close() {
-      this.$emit("close", false);
-    },
-    createNewCategories() {
-      this.$store.dispatch("createHelpCategory", this.categories);
-    },
-    updateCategories() {
-      this.$store.dispatch("updateHelpCategory", this.categories);
-      this.$emit("backDefault", true);
-      this.close();
-    },
-    updateParent(val) {
-      this.categories.parent = val._id;
-    },
-    updateBlogHelp(val) {
-      const arr = val.map(item => item._id);
-      const newArr = arr.slice(-1).toString();
-      this.categories._blogHelp.push(newArr);
-    }
-  }
-};
-</script>
+<script src="./index.script.js"></script>
 <style lang="scss" scoped>
-@import "./index.style";
+@import "index.style";
 </style>

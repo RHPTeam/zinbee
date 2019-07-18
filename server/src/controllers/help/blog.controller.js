@@ -15,14 +15,13 @@ const jsonResponse = require( "../../configs/response" );
 
 module.exports = {
   "index": async ( req, res ) => {
-    console.log( req.uid );
 
     let data;
 
-    if ( req.query._id ) {
-      data = await BlogHelp.findOne( { "_id": req.query._id } ).populate( { "path": "_account", "select": "_id name" } ).lean();
+    if ( req.query.slug || req.query._id ) {
+      data = await BlogHelp.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "popularBlog", "select": "_id title slug" } ).populate( { "path": "popularCategory", "select": "_id title slug" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
-      data = await BlogHelp.find( {} ).populate( { "path": "_account", "select": "_id name" } ).lean();
+      data = await BlogHelp.find( {} ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "popularBlog", "select": "_id title slug" } ).populate( { "path": "popularCategory", "select": "_id title slug" } ).lean();
     }
 
     res
@@ -38,10 +37,15 @@ module.exports = {
     }
 
     // Create
-    const { title, content } = req.body,
+    const { label, title, slug, icon, content, popularBlog, popularCategory } = req.body,
       newBlog = await new BlogHelp( {
+        "label": label,
         "title": title,
+        "slug": slug,
+        "icon": icon,
         "content": content,
+        "popularBlog": popularBlog,
+        "popularCategory": popularCategory,
         "_account": req.uid
       } );
 
@@ -58,7 +62,7 @@ module.exports = {
       return res.status( 403 ).json( { "status": "fail", "data": { "content": "Nội dung blog không được bỏ trống!" } } );
     }
 
-    const { title, content } = req.body,
+    const { label, title, slug, icon, content, popularBlog, popularCategory } = req.body,
       blogInfo = await BlogHelp.findOne( { "_id": req.query._id } ).lean();
 
     // Check error
@@ -74,7 +78,7 @@ module.exports = {
       req.body.vote = req.body.vote.concat( blogInfo.vote );
     }
 
-    res.status( 200 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._id, { "$set": { "title": title, "content": content, "vote": req.body.vote, "_account": req.uid } }, { "new": true } ) ) );
+    res.status( 200 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._id, { "$set": { "label": label, "title": title, "slug": slug, "icon": icon, "content": content, "vote": req.body.vote, "popularBlog": popularBlog, "popularCategory": popularCategory, "_account": req.uid } }, { "new": true } ) ) );
   },
   "delete": async ( req, res ) => {
     const blogInfo = await BlogHelp.findOne( { "_id": req.query._id } ),
@@ -121,7 +125,7 @@ module.exports = {
   },
   "upload": async ( req, res ) => {
     if ( !req.file ) {
-      return res.status( 403 ).json( { "status": "fail", "photos": "Không có ảnh upload, vui lòng kiểm tra lại!" } );
+      return res.status( 403 ).json( { "status": "fail", "file": "Không có ảnh upload, vui lòng kiểm tra lại!" } );
     }
 
     // Check multer object

@@ -1,4 +1,8 @@
+import Paginate from "./paginate";
 export default {
+  components: {
+    Paginate
+  },
   data() {
     return {
       isShowOptionsPost: true
@@ -14,8 +18,6 @@ export default {
   },
   methods: {
     goToUpdate(value) {
-      // console.log("value");
-      // console.log(value);
       this.$store.dispatch("getInfoProductById", value);
       this.$store.dispatch("setButtonDefault", 0);
       this.$router.push({ name: "product_create" });
@@ -32,6 +34,10 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch("getProducts");
+    const dataSender = {
+      size: 25,
+      page: 1
+    };
+    await this.$store.dispatch("getProducts", dataSender);
   }
 };

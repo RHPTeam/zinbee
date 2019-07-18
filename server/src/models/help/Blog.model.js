@@ -4,7 +4,10 @@ const mongoose = require( "mongoose" ),
   Schema = mongoose.Schema,
 
   BlogHelpSchema = new Schema( {
+    "label": String,
     "title": String,
+    "slug": String,
+    "icon": String,
     "content": String,
     "vote": [
       {
@@ -12,6 +15,14 @@ const mongoose = require( "mongoose" ),
         "contentVote": String
       }
     ],
+    "popularBlog": [ {
+      "type": Schema.Types.ObjectId,
+      "ref": "BlogHelp"
+    } ],
+    "popularCategory": [ {
+      "type": Schema.Types.ObjectId,
+      "ref": "HelpCategory"
+    } ],
     "_account": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"
@@ -31,7 +42,7 @@ BlogHelpSchema.pre( "save", function( next ) {
 
 const BlogHelp = mongoose.model( "BlogHelp", BlogHelpSchema );
 
-BlogHelp.on( "old.vue", function(error ) {
+BlogHelp.on( "index.vue", function( error ) {
   if ( error ) {
     console.log( error.message );
   }

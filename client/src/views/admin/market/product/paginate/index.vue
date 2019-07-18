@@ -1,8 +1,6 @@
 <template>
   <div class="post--info d_flex justify_content_between align_items_center">
-    <div class="post--info-show">
-      Hiển thị {{ allPosts.length }} trong số {{ totalPost }}
-    </div>
+    <div class="post--info-show">Hiển thị {{ allPosts.length }} bản ghi</div>
     <paginate
       :pageCount="postsPageSize"
       :clickHandler="goToPage"
@@ -17,7 +15,6 @@
 
 <script>
 export default {
-  props: ["currentPage"],
   data() {
     return {
       nextText: "&#x203A;",
@@ -26,42 +23,32 @@ export default {
   },
   computed: {
     allPosts() {
-      return this.$store.getters.resultSearch;
+      return this.$store.getters.allProduct;
+    },
+    postsPage() {
+      return this.$store.getters.postsPage;
     },
     postsPageSize() {
-      return this.$store.getters.resultSearchPage;
-    },
-    totalPost() {
-      return this.$store.getters.resultSearchTotal;
-    },
-    keySearch() {
-      return this.$store.getters.keySearch;
-    },
-    sizeDefault() {
-      return this.$store.getters.sizeDefault;
+      return this.$store.getters.pageProductCurrent;
     }
   },
-  async created() {
-    // const dataSender = {
-    //   size: this.filterShowSelected.id,
-    //   page: this.currentPage
-    // };
-    //
-    // await this.$store.dispatch( "getPostsByPage", dataSender );
-  },
+  // async created() {
+  //   const dataSender = {
+  //     size: this.filterShowSelected.id,
+  //     page: this.currentPage
+  //   };
+  //
+  //   await this.$store.dispatch("getPostsByPage", dataSender);
+  //   await this.$store.dispatch("getAllPost");
+  // },
   methods: {
-    async goToPage(page) {
-      if (this.search.length > 0) {
-        const dataSender = {
-          keyword: this.keySearch,
-          size: this.sizeDefault,
-          page: page
-        };
+    goToPage(page) {
+      const dataSender = {
+        size: 25,
+        page: page
+      };
 
-        await this.$store.dispatch("searchBlog", dataSender);
-      }
-
-      this.$parent.$parent.$parent.$parent.$parent.$refs.scroll.$el.scrollTop = 0;
+      this.$store.dispatch("getProducts", dataSender);
     },
     updateCurrentPage(val) {
       this.$emit("updateCurrentPage", val);

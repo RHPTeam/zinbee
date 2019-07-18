@@ -1,5 +1,5 @@
 <template>
-  <div class="session">
+  <form class="session">
     <div class="logo text_center mb_0 mb_sm_2">
       <icon-base
         icon-name="ZinBee"
@@ -32,6 +32,9 @@
           v-if="this.$store.getters.authError.status === 'error'"
         >
           {{ this.$store.getters.authError.message }}
+        </div>
+        <div class="alert--error text_left mb_2" v-if="validateError">
+          {{ validateErrorText }}
         </div>
         <!-- End: Alert -->
         <!-- Start: Form Wrap -->
@@ -198,7 +201,7 @@
       <!-- End: Body -->
       <!-- Start: Footer -->
       <div class="card--footer mt_3">
-        <div class="btn--submit" @click="sendPassword">Đổi mật khẩu</div>
+        <button class="btn--submit" @click="sendPassword">Đổi mật khẩu</button>
       </div>
       <!-- End: Footer -->
     </div>
@@ -206,13 +209,28 @@
     <!-- Start: Footer -->
     <div class="footer d_flex justify_content_center mt_2">
       <div class="link--group">
-        <a class="link--group-item mr_3" href="#">Trợ giúp</a>
-        <a class="link--group-item mr_3" href="#">Bảo mật</a>
-        <a class="link--group-item" href="#">Điều khoản</a>
+        <a
+          class="link--group-item mr_3"
+          href="https://www.zinbee.vn/#/help"
+          target="_blank"
+          >Trợ giúp</a
+        >
+        <a
+          class="link--group-item mr_3"
+          href="https://www.zinbee.vn/#/help"
+          target="_blank"
+          >Bảo mật</a
+        >
+        <a
+          class="link--group-item"
+          href="https://www.zinbee.vn/#/help"
+          target="_blank"
+          >Điều khoản</a
+        >
       </div>
     </div>
     <!-- End: Footer -->
-  </div>
+  </form>
 </template>
 
 <script src="./index.script.js"></script>

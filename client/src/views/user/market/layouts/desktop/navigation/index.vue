@@ -1,7 +1,7 @@
 <template>
   <div class="nav--root r mx_0">
     <div class="ct">
-      <div class="d_flex align_items_center" v-if="isShowMore === false">
+      <div class="d_flex align_items_center">
         <ul class="nav--list" data-test-selector="category-menu">
           <li class="nav--item">
             <a class="nav--link" @click.prevent="goToHome">Tất cả</a>
@@ -21,8 +21,12 @@
             <a class="nav--link">{{ category.name }}</a>
           </li>
           <li class="nav--item position_relative" aria-label="more">
-            <a class="nav--link">Xem thêm</a>
-            <ul class="cate--more position_absolute">
+            <a class="nav--link" @click="isShowMore = !isShowMore">Xem thêm</a>
+            <ul
+              class="cate--more position_absolute"
+              v-if="isShowMore === true"
+              v-click-outside="close"
+            >
               <li v-if="!currentParentMarketCategory.children"></li>
               <li
                 v-else
@@ -54,11 +58,15 @@ export default {
     }
   },
   methods: {
+    close() {
+      this.isShowMore = false;
+    },
     goToHome() {
       this.$router.push({ name: "market_home" });
     },
     async loadProductByCategory(categoryId) {
       await this.$store.dispatch("getProductsByCategory", categoryId);
+      await this.close();
       this.$router.push({
         name: "market_list",
         params: {
@@ -89,16 +97,6 @@ export default {
         color: #000;
         cursor: pointer;
       }
-      &:last-child {
-        &:hover,
-        &:focus,
-        &:active,
-        &:visited {
-          > .cate--more {
-            opacity: 1;
-          }
-        }
-      }
     }
     .nav--link {
       border-radius: 0.25rem;
@@ -118,7 +116,6 @@ export default {
     background-color: #fafafa;
     min-width: 230px;
     max-width: 300px;
-    opacity: 0;
     padding-left: 0;
     margin-bottom: 0;
     z-index: 99;

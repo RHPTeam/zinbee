@@ -2,7 +2,11 @@ const mongoose = require( "mongoose" ),
   Schema = mongoose.Schema,
 
   HelpCategorySchema = new Schema( {
+    "label": String,
     "title": String,
+    "slug": String,
+    "description": String,
+    "photo": String,
     "level": {
       "type": Number,
       "default": 1
