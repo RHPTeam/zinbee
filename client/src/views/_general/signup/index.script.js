@@ -147,7 +147,7 @@ export default {
         };
       }
       // Reset error status before send request
-      this.$store.dispatch("set_error", "");
+      this.$store.dispatch("setAuthError", "");
       // Request sign up user account
       await this.$store.dispatch("signUpByUser", dataSender);
       // Check error after request

@@ -49,7 +49,7 @@
         <!-- Start: Main -->
         <div class="c_12 c_lg_4 wrapper--main d_flex align_items_center">
           <div class="w--100">
-            <!-- Start: Main Header-->
+            <!-- Start: Main Header -->
             <div class="main--header">
               <div class="d_none d_md_block title mb_3">Zinbee xin chào</div>
               <div class="desc">
@@ -59,6 +59,12 @@
             </div>
             <!-- End: Main Header-->
             <!-- Start: Alert -->
+            <div
+              v-if="loginError === true"
+              class="alert--error position_relative mt_3"
+            >
+              {{ loginErrorText }}
+            </div>
             <div
               v-if="this.$store.getters.statusResetPassword === true"
               class="alert--success position_relative mt_3"
@@ -103,6 +109,7 @@
                       class="form--input"
                       placeholder="nguyenvana@gmail.com"
                       v-model="user.email"
+                      @keydown.enter="signIn"
                     />
                   </div>
                   <div class="form--validate">
@@ -152,6 +159,7 @@
                       class="form--input"
                       placeholder="Nhập mật khẩu"
                       v-model="user.password"
+                      @keydown.enter="signIn"
                     />
                     <input
                       v-if="isShowPassword === true"
@@ -159,6 +167,7 @@
                       class="form--input"
                       placeholder="Nhập mật khẩu"
                       v-model="user.password"
+                      @keydown.enter="signIn"
                     />
                   </div>
                   <div class="form--validate d_flex align_items_center">

@@ -3,6 +3,7 @@
     <VuePerfectScrollbar
       class="scroll-homepage"
       @ps-scroll-y="scrollHandle"
+      :setting="settings"
       ref="menu"
     >
       <div class="modal--content">
@@ -33,11 +34,15 @@ export default {
     VuePerfectScrollbar
   },
   data() {
-    return {};
+    return {
+      settings: {
+        maxScrollbarLength: 10,
+        minScrollbarLength: 10
+      }
+    };
   },
   methods: {
     scrollHandle(evt) {
-      // Position ScrollTop = evt.srcElement.scrollTo
       if (evt.srcElement.scrollTop === 0) {
         this.$store.dispatch("changeBackgroundHeader", 1);
       } else {

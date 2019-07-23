@@ -17,6 +17,8 @@ export default {
         password: ""
       },
       isShowPassword: false,
+      loginError: false,
+      loginErrorText: true,
       loginImage: require("@/assets/images/zinbee-login-image.svg"),
       statusFinishForm: false,
       statusClassError: {
@@ -44,6 +46,32 @@ export default {
         email: this.user.email,
         password: this.user.password
       };
+
+      // Reset error status
+      this.$store.dispatch("setAuthError", "");
+
+      // Validate before request
+      if (this.user.email === "") {
+        this.loginError = true;
+        this.loginErrorText = "Bạn chưa nhập địa chỉ email!";
+        return;
+      } else if (this.user.password === "") {
+        this.loginError = true;
+        this.loginErrorText = "Bạn chưa nhập mật khẩu!";
+        return;
+      } else if ( this.statusClassError.email ) {
+        this.loginError = true;
+        this.loginErrorText = this.errorText.email;
+        return;
+      } else if ( this.statusClassError.password ) {
+        this.loginError = true;
+        this.loginErrorText = this.errorText.password;
+        return;
+      }
+
+      // Reset loginError & loginErrorText before send request
+      this.loginError = false;
+      this.loginErrorText = "";
 
       await this.$store.dispatch( "signInByUser", dataSender );
       if ( this.$store.getters.authError === "401" ) {
