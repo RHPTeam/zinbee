@@ -70,7 +70,7 @@
           <ul class="menu--help d_inline_flex">
             <!-- Start: Home -->
             <li class="menu--help-item flex_fill item--active">
-              <a href="">Trang chủ</a>
+              <a @click="goToHelpHome">Trang chủ</a>
             </li>
             <!-- End: Home -->
             <!-- Start: Menu Items Loop -->

@@ -13,6 +13,9 @@ export default {
   getBlogBySlug(slug) {
     return Api().get(`help/posts?slug=${slug}`);
   },
+  uploadIcon(files) {
+    return Api().post(`help/posts/upload`, files);
+  },
   updateBlog(id, content) {
     return Api().patch(`help/posts?_id=${id}`, content);
   },
