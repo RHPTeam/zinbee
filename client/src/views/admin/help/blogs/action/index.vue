@@ -207,11 +207,7 @@ export default {
     createNewBlog() {
       if (this.blog.slug === "") {
         const convertTitle = StringFunction.convertUnicode(this.blog.title);
-        const slugConvert = StringFunction.convertToSlug(convertTitle);
-
-        this.blog.slug = this.slug + slugConvert;
-      } else {
-        this.blog.slug = this.slug + this.blog.slug;
+        this.blog.slug = StringFunction.convertToSlug(convertTitle);
       }
       this.$store.dispatch("createNewBlog", this.blog);
       this.$router.push({ name: "blogs" });

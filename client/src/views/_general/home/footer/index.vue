@@ -27,8 +27,14 @@
           <div class="title--footer">Thông Tin Hỗ Trợ</div>
           <ul>
             <li>Địa Chỉ: Toàn Nhà Capital, 102 Trường Chinh, Hà Nội</li>
-            <li>Hotline: (+84) 856449666 - (+84) 799449666</li>
-            <li>Email: Cskh@Zinbee.Vn</li>
+            <li>
+              Hotline: <span v-if="agencyInfo" v-text="agencyInfo.phone"></span
+              ><span v-else>(+84) 856449666 - (+84) 799449666</span>
+            </li>
+            <li>
+              Email: <span v-if="agencyInfo" v-text="agencyInfo.email"></span
+              ><span v-else>Cskh@Zinbee.Vn</span>
+            </li>
           </ul>
         </div>
         <div class="c_lg_3 mb_3">
@@ -73,7 +79,7 @@
               </a>
             </div>
             <!-- <div class="icon">
-              <a href="https://www.facebook.com/zinbeeauto/" target="_blank"></a>   
+              <a href="https://www.facebook.com/zinbeeauto/" target="_blank"></a>
               <icon-base
                 class="instagram"
                 icon-name="instagram"
@@ -101,7 +107,7 @@
               </a>
             </div>
             <!-- <div class="icon">
-              <a href="https://www.facebook.com/zinbeeauto/" target="_blank"></a>     
+              <a href="https://www.facebook.com/zinbeeauto/" target="_blank"></a>
               <icon-base
                 class="twitter"
                 icon-name="twitter"
@@ -144,6 +150,11 @@ export default {
     return {
       backgroundShow: require("@/assets/images/home/map-bg.jpg")
     };
+  },
+  computed: {
+    agencyInfo() {
+      return this.$store.getters.agencyInfo;
+    }
   }
 };
 </script>
