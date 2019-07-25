@@ -4,7 +4,11 @@
       <!-- Start: sidebar show category-->
       <div class="sidebar c_xl_3 c_lg_3 c_md_3 c_12 pl_0 pr_0 pt_4">
         <div class="item">
-          <div class="parent py_2" v-for="(category, cindex) in blogDetail.megamenu" :key="cindex">
+          <div
+            class="parent py_2"
+            v-for="(category, cindex) in blogDetail.megamenu"
+            :key="cindex"
+          >
             <span>{{ category.title }}</span>
             <div v-if="category.children" class="child d_flex flex_column">
               <div class="divine mb_2 mt_2"></div>
