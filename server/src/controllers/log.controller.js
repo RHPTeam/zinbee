@@ -15,8 +15,8 @@ module.exports = {
     res.status( 200 ).send( { "status": "success", "data": data } );
   },
   "create": async ( req, res ) => {
-    let { body } = req;
-    const findLog = await Log.findOne( { "_account": body._account } );
+    const { body } = req,
+      findLog = await Log.findOne( { "_account": body._account } );
 
     if ( !findLog ) {
       const newLog = await new Log( { "_account": body._account } );

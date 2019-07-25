@@ -43,7 +43,7 @@ module.exports = {
 
     let newAgency = new Agency( req.body );
 
-    newAgency.linkAffiliate = `${process.env.APP_URL }/#/?a=${ newAgency._id.toString()}`;
+    newAgency.linkAffiliate = `${process.env.APP_URL }/#/a/${ newAgency._id.toString()}`;
     await newAgency.save();
     await Account.findByIdAndUpdate( { "_id": req.body._account }, { "$set": { "_role": findRole._id } }, { "new": true } );
 
@@ -209,5 +209,35 @@ module.exports = {
     res.status( 201 ).json( jsonResponse( "success", dataRespone.filter( function ( el ) {
       return el != null;
     } ) ) );
+  },
+  "getInfoAgency": async ( req, res ) => {
+    const { domain } = req.body,
+      agencyInfo = await Agency.findOne( { "subDomain": domain } ).lean();
+
+    if ( !agencyInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Thông tin domain không hợp lệ!" } );
+    }
+
+    let accountInfo = await Account.findOne( { "_id": agencyInfo._account }, "email name phone imageAvatar" ).lean();
+
+    if ( !accountInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Đại lý này không còn hoạt động!" } );
+    }
+
+    res.status( 200 ).json( { "status": "success", "data": accountInfo } );
+  },
+  "updateAgencyInfo": async ( req, res ) => {
+    const agencyInfo = await Agency.findOne( { "_account": req.query._account } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "_id name phone email" } ).populate( { "path": "_package", "select": "_id title" } );
+
+    // Check error
+    if ( !agencyInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Đại lý không tồn tại!" } );
+    }
+
+    agencyInfo.subDomain = req.body.domain;
+
+    await agencyInfo.save();
+
+    res.status( 200 ).json( { "status": "success", "data": agencyInfo } );
   }
 };

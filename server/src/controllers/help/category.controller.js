@@ -3,7 +3,7 @@
  * author: hoc-anms
  * updater: Tran Toan (Sky Albert)
  * date up: 15/05/2019
- * date to: 04/06/2019
+ * date to: 16/07/2019
  * team: BE-RHP
  */
 
@@ -32,10 +32,15 @@ let getNestedChildren = ( arr, parent ) => {
 
 module.exports = {
   "index": async ( req, res ) => {
+
     let data;
 
     if ( req.query.slug || req.query._id ) {
       data = await HelpCategory.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( "_blogHelp" ).lean();
+
+      if ( data.parent && data.parent.length > 0 ) {
+        data.parent = await HelpCategory.findOne( { "_id": data.parent } );
+      }
     } else if ( req.query._type === "rs" ) {
       data = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
       data = getNestedChildren( data, "" );
@@ -46,6 +51,7 @@ module.exports = {
     res
       .status( 200 )
       .json( jsonResponse( "success", data ) );
+
   },
   "create": async ( req, res ) => {
     // Check validator

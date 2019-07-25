@@ -4,7 +4,7 @@
       <router-link tag="label" class="link" :to="{ name: 'admin_help' }">
         Quay lại
       </router-link>
-      <label class="link" @click="isActiveCategoryPopup = true">
+      <label class="link" @click="openCreateCategory">
         Tạo mới
       </label>
     </div>
@@ -14,7 +14,10 @@
     </div>
 
     <!--Start: Custom Category Popup-->
-    <category-popup v-if="isActiveCategoryPopup === true" @close="isActiveCategoryPopup = $event" />
+    <category-popup
+      v-if="isActiveCategoryPopup === true"
+      @close="isActiveCategoryPopup = $event"
+    />
     <!--End: Custom Category Popup-->
   </div>
 </template>
@@ -42,6 +45,12 @@ export default {
   },
   async created() {
     await this.$store.dispatch("getAllCategoriesChildren");
+  },
+  methods: {
+    openCreateCategory() {
+      this.$store.dispatch("setVariableControlCate", 0);
+      this.isActiveCategoryPopup = true;
+    }
   }
 };
 </script>

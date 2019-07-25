@@ -1,8 +1,6 @@
 <template>
   <div class="action">
-    <router-link tag="label" class="top" :to="{ name: 'blogs' }"
-      >Quay lại</router-link
-    >
+    <label class="top" @click="goToListBlog">Quay lại</label>
     <div class="body">
       <div class="form_group">
         <label>Tên bài viết</label>
@@ -15,13 +13,82 @@
       </div>
       <div class="form_group">
         <label>Slug</label>
+        <div
+          class="slug d_flex align_items_center"
+          v-if="this.$route.params.id === undefined"
+        >
+          <span class="mr_2">{{ slug }}</span>
+          <input
+            type="text"
+            placeholder="Link hiển thị"
+            class="form_control"
+            v-model="blog.slug"
+          />
+        </div>
+        <div class="" v-else>
+          <input
+            type="text"
+            placeholder="Link hiển thị"
+            class="form_control"
+            v-model="blog.slug"
+          />
+        </div>
+      </div>
+      <div class="form_group">
+        <label>Nhãn dán</label>
         <input
           type="text"
-          placeholder="Link hiển thị"
-          readonly
+          placeholder="Giới thiệu"
           class="form_control"
-          v-model="convertSlug"
+          v-model="blog.label"
         />
+      </div>
+      <!-- Start: image -->
+      <div class="form_group">
+        <label for class>Ảnh đại diện</label>
+        <div class="img--preview mb_2">
+          <img :src="blog.icon" alt="" height="120px" />
+        </div>
+        <div class>
+          <input
+            type="file"
+            ref="file"
+            @change="selectFile()"
+            accept="image/x-png,image/gif,image/jpeg"
+            class="form_control p_1"
+          />
+        </div>
+        <div class="contain--images"></div>
+      </div>
+      <!-- End: image -->
+      <div class="form_group">
+        <label>Bài viết có liên quan</label>
+        <div class="multi">
+          <multiselect
+            multiple
+            label="title"
+            placeholder="Chọn bài viết liên quan"
+            :options="blogs"
+            :value="blog.popularBlog"
+            @input="selectBlog"
+          >
+          </multiselect>
+        </div>
+      </div>
+      <div class="form_group">
+        <label>Chủ đề liên quan</label>
+        <div class="multi">
+          <multiselect
+            multiple
+            label="title"
+            placeholder="Chọn chủ đề liên quan"
+            :options="categories"
+            :value="blog.popularCategory"
+            @input="selectCategories"
+          >
+          </multiselect>
+        </div>
+        <span class="text_danger">Chọn 3 danh mục liên quan.</span>
       </div>
       <div class="form_group">
         <label>Nội dung bài viết</label>
@@ -101,28 +168,34 @@ export default {
       },
       slug:
         process.env.VUE_APP_ENV === "local"
-          ? `${process.env.VUE_APP_ROOT + ":" + process.env.VUE_APP_PORT}/#/`
-          : `${process.env.VUE_APP_ROOT}/#/`
+          ? `${process.env.VUE_APP_ROOT +
+              ":" +
+              process.env.VUE_APP_PORT}/#/help/`
+          : `${process.env.VUE_APP_ROOT}/#/help/`
     };
   },
   computed: {
-    allCategories() {
-      return this.$store.getters.allCategories;
+    categories() {
+      return this.$store.getters.allHelpCategories;
     },
     blog() {
       return this.$store.getters.blog;
     },
-    convertSlug() {
-      return this.slug + this.blog.slug;
+    blogs() {
+      return this.$store.getters.allBlog;
     }
   },
   async created() {
-    await this.$store.dispatch("getBlogDefault");
+    if (this.$route.params.id) {
+      await this.$store.dispatch("getBlogById", this.$route.params.id);
+    }
   },
   watch: {
-    "blog.title"(val) {
-      const convertTitle = StringFunction.convertUnicode(val);
-      this.blog.slug = StringFunction.convertToSlug(convertTitle);
+    "blog.title"(value) {
+      if (value) {
+        const convertTitle = StringFunction.convertUnicode(value);
+        this.blog.slug = StringFunction.convertToSlug(convertTitle);
+      }
     }
   },
   methods: {
@@ -130,9 +203,39 @@ export default {
       this.$store.dispatch("createNewBlog", this.blog);
       this.$router.push({ name: "blogs" });
     },
-    updateBlog() {
-      this.$store.dispatch("updateBlog", this.blog);
+    async updateBlog() {
+      await this.$store.dispatch("updateBlog", this.blog);
+      await this.$store.dispatch("resetBlog");
       this.$router.push({ name: "blogs" });
+    },
+    goToListBlog() {
+      this.$store.dispatch("getBlogDefault");
+      this.$router.push({ name: "blogs" });
+    },
+    selectFile() {
+      this.file = this.$refs.file.files;
+      this.sendFile();
+
+      // reset ref
+      const input = this.$refs.file;
+      input.type = "text";
+      input.type = "file";
+    },
+    async sendFile() {
+      const formData = new FormData();
+      Array.from(this.file).forEach(file => {
+        formData.append("file", file);
+      });
+
+      await this.$store.dispatch("uploadIconBlog", formData);
+      const dataEmit = await this.$store.getters.blogIcon;
+      this.blog.icon = dataEmit;
+    },
+    selectBlog(val) {
+      this.blog.popularBlog = val;
+    },
+    selectCategories(val) {
+      this.blog.popularCategory = val;
     }
   }
 };
@@ -149,6 +252,13 @@ export default {
     .multi {
       border: 1px solid #e4e4e4;
       border-radius: 0.625rem;
+    }
+    .slug {
+      span {
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        background-color: #ffb94a;
+      }
     }
   }
 }

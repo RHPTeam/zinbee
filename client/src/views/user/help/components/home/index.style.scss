@@ -1,0 +1,138 @@
+.top {
+  background-color: #e4f0f6;
+}
+.left {
+  .blog {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    a {
+      background-color: #ffb94a;
+      border-radius: 1rem;
+      color: #fff;
+      cursor: pointer;
+      font-size: calc(1rem + 2px);
+      margin-bottom: 1rem;
+      padding: .5rem 1rem;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+.right {
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 324px;
+}
+.pd{
+  padding: 30px 0;
+}
+
+.popular--topics {
+  .topic--card{
+    padding-left: 0;
+    .topic--card-content {
+      box-shadow: 0 0 4px rgba(0, 0, 0, .1);
+      border-right: 0;
+      border-radius: .25rem;
+      cursor: pointer;
+      padding: 1.5rem 1rem;
+      height: 100%;
+      transition: background-color .4s ease;
+      &:hover{
+        background: #f9f9f9;
+      }
+    }
+    &:nth-child(1){
+      .img--position{
+        background-position: -181px -932px;
+      }
+    }
+    &:nth-child(2){
+      .img--position{
+        background-position: 0 -751px;
+      }
+    }
+    &:nth-child(3){
+      .img--position{
+        background-position: -181px -570px;
+      }
+    }
+    &:nth-child(4){
+      .img--position{
+        background-position: 0 -570px;
+      }
+    }
+    .img--position{
+      margin: 0 auto;
+      height: 180px;
+      width: 180px;
+      display: inline-block;
+      background-size: auto;
+      background-repeat: no-repeat;
+    }
+    .topic--name{
+      text-align: left;
+      font-size: .825rem;
+      color: $color-dark-1;
+    }
+    .title{
+      text-align: left;
+      color: $color-light;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .content{
+      text-align: left;
+      color: $color-dark-3;
+      font-size: .875rem;
+    }
+  }
+}
+
+.search--other{
+  .pd-lr{
+    margin: 0 auto;
+  }
+  .description{
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+  .img{
+    width: 244px;
+    height: 244px;
+    background-position: -245px -325px;
+    margin: 0 auto;
+  }
+  .advertise{
+    background-position: 0 -325px;
+  }
+  .access--public{
+    border: 1px solid $mainBrandColor;
+    border-radius: .5rem;
+    padding: 10px 15px;
+    display: inline-block;
+    background: $mainBrandColor;
+    color: $color-dark;
+    transition: all .4s ease;
+    &:hover{
+      background: #FF9E4A;
+    }
+    svg{
+      transform: rotate(-180deg);
+      margin-top: -7px;
+      margin-right: 5px;
+    }
+  }
+  .des--content{
+    font-size: 14px;
+    margin: 0;
+    padding: 1rem;
+    .text {
+      max-width: 300px;
+    }
+  }
+
+}
