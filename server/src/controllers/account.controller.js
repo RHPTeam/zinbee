@@ -16,7 +16,7 @@ const fs = require( "fs" );
 const cryptoRandomString = require( "crypto-random-string" );
 const jsonResponse = require( "../configs/response" );
 
-// const { findSubString } = require( "../helpers/utils/functions/string" );
+const { findSubString } = require( "../helpers/utils/functions/string" );
 const { decodeToken, signToken } = require( "../configs/jwt" );
 const { signUpSync, createNewPasswordSync, activeAccountSync, changeStatusAccountSync } = require( "../microservices/synchronize/account" ),
   mail = require( "nodemailer" );

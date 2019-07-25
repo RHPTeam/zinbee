@@ -1,7 +1,6 @@
 <template>
   <div class="action">
-    <router-link tag="label" class="top" :to="{ name: 'blogs' }"
-      >Quay lại</router-link
+    <label class="top" @click="goToListBlog">Quay lại</label
     >
     <div class="body">
       <div class="form_group">
@@ -90,6 +89,7 @@
           >
           </multiselect>
         </div>
+        <span class="text_danger">Chọn 3 danh mục liên quan.</span>
       </div>
       <div class="form_group">
         <label>Nội dung bài viết</label>
@@ -187,34 +187,31 @@ export default {
     }
   },
   async created() {
-    const categories = this.$store.getters.allHelpCategories,
-      blog = this.$route.params.id,
-      blogs = this.$store.getters.allBlog;
-
-    await this.$store.dispatch("getBlogDefault");
-
-    if (categories && categories.length === 0) {
-      this.$store.dispatch("getAllHelpCategories");
+    if (this.$route.params.id) {
+      await this.$store.dispatch("getBlogById", this.$route.params.id);
     }
-    if (blogs && blogs.length === 0) {
-      this.$store.dispatch("getAllBlog");
-    }
-    if (blog !== undefined) {
-      await this.$store.dispatch("getBlogById", blog);
+  },
+  watch: {
+    "blog.title"(value) {
+      if (value) {
+        const convertTitle = StringFunction.convertUnicode(value);
+        this.blog.slug = StringFunction.convertToSlug(convertTitle);
+      }
     }
   },
   methods: {
     createNewBlog() {
-      if (this.blog.slug === "") {
-        const convertTitle = StringFunction.convertUnicode(this.blog.title);
-        this.blog.slug = StringFunction.convertToSlug(convertTitle);
-      }
       this.$store.dispatch("createNewBlog", this.blog);
       this.$router.push({ name: "blogs" });
     },
-    updateBlog() {
-      this.$store.dispatch("updateBlog", this.blog);
+    async updateBlog() {
+      await this.$store.dispatch("updateBlog", this.blog);
+      await this.$store.dispatch("resetBlog");
       this.$router.push({ name: "blogs" });
+    },
+    goToListBlog() {
+      this.$store.dispatch("getBlogDefault");
+      this.$router.push({name: "blogs"});
     },
     selectFile() {
       this.file = this.$refs.file.files;

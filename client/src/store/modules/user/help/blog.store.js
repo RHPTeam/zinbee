@@ -4,7 +4,7 @@ const state = {
   blogHelpStatus: "",
   blogHelpError: "",
   allBlog: [],
-  blog: [],
+  blog: {},
   blogIcon: [],
   resultSearch: [],
   resultSearchPage: 1,
@@ -80,7 +80,6 @@ const actions = {
         return item._id;
       });
     }
-
     await BlogHelpServices.createBlog(payload);
     const result = await BlogHelpServices.getAllBlog();
     commit("setAllBlog", result.data.data);
@@ -91,17 +90,6 @@ const actions = {
     const result = await BlogHelpServices.getAllBlog();
     commit("setAllBlog", result.data.data);
     commit("blog_help_success");
-  },
-  getBlogDefault: async ({ commit }) => {
-    commit("setBlog", {
-      title: "",
-      slug: "",
-      content: "",
-      label: "",
-      icon: "",
-      popularBlog: [],
-      popularCategory: []
-    });
   },
   getBlogById: async ({ commit }, payload) => {
     try {
@@ -172,6 +160,9 @@ const actions = {
   },
   setKeySearch: async ({ commit }, payload) => {
     commit("setKeySearch", payload);
+  },
+  resetBlog: ({ commit }) => {
+    commit("setBlog", {});
   }
 };
 
