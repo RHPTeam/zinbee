@@ -8,7 +8,7 @@
  */
 const Account = require( "../models/Account.model" );
 const Role = require( "../models/Role.model" );
-// const Agency = require( "../models/agency/Agency.model" );
+const Agency = require( "../models/agency/Agency.model" );
 const Server = require( "../models/Server.model" );
 const { writeForgotPassword } = require( "../databases/templates/email" );
 
@@ -16,7 +16,7 @@ const fs = require( "fs" );
 const cryptoRandomString = require( "crypto-random-string" );
 const jsonResponse = require( "../configs/response" );
 
-// const { findSubString } = require( "../helpers/utils/functions/string" );
+const { findSubString } = require( "../helpers/utils/functions/string" );
 const { decodeToken, signToken } = require( "../configs/jwt" );
 const { signUpSync, createNewPasswordSync, activeAccountSync, changeStatusAccountSync } = require( "../microservices/synchronize/account" ),
   mail = require( "nodemailer" );
@@ -243,15 +243,15 @@ module.exports = {
     res.set( "Cookie", cookie );
 
     // check browser user have link and cookie affiliate
-    // if ( req.headers.authorization && findSubString( req.headers.authorization, "aid=", ";" ) ) {
-    //   const findAgency = await Agency.findOne( { "_id": findSubString( req.headers.authorization, "aid=", ";" ) } );
-    //
-    //   if ( findAgency ) {
-    //     findAgency.customer.total += 1;
-    //     findAgency.customer.listOfUser.push( { "user": newUser._id, "typeUser": 0 } );
-    //     await findAgency.save();
-    //   }
-    // }
+    if ( req.headers.authorization && req.headers.authorization.includes( "aid" && findSubString( req.headers.authorization, "aid=", ";" ) !== "None" ) ) {
+      const findAgency = await Agency.findOne( { "_id": findSubString( req.headers.authorization, "aid=", ";" ) } );
+
+      if ( findAgency ) {
+        findAgency.customer.total += 1;
+        findAgency.customer.listOfUser.push( { "user": newUser._id, "typeUser": 0 } );
+        await findAgency.save();
+      }
+    }
 
     res.status( 201 ).json( jsonResponse( "success", {
       "message": `${newUser.email} đăng ký thành công!`,

@@ -19,12 +19,14 @@ const state = {
     }
   },
   agencies: [],
+  agencyInfo: {},
   agencyStatus: "",
   variableControlAgency: 0
 };
 const getters = {
   agencies: state => state.agencies,
   agency: state => state.agency,
+  agencyInfo: state => state.agencyInfo,
   agencyStatus: state => state.agencyStatus,
   variableControlAgency: state => state.variableControlAgency
 };
@@ -43,6 +45,9 @@ const mutations = {
   },
   setAgencyDefault: (state, payload) => {
     state.agency = payload;
+  },
+  setAgencyInfo: (state, payload) => {
+    state.agencyInfo = payload;
   },
   setListOfUser: (state, payload) => {
     state.agency.customer.listOfUser = [...new Set(payload)];
@@ -84,10 +89,29 @@ const actions = {
     commit("setAllAgency", result.data.data);
     commit("agency_success");
   },
+  deleteAgency: async ({ commit, state }, payload) => {
+    commit("agency_request");
+    const list = state.agencies.filter(item => item._id !== payload);
+    await commit("setDeleteAgency", list);
+    await AgencyServices.delete(payload);
+    commit("agency_success");
+  },
   getAllAgency: async ({ commit }) => {
     commit("agency_request");
     const result = await AgencyServices.index();
     commit("setAllAgency", result.data.data);
+    commit("agency_success");
+  },
+  getAgencyInfo: async ({ commit }, payload) => {
+    commit("agency_request");
+    const result = await AgencyServices.getAgencyInfo(payload);
+    commit("setAgencyInfo", result.data.data);
+    commit("agency_success");
+  },
+  getInfoAgency: async ({ commit }, payload) => {
+    commit("agency_request");
+    const result = await AgencyServices.getInfo(payload);
+    commit("setAgency", result.data.data);
     commit("agency_success");
   },
   setListOfUser: async ({ commit }, payload) => {
@@ -118,12 +142,6 @@ const actions = {
       }
     });
   },
-  getInfoAgency: async ({ commit }, payload) => {
-    commit("agency_request");
-    const result = await AgencyServices.getInfo(payload);
-    commit("setAgency", result.data.data);
-    commit("agency_success");
-  },
   updateAgency: async ({ commit }, payload) => {
     commit("agency_request");
     await commit("setUpdateAgency", payload);
@@ -140,13 +158,6 @@ const actions = {
       _package: payload._package._id
     };
     await AgencyServices.update(payload._id, dataSender);
-    commit("agency_success");
-  },
-  deleteAgency: async ({ commit, state }, payload) => {
-    commit("agency_request");
-    const list = state.agencies.filter(item => item._id !== payload);
-    await commit("setDeleteAgency", list);
-    await AgencyServices.delete(payload);
     commit("agency_success");
   }
 };
