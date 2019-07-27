@@ -3,19 +3,24 @@
     <div class="r">
       <!-- Start: sidebar show category-->
       <div class="sidebar c_xl_3 c_lg_3 c_md_3 c_12 pl_0 pr_0 pt_4">
-        <div class="item">
-          <div class="parent py_2" v-for="category in blogDetail.megamenu">
-            <span>{{ category.title }}</span>
-            <div v-if="category.children" class="child d_flex flex_column">
-              <div class="divine mb_2 mt_2"></div>
-              <div class="child--item py_2 d_flex align_items_center" v-for="item in category.children">
-                <div class="left mr_3"></div>
-                {{ item.title }}
-              </div>
-              <div class="divine mb_2 mt_2"></div>
-            </div>
-          </div>
-        </div>
+        <ul>
+          <li
+            class="item"
+            v-for="(category, index) in blogDetail.megamenu"
+            :key="`c-${index}`"
+          >
+            <a href="#">{{ category.title }}</a>
+            <ul v-if="category.children" class="sub">
+              <li
+                class="item"
+                v-for="(item, index) in category.children"
+                :key="`i-${index}`"
+              >
+                <a href="#">{{ item.title }}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
       <!-- End: sidebar show category-->
       <!-- Start: blog detail -->
@@ -135,14 +140,8 @@ export default {
     }
   },
   async created() {
-    const slug = this.$route.params.slug,
-      blog = this.$store.getters.blog;
-    // Check slug in router and blog on store
-    if (slug && blog && blog.length === 0) {
-      await this.$store.dispatch("getBlogBySlug", slug);
-    }
-
-    await this.$store.dispatch("getAllHelpCategories");
+    const slug = this.$route.params.slug;
+    await this.$store.dispatch("getBlogBySlug", slug);
   },
   methods: {
     detailPopularBlog(val) {
