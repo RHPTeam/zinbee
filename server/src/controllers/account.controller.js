@@ -27,6 +27,24 @@ module.exports = {
       userInfo = await Account.findOne( { "_id": req.uid } ),
       isPassword = await userInfo.isValidPassword( body.password );
 
+    // For mobile
+    if ( req.query._mobile === "true" && req.query._password === "true" ) {
+      // Assign new password
+      userInfo.password = body.newPassword;
+
+      // Save to mongodb
+      await userInfo.save();
+
+      res.send( { "status": "success", "data": null } );
+    }
+    if ( req.query._mobile === "true" ) {
+      // Check errors
+      if ( !isPassword ) {
+        return res.send( { "status": "error", "message": "Mật khẩu không chính xác!" } );
+      }
+      return res.send( { "status": "success", "data": null } );
+    }
+
     // Check errors
     if ( !isPassword ) {
       return res.send( { "status": "error", "message": "Mật khẩu không chính xác!" } );
@@ -55,8 +73,13 @@ module.exports = {
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   "getUserInfo": async ( req, res ) => {
-    const data = await Account.findOne( { "_id": req.uid } ).select( "-password" ).lean();
+    let data = null;
 
+    if ( req.query._id ) {
+      data = await Account.findOne( { "_id": req.query._id } ).select( "-password" ).lean();
+      return res.status( 200 ).json( jsonResponse( "success", data ) );
+    }
+    data = await Account.findOne( { "_id": req.uid } ).select( "-password" ).lean();
     res.status( 200 ).json( jsonResponse( "success", data ) );
   },
   "index": async ( req, res ) => {
