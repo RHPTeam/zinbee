@@ -1,6 +1,7 @@
 <template>
   <div class="action">
-    <label class="top" @click="goToListBlog">Quay lại</label>
+    <label class="top" @click="goToListBlog">Quay lại</label
+    >
     <div class="body">
       <div class="form_group">
         <label>Tên bài viết</label>
@@ -199,16 +200,8 @@ export default {
     }
   },
   methods: {
-    createNewBlog() {
-      if (this.blog.slug === "") {
-        const convertTitle = StringFunction.convertUnicode(this.blog.title);
-        const slugConvert = StringFunction.convertToSlug(convertTitle);
-
-        this.blog.slug = this.slug + slugConvert;
-      } else {
-        this.blog.slug = this.slug + this.blog.slug;
-      }
-      this.$store.dispatch("createNewBlog", this.blog);
+    async createNewBlog() {
+      await this.$store.dispatch("createNewBlog", this.blog);
       this.$router.push({ name: "blogs" });
     },
     async updateBlog() {
@@ -218,7 +211,7 @@ export default {
     },
     goToListBlog() {
       this.$store.dispatch("getBlogDefault");
-      this.$router.push({ name: "blogs" });
+      this.$router.push({name: "blogs"});
     },
     selectFile() {
       this.file = this.$refs.file.files;

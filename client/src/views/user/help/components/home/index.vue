@@ -14,7 +14,6 @@
               <li
                 v-for="(item, index) in popularHelp.popular_blog"
                 :key="`c-${index}`"
-                @click="showInfoBlog(item)"
               >
                 <a
                   class="d_inline_block"

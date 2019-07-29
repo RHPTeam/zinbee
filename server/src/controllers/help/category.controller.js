@@ -47,7 +47,7 @@ module.exports = {
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
     }
-    
+
     res
       .status( 200 )
       .json( jsonResponse( "success", data ) );
