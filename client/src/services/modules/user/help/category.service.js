@@ -10,6 +10,9 @@ export default {
   getCategoryById(id) {
     return Api().get(`help/categories?_id=${id}`);
   },
+  getCategoryBySlug(slug) {
+    return Api().get(`help/categories?slug=${slug}`);
+  },
   updateCategory(id, data) {
     return Api().patch(`help/categories?_id=${id}`, data);
   },

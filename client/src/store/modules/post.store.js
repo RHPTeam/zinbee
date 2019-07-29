@@ -46,7 +46,7 @@ const actions = {
     const result = await PostLibrariesServices.create(payload);
     commit("setNewPostLibraries", result.data.data);
 
-    const resultUpdate = await PostLibrariesServices.old();
+    const resultUpdate = await PostLibrariesServices.index();
     commit("setAllPostLibraries", resultUpdate.data.data);
 
     commit("lib_success");
@@ -54,7 +54,7 @@ const actions = {
   getAllPostLibraries: async ({ commit }) => {
     commit("lib_request");
 
-    const result = await PostLibrariesServices.old();
+    const result = await PostLibrariesServices.index();
     commit("setAllPostLibraries", result.data.data);
 
     commit("lib_success");
@@ -73,7 +73,7 @@ const actions = {
     const result = await PostLibrariesServices.getById(payload.postId);
     commit("setPostLibraries", result.data.data);
 
-    const resultUpdate = await PostLibrariesServices.old();
+    const resultUpdate = await PostLibrariesServices.index();
     commit("setAllPostLibraries", resultUpdate.data.data);
 
     commit("lib_success");
@@ -92,12 +92,12 @@ const actions = {
     const result = await PostLibrariesServices.getById(payload.id);
     commit("setPostLibraries", result.data.data);
 
-    const resultUpdate = await PostLibrariesServices.old();
+    const resultUpdate = await PostLibrariesServices.index();
     commit("setAllPostLibraries", resultUpdate.data.data);
   },
   deletePostLibrariesFacebook: async ({ commit }, payload) => {
     await PostLibrariesServices.deletePostFacebook(payload);
-    const result = await PostLibrariesServices.old();
+    const result = await PostLibrariesServices.index();
     commit("setAllPostLibraries", result.data.data);
   },
   deleteItemAttachmentLibraries: async ({ commit }, payload) => {
@@ -108,7 +108,7 @@ const actions = {
     const result = await PostLibrariesServices.getById(payload.postId);
     commit("setPostLibraries", result.data.data);
 
-    const results = await PostLibrariesServices.old();
+    const results = await PostLibrariesServices.index();
     commit("setAllPostLibraries", results.data.data);
   },
   searchPostFromLibrariesByKey: async ({ commit }, payload) => {

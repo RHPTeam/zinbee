@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import AppTree from "./components/tree";
+import AppTree from "./components/tree/index";
 export default {
   components: {
     AppTree

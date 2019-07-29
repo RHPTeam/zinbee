@@ -40,7 +40,7 @@ const mutations = {
 const actions = {
   getPopularHelp: async ({ commit }) => {
     commit("help_request");
-    const result = await HelpServices.old();
+    const result = await HelpServices.index();
     commit("setPopularHelp", result.data.data);
     commit("help_success");
   },
@@ -64,7 +64,7 @@ const actions = {
       await HelpServices.update(objSender);
     }
 
-    const result = await HelpServices.old();
+    const result = await HelpServices.index();
     commit("setPopularHelp", result.data.data);
     commit("help_success");
   },

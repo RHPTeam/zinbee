@@ -5,7 +5,7 @@
       <div class="btn--click d_flex">
         <!-- <button class="btn btn_warning" @click="goToCateById(node._id)">Update</button>
         <button class="btn btn_danger ml_2" @click="deleteCategory(node._id)">Delete</button> -->
-        <div class="icon mr_2" @click="showInfoCategories(node._id)">
+        <div class="icon mr_2" @click="showInfoCategories(node)">
           <icon-base
             class="icon--arrow-left"
             icon-name="Sửa"
@@ -36,21 +36,21 @@
         :key="index"
       />
     </ol>
-
-    <!-- START: POPUP update category -->
-
-    <update-category
+    <!--Start: Custom Category Popup-->
+    <category-popup
       v-if="isShowPopupUpdateCategory === true"
       @close="isShowPopupUpdateCategory = $event"
-    />
-
-    <!-- END: POPUP update category -->
+    ></category-popup>
+    <!--End: Custom Category Popup-->
   </div>
 </template>
 
 <script>
-import UpdateCategory from "../../../../popup/update";
+import CategoryPopup from "../../../../popup/category";
 export default {
+  components: {
+    CategoryPopup
+  },
   name: "node",
   props: {
     node: Object
@@ -62,8 +62,9 @@ export default {
   },
   created() {},
   methods: {
-    showInfoCategories(val) {
-      this.$store.dispatch("getHelpCategoryById", val);
+    async showInfoCategories(val) {
+      await this.$store.dispatch("getHelpCategoryById", val._id);
+      await this.$store.dispatch("setVariableControlCate", 1);
       this.isShowPopupUpdateCategory = true;
     },
     deleteCategories(val) {
@@ -72,9 +73,6 @@ export default {
     closePopupUpdateCategory() {
       this.$emit("isShowPopupUpdateCategory", false);
     }
-  },
-  components: {
-    UpdateCategory
   }
 };
 </script>

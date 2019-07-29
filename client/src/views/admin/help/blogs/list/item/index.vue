@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     showBlogById() {
-      this.$store.dispatch("getBlogById", this.item._id);
       this.$router.push({
         name: "blogs_update",
         params: { id: this.item._id }

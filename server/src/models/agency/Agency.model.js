@@ -52,7 +52,10 @@ const mongoose = require( "mongoose" ),
       "ref": "Package"
     },
     "linkAffiliate": String,
-    "subDomain": String,
+    "subDomain": {
+      "type": String,
+      "default": "None"
+    },
     "createdAt": { // Auto generate
       "type": Date,
       "default": Date.now()

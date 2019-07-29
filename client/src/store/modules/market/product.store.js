@@ -11,10 +11,11 @@ const state = {
   productsSearch: [],
   newestProduct: [],
   statusProducts: "",
-  statusSearchProducts: ""
+  statusSearchProducts: "",
+  pageProductCurrent: 1
 };
 const getters = {
-  allProduct: state => state.allProduct.reverse(),
+  allProduct: state => state.allProduct,
   marketCategoryProducts: state => state.marketCategoryProducts,
   marketStatus: state => state.marketStatus,
   marketRequestStatus: state => state.marketRequestStatus,
@@ -25,7 +26,8 @@ const getters = {
   productsSearch: state => state.productsSearch,
   newestProduct: state => state.newestProduct,
   statusProducts: state => state.statusProducts,
-  statusSearchProducts: state => state.statusSearchProducts
+  statusSearchProducts: state => state.statusSearchProducts,
+  pageProductCurrent: state => state.pageProductCurrent
 };
 const mutations = {
   market_request: state => {
@@ -94,13 +96,33 @@ const mutations = {
   // statusSearchProducts
   statusSearchProducts: (state, payload) => {
     state.statusSearchProducts = payload;
+  },
+
+  //Set page of product
+  setPageProduct: (state, payload) => {
+    state.pageProductCurrent = payload;
+  },
+  //Set update product
+  setUpdateProduct: (state, payload) => {
+    const position = state.allProduct
+      .map((item, index) => {
+        if (item._id === payload._id) return index;
+      })
+      .filter(item => item !== undefined);
+
+    state.allProduct[position] = payload;
+  },
+  //Set delete product
+  setDeleteProductMarket: (state, payload) => {
+    state.allProduct = payload;
   }
 };
 const actions = {
   // get all product
-  getProducts: async ({ commit }) => {
-    const rsAllProduct = await ProductMarket.allProduct();
-    commit("setAllProduct", rsAllProduct.data.data);
+  getProducts: async ({ commit }, payload) => {
+    const rsAllProduct = await ProductMarket.index(payload.size, payload.page);
+    commit("setAllProduct", rsAllProduct.data.data.results);
+    commit("setPageProduct", rsAllProduct.data.data.page);
   },
   /**
    * Get market products of category
@@ -108,25 +130,23 @@ const actions = {
   // create
   createProduct: async ({ commit }, payload) => {
     await ProductMarket.create(payload);
-
-    const rsAllProduct = await ProductMarket.allProduct();
+    const sizeDefault = 25,
+      pageDefault = 1;
+    const rsAllProduct = await ProductMarket.index(sizeDefault, pageDefault);
     commit("setAllProduct", rsAllProduct.data.data);
   },
 
   // delete
-  deleteProduct: async ({ commit }, payload) => {
+  deleteProduct: async ({ commit, state }, payload) => {
+    const product = state.allProduct.filter(item => item._id !== payload);
+    commit("setDeleteProductMarket", product);
     await ProductMarket.delete(payload);
-
-    const rsAllProduct = await ProductMarket.allProduct();
-    commit("setAllProduct", rsAllProduct.data.data);
   },
 
   // update
   updateProduct: async ({ commit }, payload) => {
+    commit("setUpdateProduct", payload);
     await ProductMarket.update(payload._id, payload);
-
-    const rsAllProduct = await ProductMarket.allProduct();
-    commit("setAllProduct", rsAllProduct.data.data);
   },
 
   // get infor product by id

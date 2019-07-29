@@ -2,8 +2,8 @@ const mongoose = require( "mongoose" ),
   Schema = mongoose.Schema,
 
   HelpCategorySchema = new Schema( {
-    "title": String,
     "label": String,
+    "title": String,
     "description": String,
     "content": String,
     "icon": String,
