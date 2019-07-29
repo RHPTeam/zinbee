@@ -1,6 +1,7 @@
 /**
  * Create route help category for project
  * author: hocpv
+ * editor: sky albert
  * date: 15/05/2019
  * team: BE-RHP
  */

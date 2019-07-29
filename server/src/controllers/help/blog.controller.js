@@ -8,7 +8,7 @@
  */
 
 const BlogHelp = require( "../../models/help/Blog.model" );
-const HelpCategory = require( "../../models/help/category.model" );
+const HelpCategory = require( "../../models/help/Category.model" );
 
 
 const jsonResponse = require( "../../configs/response" );
