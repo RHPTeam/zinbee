@@ -62,7 +62,7 @@ module.exports = {
     let newCategory;
 
     // Create
-    const { title, slug, parent } = req.body;
+    const { title, parent } = req.body;
 
     // Set default parent
     req.body.level = 0;
@@ -109,7 +109,10 @@ module.exports = {
     }
 
     categoryInfo.title = req.body.title;
-    categoryInfo.slug = req.body.slug;
+    categoryInfo.label = req.body.label;
+    categoryInfo.description = req.body.description;
+    categoryInfo.content = req.body.content;
+    categoryInfo.icon = req.body.icon;
 
     // Check logic
     if ( req.body.parent ) {
