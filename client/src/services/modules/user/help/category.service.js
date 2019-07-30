@@ -16,6 +16,9 @@ export default {
   updateCategory(id, data) {
     return Api().patch(`help/categories?_id=${id}`, data);
   },
+  uploadFile(file) {
+    return Api().post("help/categories/upload", file);
+  },
   deleteCategory(id) {
     return Api().delete(`help/categories?_id=${id}`);
   },

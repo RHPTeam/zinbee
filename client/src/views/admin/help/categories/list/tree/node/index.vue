@@ -5,7 +5,11 @@
       <div class="btn--click d_flex">
         <!-- <button class="btn btn_warning" @click="goToCateById(node._id)">Update</button>
         <button class="btn btn_danger ml_2" @click="deleteCategory(node._id)">Delete</button> -->
-        <div class="icon mr_2" @click="showInfoCategories(node)">
+        <router-link
+          class="icon mr_2"
+          :to="{ name: 'admin_help_categories_update', params: { helpCategoryId: node._id } }"
+          @click.native="showCategoryDetail(node)"
+        >
           <icon-base
             class="icon--arrow-left"
             icon-name="Sửa"
@@ -15,7 +19,7 @@
           >
             <icon-edit></icon-edit>
           </icon-base>
-        </div>
+        </router-link>
         <div class="icon" @click="deleteCategories(node._id)">
           <icon-base
             class="icon--arrow-left"
@@ -36,21 +40,11 @@
         :key="index"
       />
     </ol>
-    <!--Start: Custom Category Popup-->
-    <category-popup
-      v-if="isShowPopupUpdateCategory === true"
-      @close="isShowPopupUpdateCategory = $event"
-    ></category-popup>
-    <!--End: Custom Category Popup-->
   </div>
 </template>
 
 <script>
-import CategoryPopup from "../../../../popup/category";
 export default {
-  components: {
-    CategoryPopup
-  },
   name: "node",
   props: {
     node: Object
@@ -62,16 +56,12 @@ export default {
   },
   created() {},
   methods: {
-    async showInfoCategories(val) {
+    async showCategoryDetail(val) {
       await this.$store.dispatch("getHelpCategoryById", val._id);
       await this.$store.dispatch("setVariableControlCate", 1);
-      this.isShowPopupUpdateCategory = true;
     },
     deleteCategories(val) {
       this.$store.dispatch("deleteHelpCategory", val);
-    },
-    closePopupUpdateCategory() {
-      this.$emit("isShowPopupUpdateCategory", false);
     }
   }
 };
@@ -86,6 +76,14 @@ export default {
   float: right;
   button {
     font-size: 13px;
+  }
+  .icon {
+    cursor: pointer;
+    color: #999999;
+    transition: all 0.4s ease;
+    &:hover {
+      color: #444;
+    }
   }
 }
 </style>

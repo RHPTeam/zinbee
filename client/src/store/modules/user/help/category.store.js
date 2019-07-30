@@ -2,29 +2,31 @@ import HelpCategoryServices from "@/services/modules/user/help/category.service"
 
 const state = {
   allHelpCategories: [],
-  helpCategory: {},
-  helpCategoryStatus: "",
   allHelpCategoriesChild: [],
-  helpCategoryById: [],
   categoryChildren: [],
-  parentCate: [],
   cateLevel: [],
   cateChildren: [],
   children: [],
+  helpCategory: {},
+  helpCategoryStatus: "",
+  helpCategoryById: [],
+  helpCategoryIconUpload: "",
+  parentCate: [],
   variableControlBlog: 0,
   variableControlCate: 0
 };
 const getters = {
   allHelpCategories: state => state.allHelpCategories,
-  helpCategory: state => state.helpCategory,
-  helpCategoryStatus: state => state.helpCategoryStatus,
   allHelpCategoriesChild: state => state.allHelpCategoriesChild,
-  helpCategoryById: state => state.helpCategoryById,
   categoryChildren: state => state.categoryChildren,
-  parentCate: state => state.parentCate,
   cateLevel: state => state.cateLevel,
   cateChildren: state => state.cateChildren,
   children: state => state.children,
+  helpCategory: state => state.helpCategory,
+  helpCategoryStatus: state => state.helpCategoryStatus,
+  helpCategoryById: state => state.helpCategoryById,
+  helpCategoryIconUpload: state => state.helpCategoryIconUpload,
+  parentCate: state => state.parentCate,
   variableControlBlog: state => state.variableControlBlog,
   variableControlCate: state => state.variableControlCate
 };
@@ -43,6 +45,9 @@ const mutations = {
   },
   setHelpCategoryById: (state, payload) => {
     state.helpCategoryById = payload;
+  },
+  setHelpCategoryIconUpload: (state, payload) => {
+    state.helpCategoryIconUpload = payload;
   },
   setAllHelpCategoriesChild: (state, payload) => {
     if (payload === undefined) {
@@ -127,6 +132,16 @@ const actions = {
     const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
     commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
   },
+  deleteHelpCategory: async ({ commit, state }, payload) => {
+    const categories = state.allHelpCategories.filter(
+      item => item._id !== payload._id
+    );
+    commit("setDeleteCategory", categories);
+    await HelpCategoryServices.deleteCategory(payload);
+
+    const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
+    commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
+  },
   getAllHelpCategories: async ({ commit }) => {
     commit("help_category_request");
     const result = await HelpCategoryServices.getAllCategories();
@@ -136,6 +151,10 @@ const actions = {
   getHelpCategoryDefault: async ({ commit }) => {
     commit("setHelpCategory", {
       title: "",
+      label: "",
+      icon: "",
+      description: "",
+      content: "",
       parent: "",
       _blogHelp: []
     });
@@ -151,6 +170,29 @@ const actions = {
     const result = await HelpCategoryServices.getCategoryBySlug(payload);
     commit("setHelpCategory", result.data.data);
     commit("help_category_success");
+  },
+  getAllCategoriesChildren: async ({ commit }) => {
+    const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
+    commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
+  },
+  getHelpCategoryParent: async ({ commit }, payload) => {
+    const result = await HelpCategoryServices.getAllCategories();
+    // const results = result.data.data.filter(item =>
+    //   item.parent === payload.parentId
+    // );
+    commit("setCateParent", {
+      cate: result.data.data,
+      parentId: payload.parentId
+    });
+  },
+  setHelpCategoryChildrenLevel: async ({ commit }, payload) => {
+    commit("setCategoryChildren", payload);
+  },
+  setVaribleControlBlog: async ({ commit }, payload) => {
+    await commit("setControlBlog", payload);
+  },
+  setVariableControlCate: async ({ commit }, payload) => {
+    await commit("setVariableControlCate", payload);
   },
   updateHelpCategory: async ({ commit }, payload) => {
     commit("help_category_request");
@@ -172,39 +214,10 @@ const actions = {
     commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
     commit("help_category_success");
   },
-  deleteHelpCategory: async ({ commit, state }, payload) => {
-    const categories = state.allHelpCategories.filter(
-      item => item._id !== payload._id
-    );
-    commit("setDeleteCategory", categories);
-    await HelpCategoryServices.deleteCategory(payload);
-
-    const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
-    commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
+  uploadHelpCategoryIcon: async ({ commit }, payload) => {
+    const res = await HelpCategoryServices.uploadFile(payload);
+    commit("setHelpCategoryIconUpload", res.data.data);
   },
-  getAllCategoriesChildren: async ({ commit }) => {
-    const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
-    commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
-  },
-  setHelpCategoryChildrenLevel: async ({ commit }, payload) => {
-    commit("setCategoryChildren", payload);
-  },
-  getHelpCategoryParent: async ({ commit }, payload) => {
-    const result = await HelpCategoryServices.getAllCategories();
-    // const results = result.data.data.filter(item =>
-    //   item.parent === payload.parentId
-    // );
-    commit("setCateParent", {
-      cate: result.data.data,
-      parentId: payload.parentId
-    });
-  },
-  setVaribleControlBlog: async ({ commit }, payload) => {
-    await commit("setControlBlog", payload);
-  },
-  setVariableControlCate: async ({ commit }, payload) => {
-    await commit("setVariableControlCate", payload);
-  }
 };
 
 export default {

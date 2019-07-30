@@ -7,20 +7,20 @@
           class="btn btn_light"
           :to="{ name: 'admin_help' }"
         >
-          Danh muc va bai viet duoc chon
+          Tùy chỉnh trang chủ
         </router-link>
       </div>
       <div class="categories mr_3">
         <router-link
           tag="button"
-          :to="{ name: 'admin_categories' }"
+          :to="{ name: 'admin_help_categories' }"
           class="btn btn_light"
         >
           Danh mục
         </router-link>
       </div>
       <div class="blogs mr_3">
-        <router-link tag="button" :to="{ name: 'blogs' }" class="btn btn_light">
+        <router-link tag="button" :to="{ name: 'admin_help_blogs' }" class="btn btn_light">
           Bài viết
         </router-link>
       </div>

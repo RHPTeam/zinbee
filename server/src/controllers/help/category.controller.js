@@ -32,11 +32,10 @@ let getNestedChildren = ( arr, parent ) => {
 
 module.exports = {
   "index": async ( req, res ) => {
-
     let data;
 
-    if ( req.query.slug || req.query._id ) {
-      data = await HelpCategory.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( "_blogHelp" ).lean();
+    if ( req.query._id ) {
+      data = await HelpCategory.findOne( { "_id": req.query._id } ).populate( "_blogHelp" ).lean();
 
       if ( data.parent && data.parent.length > 0 ) {
         data.parent = await HelpCategory.findOne( { "_id": data.parent } );

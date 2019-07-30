@@ -25,7 +25,7 @@ export default {
   methods: {
     showBlogById() {
       this.$router.push({
-        name: "blogs_update",
+        name: "admin_help_blogs_update",
         params: { id: this.item._id }
       });
     },
