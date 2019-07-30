@@ -68,7 +68,7 @@
             <!-- End: Alert -->
             <!-- Start: Main Body-->
             <div class="main--body my_4 mb_md_5">
-              <form @submit.prevent="submit()">
+              <form @submit.prevent="registerByUser">
                 <!-- Start: Form Group-->
                 <div class="form--group">
                   <!-- Start: Name -->
@@ -428,7 +428,6 @@
                   <button
                     type="submit"
                     class="btn--control btn--orange mr_3"
-                    @click="submit()"
                   >
                     Đăng kí
                   </button>
@@ -459,10 +458,6 @@
       </div>
       <!-- End: Content -->
     </div>
-    <!--**************POPUP*****************-->
-    <transition name="popup">
-      <server-popup v-if="false"></server-popup>
-    </transition>
   </div>
 </template>
 
