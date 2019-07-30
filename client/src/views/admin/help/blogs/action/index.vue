@@ -199,8 +199,8 @@ export default {
     }
   },
   methods: {
-    createNewBlog() {
-      this.$store.dispatch("createNewBlog", this.blog);
+    async createNewBlog() {
+      await this.$store.dispatch("createNewBlog", this.blog);
       this.$router.push({ name: "blogs" });
     },
     async updateBlog() {
