@@ -4,9 +4,9 @@ const mongoose = require( "mongoose" ),
   HelpCategorySchema = new Schema( {
     "label": String,
     "title": String,
+    "slug": String,
     "description": String,
-    "content": String,
-    "icon": String,
+    "photo": String,
     "level": {
       "type": Number,
       "default": 1
