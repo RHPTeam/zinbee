@@ -2,10 +2,16 @@
   <div class="container">
     <!-- Start: Top -->
     <div class="top d_flex align_items_center mb_3">
-      <router-link class="link mr_3" :to="{ name: 'admin_help_categories' }" @click.native="resetCategory">
+      <router-link
+        class="link mr_3"
+        :to="{ name: 'admin_help_categories' }"
+        @click.native="resetCategory"
+      >
         « Quay lại
       </router-link>
-      <div class="title">{{ variableControl === 0 ? "Tạo mới danh mục" : "Chỉnh sửa danh mục" }}</div>
+      <div class="title">
+        {{ variableControl === 0 ? "Tạo mới danh mục" : "Chỉnh sửa danh mục" }}
+      </div>
     </div>
     <!-- End: Top -->
     <!-- Start: Body -->
@@ -38,11 +44,7 @@
           <label>Biểu tượng</label>
           <div class="">
             <div class="img--preview mb_2" v-if="category.icon">
-              <img
-                :src="category.icon"
-                alt=""
-                height="120px"
-              />
+              <img :src="category.icon" alt="" height="120px" />
             </div>
             <input
               type="file"
@@ -119,10 +121,7 @@
           >
             Cập nhật
           </button>
-          <button
-            class="btn btn_danger"
-            @click.prevent="cancel"
-          >
+          <button class="btn btn_danger" @click.prevent="cancel">
             Hủy bỏ
           </button>
         </div>

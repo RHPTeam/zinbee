@@ -4,7 +4,11 @@
       <router-link tag="a" class="left link" :to="{ name: 'admin_help' }">
         Quay lại
       </router-link>
-      <router-link tag="a" class="right link" :to="{ name: 'admin_help_blogs_create' }">
+      <router-link
+        tag="a"
+        class="right link"
+        :to="{ name: 'admin_help_blogs_create' }"
+      >
         Tạo mới
       </router-link>
     </div>

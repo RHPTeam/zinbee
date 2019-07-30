@@ -217,7 +217,7 @@ const actions = {
   uploadHelpCategoryIcon: async ({ commit }, payload) => {
     const res = await HelpCategoryServices.uploadFile(payload);
     commit("setHelpCategoryIconUpload", res.data.data);
-  },
+  }
 };
 
 export default {

@@ -20,7 +20,11 @@
         </router-link>
       </div>
       <div class="blogs mr_3">
-        <router-link tag="button" :to="{ name: 'admin_help_blogs' }" class="btn btn_light">
+        <router-link
+          tag="button"
+          :to="{ name: 'admin_help_blogs' }"
+          class="btn btn_light"
+        >
           Bài viết
         </router-link>
       </div>

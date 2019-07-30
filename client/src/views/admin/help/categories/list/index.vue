@@ -14,13 +14,10 @@
     </div>
     <div class="desc mb_3">Danh sách các danh mục hiện có</div>
     <div class="body px_3 py_2">
-      <div
-        class="text_center"
-        v-if="categories.length === 0"
-      >
+      <div class="text_center" v-if="categories.length === 0">
         Không có danh mục nào.
       </div>
-      <app-tree v-else :tree-data="categories"/>
+      <app-tree v-else :tree-data="categories" />
     </div>
   </div>
 </template>
@@ -60,7 +57,7 @@ export default {
       font-size: 0.875rem;
     }
     .btn--create {
-      background-color: #FFB94A;
+      background-color: #ffb94a;
       border-radius: 0.625rem;
       color: #fff;
       font-weight: 600;
@@ -68,7 +65,7 @@ export default {
       text-decoration: none;
       transition: all 0.4s ease;
       &:hover {
-        background-color: #FF9E4A;
+        background-color: #ff9e4a;
       }
     }
   }

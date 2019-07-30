@@ -9,6 +9,7 @@ import ImageResize from "quill-image-resize-module";
 Quill.register("modules/ImageExtend", ImageExtend);
 Quill.register("modules/imageResize", ImageResize);
 
+import CookieFunction from "@/utils/functions/cookie";
 import StringFunction from "@/utils/functions/string";
 export default {
   components: {
@@ -35,7 +36,7 @@ export default {
             loading: true,
             name: "file",
             size: 25,
-            action: `${process.env.VUE_APP_API_URL}/help/posts/upload`,
+            action: `${process.env.VUE_APP_API_URL}/help/categories/upload`,
             response: res => {
               return res.data;
             },
@@ -51,8 +52,8 @@ export default {
             }
           }
         }
-      },
-    }
+      }
+    };
   },
   computed: {
     categories() {

@@ -7,7 +7,10 @@
         <button class="btn btn_danger ml_2" @click="deleteCategory(node._id)">Delete</button> -->
         <router-link
           class="icon mr_2"
-          :to="{ name: 'admin_help_categories_update', params: { helpCategoryId: node._id } }"
+          :to="{
+            name: 'admin_help_categories_update',
+            params: { helpCategoryId: node._id }
+          }"
           @click.native="showCategoryDetail(node)"
         >
           <icon-base

@@ -159,7 +159,7 @@ const actions = {
     };
     await AgencyServices.update(payload._id, dataSender);
     commit("agency_success");
-  },
+  }
 };
 
 export default {
