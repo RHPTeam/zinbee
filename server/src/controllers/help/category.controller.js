@@ -8,7 +8,7 @@
  */
 
 const BlogHelp = require( "../../models/help/Blog.model" );
-const HelpCategory = require( "../../models/help/category.model" );
+const HelpCategory = require( "../../models/help/Category.model" );
 
 const jsonResponse = require( "../../configs/response" );
 
@@ -62,7 +62,7 @@ module.exports = {
     let newCategory;
 
     // Create
-    const { title, slug, parent } = req.body;
+    const { title, parent } = req.body;
 
     // Set default parent
     req.body.level = 0;
@@ -80,7 +80,10 @@ module.exports = {
 
     newCategory = await new HelpCategory( {
       "title": title,
-      "slug": slug,
+      "label": req.body.label,
+      "description": req.body.description,
+      "content": req.body.content,
+      "icon": req.body.icon,
       "level": req.body.level,
       "parent": parent !== undefined && parent !== "" ? parent : "",
       "_blogHelp": req.body._blogHelp ? req.body._blogHelp : [],
@@ -106,7 +109,10 @@ module.exports = {
     }
 
     categoryInfo.title = req.body.title;
-    categoryInfo.slug = req.body.slug;
+    categoryInfo.label = req.body.label;
+    categoryInfo.description = req.body.description;
+    categoryInfo.content = req.body.content;
+    categoryInfo.icon = req.body.icon;
 
     // Check logic
     if ( req.body.parent ) {
@@ -142,5 +148,16 @@ module.exports = {
     await categoryInfo.remove();
 
     res.status( 200 ).json( jsonResponse( "success", null ) );
+  },
+  "upload": async ( req, res ) => {
+    console.log( "cak" );
+    if ( !req.file ) {
+      return res.status( 403 ).json( { "status": "fail", "photos": "Không có ảnh upload, vui lòng kiểm tra lại!" } );
+    }
+
+    // Check object file
+    if ( req.file.fieldname === "file" && req.file.mimetype.includes( "image" ) ) {
+      return res.status( 200 ).json( { "status": "success", "data": `${process.env.APP_URL}:${process.env.PORT_BASE}/${req.file.path.replace( /\\/gi, "/" )}` } );
+    }
   }
 };
