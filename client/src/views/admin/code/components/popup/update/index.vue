@@ -4,7 +4,7 @@
       <div class="modal--content py_3">
         <!-- Start: Header -->
         <div class="modal--header text_center">
-          Tạo mã kích hoạt
+          Cập nhật mã ' {{ code.code }} '
         </div>
         <!-- End: Header -->
         <!-- Start: body -->
@@ -20,18 +20,6 @@
             </div>
           </div>
           <div class="items months mb_3 d_flex align_items_center">
-            <div>Expire Day</div>
-            <div class="ml_auto">
-              <datepicker
-                class="date--input"
-                placeholder="Chọn ngày hết hạn"
-                role="date"
-                format="DD/MM/YYYY"
-                v-model="code.expireDate"
-              ></datepicker>
-            </div>
-          </div>
-          <div class="items months mb_3 d_flex align_items_center">
             <div>Max User</div>
             <div class="ml_auto text_center">
               <input type="number" min="0" v-model="code.maxUser" />
@@ -42,7 +30,7 @@
         <!-- Start: footer -->
         <div class="modal--footer d_flex align_items_center px_3">
           <div class="left mr_auto" @click="closePopup">HỦY</div>
-          <div class="right ml_auto" @click="createCode">TẠO</div>
+          <div class="right ml_auto" @click="updateCode">CẬP NHẬT</div>
         </div>
         <!-- End: footer -->
       </div>
@@ -50,26 +38,14 @@
   </div>
 </template>
 <script>
-import Datepicker from "@/components/datepicker";
 export default {
-  components: {
-    Datepicker
-  },
-  data() {
-    return {
-      code: {
-        expireDate: "",
-        typeExpire: 1,
-        maxUser: 2
-      }
-    };
-  },
+  props: ["code"],
   methods: {
     closePopup() {
       this.$emit("closePopup", false);
     },
-    createCode() {
-      this.$store.dispatch("createCode", this.code);
+    updateCode() {
+      this.$store.dispatch("updateCode", this.code);
       this.closePopup();
     }
   }
@@ -93,7 +69,7 @@ export default {
     width: 100%;
   }
   .modal--header {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   .modal--content {
     background-color: #2f3236;
