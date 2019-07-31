@@ -36,4 +36,7 @@ router.use( "/backup", auth, permission, require( "./modules/backup/marketCatego
 router.use( "/package", auth, permission, require( "./modules/agency/package.route" ) );
 router.use( "/agency", require( "./modules/agency/agency.route" ) );
 
+// Code Route
+router.use( "/code", auth, permission, require( "./modules/code.route" ) );
+
 module.exports = router;
