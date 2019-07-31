@@ -222,7 +222,10 @@ module.exports = {
       return res.status( 404 ).json( { "status": "error", "message": "Đại lý này không còn hoạt động!" } );
     }
 
-    res.status( 200 ).json( { "status": "success", "data": accountInfo } );
+    res.status( 200 ).json( { "status": "success", "data": {
+      "agency": agencyInfo,
+      "userInfo": accountInfo
+    } } );
   },
   "updateAgencyInfo": async ( req, res ) => {
     const agencyInfo = await Agency.findOne( { "_account": req.query._account } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "_id name phone email" } ).populate( { "path": "_package", "select": "_id title" } );

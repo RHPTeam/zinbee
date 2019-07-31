@@ -243,12 +243,13 @@ module.exports = {
     res.set( "Cookie", cookie );
 
     // check browser user have link and cookie affiliate
-    if ( req.headers.authorization && req.headers.authorization.includes( "aid" && findSubString( req.headers.authorization, "aid=", ";" ) !== "None" ) ) {
+    if ( req.headers.authorization && req.headers.authorization.includes( "aid" ) && findSubString( req.headers.authorization, "aid=", ";" ) !== "None"
+    ) {
       const findAgency = await Agency.findOne( { "_id": findSubString( req.headers.authorization, "aid=", ";" ) } );
 
       if ( findAgency ) {
         findAgency.customer.total += 1;
-        findAgency.customer.listOfUser.push( { "user": newUser._id, "typeUser": 0 } );
+        findAgency.customer.listOfUser.push( { "user": newUser._id, "typeUser": 1 } );
         await findAgency.save();
       }
     }

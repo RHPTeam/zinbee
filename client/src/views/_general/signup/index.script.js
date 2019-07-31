@@ -142,20 +142,36 @@ export default {
           region: 0
         };
       }
+
+      //Get aid if user signup by link afilate of agency
+      let aidMemberAgency = CookieFunction.getCookie("aid");
+
       // Reset error status before send request
-      this.$store.dispatch("setAuthError", "");
+      await this.$store.dispatch("setAuthError", "");
+
       // Request sign up user account
-      await this.$store.dispatch("signUpByUser", dataSender);
+      if (aidMemberAgency) {
+        let objSender = {
+          info: dataSender,
+          aid: aidMemberAgency
+        };
+        await this.$store.dispatch("signUpUserOfAgency", objSender);
+      } else {
+        await this.$store.dispatch("signUpByUser", dataSender);
+      }
+
       // Check error after request
       if (this.$store.getters.authError.status === "error") {
         return;
       }
       // Redirect if create account successfully
+
       const token = `sid=${CookieFunction.getCookie(
         "sid"
       )}; uid=${CookieFunction.getCookie(
         "uid"
       )}; cfr=${CookieFunction.getCookie("cfr")};`;
+
       window.location.href = `${
         this.redirectDomain
       }redirect?authorization=${encodeURIComponent(token)}`;

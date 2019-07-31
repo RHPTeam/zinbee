@@ -200,7 +200,53 @@ const actions = {
   signUpByUser: async ({ commit }, payload) => {
     try {
       commit("auth_request");
+
       const resData = await AccountServices.signUpByUser(payload);
+
+      const newSid = StringFunction.findSubString(
+        resData.headers.cookie,
+        "sid=",
+        ";"
+      );
+
+      const newUid = StringFunction.findSubString(
+        resData.headers.cookie,
+        "uid=",
+        ";"
+      );
+
+      const newCfr = StringFunction.findSubString(
+        resData.headers.cookie,
+        "cfr=",
+        ""
+      );
+
+      CookieFunction.setCookie("sid", newSid);
+      CookieFunction.setCookie("uid", newUid);
+      CookieFunction.setCookie("cfr", newCfr);
+      CookieFunction.setCookie("_sub", `${resData.data.data.domain}welcome`);
+
+      axios.defaults.headers.common.Authorization = resData.headers.cookie;
+
+      commit("auth_success");
+      commit("setRedirectDomain", `${resData.data.data.domain}`);
+    } catch (e) {
+      if (e.response) {
+        commit("auth_error", e.response.data);
+      }
+      return;
+    }
+  },
+  /**
+   * @Description signup member agency when member use link affilate
+   * @param commit
+   * @param payload contain info member and aid of agency get from Cookies
+   * @returns {Promise<void>}
+   */
+  signUpUserOfAgency: async ({ commit }, payload) => {
+    try {
+      commit("auth_request");
+      const resData = await AccountServices.signUpUserAgency(payload.info);
 
       const newSid = StringFunction.findSubString(
         resData.headers.cookie,

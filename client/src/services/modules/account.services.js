@@ -1,5 +1,7 @@
 /* eslint-disable new-cap */
 import Api from "@/services";
+import request from "axios";
+import CookieFunction from "@/utils/functions/cookie";
 
 export default {
   signInAdmin(user) {
@@ -17,6 +19,22 @@ export default {
   },
   signUpByUser(user) {
     return Api().post("/signup", user);
+  },
+  signUpUserAgency(user) {
+    return request({
+      method: "post",
+      url: `${process.env.VUE_APP_API_URL}/signup`,
+      data: user,
+      headers: {
+        Authorization: `sid=${CookieFunction.getCookie(
+          "sid"
+        )}; uid=${CookieFunction.getCookie(
+          "uid"
+        )}; cfr=${CookieFunction.getCookie(
+          "cfr"
+        )}; aid=${CookieFunction.getCookie("aid")};`
+      }
+    });
   },
   getAllUser() {
     return Api().get("users");

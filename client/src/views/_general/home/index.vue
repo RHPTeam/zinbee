@@ -55,9 +55,10 @@ export default {
     } else {
       // Request to server which get info of agency
       await this.$store.dispatch("getAgencyInfo", {
-        domain: window.location.hostname
+        // domain: window.location.hostname
+        domain: "bogia.zinbee.vn"
       });
-      CookieFunction.setCookie("aid", this.agencyInfo._id);
+      CookieFunction.setCookie("aid", this.agencyInfo.agency._id);
     }
   }
 };
