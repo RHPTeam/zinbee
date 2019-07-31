@@ -21,6 +21,7 @@ router.route( "/search" ).post( auth, permission, AccountController.searchUser )
 router.route( "/status" ).post( auth, permission, AccountController.changeStatus );
 router.route( "/renew/id" ).post( auth, permission, AccountController.renewById );
 router.route( "/renew/code" ).post( auth, permission, AccountController.renewByCode );
+router.route( "/renew/code/auto" ).post( auth, AccountController.renewAutoUsingCode );
 router.route( "/change-password/sync" ).patch( auth, AccountController.changePasswordSync );
 router.route( "/info/reset-password" ).get( AccountController.getUserInfoLostPass ); // get use info by email
 router.route( "/reset-password" ).post( AccountController.resetPassword );

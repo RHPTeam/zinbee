@@ -11,7 +11,10 @@ const mongoose = require( "mongoose" ),
 
   AccountSchema = new Schema( {
     "name": String,
-    "email": String,
+    "email": {
+      "type": String,
+      "unique": true
+    },
     "password": String,
     "phone": String,
     "status": Boolean,

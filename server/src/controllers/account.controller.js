@@ -10,6 +10,7 @@ const Account = require( "../models/Account.model" );
 const Role = require( "../models/Role.model" );
 const Agency = require( "../models/agency/Agency.model" );
 const Server = require( "../models/Server.model" );
+const Code = require( "../models/Code.model" );
 const { writeForgotPassword } = require( "../databases/templates/email" );
 
 const fs = require( "fs" );
@@ -119,7 +120,7 @@ module.exports = {
     res.status( 304 ).json( jsonResponse( "fail", "API này không được cung cấp!" ) );
   },
   "searchUser": async ( req, res ) => {
-    const findAccount = await Account.findOne( { "$or": [ { "email": req.query._keyword }, { "phone": req.query._keyword } ] } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).lean();
+    const findAccount = await Account.find( { "$or": [ { "email": req.query._keyword }, { "phone": req.query._keyword }, { "presenter": req.query._keyword } ] } ).select( "-password" ).populate( { "path": "_role", "select": "_id level" } ).lean();
 
     if ( !findAccount ) {
       return res.status( 403 ).json( { "status": "fail", "message": "Tài khoản không tồn tại" } );
@@ -148,6 +149,49 @@ module.exports = {
 
     // Update expire date
     data = await Account.findByIdAndUpdate( id, { "$set": { "status": 1, "expireDate": expireDate, "maxAccountFb": maxAccountFb } }, { "new": true } ).select( "-password" );
+
+    resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
+    if ( resUserSync.data.status !== "success" ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
+    }
+
+    res.status( 200 ).json( jsonResponse( "success", data ) );
+  },
+  "renewAutoUsingCode": async ( req, res ) => {
+    let data, resUserSync;
+
+    const userInfo = await Account.findOne( { "_id": req.uid } ),
+      vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean(),
+      findCode = await Code.findOne( { "code": req.body.code } ),
+      date = new Date( userInfo.expireDate );
+
+    // Check exists
+    if ( !userInfo ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Người dùng này không tồn tại!" } );
+    }
+    if ( !findCode ) {
+      return res.status( 404 ).json( { "status": "error", "message": "Mã code này không tồn tại!" } );
+    }
+    // Check code expire
+    if ( new Date( findCode.expireDate ) < new Date() ) {
+      return res.status( 405 ).json( { "status": "error", "message": "Mã code này đã hết hạn sử dụng!" } );
+    }
+    if ( findCode.numberOfUser >= findCode.maxUser ) {
+      return res.status( 405 ).json( { "status": "error", "message": "Mã code này đã đạt tối đa số lượt sử dung!" } );
+    }
+    // Check code used by user
+    if ( userInfo.code && userInfo.code === req.body.code ) {
+      return res.status( 405 ).json( { "status": "error", "message": "Bạn đã từng sử dụng mã code này, vui lòng nhập mã khác!" } );
+    }
+
+    // Update expire date
+    data = await Account.findByIdAndUpdate( req.uid, { "$set": { "status": 1, "expireDate": new Date( date.setMonth( date.getMonth() + findCode.typeExpire ) ), "code": req.body.code } }, { "new": true } ).select( "-password" );
+
+    findCode.numberOfUser += 1;
+    await findCode.save();
+
+    req.body.id = userInfo._id;
+    req.body.expireDate = new Date( date.setMonth( date.getMonth() + findCode.typeExpire ) );
 
     resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
     if ( resUserSync.data.status !== "success" ) {
