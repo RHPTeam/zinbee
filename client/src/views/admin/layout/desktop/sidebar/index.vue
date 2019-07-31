@@ -62,6 +62,25 @@
           <span class="ml_2">{{ menu.text }}</span>
         </a>
       </router-link>
+      <router-link
+        class="menu--item d_flex align_items_center"
+        tag="li"
+        active-class="active"
+        exact
+        :to="{ name: 'post_code' }"
+      >
+        <a href="#">
+          <icon-base
+            icon-name="Quản lý thành viên"
+            width="24"
+            height="24"
+            viewBox="0 0 600 600"
+          >
+            <icon-agency></icon-agency>
+          </icon-base>
+          <span class="menu--item-text ml_2">Mã kích hoạt</span>
+        </a>
+      </router-link>
     </ul>
   </div>
 </template>

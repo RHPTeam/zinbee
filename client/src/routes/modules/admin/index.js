@@ -162,6 +162,11 @@ const generalRouter = {
           component: require("@/views/admin/agency/package").default
         }
       ]
+    },
+    {
+      path: "code",
+      name: "post_code",
+      component: require("@/views/admin/code").default
     }
   ]
 };

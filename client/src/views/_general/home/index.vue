@@ -34,14 +34,16 @@ export default {
     AppFooter,
     VuePerfectScrollbar
   },
-  computed: {
-    agencyInfo() {
-      return this.$store.getters.agencyInfo;
-    }
+  data() {
+    return {
+      settings: {
+        maxScrollbarLength: 10,
+        minScrollbarLength: 10
+      }
+    };
   },
   methods: {
     scrollHandle(evt) {
-      // Position ScrollTop = evt.srcElement.scrollTo
       if (evt.srcElement.scrollTop === 0) {
         this.$store.dispatch("changeBackgroundHeader", 1);
       } else {

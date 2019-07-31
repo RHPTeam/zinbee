@@ -21,6 +21,7 @@ import ListProduct from "./modules/market/list.store";
 //Agency
 import PackageStore from "./modules/package.store";
 import AgencyStore from "./modules/agency.store";
+import CodeStore from "./modules/code.store";
 
 Vue.use(Vuex);
 
@@ -43,6 +44,7 @@ export default new Vuex.Store({
     ListProduct,
     //Agency
     PackageStore,
-    AgencyStore
+    AgencyStore,
+    CodeStore
   }
 });

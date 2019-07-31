@@ -118,4 +118,14 @@ export default {};
     }
   }
 }
+@media screen and (max-width: 767px) {
+  .wrapper--header {
+    .header--main {
+      .alert--expiration {
+        width: 80vw;
+        padding: 0 !important;
+      }
+    }
+  }
+}
 </style>

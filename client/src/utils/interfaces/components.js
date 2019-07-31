@@ -21,7 +21,7 @@ Vue.component("IconArrowRight", () =>
 Vue.component("IconAttention", () =>
   import("@/components/icons/IconAttention")
 );
-
+Vue.component("IconAgency", () => import("@/components/icons/IconAgency"));
 Vue.component("IconBase", () => import("@/components/icons/IconBase"));
 Vue.component("IconBell", () => import("@/components/icons/IconBell"));
 Vue.component("IconBroadcast", () =>

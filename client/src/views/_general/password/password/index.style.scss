@@ -185,8 +185,10 @@
 /* Responsive */
 @media screen and (max-width: 576px) {
   .session {
+    padding: 1rem 0;
     .card {
       border: 0;
+      padding: 0 1rem!important;
       font-size: 0.875rem;
       width: 100%;
       height: auto;
