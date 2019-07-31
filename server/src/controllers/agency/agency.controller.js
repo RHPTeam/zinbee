@@ -16,8 +16,6 @@ const Server = require( "../../models/Server.model" );
 
 const { signUpSync, activeAccountSync } = require( "../../microservices/synchronize/account" );
 const { signAffiliate } = require( "../../configs/jwt" );
-const { convertUnicode } = require( "../../helpers/utils/functions/string" );
-
 
 module.exports = {
   "create": async ( req, res ) => {
@@ -162,8 +160,8 @@ module.exports = {
       dateNewExpire = new Date( req.body.expireDate ),
       oneMonth = 30 * 24 * 60 * 60 * 1000; // days*hours*minutes*seconds*milliseconds
 
-    findAgency.expire.usedTime = findAgency.expire.usedTime + parseFloat( Math.abs( ( dateNowExpire.getTime() - dateNewExpire.getTime() ) / ( oneMonth ) ) ).toFixed( 2 );
-    findAgency.expire.leftTime = findAgency.expire.leftTime - parseFloat( Math.abs( ( dateNowExpire.getTime() - dateNewExpire.getTime() ) / ( oneMonth ) ) ).toFixed( 2 );
+    findAgency.expire.usedTime = ( findAgency.expire.usedTime + Math.floor( Math.abs( ( dateNowExpire.getTime() - dateNewExpire.getTime() ) / ( oneMonth ) ) ) ).toFixed( 2 );
+    findAgency.expire.leftTime = ( findAgency.expire.leftTime - Math.floor( Math.abs( ( dateNowExpire.getTime() - dateNewExpire.getTime() ) / ( oneMonth ) ) ) ).toFixed( 2 );
 
     // Check agency use expire date
     if ( findAgency.expire.leftTime <= 0 ) {
