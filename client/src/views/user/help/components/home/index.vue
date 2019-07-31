@@ -5,20 +5,24 @@
         <div class="r pd">
           <div class="left c_xl_6 c_lg_6 c_md_6 c_12">
             <h3 class="mb_3">Có thể bạn chưa biết ?</h3>
-            <div
-              class="blog d_flex flex_column"
+            <ul
+              class="blog"
               v-if="
                 popularHelp.popular_blog && popularHelp.popular_blog.length > 0
               "
             >
-              <span
+              <li
                 v-for="(item, index) in popularHelp.popular_blog"
                 :key="`c-${index}`"
-                @click="showInfoBlog(item)"
               >
-                {{ item.title }}
-              </span>
-            </div>
+                <a
+                  class="d_inline_block"
+                  :href="`/#/help/${item.slug}`"
+                  @click="showInfoBlog(item)"
+                  >{{ item.title }}</a
+                >
+              </li>
+            </ul>
             <div v-else>Chưa có bài viết nào</div>
           </div>
           <div

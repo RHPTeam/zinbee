@@ -18,6 +18,7 @@ import introduceRouter from "./modules/user/landingpage";
 import redirectRouter from "./modules/user/_general/redirect";
 import changePasswordRouter from "./modules/user/_general/password";
 import expirationRouter from "./modules/user/_general/expiration";
+import affiliateRouter from "./modules/user/_general/affiliate";
 
 /**
  * Router for Help
@@ -50,6 +51,7 @@ export default new Router({
     redirectRouter,
     changePasswordRouter,
     expirationRouter,
+    affiliateRouter,
     /**
      * Router for Help
      */

@@ -1,8 +1,8 @@
 import Api from "@/services";
 
 export default {
-  createBlog(data) {
-    return Api().post("help/posts", data);
+  createBlog(blog) {
+    return Api().post("help/posts", blog);
   },
   getAllBlog() {
     return Api().get("help/posts");

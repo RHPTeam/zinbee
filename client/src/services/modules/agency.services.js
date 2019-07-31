@@ -15,5 +15,8 @@ export default {
   },
   update(agencyId, data) {
     return Api().patch(`agency?_id=${agencyId}`, data);
+  },
+  getAgencyInfo(domain) {
+    return Api().post("agency/info", domain);
   }
 };

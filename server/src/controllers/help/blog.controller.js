@@ -8,18 +8,34 @@
  */
 
 const BlogHelp = require( "../../models/help/Blog.model" );
-const HelpCategory = require( "../../models/help/category.model" );
+const HelpCategory = require( "../../models/help/Category.model" );
 
 
 const jsonResponse = require( "../../configs/response" );
 
 module.exports = {
   "index": async ( req, res ) => {
-
     let data;
 
     if ( req.query.slug || req.query._id ) {
       data = await BlogHelp.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "popularBlog", "select": "_id title slug" } ).populate( { "path": "popularCategory", "select": "_id title slug" } ).lean();
+
+      // Handle mega menu contain blog
+      const categoryContainBlog = await HelpCategory.findOne( { "_blogHelp": data._id } ).lean();
+
+      if ( categoryContainBlog ) {
+        data.megamenu = await HelpCategory.find( { "level": categoryContainBlog.level === null ? 0 : categoryContainBlog.level, "parent": categoryContainBlog.parent }, "_id title slug" ).lean();
+        data.megamenu = await Promise.all( data.megamenu.map( async ( menu ) => {
+          if ( menu._id.toString() === categoryContainBlog._id.toString() ) {
+            const childrenMenu = await HelpCategory.find( { "parent": categoryContainBlog._id }, "_id title slug" );
+
+            if ( childrenMenu.length > 0 ) {
+              menu.children = childrenMenu;
+            }
+          }
+          return menu;
+        } ) );
+      }
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await BlogHelp.find( {} ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "popularBlog", "select": "_id title slug" } ).populate( { "path": "popularCategory", "select": "_id title slug" } ).lean();
     }

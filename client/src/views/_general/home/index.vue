@@ -3,7 +3,6 @@
     <VuePerfectScrollbar
       class="scroll-homepage"
       @ps-scroll-y="scrollHandle"
-      :setting="settings"
       ref="menu"
     >
       <div class="modal--content">
@@ -26,6 +25,8 @@ import AppHeader from "./header";
 import AppMain from "./main";
 import AppFooter from "./footer";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import CookieFunction from "@/utils/functions/cookie";
+
 export default {
   components: {
     AppHeader,
@@ -48,6 +49,17 @@ export default {
       } else {
         this.$store.dispatch("changeBackgroundHeader", 2);
       }
+    }
+  },
+  async created() {
+    if (window.location.hostname === "zinbee.vn") {
+      return false;
+    } else {
+      // Request to server which get info of agency
+      await this.$store.dispatch("getAgencyInfo", {
+        domain: window.location.hostname
+      });
+      CookieFunction.setCookie("aid", this.agencyInfo._id);
     }
   }
 };
