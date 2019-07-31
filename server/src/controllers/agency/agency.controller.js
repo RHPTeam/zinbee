@@ -194,19 +194,19 @@ module.exports = {
     res.status( 201 ).json( jsonResponse( "success", null ) );
   },
   "searchUserByAgency": async ( req, res ) => {
-    const findAgency = await Agency.findOne( { "_id": req.uid } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "-password" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
+    const findAgency = await Agency.findOne( { "_account": req.uid } ).populate( { "path": "_account", "select": "_id name phone email" } ).populate( { "path": "_creator", "select": "_id name" } ).populate( { "path": "_editor", "select": "_id name" } ).populate( { "path": "customer.listOfUser.user", "select": "-password" } ).populate( { "path": "_package", "select": "_id title" } ).lean();
 
     if ( !findAgency ) {
       return res.status( 404 ).json( { "status": "error", "message": "Đại lý không tồn tại!" } );
     }
 
-    let dataRespone = Promise.all( findAgency.listOfUser.map( ( user ) => {
-      if ( convertUnicode( user.user.email ).toLowerCase().includes( req.query.value ) === true || ( user.user.phone ).includes( req.query.value ) === true ) {
+    let dataResponse = await Promise.all( findAgency.customer.listOfUser.map( ( user ) => {
+      if ( user.user.phone.includes( req.query.value ) || user.user.email.includes( req.query.value ) ) {
         return user;
       }
     } ) );
 
-    res.status( 201 ).json( jsonResponse( "success", dataRespone.filter( function ( el ) {
+    res.status( 201 ).json( jsonResponse( "success", dataResponse.filter( function ( el ) {
       return el != null;
     } ) ) );
   },

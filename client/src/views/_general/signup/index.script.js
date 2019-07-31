@@ -1,15 +1,11 @@
 import AppIntroVideo from "../introvideo";
 import AppAlert from "@/components/shared/layouts/alert";
-import ServerPopup from "./popup/index";
 import CookieFunction from "@/utils/functions/cookie";
-
-// import axios from "axios/index";
 
 export default {
   components: {
     AppAlert,
-    AppIntroVideo,
-    ServerPopup
+    AppIntroVideo
   },
   data() {
     return {
@@ -62,7 +58,7 @@ export default {
     }
   },
   methods: {
-    async submit() {
+    async registerByUser() {
       // Validate before request
       if (this.user.name === "") {
         this.$store.dispatch("set_error", {
@@ -161,26 +157,6 @@ export default {
         "uid"
       )}; cfr=${CookieFunction.getCookie("cfr")};`;
       window.location.href = `${
-        this.redirectDomain
-      }redirect?authorization=${encodeURIComponent(token)}`;
-    },
-    openPopupSelectServer() {
-      this.isShowServerMutipart = true;
-    },
-    async redirectServer() {
-      await this.$store.dispatch("signUpByUser", this.user);
-      if (
-        this.$store.getters.authError === "403" ||
-        this.$store.getters.authError === "404"
-      ) {
-        return;
-      }
-      const token = `sid=${CookieFunction.getCookie(
-        "sid"
-      )}; uid=${CookieFunction.getCookie(
-        "uid"
-      )}; cfr=${CookieFunction.getCookie("cfr")};`;
-      window.location = `${
         this.redirectDomain
       }redirect?authorization=${encodeURIComponent(token)}`;
     }
