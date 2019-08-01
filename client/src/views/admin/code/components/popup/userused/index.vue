@@ -7,11 +7,10 @@
           <div class="col col--category status">Email</div>
           <div class="col col--category expire text_center">Số điện thoại</div>
         </div>
-        <div class="py_2 text_center" v-if="user._users.length > 0">
+        <!-- <div class="py_2 text_center" v-if="user._users.length === 0">
           Chưa có người nào sử dụng mã code này!
-        </div>
+        </div> -->
         <div
-          v-else
           class="item--body d_flex align_items_center px_3 py_2"
           v-for="item in user._users"
           :key="item._id"
