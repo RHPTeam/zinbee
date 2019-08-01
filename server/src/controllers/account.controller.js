@@ -163,7 +163,7 @@ module.exports = {
     const userInfo = await Account.findOne( { "_id": req.uid } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean(),
       findCode = await Code.findOne( { "code": req.body.code } ),
-      date = new Date( userInfo.expireDate );
+      date = new Date( userInfo.expireDate.toString() );
 
     // Check exists
     if ( !userInfo ) {
@@ -188,10 +188,11 @@ module.exports = {
     data = await Account.findByIdAndUpdate( req.uid, { "$set": { "status": 1, "expireDate": new Date( date.setMonth( date.getMonth() + findCode.typeExpire ) ), "code": req.body.code } }, { "new": true } ).select( "-password" );
 
     findCode.numberOfUser += 1;
+    findCode._users.push( data._id );
     await findCode.save();
 
     req.body.id = userInfo._id;
-    req.body.expireDate = new Date( date.setMonth( date.getMonth() + findCode.typeExpire ) );
+    req.body.expireDate = data.expireDate;
 
     resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
     if ( resUserSync.data.status !== "success" ) {

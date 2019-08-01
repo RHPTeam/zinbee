@@ -7,7 +7,7 @@ module.exports = {
     let dataResponse = null;
 
     if ( req.query._id ) {
-      dataResponse = await Code.findOne( { "_id": req.query._id } ).populate( { "path": "_creator", "select": "name imageAvatar" } ).populate( { "path": "_editor", "select": "name imageAvatar" } ).lean();
+      dataResponse = await Code.findOne( { "_id": req.query._id } ).populate( { "path": "_users", "select": "name imageAvatar email phone" } ).populate( { "path": "_creator", "select": "name imageAvatar" } ).populate( { "path": "_editor", "select": "name imageAvatar" } ).lean();
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       dataResponse = await Code.find( {} ).populate( { "path": "_creator", "select": "name imageAvatar" } ).populate( { "path": "_editor", "select": "name imageAvatar" } ).lean();
     }
