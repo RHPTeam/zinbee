@@ -18,6 +18,10 @@ const mongoose = require( "mongoose" ),
       "default": 0
     },
     "maxUser": Number,
+    "_users": [ {
+      "type": Schema.Types.ObjectId,
+      "ref": "Account"
+    } ],
     "_editor": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"
