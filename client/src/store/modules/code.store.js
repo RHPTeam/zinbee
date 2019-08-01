@@ -7,7 +7,7 @@ const getters = {
 };
 const mutations = {
   setAllCode: (state, payload) => {
-    state.allCode = payload;
+    state.allCode = payload.reverse();
   },
   setDeleteCode: (state, payload) => {
     state.allCode = payload;

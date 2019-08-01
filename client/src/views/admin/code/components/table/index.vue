@@ -2,11 +2,11 @@
   <div class="main">
     <div class="item--header d_flex align_items_center px_3 py_2">
       <div class="col col--name">Mã code</div>
-      <div class="col col--category expire">Ngày hết hạn</div>
-      <!-- <div class="col col--category status">Trạng thái</div> -->
+      <div class="col col--category status">Số tháng</div>
       <div class="col col--category number--account activated">
-        Số lượng tài khoản
+        Số người dùng
       </div>
+      <div class="col col--category expire text_center">Ngày hết hạn</div>
       <div class="col col--action">Hành động</div>
     </div>
     <div class="item--body">

@@ -163,7 +163,7 @@ module.exports = {
     const userInfo = await Account.findOne( { "_id": req.uid } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean(),
       findCode = await Code.findOne( { "code": req.body.code } ),
-      date = new Date( userInfo.expireDate );
+      date = new Date( userInfo.expireDate.toString() );
 
     // Check exists
     if ( !userInfo ) {

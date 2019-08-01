@@ -5,23 +5,23 @@
       <div class="col col--name-text">{{ code.code }}</div>
     </div>
     <!-- End: Name Column -->
-    <!-- Start: Email Column -->
+    <!-- Start: Type Column -->
+    <div class="col col--category px_2 activated">
+      <span>
+        {{code.typeExpire}}
+      </span>
+    </div>
+    <!-- End: Type Column -->
+    <!-- Start: Phone Column -->
     <div class="col col--category px_2">
+      <span>{{ code.numberOfUser }} / {{ code.maxUser }}</span>
+    </div>
+    <!-- End: Phone Column -->
+    <!-- Start: Email Column -->
+    <div class="col col--category px_2 text_center">
       <span>{{ formatDate(code.expireDate) }}</span>
     </div>
     <!-- End: Email Column -->
-    <!-- Start: Phone Column -->
-    <div class="col col--category px_2">
-      <span>{{ code.maxUser }}</span>
-    </div>
-    <!-- End: Phone Column -->
-    <!-- Start: Type Column -->
-    <!-- <div class="col col--category px_2 activated">
-      <span>
-        {{code.typeUser}}
-      </span>
-    </div>-->
-    <!-- End: Type Column -->
 
     <!-- Start: Action Column -->
     <div
