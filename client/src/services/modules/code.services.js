@@ -12,5 +12,8 @@ export default {
   },
   deleteCode(codeId) {
     return Api().delete(`code?_id=${codeId}`);
+  },
+  getInfoById(codeId) {
+    return Api().get(`code?_id=${codeId}`);
   }
 };

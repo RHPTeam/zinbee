@@ -1,13 +1,15 @@
 import CodeServices from "@/services/modules/code.services";
 const state = {
-  allCode: []
+  allCode: [],
+  infoUserUsedCode: {}
 };
 const getters = {
-  allCode: state => state.allCode
+  allCode: state => state.allCode,
+  infoUserUsedCode: state => state.infoUserUsedCode
 };
 const mutations = {
   setAllCode: (state, payload) => {
-    state.allCode = payload;
+    state.allCode = payload.reverse();
   },
   setDeleteCode: (state, payload) => {
     state.allCode = payload;
@@ -19,6 +21,9 @@ const mutations = {
       })
       .filter(item => item !== undefined);
     state.allCode[position] = payload;
+  },
+  setInfoUserUsedCode: (state, payload) => {
+    state.infoUserUsedCode = payload;
   }
 };
 const actions = {
@@ -36,6 +41,10 @@ const actions = {
   getAllCode: async ({ commit }) => {
     const result = await CodeServices.getAllCode();
     commit("setAllCode", result.data.data);
+  },
+  getInfoById: async ({ commit }, payload) => {
+    const result = await CodeServices.getInfoById(payload);
+    commit("setInfoUserUsedCode", result.data.data);
   },
   updateCode: async ({ commit }, payload) => {
     await CodeServices.updateCode(payload._id, payload);
