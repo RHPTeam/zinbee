@@ -8,7 +8,7 @@
     <!-- Start: Type Column -->
     <div class="col col--category px_2 activated">
       <span>
-        {{code.typeExpire}}
+        {{ code.typeExpire }}
       </span>
     </div>
     <!-- End: Type Column -->
