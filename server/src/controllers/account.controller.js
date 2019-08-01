@@ -170,14 +170,14 @@ module.exports = {
       return res.status( 404 ).json( { "status": "error", "message": "Người dùng này không tồn tại!" } );
     }
     if ( !findCode ) {
-      return res.status( 404 ).json( { "status": "error", "message": "Mã code này không tồn tại!" } );
+      return res.status( 403 ).json( { "status": "error", "message": "Mã code này không tồn tại!" } );
     }
     // Check code expire
     if ( new Date( findCode.expireDate ) < new Date() ) {
-      return res.status( 405 ).json( { "status": "error", "message": "Mã code này đã hết hạn sử dụng!" } );
+      return res.status( 400 ).json( { "status": "error", "message": "Mã code này đã hết hạn sử dụng!" } );
     }
     if ( findCode.numberOfUser >= findCode.maxUser ) {
-      return res.status( 405 ).json( { "status": "error", "message": "Mã code này đã đạt tối đa số lượt sử dung!" } );
+      return res.status( 406 ).json( { "status": "error", "message": "Mã code này đã đạt tối đa số lượt sử dung!" } );
     }
     // Check code used by user
     if ( userInfo.code && userInfo.code === req.body.code ) {
@@ -192,7 +192,7 @@ module.exports = {
     await findCode.save();
 
     req.body.id = userInfo._id;
-    req.body.expireDate = data.expireDate;
+    req.body.expireDate = data.expireDate.toString();
 
     resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
     if ( resUserSync.data.status !== "success" ) {
