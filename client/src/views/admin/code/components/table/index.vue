@@ -20,6 +20,7 @@
         :code="code"
         @showPopupUpdate="showPopupUpdate($event)"
         @showPopupDelete="showPopupDelete($event)"
+        @showPopupUserUsed="showPopupUserUsed($event)"
       />
     </div>
     <!-- Start: Popup Update code -->
@@ -36,6 +37,11 @@
         storeActionName="deleteCode"
         :targetData="codeSelected"
       />
+      <popup-info-user-used-code
+        :code="codeSelected"
+        v-if="isShowPopupInfo === true"
+        @closePopup="isShowPopupInfo = $event"
+      />
     </transition>
     <!-- End: Popup Update code -->
   </div>
@@ -45,16 +51,19 @@
 import AppItem from "./item";
 import PopupDeleteCode from "@/components/popups/delete";
 import PopupUpdateCode from "../popup/update";
+import PopupInfoUserUsedCode from "../popup/userused";
 export default {
   components: {
     AppItem,
     PopupDeleteCode,
-    PopupUpdateCode
+    PopupUpdateCode,
+    PopupInfoUserUsedCode
   },
   data() {
     return {
       isShowPopupUpdateCode: false,
       isShowPopupDeleteCode: false,
+      isShowPopupInfo: false,
       codeSelected: {}
     };
   },
@@ -74,6 +83,12 @@ export default {
     showPopupDelete(code) {
       this.codeSelected = code;
       this.isShowPopupDeleteCode = true;
+    },
+    showPopupUserUsed(code) {
+      // console.log("code", code);
+      // this.codeSelected = code;
+      this.$store.dispatch("getInfoById", code._id);
+      this.isShowPopupInfo = true;
     }
   }
 };

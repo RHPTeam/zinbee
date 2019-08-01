@@ -13,7 +13,7 @@
     </div>
     <!-- End: Type Column -->
     <!-- Start: Phone Column -->
-    <div class="col col--category px_2">
+    <div class="col col--category px_2" @click="showPopupUserUsed">
       <span>{{ code.numberOfUser }} / {{ code.maxUser }}</span>
     </div>
     <!-- End: Phone Column -->
@@ -28,12 +28,18 @@
       class="col d_flex align_items_center justify_content_center col--action px_4 text_center"
     >
       <div class="mr_2" @click="showPopupDelete">
-        <icon-base width="20" height="20" viewBox="0 0 15 15" icon-name="Xóa">
+        <icon-base
+          width="20"
+          height="20"
+          viewBox="0 0 15 15"
+          icon-name="Xóa"
+          class="icon--remove"
+        >
           <icon-remove />
         </icon-base>
       </div>
       <div @click="showPopupUpdate">
-        <icon-base icon-name="Chỉnh sửa" viewBox="0 0 20 20">
+        <icon-base icon-name="Chỉnh sửa" viewBox="0 0 20 20" class="icon--edit">
           <icon-edit />
         </icon-base>
       </div>
@@ -59,6 +65,9 @@ export default {
     },
     showPopupDelete() {
       this.$emit("showPopupDelete", this.code);
+    },
+    showPopupUserUsed() {
+      this.$emit("showPopupUserUsed", this.code);
     }
   }
 };
@@ -81,6 +90,14 @@ export default {
   .col--action {
     width: 20%;
     text-align: center;
+    .icon--remove:hover {
+      color: red;
+      cursor: pointer;
+    }
+    .icon--edit:hover {
+      color: #ffb94a;
+      cursor: pointer;
+    }
   }
 }
 </style>
