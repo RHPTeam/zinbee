@@ -1,5 +1,5 @@
 <template>
-  <div class="ct wrap--footer py_4">
+  <div class="ct wrap--footer">
     <div class="m_0 text_center content">
       <div class="d_inline_flex">
         <div class="copyright d_flex align_items_center mr_3">

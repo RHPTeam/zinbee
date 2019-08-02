@@ -4,10 +4,8 @@ const mongoose = require( "mongoose" ),
   Schema = mongoose.Schema,
 
   BlogHelpSchema = new Schema( {
-    "label": String,
     "title": String,
     "slug": String,
-    "icon": String,
     "content": String,
     "vote": [
       {
@@ -15,13 +13,9 @@ const mongoose = require( "mongoose" ),
         "contentVote": String
       }
     ],
-    "popularBlog": [ {
+    "relatedBlog": [ {
       "type": Schema.Types.ObjectId,
       "ref": "BlogHelp"
-    } ],
-    "popularCategory": [ {
-      "type": Schema.Types.ObjectId,
-      "ref": "HelpCategory"
     } ],
     "_account": {
       "type": Schema.Types.ObjectId,

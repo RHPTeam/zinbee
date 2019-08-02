@@ -23,6 +23,7 @@
 .wrapper {
   color: #666;
   background-color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
   min-height: 100vh;
   .wrap--content-main {
     width: 100%;

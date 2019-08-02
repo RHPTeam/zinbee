@@ -63,7 +63,6 @@
         </div>
         <!-- End back facebook   -->
       </div>
-
       <!-- Start: Navigation help-->
       <div class="wrap--nav">
         <nav>
@@ -88,7 +87,7 @@
                   class="dropdown--menu-item"
                   v-for="(categoryChild, cindex) in category.children"
                   :key="cindex"
-                  @click="showInfoCategory(categoryChild, category)"
+                  @click="showCurrentHelpCategory(categoryChild._id)"
                 >
                   <a>{{ categoryChild.title }}</a>
                 </li>
@@ -148,20 +147,24 @@ export default {
     goToHelpHome() {
       this.$router.push({ name: "help" });
     },
-    async showInfoCategory(val, cate) {
-      await localStorage.setItem("parentId", cate._id);
-      await this.$store.dispatch("setHelpDefault", {
-        right: 1,
-        left: 1
+    async showCurrentHelpCategory(categoryId) {
+      await this.$store.dispatch("getCurrentHelpCategory", {
+        id: categoryId,
+        type: "hc_global_nav"
       });
-      await this.$store.dispatch("getHelpCategoryBySlug", val.slug);
-      await this.$store.dispatch("getHelpCategoryParent", {
-        parentId: cate._id
-      });
-      await this.$store.dispatch("setHelpCategoryChildrenLevel", val);
-      this.$router.replace({
-        name: "help_detail_category",
-        params: { parentId: cate.slug, cateId: val.slug }
+      if (this.$store.getters.currentHelpCategory._blogHelp.length === 0) {
+        await this.$store.dispatch("setHelpDetailViewActive", 1);
+      } else {
+        await this.$store.dispatch("setHelpDetailViewActive", 2);
+      }
+      this.$router.push({
+        name: "help_detail",
+        params: {
+          id: categoryId
+        },
+        query: {
+          type: "hc_global_nav"
+        }
       });
     },
     openEmail() {

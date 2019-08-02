@@ -1,31 +1,39 @@
 import HelpCategoryServices from "@/services/modules/user/help/category.service";
 
 const state = {
+  activeHelpCategory: "",
   allHelpCategories: [],
   allHelpCategoriesChild: [],
   categoryChildren: [],
   cateLevel: [],
   cateChildren: [],
   children: [],
+  currentHelpCategory: {},
   helpCategory: {},
   helpCategoryStatus: "",
   helpCategoryById: [],
   helpCategoryIconUpload: "",
+  helpDetailViewActive: 0, // 1 is Category Detail, 2 is Blog List, 3 is Blog Detail
+  helpMegaMenu: [],
   parentCate: [],
   variableControlBlog: 0,
   variableControlCate: 0
 };
 const getters = {
+  activeHelpCategory: state => state.activeHelpCategory,
   allHelpCategories: state => state.allHelpCategories,
   allHelpCategoriesChild: state => state.allHelpCategoriesChild,
   categoryChildren: state => state.categoryChildren,
   cateLevel: state => state.cateLevel,
   cateChildren: state => state.cateChildren,
+  currentHelpCategory: state => state.currentHelpCategory,
   children: state => state.children,
   helpCategory: state => state.helpCategory,
   helpCategoryStatus: state => state.helpCategoryStatus,
   helpCategoryById: state => state.helpCategoryById,
   helpCategoryIconUpload: state => state.helpCategoryIconUpload,
+  helpDetailViewActive: state => state.helpDetailViewActive,
+  helpMegaMenu: state => state.helpMegaMenu,
   parentCate: state => state.parentCate,
   variableControlBlog: state => state.variableControlBlog,
   variableControlCate: state => state.variableControlCate
@@ -40,14 +48,8 @@ const mutations = {
   setAllHelpCategories: (state, payload) => {
     state.allHelpCategories = payload;
   },
-  setHelpCategory: (state, payload) => {
-    state.helpCategory = payload;
-  },
-  setHelpCategoryById: (state, payload) => {
-    state.helpCategoryById = payload;
-  },
-  setHelpCategoryIconUpload: (state, payload) => {
-    state.helpCategoryIconUpload = payload;
+  setActiveHelpCategory: (state, payload) => {
+    state.activeHelpCategory = payload;
   },
   setAllHelpCategoriesChild: (state, payload) => {
     if (payload === undefined) {
@@ -96,11 +98,29 @@ const mutations = {
   setControlBlog: (state, payload) => {
     state.variableControlBlog = payload;
   },
-  setVariableControlCate: (state, payload) => {
-    state.variableControlCate = payload;
+  setCurrentHelpCategory: (state, payload) => {
+    state.currentHelpCategory = payload;
   },
   setDeleteCategory: (state, payload) => {
     state.allHelpCategories = payload;
+  },
+  setHelpCategory: (state, payload) => {
+    state.helpCategory = payload;
+  },
+  setHelpCategoryById: (state, payload) => {
+    state.helpCategoryById = payload;
+  },
+  setHelpCategoryIconUpload: (state, payload) => {
+    state.helpCategoryIconUpload = payload;
+  },
+  setHelpDetailViewActive: (state, payload) => {
+    state.helpDetailViewActive = payload;
+  },
+  setHelpMegaMenu: (state, payload) => {
+    state.helpMegaMenu = payload;
+  },
+  setVariableControlCate: (state, payload) => {
+    state.variableControlCate = payload;
   },
   setUpdateCategory: (state, payload) => {
     const position = state.allHelpCategories
@@ -142,11 +162,24 @@ const actions = {
     const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
     commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
   },
+  getAllCategoriesChildren: async ({ commit }) => {
+    const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
+    commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
+  },
   getAllHelpCategories: async ({ commit }) => {
     commit("help_category_request");
     const result = await HelpCategoryServices.getAllCategories();
     commit("setAllHelpCategories", result.data.data);
     commit("help_category_success");
+  },
+  getCurrentHelpCategory: async ({ commit }, payload) => {
+    const res = await HelpCategoryServices.getGlobalNavCategory(
+      payload.id,
+      payload.type
+    );
+    commit("setCurrentHelpCategory", res.data.data);
+    commit("setHelpMegaMenu", res.data.data.megamenu);
+    commit("setActiveHelpCategory", payload.id);
   },
   getHelpCategoryDefault: async ({ commit }) => {
     commit("setHelpCategory", {
@@ -171,10 +204,6 @@ const actions = {
     commit("setHelpCategory", result.data.data);
     commit("help_category_success");
   },
-  getAllCategoriesChildren: async ({ commit }) => {
-    const rsGetAllCategoriesChild = await HelpCategoryServices.getAllCategoriesChild();
-    commit("setAllHelpCategoriesChild", rsGetAllCategoriesChild.data.data);
-  },
   getHelpCategoryParent: async ({ commit }, payload) => {
     const result = await HelpCategoryServices.getAllCategories();
     // const results = result.data.data.filter(item =>
@@ -187,6 +216,9 @@ const actions = {
   },
   setHelpCategoryChildrenLevel: async ({ commit }, payload) => {
     commit("setCategoryChildren", payload);
+  },
+  setHelpDetailViewActive: ({ commit }, payload) => {
+    commit("setHelpDetailViewActive", payload);
   },
   setVaribleControlBlog: async ({ commit }, payload) => {
     await commit("setControlBlog", payload);
