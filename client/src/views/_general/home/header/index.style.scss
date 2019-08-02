@@ -94,20 +94,18 @@
       cursor: pointer;
     }
     .nav--menu-res {
-      width: 250px;
+      width: 290px;
+      height: 250px;
       right: 0;
       top: 24px;
+      background: #4c4c78;
       li {
-        background: #3b3d63;
         cursor: pointer;
         padding: 0.625rem 0.9375rem;
-        border-bottom: 1px solid #484848;
-        .try {
-          
-        }
-        &:last-child {
-          border: 0;
-        }
+        border-bottom: 1px solid #444;
+        // &:last-child {
+        //   border: 0;
+        // }
         &:hover {
           background: #f8b448;
           border-color: #f8b448;
