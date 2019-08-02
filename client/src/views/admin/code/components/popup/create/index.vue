@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       code: {
-        expireDate: "",
+        expireDate: new Date(),
         typeExpire: 1,
         maxUser: 2
       }
