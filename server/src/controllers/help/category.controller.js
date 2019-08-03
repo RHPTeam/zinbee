@@ -72,6 +72,9 @@ module.exports = {
       } ) );
 
       data.megamenu = megamenuList;
+
+      // Handle children
+      data.children = ( await HelpCategory.find( { "parent": data._id } ).lean() ).length > 0 ? 1 : 0;
     } else if ( req.query._type === "rs" ) {
       data = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
       data = getNestedChildren( data, "" );
