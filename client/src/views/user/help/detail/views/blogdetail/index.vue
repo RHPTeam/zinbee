@@ -10,21 +10,22 @@
     <div class="section related--blog">
       <h3 class="title">Bài viết có liên quan</h3>
       <div class="list--group">
-        <div class="list--group-item">
-          <a class="link" href="">
-            Tại sao tôi được yêu cầu nhập thông tin đăng nhập email của mình
-            trong khi cố gắng đặt lại mật khẩu Facebook?
-          </a>
-        </div>
-        <div class="list--group-item">
-          <a class="link" href="">
-            Làm cách nào để sử dụng mật khẩu ứng dụng?
-          </a>
-        </div>
-        <div class="list--group-item">
-          <a class="link" href="">
-            Tại sao bài niêm yết của tôi trên Marketplace không được duyệt?
-          </a>
+        <div
+          class="list--group-item"
+          v-for="(item, index) in blog.relatedBlog"
+          :key="index"
+        >
+          <router-link
+            class="link"
+            :to="{
+              name: 'help_detail',
+              params: { id: item._id },
+              query: { type: 'hc_blog' }
+            }"
+            @click.native="showBlogDetail(item._id)"
+          >
+            {{ item.title }}
+          </router-link>
         </div>
       </div>
     </div>
@@ -34,7 +35,20 @@
 
 <script>
 export default {
-  props: ["blog"]
+  props: ["blog"],
+  methods: {
+    async showBlogDetail(blogId) {
+      await this.$store.dispatch("getBlogById", blogId);
+      await this.$store.dispatch("setHelpDetailViewActive", 3);
+      this.$router.push({
+        name: "help_detail",
+        params: { id: blogId },
+        query: {
+          type: "hc_blog"
+        }
+      });
+    }
+  }
 };
 </script>
 
