@@ -1,0 +1,29 @@
+.wrapper {
+  h3 {
+    color: #000;
+    font-weight: 500;
+  }
+  .main {
+    &:before {
+      background-image: linear-gradient(to right, white, rgba(0, 0, 0, .05));
+      bottom: 0;
+      content: "";
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 4px;
+    }
+  }
+  .body {
+  }
+  .footer {
+    h3 {
+      font-weight: 700;
+    }
+  }
+}
+
+// Sidebar
+.sidebar {
+
+}

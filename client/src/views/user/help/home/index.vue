@@ -15,12 +15,16 @@
                 v-for="(item, index) in popularHelp.popular_blog"
                 :key="`c-${index}`"
               >
-                <a
+                <router-link
                   class="d_inline_block"
-                  :href="`/#/help/${item.slug}`"
-                  @click="showInfoBlog(item)"
-                  >{{ item.title }}</a
-                >
+                  :to="{
+                    name: 'help_detail',
+                    params: { id: item._id },
+                    query: { type: 'hc_blog' }
+                  }"
+                  @click.native="showBlogDetail(item._id)"
+                  >{{ item.title }}
+                </router-link>
               </li>
             </ul>
             <div v-else>Chưa có bài viết nào</div>
@@ -169,11 +173,15 @@ export default {
     await this.$store.dispatch("getPopularHelp");
   },
   methods: {
-    showInfoBlog(val) {
-      this.$store.dispatch("getBlogBySlug", val.slug);
+    async showBlogDetail(blogId) {
+      await this.$store.dispatch("getBlogById", blogId);
+      await this.$store.dispatch("setHelpDetailViewActive", 3);
       this.$router.push({
         name: "help_detail",
-        params: { slug: val.slug }
+        params: { id: blogId },
+        query: {
+          type: "hc_blog"
+        }
       });
     }
   }

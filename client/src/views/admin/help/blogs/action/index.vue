@@ -201,16 +201,16 @@ export default {
   methods: {
     async createNewBlog() {
       await this.$store.dispatch("createNewBlog", this.blog);
-      this.$router.push({ name: "blogs" });
+      this.$router.push({ name: "admin_help_blogs" });
     },
     async updateBlog() {
       await this.$store.dispatch("updateBlog", this.blog);
       await this.$store.dispatch("resetBlog");
-      this.$router.push({ name: "blogs" });
+      this.$router.push({ name: "admin_help_blogs" });
     },
     goToListBlog() {
       this.$store.dispatch("getBlogDefault");
-      this.$router.push({ name: "blogs" });
+      this.$router.push({ name: "admin_help_blogs" });
     },
     selectFile() {
       this.file = this.$refs.file.files;

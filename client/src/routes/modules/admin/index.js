@@ -47,8 +47,24 @@ const generalRouter = {
         },
         {
           path: "categories",
-          name: "admin_categories",
-          component: require("@/views/admin/help/category").default
+          component: require("@/views/admin/help/categories").default,
+          children: [
+            {
+              path: "",
+              name: "admin_help_categories",
+              components: require("@/views/admin/help/categories/list")
+            },
+            {
+              path: "create",
+              name: "admin_help_categories_create",
+              components: require("@/views/admin/help/categories/form")
+            },
+            {
+              path: "update/:helpCategoryId",
+              name: "admin_help_categories_update",
+              components: require("@/views/admin/help/categories/form")
+            }
+          ]
         },
         {
           path: "blogs",
@@ -56,17 +72,17 @@ const generalRouter = {
           children: [
             {
               path: "",
-              name: "blogs",
+              name: "admin_help_blogs",
               component: require("@/views/admin/help/blogs/list").default
             },
             {
               path: "create",
-              name: "blogs_new",
+              name: "admin_help_blogs_create",
               component: require("@/views/admin/help/blogs/action").default
             },
             {
               path: ":id",
-              name: "blogs_update",
+              name: "admin_help_blogs_update",
               component: require("@/views/admin/help/blogs/action").default
             }
           ]
