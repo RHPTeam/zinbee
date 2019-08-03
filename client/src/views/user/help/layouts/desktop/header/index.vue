@@ -87,9 +87,17 @@
                   class="dropdown--menu-item"
                   v-for="(categoryChild, cindex) in category.children"
                   :key="cindex"
-                  @click="showCurrentHelpCategory(categoryChild._id)"
                 >
-                  <a>{{ categoryChild.title }}</a>
+                  <router-link
+                    :to="{
+                      name: 'help_detail',
+                      params: { id: categoryChild._id },
+                      query: { type: 'hc_global_nav' }
+                    }"
+                    @click.native="showCurrentHelpCategory(categoryChild._id)"
+                  >
+                    {{ categoryChild.title }}
+                  </router-link>
                 </li>
               </ul>
             </li>
@@ -127,7 +135,7 @@ export default {
     return {
       hrefDefault: "mailto:khangle0608@gmail.com",
       keyword: "",
-      sizeDefault: 25,
+      sizeDefault: 100,
       pageDefault: 1
     };
   },
@@ -137,11 +145,22 @@ export default {
     }
   },
   async created() {
-    // let helpCategories = this.$store.getters.allHelpCategoriesChild;
-    // console.log(helpCategories);
-    // if (helpCategories && helpCategories.length === 0) {
-    //   await this.$store.dispatch("getAllCategoriesChildren");
-    // }
+    const keyword = this.$route.query.key,
+      dataSender = {
+        keyword: keyword,
+        size: this.sizeDefault,
+        page: this.pageDefault
+      };
+
+    if (keyword) {
+      await this.$store.dispatch("searchBlog", dataSender);
+      await this.$store.dispatch("setKeySearch", this.keyword);
+      this.$router.push({
+        name: "help_search",
+        query: { key: keyword }
+      });
+    }
+    this.keyword = keyword;
   },
   methods: {
     goToHelpHome() {
@@ -157,15 +176,6 @@ export default {
       } else {
         await this.$store.dispatch("setHelpDetailViewActive", 2);
       }
-      this.$router.push({
-        name: "help_detail",
-        params: {
-          id: categoryId
-        },
-        query: {
-          type: "hc_global_nav"
-        }
-      });
     },
     openEmail() {
       window.location.assign("mailto: kythuatchatbee@gmail.com");
@@ -179,7 +189,7 @@ export default {
       await this.$store.dispatch("searchBlog", dataSender);
       await this.$store.dispatch("setKeySearch", this.keyword);
       this.$router.push({
-        name: "help_result_search",
+        name: "help_search",
         query: { key: this.keyword }
       });
     }
