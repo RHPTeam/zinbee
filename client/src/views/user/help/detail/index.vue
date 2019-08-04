@@ -112,15 +112,15 @@ export default {
         // Set active view
         await this.$store.dispatch("setHelpDetailViewActive", 3);
         // Set active category
-        if (this.currentHelpCategory.level === 1) {
+        if (this.currentHelpBlog.categoryLevel === 1) {
           await this.$store.dispatch("setActiveHelpCategory", {
-            parent: this.currentHelpCategory._id,
+            parent: this.currentHelpBlog.category,
             children: ""
           });
         } else {
           await this.$store.dispatch("setActiveHelpCategory", {
-            parent: this.currentHelpCategory.parent._id,
-            children: this.currentHelpCategory._id
+            parent: this.currentHelpBlog.categoryParent._id,
+            children: this.currentHelpBlog.category
           });
         }
       }

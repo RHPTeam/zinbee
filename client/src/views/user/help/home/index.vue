@@ -40,60 +40,19 @@
       <div class="popular--topics pd">
         <h3 class="mb_4">Chủ đề phổ biến</h3>
         <div class="r m_0">
-          <div class="c_12 c_md_6 c_lg_3 topic--card text_center mb_3 mb_lg_0">
+          <div
+            class="c_12 c_md_6 c_lg_3 topic--card text_center mb_3 mb_lg_0"
+            v-for="(category, index) in popularHelp.popular_section"
+            :key="index"
+          >
             <div class="topic--card-content">
               <div
                 class="img--position"
-                :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
+                :style="{ backgroundImage: 'url(' + category.icon + ')' }"
               ></div>
-              <div class="topic--name mt_2">GIỚI THIỆU</div>
-              <div class="title">Trang cá nhân và cài đặt</div>
-              <div class="content mt_2">
-                Tìm hiểu cách thêm ảnh đại điện, chỉnh sửa thông tin và quản lý
-                bài viết trên Dòng thời gian của bạn.
-              </div>
-            </div>
-          </div>
-          <div class="c_12 c_md_6 c_lg_3 topic--card text_center mb_3 mb_lg_0">
-            <div class="topic--card-content">
-              <div
-                class="img--position"
-                :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
-              ></div>
-              <div class="topic--name mt_2">GIỚI THIỆU</div>
-              <div class="title">Chiến dịch</div>
-              <div class="content mt_2">
-                Nhận trợ giúp quản lý chiến dịch và hiểu cách tương tác với
-                chiến dịch mà bạn quan tâm.
-              </div>
-            </div>
-          </div>
-          <div class="c_12 c_md_6 c_lg_3 topic--card text_center">
-            <div class="topic--card-content">
-              <div
-                class="img--position"
-                :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
-              ></div>
-              <div class="topic--name mt_2">GIỚI THIỆU</div>
-              <div class="title">Trò chuyện</div>
-              <div class="content mt_2">
-                Tìm câu trả lời về cách gửi và nhận tin nhắn trên hệ thống
-                Zinbee.
-              </div>
-            </div>
-          </div>
-          <div class="c_12 c_md_6 c_lg_3 topic--card text_center">
-            <div class="topic--card-content">
-              <div
-                class="img--position"
-                :style="{ backgroundImage: 'url(' + srcDefault + ')' }"
-              ></div>
-              <div class="topic--name mt_2">GIỚI THIỆU</div>
-              <div class="title">Thông báo</div>
-              <div class="content mt_2">
-                Thay đổi nội dung bạn sẽ được thông báo trên hệ thống và quyết
-                định cách nhận các thông báo đó.
-              </div>
+              <div class="topic--name mt_2">{{ category.label }}</div>
+              <div class="title">{{ category.title }}</div>
+              <div class="content mt_2">{{ category.description }}</div>
             </div>
           </div>
         </div>

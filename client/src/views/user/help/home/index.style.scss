@@ -45,33 +45,15 @@
         background: #f9f9f9;
       }
     }
-    &:nth-child(1){
-      .img--position{
-        background-position: -181px -932px;
-      }
-    }
-    &:nth-child(2){
-      .img--position{
-        background-position: 0 -751px;
-      }
-    }
-    &:nth-child(3){
-      .img--position{
-        background-position: -181px -570px;
-      }
-    }
-    &:nth-child(4){
-      .img--position{
-        background-position: 0 -570px;
-      }
-    }
     .img--position{
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 100%;
+      display: inline-block;
       margin: 0 auto;
       height: 180px;
       width: 180px;
-      display: inline-block;
-      background-size: auto;
-      background-repeat: no-repeat;
     }
     .topic--name{
       text-align: left;
