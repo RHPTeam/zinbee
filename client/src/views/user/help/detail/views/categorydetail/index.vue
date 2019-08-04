@@ -30,7 +30,6 @@
               params: { id: blog._id },
               query: { type: 'hc_blog' }
             }"
-            @click.native="showBlogDetail(blog._id)"
           >
             {{ blog.title }}
           </router-link>
@@ -57,7 +56,6 @@
               params: { id: item._id },
               query: { type: 'hc_global_nav' }
             }"
-            @click.native="showRelatedCategory(item._id)"
           >
             <div
               class="card--img mx_auto"
@@ -80,40 +78,7 @@
 
 <script>
 export default {
-  props: ["category"],
-  methods: {
-    async showBlogDetail(blogId) {
-      await this.$store.dispatch("getBlogById", blogId);
-      await this.$store.dispatch("setHelpDetailViewActive", 3);
-      this.$router.push({
-        name: "help_detail",
-        params: { id: blogId },
-        query: {
-          type: "hc_blog"
-        }
-      });
-    },
-    async showRelatedCategory(categoryId) {
-      await this.$store.dispatch("getCurrentHelpCategory", {
-        id: categoryId,
-        type: "hc_global_nav"
-      });
-      if (this.$store.getters.currentHelpCategory._blogHelp.length === 0) {
-        await this.$store.dispatch("setHelpDetailViewActive", 1);
-      } else {
-        await this.$store.dispatch("setHelpDetailViewActive", 2);
-      }
-      this.$router.push({
-        name: "help_detail",
-        params: {
-          id: categoryId
-        },
-        query: {
-          type: "hc_global_nav"
-        }
-      });
-    }
-  }
+  props: ["category"]
 };
 </script>
 

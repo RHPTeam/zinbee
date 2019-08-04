@@ -94,7 +94,6 @@
                       params: { id: categoryChild._id },
                       query: { type: 'hc_global_nav' }
                     }"
-                    @click.native="showCurrentHelpCategory(categoryChild._id)"
                   >
                     {{ categoryChild.title }}
                   </router-link>
@@ -142,6 +141,9 @@ export default {
   computed: {
     allHelpCategories() {
       return this.$store.getters.allHelpCategoriesChild;
+    },
+    currentHelpCategory() {
+      return this.$store.getters.currentHelpCategory;
     }
   },
   async created() {
@@ -165,17 +167,6 @@ export default {
   methods: {
     goToHelpHome() {
       this.$router.push({ name: "help" });
-    },
-    async showCurrentHelpCategory(categoryId) {
-      await this.$store.dispatch("getCurrentHelpCategory", {
-        id: categoryId,
-        type: "hc_global_nav"
-      });
-      if (this.$store.getters.currentHelpCategory._blogHelp.length === 0) {
-        await this.$store.dispatch("setHelpDetailViewActive", 1);
-      } else {
-        await this.$store.dispatch("setHelpDetailViewActive", 2);
-      }
     },
     openEmail() {
       window.location.assign("mailto: kythuatchatbee@gmail.com");

@@ -22,7 +22,6 @@
                     params: { id: item._id },
                     query: { type: 'hc_blog' }
                   }"
-                  @click.native="showBlogDetail(item._id)"
                   >{{ item.title }}
                 </router-link>
               </li>
@@ -171,19 +170,6 @@ export default {
   },
   async created() {
     await this.$store.dispatch("getPopularHelp");
-  },
-  methods: {
-    async showBlogDetail(blogId) {
-      await this.$store.dispatch("getBlogById", blogId);
-      await this.$store.dispatch("setHelpDetailViewActive", 3);
-      this.$router.push({
-        name: "help_detail",
-        params: { id: blogId },
-        query: {
-          type: "hc_blog"
-        }
-      });
-    }
   }
 };
 </script>

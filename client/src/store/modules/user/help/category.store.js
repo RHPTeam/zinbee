@@ -179,7 +179,6 @@ const actions = {
     );
     commit("setCurrentHelpCategory", res.data.data);
     commit("setHelpMegaMenu", res.data.data.megamenu);
-    commit("setActiveHelpCategory", payload.id);
   },
   getHelpCategoryDefault: async ({ commit }) => {
     commit("setHelpCategory", {
@@ -213,6 +212,9 @@ const actions = {
       cate: result.data.data,
       parentId: payload.parentId
     });
+  },
+  setActiveHelpCategory: ({ commit }, payload) => {
+    commit("setActiveHelpCategory", payload);
   },
   setHelpCategoryChildrenLevel: async ({ commit }, payload) => {
     commit("setCategoryChildren", payload);

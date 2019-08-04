@@ -67,25 +67,65 @@ export default {
       return this.$store.getters.helpMegaMenu;
     }
   },
-  async created() {
-    const id = this.$route.params.id,
-      type = this.$route.query.type;
-    if (type === "hc_global_nav") {
-      await this.$store.dispatch("getCurrentHelpCategory", {
-        id: id,
-        type: type
-      });
-      if (this.currentHelpCategory._blogHelp.length === 0) {
-        await this.$store.dispatch("setHelpDetailViewActive", 1);
-      } else {
-        await this.$store.dispatch("setHelpDetailViewActive", 2);
-      }
-    } else if (type === "hc_blog") {
-      await this.$store.dispatch("getBlogById", id);
-      await this.$store.dispatch("setHelpDetailViewActive", 3);
+  watch: {
+    $route() {
+      this.fetchData();
     }
   },
-  methods: {}
+  created() {
+    this.fetchData();
+  },
+  methods: {
+    async fetchData() {
+      const id = this.$route.params.id,
+        type = this.$route.query.type;
+      if (type === "hc_global_nav") {
+        await this.$store.dispatch("getCurrentHelpCategory", {
+          id: id,
+          type: type
+        });
+        // Set active view
+        if (
+          (this.currentHelpCategory._blogHelp.length === 0 &&
+            this.currentHelpCategory.children === 0) ||
+          (this.currentHelpCategory._blogHelp.length === 0 &&
+            this.currentHelpCategory.children === 1)
+        ) {
+          await this.$store.dispatch("setHelpDetailViewActive", 1);
+        } else {
+          await this.$store.dispatch("setHelpDetailViewActive", 2);
+        }
+        // Set active category
+        if (this.currentHelpCategory.level === 1) {
+          await this.$store.dispatch("setActiveHelpCategory", {
+            parent: this.currentHelpCategory._id,
+            children: ""
+          });
+        } else {
+          await this.$store.dispatch("setActiveHelpCategory", {
+            parent: this.currentHelpCategory.parent._id,
+            children: this.currentHelpCategory._id
+          });
+        }
+      } else if (type === "hc_blog") {
+        await this.$store.dispatch("getBlogById", id);
+        // Set active view
+        await this.$store.dispatch("setHelpDetailViewActive", 3);
+        // Set active category
+        if (this.currentHelpCategory.level === 1) {
+          await this.$store.dispatch("setActiveHelpCategory", {
+            parent: this.currentHelpCategory._id,
+            children: ""
+          });
+        } else {
+          await this.$store.dispatch("setActiveHelpCategory", {
+            parent: this.currentHelpCategory.parent._id,
+            children: this.currentHelpCategory._id
+          });
+        }
+      }
+    }
+  }
 };
 </script>
 
