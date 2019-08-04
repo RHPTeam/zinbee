@@ -40,6 +40,10 @@ module.exports = {
       // Handle mega menu contain blog
       const categoryContainBlog = await HelpCategory.findOne( { "_blogHelp": data._id } ).populate( "_blogHelp" ).lean();
 
+      data.category = categoryContainBlog._id;
+      data.categoryLevel = categoryContainBlog.level;
+      data.categoryParent = await HelpCategory.findOne( { "_id": categoryContainBlog.parent } ).lean();
+
       if ( categoryContainBlog ) {
         const categoryList = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
 
