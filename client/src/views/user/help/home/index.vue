@@ -45,15 +45,23 @@
             v-for="(category, index) in popularHelp.popular_section"
             :key="index"
           >
-            <div class="topic--card-content">
-              <div
-                class="img--position"
-                :style="{ backgroundImage: 'url(' + category.icon + ')' }"
-              ></div>
-              <div class="topic--name mt_2">{{ category.label }}</div>
-              <div class="title">{{ category.title }}</div>
-              <div class="content mt_2">{{ category.description }}</div>
-            </div>
+            <router-link
+              :to="{
+                name: 'help_detail',
+                params: { id: category._id },
+                query: { type: 'hc_global_nav' }
+              }"
+            >
+              <div class="topic--card-content">
+                <div
+                  class="img--position"
+                  :style="{ backgroundImage: 'url(' + category.icon + ')' }"
+                ></div>
+                <div class="topic--name mt_2">{{ category.label }}</div>
+                <div class="title">{{ category.title }}</div>
+                <div class="content mt_2">{{ category.description }}</div>
+              </div>
+            </router-link>
           </div>
         </div>
       </div>

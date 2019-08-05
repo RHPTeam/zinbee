@@ -2,7 +2,7 @@
   <div class="">
     <!-- Start: Category Introduce -->
     <div class="section introduce py_2">
-      <div class="introduce--label">
+      <div class="introduce--label" v-if="category.label">
         {{ category.label }}
       </div>
       <div

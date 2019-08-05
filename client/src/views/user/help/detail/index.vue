@@ -3,7 +3,11 @@
     <div class="r mx_0 mb_5">
       <!-- Start: Sidebar-->
       <div class="sidebar c_xl_3 c_lg_3 c_md_3 c_12 pl_0 pr_0 pt_4">
-        <app-sidebar :categories="helpMegaMenu"></app-sidebar>
+        <app-sidebar
+          :categories="helpMegaMenu"
+          :selectedCategoryId="selectedCategoryId"
+          @updateSelectedCategoryId="selectedCategoryId = $event"
+        ></app-sidebar>
       </div>
       <!-- End: Sidebar-->
       <!-- Start: Main -->
@@ -49,8 +53,7 @@ export default {
   },
   data() {
     return {
-      srcDefault:
-        "http://thuvienanhdep.net/wp-content/uploads/2015/11/nhung-hinh-anh-dep-de-thuong-va-dang-yeu-cua-dong-vat-trong-cuoc-song-9.jpg"
+      selectedCategoryId: ""
     };
   },
   computed: {
@@ -122,8 +125,11 @@ export default {
             parent: this.currentHelpBlog.categoryParent._id,
             children: this.currentHelpBlog.category
           });
+          this.selectedCategoryId = this.currentHelpBlog.categoryParent._id;
         }
       }
+      // Scroll to top
+      this.$parent.$parent.$parent.$refs.scroll.$el.scrollTop = 0;
     }
   }
 };
