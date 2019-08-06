@@ -141,6 +141,10 @@ export default {
       return `${date}/${month}/${year}`;
     },
     getFirstLetter(string) {
+      // return string.charAt(0).toUpperCase();
+      if (string === undefined) {
+        return;
+      }
       return string.charAt(0).toUpperCase();
     }
   },
