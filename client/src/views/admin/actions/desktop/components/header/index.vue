@@ -92,8 +92,7 @@ export default {
     }
   },
   methods: {
-    getActions() {      
-    },
+    getActions() {},
     closeFilterDropdown() {
       this.showFilterDropdown = false;
     },
