@@ -1,7 +1,7 @@
 <template>
   <div class="list mt_3" :data-theme="currentTheme">
     <!-- Start: Day -->
-    <div class="text_center day">
+    <div class="text_center day mb_3">
       <button class="rc--btn-prev" @click="getActiveDay(-1)">
         <icon-base
           class="icon--arrow-left"
@@ -15,11 +15,11 @@
       </button>
       <div class="rc--time-info">
         {{
-          String(activeDay.getDate()).padStart(2, "0") +
-            " " +
-            monthName[activeDay.getMonth()] +
-            ", " +
-            activeDay.getFullYear()
+        String(activeDay.getDate()).padStart(2, "0") +
+        " " +
+        monthName[activeDay.getMonth()] +
+        ", " +
+        activeDay.getFullYear()
         }}
       </div>
       <button class="rc--btn-next" @click="getActiveDay(1)">
@@ -37,22 +37,48 @@
     <!-- End: Day -->
 
     <!-- Start: List -->
-    <div class="post">
+    <div class="list--items">
       <!-- Create -->
-      <div class="items create">
-        <div class="content pl_3">
-          <div class="user item d_flex align_items_center">
-            <div class="avt"></div>
-            <div class="id"></div>
-          </div>
-        </div>
-      </div>
+      <app-create @showInfoEvent="isShowInfoCreateEvent = $event"/>
+      <!-- Update  -->
+      <app-update @showInfoPostgroup="isShowInfoPostgroup = $event" @showInfoUpdateEvent="isShowInfoUpdateEvent = $event"/>
+      <!-- Delete -->
+      <app-delete/>
+      <!-- Duplicate -->
+      <app-duplicate/>
+      <!-- Post now -->
+      <app-post-now @showPopupPostNow="isShowPopupPostNow = $event"/>
+      <!-- signup -->
+      <app-sign-up/>
+      <!-- post success or fail -->
+      <app-post @showPopupInfoPostEvent="isShowPopupInfoPostEvent = $event"/>
+    <!-- Start: Transtion Popup -->
+    <transition name="popup">
+      <create-event v-if="isShowInfoCreateEvent === true" @closePopup="isShowInfoCreateEvent = $event"/>
+      <update-event v-if="isShowInfoUpdateEvent === true" @closePopup="isShowInfoUpdateEvent = $event"/>
+      <update-post-group v-if="isShowInfoPostgroup === true" @closePopup="isShowInfoPostgroup = $event"/>
+      <popup-post-now v-if="isShowPopupPostNow === true" @closePopup="isShowPopupPostNow = $event"/>
+      <popup-post v-if="isShowPopupInfoPostEvent === true" @closePopup="isShowPopupInfoPostEvent = $event"/>
+    </transition>
+    <!-- End: Transtion Popup -->
     </div>
     <!-- End: List -->
   </div>
 </template>
 
 <script>
+import AppCreate from "./components/create";
+import AppDelete from "./components/delete";
+import AppDuplicate from "./components/duplicate";
+import AppPostNow from "./components/postnow";
+import AppUpdate from "./components/update";
+import AppSignUp from "./components/signup";
+import AppPost from "./components/post";
+import CreateEvent from "./popup/create/campaign";
+import UpdateEvent from "./popup/update/campaign";
+import UpdatePostGroup from "./popup/update/postgroup";
+import PopupPost from "./popup/post";
+import PopupPostNow from "./popup/postnow";
 export default {
   data() {
     return {
@@ -70,8 +96,27 @@ export default {
         "Tháng 10",
         "Tháng 11",
         "Tháng 12"
-      ]
+      ],      
+      isShowInfoCreateEvent: false,
+      isShowInfoUpdateEvent: false,
+      isShowInfoPostgroup: false,
+      isShowPopupPostNow: false,
+      isShowPopupInfoPostEvent: false
     };
+  },
+  components: {
+    AppCreate,
+    AppDelete,
+    AppDuplicate,
+    AppPostNow,
+    AppPost,
+    AppUpdate,
+    AppSignUp,
+    CreateEvent,
+    UpdateEvent,
+    UpdatePostGroup,
+    PopupPost,
+    PopupPostNow
   },
   computed: {
     currentTheme() {
@@ -146,8 +191,24 @@ export default {
   .postnow {
     border-left: 3px solid yellow;
   }
-  .post {
+  .signup {
+    border-left: 3px solid blue;
   }
+  .success {
+    border-left: 3px solid greenyellow;
+  }
+  .fail {
+    border-left: 3px solid pink;
+  }
+}
+/*Transition popup*/
+.popup-enter-active,
+.popup-leave-active {
+  transition: opacity 1s;
+}
+.popup-enter,
+.popup-leave-to {
+  opacity: 0;
 }
 // Change Color
 .list[data-theme="light"] {

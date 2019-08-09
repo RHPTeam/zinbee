@@ -44,7 +44,7 @@
           <loading-component/>
             </div>-->
             <div>
-              <div class="dropdown--item" @click="getActions">Tất cả</div>
+              <!-- <div class="dropdown--item" @click="getActions">Tất cả</div> -->
               <div
                 class="dropdown--item"
                 v-for="(item, index) in actions"
@@ -69,6 +69,9 @@ export default {
       showFilterDropdown: false,
       actions: [
         {
+          title: "Tất cả"
+        },
+        {
           title: "Tài khoản facebook"
         },
         {
@@ -82,6 +85,12 @@ export default {
         },
         {
           title: "Đăng bài tự động"
+        },
+        {
+          title: "Đăng ký"
+        },
+        {
+          title: "Số người đang hoạt động"
         }
       ]
     };
@@ -112,12 +121,12 @@ export default {
     border-radius: 10px;
     font-size: 0.875rem;
     height: 40px;
-    background: #27292d;
+    background: #fafafa;
     width: 20rem;
     > input[type="text"] {
       background-color: transparent;
       border: 0;
-      color: #fff;
+      color: #666;
       height: 100%;
       outline: none;
       width: calc(100% - 48px);
@@ -134,9 +143,9 @@ export default {
   .btn--filter {
     border-radius: 0.5rem;
     font-size: inherit;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 0.75rem;
+    // height: 40px;
+    // line-height: 40px;
+    padding: .525rem 0.625rem;
     position: relative;
     &:active,
     &:focus {
@@ -154,7 +163,11 @@ export default {
       width: auto;
       z-index: 999;
       &--item {
-        padding: 0 0.75rem;
+        padding: .525rem 0.625rem;
+        border-bottom: 1px solid #cccccc4f;
+        &:last-child {
+          border: 0;
+        }
       }
       .scroll--control {
         max-height: 200px;
