@@ -15,7 +15,12 @@
         <div class="main d_flex align_items_center mb_2">
           <div class="icon pr_2">
             <span>
-              <icon-base icon-name="Tài khoản Facebook" width="23" height="23" viewBox="0 0 24 24">
+              <icon-base
+                icon-name="Tài khoản Facebook"
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+              >
                 <icon-account />
               </icon-base>
             </span>
@@ -47,7 +52,7 @@
             </span>-->
           </div>
           <div class="content">
-            Đăng ký tài khoản với: 
+            Đăng ký tài khoản với:
             <div>Email: <b>congkhanh98.hp@gmail.com</b></div>
             <div>Phone: <b>0985096144</b></div>
           </div>

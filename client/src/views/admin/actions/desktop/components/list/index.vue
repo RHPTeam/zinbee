@@ -15,11 +15,11 @@
       </button>
       <div class="rc--time-info">
         {{
-        String(activeDay.getDate()).padStart(2, "0") +
-        " " +
-        monthName[activeDay.getMonth()] +
-        ", " +
-        activeDay.getFullYear()
+          String(activeDay.getDate()).padStart(2, "0") +
+            " " +
+            monthName[activeDay.getMonth()] +
+            ", " +
+            activeDay.getFullYear()
         }}
       </div>
       <button class="rc--btn-next" @click="getActiveDay(1)">
@@ -39,28 +39,46 @@
     <!-- Start: List -->
     <div class="list--items">
       <!-- Create -->
-      <app-create @showInfoEvent="isShowInfoCreateEvent = $event"/>
+      <app-create @showInfoEvent="isShowInfoCreateEvent = $event" />
       <!-- Update  -->
-      <app-update @showInfoPostgroup="isShowInfoPostgroup = $event" @showInfoUpdateEvent="isShowInfoUpdateEvent = $event"/>
+      <app-update
+        @showInfoPostgroup="isShowInfoPostgroup = $event"
+        @showInfoUpdateEvent="isShowInfoUpdateEvent = $event"
+      />
       <!-- Delete -->
-      <app-delete/>
+      <app-delete />
       <!-- Duplicate -->
-      <app-duplicate/>
+      <app-duplicate />
       <!-- Post now -->
-      <app-post-now @showPopupPostNow="isShowPopupPostNow = $event"/>
+      <app-post-now @showPopupPostNow="isShowPopupPostNow = $event" />
       <!-- signup -->
-      <app-sign-up/>
+      <app-sign-up />
       <!-- post success or fail -->
-      <app-post @showPopupInfoPostEvent="isShowPopupInfoPostEvent = $event"/>
-    <!-- Start: Transtion Popup -->
-    <transition name="popup">
-      <create-event v-if="isShowInfoCreateEvent === true" @closePopup="isShowInfoCreateEvent = $event"/>
-      <update-event v-if="isShowInfoUpdateEvent === true" @closePopup="isShowInfoUpdateEvent = $event"/>
-      <update-post-group v-if="isShowInfoPostgroup === true" @closePopup="isShowInfoPostgroup = $event"/>
-      <popup-post-now v-if="isShowPopupPostNow === true" @closePopup="isShowPopupPostNow = $event"/>
-      <popup-post v-if="isShowPopupInfoPostEvent === true" @closePopup="isShowPopupInfoPostEvent = $event"/>
-    </transition>
-    <!-- End: Transtion Popup -->
+      <app-post @showPopupInfoPostEvent="isShowPopupInfoPostEvent = $event" />
+      <!-- Start: Transtion Popup -->
+      <transition name="popup">
+        <create-event
+          v-if="isShowInfoCreateEvent === true"
+          @closePopup="isShowInfoCreateEvent = $event"
+        />
+        <update-event
+          v-if="isShowInfoUpdateEvent === true"
+          @closePopup="isShowInfoUpdateEvent = $event"
+        />
+        <update-post-group
+          v-if="isShowInfoPostgroup === true"
+          @closePopup="isShowInfoPostgroup = $event"
+        />
+        <popup-post-now
+          v-if="isShowPopupPostNow === true"
+          @closePopup="isShowPopupPostNow = $event"
+        />
+        <popup-post
+          v-if="isShowPopupInfoPostEvent === true"
+          @closePopup="isShowPopupInfoPostEvent = $event"
+        />
+      </transition>
+      <!-- End: Transtion Popup -->
     </div>
     <!-- End: List -->
   </div>
@@ -96,7 +114,7 @@ export default {
         "Tháng 10",
         "Tháng 11",
         "Tháng 12"
-      ],      
+      ],
       isShowInfoCreateEvent: false,
       isShowInfoUpdateEvent: false,
       isShowInfoPostgroup: false,

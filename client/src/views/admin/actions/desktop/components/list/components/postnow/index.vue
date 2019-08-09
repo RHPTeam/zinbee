@@ -12,10 +12,18 @@
         </div>
         <!-- End: Info User -->
         <!-- Start: Info Main -->
-        <div class="main d_flex align_items_center mb_2" @click="showPopupPostNow">
+        <div
+          class="main d_flex align_items_center mb_2"
+          @click="showPopupPostNow"
+        >
           <div class="icon pr_2">
             <span>
-              <icon-base icon-name="Tài khoản Facebook" width="23" height="23" viewBox="0 0 24 24">
+              <icon-base
+                icon-name="Tài khoản Facebook"
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+              >
                 <icon-account />
               </icon-base>
             </span>
@@ -74,7 +82,7 @@ export default {
     showPopupPostNow() {
       this.$emit("showPopupPostNow", true);
     }
-  },
+  }
 };
 </script>
 

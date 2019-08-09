@@ -15,7 +15,12 @@
         <div class="main d_flex align_items_center mb_2">
           <div class="icon pr_2">
             <span>
-              <icon-base icon-name="Chiến dịch" width="23" height="23" viewBox="0 0 24 24">
+              <icon-base
+                icon-name="Chiến dịch"
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+              >
                 <icon-broadcast />
               </icon-base>
             </span>
@@ -30,7 +35,10 @@
               </b>
             </div> -->
             <!-- Fail -->
-            <div class="item--success d_flex align_items_center" @click="showPopupInfoPostEvent">
+            <div
+              class="item--success d_flex align_items_center"
+              @click="showPopupInfoPostEvent"
+            >
               Đăng thất bại trong chiến dịch
               <b>Chiến dịch 1</b> với bài viết
               <b>

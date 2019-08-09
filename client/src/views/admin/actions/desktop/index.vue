@@ -13,7 +13,7 @@
     <app-list />
     <!-- End: List -->
     <!-- Start: Footer - Total -->
-    <app-footer/>
+    <app-footer />
     <!-- End: Footer - Total -->
     <!-- Start: Info -->
     <div class="info position_fixed">
@@ -28,7 +28,10 @@
           <icon-help />
         </icon-base>
       </div>
-      <div class="content position_absolute" :class="isShowInfo === true ? 'active' : ''">
+      <div
+        class="content position_absolute"
+        :class="isShowInfo === true ? 'active' : ''"
+      >
         <div class="items d_flex align_items_center">
           Thêm
           <span class="bg--color create"></span>
@@ -72,7 +75,7 @@ export default {
   data() {
     return {
       isShowInfo: false
-    }
+    };
   },
   methods: {
     closeInfo() {
@@ -81,7 +84,7 @@ export default {
     showInfo() {
       this.isShowInfo = true;
     }
-  },
+  }
 };
 </script>
 

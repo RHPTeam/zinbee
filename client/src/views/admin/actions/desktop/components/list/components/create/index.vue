@@ -15,7 +15,12 @@
         <div class="main d_flex align_items_center mb_2">
           <div class="icon pr_2">
             <span>
-              <icon-base icon-name="Tài khoản Facebook" width="23" height="23" viewBox="0 0 24 24">
+              <icon-base
+                icon-name="Tài khoản Facebook"
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+              >
                 <icon-account />
               </icon-base>
             </span>
@@ -47,7 +52,6 @@
             </span> -->
           </div>
           <div class="content">
-
             <!-- Start: Account Facebook -->
             <div class="account--fb">
               Thêm tài khoản
@@ -109,18 +113,15 @@
 
 <script>
 export default {
-  components: {
-    
-  },
+  components: {},
   data() {
-    return {
-    }
+    return {};
   },
   methods: {
     showInfoEvent() {
       this.$emit("showInfoEvent", true);
     }
-  },
+  }
 };
 </script>
 

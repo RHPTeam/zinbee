@@ -11,33 +11,33 @@
           <!-- Start: Body -->
           <div class="px_3 items--body mb_3">
             <div class="profile mb_2">
-              TCN: 
+              TCN:
               <span>
                 <!-- <img :src="item.userInfo.thumbSrc" alt="avatar" width="30px" height="30px" /> -->
-                <span class="pl_2">Name 1</span>
-              </span>,
+                <span class="pl_2">Name 1</span> </span
+              >,
               <span>
                 <!-- <img :src="item.userInfo.thumbSrc" alt="avatar" width="30px" height="30px" /> -->
                 <span class="pl_2">Name 2</span>
               </span>
             </div>
             <div class="page mb_2">
-              Fanpage: 
+              Fanpage:
               <span>
                 <!-- <img :src="item.userInfo.thumbSrc" alt="avatar" width="30px" height="30px" /> -->
-                <span class="pl_2">Page 1</span>
-              </span>,
+                <span class="pl_2">Page 1</span> </span
+              >,
               <span>
                 <!-- <img :src="item.userInfo.thumbSrc" alt="avatar" width="30px" height="30px" /> -->
                 <span class="pl_2">Page 2</span>
               </span>
             </div>
-            <div class="group">  
-              Group:             
+            <div class="group">
+              Group:
               <span>
                 <!-- <img :src="item.userInfo.thumbSrc" alt="avatar" width="30px" height="30px" /> -->
-                <span class="pl_2">Group 1</span>
-              </span>,
+                <span class="pl_2">Group 1</span> </span
+              >,
               <span>
                 <!-- <img :src="item.userInfo.thumbSrc" alt="avatar" width="30px" height="30px" /> -->
                 <span class="pl_2">Group 2</span>
@@ -46,7 +46,10 @@
           </div>
           <!-- End: Body -->
           <!-- Start: Footer -->
-          <div class="items--footer d_flex align_items_center" @click="closePopup">
+          <div
+            class="items--footer d_flex align_items_center"
+            @click="closePopup"
+          >
             <icon-base
               icon-name="đóng"
               width="18"
@@ -73,7 +76,7 @@ export default {
     closePopup() {
       this.$emit("closePopup", false);
     }
-  },
+  }
 };
 </script>
 

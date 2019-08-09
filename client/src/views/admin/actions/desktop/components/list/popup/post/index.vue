@@ -5,7 +5,9 @@
         <VuePerfectScrollbar class="scroll--postgroup">
           <!-- Start: Header -->
           <div class="px_3 items--header mt_3 text_center">
-            <div class="title">Đăng thành công thất bại bài viết <b>Bài viết 1</b></div>
+            <div class="title">
+              Đăng thành công thất bại bài viết <b>Bài viết 1</b>
+            </div>
           </div>
           <!-- Start: Header -->
           <!-- Start: Body -->
@@ -25,7 +27,10 @@
           </div>
           <!-- End: Body -->
           <!-- Start: Footer -->
-          <div class="items--footer d_flex align_items_center" @click="closePopup">
+          <div
+            class="items--footer d_flex align_items_center"
+            @click="closePopup"
+          >
             <icon-base
               icon-name="đóng"
               width="18"
@@ -52,7 +57,7 @@ export default {
     closePopup() {
       this.$emit("closePopup", false);
     }
-  },
+  }
 };
 </script>
 

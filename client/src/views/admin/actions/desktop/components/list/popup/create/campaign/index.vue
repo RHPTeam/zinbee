@@ -18,7 +18,8 @@
               Bài đăng:
               <div class="item pl_3">
                 <p class="mb_0">Danh mục: <b>Danh mục 1</b></p>
-                <p class="mb_0">Kho nội dung:
+                <p class="mb_0">
+                  Kho nội dung:
                   <span>
                     <b>Post 1</b>,
                     <b>Post 2</b>
@@ -36,7 +37,12 @@
             <div class="active">
               <div class="item d_flex align_items_center">
                 <div class="mr_auto">Hoạt động:</div>
-                <div class="ml_auto detail" @click="isShowDetail = !isShowDetail">Chi tiết</div>
+                <div
+                  class="ml_auto detail"
+                  @click="isShowDetail = !isShowDetail"
+                >
+                  Chi tiết
+                </div>
               </div>
               <div class="content--active" v-show="isShowDetail === true">
                 <div class="item d_flex align_items_center">
@@ -59,7 +65,10 @@
           </div>
           <!-- End: Body -->
           <!-- Start: Footer -->
-          <div class="items--footer d_flex align_items_center" @click="closePopup">
+          <div
+            class="items--footer d_flex align_items_center"
+            @click="closePopup"
+          >
             <icon-base
               icon-name="đóng"
               width="18"
@@ -85,13 +94,13 @@ export default {
   data() {
     return {
       isShowDetail: false
-    }
+    };
   },
   methods: {
     closePopup() {
       this.$emit("closePopup", false);
     }
-  },
+  }
 };
 </script>
 

@@ -41,7 +41,12 @@
               </icon-base>
             </span>-->
             <span>
-              <icon-base icon-name="Chiến dịch" width="23" height="23" viewBox="0 0 24 24">
+              <icon-base
+                icon-name="Chiến dịch"
+                width="23"
+                height="23"
+                viewBox="0 0 24 24"
+              >
                 <icon-broadcast />
               </icon-base>
             </span>

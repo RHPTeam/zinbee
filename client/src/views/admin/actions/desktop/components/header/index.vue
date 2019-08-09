@@ -145,7 +145,7 @@ export default {
     font-size: inherit;
     // height: 40px;
     // line-height: 40px;
-    padding: .525rem 0.625rem;
+    padding: 0.525rem 0.625rem;
     position: relative;
     &:active,
     &:focus {
@@ -163,7 +163,7 @@ export default {
       width: auto;
       z-index: 999;
       &--item {
-        padding: .525rem 0.625rem;
+        padding: 0.525rem 0.625rem;
         border-bottom: 1px solid #cccccc4f;
         &:last-child {
           border: 0;
