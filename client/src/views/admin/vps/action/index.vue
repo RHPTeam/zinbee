@@ -22,12 +22,12 @@
 
                 <div class="d_flex align_items_center justify_content_between">
                   <div class="square form_group">
-                    <label>Thông tin Domain</label>
+                    <label>Thông tin Domain Server</label>
                     <input
                       type="text"
                       placeholder="Nhập thông tin domain ..."
                       class="form_control"
-                      v-model="domainInfo.info.domain"
+                      v-model="domainInfo.info.domainServer"
                     />
                   </div>
 
@@ -38,6 +38,18 @@
                       placeholder="Nhập thông tin ip ..."
                       class="form_control"
                       v-model="domainInfo.info.ip"
+                    />
+                  </div>
+                </div>
+
+                <div class="d_flex align_items_center justify_content_between">
+                  <div class="form_group">
+                    <label>Thông tin Domain Client Request</label>
+                    <input
+                      type="text"
+                      placeholder="Nhập thông tin domain ..."
+                      class="form_control"
+                      v-model="domainInfo.info.domain"
                     />
                   </div>
                 </div>
