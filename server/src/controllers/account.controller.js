@@ -64,8 +64,6 @@ module.exports = {
       userInfo = await Account.findOne( { "_id": id } ),
       vpsContainServer = await Server.findOne( { "userAmount": userInfo._id } ).select( "info" ).lean();
 
-console.log( req.headers.authorization );
-
     userInfo.status = !userInfo.status;
     let data = await Account.findByIdAndUpdate( id, { "$set": { "status": userInfo.status } }, { "new": true } ).select( "-password" ),
       resUserSync = await changeStatusAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/sync/change-status`, req.body, req.headers.authorization );
@@ -290,7 +288,7 @@ console.log( req.headers.authorization );
     } );
 
     // Sync with nested server
-    isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup` : `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup`;
+    isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domainServer}:${optimalServer.info.serverPort}/api/v1/signup` : `${optimalServer.info.domainServer}:${optimalServer.info.serverPort}/api/v1/signup`;
     resSyncNestedServer = await signUpSync( isEnvironment, newUser.toObject() );
     if ( resSyncNestedServer.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Quá trình đăng ký xảy ra vấn đề!" } );
