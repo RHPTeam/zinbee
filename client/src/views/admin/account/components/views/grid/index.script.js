@@ -28,9 +28,6 @@ export default {
       return `${date}/${month}/${year}`;
     },
     getFirstLetter(string) {
-      if (string === undefined) {
-        return;
-      }
       return string.charAt(0).toUpperCase();
     }
   },

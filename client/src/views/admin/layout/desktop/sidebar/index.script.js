@@ -102,17 +102,6 @@ export default {
             viewBox: "0 0 26 26"
           },
           to: "agency_list"
-        },
-        {
-          text: "Quản lý hoạt dộng",
-          icon: {
-            iconName: "manage-agency",
-            tagName: "icon-account",
-            width: 24,
-            height: 24,
-            viewBox: "0 0 26 26"
-          },
-          to: "post_actions"
         }
       ]
     };

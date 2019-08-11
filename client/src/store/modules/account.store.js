@@ -87,7 +87,7 @@ const mutations = {
     state.code = payload;
   },
   getUsersFilter: (state, payload) => {
-    state.usersFilter = payload;
+    state.usersFilter.push(payload);
   },
   setFilter: (state, payload) => {
     state.statusFilter = payload;
