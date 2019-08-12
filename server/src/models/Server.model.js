@@ -5,7 +5,6 @@ const mongoose = require( "mongoose" ),
     "title": String,
     "info": {
       "domain": String,
-      "domainServer": String,
       "clientPort": Number,
       "serverPort": Number,
       "ip": String,
