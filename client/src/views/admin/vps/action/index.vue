@@ -18,7 +18,7 @@
               </div>
 
               <div class="info">
-                <div class="title py_2">Thông tin cấu hình</div>
+                <div class="title py_2">Thông tin cấu hình VPS</div>
 
                 <div class="d_flex align_items_center justify_content_between">
                   <div class="square form_group">
@@ -42,16 +42,14 @@
                   </div>
                 </div>
 
-                <div class="d_flex align_items_center justify_content_between">
-                  <div class="form_group">
-                    <label>Thông tin Domain Client Request</label>
-                    <input
-                      type="text"
-                      placeholder="Nhập thông tin domain ..."
-                      class="form_control"
-                      v-model="domainInfo.info.domain"
-                    />
-                  </div>
+                <div class="form_group">
+                  <label>Thông tin Domain Client Request</label>
+                  <input
+                    type="text"
+                    placeholder="Nhập thông tin domain ..."
+                    class="form_control"
+                    v-model="domainInfo.info.domain"
+                  />
                 </div>
 
                 <div class="d_flex align_items_center justify_content_between">
