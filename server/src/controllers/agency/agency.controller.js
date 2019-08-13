@@ -121,7 +121,7 @@ module.exports = {
     } );
 
     // Sync with nested server
-    isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup` : `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup`;
+    isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domainServer}:${optimalServer.info.serverPort}/api/v1/signup` : `${optimalServer.info.domainServer}:${optimalServer.info.serverPort}/api/v1/signup`;
     resSyncNestedServer = await signUpSync( isEnvironment, newUser.toObject() );
     if ( resSyncNestedServer.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Quá trình đăng ký xảy ra vấn đề!" } );
@@ -171,7 +171,7 @@ module.exports = {
     await findAgency.save();
     // Update expire date
     let data = await Account.findByIdAndUpdate( req.query._account, { "$set": { "status": 1, "expireDate": expireDate, "maxAccountFb": 2 } }, { "new": true } ).select( "-password" ),
-      resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, { "id": req.query._account, "expireDate": req.body.expireDate, "maxAccountFb": 2 }, req.headers.authorization );
+      resUserSync = await activeAccountSync( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/users/active`, { "id": req.query._account, "expireDate": req.body.expireDate, "maxAccountFb": 2 }, req.headers.authorization );
 
     if ( resUserSync.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );

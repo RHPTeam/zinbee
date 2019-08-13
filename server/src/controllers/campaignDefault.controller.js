@@ -100,7 +100,7 @@ module.exports = {
         "campaignExample": findCampaignExample,
         "facebookId": req.body.facebookId
       },
-      resCampaignSync = await syncCampaignExample( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/campaigns/sync/duplicate`, data, req.headers.authorization );
+      resCampaignSync = await syncCampaignExample( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/campaigns/sync/duplicate`, data, req.headers.authorization );
 
 
     if ( resCampaignSync.data.status !== "success" ) {

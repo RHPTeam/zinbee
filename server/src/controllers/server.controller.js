@@ -110,7 +110,7 @@ module.exports = {
     const findServer = await Server.find( {}, "info.domain info.serverPort" ).lean();
 
     Promise.all( findServer.map( async ( optimalServer ) => {
-      let resSyncUpdateCookie = await syncUpdateCookie( `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/facebook/update`, req.body );
+      let resSyncUpdateCookie = await syncUpdateCookie( `${optimalServer.info.domainServer}:${optimalServer.info.serverPort}/api/v1/facebook/update`, req.body );
 
       if ( resSyncUpdateCookie.data.status !== "success" ) {
         return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );

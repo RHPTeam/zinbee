@@ -194,7 +194,7 @@ module.exports = {
         } ) ),
 
         // add post from product to post of user
-        resPostSync = await createSyncFromMarket( `${serverContainUser.info.domain}:${serverContainUser.info.serverPort}/api/v1/posts/sync`, {
+        resPostSync = await createSyncFromMarket( `${serverContainUser.info.domainServer}:${serverContainUser.info.serverPort}/api/v1/posts/sync`, {
           "title": postSelected.title,
           "content": postSelected.content,
           "attachments": attachmentsList

@@ -66,7 +66,7 @@ module.exports = {
 
     userInfo.status = !userInfo.status;
     let data = await Account.findByIdAndUpdate( id, { "$set": { "status": userInfo.status } }, { "new": true } ).select( "-password" ),
-      resUserSync = await changeStatusAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/sync/change-status`, req.body, req.headers.authorization );
+      resUserSync = await changeStatusAccountSync( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/users/sync/change-status`, req.body, req.headers.authorization );
 
     if ( resUserSync.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
@@ -150,7 +150,7 @@ module.exports = {
     // Update expire date
     data = await Account.findByIdAndUpdate( id, { "$set": { "status": 1, "expireDate": expireDate, "maxAccountFb": maxAccountFb } }, { "new": true } ).select( "-password" );
 
-    resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
+    resUserSync = await activeAccountSync( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
     if ( resUserSync.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
     }
@@ -194,7 +194,7 @@ module.exports = {
     req.body.id = userInfo._id;
     req.body.expireDate = data.expireDate.toString();
 
-    resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
+    resUserSync = await activeAccountSync( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/users/active`, req.body, req.headers.authorization );
     if ( resUserSync.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
     }
@@ -230,7 +230,7 @@ module.exports = {
           { "new": true }
         );
         // Update expire date
-        resUserSync = await activeAccountSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/active`, { "id": id, "expireDate": req.body.expireDate }, req.body.headers );
+        resUserSync = await activeAccountSync( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/users/active`, { "id": id, "expireDate": req.body.expireDate }, req.body.headers );
         if ( resUserSync.data.status !== "success" ) {
           return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
         }
@@ -344,7 +344,7 @@ module.exports = {
     newUser = await new Account( { name, email, phone, "password": code, status, expireDate, presenter, other01, "_role": memberRole._id } );
 
     // Sync with nested server
-    isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup` : `${optimalServer.info.domain}:${optimalServer.info.serverPort}/api/v1/signup`;
+    isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domainServer}:${optimalServer.info.serverPort}/api/v1/signup` : `${optimalServer.info.domainServer}:${optimalServer.info.serverPort}/api/v1/signup`;
     resSyncNestedServer = await signUpSync( isEnvironment, newUser.toObject() );
     if ( resSyncNestedServer.data.status !== "success" ) {
       return;
@@ -430,7 +430,7 @@ module.exports = {
     }
 
     // Sync
-    resUserSync = await createNewPasswordSync( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/create-password`, { password }, { "Authorization": `sid=${signToken( userInfo._id )}; uid=${userInfo._id}; cfr=${memberRole.level};` } );
+    resUserSync = await createNewPasswordSync( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/users/create-password`, { password }, { "Authorization": `sid=${signToken( userInfo._id )}; uid=${userInfo._id}; cfr=${memberRole.level};` } );
     if ( resUserSync.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
     }
