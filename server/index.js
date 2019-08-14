@@ -1,3 +1,5 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const bodyParser = require( "body-parser" );
 const fs = require( "fs" );
 const cors = require( "cors" );
