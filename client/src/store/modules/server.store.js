@@ -62,7 +62,6 @@ const actions = {
     commit("setInfoDomainDefault", {
       title: "",
       info: {
-        domainServer: "",
         domain: "",
         ip: "",
         cpu: "",

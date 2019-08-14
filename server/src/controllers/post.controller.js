@@ -157,7 +157,7 @@ module.exports = {
     // Check key word exists in db of acc
     if ( keywordExist( convertUnicode( req.query.keyword.toLowerCase() ) ) === false ) {
       await Account.findByIdAndUpdate( { "_id": req.uid }, { "$push": { "keywordSearch": { "content": req.query.keyword, "time": Date.now() } } }, { "new": true } ).select( "-password" );
-      resKeywordSync = await syncKeyWordSearch( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/search`, { "content": req.query.keyword, "time": Date.now() }, req.headers.authorization );
+      resKeywordSync = await syncKeyWordSearch( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/users/search`, { "content": req.query.keyword, "time": Date.now() }, req.headers.authorization );
       if ( resKeywordSync.data.status !== "success" ) {
         return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
       }
@@ -226,7 +226,7 @@ module.exports = {
     // Check key word exists in db of acc
     if ( keywordExist( convertUnicode( req.query.keyword.toLowerCase() ) ) === false ) {
       await Account.findByIdAndUpdate( { "_id": req.uid }, { "$push": { "keywordSearch": { "content": req.query.keyword, "time": Date.now() } } }, { "new": true } ).select( "-password" );
-      resKeywordSync = await syncKeyWordSearch( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/users/search`, { "content": req.query.keyword, "time": Date.now() }, req.headers.authorization );
+      resKeywordSync = await syncKeyWordSearch( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/users/search`, { "content": req.query.keyword, "time": Date.now() }, req.headers.authorization );
       if ( resKeywordSync.data.status !== "success" ) {
         return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
       }
@@ -333,7 +333,7 @@ module.exports = {
         "postList": resData,
         "postId": postId
       },
-      resFolderSync = await syncFolderExample( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/posts/sync/duplicate/folder`, data, req.headers.authorization );
+      resFolderSync = await syncFolderExample( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/posts/sync/duplicate/folder`, data, req.headers.authorization );
 
     if ( resFolderSync.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Máy chủ bạn đang hoạt động có vấn đề! Vui lòng liên hệ với bộ phận CSKH." } );
@@ -362,7 +362,7 @@ module.exports = {
         "attachments": attachments,
         "_account": req.uid
       },
-      resPostSync = await syncPostFolderExample( `${vpsContainServer.info.domain}:${vpsContainServer.info.serverPort}/api/v1/posts/sync/duplicate`, data, req.headers.authorization );
+      resPostSync = await syncPostFolderExample( `${vpsContainServer.info.domainServer}:${vpsContainServer.info.serverPort}/api/v1/posts/sync/duplicate`, data, req.headers.authorization );
 
 
     if ( resPostSync.data.status !== "success" ) {
