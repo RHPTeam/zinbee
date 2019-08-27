@@ -97,6 +97,7 @@ const actions = {
       commit("blog_help_request");
       const result = await BlogHelpServices.getBlogById(payload);
       commit("setBlog", result.data.data);
+      commit("setHelpMegaMenu", result.data.data.megamenu);
       commit("blog_help_success");
     } catch (e) {
       if (e.response.status === 500) {
@@ -110,9 +111,10 @@ const actions = {
       commit("blog_help_request");
       const result = await BlogHelpServices.getBlogBySlug(payload);
       commit("setBlog", result.data.data);
+      commit("setHelpMegaMenu", result.data.data.megamenu);
       commit("blog_help_success");
     } catch (e) {
-      if (e.response.status === 500) {
+      if (e.response && e.response.status === 500) {
         commit("blog_help_error", 500);
       }
     }

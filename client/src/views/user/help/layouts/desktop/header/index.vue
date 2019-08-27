@@ -63,7 +63,6 @@
         </div>
         <!-- End back facebook   -->
       </div>
-
       <!-- Start: Navigation help-->
       <div class="wrap--nav">
         <nav>
@@ -88,9 +87,17 @@
                   class="dropdown--menu-item"
                   v-for="(categoryChild, cindex) in category.children"
                   :key="cindex"
-                  @click="showInfoCategory(categoryChild, category)"
                 >
-                  <a>{{ categoryChild.title }}</a>
+                  <router-link
+                    :to="{
+                      name: 'help_detail',
+                      params: { id: categoryChild._id },
+                      query: { type: 'hc_global_nav' }
+                    }"
+                    @click.native="showCurrentHelpCategory(categoryChild._id)"
+                  >
+                    {{ categoryChild.title }}
+                  </router-link>
                 </li>
               </ul>
             </li>
@@ -128,7 +135,7 @@ export default {
     return {
       hrefDefault: "mailto:khangle0608@gmail.com",
       keyword: "",
-      sizeDefault: 25,
+      sizeDefault: 100,
       pageDefault: 1
     };
   },
@@ -138,31 +145,37 @@ export default {
     }
   },
   async created() {
-    // let helpCategories = this.$store.getters.allHelpCategoriesChild;
-    // console.log(helpCategories);
-    // if (helpCategories && helpCategories.length === 0) {
-    //   await this.$store.dispatch("getAllCategoriesChildren");
-    // }
+    const keyword = this.$route.query.key,
+      dataSender = {
+        keyword: keyword,
+        size: this.sizeDefault,
+        page: this.pageDefault
+      };
+
+    if (keyword) {
+      await this.$store.dispatch("searchBlog", dataSender);
+      await this.$store.dispatch("setKeySearch", this.keyword);
+      this.$router.push({
+        name: "help_search",
+        query: { key: keyword }
+      });
+    }
+    this.keyword = keyword;
   },
   methods: {
     goToHelpHome() {
       this.$router.push({ name: "help" });
     },
-    async showInfoCategory(val, cate) {
-      await localStorage.setItem("parentId", cate._id);
-      await this.$store.dispatch("setHelpDefault", {
-        right: 1,
-        left: 1
+    async showCurrentHelpCategory(categoryId) {
+      await this.$store.dispatch("getCurrentHelpCategory", {
+        id: categoryId,
+        type: "hc_global_nav"
       });
-      await this.$store.dispatch("getHelpCategoryBySlug", val.slug);
-      await this.$store.dispatch("getHelpCategoryParent", {
-        parentId: cate._id
-      });
-      await this.$store.dispatch("setHelpCategoryChildrenLevel", val);
-      this.$router.replace({
-        name: "help_detail_category",
-        params: { parentId: cate.slug, cateId: val.slug }
-      });
+      if (this.$store.getters.currentHelpCategory._blogHelp.length === 0) {
+        await this.$store.dispatch("setHelpDetailViewActive", 1);
+      } else {
+        await this.$store.dispatch("setHelpDetailViewActive", 2);
+      }
     },
     openEmail() {
       window.location.assign("mailto: kythuatchatbee@gmail.com");
@@ -176,7 +189,7 @@ export default {
       await this.$store.dispatch("searchBlog", dataSender);
       await this.$store.dispatch("setKeySearch", this.keyword);
       this.$router.push({
-        name: "help_result_search",
+        name: "help_search",
         query: { key: this.keyword }
       });
     }

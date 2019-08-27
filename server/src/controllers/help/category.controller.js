@@ -32,15 +32,49 @@ let getNestedChildren = ( arr, parent ) => {
 
 module.exports = {
   "index": async ( req, res ) => {
-
     let data;
 
-    if ( req.query.slug || req.query._id ) {
-      data = await HelpCategory.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( "_blogHelp" ).lean();
+    if ( req.query._id ) {
+      data = await HelpCategory.findOne( { "_id": req.query._id } ).populate( "_blogHelp" ).lean();
+
+      console.log( 1 );
 
       if ( data.parent && data.parent.length > 0 ) {
         data.parent = await HelpCategory.findOne( { "_id": data.parent } );
       }
+
+      // check popular blog
+      const childCategoryInfo = await HelpCategory.find( { "parent": data._id } ).populate( "_blogHelp" ).lean();
+
+      let tempBlogList = [];
+
+      await Promise.all( childCategoryInfo.map( ( category ) => {
+        tempBlogList = tempBlogList.concat( category._blogHelp );
+      } ) );
+
+      data.popularBlog = tempBlogList.splice( 0, 4 );
+
+      // check related category
+      data.relatedCategory = ( await HelpCategory.find( { "level": data.level === null ? 0 : data.level, "parent": data.parent._id } ).limit( 3 ).lean() ).filter( ( category ) => category._id.toString() !== data._id.toString() );
+
+      // eslint-disable-next-line one-var
+      const categoryList = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
+
+      data.megamenu = getNestedChildren( categoryList, "" );
+
+      // eslint-disable-next-line one-var
+      let megamenuList = [];
+
+      await Promise.all( getNestedChildren( categoryList, "" ).map( ( category ) => {
+        if ( category.children ) {
+          megamenuList = megamenuList.concat( category.children );
+        }
+      } ) );
+
+      data.megamenu = megamenuList;
+
+      // Handle children
+      data.children = ( await HelpCategory.find( { "parent": data._id } ).lean() ).length > 0 ? 1 : 0;
     } else if ( req.query._type === "rs" ) {
       data = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
       data = getNestedChildren( data, "" );
@@ -86,7 +120,7 @@ module.exports = {
       "icon": req.body.icon,
       "level": req.body.level,
       "parent": parent !== undefined && parent !== "" ? parent : "",
-      "_blogHelp": req.body._blogHelp ? req.body._blogHelp : [],
+      "_blogHelp": req.body._blogHelp,
       "_account": req.uid
     } );
 

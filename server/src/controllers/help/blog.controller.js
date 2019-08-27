@@ -10,6 +10,23 @@
 const BlogHelp = require( "../../models/help/Blog.model" );
 const HelpCategory = require( "../../models/help/Category.model" );
 
+let getNestedChildren = ( arr, parent ) => {
+  if ( arr.length > 0 ) {
+    const out = [];
+
+    for ( let i in arr ) {
+      if ( arr[ i ].parent.toString() === parent.toString() ) {
+        let children = getNestedChildren( arr, arr[ i ]._id );
+
+        if ( children.length ) {
+          arr[ i ].children = children;
+        }
+        out.push( arr[ i ] );
+      }
+    }
+    return out;
+  }
+};
 
 const jsonResponse = require( "../../configs/response" );
 
@@ -21,21 +38,30 @@ module.exports = {
       data = await BlogHelp.findOne( { "$or": [ { "slug": req.query.slug }, { "_id": req.query._id } ] } ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "popularBlog", "select": "_id title slug" } ).populate( { "path": "popularCategory", "select": "_id title slug" } ).lean();
 
       // Handle mega menu contain blog
-      const categoryContainBlog = await HelpCategory.findOne( { "_blogHelp": data._id } ).lean();
+      const categoryContainBlog = await HelpCategory.findOne( { "_blogHelp": data._id } ).populate( "_blogHelp" ).lean();
+
+      data.category = categoryContainBlog._id;
+      data.categoryLevel = categoryContainBlog.level;
+      data.categoryParent = await HelpCategory.findOne( { "_id": categoryContainBlog.parent } ).lean();
 
       if ( categoryContainBlog ) {
-        data.megamenu = await HelpCategory.find( { "level": categoryContainBlog.level === null ? 0 : categoryContainBlog.level, "parent": categoryContainBlog.parent }, "_id title slug" ).lean();
-        data.megamenu = await Promise.all( data.megamenu.map( async ( menu ) => {
-          if ( menu._id.toString() === categoryContainBlog._id.toString() ) {
-            const childrenMenu = await HelpCategory.find( { "parent": categoryContainBlog._id }, "_id title slug" );
+        const categoryList = await HelpCategory.find( {} ).populate( "_blogHelp" ).lean();
 
-            if ( childrenMenu.length > 0 ) {
-              menu.children = childrenMenu;
-            }
+        data.megamenu = getNestedChildren( categoryList, "" );
+
+        let megamenuList = [];
+
+        await Promise.all( getNestedChildren( categoryList, "" ).map( ( category ) => {
+          if ( category.children ) {
+            megamenuList = megamenuList.concat( category.children );
           }
-          return menu;
         } ) );
+
+        data.megamenu = megamenuList;
       }
+
+      // Handle related blog
+      data.relatedBlog = categoryContainBlog._blogHelp.slice( 0, 4 ).filter( ( element ) => element._id.toString() !== data._id.toString() );
     } else if ( Object.entries( req.query ).length === 0 && req.query.constructor === Object ) {
       data = await BlogHelp.find( {} ).populate( { "path": "_account", "select": "_id name" } ).populate( { "path": "popularBlog", "select": "_id title slug" } ).populate( { "path": "popularCategory", "select": "_id title slug" } ).lean();
     }
@@ -53,15 +79,12 @@ module.exports = {
     }
 
     // Create
-    const { label, title, slug, icon, content, popularBlog, popularCategory } = req.body,
+    const { title, slug, content, relatedBlog } = req.body,
       newBlog = await new BlogHelp( {
-        "label": label,
         "title": title,
         "slug": slug,
-        "icon": icon,
         "content": content,
-        "popularBlog": popularBlog,
-        "popularCategory": popularCategory,
+        "relatedBlog": relatedBlog,
         "_account": req.uid
       } );
 
@@ -78,7 +101,7 @@ module.exports = {
       return res.status( 403 ).json( { "status": "fail", "data": { "content": "Nội dung blog không được bỏ trống!" } } );
     }
 
-    const { label, title, slug, icon, content, popularBlog, popularCategory } = req.body,
+    const { title, slug, content, relatedBlog } = req.body,
       blogInfo = await BlogHelp.findOne( { "_id": req.query._id } ).lean();
 
     // Check error
@@ -94,7 +117,7 @@ module.exports = {
       req.body.vote = req.body.vote.concat( blogInfo.vote );
     }
 
-    res.status( 200 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._id, { "$set": { "label": label, "title": title, "slug": slug, "icon": icon, "content": content, "vote": req.body.vote, "popularBlog": popularBlog, "popularCategory": popularCategory, "_account": req.uid } }, { "new": true } ) ) );
+    res.status( 200 ).json( jsonResponse( "success", await BlogHelp.findByIdAndUpdate( req.query._id, { "$set": { "title": title, "slug": slug, "content": content, "vote": req.body.vote, "relatedBlog": relatedBlog, "_account": req.uid } }, { "new": true } ) ) );
   },
   "delete": async ( req, res ) => {
     const blogInfo = await BlogHelp.findOne( { "_id": req.query._id } ),

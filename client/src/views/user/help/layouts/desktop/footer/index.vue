@@ -1,5 +1,5 @@
 <template>
-  <div class="ct wrap--footer py_4">
+  <div class="ct wrap--footer">
     <div class="m_0 text_center content">
       <div class="d_inline_flex">
         <div class="copyright d_flex align_items_center mr_3">
@@ -35,6 +35,7 @@
 .wrap--footer {
   color: #666666;
   font-size: 0.875rem;
+  padding: 1.75rem 0 1rem 0;
   .language {
     color: #666;
     cursor: pointer;

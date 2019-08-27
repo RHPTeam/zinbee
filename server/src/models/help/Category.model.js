@@ -16,6 +16,14 @@ const mongoose = require( "mongoose" ),
       "type": Schema.Types.ObjectId,
       "ref": "BlogHelp"
     } ],
+    "popularBlog": [ {
+      "type": Schema.Types.ObjectId,
+      "ref": "BlogHelp"
+    } ],
+    "relatedCategory": [ {
+      "type": Schema.Types.ObjectId,
+      "ref": "HelpCategory"
+    } ],
     "_account": {
       "type": Schema.Types.ObjectId,
       "ref": "Account"
