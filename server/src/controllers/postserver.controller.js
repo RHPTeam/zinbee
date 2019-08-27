@@ -6,7 +6,7 @@
  * date to:
  * team: BE-RHP
  */
-const PostServer = require( "../models/Server.model" );
+const PostServer = require( "../models/PostServer.model" );
 const jsonResponse = require( "../configs/response" );
 
 module.exports = {

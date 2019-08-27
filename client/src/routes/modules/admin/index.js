@@ -33,8 +33,19 @@ const generalRouter = {
     },
     {
       path: "vps",
-      name: "admin_server",
-      component: require("@/views/admin/vps").default
+      component: require("@/views/admin/vps").default,
+      children: [
+        {
+          path: "",
+          name: "admin_server",
+          component: require("@/views/admin/vps/components/vps").default
+        },
+        {
+          path: "post-server",
+          name: "post_server",
+          component: require("@/views/admin/vps/components/postserver").default
+        }
+      ]
     },
     {
       path: "help",
