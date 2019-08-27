@@ -28,6 +28,7 @@ router.use( "/market/p/posts", require( "./modules/market/products/post.route" )
 
 // Server Route
 router.use( "/vps", require( "./modules/server.route" ) );
+router.use( "/server/post", require( "./modules/postserver.route" ) );
 
 // Backup Route
 router.use( "/backup", auth, permission, require( "./modules/backup/marketCategoryDefault.route" ) );
