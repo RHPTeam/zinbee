@@ -19,14 +19,22 @@
             <div class="flex-row" role="columnheader">id server</div>
             <div class="flex-row" role="columnheader">Hành động</div>
           </div>
-          <div v-if="!postServers">Không có dữ liệu</div>
+          <div
+            v-if="this.$store.getters.postSvStatus === 'loading'"
+            class="d_flex align_items_center justify_content_center"
+          >
+            <loading-component />
+          </div>
           <div v-else>
-            <item-server
-              v-for="(item, index) in postServers"
-              :key="index"
-              :item="item"
-              @openPopupEditPostServer="openPopupPostServer($event)"
-            />
+            <div v-if="!postServers">Không có dữ liệu</div>
+            <div v-else>
+              <item-server
+                v-for="(item, index) in postServers"
+                :key="index"
+                :item="item"
+                @openPopupEditPostServer="openPopupPostServer($event)"
+              />
+            </div>
           </div>
         </div>
       </div>
