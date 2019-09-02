@@ -124,7 +124,7 @@
     </div>
     <div class="copy">
       <div class="ct m_auto d_flex align_items_center content--copy">
-        <div class="title">Copyright © 2018 zinbee.vn</div>
+        <div class="title">Copyright © 2019 zinbee.vn</div>
         <div class="ml_auto d_flex contact">
           <!-- <div class="items">Chính sách bảo mật</div>
           <div class="items">Giới thiệu</div>

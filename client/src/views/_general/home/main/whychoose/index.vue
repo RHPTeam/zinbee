@@ -89,7 +89,7 @@ export default {
   .marketing--section {
     .marketing--section-image {
       background-size: 300px 130px;
-      height: 80px;
+      height: 150px;
       background-repeat: no-repeat;
     }
     .title {

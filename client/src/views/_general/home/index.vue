@@ -44,10 +44,12 @@ export default {
   },
   methods: {
     scrollHandle(evt) {
-      if (evt.srcElement.scrollTop === 0) {
-        this.$store.dispatch("changeBackgroundHeader", 1);
-      } else {
-        this.$store.dispatch("changeBackgroundHeader", 2);
+      if ( evt.path[0].childNodes[0].className === "modal--content" ) {        
+        if (evt.srcElement.scrollTop === 0) {
+          this.$store.dispatch("changeBackgroundHeader", 1);
+        } else {
+          this.$store.dispatch("changeBackgroundHeader", 2);
+        }
       }
     }
   },
