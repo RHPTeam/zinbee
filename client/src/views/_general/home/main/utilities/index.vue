@@ -6,7 +6,6 @@
     <div class="d_none d_md_block">
       <div class="content--options position_relative pt_4">
         <div class="px_3 slide--image">
-          <!-- <transition name="slide-fade" mode="out-in"> -->
           <div class="slider--desktop">
             <div class="d_flex align_items_center display items">
               <div class="left text">
@@ -24,8 +23,6 @@
               ></div>
             </div>
           </div>
-          <!-- </transition> -->
-          <!-- <transition name="slide-fade" mode="out-in"> -->
           <div class="slider--desktop">
             <div class="content d_flex align_items_center items">
               <div class="left text">
@@ -43,8 +40,6 @@
               ></div>
             </div>
           </div>
-          <!-- </transition> -->
-          <!-- <transition name="slide-fade" mode="out-in"> -->
           <div class="slider--desktop">
             <div class="automation d_flex align_items_center items">
               <div class="right text">
@@ -63,8 +58,6 @@
               ></div>
             </div>
           </div>
-          <!-- </transition>
-          <transition name="slide-fade" mode="out-in"> -->
           <div class="slider--desktop">
             <div class="function d_flex align_items_center items">
               <div class="left text">
@@ -82,7 +75,6 @@
               ></div>
             </div>
           </div>
-          <!-- </transition > -->
         </div>
         <div class="action text_center">
           <ul>
@@ -98,11 +90,10 @@
           <span
             class="prev action"
             @click="plusDivs(-1)"
-            v-if="currentIndexInfo !== 0"
           >
             <icon-base
               class="icon--arrow-left"
-              icon-name="Prev"
+              icon-name="Trước"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -113,11 +104,10 @@
           <span
             class="next ml_auto action"
             @click="plusDivs(+1)"
-            v-if="currentIndexInfo !== 3"
           >
             <icon-base
               class="icon--arrow-left"
-              icon-name="Next"
+              icon-name="Sau"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -196,7 +186,6 @@
 export default {
   data() {
     return {
-      currentIndexInfo: 1,
       slideIndex: 1,
       // images of Utilities
       sliderUtilities: [
@@ -208,20 +197,6 @@ export default {
     };
   },
   methods: {
-    nextInfo() {
-      if (this.currentIndexInfo === 4) {
-        this.currentIndexInfo = 4;
-      } else {
-        this.currentIndexInfo++;
-      }
-    },
-    prevInfo() {
-      if (this.currentIndexInfo === 1) {
-        this.currentIndexInfo = 1;
-      } else {
-        this.currentIndexInfo--;
-      }
-    },
     currentDiv(n) {
       this.showDivs((this.slideIndex = n));
     },

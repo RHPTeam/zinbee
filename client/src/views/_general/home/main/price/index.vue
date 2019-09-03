@@ -1037,7 +1037,7 @@
         }
         &--main {
           border-left: solid 1px #e8e9eb;
-          padding: 0.375rem 0;
+          padding: 0.6rem 0;
           flex: 1;
           &.function {
             border-left: 0;
