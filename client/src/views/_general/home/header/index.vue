@@ -59,10 +59,7 @@
               </icon-base>
             </div>
             <transition name="slide-fade">
-              <ul
-                class="nav--menu-res"
-                v-if="menu === true"
-              >
+              <ul class="nav--menu-res" v-if="menu === true">
                 <span class="close--menu" @click="closeMenu">
                   <icon-base
                     class="icon--close"
@@ -83,7 +80,6 @@
             </transition>
           </div>
           <!-- End: MENU - 980px -->
-
         </div>
         <!-- /.container-fluid -->
       </nav>
