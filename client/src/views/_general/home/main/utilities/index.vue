@@ -87,10 +87,7 @@
         <div
           class="position_absolute action--slider-info d_flex align_items_center"
         >
-          <span
-            class="prev action"
-            @click="plusDivs(-1)"
-          >
+          <span class="prev action" @click="plusDivs(-1)">
             <icon-base
               class="icon--arrow-left"
               icon-name="Trước"
@@ -101,10 +98,7 @@
               <icon-arrow-left></icon-arrow-left>
             </icon-base>
           </span>
-          <span
-            class="next ml_auto action"
-            @click="plusDivs(+1)"
-          >
+          <span class="next ml_auto action" @click="plusDivs(+1)">
             <icon-base
               class="icon--arrow-left"
               icon-name="Sau"
