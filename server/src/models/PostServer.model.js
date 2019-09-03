@@ -18,6 +18,6 @@ PostServerSchema.pre( "save", function( next ) {
 } );
 
 /* eslint-disable one-var */
-const PostServer = mongoose.model( "Server", PostServerSchema );
+const PostServer = mongoose.model( "PostServer", PostServerSchema );
 
 module.exports = PostServer;

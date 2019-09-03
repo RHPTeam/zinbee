@@ -7,6 +7,7 @@ import CampaignsDefault from "./modules/campaign.store";
 import DashBoard from "./modules/dashboard.store";
 import ServerStore from "./modules/server.store";
 import PostLibraries from "./modules/post.store";
+import PostServer from "./modules/postserver.store";
 import HelpBlogStore from "./modules/user/help/blog.store";
 import HelpCategoriesStore from "./modules/user/help/category.store";
 import HelpStore from "./modules/help.store";
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     DashBoard,
     ServerStore,
     PostLibraries,
+    PostServer,
     HelpBlogStore,
     HelpCategoriesStore,
     HelpStore,
