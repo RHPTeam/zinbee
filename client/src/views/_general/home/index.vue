@@ -25,7 +25,7 @@ import AppHeader from "./header";
 import AppMain from "./main";
 import AppFooter from "./footer";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
-import CookieFunction from "@/utils/functions/cookie";
+// import CookieFunction from "@/utils/functions/cookie";
 
 export default {
   components: {
@@ -54,15 +54,15 @@ export default {
     }
   },
   async created() {
-    if (window.location.hostname === "zinbee.vn") {
-      return false;
-    } else {
-      // Request to server which get info of agency
-      await this.$store.dispatch("getAgencyInfo", {
-        domain: window.location.hostname
-      });
-      CookieFunction.setCookie("aid", this.agencyInfo.agency._id);
-    }
+    // if (window.location.hostname === "zinbee.vn") {
+    //   return false;
+    // } else {
+    //   // Request to server which get info of agency
+    //   await this.$store.dispatch("getAgencyInfo", {
+    //     domain: window.location.hostname
+    //   });
+    //   CookieFunction.setCookie("aid", this.agencyInfo.agency._id);
+    // }
   }
 };
 </script>

@@ -28,12 +28,14 @@
           <ul>
             <li>Địa Chỉ: Toàn Nhà Capital, 102 Trường Chinh, Hà Nội</li>
             <li>
-              Hotline: <span v-if="agencyInfo" v-text="agencyInfo.phone"></span
-              ><span v-else>(+84) 856449666 - (+84) 799449666</span>
+              Hotline:
+              <!-- <span v-if="agencyInfo" v-text="agencyInfo.phone"></span> -->
+              <span>(+84) 856449666 - (+84) 799449666</span>
             </li>
             <li>
-              Email: <span v-if="agencyInfo" v-text="agencyInfo.email"></span
-              ><span v-else>Cskh@Zinbee.Vn</span>
+              Email:
+              <!-- <span v-if="agencyInfo" v-text="agencyInfo.email"></span> -->
+              <span>Cskh@Zinbee.Vn</span>
             </li>
           </ul>
         </div>

@@ -300,6 +300,7 @@ export default {
         background-position: center;
         flex: 1;
         height: 100%;
+        width: 100%;
         &.text {
           padding: 0 1rem;
         }
