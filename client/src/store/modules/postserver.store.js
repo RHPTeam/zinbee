@@ -83,6 +83,7 @@ const actions = {
   setPostServerDefault: async ({ commit }) => {
     commit("setPostServerDefault", {
       name: "",
+      server: "",
       status: true,
       uid: ""
     });
