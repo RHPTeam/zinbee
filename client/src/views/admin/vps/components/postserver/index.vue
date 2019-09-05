@@ -19,34 +19,26 @@
             <div class="flex-row" role="columnheader">id server</div>
             <div class="flex-row" role="columnheader">Hành động</div>
           </div>
-          <div
-            v-if="this.$store.getters.postSvStatus === 'loading'"
-            class="d_flex align_items_center justify_content_center"
-          >
-            <loading-component />
-          </div>
+          <div v-if="!postServers">Không có dữ liệu</div>
           <div v-else>
-            <div v-if="!postServers">Không có dữ liệu</div>
-            <div v-else>
-              <item-server
-                v-for="(item, index) in postServers"
-                :key="index"
-                :item="item"
-                @openPopupEditPostServer="openPopupPostServer($event)"
-              />
-            </div>
+            <item-server
+              v-for="(item, index) in postServers"
+              :key="index"
+              :item="item"
+              @openPopupEditPostServer="isShowCreateNewPostServer = $event"
+            />
           </div>
         </div>
       </div>
     </div>
     <!-- END: CONTENT POST SERVER -->
 
-    <!-- START: CREATE NEW POST SERVER -->
+    <!-- START: CREATE NEW POST AND EDIT INFORMATION SERVER -->
     <create-new-server
       v-if="isShowCreateNewPostServer === true"
       @closePopUp="isShowCreateNewPostServer = $event"
     />
-    <!-- END: CREATE NEW POST SERVER -->
+    <!-- END: CREATE NEW POST AND EDIT INFORMATION SERVER -->
   </div>
 </template>
 <script>
@@ -75,9 +67,6 @@ export default {
       this.$store.dispatch("setPostServerDefault");
       this.$store.dispatch("setVariableControlButton", 0);
       this.isShowCreateNewPostServer = true;
-    },
-    openPopupPostServer(val) {
-      this.isShowCreateNewPostServer = val;
     }
   }
 };
