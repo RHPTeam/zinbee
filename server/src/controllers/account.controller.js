@@ -289,6 +289,8 @@ module.exports = {
 
     // Sync with nested server
     isEnvironment = process.env.APP_ENV === "production" ? `${optimalServer.info.domainServer}:${optimalServer.info.serverPort}/api/v1/signup` : `${optimalServer.info.domainServer}:${optimalServer.info.serverPort}/api/v1/signup`;
+    console.log(1);
+    console.log(isEnvironment);
     resSyncNestedServer = await signUpSync( isEnvironment, newUser.toObject() );
     if ( resSyncNestedServer.data.status !== "success" ) {
       return res.status( 404 ).json( { "status": "error", "message": "Quá trình đăng ký xảy ra vấn đề!" } );

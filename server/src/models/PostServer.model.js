@@ -3,6 +3,7 @@ const mongoose = require( "mongoose" ),
 
   PostServerSchema = new Schema( {
     "name": String,
+    "server": String,
     "status": Boolean,
     "uid": String,
     "created_at": {
