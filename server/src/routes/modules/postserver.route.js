@@ -18,5 +18,6 @@ router
   .delete( auth, permission, PostServerController.delete );
 
 router.route( "/:uid/status" ).post( PostServerController.changeStatus );
+router.route( "/online" ).post( PostServerController.getServerOnline );
 
 module.exports = router;
