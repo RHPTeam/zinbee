@@ -86,7 +86,7 @@
             <span @click="prev" class="prev action" v-if="currentIndex !== 1">
               <icon-base
                 class="icon--arrow-left"
-                icon-name="Prev"
+                icon-name="Trước"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -101,7 +101,7 @@
             >
               <icon-base
                 class="icon--arrow-left"
-                icon-name="Next"
+                icon-name="Sau"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"

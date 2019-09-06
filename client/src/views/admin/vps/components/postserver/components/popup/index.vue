@@ -17,6 +17,16 @@
               </div>
 
               <div class="form_group">
+                <label>Domain server áp dụng</label>
+                <input
+                  type="text"
+                  class="form_control"
+                  placeholder="Nhập tên post server mới"
+                  v-model="postServer.server"
+                />
+              </div>
+
+              <div class="form_group">
                 <label>Trạng thái hoạt động</label>
                 <select
                   class="form_control"

@@ -31,22 +31,8 @@
 
           <!-- Start: Navbar -->
           <div class="d_flex nav--menu ml_auto">
-            <!-- <div
-              class="items--header"
-              v-for="(item, index) in itemHeader"
-              :key="index"
-              :class="{ active: activeIndex === index }"
-              @click="activeMenu(index)"
-            >
-              {{ item }}
-            </div>-->
             <nav>
               <ul class="d_flex nav--menu">
-                <!--<li class="items&#45;&#45;header">Trang chủ</li>
-                <li class="items&#45;&#45;header">Giới thiệu</li>
-                <li class="items&#45;&#45;header">Tiện ích</li>
-                <li class="items&#45;&#45;header">Bảng giá</li>
-                <li class="items&#45;&#45;header">Liên hệ</li>-->
                 <li class="items--header" @click="goToSignIn">Đăng nhập</li>
                 <li
                   class="items--header try ml_2"
@@ -59,6 +45,7 @@
             </nav>
           </div>
           <!-- End: Navbar -->
+
           <!-- Start: MENU - 980px -->
           <div class="menu position_relative">
             <div @click="showMenu">
@@ -72,27 +59,18 @@
               </icon-base>
             </div>
             <transition name="slide-fade">
-              <ul
-                class="nav--menu-res position_absolute"
-                v-if="menu === true"
-                v-click-outside="closeMenu"
-              >
-                <!--<li class="items&#45;&#45;header">
-                  <a href="#">Trang chủ</a>
-                </li>
-                <li class="items&#45;&#45;header">
-                  <a href="#">Giới thiệu</a>
-                </li>
-                <li class="items&#45;&#45;header">
-                  <a href="#">Tiện ích</a>
-                </li>
-                <li class="items&#45;&#45;header">
-                  <a href="#">Bảng giá</a>
-                </li>
-                <li class="items&#45;&#45;header">
-                  <a href="#">Liên hệ</a>
-                </li>-->
-                <li class="items--header" @click="goToSignIn">
+              <ul class="nav--menu-res" v-if="menu === true">
+                <span class="close--menu" @click="closeMenu">
+                  <icon-base
+                    class="icon--close"
+                    width="14px"
+                    height="14px"
+                    viewBox="0 0 18 18"
+                  >
+                    <icon-cancel></icon-cancel>
+                  </icon-base>
+                </span>
+                <li class="items--header login" @click="goToSignIn">
                   <a href="#">Đăng nhập</a>
                 </li>
                 <li class="items--header" @click="goToSignUp">

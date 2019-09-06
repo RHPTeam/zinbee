@@ -40,13 +40,13 @@
 
 <style lang="scss" scoped>
 @import "./index.style";
-.owl-stage-outer .owl-stage .owl-item {
-  max-width: 470px !important;
-}
-.owl-theme .owl-nav {
-  display: none;
-}
-.owl-theme .owl-dots {
-  display: none;
-}
+// .owl-stage-outer .owl-stage .owl-item {
+//   max-width: 470px !important;
+// }
+// .owl-theme .owl-nav {
+//   display: none;
+// }
+// .owl-theme .owl-dots {
+//   display: none;
+// }
 </style>

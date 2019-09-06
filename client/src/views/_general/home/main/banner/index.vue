@@ -71,7 +71,7 @@ export default {
   background-repeat: no-repeat;
   // background-position: right;
   .title {
-    color: #222;
+    color: #000;
     font-size: 2.5rem;
     line-height: 50px;
     text-transform: capitalize;

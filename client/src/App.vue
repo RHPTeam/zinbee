@@ -24,4 +24,16 @@ export default {
     height: 100vh;
   }
 }
+// RESPONSIVE
+@media screen and (max-width: 767px) {
+  #app {
+    .ps > .ps__scrollbar-y-rail > .ps__scrollbar-y,
+    .ps > .ps__scrollbar-x-rail > .ps__scrollbar-x,
+    .ps:hover > .ps__scrollbar-y-rail:hover,
+    .ps.ps--active-x > .ps__scrollbar-x-rail,
+    .ps.ps--active-y > .ps__scrollbar-y-rail {
+      display: none;
+    }
+  }
+}
 </style>

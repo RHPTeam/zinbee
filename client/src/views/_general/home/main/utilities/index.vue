@@ -4,44 +4,10 @@
       <h3 class="title">Tại sao nên chọn ZinBee ?</h3>
     </div>
     <div class="d_none d_md_block">
-      <div class="options mb_4 d_none">
-        <div class="d_flex first">
-          <div
-            class="title"
-            :class="[currentIndexInfo === 1 ? 'active' : '']"
-            @click="currentIndexInfo = 1"
-          >
-            <p>01. Giao diện thân thiện</p>
-          </div>
-          <div
-            class="title"
-            :class="[currentIndexInfo === 2 ? 'active' : '']"
-            @click="currentIndexInfo = 2"
-          >
-            <p>02. Nội dung đa dạng</p>
-          </div>
-        </div>
-        <div class="d_flex second">
-          <div
-            class="title"
-            :class="[currentIndexInfo === 3 ? 'active' : '']"
-            @click="currentIndexInfo = 3"
-          >
-            <p>03. Tự động hóa</p>
-          </div>
-          <div
-            class="title"
-            :class="[currentIndexInfo === 4 ? 'active' : '']"
-            @click="currentIndexInfo = 4"
-          >
-            <p>04. Rất nhiều tính năng khác</p>
-          </div>
-        </div>
-      </div>
       <div class="content--options position_relative pt_4">
         <div class="px_3 slide--image">
-          <transition name="slide-fade">
-            <div class="items display d_flex" v-if="currentIndexInfo === 0">
+          <div class="slider--desktop">
+            <div class="d_flex align_items_center display items">
               <div class="left text">
                 <div class="title--why">Giao diện thân thiện</div>
                 <div class="desc">
@@ -56,9 +22,9 @@
                 }"
               ></div>
             </div>
-          </transition>
-          <transition name="slide-fade">
-            <div class="content items d_flex" v-if="currentIndexInfo === 1">
+          </div>
+          <div class="slider--desktop">
+            <div class="content d_flex align_items_center items">
               <div class="left text">
                 <div class="title--why">Nội dung đa dạng</div>
                 <div class="desc">
@@ -73,9 +39,9 @@
                 }"
               ></div>
             </div>
-          </transition>
-          <transition name="slide-fade">
-            <div class="automation items d_flex" v-if="currentIndexInfo === 2">
+          </div>
+          <div class="slider--desktop">
+            <div class="automation d_flex align_items_center items">
               <div class="right text">
                 <div class="title--why">Tự động hóa</div>
                 <div class="desc">
@@ -91,9 +57,9 @@
                 }"
               ></div>
             </div>
-          </transition>
-          <transition name="slide-fade">
-            <div class="function items d_flex" v-if="currentIndexInfo === 3">
+          </div>
+          <div class="slider--desktop">
+            <div class="function d_flex align_items_center items">
               <div class="left text">
                 <div class="title--why">Rất nhiều tính năng khác</div>
                 <div class="desc">
@@ -108,39 +74,23 @@
                 }"
               ></div>
             </div>
-          </transition>
+          </div>
         </div>
         <div class="action text_center">
           <ul>
-            <li
-              :class="[currentIndexInfo === 0 ? 'active' : '']"
-              @click="currentIndexInfo = 0"
-            ></li>
-            <li
-              :class="[currentIndexInfo === 1 ? 'active' : '']"
-              @click="currentIndexInfo = 1"
-            ></li>
-            <li
-              :class="[currentIndexInfo === 2 ? 'active' : '']"
-              @click="currentIndexInfo = 2"
-            ></li>
-            <li
-              :class="[currentIndexInfo === 3 ? 'active' : '']"
-              @click="currentIndexInfo = 3"
-            ></li>
+            <li class="dots" @click="currentDiv(1)"></li>
+            <li class="dots" @click="currentDiv(2)"></li>
+            <li class="dots" @click="currentDiv(3)"></li>
+            <li class="dots" @click="currentDiv(4)"></li>
           </ul>
         </div>
         <div
           class="position_absolute action--slider-info d_flex align_items_center"
         >
-          <span
-            class="prev action"
-            @click="prevInfo"
-            v-if="currentIndexInfo !== 0"
-          >
+          <span class="prev action" @click="plusDivs(-1)">
             <icon-base
               class="icon--arrow-left"
-              icon-name="Prev"
+              icon-name="Trước"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -148,14 +98,10 @@
               <icon-arrow-left></icon-arrow-left>
             </icon-base>
           </span>
-          <span
-            class="next ml_auto action"
-            @click="nextInfo"
-            v-if="currentIndexInfo !== 3"
-          >
+          <span class="next ml_auto action" @click="plusDivs(+1)">
             <icon-base
               class="icon--arrow-left"
-              icon-name="Next"
+              icon-name="Sau"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -234,7 +180,7 @@
 export default {
   data() {
     return {
-      currentIndexInfo: 0,
+      slideIndex: 1,
       // images of Utilities
       sliderUtilities: [
         require("@/assets/images/home/undraw_chore_list_iof3.svg"),
@@ -245,31 +191,34 @@ export default {
     };
   },
   methods: {
-    nextInfo() {
-      if (this.currentIndexInfo === 3) {
-        this.currentIndexInfo = 3;
-      } else {
-        this.currentIndexInfo++;
-      }
+    currentDiv(n) {
+      this.showDivs((this.slideIndex = n));
     },
-    prevInfo() {
-      if (this.currentIndexInfo === 0) {
-        this.currentIndexInfo = 0;
-      } else {
-        this.currentIndexInfo--;
-      }
+    plusDivs(n) {
+      this.showDivs((this.slideIndex += n));
     },
-    sliderWhyChooseZinbee() {
-      setInterval(() => {
-        this.currentIndexInfo++;
-        if (this.currentIndexInfo === 4) {
-          this.currentIndexInfo = 0;
-        }
-      }, 6000);
+    showDivs(n) {
+      var i;
+      var x = document.getElementsByClassName("slider--desktop");
+      var dots = document.getElementsByClassName("dots");
+      if (n > x.length) {
+        this.slideIndex = 1;
+      }
+      if (n < 1) {
+        this.slideIndex = x.length;
+      }
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      x[this.slideIndex - 1].style.display = "block";
+      dots[this.slideIndex - 1].className += " active";
     }
   },
   mounted() {
-    this.sliderWhyChooseZinbee();
+    this.showDivs(this.slideIndex);
   }
 };
 </script>
@@ -322,7 +271,7 @@ export default {
   }
   .content--options {
     padding: 0 3.5rem;
-    // height: 537px;
+    // height: 263px;
     overflow: hidden;
     &:hover {
       .action--slider-info {
@@ -350,6 +299,8 @@ export default {
         background-repeat: no-repeat;
         background-position: center;
         flex: 1;
+        height: 100%;
+        width: 100%;
         &.text {
           padding: 0 1rem;
         }
